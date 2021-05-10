@@ -1,0 +1,48 @@
+{
+    "public": {
+      "stripe_test_publishable": "pk_test_ZJyBJvHd4C6os9DdnqgaC9S000GQxfpBcw",
+      "stripe_live_publishable": "pk_live_yPnsXEcJ246YCDfassTI4N6i008IZxXplm",
+      "stripe_client_id": "ca_6xrceWlIdjoZ0ebtxSUDBMG1yazAn5et"
+    },
+	"private": {
+		"stripe_test_secret": "sk_test_6QfNJiwUC94nsS3DCax248Ir00fv9fPijc",
+		"stripe_live_secret": "sk_live_zI09tiGK1RoMXX1KVJ7Mmhow00KLXdfHOU",
+		"cloudinary_key": "493658865494442",
+		"cloudinary_secret": "sgysKUZXE03YkHU_xvrVgl_76lM",
+		"tone": {
+			"url": "https://gateway.watsonplatform.net/tone-analyzer/api",
+			"apikey": "LoYmT-a3MSsEOtHgYef1rf6xIkHZ_zf8ICXcIud9UNtu",
+			"password": "OzX5px2EtWGt"
+		},
+		"language": {
+			"apikey": "NNPM77_CjQv7IyPrhwjyA34SGd8BLLP103TnPuVmd8Qn",
+			"iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:natural-language-understanding:us-south:a/f18c8f41459468045d98bcffc36f39d4:16a0e5c6-0fa1-4618-9b24-511e02143ab0::",
+			"iam_apikey_name": "auto-generated-apikey-9618be9d-9ba7-4fb3-9fa2-f887746fb110",
+			"iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+			"iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/f18c8f41459468045d98bcffc36f39d4::serviceid:ServiceId-cf75d1ab-91b0-4f1f-a21b-986412a8b311",
+			"url": "https://gateway.watsonplatform.net/natural-language-understanding/api"
+		},
+		"visual": {
+			"apikey": "dKgeK3U6JYQn235P2f4y1JchqFROfW9ZwlhGe_5ffRA-",
+			"iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:watson-vision-combined:us-south:a/f18c8f41459468045d98bcffc36f39d4:a215dc07-48ca-41f5-be89-6e311afcb7e6::",
+			"iam_apikey_name": "auto-generated-apikey-63bf28e3-6093-4072-98e5-f9a64e795d39",
+			"iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+			"iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/f18c8f41459468045d98bcffc36f39d4::serviceid:ServiceId-e5742746-dd68-40fa-8962-f66d0f136a65",
+			"url": "https://gateway.watsonplatform.net/visual-recognition/api"
+		},
+		"personality": {
+			"apikey": "k3qTBQiTfIuJMWarQjXYG6Hc1GkK1XVmZcaPTtzShmU1",
+			"iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:personality-insights:us-south:a/f18c8f41459468045d98bcffc36f39d4:bd3a22ef-c2c0-4f88-990d-58363b487314::",
+			"iam_apikey_name": "auto-generated-apikey-ddeec0a3-81a7-4872-94a4-8bdd0e4977f3",
+			"iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+			"iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/f18c8f41459468045d98bcffc36f39d4::serviceid:ServiceId-737a486e-da22-404d-a3f2-4296dc02065d",
+			"url": "https://gateway.watsonplatform.net/personality-insights/api"
+		}
+	},
+	"galaxy.meteor.com": {
+		"env": {
+			"MONGO_URL": "mongodb+srv://daoadmin:daoadminpassword@daocluster.etul3.mongodb.net/daodb",
+			"ROOT_URL": "https://www.goldrun.community"
+		}
+	}
+}

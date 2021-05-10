@@ -1,0 +1,33 @@
+template(name='user_orders')
+    .ui.header #{orders.count} orders
+    .scrolling
+        each orders 
+            +profile_order_item
+
+template(name='profile_order_item')
+    .ui.grid
+        .row
+            .four.wide.column
+                with order_dish
+                    //- img.ui.mini.image(src=image)
+                    +image_view key='image_id' direct=true cl='zoomer ui fluid image'
+            .twelve.wide.column
+                .ui.header #{order_dish.title}
+                a.ui.small.header.inline.lowercase(href="/order/#{_id}")
+                    |#{order_amount}c
+                .ui.inline.header status: 
+                    if kve status 'pending'
+                        i.large.yellow.clock.icon
+                    else if kve status 'ready'
+                        i.large.green.clock.icon
+                    else if kve status 'complete'
+                        i.large.green.checkmark.icon
+                    |#{status}
+                // .ui.inline.header dish_id: #{dish_id}
+                
+                a.ui.circular.icon.big.button(href="/order/#{_id}")
+                    i.right.chevron.large.icon
+                if in_dev 
+                    +print_this
+                if is_admin
+                    +remove_button

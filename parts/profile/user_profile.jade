@@ -1,0 +1,70 @@
+template(name='user_layout')
+    img.ui.fluid.image.checkin_banner(src="{{c.url 'cafe'}}")
+    +nav
+    with user_from_username_param
+        .ui.stackable.padded.grid
+            .row
+                //- img.ui.image.checkin_banner(src="{{c.url banner_image width=1000 height=1000 crop='crop'}}")
+                .four.wide.column
+                    a.item.mobile.hidden(href="/user/#{user_from_username_param.username}/food")
+                        img.ui.centered.rounded.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                    .spacer
+                    a(href="/user/#{user.username}")
+                        .ui.center.aligned.header
+                            strong #{user.name}
+                            //- 
+                            //- strong #{user.first_name} #{user.last_name}
+                            //- small @#{user.username}        
+                    a.ui.center.aligned.inline.header.mobile.hidden(href="/user/#{user_from_username_param.username}/credit" title='credit')
+                        |{{fixed user.credit}}c
+                    .ui.two.column.middle.aligned.grid.mobile.only
+                        .column
+                            img.ui.small.inline.image.mobile.only(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                        .column
+                            .ui.inline.header
+                                strong #{user.name}
+                                //- small @#{user.username}        
+                            a.ui.inline.header(href="/user/#{user_from_username_param.username}/credit" title='credit')
+                                //- +i name='coins'
+                                //- i.coins.icon
+                                |{{fixed user.credit}}c
+                    if is_current_user
+                        a.ui.basic.compact.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
+                            i.cog.icon
+                            |edit
+                    else if is_admin
+                        a.ui.basic.compact.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
+                            +i name='settings' cl='ui avatar image'
+                            |edit
+                    if is_current_user
+                        .ui.basic.compact.button.logout
+                            i.sign.out.alternate.icon
+                            |log out
+                        //- a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
+                        //-     i.globe.icon
+                        //-     |log out other clients
+                .twelve.wide.column
+                    a.ui.big.image.label(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
+                        +i name='dashboard' cl='ui avatar image'
+                        |dashboard
+                    a.ui.big.image.label(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
+                        +i name='money' cl='ui avatar image'
+                        |credit
+                    a.ui.big.image.label(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
+                        +i name='check' cl='ui avatar image'
+                        |orders
+                    a.ui.big.image.label(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
+                        +i name='friends' cl='ui avatar image'
+                        |friends
+                    a.ui.big.image.label(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
+                        +i name='shopping-cart' cl='ui avatar image'
+                        |cart
+        
+                    div.global_container
+                        .spacer
+                        +yield
+
+
+
+template(name='user_dashboard')
+    .ui.header dashboard

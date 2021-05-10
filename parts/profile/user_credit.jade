@@ -1,0 +1,22 @@
+template(name='user_credit')
+    .ui.stackable.two.column.grid
+        if is_current_user
+            .column
+                .ui.header 
+                    |deposits
+                // |includes 2% credit card processing fee
+                .ui.action.fluid.input
+                    input.deposit_amount(type='number' min='1' placeholder='deposit')
+                    .ui.icon.button.add_credits   
+                        i.right.chevron.icon
+                        
+                .ui.large.bulleted.list
+                    each deposits
+                        .item 
+                            .content
+                                .header 
+                                    |$#{amount} + #{bonus}c
+                                .description #{when} {{long_date _timestamp}}
+                                //- if is_dev
+                                +remove_button
+                                

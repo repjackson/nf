@@ -1,0 +1,74 @@
+
+template(name='model_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .sixteen.wide.column
+                    .ui.breadcrumb
+                        a.section(href="/m/#{current_model}" title=current_model)
+                            .ui.compact.button
+                                |#{current_model.title}
+                        .divider
+                            i.chevron.right.icon
+                        .active.section
+                            if icon
+                                i.icon(class=icon)
+                            if title
+                                |#{title}
+                            else
+                                | view #{model}
+            .row
+                .four.wide.column
+                    // .ui.header
+                    //     a.ui.icon.button(href="/m/#{model}" title=plural)
+                    //         i.chevron.left.icon
+                    //     |View #{model}
+                    if can_edit
+                        a.ui.fluid.button(href="/m/#{model}/#{_id}/edit")
+                            i.pencil.icon
+                            |edit
+                    each model.actions
+                        +Template.dynamic template=this data=current_doc
+                    +user_list_toggle key='bookmark_ids' icon='bookmark' label='Bookmark' color='red'
+                    +creation_info
+                .twelve.wide.column
+                    .ui.header
+                        each fields
+                            if header
+                                +Template.dynamic template=view_template 
+                        // if icon
+                        //     i.icon(class=icon)
+                        // |#{title}
+                    each fields
+                        unless header
+                            .item
+                                +Template.dynamic template=view_template 
+                    div
+                    +comments
+        .ui.stackable.padded.grid
+            .four.wide.column
+                h1.ui.header #{title}
+                .ui.icon.big.button.add_child(title="add #{slug}")
+                    i.plus.icon
+                a.ui.icon.big.button(href="/model/edit/#{_id}")
+                    i.pencil.icon
+                .ui.form
+                    +text_view key='title'
+                    +text_view key='slug'
+                    +text_view key='icon'
+                    +textarea_view key='description'
+                    +array_view key='tags'
+                //- +cloud filter=slug
+            .twelve.wide.column
+                //- .ui.header Fields
+                //- each fields
+                //-     .ui.divider
+                //-     +field_view
+                each model_docs
+                    .ui.fluid.card
+                        .content
+                            +Template.dynamic template=model_doc
+                            +array_view key='tags'
+                            +edit_button
+
+                    

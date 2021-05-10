@@ -1,0 +1,121 @@
+template(name='delta_result_card')
+    with result 
+        if template_exists
+            +Template.dynamic template=model_template
+        else
+            .ui.card.result.pointer(class=loading_class tabindex="1")
+                .content
+                    if key_value_is 'model' 'model'
+                        .ui.header
+                            +i name=color_icon
+                            |#{title}
+                    else 
+                        // each visible_fields
+                        each fields
+                            +Template.dynamic template=view_template
+                            div
+                    .extra
+                        if key_value_is 'model' 'model'
+                            //- +user_list_toggle key='bookmark_ids' icon='bookmark' label='bookmark' color='red'
+                            //- a.ui.basic.button.route_model(href="/m/#{slug}")
+                            //-     |view model
+                            //-     i.right.chevron.green.icon
+                                //- +i name='chevron-right' clases='ui avatar image'
+                            if is_admin
+                                a.ui.basic.button.route_model(href="/model/edit/#{_id}")
+                                    i.cog.icon
+                                    |edit model
+                                span(title='views')
+                                    i.grey.eye.icon
+                                    | #{views}
+                        else
+                            if can_edit
+                                a.ui.icon.button(href="/m/#{current_model.slug}/#{_id}/edit" title='edit')
+                                    i.pencil.large.icon
+                                    //- |edit
+                            //- a.ui.icon.large.button(href="/m/#{current_model.slug}/#{_id}/view" title='view')
+                            //-     i.right.chevron.yellow.large.icon
+                        if _author_id
+                            +author_info
+                        if is_admin
+                            +creation_info
+                            .ui.small.inline.header #{views} views
+                                //- i.eye.icon
+                                each viewer_usernames
+                                    .ui.small.inverted.label #{this}
+                        //- +comments
+                    if is_dev
+                        +remove_button
+            
+
+
+
+template(name='delta_list_result')
+    with result 
+        if template_exists
+            +Template.dynamic template=model_template
+        else
+            .ui.fluid.segment
+                .content
+                    if key_value_is 'model' 'model'
+                        .ui.header
+                            +i name=color_icon
+                            |#{title}
+                    else 
+                        each visible_fields
+                            +Template.dynamic template=view_template
+                            div
+                    .extra
+                        if key_value_is 'model' 'model'
+                            //- +user_list_toggle key='bookmark_ids' icon='bookmark' label='bookmark' color='red'
+                            a.ui.basic.button.route_model(href="/m/#{slug}")
+                                |view model
+                                i.right.chevron.green.icon
+                            if is_admin
+                                a.ui.basic.button.route_model(href="/model/edit/#{_id}")
+                                    i.cog.icon
+                                    |edit model
+                                span(title='views')
+                                    i.grey.eye.icon
+                                    | #{views}
+                        else
+                            .ui.large.basic.button.result
+                                |view
+                                i.right.chevron.icon
+                            if can_edit
+                                a.ui.icon.basic.button(href="/m/#{current_model.slug}/#{_id}/edit" title='edit')
+                                    i.pencil.large.icon
+                                    //- |edit
+                            //- a.ui.icon.large.button(href="/m/#{current_model.slug}/#{_id}/view" title='view')
+                            //-     i.right.chevron.yellow.large.icon
+                        if _author_id
+                            +author_info
+                        if is_admin
+                            +print_this
+                            +creation_info
+                            .ui.small.inline.header #{views} views
+                                //- i.eye.icon
+                                each viewer_usernames
+                                    .ui.small.inverted.label #{this}
+                        //- +comments
+                    if is_dev
+                        +remove_button
+            
+
+template(name='delta_result_table_row')
+    tr.pointer.goto_doc
+        //- if result.color_icon
+        //-     +i name=result.color_icon
+        //- td
+            //- |#{result.title}
+        each visible_fields
+            +dr_table_cell
+            
+template(name='dr_table_cell')
+    td
+        if is_loading
+            .ui.fluid.placeholder
+                .line
+        else 
+            | #{result_value}
+                            

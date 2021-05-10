@@ -1,0 +1,80 @@
+template(name='dish_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .two.column.row
+                .column
+                    a.ui.compact.button(href="/dishes")
+                        i.chevron.left.icon
+                        +i name='food' cl='ui mini inline image'
+                        |dishes
+                
+                    .ui.large.inline.header 
+                        //- small viewing
+                        | #{title}
+                        //- small dish
+                    if can_edit
+                        a(href="/dish/#{_id}/edit")
+                            i.pencil.blue.large.circular.link.icon
+                    img.ui.rounded.image(src="{{c.url image_id}}")
+                    div
+                    .ui.inline.header 
+                        +i name='ingredients'
+                        |ingredients
+                    each ingredients
+                        .ui.large.basic.label #{this}
+                    //- .ui.dividing.header
+                    //-     +i name='rules'
+                    //-     |rules
+                .column
+                    if can_order
+                        +order_button
+                    +textarea_view key='description' direct=true
+                    .ui.header 
+                        +i name='order-history'
+                        |#{dish_orders.count}
+                        |orders
+                        |(${{fixed dish_order_total}})
+                    .ui.basic.segments.scrolling
+                        each dish_orders
+                            +dish_order_card
+                    .ui.hidden.divider
+                    +comments
+         
+         
+         
+         
+template(name='dish_order_card')
+    .ui.segment(class=dish_order_class)
+        .ui.inline.green.header
+            |${{fixed order_price}} 
+            if _author.image_id
+                img.ui.avatar.image(src="{{c.url _author.image_id width=100 height=100 gravity='face' crop='fill'}}")
+            |#{_author.username}
+        // div
+        .ui.large.basic.label
+            i.clock.icon
+            |status: #{status}
+        .ui.small.inline.header
+            | #{when} ({{long_date _timestamp}})
+        a.ui.compact.big.icon.button(href="/order/#{_id}")
+            i.right.chevron.large.icon
+        if is_author
+            .ui.small.compact.basic.button.cancel_order(title='cancel')
+                i.remove.red.icon
+                |cancel
+
+
+
+template(name='order_button')
+    // if servings_left
+    .ui.green.fluid.large.button.order_dish
+        i.cart.plus.large.icon
+        // |order #{serving_unit}
+        small order for
+        strong ${{fixed price_usd}}
+        // strong #{price_franc}f
+    // else 
+    //     .ui.grey.header sold out
+        //- .ui.teal.large.fluid.button.join_waitlist
+        //-     i.clock.large.icon
+        //-     |join wait list

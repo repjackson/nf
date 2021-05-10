@@ -1,0 +1,61 @@
+template(name='inbox')
+    .ui.padded.stackable.grid
+        .row
+            .four.wide.column
+                i.inbox.icon
+                .ui.inline.header inbox
+                //- +view_notifications
+            .twelve.wide.column
+                each messages
+                    +message_segment
+
+template(name='message_segment')                    
+    .ui.segment
+        .ui.header #{title} #{when}
+        .ui.header #{body}
+        +author_info
+        .ui.header parent #{parent_id} #{parent_doc.model}
+        +remove_button
+        
+        
+template(name='view_notifications')
+    .centered.row
+        .four.wide.column
+            //- +cloud key='tags' filter='notification'
+            #mark_all_read.ui.button 
+                i.visible.icon
+                |mark all read
+             if is_admin
+                 .ui.header options
+                 if notifications_allowed
+                    .ui.disabled.button notifications allowed
+                    #disallow_notifications.ui.red.button
+                        i.remove.icon
+                        |remove permissions
+            else
+                #allow_notifications.ui.button allow desktop notifications
+        .ten.wide.column.shadowed
+            each notifications
+                +notification
+
+            
+template(name='notification')
+    .ui.segment.notification_segment(class=notification_segment_class)
+        .ui.feed
+            .event
+                .label
+                    img.ui.avatar.image(src="{{c.url recipient.profile.image_id width=50 height=50 gravity='face' crop='fill'}}")
+                .content
+                    .summary
+                        // a.user(href="/profile/#{subject.username}")
+                        //     | #{subject_name}
+                        // | #{predicate}
+                        a.user(href="/profile/#{recipient.username}")
+                            | #{recipient.username}.
+                        .date
+                            | #{when}
+                    .extra.text
+                        p !{content}
+                    .meta
+                        +mark_read_button
+                        +session_delete_button

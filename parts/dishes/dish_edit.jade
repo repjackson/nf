@@ -1,0 +1,32 @@
+template(name='dish_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .eight.wide.column
+                .ui.inline.header
+                    i.pencil.icon
+                    | #{title}
+                    small dish
+                .ui.large.circular.icon.green.button.save_dish(title='save dish')
+                    i.checkmark.large.icon   
+                +text_edit key='title' label='title' direct=true
+                +text_edit key='menu_section' label='menu section' direct=true
+                each model_docs 'menu_section'
+                    +pick_section
+                +image_edit key='image_id' label='image' direct=true
+            .eight.wide.column
+                +float_edit key='price_usd' label='$ price' direct=true
+                div
+                +float_edit key='price_franc' label='franc price' direct=true
+                +array_edit key='ingredients' label='ingredients'  direct=true
+                +textarea_edit key='description' label='description' direct=true
+                if can_delete
+                    .ui.red.button.delete_dish
+                        i.remove.icon   
+                        | delete
+                
+
+
+template(name='pick_section')
+    .ui.big.image.label
+        img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+        | #{title}
