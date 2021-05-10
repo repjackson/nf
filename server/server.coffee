@@ -60,12 +60,12 @@ Meteor.publish 'model_docs', (model,limit)->
     if limit
         Docs.find {
             model: model
-            app:'lfc'
+            app:'kit'
         }, 
             limit:limit
     else
         Docs.find {
-            app:'lfc'
+            app:'kit'
             model: model
         }, sort:_timestamp:-1
 Meteor.publish 'me', ->

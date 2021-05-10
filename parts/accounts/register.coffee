@@ -81,7 +81,7 @@ if Meteor.isClient
                         $set:
                             first_name: Session.get('first_name')
                             last_name: Session.get('last_name')
-                            app:'lfc'
+                            app:'kit'
                             username:username
                     Router.go "/user/#{username}"
                     # Meteor.loginWithPassword username, password, (err,res)=>

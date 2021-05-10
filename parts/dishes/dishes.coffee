@@ -224,7 +224,7 @@ if Meteor.isServer
         if doc_sort_direction
             sort_direction = parseInt(doc_sort_direction)
         self = @
-        match = {model:'dish', app:'lfc'}
+        match = {model:'dish', app:'kit'}
         if view_open
             match.open = $ne:false
         if view_delivery
@@ -276,7 +276,7 @@ if Meteor.isServer
         console.log 'selected ingredients', selected_ingredients
 
         self = @
-        match = {app:'lfc'}
+        match = {app:'kit'}
         match.model = 'dish'
         if view_open
             match.open = $ne:false
