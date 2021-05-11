@@ -9,8 +9,8 @@ template(name='order_view')
                                 img.ui.rounded.image(src="{{c.url image_id width=400 height=400}}")
                             a.ui.header(href="/dish/#{_id}") #{title}
                             //- .ui.header #{cook_tip} cook tip
-                            .ui.header $#{order_total_transaction_amount} 
-                                small total transaction amount
+                            // .ui.header $#{order_total_transaction_amount} 
+                            //     small total transaction amount
                     div
                 .eight.wide.column
                     a.ui.compact.button(href="/dish/#{dish_id}")

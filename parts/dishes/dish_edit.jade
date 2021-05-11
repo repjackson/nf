@@ -13,6 +13,8 @@ template(name='dish_edit')
                 each model_docs 'menu_section'
                     +pick_section
                 +image_edit key='image_id' label='image' direct=true
+                +boolean_edit key='gluten_free' label='gluten free' direct=true
+                +boolean_edit key='vegan' label='vegan' direct=true
             .eight.wide.column
                 +float_edit key='price_usd' label='$ price' direct=true
                 div

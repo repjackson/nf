@@ -6,7 +6,7 @@ template(name='order_edit')
                 .ui.inline.header #{order_dish.title}
                 .ui.inline.header #{order_dish.price_usd}
                 each order_dish.ingredients
-                    .ui.label #{order_dish.price_usd}
+                    .ui.label #{this}
                 // +array_edit key='tags' 
                 // div
                 // +float_edit key='serving_purchase_price' label='serving purchase price' direct=true

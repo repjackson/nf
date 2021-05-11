@@ -1,12 +1,11 @@
 template(name='dish_view')
     with current_doc
         .ui.stackable.padded.grid
-            .two.column.row
+            .three.column.row
                 .column
-                    a.ui.compact.button(href="/dishes")
+                    a.ui.circular.basic.button(href="/dishes")
                         i.chevron.left.icon
                         +i name='food' cl='ui mini inline image'
-                        |dishes
                 
                     .ui.large.inline.header 
                         //- small viewing
@@ -17,15 +16,17 @@ template(name='dish_view')
                             i.pencil.blue.large.circular.link.icon
                     img.ui.rounded.image(src="{{c.url image_id}}")
                     div
+                .column
                     .ui.inline.header 
                         +i name='ingredients'
                         |ingredients
                     each ingredients
                         .ui.large.basic.label #{this}
-                    //- .ui.dividing.header
-                    //-     +i name='rules'
-                    //-     |rules
+                    +boolean_view key='gluten_free' label='gluten free' direct=true
+                    +boolean_view key='vegan' label='vegan' direct=true
+                        
                 .column
+                    .ui.header #{menu_section}
                     if can_order
                         +order_button
                     +textarea_view key='description' direct=true
@@ -69,9 +70,9 @@ template(name='order_button')
     // if servings_left
     .ui.green.fluid.large.button.order_dish
         i.cart.plus.large.icon
-        // |order #{serving_unit}
-        small order for
         strong ${{fixed price_usd}}
+        // |order #{serving_unit}
+        // small order for
         // strong #{price_franc}f
     // else 
     //     .ui.grey.header sold out

@@ -18,7 +18,7 @@ template(name='dishes')
                     | #{this}
             +i name='ingredients' cl='ui inline mini image'
             each ingredients
-                button.ui.circular.compact.small.button.ingredient_result(tabindex="0" class=result_class title=count) #{title}
+                button.ui.circular.compact.basic.button.ingredient_result(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
             // .spacer
             // .ui.circular.compact.button.toggle_delivery(class=toggle_delivery_class)
@@ -86,7 +86,7 @@ template(name='dishes')
             //-     //-             +set_dish_limit amount=10
             //-     //-             +set_dish_limit amount=20
             //- .spacer 
-            .ui.stackable.cards
+            .ui.stackable.centered.four.column.grid
                 each dish_docs
                     +dish_card
 
@@ -120,7 +120,7 @@ template(name='set_dish_limit')
 
 
 template(name='dish_card')
-    .ui.card(class=dish_card_class)
+    .column.zoomer(class=dish_card_class)
         a.image.zoomer(href="/dish/#{_id}") 
             img.ui.zoom.pointer.goto_dish.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
@@ -139,8 +139,10 @@ template(name='dish_card')
         // //- a.image(href="/dish/#{_id}")
             
         .content    
-            .ui.header 
+            .ui.inline.header 
                 |${{fixed price_usd}}
+            .ui.inline.small.header 
+                |(#{menu_section}) 
             div
             if delivery
                 +i name='deliver-dish' cl='ui avatar image'
