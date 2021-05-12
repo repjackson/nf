@@ -13,10 +13,10 @@
 //         .ui.left.icon.input
 //             i.search.icon
 //             +inputAutocomplete settings=settings id="search" class="" autofocus='' autocomplete="off" placeholder=''
-//         if selected_tags
+//         if picked_tags
 //             #clear_tags.ui.primary.icon.compact.button
 //                 i.remove.icon
-//             each selected_tags
+//             each picked_tags
 //                 .unselect_tag.ui.primary.compact.button
 //                     strong #{this}
 //         each all_tags
@@ -28,10 +28,10 @@ template(name='cloud')
         //-     i.search.icon
         //-     +inputAutocomplete settings=settings id="search" class="" autocomplete="off" 
         // .ui.hidden.fitted.divider
-    if selected_tags
+    if picked_tags
         #clear_tags.ui.active.icon.button
             i.remove.icon
-        each selected_tags
+        each picked_tags
             .unselect_tag.ui.active.button
                 strong #{this}
     each all_tags
@@ -46,10 +46,10 @@ template(name='mini-cloud')
         //-     i.search.icon
         //-     +inputAutocomplete settings=settings id="search" class="" autocomplete="off" 
         // .ui.hidden.fitted.divider
-    if selected_tags
+    if picked_tags
         #clear_tags.ui.active.icon.button
             i.remove.icon
-        each selected_tags
+        each picked_tags
             .unselect_tag.ui.active.button
                 strong #{this}
     each all_tags
@@ -63,10 +63,10 @@ template(name='doc_cloud')
         //- .ui.left.icon.input
         //-     i.search.icon
         //-     +inputAutocomplete settings=settings id="search" class="" autocomplete="off" 
-        if selected_tags
+        if picked_tags
             #clear_tags.ui.primary.icon.large.button
                 i.remove.icon
-            each selected_tags
+            each picked_tags
                 .unselect_tag.ui.primary.large.button
                     strong #{this}
         each all_tags

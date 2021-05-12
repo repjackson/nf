@@ -3,16 +3,18 @@ template(name='login')
         .centered.row
             .eight.wide.column
                 h1.ui.center.aligned.header
-                    | le french cafe
+                    | the kitchen
                     small login
                 .ui.inline.small.header 
-                    +i name='user-male'
+                    // +i name='user-male'
+                    i.user.outline.icon
                     |username
                 .ui.fluid.large.input(class=login_class)
                     input.username(type='text')
                 .spacer
                 .ui.inline.small.header 
-                    +i name='password'
+                    // +i name='password'
+                    i.lock.icon
                     | password
                 .ui.fluid.large.input(class=login_class)
                     input.password(type='password')

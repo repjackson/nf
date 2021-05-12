@@ -13,16 +13,16 @@ template(name='order_view')
                             //     small total transaction amount
                     div
                 .eight.wide.column
-                    a.ui.compact.button(href="/dish/#{dish_id}")
-                        i.left.chevron.icon
-                        img.ui.avatar.image(src="{{c.url order_dish.image_id width=200 height=200}}")    
-                        |#{order_dish.title}
+                    // a.ui.compact.button(href="/dish/#{dish_id}")
+                    //     i.left.chevron.icon
+                    //     img.ui.avatar.image(src="{{c.url order_dish.image_id width=200 height=200}}")    
+                    //     |#{order_dish.title}
                     .ui.inline.header 
-                        strong '#{order_dish.title}'
-                        small order
+                        // strong '#{order_dish.title}'
+                        |order
                     if can_edit
-                        a.ui.large.icon.button(href="/order/#{_id}/edit" title='edit')
-                            i.pencil.icon
+                        a(href="/order/#{_id}/edit" title='edit')
+                            i.pencil.link.large.circular.icon
                     .ui.header buyer #{_author_username}
                     .ui.header 
                         i.clock.icon

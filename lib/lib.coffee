@@ -282,9 +282,9 @@ if Meteor.isServer
             Docs.find id
         else if user
             Meteor.users.find id
-    Meteor.publish 'docs', (selected_tags, filter)->
+    Meteor.publish 'docs', (picked_tags, filter)->
         # user = Meteor.users.findOne @userId
-        # console.log selected_tags
+        # console.log picked_tags
         # console.log filter
         self = @
         match = {}
@@ -296,7 +296,7 @@ if Meteor.isServer
 
         # if filter is 'shop'
         #     match.active = true
-        if selected_tags.length > 0 then match.tags = $all: selected_tags
+        if picked_tags.length > 0 then match.tags = $all: picked_tags
         if filter then match.model = filter
 
         Docs.find match, sort:_timestamp:-1

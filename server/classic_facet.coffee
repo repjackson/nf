@@ -2,12 +2,12 @@ Meteor.publish 'delta', (match)->
     console.log match
 
 Meteor.publish 'facet', (
-    selected_theme_tags
-    selected_author_ids=[]
-    selected_location_tags
-    selected_building_tags
-    selected_unit_tags
-    selected_timestamp_tags
+    picked_theme_tags
+    picked_author_ids=[]
+    picked_location_tags
+    picked_building_tags
+    picked_unit_tags
+    picked_timestamp_tags
     model
     author_id
     parent_id
@@ -20,7 +20,7 @@ Meteor.publish 'facet', (
         self = @
         match = {}
 
-        # match.tags = $all: selected_theme_tags
+        # match.tags = $all: picked_theme_tags
         if model then match.model = model
         if parent_id then match.parent_id = parent_id
 
@@ -30,14 +30,14 @@ Meteor.publish 'facet', (
         # if view_private is false
         #     match.published = $in: [0,1]
 
-        if selected_theme_tags.length > 0 then match.tags = $all: selected_theme_tags
+        if picked_theme_tags.length > 0 then match.tags = $all: picked_theme_tags
 
-        if selected_author_ids.length > 0
-            match.author_id = $in: selected_author_ids
+        if picked_author_ids.length > 0
+            match.author_id = $in: picked_author_ids
             match.published = 1
-        if selected_location_tags.length > 0 then match.location_tags = $all: selected_location_tags
-        if selected_building_tags.length > 0 then match.building_tags = $all: selected_building_tags
-        if selected_timestamp_tags.length > 0 then match.timestamp_tags = $all: selected_timestamp_tags
+        if picked_location_tags.length > 0 then match.location_tags = $all: picked_location_tags
+        if picked_building_tags.length > 0 then match.building_tags = $all: picked_building_tags
+        if picked_timestamp_tags.length > 0 then match.timestamp_tags = $all: picked_timestamp_tags
 
         if tag_limit then limit=tag_limit else limit=50
         if author_id then match.author_id = author_id
@@ -77,7 +77,7 @@ Meteor.publish 'facet', (
         #     { $project: ancestor_array: 1 }
         #     { $unwind: "$ancestor_array" }
         #     { $group: _id: '$ancestor_array', count: $sum: 1 }
-        #     { $match: _id: $nin: selected_ancestor_ids }
+        #     { $match: _id: $nin: picked_ancestor_ids }
         #     { $sort: count: -1, _id: 1 }
         #     { $limit: limit }
         #     { $project: _id: 0, name: '$_id', count: 1 }
@@ -94,7 +94,7 @@ Meteor.publish 'facet', (
             { $project: tags: 1 }
             { $unwind: "$tags" }
             { $group: _id: '$tags', count: $sum: 1 }
-            { $match: _id: $nin: selected_theme_tags }
+            { $match: _id: $nin: picked_theme_tags }
             { $sort: count: -1, _id: 1 }
             { $limit: limit }
             { $project: _id: 0, name: '$_id', count: 1 }
@@ -113,7 +113,7 @@ Meteor.publish 'facet', (
         # #     { $project: watson_keywords: 1 }
         # #     { $unwind: "$watson_keywords" }
         # #     { $group: _id: '$watson_keywords', count: $sum: 1 }
-        # #     { $match: _id: $nin: selected_theme_tags }
+        # #     { $match: _id: $nin: picked_theme_tags }
         # #     { $sort: count: -1, _id: 1 }
         # #     { $limit: limit }
         # #     { $project: _id: 0, name: '$_id', count: 1 }
@@ -130,7 +130,7 @@ Meteor.publish 'facet', (
         #     { $project: timestamp_tags: 1 }
         #     { $unwind: "$_timestamp_tags" }
         #     { $group: _id: '$_timestamp_tags', count: $sum: 1 }
-        #     { $match: _id: $nin: selected_timestamp_tags }
+        #     { $match: _id: $nin: picked_timestamp_tags }
         #     { $sort: count: -1, _id: 1 }
         #     { $limit: 10 }
         #     { $project: _id: 0, name: '$_id', count: 1 }
@@ -148,7 +148,7 @@ Meteor.publish 'facet', (
         #     { $project: building_tags: 1 }
         #     { $unwind: "$building_tags" }
         #     { $group: _id: '$building_tags', count: $sum: 1 }
-        #     { $match: _id: $nin: selected_building_tags }
+        #     { $match: _id: $nin: picked_building_tags }
         #     { $sort: count: -1, _id: 1 }
         #     { $limit: limit }
         #     { $project: _id: 0, name: '$_id', count: 1 }
@@ -166,7 +166,7 @@ Meteor.publish 'facet', (
         #     { $project: location_tags: 1 }
         #     { $unwind: "$location_tags" }
         #     { $group: _id: '$location_tags', count: $sum: 1 }
-        #     { $match: _id: $nin: selected_location_tags }
+        #     { $match: _id: $nin: picked_location_tags }
         #     { $sort: count: -1, _id: 1 }
         #     { $limit: limit }
         #     { $project: _id: 0, name: '$_id', count: 1 }
@@ -186,7 +186,7 @@ Meteor.publish 'facet', (
         #     { $match: author_match }
         #     { $project: _author_id: 1 }
         #     { $group: _id: '$_author_id', count: $sum: 1 }
-        #     { $match: _id: $nin: selected_author_ids }
+        #     { $match: _id: $nin: picked_author_ids }
         #     { $sort: count: -1, _id: 1 }
         #     { $limit: limit }
         #     { $project: _id: 0, text: '$_id', count: 1 }
@@ -279,13 +279,13 @@ Meteor.publish 'facet', (
 #     # match.parent_id = $in:match_array
 
 #     # console.log 'match',match
-#     # if selected_ancestor_ids.length > 0 then match.ancestor_array = $all: selected_ancestor_ids
+#     # if picked_ancestor_ids.length > 0 then match.ancestor_array = $all: picked_ancestor_ids
 #     ancestor_ids_cloud = Docs.aggregate [
 #         { $match: match }
 #         { $project: ancestor_array: 1 }
 #         { $unwind: "$ancestor_array" }
 #         { $group: _id: '$ancestor_array', count: $sum: 1 }
-#         # { $match: _id: $nin: selected_ancestor_ids }
+#         # { $match: _id: $nin: picked_ancestor_ids }
 #         { $sort: count: -1, _id: 1 }
 #         { $limit: 10 }
 #         { $project: _id: 0, name: '$_id', count: 1 }
@@ -319,13 +319,13 @@ Meteor.publish 'facet', (
 #     self.onStop ()-> subHandle.stop()
 
 
-# # Meteor.publish 'parent_ids', (username, selected_parent_id)->
+# # Meteor.publish 'parent_ids', (username, picked_parent_id)->
 # #         parent_tag_cloud = Docs.aggregate [
 # #             { $match: author_id:Meteor.userId() }
 # #             { $project: parent_id: 1 }
 # #             # { $unwind: "$tags" }
 # #             { $group: _id: '$parent_id', count: $sum: 1 }
-# #             { $match: _id: $nin: selected_theme_tags }
+# #             { $match: _id: $nin: picked_theme_tags }
 # #             { $sort: count: -1, _id: 1 }
 # #             { $limit: limit }
 # #             { $project: _id: 0, name: '$_id', count: 1 }

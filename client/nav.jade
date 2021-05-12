@@ -1,5 +1,5 @@
 template(name='nav')
-    #topnav.topnav.ui.attached.borderless.five.item.large.menu
+    #topnav.topnav.ui.attached.borderless.four.item.large.menu
         if is_loading
             .icon.item
                 i.big.spinning.grey.yin.yang.icon.cancel
@@ -21,8 +21,8 @@ template(name='nav')
             //-     i.bell.icon
             a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActivePath '/cart'}}" title='cart')
                 +i name='shopping-cart' cl='ui inline mini image'
-            a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
-                .ui.inline.header #{currentUser.credit}f
+            // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
+            //     .ui.inline.header #{currentUser.credit}f
             a.item(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
                 if currentUser.image_id
                     img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")

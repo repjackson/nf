@@ -33,10 +33,10 @@ template(name='session_set')
             |#{value}
 template(name='user_cloud')
     i.shield.blue.large.icon
-    if selected_user_levels
+    if picked_user_levels
         #clear_levels.ui.primary.icon.compact.button
             i.remove.icon
-        each selected_user_levels
+        each picked_user_levels
             .unselect_level.ui.primary.compact.button
                 strong #{this}
     each all_levels
@@ -44,10 +44,10 @@ template(name='user_cloud')
             strong #{this.name}
     div
     i.tags.large.icon
-    if selected_user_tags
+    if picked_user_tags
         #clear_tags.ui.primary.icon.compact.button
             i.remove.icon
-        each selected_user_tags
+        each picked_user_tags
             .unpick_tag.ui.primary.compact.button
                 strong #{this}
     each all_tags

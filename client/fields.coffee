@@ -534,7 +534,7 @@ Template.multi_doc_view.helpers
 #     $('.ui.dropdown').dropdown(
 #         clearable:true
 #         action: 'activate'
-#         onChange: (text,value,$selectedItem)->
+#         onChange: (text,value,$pickedItem)->
 #         )
 
 

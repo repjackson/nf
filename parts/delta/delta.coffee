@@ -50,7 +50,7 @@ if Meteor.isClient
             if delta
                 if delta.sort_direction is 1 then true
 
-        selected_tags: -> selected_tags.list()
+        picked_tags: -> picked_tags.list()
         view_mode_template: ->
             # console.log @
             delta = Docs.findOne model:'delta'
@@ -228,22 +228,22 @@ if Meteor.isClient
         #         else
         #             Session.set 'is_calculating', false
 
-        # 'click .select_tag': -> selected_tags.push @name
-        # 'click .unselect_tag': -> selected_tags.remove @valueOf()
-        # 'click #clear_tags': -> selected_tags.clear()
+        # 'click .select_tag': -> picked_tags.push @name
+        # 'click .unselect_tag': -> picked_tags.remove @valueOf()
+        # 'click #clear_tags': -> picked_tags.clear()
         #
         # 'keyup #search': (e)->
             # switch e.which
             #     when 13
             #         if e.target.value is 'clear'
-            #             selected_tags.clear()
+            #             picked_tags.clear()
             #             $('#search').val('')
             #         else
-            #             selected_tags.push e.target.value.toLowerCase().trim()
+            #             picked_tags.push e.target.value.toLowerCase().trim()
             #             $('#search').val('')
             #     when 8
             #         if e.target.value is ''
-            #             selected_tags.pop()
+            #             picked_tags.pop()
         'keyup #search': _.throttle((e,t)->
             query = $('#search').val()
             Session.set('current_query', query)
@@ -258,7 +258,7 @@ if Meteor.isClient
             if e.which is 13
                 search = $('#search').val().trim().toLowerCase()
                 if search.length > 0
-                    selected_tags.push search
+                    picked_tags.push search
                     console.log 'search', search
                     # Meteor.call 'log_term', search, ->
                     $('#search').val('')
