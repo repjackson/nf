@@ -13,21 +13,21 @@ template(name='dishes')
             //     .ui.icon.circular.black.compact.button.clear_picked_ingredients
             //         i.remove.icon
             each picked_ingredients
-                button.ui.blue.compact.circular.small.button.unselect_ingredient(tabindex='0')
+                button.ui.blue.compact.circular.small.button.unpick_ingredient(tabindex='0')
                     //- i.remove.icon
                     | #{this}
             +i name='ingredients' cl='ui inline mini image'
             each ingredients
-                button.ui.circular.compact.tertiary.button.ingredient_result(tabindex="0" class=result_class title=count) #{title}
+                button.ui.circular.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
            
-            each picked_times
-                button.ui.blue.compact.circular.small.button.unselect_ingredient(tabindex='0')
+            each picked_sections
+                button.ui.blue.compact.circular.small.button.unpick_section(tabindex='0')
                     //- i.remove.icon
                     | #{this}
             +i name='clock' cl='ui inline mini image'
-            each times
-                button.ui.circular.compact.button.ingredient_result(tabindex="0" class=result_class title=count) #{title}
+            each sections
+                button.ui.circular.compact.button.pick_section(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
             unless one_post
                 spann.sorting_row

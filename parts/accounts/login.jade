@@ -2,9 +2,9 @@ template(name='login')
     .ui.padded.stackable.grid
         .centered.row
             .eight.wide.column
-                h1.ui.center.aligned.header
-                    | the kitchen
-                    small login
+                // img.ui.image(src="{{c.url 'kitchen_logo' gravity='face' crop='fill'}}")
+                img.ui.image(src="https://images.getbento.com/accounts/1e2fcd9941443e4f75e21cfb3587db3e/media/accounts/media/7FHPeVzERhAxtJId5v9D_TheKitchen_AmericanBistro_Logo.png")
+                h1.ui.center.aligned.header login
                 .ui.inline.small.header 
                     // +i name='user-male'
                     i.user.outline.icon
@@ -25,10 +25,10 @@ template(name='login')
                     |login
                     strong #{username}
                     //- i.right.chevron.icon
-                .ui.center.aligned.basic.segment    
-                    a.ui.compact.small.basic.button(href='/forgot_password')
-                        +i name='forgot-password' cl='ui mini inline image'                    
-                        |forgot password
+                // .ui.center.aligned.basic.segment    
+                //     a.ui.compact.small.basic.button(href='/forgot_password')
+                //         +i name='forgot-password' cl='ui mini inline image'                    
+                //         |forgot password
 
                 .ui.center.aligned.basic.segment    
                     a.ui.basic.button(href='/register')

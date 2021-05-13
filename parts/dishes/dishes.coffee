@@ -15,6 +15,7 @@ if Meteor.isClient
     Template.dishes.onCreated ->
         @autorun => @subscribe 'dish_facets',
             picked_ingredients.array()
+            picked_sections.array()
             Session.get('dish_limit')
             Session.get('dish_sort_key')
             Session.get('dish_sort_direction')
@@ -24,6 +25,7 @@ if Meteor.isClient
 
         @autorun => @subscribe 'dish_results',
             picked_ingredients.array()
+            picked_sections.array()
             Session.get('dish_limit')
             Session.get('dish_sort_key')
             Session.get('dish_sort_direction')
@@ -46,9 +48,10 @@ if Meteor.isClient
         'click .toggle_pickup': -> Session.set('view_pickup', !Session.get('view_pickup'))
         'click .toggle_open': -> Session.set('view_open', !Session.get('view_open'))
 
-        'click .ingredient_result': -> picked_ingredients.push @title
-        'click .unselect_ingredient': ->
-            picked_ingredients.remove @valueOf()
+        'click .pick_section': -> picked_sections.push @title
+        'click .unpick_section': -> picked_sections.remove @valueOf()
+        'click .pick_ingredient': -> picked_ingredients.push @title
+        'click .unpick_ingredient': -> picked_ingredients.remove @valueOf()
             # console.log picked_ingredients.array()
             # if picked_ingredients.array().length is 1
                 # Meteor.call 'call_wiki', search, ->
@@ -152,6 +155,7 @@ if Meteor.isClient
                 'disabled'
 
         picked_ingredients: -> picked_ingredients.array()
+        picked_sections: -> picked_sections.array()
         picked_ingredients_plural: -> picked_ingredients.array().length > 1
         searching: -> Session.get('searching')
 
@@ -179,10 +183,10 @@ if Meteor.isClient
                 # limit:1
 
 
-        timestamp_tags: ->
+        sections: ->
             # if picked_tags.array().length > 0
-            Timestamp_tags.find {
-                # model:'reddit'
+            Results.find {
+                model:'section'
             },
                 sort: count:-1
                 # limit:1
@@ -210,6 +214,7 @@ if Meteor.isClient
 if Meteor.isServer
     Meteor.publish 'dish_results', (
         picked_ingredients
+        picked_sections
         doc_limit
         doc_sort_key
         doc_sort_direction
@@ -237,10 +242,13 @@ if Meteor.isServer
             match.pickup = $ne:false
         if picked_ingredients.length > 0
             match.ingredients = $all: picked_ingredients
-            sort = 'price_per_serving'
-        else
+            # sort = 'price_per_serving'
+        if picked_sections.length > 0
+            match.section = $all: picked_sections
+            # sort = 'price_per_serving'
+        # else
             # match.tags = $nin: ['wikipedia']
-            sort = '_timestamp'
+        sort = '_timestamp'
             # match.source = $ne:'wikipedia'
         # if view_images
         #     match.is_image = $ne:false
@@ -266,7 +274,7 @@ if Meteor.isServer
 
     Meteor.publish 'dish_facets', (
         picked_ingredients
-        picked_timestamp_tags
+        picked_sections
         query
         doc_limit
         doc_sort_key
@@ -282,13 +290,14 @@ if Meteor.isServer
         self = @
         match = {app:'kit'}
         match.model = 'dish'
-        if view_open
-            match.open = $ne:false
-        if view_delivery
-            match.delivery = $ne:false
-        if view_pickup
-            match.pickup = $ne:false
+        # if view_open
+        #     match.open = $ne:false
+        # if view_delivery
+        #     match.delivery = $ne:false
+        # if view_pickup
+        #     match.pickup = $ne:false
         if picked_ingredients.length > 0 then match.ingredients = $all: picked_ingredients
+        if picked_sections.length > 0 then match.section = $all: picked_sections
             # match.$regex:"#{dish_query}", $options: 'i'}
         # if query and query.length > 1
         # #     console.log 'searching query', query

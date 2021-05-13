@@ -9,8 +9,10 @@ template(name='nav')
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         a.item.zoomer(href='/dishes' class="{{isActivePath '/dishes'}}" title='dishes')
             +i name='food' cl='ui inline mini image'
+            span.mobile.hidden dishes
         a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             +i name='list' cl='ui inline mini image'
+            span.mobile.hidden orders
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
         //         +i name='tasks' cl='ui inline mini image'
