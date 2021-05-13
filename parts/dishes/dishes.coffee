@@ -16,23 +16,35 @@ if Meteor.isClient
         @autorun => @subscribe 'dish_facets',
             picked_ingredients.array()
             picked_sections.array()
+            Session.get('view_vegan')
+            Session.get('view_gf')
+            
+            Session.get('dish_query')
             Session.get('dish_limit')
             Session.get('dish_sort_key')
             Session.get('dish_sort_direction')
-            Session.get('view_delivery')
-            Session.get('view_pickup')
-            Session.get('view_open')
 
         @autorun => @subscribe 'dish_results',
             picked_ingredients.array()
             picked_sections.array()
+            Session.get('dish_query')
+            Session.get('view_vegan')
+            Session.get('view_gf')
+            
             Session.get('dish_limit')
             Session.get('dish_sort_key')
             Session.get('dish_sort_direction')
-            Session.get('view_delivery')
-            Session.get('view_pickup')
-            Session.get('view_open')
+            
+        @autorun => @subscribe 'dish_count',
+            picked_ingredients.array()
+            picked_sections.array()
             Session.get('dish_query')
+            Session.get('view_vegan')
+            Session.get('view_gf')
+            
+            Session.get('dish_limit')
+            Session.get('dish_sort_key')
+            Session.get('dish_sort_direction')
             
 
 
@@ -44,7 +56,8 @@ if Meteor.isClient
             Router.go("/dish/#{new_id}/edit")
 
 
-        'click .toggle_delivery': -> Session.set('view_delivery', !Session.get('view_delivery'))
+        'click .toggle_vegan': -> Session.set('view_vegan', !Session.get('view_vegan'))
+        'click .toggle_gf': -> Session.set('view_gf', !Session.get('view_gf'))
         'click .toggle_pickup': -> Session.set('view_pickup', !Session.get('view_pickup'))
         'click .toggle_open': -> Session.set('view_open', !Session.get('view_open'))
 
@@ -62,6 +75,9 @@ if Meteor.isClient
         'click .clear_picked_ingredients': ->
             Session.set('dish_query',null)
             picked_ingredients.clear()
+
+        'click .clear_dish_query': ->
+            Session.set('dish_query', null)
 
         'keyup #dish_search': _.throttle((e,t)->
             query = $('#dish_search').val()
@@ -114,8 +130,8 @@ if Meteor.isClient
         sorting_up: ->
             parseInt(Session.get('dish_sort_direction')) is 1
 
-        toggle_delivery_class: -> if Session.get('view_delivery') then 'blue' else ''
-        toggle_pickup_class: -> if Session.get('view_pickup') then 'blue' else ''
+        toggle_gf_class: -> if Session.get('view_gf') then 'blue' else ''
+        toggle_vegan_class: -> if Session.get('view_vegan') then 'blue' else ''
         toggle_open_class: -> if Session.get('view_open') then 'blue' else ''
         connection: ->
             console.log Meteor.status()
@@ -126,6 +142,9 @@ if Meteor.isClient
             if Meteor.user()
                 if Meteor.user().dark_mode
                     'invert'
+                    
+        dish_count: -> Counts.get('dish_counter')
+     
         tags: ->
             # if Session.get('dish_query') and Session.get('dish_query').length > 1
             #     Terms.find({}, sort:count:-1)
@@ -158,6 +177,8 @@ if Meteor.isClient
         picked_sections: -> picked_sections.array()
         picked_ingredients_plural: -> picked_ingredients.array().length > 1
         searching: -> Session.get('searching')
+
+        dish_query: -> Session.get('dish_query')
 
         one_post: ->
             Docs.find(model:'dish').count() is 1
@@ -215,13 +236,13 @@ if Meteor.isServer
     Meteor.publish 'dish_results', (
         picked_ingredients
         picked_sections
+        dish_query
+        view_vegan
+        view_gf
+        
         doc_limit
         doc_sort_key
         doc_sort_direction
-        view_delivery
-        view_pickup
-        view_open
-        dish_query
         )->
         # console.log picked_ingredients
         if doc_limit
@@ -234,26 +255,24 @@ if Meteor.isServer
             sort_direction = parseInt(doc_sort_direction)
         self = @
         match = {model:'dish', app:'kit'}
-        if view_open
-            match.open = $ne:false
-        if view_delivery
-            match.delivery = $ne:false
-        if view_pickup
-            match.pickup = $ne:false
         if picked_ingredients.length > 0
             match.ingredients = $all: picked_ingredients
             # sort = 'price_per_serving'
         if picked_sections.length > 0
-            match.section = $all: picked_sections
+            match.menu_section = $all: picked_sections
             # sort = 'price_per_serving'
         # else
             # match.tags = $nin: ['wikipedia']
         sort = '_timestamp'
             # match.source = $ne:'wikipedia'
-        # if view_images
-        #     match.is_image = $ne:false
-        # if view_videos
-        #     match.is_video = $ne:false
+        if view_vegan
+            match.vegan = true
+        if view_gf
+            match.gluten_free = true
+        if dish_query and dish_query.length > 1
+            console.log 'searching dish_query', dish_query
+            match.title = {$regex:"#{dish_query}", $options: 'i'}
+            # match.tags_string = {$regex:"#{query}", $options: 'i'}
 
         # match.tags = $all: picked_ingredients
         # if filter then match.model = filter
@@ -271,11 +290,46 @@ if Meteor.isServer
             sort:"#{sort_key}":sort_direction
             # sort:_timestamp:-1
             limit: limit
+            
+            
+    Meteor.publish 'dish_count', (
+        picked_ingredients
+        picked_sections
+        dish_query
+        view_vegan
+        view_gf
+        )->
+        # @unblock()
+    
+        # console.log picked_ingredients
+        self = @
+        match = {model:'dish', app:'kit'}
+        if picked_ingredients.length > 0
+            match.ingredients = $all: picked_ingredients
+            # sort = 'price_per_serving'
+        if picked_sections.length > 0
+            match.menu_section = $all: picked_sections
+            # sort = 'price_per_serving'
+        # else
+            # match.tags = $nin: ['wikipedia']
+        sort = '_timestamp'
+            # match.source = $ne:'wikipedia'
+        if view_vegan
+            match.vegan = true
+        if view_gf
+            match.gluten_free = true
+        if dish_query and dish_query.length > 1
+            console.log 'searching dish_query', dish_query
+            match.title = {$regex:"#{dish_query}", $options: 'i'}
+        Counts.publish this, 'dish_counter', Docs.find(match)
+        return undefined
 
     Meteor.publish 'dish_facets', (
         picked_ingredients
         picked_sections
-        query
+        dish_query
+        view_vegan
+        view_gf
         doc_limit
         doc_sort_key
         doc_sort_direction
@@ -290,20 +344,18 @@ if Meteor.isServer
         self = @
         match = {app:'kit'}
         match.model = 'dish'
-        # if view_open
-        #     match.open = $ne:false
-        # if view_delivery
-        #     match.delivery = $ne:false
-        # if view_pickup
-        #     match.pickup = $ne:false
+        if view_vegan
+            match.vegan = true
+        if view_gf
+            match.gluten_free = true
         if picked_ingredients.length > 0 then match.ingredients = $all: picked_ingredients
-        if picked_sections.length > 0 then match.section = $all: picked_sections
+        if picked_sections.length > 0 then match.menu_section = $all: picked_sections
             # match.$regex:"#{dish_query}", $options: 'i'}
-        # if query and query.length > 1
-        # #     console.log 'searching query', query
-        # #     # match.tags = {$regex:"#{query}", $options: 'i'}
-        # #     # match.tags_string = {$regex:"#{query}", $options: 'i'}
-        # #
+        if dish_query and dish_query.length > 1
+            console.log 'searching dish_query', dish_query
+            match.title = {$regex:"#{dish_query}", $options: 'i'}
+            # match.tags_string = {$regex:"#{query}", $options: 'i'}
+        #
         #     Terms.find {
         #         title: {$regex:"#{query}", $options: 'i'}
         #     },
@@ -331,7 +383,7 @@ if Meteor.isServer
             { $match: match }
             { $project: "menu_section": 1 }
             { $group: _id: "$menu_section", count: $sum: 1 }
-            { $match: _id: $nin: picked_ingredients }
+            { $match: _id: $nin: picked_sections }
             # { $match: _id: {$regex:"#{dish_query}", $options: 'i'} }
             { $sort: count: -1, _id: 1 }
             { $limit: 20 }

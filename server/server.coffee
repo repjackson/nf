@@ -40,6 +40,9 @@ Cloudinary.config
 
 # if Meteor.isProduction
 #     SyncedCron.start()
+
+
+
 Meteor.publish 'model_from_child_id', (child_id)->
     child = Docs.findOne child_id
     Docs.find

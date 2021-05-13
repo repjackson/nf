@@ -114,6 +114,7 @@ templating@1.4.0
 templating-compiler@1.4.0
 templating-runtime@1.4.0
 templating-tools@1.2.0
+tmeasday:publish-counts@0.8.0
 tracker@1.2.0
 ui@1.0.13
 underscore@1.0.10

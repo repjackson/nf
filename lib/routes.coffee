@@ -80,10 +80,10 @@ Router.route '/verification_confirmation', -> @render 'verification_confirmation
 Router.route '*', -> @render 'not_found'
 
 # Router.route '/user/:username/m/:type', -> @render 'user_layout', 'user_section'
-Router.route '/add_resident', (->
-    @layout 'layout'
-    @render 'add_resident'
-    ), name:'add_resident'
+# Router.route '/add_resident', (->
+#     @layout 'layout'
+#     @render 'add_resident'
+#     ), name:'add_resident'
 Router.route '/forgot_password', -> @render 'forgot_password'
 
 # Router.route "/food/:food_id", -> @render 'food_doc'
@@ -94,5 +94,5 @@ Router.route '/reset_password/:token', (->
 
 Router.route '/login', -> @render 'login'
 
-# Router.route '/', -> @redirect '/m/model'
+Router.route '/', -> @redirect '/dishes'
 # Router.route '/', -> @redirect "/user/#{Meteor.user().username}"
