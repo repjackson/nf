@@ -60,17 +60,17 @@ if Meteor.isClient
             Session.set('dish_query',null)
             picked_ingredients.clear()
 
-        'keyup #search': _.throttle((e,t)->
-            query = $('#search').val()
+        'keyup #dish_search': _.throttle((e,t)->
+            query = $('#dish_search').val()
             Session.set('dish_query', query)
             # console.log Session.get('dish_query')
             if e.which is 13
-                search = $('#search').val().trim().toLowerCase()
+                search = $('#dish_search').val().trim().toLowerCase()
                 if search.length > 0
                     picked_tags.push search
                     console.log 'search', search
                     # Meteor.call 'log_term', search, ->
-                    $('#search').val('')
+                    $('#dish_search').val('')
                     Session.set('dish_query', null)
                     # # $('#search').val('').blur()
                     # # $( "p" ).blur();
@@ -130,20 +130,20 @@ if Meteor.isClient
             dish_count = Docs.find().count()
             # console.log 'dish count', dish_count
             if dish_count < 3
-                Tags.find({count: $lt: dish_count})
+                Results.find({model:'tag', count: $lt: dish_count})
             else
-                Tags.find()
+                Results.find({model:'tag'})
 
         ingredients: ->
             # if Session.get('dish_query') and Session.get('dish_query').length > 1
             #     Terms.find({}, sort:count:-1)
             # else
-            dish_count = Docs.find().count()
+            dish_count = Docs.find(model:'dish').count()
             # console.log 'dish count', dish_count
             if dish_count < 3
-                Ingredients.find({count: $lt: dish_count})
+                Results.find({model:'ingredient', count: $lt: dish_count})
             else
-                Ingredients.find()
+                Results.find({model:'ingredient'})
 
         result_class: ->
             if Template.instance().subscriptionsReady()
@@ -156,7 +156,11 @@ if Meteor.isClient
         searching: -> Session.get('searching')
 
         one_post: ->
-            Docs.find().count() is 1
+            Docs.find(model:'dish').count() is 1
+        two_posts: ->
+            Docs.find(model:'dish').count() is 2
+        three_posts: ->
+            Docs.find(model:'dish').count() is 3
         dish_docs: ->
             # if picked_ingredients.array().length > 0
             Docs.find {
@@ -165,7 +169,7 @@ if Meteor.isClient
                 sort: "#{Session.get('dish_sort_key')}":parseInt(Session.get('dish_sort_direction'))
                 limit:Session.get('dish_limit')
 
-        home_subs_ready: ->
+        subs_ready: ->
             Template.instance().subscriptionsReady()
         users: ->
             # if picked_tags.array().length > 0
@@ -190,10 +194,10 @@ if Meteor.isClient
             Session.get('dish_sort_label')
 
 
-    # Template.set_dish_limit.events
-    #     'click .set_limit': ->
-    #         console.log @
-    #         Session.set('dish_limit', @amount)
+    Template.set_dish_limit.events
+        'click .set_limit': ->
+            console.log @
+            Session.set('dish_limit', @amount)
 
     Template.set_dish_sort_key.events
         'click .set_sort': ->
@@ -296,7 +300,7 @@ if Meteor.isServer
         #     },
         #         sort:
         #             count: -1
-        #         limit: 20
+        #         limit: 42
             # tag_cloud = Docs.aggregate [
             #     { $match: match }
             #     { $project: "tags": 1 }
@@ -314,28 +318,28 @@ if Meteor.isServer
         # if picked_ingredients.length > 0 then match.tags = $all: picked_ingredients
         # # match.tags = $all: picked_ingredients
         # # console.log 'match for tags', match
-        # tag_cloud = Docs.aggregate [
-        #     { $match: match }
-        #     { $project: "tags": 1 }
-        #     { $unwind: "$tags" }
-        #     { $group: _id: "$tags", count: $sum: 1 }
-        #     { $match: _id: $nin: picked_ingredients }
-        #     # { $match: _id: {$regex:"#{dish_query}", $options: 'i'} }
-        #     { $sort: count: -1, _id: 1 }
-        #     { $limit: 20 }
-        #     { $project: _id: 0, name: '$_id', count: 1 }
-        # ], {
-        #     allowDiskUse: true
-        # }
-        #
-        # tag_cloud.forEach (tag, i) =>
-        #     # console.log 'queried tag ', tag
-        #     # console.log 'key', key
-        #     self.added 'tags', Random.id(),
-        #         title: tag.name
-        #         count: tag.count
-        #         # category:key
-        #         # index: i
+        section_cloud = Docs.aggregate [
+            { $match: match }
+            { $project: "menu_section": 1 }
+            { $group: _id: "$menu_section", count: $sum: 1 }
+            { $match: _id: $nin: picked_ingredients }
+            # { $match: _id: {$regex:"#{dish_query}", $options: 'i'} }
+            { $sort: count: -1, _id: 1 }
+            { $limit: 20 }
+            { $project: _id: 0, name: '$_id', count: 1 }
+        ], {
+            allowDiskUse: true
+        }
+        
+        section_cloud.forEach (section, i) =>
+            # console.log 'queried section ', section
+            # console.log 'key', key
+            self.added 'results', Random.id(),
+                title: section.name
+                count: section.count
+                model:'section'
+                # category:key
+                # index: i
 
 
         ingredient_cloud = Docs.aggregate [
@@ -353,9 +357,10 @@ if Meteor.isServer
 
         ingredient_cloud.forEach (ingredient, i) =>
             # console.log 'ingredient result ', ingredient
-            self.added 'ingredients', Random.id(),
+            self.added 'results', Random.id(),
                 title: ingredient.title
                 count: ingredient.count
+                model:'ingredient'
                 # category:key
                 # index: i
 
@@ -384,7 +389,7 @@ if Meteor.isClient
               .modal('show')
 
         'click .goto_food': (e,t)->
-            # $(e.currentTarget).closest('.card').transition('zoom',200)
+            # $(e.currentTarget).closest('.card').transition('zoom',420)
             # $('.global_container').transition('scale', 500)
             Router.go("/food/#{@_id}")
             # Meteor.setTimeout =>

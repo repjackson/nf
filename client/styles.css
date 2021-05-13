@@ -697,8 +697,8 @@ h1.ui.header{
   animation: fadein .5s;
 }
 
-.icon.item {
-  animation: fadein .25s;
+.icon {
+  animation: fadein .5s;
 }
 
 @keyframes fadein {

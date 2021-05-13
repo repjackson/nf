@@ -1,11 +1,12 @@
 @Docs = new Meteor.Collection 'docs'
-@Tags = new Meteor.Collection 'tags'
+@Results = new Meteor.Collection 'results'
 
-@Ingredients = new Meteor.Collection 'ingredients'
 
 
 Docs.before.insert (userId, doc)->
-    doc._author_id = Meteor.userId()
+    if Meteor.userId()
+        doc._author_id = Meteor.userId()
+        doc._author_username = Meteor.user().username
     timestamp = Date.now()
     doc._timestamp = timestamp
     doc._timestamp_long = moment(timestamp).format("dddd, MMMM Do YYYY, h:mm:ss a")
@@ -27,9 +28,6 @@ Docs.before.insert (userId, doc)->
         # console.log date_array
         doc._timestamp_tags = date_array
 
-    doc._author_id = Meteor.userId()
-    if Meteor.user()
-        doc._author_username = Meteor.user().username
     doc.app = 'kit'
     # doc.points = 0
     # doc.downvoters = []
@@ -62,7 +60,7 @@ if Meteor.isServer
 
 Docs.helpers
     author: -> Meteor.users.findOne @_author_id
-    cook: -> Meteor.users.findOne @cook_user_id
+    # cook: -> Meteor.users.findOne @cook_user_id
 
     when: -> moment(@_timestamp).fromNow()
     ten_tags: -> if @tags then @tags[..10]
@@ -72,16 +70,16 @@ Docs.helpers
     is_published: -> @published is 1
     is_anonymous: -> @published is 0
     is_private: -> @published is -1
-    from_user: ->
-        if @from_user_id
-            Meteor.users.findOne @from_user_id
-    to_user: ->
-        if @to_user_id
-            Meteor.users.findOne @to_user_id
+    # from_user: ->
+    #     if @from_user_id
+    #         Meteor.users.findOne @from_user_id
+    # to_user: ->
+    #     if @to_user_id
+    #         Meteor.users.findOne @to_user_id
 
 
-    order_total_transaction_amount: ->
-        @serving_purchase_price+@cook_tip
+    # order_total_transaction_amount: ->
+    #     @serving_purchase_price+@cook_tip
 
 
     order: ->

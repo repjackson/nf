@@ -9,66 +9,88 @@ template(name='dishes')
             .ui.left.icon.search.small.input
                 i.search.icon.refresh_tags
                 input#search_ingredient.prompt(type='text' autocomplete="off" placeholder='ingredients')
-            if picked_ingredient_plural
-                .ui.icon.circular.black.compact.button.clear_picked_ingredients
-                    i.remove.icon
+            // if picked_ingredient_plural
+            //     .ui.icon.circular.black.compact.button.clear_picked_ingredients
+            //         i.remove.icon
             each picked_ingredients
                 button.ui.blue.compact.circular.small.button.unselect_ingredient(tabindex='0')
                     //- i.remove.icon
                     | #{this}
             +i name='ingredients' cl='ui inline mini image'
             each ingredients
-                button.ui.circular.compact.basic.button.ingredient_result(tabindex="0" class=result_class title=count) #{title}
+                button.ui.circular.compact.tertiary.button.ingredient_result(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
-        .sixteen.wide.column
-            .sorting_row
-                +session_set key='view_users' value='grid' icon='th' 
-                +session_set key='view_users' value='list' icon='list'
-                +session_set key='sort_users_direction' value='-1' icon='chevron down'
-                +session_set key='sort_users_direction' value='1' icon='chevron up'
-                +session_set key='sort_users_key' value='points' icon='coins'
-                +session_set key='sort_users_key' value='created_date' icon='clock'
-                // +session_set key='view_limit' value=1
-                +session_set key='view_limit' value=10
-                +session_set key='view_limit' value=20
-
-                
-                .ui.icon.input
-                    i.search.icon
-                    input.ingredient_search(type='text' placeholder='search...')
-                |sort by
-                .ui.compact.small.menu
-                    .ui.simple.dropdown.item
-                        strong #{current_dish_sort_label}
-                        i.dropdown.icon
-                        .menu
-                           +set_dish_sort_key key='price_per_serving' label='$/serving' icon='money'
-                           +set_dish_sort_key key='datetime_available' label='available' icon='clock'
-                           //- +set_dish_sort_key key='_timestamp' label='added' icon='clock'
-                           +set_dish_sort_key key='comment_count' label='comment count' icon='chat'
-                .ui.compact.icon.circular.button.set_sort_direction(title='toggle sort direction')
-                    if sorting_up
-                        i.sort.amount.down.icon
-                    else
-                        i.sort.amount.up.icon
-                |&nbsp;
-                |&nbsp;
-                //- .ui.inline.small.grey.header
-                //-     |show
-                //- .ui.compact.menu
-                //-     .ui.simple.dropdown.item
-                //-         strong #{dish_limit}
-                //-         i.dropdown.icon
-                //-         .menu
-                //-            +set_dish_limit amount=1
-                //-            +set_dish_limit amount=5
-                //-            +set_dish_limit amount=10
-                //-             +set_dish_limit amount=20
-            // .spacer 
-            .ui.stackable.centered.five.column.grid
-                each dish_docs
-                    +dish_card
-
+           
+            each picked_times
+                button.ui.blue.compact.circular.small.button.unselect_ingredient(tabindex='0')
+                    //- i.remove.icon
+                    | #{this}
+            +i name='clock' cl='ui inline mini image'
+            each times
+                button.ui.circular.compact.button.ingredient_result(tabindex="0" class=result_class title=count) #{title}
+                    //- small #{count}
+            unless one_post
+                spann.sorting_row
+                    // +session_set key='view_users' value='grid' icon='th' 
+                    // +session_set key='view_users' value='list' icon='list'
+                    // +session_set key='sort_users_direction' value='-1' icon='chevron down'
+                    // +session_set key='sort_users_direction' value='1' icon='chevron up'
+                    // +session_set key='sort_users_key' value='points' icon='coins'
+                    // +session_set key='sort_users_key' value='created_date' icon='clock'
+                    // +session_set key='view_limit' value=1
+                    +session_set key='view_limit' value=10
+                    +session_set key='view_limit' value=20
+    
+                    
+                    // .ui.icon.inline.input
+                    //     i.search.icon
+                    //     input#dish_search(type='text' placeholder='search...')
+                    // |sort by
+                    // .ui.compact.small.menu.inline
+                    //     .ui.simple.dropdown.item
+                    //         strong #{current_dish_sort_label}
+                    //         i.dropdown.icon
+                    //         .menu
+                    //           +set_dish_sort_key key='price_per_serving' label='$/serving' icon='money'
+                    //           +set_dish_sort_key key='datetime_available' label='available' icon='clock'
+                    //           //- +set_dish_sort_key key='_timestamp' label='added' icon='clock'
+                    //           +set_dish_sort_key key='comment_count' label='comment count' icon='chat'
+                    .ui.compact.icon.circular.button.set_sort_direction(title='toggle sort direction')
+                        if sorting_up
+                            i.sort.amount.down.icon
+                        else
+                            i.sort.amount.up.icon
+                    |&nbsp;
+                    |&nbsp;
+                    .ui.compact.menu
+                        .ui.simple.dropdown.item
+                            strong #{dish_limit}
+                            i.dropdown.icon
+                            .menu
+                            //   +set_dish_limit amount=1
+                               +set_dish_limit amount=5
+                               +set_dish_limit amount=10
+                                +set_dish_limit amount=20
+                .spacer 
+            if subs_ready
+                if one_post
+                    .ui.stackable.centered.one.column.grid
+                        each dish_docs
+                            +dish_card
+                else if two_posts
+                    .ui.stackable.centered.two.column.grid
+                        each dish_docs
+                            +dish_card
+                else if three_posts
+                    .ui.stackable.centered.three.column.grid
+                        each dish_docs
+                            +dish_card
+                else
+                    .ui.stackable.centered.five.column.grid
+                        each dish_docs
+                            +dish_card
+            else 
+                i.massive.loading.food.grey.icon
 
 
 
