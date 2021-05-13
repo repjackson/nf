@@ -90,7 +90,7 @@ template(name='dishes')
                         each dish_docs
                             +dish_card
             else 
-                i.massive.loading.food.grey.icon
+                i.big.loading.food.grey.icon
 
 
 
@@ -121,9 +121,9 @@ template(name='set_dish_limit')
 
 
 template(name='dish_card')
-    .column.zoomer(class=dish_card_class)
+    .center.aligned.column.zoomer(class=dish_card_class)
         a.image.zoomer(href="/dish/#{_id}") 
-            img.ui.zoom.pointer.goto_dish.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+            img.ui.zoom.pointer.goto_dish.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
             a.ui.inline.header(href="/dish/#{_id}") 
                 //- |#{_author.name}'s
@@ -131,7 +131,7 @@ template(name='dish_card')
             //- if session_is 'view_ingredients' true
             // +ismall name='ingredients'
             each ingredients
-                .ui.small.circular.label #{this}
+                .ui.small.circular.basic.label #{this}
         //- .ui.inline.small.header tags
         // .content
         //     .right.floated.meta
