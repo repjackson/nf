@@ -3,7 +3,7 @@ template(name='dish_view')
         .ui.stackable.padded.grid
             .three.column.row
                 .column
-                    a.ui.circular.basic.button(href="/dishes")
+                    a.ui.basic.button(href="/dishes")
                         i.chevron.left.icon
                         +i name='food' cl='ui mini inline image'
                 
@@ -13,7 +13,7 @@ template(name='dish_view')
                         //- small dish
                     if can_edit
                         a(href="/dish/#{_id}/edit")
-                            i.pencil.blue.large.circular.link.icon
+                            i.pencil.blue.large.link.icon
                     img.ui.rounded.image(src="{{c.url image_id}}")
                     div
                 .column
@@ -68,7 +68,7 @@ template(name='dish_order_card')
 
 template(name='order_button')
     // if servings_left
-    .ui.green.basic.inverted.circular.fluid.large.button.order_dish
+    .ui.green.basic.inverted.fluid.large.button.order_dish
         i.cart.plus.large.icon
         strong ${{fixed price_usd}}
         // |order #{serving_unit}

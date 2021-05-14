@@ -1,5 +1,5 @@
 template(name='nav')
-    #topnav.topnav.ui.attached.borderless.four.item.large.menu
+    #topnav.topnav.ui.attached.borderless.four.item.big.menu
         if is_loading
             .icon.item
                 i.big.spinning.grey.yin.yang.icon.cancel
@@ -9,10 +9,10 @@ template(name='nav')
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         a.item.zoomer(href='/dishes' class="{{isActivePath '/dishes'}}" title='dishes')
             +i name='food' cl='ui inline mini image'
-            span.mobile.hidden dishes
+            strong.mobile.hidden dishes
         a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             +i name='list' cl='ui inline mini image'
-            span.mobile.hidden orders
+            strong.mobile.hidden orders
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
         //         +i name='tasks' cl='ui inline mini image'
@@ -30,7 +30,7 @@ template(name='nav')
                     img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
                 else
                     i.user.icon
-                span.mobile.hidden #{currentUser.name}
+                strong.mobile.hidden #{currentUser.name}
                     //- |${{int currentUser.credit}}
         unless currentUser
             a.item(href='/login' title='login') 

@@ -5,35 +5,34 @@ template(name='dishes')
                 |#{dish_count}
                 |dishes
             if currentUser
-                a.ui.icon.circular.button.add_dish(title='cook')
+                a.ui.icon.button.add_dish(title='cook')
                     i.plus.green.large.icon
             
             .ui.left.icon.search.small.input
                 i.search.icon.refresh_tags
                 input#search_ingredient.prompt(type='text' autocomplete="off" placeholder='ingredients')
             // if picked_ingredient_plural
-            //     .ui.icon.circular.black.compact.button.clear_picked_ingredients
+            //     .ui.icon.black.compact.button.clear_picked_ingredients
             //         i.remove.icon
-            .ui.basic.circular.icon.button.toggle_gf(class=toggle_gf_class)
+            .ui.basic.icon.button.toggle_gf(class=toggle_gf_class)
                 +i name='no-gluten' cl='ui mini inline image'
-            .ui.basic.circular.icon.button.toggle_vegan(class=toggle_vegan_class)
+            .ui.basic.icon.button.toggle_vegan(class=toggle_vegan_class)
                 +i name='vegan-symbol' cl='ui mini inline image'
             each picked_ingredients
-                button.ui.blue.compact.circular.small.button.unpick_ingredient(tabindex='0')
+                button.ui.blue.compact.small.button.unpick_ingredient(tabindex='0')
                     //- i.remove.icon
                     | #{this}
             +i name='ingredients' cl='ui inline mini image'
             each ingredients
-                button.ui.circular.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
+                button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
-           
             each picked_sections
-                button.ui.blue.compact.circular.small.button.unpick_section(tabindex='0')
+                button.ui.blue.compact.small.button.unpick_section(tabindex='0')
                     //- i.remove.icon
                     | #{this}
             +i name='clock' cl='ui inline mini image'
             each sections
-                button.ui.circular.compact.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+                button.ui.compact.button.pick_section(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
             // unless one_post
             spann.sorting_row
@@ -64,7 +63,7 @@ template(name='dishes')
                           +set_dish_sort_key key='datetime_available' label='available' icon='clock'
                           //- +set_dish_sort_key key='_timestamp' label='added' icon='clock'
                           +set_dish_sort_key key='comment_count' label='comment count' icon='chat'
-                .ui.compact.icon.circular.button.set_sort_direction(title='toggle sort direction')
+                .ui.compact.icon.button.set_sort_direction(title='toggle sort direction')
                     if sorting_up
                         i.sort.amount.down.icon
                     else
@@ -99,7 +98,7 @@ template(name='dishes')
                         each dish_docs
                             +dish_card
             else 
-                i.big.loading.food.grey.icon
+                i.massive.loading.yin.yang.grey.icon
 
 
 
@@ -140,7 +139,7 @@ template(name='dish_card')
             //- if session_is 'view_ingredients' true
             // +ismall name='ingredients'
             each ingredients
-                .ui.small.circular.basic.label #{this}
+                .ui.small.basic.label #{this}
         if gluten_free
             +i name='no-gluten' cl='ui mini inline image' title='gluten free'
         if vegan

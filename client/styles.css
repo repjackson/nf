@@ -420,12 +420,12 @@ img {
 
 
 .input{
-    -webkit-border-radius: 10px !important;
-    border-radius: 10px !important;
+    /*-webkit-border-radius: 10px !important;*/
+    /*border-radius: 10px !important;*/
 }
 input:not(.no_format){
     /* -webkit-border-radius: 10px !important; */ */
-    border-radius: 10px !important;
+    /*border-radius: 10px !important;*/
     margin-bottom: 3px !important;
     margin-top: 3px !important;
     /* font-size: 120% !important; */
