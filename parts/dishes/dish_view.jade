@@ -1,7 +1,7 @@
 template(name='dish_view')
     with current_doc
         .ui.stackable.padded.grid
-            .three.column.row
+            .two.column.row
                 .column
                     a.ui.basic.button(href="/dishes")
                         i.chevron.left.icon
@@ -24,8 +24,6 @@ template(name='dish_view')
                         .ui.large.basic.label #{this}
                     +boolean_view key='gluten_free' label='gluten free' direct=true
                     +boolean_view key='vegan' label='vegan' direct=true
-                        
-                .column
                     .ui.header #{menu_section}
                     if can_order
                         +order_button

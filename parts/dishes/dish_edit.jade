@@ -9,6 +9,7 @@ template(name='dish_edit')
                 .ui.large.circular.icon.green.button.save_dish(title='save dish')
                     i.checkmark.large.icon   
                 +text_edit key='title' label='title' direct=true
+                +text_edit key='location' label='location' direct=true
                 +text_edit key='menu_section' label='menu section' direct=true
                 each model_docs 'menu_section'
                     +pick_section

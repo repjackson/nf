@@ -83,6 +83,9 @@ if Meteor.isClient
             query = $('#dish_search').val()
             Session.set('dish_query', query)
             # console.log Session.get('dish_query')
+            if e.key == "Escape"
+                Session.set('dish_query', null)
+                
             if e.which is 13
                 search = $('#dish_search').val().trim().toLowerCase()
                 if search.length > 0
