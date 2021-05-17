@@ -243,8 +243,8 @@ img {
     /* border-radius:10px !important; */
 }
 
-.image:not(.circular) {
-     /*border-radius:10px !important; */
+.image:not(.circular), img {
+    border-radius:10px !important; 
 }
 
 

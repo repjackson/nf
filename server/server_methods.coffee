@@ -1,5 +1,5 @@
 Meteor.methods
-    increment_view: (doc_id)->
+    log_view: (doc_id)->
         Docs.update doc_id,
             $inc:views:1
 

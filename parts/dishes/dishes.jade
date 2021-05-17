@@ -1,6 +1,6 @@
 template(name='dishes')
-    .ui.stackable.padded.center.aligned.grid
-        .sixteen.wide.column
+    .ui.stackable.padded.grid
+        .four.wide.column
             .ui.inline.header
                 |#{dish_count}
                 |dishes
@@ -36,12 +36,13 @@ template(name='dishes')
                 button.ui.blue.compact.small.circular.button.unpick_section(tabindex='0')
                     //- i.remove.icon
                     | #{this}
+            div
             +i name='clock' cl='ui inline mini image'
             each sections
-                button.ui.compact.circular.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+                button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
             // unless one_post
-            spann.sorting_row
+            .sorting_row
                 // +session_set key='view_users' value='grid' icon='th' 
                 // +session_set key='view_users' value='list' icon='list'
                 // +session_set key='sort_users_direction' value='-1' icon='chevron down'
@@ -80,6 +81,7 @@ template(name='dishes')
                            +set_dish_limit amount=10
                             +set_dish_limit amount=20
                 .spacer 
+        .twelve.wide.column
             if subs_ready
                 if one_post
                     .ui.stackable.centered.one.column.grid
@@ -98,7 +100,7 @@ template(name='dishes')
                         each dish_docs
                             +dish_card
             else 
-                i.massive.loading.food.grey.icon
+                i.massive.loading.circular.food.grey.icon
 
 
 

@@ -9,6 +9,8 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'dish_from_dish_id', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'orders_from_dish_id', Router.current().params.doc_id
+    Template.dish_view.onRendered ->
+        Meteor.call 'log_view', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'ingredients_from_dish_id', Router.current().params.doc_id
 
 
