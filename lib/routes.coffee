@@ -94,5 +94,5 @@ Router.route '/reset_password/:token', (->
 
 Router.route '/login', -> @render 'login'
 
-Router.route '/', -> @redirect '/dishes'
+Router.route '/', -> @render 'home'
 # Router.route '/', -> @redirect "/user/#{Meteor.user().username}"

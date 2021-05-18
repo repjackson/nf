@@ -81,7 +81,7 @@ template(name='dishes')
                            +set_dish_limit amount=10
                             +set_dish_limit amount=20
                 .spacer 
-        .twelve.wide.column
+        .twelve.wide.column.scrolling
             if subs_ready
                 if one_post
                     .ui.stackable.centered.one.column.grid
@@ -96,7 +96,7 @@ template(name='dishes')
                         each dish_docs
                             +dish_card
                 else
-                    .ui.stackable.centered.five.column.grid
+                    .ui.stackable.centered.four.column.grid
                         each dish_docs
                             +dish_card
             else 

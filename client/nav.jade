@@ -1,5 +1,5 @@
 template(name='nav')
-    #topnav.topnav.ui.attached.borderless.four.item.menu
+    #topnav.topnav.ui.attached.borderless.menu
         if is_loading
             .icon.item
                 i.big.spinning.grey.yin.yang.icon.cancel
@@ -7,6 +7,10 @@ template(name='nav')
         //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
+        a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
+            // +i name='food' cl='ui inline mini image'
+            i.dashboard.icon
+            strong.mobile.hidden home
         a.item.zoomer(href='/dishes' class="{{isActivePath '/dishes'}}" title='dishes')
             // +i name='food' cl='ui inline mini image'
             i.food.icon
@@ -15,26 +19,31 @@ template(name='nav')
             // +i name='list' cl='ui inline mini image'
             i.list.icon
             strong.mobile.hidden orders
+        a.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
+            // +i name='list' cl='ui inline mini image'
+            i.chat.icon
+            strong.mobile.hidden chat
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
         //         +i name='tasks' cl='ui inline mini image'
         //     a.item(href='/m/model' class="{{isActivePath '/m/model'}}" title='delta')
         //         +i name='database' cl='ui inline mini image'
         if currentUser
-            //- a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
-            //-     i.bell.icon
-            a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActivePath '/cart'}}" title='cart')
-                // +i name='shopping-cart' cl='ui inline mini image'
-                i.cart.icon
-            // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
-            //     .ui.inline.header #{currentUser.credit}f
-            a.item(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
-                if currentUser.image_id
-                    img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                else
-                    i.user.icon
-                strong.mobile.hidden #{currentUser.name}
-                    //- |${{int currentUser.credit}}
+            .right.menu
+                //- a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
+                //-     i.bell.icon
+                a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActivePath '/cart'}}" title='cart')
+                    // +i name='shopping-cart' cl='ui inline mini image'
+                    i.cart.icon
+                // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
+                //     .ui.inline.header #{currentUser.credit}f
+                a.item(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
+                    if currentUser.image_id
+                        img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                    else
+                        i.user.icon
+                    strong.mobile.hidden #{currentUser.name}
+                        //- |${{int currentUser.credit}}
         unless currentUser
             a.item(href='/login' title='login') 
                 //- i.sign.in.icon

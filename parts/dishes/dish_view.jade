@@ -16,7 +16,10 @@ template(name='dish_view')
                             i.pencil.blue.large.link.icon
                     img.ui.rounded.image(src="{{c.url image_id}}")
                     div
-                .column
+                    +voting_full
+                    div 
+                    +comments
+                .column.scrolling
                     .ui.inline.header 
                         +i name='ingredients'
                         |ingredients
@@ -38,7 +41,6 @@ template(name='dish_view')
                             +dish_order_card
                     .ui.header #{views} views
                     .ui.hidden.divider
-                    +comments
          
          
          

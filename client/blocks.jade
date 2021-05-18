@@ -62,7 +62,9 @@ template(name='viewing')
         +user_info
 
 template(name='user_info')
-    .ui.header #{this}
+    with user_from_id this
+        .ui.header #{username}
+    // .ui.header #{this}
 
 
 template(name='session_boolean_toggle')
@@ -320,7 +322,7 @@ template(name='voting_full')
             +user_info
     if downvoter_ids
         .ui.small.header 
-            i.thumbs.up.icon
+            i.thumbs.down.icon
             |downvoters
         each downvoter_ids
             +user_info
