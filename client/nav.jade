@@ -7,10 +7,9 @@ template(name='nav')
         //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
-        a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
+        a.icon.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
-            i.dashboard.icon
-            strong.mobile.hidden home
+            i.home.icon
         a.item.zoomer(href='/dishes' class="{{isActivePath '/dishes'}}" title='dishes')
             // +i name='food' cl='ui inline mini image'
             i.food.icon
@@ -19,6 +18,10 @@ template(name='nav')
             // +i name='list' cl='ui inline mini image'
             i.list.icon
             strong.mobile.hidden orders
+        a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
+            // +i name='list' cl='ui inline mini image'
+            i.newspaper.icon
+            strong.mobile.hidden news
         a.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
             // +i name='list' cl='ui inline mini image'
             i.chat.icon

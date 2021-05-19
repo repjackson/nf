@@ -42,6 +42,7 @@ template(name='dishes')
                 button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
             // unless one_post
+        .twelve.wide.column.scrolling
             .sorting_row
                 // +session_set key='view_users' value='grid' icon='th' 
                 // +session_set key='view_users' value='list' icon='list'
@@ -60,10 +61,10 @@ template(name='dishes')
                         strong #{current_dish_sort_label}
                         i.dropdown.icon
                         .menu
-                          +set_dish_sort_key key='price_per_serving' label='$/serving' icon='money'
-                          +set_dish_sort_key key='datetime_available' label='available' icon='clock'
+                          +set_dish_sort_key key='price_usd' label='price' icon='money'
                           //- +set_dish_sort_key key='_timestamp' label='added' icon='clock'
                           +set_dish_sort_key key='comment_count' label='comment count' icon='chat'
+                          +set_dish_sort_key key='views' label='views' icon='visible'
                 .ui.compact.icon.button.set_sort_direction(title='toggle sort direction')
                     if sorting_up
                         i.sort.amount.down.icon
@@ -81,7 +82,6 @@ template(name='dishes')
                            +set_dish_limit amount=10
                             +set_dish_limit amount=20
                 .spacer 
-        .twelve.wide.column.scrolling
             if subs_ready
                 if one_post
                     .ui.stackable.centered.one.column.grid
