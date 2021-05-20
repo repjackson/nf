@@ -10,15 +10,14 @@ Template.registerHelper 'model_docs', (model) ->
         model:model
     # Template.parentData()
 
+Template.registerHelper 'dish_sort_icon', () -> Session.get('dish_sort_icon')
 Template.registerHelper 'active_path', (metric) ->
     false
 
 Template.registerHelper 'user_from_id', (id)->
     Meteor.users.findOne id
-Template.registerHelper 'kve', (key,value)->
-    @["#{key}"] is value
-Template.registerHelper 'skv_is', (key,value)->
-    Session.equals(key,value)
+Template.registerHelper 'kve', (key,value)-> @["#{key}"] is value
+Template.registerHelper 'skv_is', (key,value)-> Session.equals(key,value)
 
 Template.registerHelper 'gs', () ->
     Docs.findOne
