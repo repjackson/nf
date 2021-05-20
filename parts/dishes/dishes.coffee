@@ -215,11 +215,9 @@ if Meteor.isClient
                 sort: count:-1
                 # limit:1
 
-        dish_limit: ->
-            Session.get('dish_limit')
+        dish_limit: -> Session.get('dish_limit')
 
-        current_dish_sort_label: ->
-            Session.get('dish_sort_label')
+        current_dish_sort_label: -> Session.get('dish_sort_label')
 
 
     Template.set_dish_limit.events
@@ -232,6 +230,7 @@ if Meteor.isClient
             console.log @
             Session.set('dish_sort_key', @key)
             Session.set('dish_sort_label', @label)
+            Session.set('dish_sort_icon', @icon)
 
 
 

@@ -25,12 +25,6 @@ template(name='users')
                             +user_item
                             div
 
-template(name='session_set')
-    .ui.icon.button.set_value(class=session_set_class)
-        if icon
-            i.icon(class=icon)
-        else 
-            |#{value}
 template(name='user_cloud')
     i.shield.blue.large.icon
     if picked_user_levels

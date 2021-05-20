@@ -411,3 +411,11 @@ template(name='email_validation_check')
 template(name='print_this')
     .ui.icon.circular.basic.button.print
         i.orange.code.icon
+
+
+template(name='session_set')
+    .ui.icon.button.set_value(class=session_set_class)
+        if icon
+            i.icon(class=icon)
+        else 
+            |#{value}
