@@ -7,12 +7,13 @@ template(name='nav')
         //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
-        a.icon.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
-            // +i name='food' cl='ui inline mini image'
-            i.home.icon
+        a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
+            +i name='home' cl='ui inline mini image'
+            // i.home.icon
+            span.mobile.hidden the kitchen
         a.item.zoomer(href='/dishes' class="{{isActivePath '/dishes'}}" title='dishes')
-            // +i name='food' cl='ui inline mini image'
-            i.food.icon
+            +i name='food' cl='ui inline mini image'
+            // i.food.icon
             strong.mobile.hidden dishes
         a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             // +i name='list' cl='ui inline mini image'
