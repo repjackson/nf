@@ -21,7 +21,7 @@ template(name='shop')
             //     .ui.icon.black.compact.button.clear_picked_ingredients
             //         i.remove.icon
             .ui.basic.icon.circular.button.toggle_gf(class=toggle_gf_class)
-                +i name='no-gluten' cl='ui mini inline image'
+                +icolor name='no-gluten' cl='ui mini inline image'
             .ui.basic.icon.circular.button.toggle_vegan(class=toggle_vegan_class)
                 +i name='vegan-food' cl='ui mini inline image'
             each picked_ingredients
@@ -144,9 +144,9 @@ template(name='product_card')
             //- if session_is 'view_ingredients' true
             // +ismall name='ingredients'
             each ingredients
-                .ui.small.basic.label #{this}
+                .ui.small.basic.circular.label #{this}
         if gluten_free
-            +i name='no-gluten' cl='ui mini inline image' title='gluten free'
+            +i name='services--v2' cl='ui mini inline image' title='gluten free'
         if vegan
             +i name='vegan-food' cl='ui mini inline image' title='vegan'
         //- .ui.inline.small.header tags

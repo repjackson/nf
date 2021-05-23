@@ -14,11 +14,13 @@ template(name='nav')
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         .right.menu
             a.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-                +i name='shopping-cart' cl='ui inline mini image'
+                .ui.mini.image.cart
+                    +i name='shopping-cart' cl=''
                 // i.cart.icon
                 strong.mobile.hidden shop
             a.item.zoomer(href='/about' class="{{isActivePath '/about'}}" title='about')
-                +i name='info' cl='ui inline mini image'
+                .ui.mini.image.info
+                    +i name='information--v1' cl=''
                 // i.cart.icon
                 strong.mobile.hidden about
             a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
@@ -50,7 +52,8 @@ template(name='nav')
                 //- a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
                 //-     i.bell.icon
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActivePath '/cart'}}" title='current wallet balance')
-                    +i name='wallet' cl='ui inline mini image'
+                    .ui.mini.image.wallet
+                        +i name='wallet' cl=''
                     // i.cart.icon
                 // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
                 //     .ui.inline.header #{currentUser.credit}f
@@ -92,3 +95,47 @@ template(name='latest_activity')
                 |#{text} #{body} 
                 .ui.label #{log_type}
                 small #{when}
+
+
+template(name='footer')
+    .ui.stackable.padded.grid
+        .four.column.row
+            .column
+                .ui.link.list
+                    .item CONTACT US
+                    a.item hello@nudefoodsmarket.com
+                    a.item 555 30th Street
+                    a.item Boulder, CO 80303
+                    a.item (720) 815-5588
+            .column
+                .ui.link.animated.selection.list
+                    .header.item PAGES
+                    a.item(href="/cart") Cart
+                    .item Checkout
+                    a.item 
+                        i.phone.icon
+                        |Contact Us
+                    a.item 
+                        i.smile.icon
+                        |Get Involved
+                    a.item 
+                        i.home.icon
+                        |Home
+                    a.item My Account
+                    a.item Newsletter
+                    a.item Nude Foods Team
+                    a.item Refer A Friend
+                    a.item Shop
+                    a.item Transparency
+                    a.item We’re Hiring!
+            .column
+                .ui.link.animated.selection.list
+                    a.item INFO
+                    a.item FAQ
+                    a.item How it Works
+                    a.item Privacy Policy
+                    a.item Terms of Service
+            .column
+                +i name='facebook'
+                +i name='instagram'
+

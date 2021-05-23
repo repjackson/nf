@@ -16,11 +16,12 @@ template(name='product_edit')
                 +image_edit key='image_id' label='image' direct=true
                 +boolean_edit key='gluten_free' label='gluten free' direct=true
                 +boolean_edit key='vegan' label='vegan' direct=true
+                +boolean_edit key='local' label='vegan' direct=true
             .eight.wide.column
                 +float_edit key='price_usd' label='$ price' direct=true
                 div
                 +array_edit key='ingredients' label='ingredients'  direct=true
-                +textarea_edit key='description' label='description' direct=true
+                +html_edit key='description' label='description' direct=true
                 if can_delete
                     .ui.red.button.delete_product
                         i.remove.icon   

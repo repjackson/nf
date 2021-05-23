@@ -263,6 +263,18 @@ img {
     transform: scale(1.05) !important; /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
     box-shadow: inset 0px 0px 10px 10px rgba(250,250,250,0.8);
 }
+.wallet:hover {
+    content:url("/wallet.gif");
+}
+.info:hover {
+    content:url("/info.gif");
+}
+.cart:hover {
+    content:url("/cart.gif");
+    width: 35px;
+    /*height: auto;*/
+    /*font-size: .78571429rem;*/
+}
 .zoomer:hover {
     transition: transform .5s; /* Animation */
     box-shadow: inset 0px 0px 10px 10px rgba(250,250,250,0.8);

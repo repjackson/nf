@@ -30,7 +30,7 @@ template(name='product_view')
                     .ui.header #{menu_section}
                     if can_order
                         +order_button
-                    +textarea_view key='description' direct=true
+                    +html_view key='description' direct=true
                     .ui.header 
                         +i name='order-history'
                         |#{product_orders.count}
