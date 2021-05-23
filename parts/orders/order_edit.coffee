@@ -11,7 +11,7 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'dish_from_order_id', Router.current().params.doc_id 
 
     Template.order_edit.helpers
-        all_dishes: ->
+        all_shop: ->
             Docs.find
                 model:'dish'
         can_delete: ->

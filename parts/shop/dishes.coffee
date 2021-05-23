@@ -1,18 +1,18 @@
 if Meteor.isClient
-    Router.route '/dishes', (->
+    Router.route '/shop', (->
         @layout 'layout'
-        @render 'dishes'
-        ), name:'dishes'
+        @render 'shop'
+        ), name:'shop'
 
 
-    Template.dishes.onCreated ->
+    Template.shop.onCreated ->
         Session.setDefault 'view_mode', 'list'
         Session.setDefault 'dish_sort_key', 'datetime_available'
         Session.setDefault 'dish_sort_label', 'available'
         Session.setDefault 'dish_limit', 42
         Session.setDefault 'view_open', true
 
-    Template.dishes.onCreated ->
+    Template.shop.onCreated ->
         @autorun => @subscribe 'dish_facets',
             picked_ingredients.array()
             picked_sections.array()
@@ -48,7 +48,7 @@ if Meteor.isClient
             
 
 
-    Template.dishes.events
+    Template.shop.events
         'click .add_dish': ->
             new_id =
                 Docs.insert
@@ -126,7 +126,7 @@ if Meteor.isClient
                 Session.set('dish_sort_direction', -1)
 
 
-    Template.dishes.helpers
+    Template.shop.helpers
         quickbuying_dish: ->
             Docs.findOne Session.get('quickbuying_id')
 

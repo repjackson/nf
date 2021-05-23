@@ -2,18 +2,18 @@ template(name='nav')
     #topnav.topnav.ui.attached.borderless.menu
         if is_loading
             .icon.item
-                i.big.spinning.grey.yin.yang.icon.cancel
-        a.image.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
+                i.big.spinning.grey.food.icon.cancel
+        a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
-            img.ui.tiny.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+            img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // span.mobile.hidden nude foods market
         // else 
         //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         .right.menu
-            a.item.zoomer(href='/dishes' class="{{isActivePath '/dishes'}}" title='dishes')
+            a.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
                 +i name='shopping-cart' cl='ui inline mini image'
                 // i.cart.icon
                 strong.mobile.hidden shop
@@ -25,11 +25,15 @@ template(name='nav')
                 +i name='list' cl='ui inline mini image'
                 // i.list.icon
                 strong.mobile.hidden orders
-            a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
-                +i name='list' cl='ui inline mini image'
+            a.disabled.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
+                // +i name='list' cl='ui inline mini image'
                 // i.newspaper.icon
-                strong.mobile.hidden news
-            a.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
+                strong.mobile.hidden get involved
+            // a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
+            //     +i name='list' cl='ui inline mini image'
+            //     // i.newspaper.icon
+            //     strong.mobile.hidden news
+            a.disabled.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
                 +i name='chat' cl='ui inline mini image'
                 // i.chat.icon
                 strong.mobile.hidden chat

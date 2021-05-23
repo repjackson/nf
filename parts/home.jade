@@ -6,6 +6,11 @@ template(name='home')
 
         .four.column.row
             .center.aligned.column
+                a.ui.icon.header(href="/shop")
+                    +i name='shopping-cart' cl='icon zoomer'
+                    // i.food.icon
+                    |shop
+            .center.aligned.column
                 a.ui.icon.header(href="/users") 
                     // i.users.icon
                     +i name='conference' cl='icon zoomer'
@@ -15,16 +20,16 @@ template(name='home')
                     // i.shield.icon
                     +i name='employee-card' cl='icon zoomer'
                     |staff
+            // .center.aligned.column
+            //     a.ui.icon.header(href="/staff")
+            //         // i.shield.icon
+            //         +i name='employee-card' cl='icon zoomer'
+            //         |staff
             .center.aligned.column
-                a.ui.icon.header(href="/staff")
-                    // i.shield.icon
-                    +i name='employee-card' cl='icon zoomer'
-                    |staff
-            .center.aligned.column
-                a.ui.icon.header(href="/dishes")
-                    +i name='shopping-cart' cl='icon zoomer'
+                a.ui.icon.header(href="/shop")
+                    +i name='sell' cl='icon zoomer'
                     // i.food.icon
-                    |shop
+                    |become a seller
             .center.aligned.column
                 a.ui.icon.header(href="/orders")
                     +i name='bill' cl='icon zoomer'
@@ -35,8 +40,26 @@ template(name='home')
                     +i name='inbox' cl='icon zoomer'
                     // i.mail.icon
                     |inbox
-            // .center.aligned.column
-            //     a.ui.icon.header(href="/m/ingredient")
-            //         i.food.icon
-            //         |ingredients
-                    
+        .one.column.row
+            .column
+                .ui.header 
+                    i.shield.icon
+                    |admin
+                a.ui.big.basic.disabled.button(href="/inventory")
+                    +i name='list' cl='ui inline image'
+                    |inventory
+                a.ui.big.basic.disabled.button(href="/bikers")
+                    +i name='cycling-road' cl='ui inline image'
+                    |bikers
+                a.ui.big.basic.disabled.button(href="/trips")
+                    +i name='time-machine' cl='ui inline image'
+                    |trips
+        .one.column.row
+            .column
+                .ui.header footer
+                .ui.list
+                    .item CONTACT US
+                    .item hello@nudefoodsmarket.com
+                    .item 555 30th Street
+                    .item Boulder, CO 80303
+                    .item (720) 815-5588

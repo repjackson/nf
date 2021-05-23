@@ -23,7 +23,7 @@ if Meteor.isClient
         , 2000
 
     Template.dish_edit.helpers
-        all_dishes: ->
+        all_shop: ->
             Docs.find
                 model:'dish'
         can_delete: ->
