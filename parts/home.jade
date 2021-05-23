@@ -1,28 +1,42 @@
 template(name='home')
     .ui.stackable.padded.centered.grid
+        .one.column.row
+            .center.aligned.column
+                .ui.big.header.f20 WE DELIVER LOCAL, ORGANIC GROCERIES, MEALS AND HOUSEHOLD PRODUCTS IN ZERO-WASTE, REUSABLE CONTAINERS TO YOUR DOOR BY BICYCLE
+
         .four.column.row
             .center.aligned.column
                 a.ui.icon.header(href="/users") 
-                    i.users.icon
+                    // i.users.icon
+                    +i name='conference' cl='icon zoomer'
                     |users
             .center.aligned.column
                 a.ui.icon.header(href="/staff")
-                    i.shield.icon
+                    // i.shield.icon
+                    +i name='employee-card' cl='icon zoomer'
+                    |staff
+            .center.aligned.column
+                a.ui.icon.header(href="/staff")
+                    // i.shield.icon
+                    +i name='employee-card' cl='icon zoomer'
                     |staff
             .center.aligned.column
                 a.ui.icon.header(href="/dishes")
-                    i.food.icon
-                    |menu
+                    +i name='shopping-cart' cl='icon zoomer'
+                    // i.food.icon
+                    |shop
             .center.aligned.column
                 a.ui.icon.header(href="/orders")
-                    i.list.icon
+                    +i name='bill' cl='icon zoomer'
+                    // i.list.icon
                     |orders
             .center.aligned.column
                 a.ui.icon.header(href="/inbox")
-                    i.mail.icon
+                    +i name='inbox' cl='icon zoomer'
+                    // i.mail.icon
                     |inbox
-            .center.aligned.column
-                a.ui.icon.header(href="/m/ingredient")
-                    i.food.icon
-                    |ingredients
+            // .center.aligned.column
+            //     a.ui.icon.header(href="/m/ingredient")
+            //         i.food.icon
+            //         |ingredients
                     
