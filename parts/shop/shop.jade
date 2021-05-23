@@ -2,16 +2,16 @@ template(name='shop')
     .ui.stackable.padded.grid
         .four.wide.column
             .ui.inline.header
-                |#{dish_count}
-                |shop
-            .ui.icon.inline.input
-                if dish_query
-                    i.remove.link.icon.clear_dish_query(title='clear search')
+                |#{product_count}
+                |products
+            .ui.icon.input
+                if product_query
+                    i.remove.link.icon.clear_product_query(title='clear search')
                 else 
                     i.search.icon
-                input#dish_search(type='text' placeholder='title...' value=dish_query)
+                input#product_search(type='text' placeholder='title...' value=product_query)
             if currentUser
-                a.ui.icon.button.add_dish(title='cook')
+                a.ui.icon.button.add_product(title='cook')
                     i.plus.green.large.icon
             
             // .ui.left.icon.search.input
@@ -23,7 +23,7 @@ template(name='shop')
             .ui.basic.icon.circular.button.toggle_gf(class=toggle_gf_class)
                 +i name='no-gluten' cl='ui mini inline image'
             .ui.basic.icon.circular.button.toggle_vegan(class=toggle_vegan_class)
-                +i name='vegan-symbol' cl='ui mini inline image'
+                +i name='vegan-food' cl='ui mini inline image'
             each picked_ingredients
                 button.ui.blue.compact.small.circular.button.unpick_ingredient(tabindex='0')
                     //- i.remove.icon
@@ -33,16 +33,16 @@ template(name='shop')
                 button.ui.compact.tertiary.circular.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
         .twelve.wide.column.scrolling
-            each picked_sections
-                button.ui.blue.compact.small.circular.button.unpick_section(tabindex='0')
-                    //- i.remove.icon
-                    | #{this}
-            // div
-            +i name='clock' cl='ui inline mini image'
-            each sections
-                button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
-                    //- small #{count}
-            // unless one_post
+            // each picked_sections
+            //     button.ui.blue.compact.small.circular.button.unpick_section(tabindex='0')
+            //         //- i.remove.icon
+            //         | #{this}
+            // // div
+            // +i name='clock' cl='ui inline mini image'
+            // each sections
+            //     button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+            //         //- small #{count}
+            // // unless one_post
             .sorting_row
                 // +session_set key='view_users' value='grid' icon='th' 
                 // +session_set key='view_users' value='list' icon='list'
@@ -58,15 +58,15 @@ template(name='shop')
                 |sort by
                 .ui.compact.small.menu
                     .ui.simple.dropdown.item
-                        i.icon(class=dish_sort_icon)
-                        strong #{current_dish_sort_label}
+                        i.icon(class=product_sort_icon)
+                        strong #{current_product_sort_label}
                         i.dropdown.icon
                         .menu
-                          +set_dish_sort_key key='price_usd' label='price' icon='money'
-                          //- +set_dish_sort_key key='_timestamp' label='added' icon='clock'
-                          +set_dish_sort_key key='comment_count' label='comment count' icon='chat'
-                          +set_dish_sort_key key='views' label='views' icon='eye'
-                          +set_dish_sort_key key='points' label='points' icon='line chart'
+                          +set_product_sort_key key='price_usd' label='price' icon='money'
+                          //- +set_product_sort_key key='_timestamp' label='added' icon='clock'
+                          +set_product_sort_key key='comment_count' label='comment count' icon='chat'
+                          +set_product_sort_key key='views' label='views' icon='eye'
+                          +set_product_sort_key key='points' label='points' icon='line chart'
                 .ui.compact.icon.button.set_sort_direction(title='toggle sort direction')
                     if sorting_up
                         i.sort.amount.down.icon
@@ -76,40 +76,41 @@ template(name='shop')
                 |&nbsp;
                 // .ui.compact.menu
                 //     .ui.simple.dropdown.item
-                //         strong #{dish_limit}
+                //         strong #{product_limit}
                 //         i.dropdown.icon
                 //         .menu
-                        //   +set_dish_limit amount=1
-                           +set_dish_limit amount=5
-                           +set_dish_limit amount=10
-                            +set_dish_limit amount=20
+                        //   +set_product_limit amount=1
+                           +set_product_limit amount=5
+                           +set_product_limit amount=10
+                            +set_product_limit amount=20
                 .spacer 
             if subs_ready
                 if one_post
                     .ui.stackable.centered.one.column.grid
-                        each dish_docs
-                            +dish_card
+                        each product_docs
+                            +product_card
                 else if two_posts
                     .ui.stackable.centered.two.column.grid
-                        each dish_docs
-                            +dish_card
+                        each product_docs
+                            +product_card
                 else if three_posts
                     .ui.stackable.centered.three.column.grid
-                        each dish_docs
-                            +dish_card
+                        each product_docs
+                            +product_card
                 else
                     .ui.stackable.centered.four.column.grid
-                        each dish_docs
-                            +dish_card
+                        each product_docs
+                            +product_card
             else 
-                i.massive.loading.circular.food.grey.icon
+                .ui.basic.center.aligned.segment
+                    i.massive.loading.circular.food.grey.icon
 
 
 
 
 
         
-template(name='set_dish_sort_key')
+template(name='set_product_sort_key')
     .item.set_sort
         if color
             .ui.label(class=color) #{label}
@@ -121,23 +122,23 @@ template(name='set_dish_sort_key')
             |#{label}
         
 
-template(name='set_view_mode_dish')
+template(name='set_view_mode_product')
     .item.set_view
         i.icon(class=icon)
         |#{title}
 
 
-template(name='set_dish_limit')
+template(name='set_product_limit')
     .item.set_limit #{amount}
 
 
 
-template(name='dish_card')
-    .center.aligned.column.zoomer(class=dish_card_class)
-        a.image.zoomer(href="/dish/#{_id}") 
-            img.ui.zoom.pointer.goto_dish.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+template(name='product_card')
+    .center.aligned.column.zoomer(class=product_card_class)
+        a.image.zoomer(href="/product/#{_id}") 
+            img.ui.zoom.pointer.goto_product.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
-            a.ui.inline.header(href="/dish/#{_id}") 
+            a.ui.inline.header(href="/product/#{_id}") 
                 //- |#{_author.name}'s
                 | #{title}
             //- if session_is 'view_ingredients' true
@@ -147,13 +148,13 @@ template(name='dish_card')
         if gluten_free
             +i name='no-gluten' cl='ui mini inline image' title='gluten free'
         if vegan
-            +i name='vegan-symbol' cl='ui mini inline image' title='vegan'
+            +i name='vegan-food' cl='ui mini inline image' title='vegan'
         //- .ui.inline.small.header tags
         // .content
         //     .right.floated.meta
         //         | {{from_now datetime_available}}
         //     //- if session_is 'view_users' true
-        // //- a.image(href="/dish/#{_id}")
+        // //- a.image(href="/product/#{_id}")
             
         .content    
             .ui.inline.header 

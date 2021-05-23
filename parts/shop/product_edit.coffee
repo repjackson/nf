@@ -1,17 +1,17 @@
 if Meteor.isClient
-    Router.route '/dish/:doc_id/edit', (->
+    Router.route '/product/:doc_id/edit', (->
         @layout 'layout'
-        @render 'dish_edit'
-        ), name:'dish_edit'
+        @render 'product_edit'
+        ), name:'product_edit'
 
 
 
-    Template.dish_edit.onCreated ->
+    Template.product_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'model_docs', 'menu_section'
 
-    Template.dish_edit.onRendered ->
+    Template.product_edit.onRendered ->
         Meteor.setTimeout ->
             today = new Date()
             $('#availability')
@@ -22,14 +22,14 @@ if Meteor.isClient
                 })
         , 2000
 
-    Template.dish_edit.helpers
+    Template.product_edit.helpers
         all_shop: ->
             Docs.find
-                model:'dish'
+                model:'product'
         can_delete: ->
-            dish = Docs.findOne Router.current().params.doc_id
-            if dish.reservation_ids
-                if dish.reservation_ids.length > 1
+            product = Docs.findOne Router.current().params.doc_id
+            if product.reservation_ids
+                if product.reservation_ids.length > 1
                     false
                 else
                     true
@@ -37,11 +37,11 @@ if Meteor.isClient
                 true
 
 
-    Template.dish_edit.events
-        'click .save_dish': ->
-            dish_id = Router.current().params.doc_id
-            Meteor.call 'calc_dish_data', dish_id, ->
-            Router.go "/dish/#{dish_id}"
+    Template.product_edit.events
+        'click .save_product': ->
+            product_id = Router.current().params.doc_id
+            Meteor.call 'calc_product_data', product_id, ->
+            Router.go "/product/#{product_id}"
 
 
         'click .save_availability': ->
@@ -59,21 +59,21 @@ if Meteor.isClient
 
 
 
-        # 'click .select_dish': ->
+        # 'click .select_product': ->
         #     Docs.update Router.current().params.doc_id,
         #         $set:
-        #             dish_id: @_id
+        #             product_id: @_id
         #
         #
-        # 'click .clear_dish': ->
-        #     if confirm 'clear dish?'
+        # 'click .clear_product': ->
+        #     if confirm 'clear product?'
         #         Docs.update Router.current().params.doc_id,
         #             $set:
-        #                 dish_id: null
+        #                 product_id: null
 
 
 
-        'click .delete_dish': ->
-            if confirm 'refund orders and cancel dish?'
+        'click .delete_product': ->
+            if confirm 'refund orders and cancel product?'
                 Docs.remove Router.current().params.doc_id
                 Router.go "/"

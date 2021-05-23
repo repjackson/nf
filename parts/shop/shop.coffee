@@ -7,53 +7,53 @@ if Meteor.isClient
 
     Template.shop.onCreated ->
         Session.setDefault 'view_mode', 'list'
-        Session.setDefault 'dish_sort_key', 'datetime_available'
-        Session.setDefault 'dish_sort_label', 'available'
-        Session.setDefault 'dish_limit', 42
+        Session.setDefault 'product_sort_key', 'datetime_available'
+        Session.setDefault 'product_sort_label', 'available'
+        Session.setDefault 'product_limit', 42
         Session.setDefault 'view_open', true
 
     Template.shop.onCreated ->
-        @autorun => @subscribe 'dish_facets',
+        @autorun => @subscribe 'product_facets',
             picked_ingredients.array()
             picked_sections.array()
             Session.get('view_vegan')
             Session.get('view_gf')
             
-            Session.get('dish_query')
-            Session.get('dish_limit')
-            Session.get('dish_sort_key')
-            Session.get('dish_sort_direction')
+            Session.get('product_query')
+            Session.get('product_limit')
+            Session.get('product_sort_key')
+            Session.get('product_sort_direction')
 
-        @autorun => @subscribe 'dish_results',
+        @autorun => @subscribe 'product_results',
             picked_ingredients.array()
             picked_sections.array()
-            Session.get('dish_query')
+            Session.get('product_query')
             Session.get('view_vegan')
             Session.get('view_gf')
             
-            Session.get('dish_limit')
-            Session.get('dish_sort_key')
-            Session.get('dish_sort_direction')
+            Session.get('product_limit')
+            Session.get('product_sort_key')
+            Session.get('product_sort_direction')
             
-        @autorun => @subscribe 'dish_count',
+        @autorun => @subscribe 'product_count',
             picked_ingredients.array()
             picked_sections.array()
-            Session.get('dish_query')
+            Session.get('product_query')
             Session.get('view_vegan')
             Session.get('view_gf')
             
-            Session.get('dish_limit')
-            Session.get('dish_sort_key')
-            Session.get('dish_sort_direction')
+            Session.get('product_limit')
+            Session.get('product_sort_key')
+            Session.get('product_sort_direction')
             
 
 
     Template.shop.events
-        'click .add_dish': ->
+        'click .add_product': ->
             new_id =
                 Docs.insert
-                    model:'dish'
-            Router.go("/dish/#{new_id}/edit")
+                    model:'product'
+            Router.go("/product/#{new_id}/edit")
 
 
         'click .toggle_vegan': -> Session.set('view_vegan', !Session.get('view_vegan'))
@@ -73,27 +73,27 @@ if Meteor.isClient
                 # Meteor.call 'search_reddit', picked_ingredients.array(), ->
 
         'click .clear_picked_ingredients': ->
-            Session.set('dish_query',null)
+            Session.set('product_query',null)
             picked_ingredients.clear()
 
-        'click .clear_dish_query': ->
-            Session.set('dish_query', null)
+        'click .clear_product_query': ->
+            Session.set('product_query', null)
 
-        'keyup #dish_search': _.throttle((e,t)->
-            query = $('#dish_search').val()
-            Session.set('dish_query', query)
-            # console.log Session.get('dish_query')
+        'keyup #product_search': _.throttle((e,t)->
+            query = $('#product_search').val()
+            Session.set('product_query', query)
+            # console.log Session.get('product_query')
             if e.key == "Escape"
-                Session.set('dish_query', null)
+                Session.set('product_query', null)
                 
             if e.which is 13
-                search = $('#dish_search').val().trim().toLowerCase()
+                search = $('#product_search').val().trim().toLowerCase()
                 if search.length > 0
                     picked_tags.push search
                     console.log 'search', search
                     # Meteor.call 'log_term', search, ->
-                    $('#dish_search').val('')
-                    Session.set('dish_query', null)
+                    $('#product_search').val('')
+                    Session.set('product_query', null)
                     # # $('#search').val('').blur()
                     # # $( "p" ).blur();
                     # Meteor.setTimeout ->
@@ -101,8 +101,8 @@ if Meteor.isClient
                     # , 10000
         , 1000)
 
-        'click .calc_dish_count': ->
-            Meteor.call 'calc_dish_count', ->
+        'click .calc_product_count': ->
+            Meteor.call 'calc_product_count', ->
 
         # 'keydown #search': _.throttle((e,t)->
         #     if e.which is 8
@@ -120,18 +120,18 @@ if Meteor.isClient
 
 
         'click .set_sort_direction': ->
-            if Session.get('dish_sort_direction') is -1
-                Session.set('dish_sort_direction', 1)
+            if Session.get('product_sort_direction') is -1
+                Session.set('product_sort_direction', 1)
             else
-                Session.set('dish_sort_direction', -1)
+                Session.set('product_sort_direction', -1)
 
 
     Template.shop.helpers
-        quickbuying_dish: ->
+        quickbuying_product: ->
             Docs.findOne Session.get('quickbuying_id')
 
         sorting_up: ->
-            parseInt(Session.get('dish_sort_direction')) is 1
+            parseInt(Session.get('product_sort_direction')) is 1
 
         toggle_gf_class: -> if Session.get('view_gf') then 'blue' else ''
         toggle_vegan_class: -> if Session.get('view_vegan') then 'blue' else ''
@@ -146,27 +146,27 @@ if Meteor.isClient
                 if Meteor.user().dark_mode
                     'invert'
                     
-        dish_count: -> Counts.get('dish_counter')
+        product_count: -> Counts.get('product_counter')
      
         tags: ->
-            # if Session.get('dish_query') and Session.get('dish_query').length > 1
+            # if Session.get('product_query') and Session.get('product_query').length > 1
             #     Terms.find({}, sort:count:-1)
             # else
-            dish_count = Docs.find().count()
-            # console.log 'dish count', dish_count
-            if dish_count < 3
-                Results.find({model:'tag', count: $lt: dish_count})
+            product_count = Docs.find().count()
+            # console.log 'product count', product_count
+            if product_count < 3
+                Results.find({model:'tag', count: $lt: product_count})
             else
                 Results.find({model:'tag'})
 
         ingredients: ->
-            # if Session.get('dish_query') and Session.get('dish_query').length > 1
+            # if Session.get('product_query') and Session.get('product_query').length > 1
             #     Terms.find({}, sort:count:-1)
             # else
-            dish_count = Docs.find(model:'dish').count()
-            # console.log 'dish count', dish_count
-            if dish_count < 3
-                Results.find({model:'ingredient', count: $lt: dish_count})
+            product_count = Docs.find(model:'product').count()
+            # console.log 'product count', product_count
+            if product_count < 3
+                Results.find({model:'ingredient', count: $lt: product_count})
             else
                 Results.find({model:'ingredient'})
 
@@ -181,21 +181,21 @@ if Meteor.isClient
         picked_ingredients_plural: -> picked_ingredients.array().length > 1
         searching: -> Session.get('searching')
 
-        dish_query: -> Session.get('dish_query')
+        product_query: -> Session.get('product_query')
 
         one_post: ->
-            Docs.find(model:'dish').count() is 1
+            Docs.find(model:'product').count() is 1
         two_posts: ->
-            Docs.find(model:'dish').count() is 2
+            Docs.find(model:'product').count() is 2
         three_posts: ->
-            Docs.find(model:'dish').count() is 3
-        dish_docs: ->
+            Docs.find(model:'product').count() is 3
+        product_docs: ->
             # if picked_ingredients.array().length > 0
             Docs.find {
-                model:'dish'
+                model:'product'
             },
-                sort: "#{Session.get('dish_sort_key')}":parseInt(Session.get('dish_sort_direction'))
-                limit:Session.get('dish_limit')
+                sort: "#{Session.get('product_sort_key')}":parseInt(Session.get('product_sort_direction'))
+                limit:Session.get('product_limit')
 
         subs_ready: ->
             Template.instance().subscriptionsReady()
@@ -215,30 +215,30 @@ if Meteor.isClient
                 sort: count:-1
                 # limit:1
 
-        dish_limit: -> Session.get('dish_limit')
+        product_limit: -> Session.get('product_limit')
 
-        current_dish_sort_label: -> Session.get('dish_sort_label')
+        current_product_sort_label: -> Session.get('product_sort_label')
 
 
-    Template.set_dish_limit.events
+    Template.set_product_limit.events
         'click .set_limit': ->
             console.log @
-            Session.set('dish_limit', @amount)
+            Session.set('product_limit', @amount)
 
-    Template.set_dish_sort_key.events
+    Template.set_product_sort_key.events
         'click .set_sort': ->
             console.log @
-            Session.set('dish_sort_key', @key)
-            Session.set('dish_sort_label', @label)
-            Session.set('dish_sort_icon', @icon)
+            Session.set('product_sort_key', @key)
+            Session.set('product_sort_label', @label)
+            Session.set('product_sort_icon', @icon)
 
 
 
 if Meteor.isServer
-    Meteor.publish 'dish_results', (
+    Meteor.publish 'product_results', (
         picked_ingredients
         picked_sections
-        dish_query
+        product_query
         view_vegan
         view_gf
         
@@ -256,7 +256,7 @@ if Meteor.isServer
         if doc_sort_direction
             sort_direction = parseInt(doc_sort_direction)
         self = @
-        match = {model:'dish', app:'nf'}
+        match = {model:'product', app:'nf'}
         if picked_ingredients.length > 0
             match.ingredients = $all: picked_ingredients
             # sort = 'price_per_serving'
@@ -271,9 +271,9 @@ if Meteor.isServer
             match.vegan = true
         if view_gf
             match.gluten_free = true
-        if dish_query and dish_query.length > 1
-            console.log 'searching dish_query', dish_query
-            match.title = {$regex:"#{dish_query}", $options: 'i'}
+        if product_query and product_query.length > 1
+            console.log 'searching product_query', product_query
+            match.title = {$regex:"#{product_query}", $options: 'i'}
             # match.tags_string = {$regex:"#{query}", $options: 'i'}
 
         # match.tags = $all: picked_ingredients
@@ -285,7 +285,7 @@ if Meteor.isServer
         #         match["#{key}"] = $all: key_array
             # console.log 'current facet filter array', current_facet_filter_array
 
-        console.log 'dish match', match
+        console.log 'product match', match
         console.log 'sort key', sort_key
         console.log 'sort direction', sort_direction
         Docs.find match,
@@ -294,10 +294,10 @@ if Meteor.isServer
             limit: limit
             
             
-    Meteor.publish 'dish_count', (
+    Meteor.publish 'product_count', (
         picked_ingredients
         picked_sections
-        dish_query
+        product_query
         view_vegan
         view_gf
         )->
@@ -305,7 +305,7 @@ if Meteor.isServer
     
         # console.log picked_ingredients
         self = @
-        match = {model:'dish', app:'nf'}
+        match = {model:'product', app:'nf'}
         if picked_ingredients.length > 0
             match.ingredients = $all: picked_ingredients
             # sort = 'price_per_serving'
@@ -320,16 +320,16 @@ if Meteor.isServer
             match.vegan = true
         if view_gf
             match.gluten_free = true
-        if dish_query and dish_query.length > 1
-            console.log 'searching dish_query', dish_query
-            match.title = {$regex:"#{dish_query}", $options: 'i'}
-        Counts.publish this, 'dish_counter', Docs.find(match)
+        if product_query and product_query.length > 1
+            console.log 'searching product_query', product_query
+            match.title = {$regex:"#{product_query}", $options: 'i'}
+        Counts.publish this, 'product_counter', Docs.find(match)
         return undefined
 
-    Meteor.publish 'dish_facets', (
+    Meteor.publish 'product_facets', (
         picked_ingredients
         picked_sections
-        dish_query
+        product_query
         view_vegan
         view_gf
         doc_limit
@@ -345,17 +345,17 @@ if Meteor.isServer
 
         self = @
         match = {app:'nf'}
-        match.model = 'dish'
+        match.model = 'product'
         if view_vegan
             match.vegan = true
         if view_gf
             match.gluten_free = true
         if picked_ingredients.length > 0 then match.ingredients = $all: picked_ingredients
         if picked_sections.length > 0 then match.menu_section = $all: picked_sections
-            # match.$regex:"#{dish_query}", $options: 'i'}
-        if dish_query and dish_query.length > 1
-            console.log 'searching dish_query', dish_query
-            match.title = {$regex:"#{dish_query}", $options: 'i'}
+            # match.$regex:"#{product_query}", $options: 'i'}
+        if product_query and product_query.length > 1
+            console.log 'searching product_query', product_query
+            match.title = {$regex:"#{product_query}", $options: 'i'}
             # match.tags_string = {$regex:"#{query}", $options: 'i'}
         #
         #     Terms.find {
@@ -386,7 +386,7 @@ if Meteor.isServer
             { $project: "menu_section": 1 }
             { $group: _id: "$menu_section", count: $sum: 1 }
             { $match: _id: $nin: picked_sections }
-            # { $match: _id: {$regex:"#{dish_query}", $options: 'i'} }
+            # { $match: _id: {$regex:"#{product_query}", $options: 'i'} }
             { $sort: count: -1, _id: 1 }
             { $limit: 20 }
             { $project: _id: 0, name: '$_id', count: 1 }
@@ -435,9 +435,9 @@ if Meteor.isServer
 
 
 if Meteor.isClient
-    Template.dish_card.onCreated ->
+    Template.product_card.onCreated ->
         # @autorun => Meteor.subscribe 'model_docs', 'food'
-    Template.dish_card.events
+    Template.product_card.events
         'click .quickbuy': ->
             console.log @
             Session.set('quickbuying_id', @_id)
@@ -461,8 +461,8 @@ if Meteor.isClient
         # 'click .view_card': ->
         #     $('.container_')
 
-    Template.dish_card.helpers
-        dish_card_class: ->
+    Template.product_card.helpers
+        product_card_class: ->
             # if Session.get('quickbuying_id')
             #     if Session.equals('quickbuying_id', @_id)
             #         'raised'

@@ -1,4 +1,4 @@
-template(name='dish_view')
+template(name='product_view')
     with current_doc
         .ui.stackable.padded.grid
             .two.column.row
@@ -10,9 +10,9 @@ template(name='dish_view')
                     .ui.large.inline.header 
                         //- small viewing
                         | #{title}
-                        //- small dish
+                        //- small product
                     if can_edit
-                        a(href="/dish/#{_id}/edit")
+                        a(href="/product/#{_id}/edit")
                             i.pencil.blue.large.link.icon
                     img.ui.rounded.image(src="{{c.url image_id}}")
                     div
@@ -33,20 +33,20 @@ template(name='dish_view')
                     +textarea_view key='description' direct=true
                     .ui.header 
                         +i name='order-history'
-                        |#{dish_orders.count}
+                        |#{product_orders.count}
                         |orders
-                        |(${{fixed dish_order_total}})
+                        |(${{fixed product_order_total}})
                     .ui.basic.segments.scrolling
-                        each dish_orders
-                            +dish_order_card
+                        each product_orders
+                            +product_order_card
                     .ui.header #{views} views
                     .ui.hidden.divider
          
          
          
          
-template(name='dish_order_card')
-    .ui.segment(class=dish_order_class)
+template(name='product_order_card')
+    .ui.segment(class=product_order_class)
         .ui.inline.green.header
             |${{fixed order_price}} 
             if _author.image_id
@@ -69,7 +69,7 @@ template(name='dish_order_card')
 
 template(name='order_button')
     // if servings_left
-    .ui.green.basic.inverted.fluid.large.button.order_dish
+    .ui.green.basic.inverted.fluid.large.button.order_product
         i.cart.plus.large.icon
         strong ${{fixed price_usd}}
         // |order #{serving_unit}

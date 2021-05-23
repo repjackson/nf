@@ -1,12 +1,12 @@
-template(name='dish_edit')
+template(name='product_edit')
     with current_doc
         .ui.stackable.padded.grid
             .eight.wide.column
                 .ui.inline.header
                     i.pencil.icon
                     | #{title}
-                    small dish
-                .ui.large.circular.icon.green.button.save_dish(title='save dish')
+                    small product
+                .ui.large.circular.icon.green.button.save_product(title='save product')
                     i.checkmark.large.icon   
                 +text_edit key='title' label='title' direct=true
                 +text_edit key='location' label='location' direct=true
@@ -22,7 +22,7 @@ template(name='dish_edit')
                 +array_edit key='ingredients' label='ingredients'  direct=true
                 +textarea_edit key='description' label='description' direct=true
                 if can_delete
-                    .ui.red.button.delete_dish
+                    .ui.red.button.delete_product
                         i.remove.icon   
                         | delete
                 

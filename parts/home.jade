@@ -4,38 +4,54 @@ template(name='home')
             .center.aligned.column
                 .ui.big.header.f20 WE DELIVER LOCAL, ORGANIC GROCERIES, MEALS AND HOUSEHOLD PRODUCTS IN ZERO-WASTE, REUSABLE CONTAINERS TO YOUR DOOR BY BICYCLE
 
-        .four.column.row
+        .one.column.row
             .center.aligned.column
-                a.ui.icon.header(href="/shop")
-                    +i name='shopping-cart' cl='icon zoomer'
+                .ui.header START SHOPPING ZERO WASTE!
+
+        .four.column.row
+            a.center.aligned.column.zoomer(href="/shop")
+                img.ui.circular.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/localbites300x300-300x300.jpg")
+                // +i name='shopping-cart' cl='ui inline image'
+                // i.food.icon
+                .ui.header local bites
+            a.center.aligned.column.zoomer(href="/users") 
+                // i.users.icon
+                img.ui.circular.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/Producebox300x300-300x300.jpg")
+                // +i name='conference' cl='ui inline image'
+                .ui.header ugly produce
+            a.center.aligned.column.zoomer(href="/staff")
+                img.ui.circular.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/buildyourown600x600-300x300.jpg")
+                .ui.header pantry staples
+            a.center.aligned.column.zoomer(href="/staff")
+                img.ui.circular.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/10/Lemony-Lentil-Soup-e1604278933195.jpg")
+                .ui.header nude meals
+        .one.column.row
+            .center.aligned.column
+                a.ui.big.basic.circular.button(href="/shop")
+                    +i name='shopping-cart' cl='ui inline image'
                     // i.food.icon
                     |shop
-            .center.aligned.column
-                a.ui.icon.header(href="/users") 
+                a.ui.big.basic.circular.button(href="/users") 
                     // i.users.icon
-                    +i name='conference' cl='icon zoomer'
+                    +i name='conference' cl='ui inline image'
                     |users
-            .center.aligned.column
-                a.ui.icon.header(href="/staff")
+                a.ui.big.basic.circular.button(href="/staff")
                     // i.shield.icon
-                    +i name='employee-card' cl='icon zoomer'
+                    +i name='employee-card' cl='ui inline image'
                     |staff
             // .center.aligned.column
             //     a.ui.icon.header(href="/staff")
             //         // i.shield.icon
             //         +i name='employee-card' cl='icon zoomer'
             //         |staff
-            .center.aligned.column
                 a.ui.icon.header(href="/shop")
                     +i name='sell' cl='icon zoomer'
                     // i.food.icon
                     |become a seller
-            .center.aligned.column
                 a.ui.icon.header(href="/orders")
                     +i name='bill' cl='icon zoomer'
                     // i.list.icon
                     |orders
-            .center.aligned.column
                 a.ui.icon.header(href="/inbox")
                     +i name='inbox' cl='icon zoomer'
                     // i.mail.icon
@@ -54,12 +70,37 @@ template(name='home')
                 a.ui.big.basic.disabled.button(href="/trips")
                     +i name='time-machine' cl='ui inline image'
                     |trips
-        .one.column.row
+        .four.column.row
             .column
-                .ui.header footer
                 .ui.list
                     .item CONTACT US
                     .item hello@nudefoodsmarket.com
                     .item 555 30th Street
                     .item Boulder, CO 80303
                     .item (720) 815-5588
+            .column
+                .ui.link.animated.list
+                    .item PAGES
+                    .item Cart
+                    .item Checkout
+                    .item Contact Us
+                    .item Get Involved
+                    .item Home
+                    .item My Account
+                    .item Newsletter
+                    .item Nude Foods Team
+                    .item Refer A Friend
+                    .item Shop
+                    .item Transparency
+                    .item We’re Hiring!
+            .column
+                .ui.link.animated.list
+                    .item INFO
+                    .item FAQ
+                    .item How it Works
+                    .item Privacy Policy
+                    .item Terms of Service
+            .column
+                +i name='facebook'
+                +i name='instagram'
+

@@ -1,29 +1,29 @@
 if Meteor.isClient
-    Router.route '/dish/:doc_id', (->
+    Router.route '/product/:doc_id', (->
         @layout 'layout'
-        @render 'dish_view'
-        ), name:'dish_view'
+        @render 'product_view'
+        ), name:'product_view'
 
 
-    Template.dish_view.onCreated ->
+    Template.product_view.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        # @autorun => Meteor.subscribe 'dish_from_dish_id', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'orders_from_dish_id', Router.current().params.doc_id
-    Template.dish_view.onRendered ->
+        # @autorun => Meteor.subscribe 'product_from_product_id', Router.current().params.doc_id
+        @autorun => Meteor.subscribe 'orders_from_product_id', Router.current().params.doc_id
+    Template.product_view.onRendered ->
         Meteor.call 'log_view', Router.current().params.doc_id
-        # @autorun => Meteor.subscribe 'ingredients_from_dish_id', Router.current().params.doc_id
+        # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
 
 
-    Template.dish_view.events
+    Template.product_view.events
         'click .mark_ready': ->
-            if confirm 'mark dish ready?'
+            if confirm 'mark product ready?'
                 Docs.update Router.current().params.doc_id,
                     $set:
                         ready:true
                         ready_timestamp:Date.now()
 
         'click .unmark_ready': ->
-            if confirm 'unmark dish ready?'
+            if confirm 'unmark product ready?'
                 Docs.update Router.current().params.doc_id,
                     $set:
                         ready:false
@@ -39,25 +39,25 @@ if Meteor.isClient
                 cancelButtonText: 'cancel'
             }).then((result) =>
                 if result.value
-                    dish = Docs.findOne Router.current().params.doc_id
+                    product = Docs.findOne Router.current().params.doc_id
                     Meteor.users.update Meteor.userId(),
                         $inc:credit:@order_price
                     Swal.fire(
                         'refund processed',
                         ''
                         'success'
-                    Meteor.call 'calc_dish_data', dish._id, ->
+                    Meteor.call 'calc_product_data', product._id, ->
                     Docs.remove @_id
                     )
             )
 
 
-    Template.dish_view.helpers
-        dish_order_total: ->
+    Template.product_view.helpers
+        product_order_total: ->
             orders = 
                 Docs.find({
                     model:'order'
-                    dish_id:@_id
+                    product_id:@_id
                 }).fetch()
             res = 0
             for order in orders
@@ -66,14 +66,14 @@ if Meteor.isClient
                 
 
         can_cancel: ->
-            dish = Docs.findOne Router.current().params.doc_id
-            if Meteor.userId() is dish._author_id
-                if dish.ready
+            product = Docs.findOne Router.current().params.doc_id
+            if Meteor.userId() is product._author_id
+                if product.ready
                     false
                 else
                     true
             else if Meteor.userId() is @_author_id
-                if dish.ready
+                if product.ready
                     false
                 else
                     true
@@ -85,7 +85,7 @@ if Meteor.isClient
             else
                 @cook_user_id isnt Meteor.userId()
 
-        dish_order_class: ->
+        product_order_class: ->
             if @status is 'ready'
                 'green'
             else if @status is 'pending'
@@ -110,7 +110,7 @@ if Meteor.isClient
         #             Docs.insert
         #                 model:'order'
         #                 waitlist:true
-        #                 dish_id: Router.current().params.doc_id
+        #                 product_id: Router.current().params.doc_id
         #             Swal.fire(
         #                 'wait list joined',
         #                 "you'll be alerted if accepted"
@@ -118,13 +118,13 @@ if Meteor.isClient
         #             )
         #     )
 
-        'click .order_dish': ->
+        'click .order_product': ->
             # if Meteor.user().credit >= @price_per_serving
             # Docs.insert
             #     model:'order'
             #     status:'pending'
             #     complete:false
-            #     dish_id: Router.current().params.doc_id
+            #     product_id: Router.current().params.doc_id
             #     if @serving_unit
             #         serving_text = @serving_unit
             #     else
@@ -139,7 +139,7 @@ if Meteor.isClient
             #     cancelButtonText: 'cancel'
             # }).then((result) =>
             #     if result.value
-            Meteor.call 'order_dish', @_id, (err, res)->
+            Meteor.call 'order_product', @_id, (err, res)->
                 if err
                     Swal.fire(
                         'err'
@@ -156,8 +156,8 @@ if Meteor.isClient
         # )
 
 if Meteor.isServer
-    Meteor.publish 'orders_from_dish_id', (dish_id)->
-        # dish = Docs.findOne dish_id
+    Meteor.publish 'orders_from_product_id', (product_id)->
+        # product = Docs.findOne product_id
         Docs.find
             model:'order'
-            dish_id:dish_id
+            product_id:product_id
