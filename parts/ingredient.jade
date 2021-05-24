@@ -1,0 +1,88 @@
+template(name='ingredient_card')
+    .ui.card
+        if image_id
+            a(href="/ingredient/#{_id}/view")
+                img.ui.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
+        .content
+            a.ui.header(href="/ingredient/#{_id}/view") #{title}
+            div created {{from_now _timestamp}} by #{_author_username}
+            each tags
+                .ui.basic.circular.label #{this}
+            //- .ui.large.basic.label 
+            //-     |#{points} points
+        .content
+            +voting
+
+            
+            
+            
+            
+
+template(name='ingredient_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .centered.middle.aligned.row
+                .four.wide.center.aligned.column
+                    a.ui.basic.circular.compact.button(href="/m/ingredient")
+                        i.left.chevron.icon
+                        +icolor name='ingredients' classes='ui inline mini image'
+                        |ingredients
+                .eight.wide.center.aligned.column
+                    .ui.center.aligned.header #{title}
+                .four.wide.center.aligned.column
+                    a.ui.basic.circular.button(href="/ingredient/#{_id}/edit")
+                        i.blue.pencil.icon
+                        |edit        
+            .five.wide.column
+                +image_view key='image_id' direct=true
+                +array_view key='tags' direct=true
+            .six.wide.column
+                .ui.header
+                    +icolor name='meal'
+                    | meals included in
+                each meal_inclusions
+                    a.ui.small.header(href="/meal/#{_id}/view")
+                        img.ui.large.rounded.image(src="{{c.url image width=500 height=500 gravity='face' crop='fill'}}")
+                        |#{title}
+                .ui.header 
+                    +icolor name='real-food-for-meals'
+                    |dishes included in
+                .ui.large.selection.animated.list
+                    each ingredient_dishes
+                        a.item(href="/dish/#{_id}/view")
+                            img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                            .content
+                                .header
+                                    |#{title}
+                img.ui.large.rounded.image(src="{{c.url image width=500 height=500 gravity='face' crop='fill'}}")
+                +textarea_view key='description' direct=true
+                +comments
+            .five.wide.column
+                with current_doc
+                    +voting_full
+                    .ui.header similar ingredients
+                    .ui.header alerts
+                    |alergen alert
+                    |#{alergen_alert}
+
+
+
+template(name='ingredient_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                .eight.wide.column
+                    .ui.header edit '#{title}' ingredient
+                .four.wide.column
+                    a.ui.large.circular.basic.button(href="/ingredient/#{_id}/view")
+                        i.checkmark.green.icon
+                        |save        
+            .five.wide.column
+                .ui.header #{title}
+                +text_edit key='title' direct=true
+                +array_edit key='tags' direct=true
+                +image_edit key='image_id' direct=true
+            .six.wide.column
+                img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
+                +textarea_edit key='description' direct=true

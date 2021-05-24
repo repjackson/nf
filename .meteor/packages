@@ -35,3 +35,6 @@ coffeescript
 ecmascript@0.15.1
 modules@0.16.0
 tmeasday:publish-counts
+multiply:iron-router-progress
+francocatena:status
+lamhieu:unblock

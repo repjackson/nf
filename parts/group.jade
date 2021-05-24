@@ -1,0 +1,380 @@
+template(name='groups')
+    .ui.padded.stackable.grid
+        .sixteen.wide.column
+            .ui.cards
+                each groups 
+                    +group_card
+                    
+                    
+template(name='group_item')
+    a.card(href="/g/#{name}/view")
+        if image
+            a(href="/g/#{name}/view")
+                img.ui.image(src="{{c.url image height=500 width=500 gravity='face' crop='fill'}}")
+        .content
+            a.ui.header(href="/g/#{_id}/view") #{title}
+        
+template(name='group_card')
+    .ui.card
+        if image_id
+            a.image(href="/g/#{name}")
+                img.ui.image.zoom(src="{{c.url image_id height=500 width=500 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+        .content
+            a.ui.header(href="/g/#{name}") #{title}
+            if private
+                i.large.lock.icon(title='private')
+            each tags
+                .ui.basic.label #{this}
+            i.chess.king.icon
+            |#{group_admin_ids.length} admins
+            i.chess.queen.icon
+            |#{group_member_ids.length} members
+            if is_admin
+                +remove_button
+                    
+                    
+template(name='group_membership')
+    .ui.items
+        each members
+            +group_member_item
+    if is_admin 
+        .ui.input
+            input(type='text')
+    // if current_doc.private
+    //     unless is_member
+    //         .ui.big.button.request
+    //             |request membership
+    //     else
+    //         .ui.large.button.switch
+    //             |switch to
+    // else
+    if is_member
+        // .ui.large.button.switch
+        //     |switch to
+        .ui.divider
+        .ui.large.button.leave
+            |- leave
+    else
+        .ui.big.button.join 
+            |+ join
+                    
+                    
+template(name='group_member_item')     
+    .item
+        a.ui.tiny.image
+            img.ui.rounded.image(src="{{c.url profile_image_id height=300 width=300 gravity='face' crop='fill'}}")
+        .content
+            a.header(href="/u/#{username}") #{username}
+            .description
+                |#{stats.points} points
+                .ui.basic.button.tip
+                    |tip
+                .ui.label
+                    |#{stats.tips_received_count} tips received
+                .ui.label
+                    |#{stats.tips_given_count} tips given
+                // .ui.label
+                //     |#{stats.tip_points} total points
+                    
+template(name='group_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row 
+                .six.wide.column
+                    a.ui.green.button(href="/g/#{name}" title='save')
+                        i.checkmark.big.icon
+                        |save
+                    .ui.small.inline.header 
+                        i.pencil.icon
+                        |edit group
+                    .ui.inline.header #{title} 
+                        small (#{name})
+                    .ui.icon.button.delete_item(title='delete group')
+                        i.large.remove.icon
+                    +multi_user_edit key='admin_ids' label='group admins' direct=true
+                    +multi_user_edit key='member_ids' label='group members' direct=true
+                    +image_edit key='image_id' label='image' direct=true
+                .ten.wide.column
+                    +text_edit key='title' label='title' direct=true
+                    +text_edit key='name' label='shortname' direct=true
+                    // +icon_edit key='icon' label='icon' direct=true
+                    +html_edit key='description' label='description' direct=true
+                    div 
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
+                    +print_this
+                    +boolean_edit key='is_private' label='private' direct=true
+                    // .ui.header enabled features
+                    // each enabled_features
+                    //     .ui.active.button.disable_feature
+                    //         |#{title}
+                    // .ui.header disabled features
+                    // each disabled_features
+                    //     .ui.basic.button.enable_feature
+                    //         |#{title}
+template(name='group_view')
+    unless current_group
+        .ui.center.aligned.basic.segment
+            i.massive.loading.yin.yang.link.icon.create_group
+    with current_group
+        .ui.stackable.grid
+            .row 
+                .twelve.wide.column
+                    a.ui.basic.icon.button(href="/groups" title='groups')
+                        i.chevron.left.icon
+                        i.big.fire.icon
+                        // |groups
+                    .ui.inline.header 
+                        img.ui.avatar.image(src="{{c.url image_id height=200 width=200 gravity='face' crop='fill'}}")
+                        |#{title}
+                    if is_admin 
+                        a.ui.icon.button(href="/g/#{_id}/edit" title='edit group instance')
+                            i.pencil.large.icon
+                    // +skve k='view_section' v='posts' l='posts' i='content'
+                    // +skve k='view_section' v='events' l='events' i='calendar'
+                    // +skve k='view_section' v='chat' l='chat' i='chat outline'
+                    // +skve k='view_section' v='members' l='members' i='users'
+                    // +skve k='view_section' v='stats' l='stats' i='line chart'
+                    // div
+                    +group_posts
+                    // if skv_is 'view_section' 'posts'
+                    // if skv_is 'view_section' 'members'
+                    //     div
+                .four.wide.column
+                    if can_edit
+                        a.ui.icon.button(href="/g/#{_id}/edit")
+                            i.pencil.icon
+                    +group_membership
+                    if is_admin 
+                        +print_this
+                    +html_view key='description' label='description' direct=true
+                    +multi_user_view key='admin_ids' label='group admins' direct=true
+                    +multi_user_view key='member_ids' label='group members' direct=true
+                    each members
+                        a.ui.header(href="/u/#{username}")
+                            img.ui.avatar.image(src="{{c.url profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
+                            |#{username}
+                    div 
+                    +array_view key='tags' label='tags' direct=true
+    // else
+    //     .ui.basic.center.aligned.segment
+    //         a.ui.large.button(href='/login')
+    //             |login
+    //         |to view group
+template(name='group_posts')
+    .ui.stackable.grid    
+        .sixteen.wide.column
+            if currentUser
+                .ui.icon.basic.button.create_post
+                    i.plus.green.large.icon
+            i.tags.icon
+            if selected_group_tags
+                // #clear_tags.ui.black.icon.compact.button
+                //     i.remove.icon
+                each selected_group_tags
+                    .unpick_tag.ui.black.compact.button
+                        strong #{this}
+            each all_tags
+                // +group_selector
+                .ui.compact.small.basic.tertiary.button.say.select_tag(class=cloud_tag_class) 
+                    strong #{this.name}
+            // div
+            i.large.marker.icon
+            if selected_group_location_tags
+                // #clear_location_tags.ui.black.icon.compact.button
+                //     i.remove.icon
+                each selected_group_location_tags
+                    .unselect_location_tag.ui.black.compact.button
+                        strong #{this}
+            each all_location_tags
+                // +group_selector
+                .ui.compact.small.basic.tertiary.button.say.select_location_tag(class=cloud_tag_class) 
+                    +group_selector
+                    strong #{this.name}
+            // div
+            i.large.clock.icon
+            if selected_group_time_tags
+                // #clear_time_tags.ui.black.icon.compact.button
+                //     i.remove.icon
+                each selected_group_time_tags
+                    .unselect_time_tag.ui.black.compact.button
+                        strong #{this}
+            each all_time_tags
+                // +group_selector
+                .ui.compact.small.basic.tertiary.button.say.select_time_tag(class=cloud_tag_class) 
+                    // if term
+                    //     if term.watson.metadata.image
+                    //         img.ui.avatar.image.zoomer(src=term.watson.metadata.image)
+                    +group_selector
+                    strong #{this.name}
+            // div
+            i.large.users.icon
+            if selected_group_people_tags
+                // #clear_people_tags.ui.black.icon.compact.button
+                //     i.remove.icon
+                each selected_group_people_tags
+                    .unselect_people_tag.ui.black.compact.button
+                        strong #{this}
+            each all_people_tags
+                .ui.compact.small.basic.tertiary.button.say.select_people_tag(class=cloud_tag_class) 
+                    strong #{this.name}
+            // div
+            .ui.inline.header #{q_count}
+            if skv_is 'sort_direction' 1
+                .ui.icon.compact.basic.tertiary.button.sort_down
+                    i.caret.down.icon
+            else
+                .ui.icon.compact.basic.tertiary.button.sort_up
+                    i.caret.up.icon
+            // if skv_is 'view_bounties' 1
+            //     .ui.compact.black.button.unview_bounties
+            //         i.hand.holding.heart.icon
+            //         | bounties
+            // else
+            //     .ui.compact.basic.tertiary.button.view_bounties
+            //         i.hand.holding.heart.icon
+            //         | bounties
+            // if skv_is 'view_unanswered' 1
+            //     .ui.compact.black.button.unview_unanswered
+            //         i.checkmark.icon
+            //         | unanswered
+            // else
+            //     .ui.compact.basic.tertiary.button.view_unanswered
+            //         i.question.icon
+            //         | unanswered
+            // i.big.fire.link.icon
+            .ui.compact.basic.small.tertiary.button.limit_1
+                |1
+            .ui.compact.basic.small.tertiary.button.limit_10
+                |10
+            .ui.icon.compact.large.basic.small.tertiary.button.sort_timestamp
+                i.clock.icon
+            .ui.icon.compact.large.basic.small.tertiary.button.set_points
+                i.line.chart.icon
+            // if skv_is 'view_detail' true
+            //     .ui.black.compact.icon.button.toggle_detail
+            //         i.list.large.icon
+            //         // |detail
+            // else
+            //     .ui.compact.basic.large.icon.tertiary.button.toggle_detail
+            //         i.minus.large.icon
+            //         // |simple
+            //     // i.line.chart.icon
+            .ui.icon.compact.large.button.set_grid(class=grid_class) 
+                i.th.large.icon
+            .ui.icon.compact.large.button.set_list(class=list_class)
+                i.list.large.icon
+                    
+            .scrolling
+                // if skv_is 'group_view_layout' 'grid'
+                .ui.stackable.cards 
+                    each posts
+                        +group_post_card
+                // else if skv_is 'group_view_layout' 'list'
+                //     each posts
+                //         +group_post_card
+                //         .ui.divider
+        
+template(name='group_selector')
+    if term
+        if term.watson.metadata.image
+            img.ui.avatar.image.superzoom(src=term.watson.metadata.image)    
+    // a.ui.big.image.basic.rounded.label.zoomer.pointer.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+    // a.ui.zoomer.tertiary.button.say.select_tag.select_term(href='#' title="#{count} results" class="#{selector_class} #{thinking_class}")
+        | #{name}
+        // else
+        small #{count}
+        
+template(name='user_groups')
+    .ui.inline.header 
+        i.users.icon
+        |groups
+    .ui.icon.button.add_group
+        i.plus.icon
+    .ui.stackable.two.column.grid
+        .column
+            .ui.header member of
+            .ui.link.selection.animated.list.scrolling
+                each groups_member
+                    a.ui.item(href="/g/#{name}") 
+                        if image_id
+                            a(href="/g/#{name}/")
+                                img.ui.image(src="{{c.url image_id }}" class=currentUser.invert_class)
+                        if image_link
+                            img(src=image_link)
+                        .content
+                            .ui.header #{title} 
+                            |#{when}
+                            each seven_tags 
+                                .ui.mini.basic.label #{this}
+        .column
+            .ui.header 
+                i.shield.icon
+                |admin of
+            .ui.link.selection.animated.list.scrolling
+                each groups_admin
+                    a.ui.item(href="/g/#{name}") 
+                        if image_id
+                            a(href="/g/#{name}/")
+                                img.ui.small.image(src="{{c.url image_id }}" class=currentUser.invert_class)
+                        if image_link
+                            img(src=image_link)
+                        .content
+                            .ui.header #{title} 
+                            |#{when}
+                            each seven_tags 
+                                .ui.mini.basic.label #{this}
+        
+        
+template(name='group_post_card')
+    .ui.card
+        .content.smallscroll
+            // .ui.segment
+            if youtube_id
+                +youtube_view key='youtube_id' direct=true
+            a.blink(href="/p/#{_id}/view") 
+                img.ui.fluid.rounded.superzoom.image(src="{{c.url image_id }}" class=currentUser.invert_class)
+            a.ui.header.blink(href="/p/#{_id}/view") 
+                |#{title}
+            | !{body}
+            | !{content}
+            // i.large.tag.icon(title='tags')
+            each ten_tags
+                .ui.basic.small.compact.button.pick(class=tag_selector_class) #{this}
+            if location_tags
+                i.large.marker.icon(title='location tags')
+                each location_tags
+                    .ui.basic.small.compact.button.pick_location(class=tag_selector_class) #{this}
+            if time_tags
+                i.large.clock.icon(title='time tags')
+                each time_tags
+                    .ui.basic.small.compact.button.pick_time(class=tag_selector_class) #{this}
+            if people_tags
+                i.large.users.icon(title='users tags')
+                each people_tags
+                    .ui.basic.small.compact.button.pick_person(class=tag_selector_class) #{this}
+        
+            if is_admin
+                +remove_button
+                +print_this
+            
+            // //- div
+            +author_info
+            +creation_info
+            | #{_views} views
+            // each _viewer_usernames
+            //     .ui.label #{this}
+            +voting_full
+            if in_dev
+                +print_this
+            each viewer_ids
+                .ui.label #{this}
+        .content
+            // if is_author
+            //     i.large.lock.link.circular.grey.icon.make_private
+            // else if in_dev
+            //     i.large.lock.link.circular.grey.icon.make_private
+            a.ui.icon.large.basic.circular.button(href="/p/#{_id}/view")
+                |#{views}
+                i.chevron.right.large.icon
+        .content
+            +comments

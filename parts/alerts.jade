@@ -1,0 +1,66 @@
+template(name='alerts')
+    .ui.stackable.padded.grid
+        .row
+            .four.wide.column
+                .ui.grey.header
+                    i.bell.icon
+                    |alerts
+            .six.wide.column
+                each alerts 
+                    +alert
+                    
+                    
+template(name='alert')                    
+    .ui.segment 
+        .ui.header #{when}
+        .ui.header #{text}
+        each readers 
+            if profile_image_id
+                img.ui.avatar.image(src=user.profile.profilePic title=name)
+            else 
+                .ui.basic.label #{username}
+        unless is_read 
+            .ui.small.compact.icon.button.mark_read
+                i.grey.eye.icon
+        +remove_button
+
+
+
+
+//- template(name='alerts')
+//-     .ui.stackable.padded.grid
+//-         .row
+//-             .four.wide.column
+//-                 .ui.header 
+//-                     i.bell.outline.icon
+//-                     |alerts
+//-                 .ui.small.grey.header subscriptions
+//-                 .ui.dropdown
+//-                     |test drop 
+//-                     .menu
+//-                         .item hi
+//-                         .item hi
+//-                         .item hi
+//-                         .item hi
+//-                         .item hi
+//-                 with currentUser
+//-                     +boolean_edit key='credits' direct=true
+//-                     +boolean_edit key='debits' direct=true
+//-             .twelve.wide.column
+//-                 .ui.header my alerts
+//-                 each my_alerts
+//-                     +alert_segment
+//-                 unless my_alerts
+//-                     .ui.header no alerts
+//-                 .ui.header all alerts
+//-                 each alerts
+//-                     +alert_segment
+//- template(name='alert_segment')
+//-     .ui.segment 
+//-         .ui.small.header #{text}
+//-         |#{when} 
+//-         a.ui.button(href=reference_link) view doc
+//-         div
+//-         +viewing
+//-         if is_dev
+//-             +remove_button

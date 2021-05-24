@@ -1,9 +1,9 @@
 template(name='product_view')
     with current_doc
-        .ui.stackable.padded.grid
+        .ui.stackable.grid
             .two.column.row
                 .column
-                    a.ui.basic.button(href="/shop")
+                    a.ui.basic.circular.button(href="/shop")
                         i.chevron.left.icon
                         +i name='food' cl='ui mini inline image'
                 
@@ -13,13 +13,16 @@ template(name='product_view')
                         //- small product
                     if can_edit
                         a(href="/product/#{_id}/edit")
-                            i.pencil.blue.large.link.icon
-                    img.ui.rounded.image(src="{{c.url image_id}}")
+                            i.pencil.blue.large.link.circular.icon
+                    a(href="{{c.url image_id}}" target="_window")
+                        img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                     div
                     +voting_full
                     div 
                     +comments
                 .column.scrolling
+                    if can_order
+                        +order_button
                     .ui.inline.header 
                         +i name='ingredients'
                         |ingredients
@@ -28,8 +31,6 @@ template(name='product_view')
                     +boolean_view key='gluten_free' label='gluten free' direct=true
                     +boolean_view key='vegan' label='vegan' direct=true
                     .ui.header #{menu_section}
-                    if can_order
-                        +order_button
                     +html_view key='description' direct=true
                     .ui.header 
                         +i name='order-history'
@@ -69,7 +70,7 @@ template(name='product_order_card')
 
 template(name='order_button')
     // if servings_left
-    .ui.green.basic.inverted.fluid.large.button.order_product
+    .ui.green.fluid.large.circular.button.order_product
         i.cart.plus.large.icon
         strong ${{fixed price_usd}}
         // |order #{serving_unit}
