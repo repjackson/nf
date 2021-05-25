@@ -34,8 +34,11 @@ head
 template(name='layout')
     // img.ui.fluid.image.(src="{{c.url 'cafe'}}")
     +nav
-    .scrolling
-        +yield
+    .ui.bottom.attached.pushable.segment
+        +left_sidebar
+        +right_sidebar
+        #main_area.global_container.pusher.scrolling
+            +yield
     +footer
 
 template(name='verification_confirmation')

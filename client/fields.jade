@@ -1025,7 +1025,7 @@ template(name='multi_user_edit')
     .ui.input
         input#multi_user_select_input(type='text' placeholder="lookup #{role_filter}.." autocomplete='off')
     each selections
-        a.ui.large.label(href="/u/#{username}")
+        a.ui.large.label(href="/user/#{username}")
             |#{name}
     if user_results
         .ui.top.attached.segment

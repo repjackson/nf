@@ -3,6 +3,9 @@ template(name='nav')
         if is_loading
             .icon.item
                 i.big.spinning.grey.food.icon.cancel
+        a.icon.item.toggle_sidebar.no_blink
+            i.bars.icon
+                
         a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
@@ -34,9 +37,9 @@ template(name='nav')
             // +i name='list' cl='ui inline mini image'
             // i.newspaper.icon
             strong.mobile.hidden get involved
-        a.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
+        a.item.zoomer(href='/p/contact' class="{{isActivePath '/contact'}}" title='news')
             // +i name='list' cl='ui inline mini image'
-            // i.newspaper.icon
+            // i8.newspaper.icon
             strong.mobile.hidden contact us
         // a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
         //     +i name='list' cl='ui inline mini image'
@@ -67,6 +70,9 @@ template(name='nav')
                     i.user.icon
                 strong.mobile.hidden #{currentUser.name}
                     //- |${{int currentUser.credit}}
+            a.icon.item.toggle_rightbar.no_blink.penny.add_global_karma
+                i.bars.icon
+                    
         unless currentUser
             a.item(href='/login' title='login') 
                 i.sign.in.icon
@@ -154,3 +160,138 @@ template(name='footer')
                 +i name='facebook'
                 +i name='instagram'
 
+
+
+
+
+template(name='topbar')
+    .ui.fluid.attached.segment
+        .ui.middle.aligned.divided.list
+            each recent_alerts
+                +recent_alert
+        a.ui.icon.attached.basic.button.item.close_topbar(href="/inbox")
+            i.inbox.icon
+            |inbox
+        
+template(name='recent_alert')        
+    .item.alert
+        .right.floated.content
+            i.eye.link.icon.mark_read(title='mark read')
+        img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
+        .content
+            .header
+                |#{description} 
+            .description #{author.name} #{when}
+            
+            
+            
+            
+template(name='right_sidebar')
+    .ui.right.sidebar.vertical.borderless.inverted.menu
+        // a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
+        //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
+        //     |#{currentUser.name}
+        a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/" class="{{isActiveRoute 'user_dashboard'}}")
+            | dashboard (#{currentUser.points}p)
+            i.dashboard.icon
+        
+        a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/credits" class="{{isActiveRoute 'user_credits'}}")
+            | #{currentUser.total_credit_amount}p received
+            i.chevron.down.icon
+        a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/debits" class="{{isActiveRoute 'user_sent'}}")
+            | #{currentUser.total_debit_amount}p sent
+            i.chevron.up.icon
+        .ui.divider
+        a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/edit" title='edit your account')
+            i.cog.icon
+            |settings
+        // a.item.toggle_nightmode.toggle_rightbar.no_blink(href="#")
+        //     i.lightbulb.icon
+        //     |dark mode
+        a.item.logout(href="/user/#{currentUser.username}/messages" class="{{isActiveRoute 'user_messages'}}" )
+            |logout
+            if is_logging_out
+                i.refresh.loading.icon
+            else
+                i.sign.out.icon
+
+
+
+template(name='left_sidebar')
+    .ui.left.sidebar.vertical.borderless.inverted.menu
+        // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
+        //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
+        //     |One
+        // a.item.set_member.toggle_sidebar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
+        a.item.set_member.toggle_sidebar.no_blink(href="/users" class="{{isActivePath 'users'}}" title='users')
+            i.users.icon
+            | users
+        a.item.toggle_sidebar.no_blink(href="/reddit" class="{{isActivePath '/reddit'}}")
+            i.reddit.icon
+            |reddit
+        a.item.toggle_sidebar.no_blink(href="/stack" class="{{isActivePath '/stack'}}")
+            i.stack.exchange.icon
+            |stack exchange
+        a.item.toggle_sidebar.no_blink(href="/questions" class="{{isActivePath '/questions'}}")
+            i.question.icon
+            |questions
+        a.item.toggle_sidebar.no_blink(href="/m/offer" class="{{isActivePath '/m/offer'}}")
+            i.hand.holding.heart.icon
+            |offers
+        a.item.toggle_sidebar.no_blink.set_post(href="/m/post" class="{{isActivePath '/m/post'}}")
+            i.newspaper.icon
+            |news
+        a.item.toggle_sidebar.no_blink(href="/m/collective" class="{{isActivePath 'requests'}}")
+            i.users.icon
+            |collectives
+        a.item.toggle_sidebar.no_blink.set_bug(href="/m/bug" class="{{isActivePath '/m/bug'}}")
+            i.bug.icon
+            |bugs
+        a.icon.item.toggle_sidebar.no_blink.set_photo(href="/m/photo" class="{{isActivePath '/m/photo'}}" title='photos')
+            i.picture.icon
+            |photos  
+        a.icon.item.toggle_sidebar.no_blink.set_expense(href="/m/expense" class="{{isActivePath '/m/expense'}}" title='expenses')
+            i.dollar.icon
+            |expenses            
+        // a.item.toggle_sidebar.no_blink.set_rental(href="/m/rental" class="{{isActivePath regex='rentals'}}")
+        //     i.clock.icon
+        //     |rentals
+        // if has_badge 'facilitator'
+        // a.item.toggle_sidebar.no_blink(href="/chat" class="{{isActivePath '/chat'}}" title='chat') 
+        //     |chat
+        //     i.chat.icon
+        // if is_eric
+        //     a.icon.item.toggle_dev.toggle_sidebar.no_blink
+        //         |toggle dev
+        //         if is_dev
+        //             i.code.blue.icon
+        //         else
+        //             i.code.icon
+        if is_in_admin
+            a.icon.item.toggle_admin.toggle_sidebar.no_blink
+                |toggle admin
+                if is_admin
+                    i.shield.blue.icon
+                else
+                    i.shield.icon
+            
+        if is_admin
+            // a.item.toggle_sidebar.no_blink.set_badge(href="/m/badge" class="{{isActivePath 'badges'}}")
+            //     i.certificate.blue.icon
+            //     | badges
+            // a.item.toggle_sidebar.no_blink.set_debit(href="/m/debit" class="{{isActivePath regex='rentals'}}")
+            //     i.gift.blue.icon
+            //     |gifts
+            .divider
+            // a.item.toggle_sidebar.no_blink.set_project(href="/m/project" class="{{isActivePath regex='projects'}}")
+            //     i.tasks.blue.icon
+            //     | projects
+            // a.item.toggle_sidebar.no_blink(href="/m/room" class="{{isActiveRoute 'requests'}}")
+            //     i.building.blue.icon
+            //     |rooms
+            a.blue.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
+                |admin
+                i.database.blue.icon
+            a.item.set_user.toggle_sidebar.no_blink(href="/m/user" class="{{isActiveRoute '/m/user'}}")
+                i.blue.users.icon
+                | all users
