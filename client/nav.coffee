@@ -8,21 +8,21 @@ Template.nav.onRendered ->
     Meteor.setTimeout ->
         $('.menu .item')
             .popup()
-        # $('.ui.left.sidebar')
-        #     .sidebar({
-        #         context: $('.bottom.segment')
-        #         transition:'overlay'
-        #         exclusive:true
-        #         duration:200
-        #         scrollLock:true
-        #     })
-        #     .sidebar('attach events', '.toggle_sidebar')
+        $('.ui.left.sidebar')
+            .sidebar({
+                context: $('.bottom.segment')
+                transition:'overlay'
+                exclusive:true
+                duration:200
+                scrollLock:true
+            })
+            .sidebar('attach events', '.toggle_sidebar')
     , 1000
     Meteor.setTimeout ->
         $('.ui.right.sidebar')
             .sidebar({
                 context: $('.bottom.segment')
-                transition:'overlay'
+                transition:'push'
                 exclusive:true
                 duration:200
                 scrollLock:true
