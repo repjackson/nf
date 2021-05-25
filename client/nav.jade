@@ -13,8 +13,8 @@ template(name='nav')
             img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // span.mobile.hidden nude foods market
         .search.item.zoomer(title='search')
-            .ui.icon.input
-                i.loading.car.icon
+            .ui.icon.transparent.input
+                i.search.icon
                 input.search_global(type='text')
         // else 
         //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
@@ -25,7 +25,7 @@ template(name='nav')
                 +i name='shopping-cart' cl=''
             // i.cart.icon
             strong.mobile.hidden shop
-        a.item.zoomer(href='/about' class="{{isActivePath '/about'}}" title='about')
+        a.item.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
             .ui.mini.image.info
                 +i name='information--v1' cl=''
             // i.cart.icon
@@ -50,11 +50,11 @@ template(name='nav')
             +i name='chat' cl='ui inline mini image'
             // i.chat.icon
             strong.mobile.hidden chat
-        if is_admin
-            a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
-                +i name='tasks' cl='ui inline mini image'
-            a.item(href='/m/model' class="{{isActivePath '/m/model'}}" title='delta')
-                +i name='database' cl='ui inline mini image'
+        // if is_admin
+        //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
+        //         +i name='tasks' cl='ui inline mini image'
+        //     a.item(href='/m/model' class="{{isActivePath '/m/model'}}" title='delta')
+        //         +i name='database' cl='ui inline mini image'
         if currentUser
             a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
                 i.bell.icon

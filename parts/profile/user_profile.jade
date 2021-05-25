@@ -39,12 +39,6 @@ template(name='user_layout')
                                 a.item(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
                                     +i name='money' cl='ui avatar image'
                                     |credit
-                                a.item(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
-                                    +i name='dashboard' cl='ui avatar image'
-                                    |dashboard
-                                a.item(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
-                                    +i name='money' cl='ui avatar image'
-                                    |credit
                                 a.item(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
                                     +i name='check' cl='ui avatar image'
                                     |orders
@@ -88,4 +82,40 @@ template(name='user_layout')
 
 
 template(name='user_dashboard')
-    .ui.header dashboard
+    .ui.four.stackable.cards
+        .ui.card
+            .content
+                .ui.header 
+                    i.dashboard.icon
+                    |dashboard
+        .ui.card
+            .content
+                .ui.header 
+                    i.line.chart.icon
+                    |stats
+        .ui.card
+            .content
+                .ui.header 
+                    i.users.icon
+                    |friends
+                .ui.big.green.button
+                    |friend!
+        .ui.card
+            .content
+                .ui.header orders
+        .ui.card
+            .content
+                .ui.header 
+                    i.money.icon
+                    |payments
+                .ui.list 
+                    .item $4
+                    .item $4
+                    .item $4
+                    .item $4
+                    .item $4
+        .ui.card
+            .content
+                .ui.header
+                    i.tasks.icon
+                    |tasks
