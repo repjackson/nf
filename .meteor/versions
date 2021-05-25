@@ -95,6 +95,7 @@ mongo-id@1.0.7
 mongo-livedata@1.0.12
 mquandalle:jade@0.4.9
 mquandalle:jade-compiler@0.4.5
+mrgalaxy:stripe@2.2.2
 multiply:iron-router-progress@1.0.2
 npm-bcrypt@0.9.3
 npm-mongo@3.9.0
