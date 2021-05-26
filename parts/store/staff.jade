@@ -1,0 +1,442 @@
+template(name='staff')
+    .ui.stackable.padded.grid
+        .row
+            .four.wide.column
+                //- .ui.grey.large.header 
+                //-     //- i.user.shield.icon
+                //-     +i name='user-shield'
+                //-     |staff
+                //- i.massive.loading.brown.poo.icon
+                a.ui.large.fluid.button(href='/add_resident')
+                    i.user.add.large.icon
+                    //- +i name='plus' classes='ui inline mini image'
+                    strong
+                        |resident
+                //- .ui.header
+                //-     |#{checkedin_members.count} checked in members
+                // +inline_doc slug='staff_notices' classes='ui small grey header'
+                a.ui.fluid.button(href='/buildings')
+                    i.building.large.icon
+                    //- +i name='building' classes='ui mini inline image'
+                    | buildings
+                a.ui.fluid.button(href='/residents')
+                    i.large.users.icon
+                    //- +i name='groups' classes='ui mini inline image'
+                    | residents
+                a.ui.fluid.button(href='/healthclub')
+                    i.large.tablet.icon
+                    //- +i name='android-tablet' classes='ui mini inline image'
+                    | kiosk view
+                // +unit_key_widget
+                a.ui.compact.fluid.large.button(href='readings')
+                    //- +ismall name='water' classes='ui inline image' 
+                    i.water.icon               
+                    strong water
+                div
+                .ui.small.grey.header 
+                    i.swimmer.icon
+                    |pool
+                each shift_pool_readings
+                    .item #{ph}ph #{br}br #{temperature}deg #{when}
+                        if ph_message
+                            .ui.label #{ph_message}
+                        if chlorine_message
+                            .ui.label #{chlorine_message}
+                div
+                .ui.small.grey.header 
+                    i.hot.tub.icon
+                    |upper hot tub
+                each shift_upper_hot_tub_readings
+                    .item #{ph}ph #{br}br #{temperature}deg #{when}
+                        if ph_message
+                            .ui.label #{ph_message}
+                        if chlorine_message
+                            .ui.label #{chlorine_message}
+                div
+                .ui.small.grey.header 
+                    i.hot.tub.icon
+                    |lower hot tub
+                each shift_lower_hot_tub_readings
+                    .item #{ph}ph #{br}br #{temperature}deg #{when}
+                        if ph_message
+                            .ui.label #{ph_message}
+                        if chlorine_message
+                            .ui.label #{chlorine_message}
+                .ui.hidden.divider
+                .ui.inline.grey.header 
+                    i.hiking.icon
+                    //- +i name='walking' classes='ui inline image'                
+                    |shift walks
+                .ui.icon.button.log_staff_walked(title='log hourly shift walk')
+                    i.plus.icon    
+                .ui.segment
+                    each shift_walks
+                        .ui.header #{when}
+                            i.remove.small.link.icon.remove_walk(title='remove walk entry')
+                if checklist_completed
+                    //- +i name='todo-list' classes='ui inline image'
+                    i.big.green.checkmark.icon
+                    |shift checklist completed
+                else 
+                    a.ui.fluid.big.button(href='/shift_checklist')
+                        i.large.tasks.icon
+                        //- +i name='to-do' classes='ui inline mini image'
+                        |checklist not completed
+
+            .twelve.wide.column
+                //- +schedule
+                .ui.inline.grey.header #{checkedin_members.count} checked in members
+                .ui.stackable.four.cards
+                    each sessions
+                        +hc_session
+
+
+template(name='hc_session')
+    .ui.card
+        a.zoom(href="/user/#{session_resident.username}/healthclub")
+            if session_resident.kiosk_photo
+                img.ui.image(src="{{c.url session_resident.kiosk_photo width=300 height=300 gravity='face' crop='fill'}}")
+            else
+                //- |old photo
+                    img.ui.image(src="{{c.url session_resident.image_id width=300 height=300 gravity='face' crop='fill'}}")
+        .content
+            a(href="/user/#{session_resident.username}/healthclub")
+                .ui.inline.grey.header
+                    |#{session_resident.first_name} #{session_resident.last_name}
+            .ui.small.grey.header #{when}
+            //- +healthclub_stats user=session_resident 
+            with session_resident
+                if address
+                    div
+                    +ismall name='marker'
+                    //- i.grey.marker.icon
+                    |#{address}
+                if building
+                    div
+                        //- i.grey.building.icon
+                        +ismall name='building'
+                        |#{building_number}
+                if unit_number
+                    div
+                        //- i.home.grey.icon
+                        +ismall name='home'
+                        | #{unit_number}
+                //- +number_edit key='checkins_without_gov_id' label='alter checkins without gov id' direct=true
+                //- +number_edit key='checkins_without_email_verification' label='alter checkins without email verification' direct=true
+                //- +number_view key='unit_number' label='unit #' direct=true
+                //- +text_view key='building_code' label='building code' direct=true
+                +lease_expiration_check
+                //- +rules_and_regs_check
+                +user_check_steps 
+                if active_violations
+                    .ui.big.red.label active violations
+                if staff_notes
+                    .ui.small.grey.header
+                        i.clipboard.icon(title='staff notes')
+                        |#{staff_notes}       
+            if checkin_guest_docs.count
+                .ui.small.grey.inline.header guests
+                each checkin_guest_docs
+                    .ui.large.label 
+                        |#{guest_name} #{first_name} #{last_name}
+            if user_is_resident
+                +date_view key='start_date' label='start date' direct=true
+                +date_view key='expiration_date' label='expiration date' direct=true
+            //- +checkin_button
+            if garden_key
+                .ui.compact.green.fluid.button.garden_key_checkout
+                    +i name='plant' classes='ui mini inline image'
+                    //- i.tree.icon
+                    strong garden key
+                .ui.fluid.large.button.check_in_garden_key
+                    //- i.sign.in.alternate.icon
+                    +i name='internal' classes='ui mini inline image'
+                    |check in garden key
+            else
+                .ui.compact.fluid.button.garden_key_checkout
+                    +i name='plant' classes='ui mini inline image'
+                    //- i.tree.icon
+                    strong garden key
+                .ui.fluid.button.sign_out
+                    //- i.sign.out.alternate.icon
+                    +i name='exit' classes='ui mini inline image'
+                    |check out
+            //- +boolean_edit key='active' direct=true
+            //- +boolean_edit key='submitted' direct=true
+            //- +boolean_edit key='approved' direct=true
+                
+                //- unless confirmed
+                //- .ui.fluid.green.button
+                //-     |confirm check in
+
+
+
+
+template(name='unit_key_widget')
+    .ui.grey.header 
+        //- i.key.yellow.icon
+        +i name='key'
+        |key lookup
+    .ui.grid
+        .two.column.row
+            .column
+                .ui.icon.large.fluid.input(title='building number')
+                    i.building.icon
+                    input.building_number(type='number' placeholder='#')
+                .ui.icon.large.fluid.input(title='unit number')
+                    i.home.icon
+                    input.unit_number(type='number' placeholder='#')
+            .column
+                .ui.icon.huge.button.lookup_key(title='lookup key')
+                    i.right.chevron.large.icon
+
+
+template(name='task_widget')
+    .ui.secondary.segment
+        .ui.header 
+            +i name='task'
+            |todos
+        //- .ui.fluid.styled.accordion
+        +goto_model slug='task'
+        .ui.icon.button.new_task
+            i.plus.icon
+            //- input.assign_task(type='text' placeholder='assign task...')
+        .ui.button.view_complete(class=view_complete_class)
+             |View Completed
+        .ui.button.view_incomplete(class=view_complete_class)
+            |View Incomplete
+        .smallscroll
+            each tasks
+                .ui.small.segment
+                    .ui.header #{body}
+                    +boolean_edit key='complete' label='Complete' direct=true true_icon='checkmark' false_icon='remove' icon_only=true
+                    //- +voting
+                    +author_info
+                    +creation_info
+                    if is_author
+                        +remove_button
+    
+    
+template(name='wywo')
+    .ui.secondary.segment
+        .ui.header 
+            +i name='note'
+            |while you were out
+    
+template(name='schedule')
+    //- .ui.center.aligned.header 
+    //-     i.calendar.icon
+    //-     |schedule
+    table.ui.definition.celled.striped.unstackable.selectable.table
+        thead
+            tr
+                th
+                th sun
+                th mon
+                th tue
+                th wed
+                th thu
+                th fri
+                th sat
+        tbody
+            tr
+                td 7/8a-12p
+                td 
+                    +facet_staff_select tags='shift,sunday,morning'
+                td 
+                    +facet_staff_select tags='shift,monday,morning'
+                td 
+                    +facet_staff_select tags='shift,tuesday,morning'
+                td 
+                    +facet_staff_select tags='shift,wednesday,morning'
+                td 
+                    +facet_staff_select tags='shift,thursday,morning'
+                td 
+                    +facet_staff_select tags='shift,friday,morning'
+                td 
+                    +facet_staff_select tags='shift,saturday,morning'
+            tr
+                td 12p-5p
+                td 
+                    +facet_staff_select tags='shift,sunday,afternoon'
+                td 
+                    +facet_staff_select tags='shift,monday,afternoon'
+                td 
+                    +facet_staff_select tags='shift,tuesday,afternoon'
+                td 
+                    +facet_staff_select tags='shift,wednesday,afternoon'
+                td 
+                    +facet_staff_select tags='shift,thursday,afternoon'
+                td 
+                    +facet_staff_select tags='shift,friday,afternoon'
+                td 
+                    +facet_staff_select tags='shift,saturday,afternoon'
+            tr
+                td 5p-9/10p
+                td 
+                    +facet_staff_select tags='shift,sunday,evening'
+                td 
+                    +facet_staff_select tags='shift,monday,evening'
+                td 
+                    +facet_staff_select tags='shift,tuesday,evening'
+                td 
+                    +facet_staff_select tags='shift,wednesday,evening'
+                td 
+                    +facet_staff_select tags='shift,thursday,evening'
+                td 
+                    +facet_staff_select tags='shift,friday,evening'
+                td 
+                    +facet_staff_select tags='shift,saturday,evening'
+    .ui.header upcoming week
+    // +inline_doc slug='staff_schedule_notes' classes='ui small grey header'    
+    table.ui.definition.celled.striped.unstackable.selectable.table
+        thead
+            tr
+                th
+                th sun
+                th mon
+                th tues
+                th wed
+                th thurs
+                th fri
+                th sat
+        tbody
+            tr
+                td 7/8am-5pm
+                td 
+                    +facet_staff_select tags='upcoming,shift,sunday,morning'
+                td 
+                    +facet_staff_select tags='upcoming,shift,monday,morning'
+                td 
+                    +facet_staff_select tags='upcoming,shift,tuesday,morning'
+                td 
+                    +facet_staff_select tags='upcoming,shift,wednesday,morning'
+                td 
+                    +facet_staff_select tags='upcoming,shift,thursday,morning'
+                td 
+                    +facet_staff_select tags='upcoming,shift,friday,morning'
+                td 
+                    +facet_staff_select tags='upcoming,shift,saturday,morning'
+            tr
+                td 12pm-5pm
+                td 
+                    +facet_staff_select tags='upcoming,shift,sunday,afternoon'
+                td 
+                    +facet_staff_select tags='upcoming,shift,monday,afternoon'
+                td 
+                    +facet_staff_select tags='upcoming,shift,tuesday,afternoon'
+                td 
+                    +facet_staff_select tags='upcoming,shift,wednesday,afternoon'
+                td 
+                    +facet_staff_select tags='upcoming,shift,thursday,afternoon'
+                td 
+                    +facet_staff_select tags='upcoming,shift,friday,afternoon'
+                td 
+                    +facet_staff_select tags='upcoming,shift,saturday,afternoon'
+            tr
+                td 5pm-9/10pm
+                td 
+                    +facet_staff_select tags='upcoming,shift,sunday,evening'
+                td 
+                    +facet_staff_select tags='upcoming,shift,monday,evening'
+                td 
+                    +facet_staff_select tags='upcoming,shift,tuesday,evening'
+                td 
+                    +facet_staff_select tags='upcoming,shift,wednesday,evening'
+                td 
+                    +facet_staff_select tags='upcoming,shift,thursday,evening'
+                td 
+                    +facet_staff_select tags='upcoming,shift,friday,evening'
+                td 
+                    +facet_staff_select tags='upcoming,shift,saturday,evening'
+
+
+template(name='shift_change_requests')
+    .ui.grey.inline.header
+        +i name='clock'
+        |shift change requests
+    .ui.icon.button.add_shift_change_request
+        i.large.icons
+            i.clock.icon
+            i.plus.corner.icon
+    table.ui.celled.fixed.unstackable.table
+        thead
+            tr
+                th date
+                th time
+                th author
+                th assigned staff
+                th 
+        tbody
+            each requests
+                +request_row
+                
+                
+template(name='request_row')
+    tr
+        td(data-label='date')
+            if can_edit
+                +date_edit key='date' direct=true
+            else
+                +date_view key='date' direct=true
+        td(data-label='time')
+            if can_edit
+                +time_edit key='time' direct=true
+            else
+                +time_view key='time' direct=true
+        td(data-label='author')
+            +author_info
+        td(data-label='assigned staff')
+            //- if can_edit
+            //-     +single_user_edit key='assigned_staff' role_filter='staff' direct=true
+            //- else
+            +username_info assigned_staff
+        td(data-label='actions')
+            .ui.icon.button.take_shift(title='take shift')
+                i.checkmark.icon
+            .ui.icon.button.declare_unavailable(title='declare unavailable')
+                i.ban.icon
+            each unavailable
+                .ui.label(title='unavailable') #{this}
+            if can_edit
+                +remove_button
+
+
+
+
+
+template(name='shift_checklist')
+    .ui.stackable.padded.grid
+        .row
+            .ui.sixteen.wide.center.aligned.column
+                .ui.header 
+                    +i name='tasks'
+                    |staff checklist for #{today}
+            .ui.sixteen.wide.column
+                if todays_checklist
+                    with todays_checklist
+                        each checklist_items
+                            .ui.segment.stackable.grid
+                                .eight.wide.column
+                                    .ui.header #{title}
+                                    if completed
+                                        .ui.small.header {{long_date completed_time}}
+                                .eight.wide.column
+                                    unless completed
+                                        .ui.big.fluid.button.complete mark complete
+                                    else
+                                        .ui.big.fluid.green.fade.animated.button.incomplete
+                                            .visible.content
+                                                i.large.checkmark.icon
+                                            .hidden.content
+                                                i.large.ban.icon
+                                                +i name='cancel' classes='ui inline image'
+                                                //- |mark incomplete
+                        if all_completed
+                            .ui.fluid.big.button.submit_checklist
+                                +i name='checkmark' classes='ui inline image'
+                                |submit
+                else
+                    .ui.large.fluid.button.create_checklist
+                        +i name='plus' classes='ui inline image'
+                        |no checklist yet, click to create

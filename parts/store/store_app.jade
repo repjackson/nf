@@ -1,0 +1,156 @@
+template(name='kiosk_container')
+    with kiosk_doc
+        +Template.dynamic template=kiosk_view
+
+
+template(name='healthclub')
+    img.ui.fluid.image.checkin_banner(src="{{c.url 'frontrange' width=1000 height=600 crop='crop'}}")
+    .ui.hidden.divider
+    .ui.grid.header-wrapper
+        //- +Template.dynamic template=kiosk_view
+        //- .row
+        //-     .six.wide.center.aligned.column
+        if rick_mode
+            img.ui.small.centered.image(src="{{c.url 'gold_run_logo' }}")
+        .row
+            .sixteen.wide.center.aligned.column
+                .ui.big.fluid.left.icon.input
+                    input.username_search(type='text' placeholder='check in resident (first or last name)' autofocus)
+                    if is_query
+                        i.remove.link.icon.clear_results
+                    else 
+                        i.user.grey.outline.large.icon
+        .row
+            .sixteen.wide.column
+                .ui.grid
+                    //- .row.checkin_toprow
+                    //-     .sixteen.wide.column
+                    //-         //- .two.wide.column
+                    //-         //-     img.ui.centered.small.inline.image.shadowed(src="{{c.url 'gold_run_logo' }}")
+                    //-         //- .fourteen.wide.column
+                    //-         .ui.massive.fluid.left.icon.input
+                    //-             input.username_search(type='text' placeholder='resident first or last name' autofocus)
+                    //-             if is_query
+                    //-                 i.remove.link.icon.clear_results
+                    //-             else 
+                    //-                 i.user.grey.outline.icon
+                    .row.checking_in_area
+                        .sixteen.wide.center.aligned.column.checking_in_area
+                            if checkedout_members.length
+                                each checkedout_members
+                                    +checkin_button
+                            else
+                                if checking_in
+                                    if is_query
+                                        .ui.center.aligned.header no members found
+                                        .ui.center.aligned.header see staff to add
+                    unless is_query
+                        .centered.row    
+                            +inline_doc slug='health_club_notices' classes='ui large header'
+                            .seven.wide.column
+                                //- .ui.header 
+                                //-     i.blue.info.icon
+                                //-     |hc info
+                                .ui.header Hours
+                                .ui.large.list
+                                    .item Mon 7a-10p
+                                    .item Tues 7a-10p
+                                    .item Wed 7a-10p
+                                    .item Thur 7a-10p
+                                    .item Fri 7a-9p
+                                    .item Sat 8a-9p
+                                    .item Sun 8a-10p
+                                .ui.header Onsite Manager 
+                                .ui.small.header Rick Hamp 
+                                .ui.relaxed.large.list
+                                    .item 303-545-1787
+                                    .item goldruncondos@gmail.com
+                            .seven.wide.column
+                                +health_club_status_small
+
+template(name='facet_doc_edit')
+    with facet_doc
+        if is_staff
+            +textarea_edit key='body'
+        else 
+            h3 
+                +textarea_view key='body'
+                        
+                        
+template(name='add_resident')
+    .ui.stackable.padded.grid
+        .centered.row
+            .eight.wide.column
+                h1.ui.center.aligned.header
+                    i.plus.icon
+                    | resident
+                .ui.big.form
+                    .field
+                        input#first_name(type='text' placeholder='first name' autocomplete='off')
+                    .field
+                        input#last_name(type='text' placeholder='last name' autocomplete='off')
+                    //- .field
+                    //-     |Username
+                    //-     input#username(type='text')
+                if permission
+                    .ui.fluid.green.big.button.create_resident
+                        |create resident
+        
+        
+template(name='sign_waiver')
+    with receipt_doc
+        .ui.stackable.padded.grid
+            .centered.row
+                .twelve.wide.column.scrolling
+                    .row
+                        h1.ui.center.aligned.header
+                            i.user.plus.icon
+                            |sign waiver
+                        with waiver_doc
+                            |!{html}
+                        +signature
+                        .ui.fluid.green.button.sign_waiver
+                            | sign waiver
+
+
+
+template(name='checkin_button')
+    unless is_staff
+        //- unless healthclub_checkedin
+        .ui.massive.compact.button.checkin.new_hc_session
+            strong.grtext.f8 #{first_initial} #{last_name}
+        //- if healthclub_checkedin
+        //- if is_staff
+        //- else
+        //-     .ui.big.button.checkout
+        //-         i.sign.out.icon
+        //-             //- +i name='exit-sign' classes='ui avatar image'
+        //-             |check out
+    if is_staff
+        if healthclub_checkedin
+            .ui.button.checkout
+                i.sign.out.icon
+                //- +i name='exit-sign' classes='ui avatar image'
+                |health club check out
+        else
+            .ui.massive.button.new_hc_session.grtext(title='sign in')
+                strong.grtext #{first_initial} #{last_name}
+
+
+template(name='health_club_info')
+    .ui.stackable.grid.f5
+        .two.column.inverted.row
+            .column
+                .ui.grey.small.inline.header wifi
+                .ui.inline.header Gold Run Health Club / goldrun1
+                div
+                .ui.grey.small.inline.header upstairs code
+                .ui.inline.header 4589
+            .column
+                .ui.relaxed.large.list
+                    .item
+                        .content
+                            .header manager
+                    .item Rick Hamp 
+                    .item 303-545-1787
+                    .item goldruncondos@gmail.com

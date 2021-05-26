@@ -50,6 +50,15 @@ template(name='layout')
             +yield
     +footer
 
+
+template(name='mlayout')
+    .global_container(class=invert_class)
+        unless is_frontdesk
+            +nav
+        //- img.ui.fluid.image.checkin_banner(src="{{c.url 'frontrange' width=1000 height=1000 crop='crop'}}")    
+        +yield
+
+
 template(name='verification_confirmation')
     .ui.text.container
         h1.ui.header your email has been verified
