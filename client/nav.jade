@@ -58,6 +58,10 @@ template(name='nav')
             +i name='chat' cl='ui inline mini image'
             // i.chat.icon
             strong.mobile.hidden chat
+        a.item.zoomer(href='/mail' class="{{isActivePath '/mail'}}" title='mail')
+            +i name='envelope' cl='ui inline mini image'
+            // i.mail.icon
+            strong.mobile.hidden mail
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
         //         +i name='tasks' cl='ui inline mini image'

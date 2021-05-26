@@ -1,0 +1,58 @@
+template(name='bugs')
+    .ui.stackable.grid
+        .four.wide.column
+            .ui.inline.header 
+                i.bugs.icon
+                |bugs
+            .ui.icon.button.add_bug 
+                i.plus.icon
+            div
+            +bug_cloud
+        .twelve.wide.column
+            each bugs
+                .ui.segment
+                    unless is_editing
+                        .ui.small.header #{text}
+                        .ui.small.header url: #{url}
+                        .ui.small.header pathname: #{pathname}
+                        each tags
+                            .ui.small.basic.label #{this}
+                        .ui.icon.circular.button.edit
+                            i.pencil.icon
+                        +author_info
+                        +voting
+                    else 
+                        +text_edit key='title' direct=true
+                        +array_edit key='tags' direct=true
+                        +remove_button
+                        .ui.icon.circular.green.button.save
+                            i.checkmark.icon
+
+
+
+
+template(name='bug_cloud')
+    .ui.hidden.divider
+    .ui.grey.small.header 
+        |targets    
+    if selected_target_id
+        with selected_target
+            .unselect_target.ui.active.circular.button
+                strong #{title}
+    else 
+        each targets
+            .ui.compact.circular.button.select_target 
+                strong #{title}
+    .spacer
+    .ui.grey.small.inline.header 
+        i.tags.icon
+        |tags    
+    if selected_bug_tags
+        #clear_bug_tags.ui.active.icon.circular.button
+            i.remove.icon
+        each selected_bug_tags
+            .unselect_bug_tag.ui.active.circular.button
+                strong #{this}
+    each all_bug_tags
+        .ui.compact.circular.button.select_bug_tag(class=cloud_tag_class) 
+            strong #{this.name}

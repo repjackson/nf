@@ -1,0 +1,78 @@
+template(name='mail')
+    .ui.stackable.padded.grid
+        .row
+            .four.wide.column
+                .ui.large.center.aligned.header 
+                    i.envelope.outline.icon
+                    |mail
+                .ui.fluid.button.compose
+                    i.plus.icon
+                    |compose
+                .ui.large.fluid.vertical.pointing.menu
+                    +mail_view_menu_item icon='inbox' label='inbox' slug='inbox'
+                    +mail_view_menu_item icon='save' label='drafts' slug='draft'
+                    +mail_view_menu_item icon='send' label='sent' slug='sent'
+                    +mail_view_menu_item icon='archive' label='archived' slug='archived'
+                    +mail_view_menu_item icon='clone' label='all' slug='all'
+                    +mail_view_menu_item icon='trash' label='trash' slug='trash'
+            .twelve.wide.column
+                .ui.header #{mail_view_mode_label}
+                each current_view_messages
+                    .ui.segment
+                        .ui.header #{recipient} 
+                        .ui.large.basic.label #{status}
+                        |#{when} #{body}
+                        +remove_button
+
+
+template(name='mail_view_menu_item')
+    a.item.set_view(class=menu_item_class)
+        |#{label}
+        i.grey.icon(class=icon)
+        .ui.small.basic.label #{view_count}
+
+
+template(name='message_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .centered.row
+                .ten.wide.column 
+                    .ui.inline.header 
+                        | edit message
+                    +remove_button
+                    +single_user_edit key='recipient' direct=true
+                    +html_edit key='description' label='description' icon='content' direct=true
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
+                    a.ui.fluid.button.save_draft(href="/message/#{_id}/view" title='save')
+                        i.save.icon
+                        |save draft
+                    a.ui.fluid.button.send(href="/message/#{_id}/view" title='save')
+                        i.checkmark.large.green.icon
+                        |send
+                
+
+
+
+
+
+template(name='message_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .eight.wide.column
+                    a.ui.button(href="/messages")
+                        i.chevron.left.icon
+                        +i name='message' classes='ui inline mini image'
+                        |message
+                    .ui.header message view 
+                    +image_view key='message_image_id' label='image' direct=true
+                    a.ui.button(href="/message/#{_id}/edit")
+                        i.pencil.icon
+                        |edit
+                .eight.wide.column
+                    .ui.header #{title}
+                    +icon_view key='icon' direct=true
+                    .ui.header 
+                        +i name='message'
+                    +comments
+                    
