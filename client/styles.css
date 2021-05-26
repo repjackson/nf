@@ -288,6 +288,12 @@ img {
 .info:hover {
     content:url("/info.gif");
 }
+.mail:hover {
+    content:url("/mail.gif");
+}
+.marker:hover {
+    content:url("/marker.gif");
+}
 .cart:hover {
     content:url("/cart.gif");
     width: 35px;

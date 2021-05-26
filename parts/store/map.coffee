@@ -1,7 +1,8 @@
 if Meteor.isClient
     # @selected_tags = new ReactiveArray []
     
-    
+    Router.route '/map', -> @render 'map'
+
     # @onpush = (event)->
     #   console.log(event.data);
     
@@ -19,7 +20,7 @@ if Meteor.isClient
         # lat: ()-> Geolocation.latLng().lat
         # lon: ()-> Geolocation.latLng().lon
     
-    Template.body.events
+    Template.map.events
         'click a': ->
             navigator.geolocation.getCurrentPosition (position) =>
                 console.log 'saving long', position.coords.longitude
@@ -80,11 +81,11 @@ if Meteor.isClient
             # Meteor.users.update Meteor.userId(),
             #     $set:current_position:pos
             @map = L.map('mapid',{
-                dragging:false, 
-                zoomControl:false
-                bounceAtZoomLimits:false
-                touchZoom:false
-                doubleClickZoom:false
+                dragging:true, 
+                zoomControl:true
+                bounceAtZoomLimits:true
+                touchZoom:true
+                doubleClickZoom:true
                 }).setView([Session.get('current_lat'), Session.get('current_long')], 17);
     
             # var map = L.map('map', {
@@ -137,8 +138,8 @@ if Meteor.isClient
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                 # attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
-                maxZoom: 19,
-                minZoom: 19,
+                maxZoom: 20,
+                minZoom: 15,
                 id: 'mapbox/outdoors-v11',
                 tileSize: 512,
                 zoomOffset: -1,

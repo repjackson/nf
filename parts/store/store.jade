@@ -1,15 +1,28 @@
 template(name='store')
     .ui.stackable.padded.grid
         .centered.row
-            .twelve.wide.column
+            .sixteen.wide.column
+                .ui.inline.header 
+                    +i name='shop'
+                    |store
+                a.ui.big.button(href="/staff") 
+                    i.shield.icon
+                    |staff portal
                 .ui.header 
                     i.shield.icon
                     |checked in customers
                 each checkedin_customers
                     .ui.header #{username}
+                .ui.header 
+                    i.shield.icon
+                    |customers today
+                each checkedin_customers
+                    .ui.header #{username}
+                .ui.header 
+                    i.money.icon
+                    |orders today
+                each checkedin_customers
+                    .ui.header #{username}
         .centered.row
-            .twelve.wide.column
-                .ui.inline.header 
-                    +i name='shop'
-                    |store
+            .fourteen.wide.column
                 +map
