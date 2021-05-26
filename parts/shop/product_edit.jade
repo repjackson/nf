@@ -10,9 +10,9 @@ template(name='product_edit')
                     i.checkmark.large.icon   
                 +text_edit key='title' label='title' direct=true
                 // +text_edit key='location' label='location' direct=true
-                +text_edit key='menu_section' label='menu section' direct=true
-                each model_docs 'menu_section'
-                    +pick_section
+                // +text_edit key='menu_section' label='menu section' direct=true
+                // each model_docs 'menu_section'
+                //     +pick_section
                 +image_edit key='image_id' label='image' direct=true
                 +boolean_edit key='gluten_free' label='gluten free' direct=true
                 +boolean_edit key='vegan' label='vegan' direct=true

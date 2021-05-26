@@ -1008,6 +1008,10 @@ h1.ui.header{
     opacity: .9 !important;
 }
 
+::-webkit-scrollbar {
+    /*display: none;*/
+    width: 1px;
+}
 .scrolling::-webkit-scrollbar {
     /*display: none;*/
     width: 1px;
