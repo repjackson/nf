@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.large.menu
+    #topnav.topnav.ui.attached.borderless.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.food.icon.cancel
@@ -260,7 +260,7 @@ template(name='left_sidebar')
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
         // a.item.set_member.toggle_sidebar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
-        a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
+        a.item.toggle_sidebar.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
             img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
@@ -270,43 +270,37 @@ template(name='left_sidebar')
                 i.search.icon
                 input.search_global(type='text')
         // else 
-        //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
+        //     a.item.toggle_sidebar.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
-        a.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+        a.item.toggle_sidebar.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image.cart
                 +i name='shopping-cart' cl=''
             // i.cart.icon
             strong.mobile.hidden shop
-        a.item.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+        a.item.toggle_sidebar.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
             .ui.mini.image.info
                 +i name='information--v1' cl=''
             // i.cart.icon
             strong.mobile.hidden about
-        a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+        a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             +i name='list' cl='ui inline mini image'
             // i.list.icon
             strong.mobile.hidden orders
-        .ui.simple.dropdown.item
-            .text get involved
-            .menu 
-                .item hi
-                .item hi
-                .item hi
         unless currentUser
-            a.item.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
+            a.item.toggle_sidebar.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
                 // +i name='list' cl='ui inline mini image'
                 // i.newspaper.icon
                 strong.mobile.hidden get involved
-        a.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
+        a.item.toggle_sidebar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
             +i name='phone' cl='ui inline mini image'
             // i8.newspaper.icon
             strong.mobile.hidden contact
-        // a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
+        // a.item.toggle_sidebar.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
         //     +i name='list' cl='ui inline mini image'
         //     // i.newspaper.icon
         //     strong.mobile.hidden news
-        a.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
+        a.item.toggle_sidebar.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
             +i name='chat' cl='ui inline mini image'
             // i.chat.icon
             strong.mobile.hidden chat
