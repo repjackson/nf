@@ -1,6 +1,7 @@
 @Docs = new Meteor.Collection 'docs'
 @Results = new Meteor.Collection 'results'
 
+@Markers = new Meteor.Collection 'markers'
 
 
 Docs.before.insert (userId, doc)->

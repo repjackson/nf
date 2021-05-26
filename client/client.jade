@@ -14,9 +14,18 @@ head
     link(rel="manifest" href="/site.webmanifest")
     link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000")
     link(href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet")
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="")
 
     script(src='https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js')
     script(src='https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js')
+    
+
+    script(src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin="")
+
     
     script(src="https://cdn.jsdelivr.net/npm/sweetalert2@9")
     script(src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js")
@@ -50,6 +59,17 @@ template(name='verification_confirmation')
 template(name='not_found')
     .ui.center.aligned.padded.basic.segment
         .ui.center.aligned.header page not found
-        a.ui.button(href="/") 
-            //+i name='home' 
-            |home
+        a.ui.big.basic.button(href="/") 
+            +i name='home' 
+            // |home
+
+
+template(name='shortcut_modal')
+    .ui.shortcut.modal
+        .ui.header keyboard shortcuts
+        .content
+            .ui.large.list
+                each shortcuts
+                    .item 
+                        .header #{combo}
+                        .content #{action}

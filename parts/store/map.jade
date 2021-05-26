@@ -1,0 +1,42 @@
+template(name='mapnav')
+    .ui.fluid.attached.borderless.three.item.small.menu.topped(style="opacity:75% !important;")
+        a.icon.item.zoomer(href="/recently" class="{{isActiveRoute regex='recently'}}")
+            i.history.large.icon
+        if currentUser.light_mode
+            a.icon.item.zoomer(href="/" class="{{isActiveRoute 'map'}}")
+                i.map.marker.alternate.big.icon
+        if currentUser
+            a.icon.item.zoomer(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='profile'}}")
+                i.user.circle.large.icon
+        else
+            a.icon.item.zoomer(href="/login" class="{{isActiveRoute regex='login'}}")
+                i.sign.in.large.icon
+        
+
+template(name='map')
+    #mapid
+    unless pos
+        .ui.large.compact.basic.fluid.button.refresh
+            i.marker.icon
+            |reload location data
+    .ui.one.column.padded.grid
+        .column
+            .ui.center.aligned.header People Near You: #{my_longform} (#{my_category})
+            .ui.four.column.stackable.padded.centered.grid
+                each nearby_people
+                    +nearby_person
+                    
+                    
+template(name='nearby_person')                    
+    .column
+        .ui.segment.rounded.zoomer.pointer.goto_user
+            img.ui.tiny.circular.inline.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
+            a.ui.header(href="/user/#{username}") #{username}
+                if age
+                    |#{age}
+            |!{about} #{formatted}
+            each tags
+                .ui.basic.small.label #{this}
+            |#{light_mode}
+            
+            

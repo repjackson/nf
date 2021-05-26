@@ -1,0 +1,15 @@
+template(name='store')
+    .ui.stackable.padded.grid
+        .centered.row
+            .twelve.wide.column
+                .ui.header 
+                    i.shield.icon
+                    |checked in customers
+                each checkedin_customers
+                    .ui.header #{username}
+        .centered.row
+            .twelve.wide.column
+                .ui.inline.header 
+                    +i name='shop'
+                    |store
+                +map

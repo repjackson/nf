@@ -254,7 +254,8 @@ if Meteor.isClient
                 ).fetch()
                 for handling in handling_rentals
                     interest_rate += handling.hourly_dollars*.1
-            interest_rate.toFixed(2)
+            if interest_rate
+                interest_rate.toFixed(2)
 
 
     Template.user_dashboard.events
