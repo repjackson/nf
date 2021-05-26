@@ -38,10 +38,10 @@ template(name='nav')
             // +i name='list' cl='ui inline mini image'
             // i.newspaper.icon
             strong.mobile.hidden get involved
-        a.item.zoomer(href='/p/contact' class="{{isActivePath '/contact'}}" title='news')
-            // +i name='list' cl='ui inline mini image'
+        a.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
+            +i name='phone' cl='ui inline mini image'
             // i8.newspaper.icon
-            strong.mobile.hidden contact us
+            strong.mobile.hidden contact
         // a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
         //     +i name='list' cl='ui inline mini image'
         //     // i.newspaper.icon
@@ -188,7 +188,7 @@ template(name='recent_alert')
             
             
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.inverted.menu
+    .ui.right.sidebar.vertical.borderless.menu
         // a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |#{currentUser.name}
@@ -219,7 +219,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.inverted.menu
+    .ui.left.sidebar.vertical.borderless.menu
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One

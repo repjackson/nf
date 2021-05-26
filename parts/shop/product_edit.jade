@@ -9,7 +9,7 @@ template(name='product_edit')
                 .ui.large.circular.icon.green.button.save_product(title='save product')
                     i.checkmark.large.icon   
                 +text_edit key='title' label='title' direct=true
-                +text_edit key='location' label='location' direct=true
+                // +text_edit key='location' label='location' direct=true
                 +text_edit key='menu_section' label='menu section' direct=true
                 each model_docs 'menu_section'
                     +pick_section

@@ -19,6 +19,9 @@ Template.registerHelper 'user_from_id', (id)->
 Template.registerHelper 'kve', (key,value)-> @["#{key}"] is value
 Template.registerHelper 'skv_is', (key,value)-> Session.equals(key,value)
 
+Template.registerHelper 'lower', (input) ->
+    input.toLowerCase()
+
 Template.registerHelper 'gs', () ->
     Docs.findOne
         model:'global_settings'

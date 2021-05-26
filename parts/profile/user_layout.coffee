@@ -19,6 +19,22 @@ if Meteor.isClient
         @layout 'user_layout'
         @render 'user_friends'
         ), name:'user_friends'
+    Router.route '/user/:username/subscriptions', (->
+        @layout 'user_layout'
+        @render 'user_subscriptions'
+        ), name:'user_subscriptions'
+    Router.route '/user/:username/downloads', (->
+        @layout 'user_layout'
+        @render 'user_downloads'
+        ), name:'user_downloads'
+    Router.route '/user/:username/addresses', (->
+        @layout 'user_layout'
+        @render 'user_addresses'
+        ), name:'user_addresses'
+    Router.route '/user/:username/giftcards', (->
+        @layout 'user_layout'
+        @render 'user_giftcards'
+        ), name:'user_giftcards'
 
 
 

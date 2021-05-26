@@ -222,7 +222,7 @@ img {
 }
 
 #topnav {
-    border-radius: 0px 0px 0px 0px !important;
+    border-radius: 0px 0px 10px 10px !important;
 }
 .hour_picked {
     /* outline: lightgreen solid 2px !important; */
@@ -1028,7 +1028,7 @@ h1.ui.header{
 
 .topnav{
 	overflow-y:hidden;
-	overflow-x:scroll;
+	/*overflow-x:scroll;*/
 	/*max-height:1000px;*/
 	/*max-height:85vh;*/
     /* transition: background-color 3s; /* Animation */

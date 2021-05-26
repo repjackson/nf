@@ -1,17 +1,17 @@
 template(name='user_layout')
-    img.ui.fluid.image.checkin_banner(src="{{c.url 'cafe'}}")
+    // img.ui.fluid.image.checkin_banner(src="{{c.url 'cafe'}}")
     +nav
     .ui.bottom.attached.pushable.segment
         +left_sidebar
         +right_sidebar
-        #main_area.global_container.pusher.scrolling
+        #main_area.global_container.pusher.scrollin
             with user_from_username_param
                 .ui.stackable.padded.grid
                     .row
                         //- img.ui.image.checkin_banner(src="{{c.url banner_image width=1000 height=1000 crop='crop'}}")
-                        .four.wide.column
-                            a.item.mobile.hidden(href="/user/#{user_from_username_param.username}/food")
-                                img.ui.centered.rounded.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                        .three.wide.column
+                            a.item.mobile.hidden(href="/user/#{user_from_username_param.username}")
+                                img.ui.centered.small.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
                             .spacer
                             a(href="/user/#{user.username}")
                                 .ui.center.aligned.header
@@ -32,7 +32,7 @@ template(name='user_layout')
                                         //- +i name='coins'
                                         //- i.coins.icon
                                         |{{fixed user.credit}}c
-                            .ui.vertical.fluid.menu
+                            .ui.vertical.fluid.large.compact.menu
                                 a.item(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
                                     +i name='dashboard' cl='ui avatar image'
                                     |dashboard
@@ -50,21 +50,24 @@ template(name='user_layout')
                                     |cart
                                 a.item(href="/user/#{username}/downloads" class="{{isActiveRoute 'user_downloads'}}")
                                     +i name='download' cl='ui avatar image'
-                                    |cart
+                                    |downloads
                                 a.item(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
                                     +i name='clock' cl='ui avatar image'
                                     |subscriptions
                                 a.item(href="/user/#{username}/addresses" class="{{isActiveRoute 'user_addresses'}}")
                                     +i name='marker' cl='ui avatar image'
                                     |addresses
+                                a.item(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
+                                    +i name='certificate' cl='ui avatar image'
+                                    |gift cards
                             if is_current_user
                                 a.ui.basic.compact.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
                                     i.cog.icon
-                                    |edit
+                                    |edit profile
                             else if is_admin
                                 a.ui.basic.compact.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
                                     +i name='settings' cl='ui avatar image'
-                                    |edit
+                                    |edit profile
                             if is_current_user
                                 .ui.basic.compact.button.logout
                                     i.sign.out.alternate.icon
@@ -72,7 +75,7 @@ template(name='user_layout')
                                 //- a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
                                 //-     i.globe.icon
                                 //-     |log out other clients
-                        .twelve.wide.column
+                        .thirteen.wide.column
                                 
                 
                             div.global_container
@@ -91,15 +94,22 @@ template(name='user_dashboard')
         .ui.card
             .content
                 .ui.header 
-                    i.line.chart.icon
+                    +i name='line-chart' cl='ui avatar image'
                     |stats
         .ui.card
             .content
                 .ui.header 
-                    i.users.icon
+                    +i name='groups' cl='ui avatar image'
                     |friends
                 .ui.big.green.button
                     |friend!
+        .ui.card
+            .content
+                a.header(href="/user/#{username}/subscriptions")
+                    +i name='clock' cl='ui avatar image'
+                    |subscriptions
+                each user_subscriptions
+                    .ui.header #{when}
         .ui.card
             .content
                 .ui.header orders
