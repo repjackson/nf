@@ -248,6 +248,15 @@ img {
     /*filter: invert(.9) !important;*/
 }
 
+#iron-router-progress {
+	background-color : orange;
+	box-shadow       : 0 0 10px orange;
+}
+
+#iron-router-progress.spinner:before {
+	border-color : orange;
+}
+
 
 .zoomer{
     transition: transform .2s; /* Animation */
@@ -680,11 +689,11 @@ input.username_search{
 .ui.header{
     /* font-family: 'Raleway', sans-serif !important; */
     /* font-family: 'Roboto', sans-serif !important; */
-     font-family: 'Ubuntu+Mono', sans-serif !important; 
+     font-family: 'Ubuntu' !important; 
     /*font-family: 'Goudy Bookletter 1911', sans-serif !important;*/
 }
 h1.ui.header{
-    /* font-family: 'Ubuntu', sans-serif !important; */
+     font-family: 'Ubuntu', sans-serif !important; 
     /* font-family: 'Lusitana', serif !important; */
     /* font-size: 300% !important; */
     /* color: #5a4400 !important; */

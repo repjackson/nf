@@ -3,6 +3,7 @@ Router.configure
     notFoundTemplate: 'not_found'
     loadingTemplate: 'splash'
     trackPageView: false
+# 	progressDelay: 100
 
 # force_loggedin =  ()->
 #     if !Meteor.userId()
