@@ -10,9 +10,9 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'model_docs', 'shift_change_request'
     Template.staff.onCreated ->
         @autorun => Meteor.subscribe 'todays_checklist'
-        @autorun => Meteor.subscribe 'todays_pool_readings'
-        @autorun => Meteor.subscribe 'todays_lower_hot_tub_readings'
-        @autorun => Meteor.subscribe 'todays_upper_hot_tub_readings'
+        # @autorun => Meteor.subscribe 'todays_pool_readings'
+        # @autorun => Meteor.subscribe 'todays_lower_hot_tub_readings'
+        # @autorun => Meteor.subscribe 'todays_upper_hot_tub_readings'
         @autorun => Meteor.subscribe 'sessions'
         @autorun => Meteor.subscribe 'shift_walks'
 

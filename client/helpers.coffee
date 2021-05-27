@@ -10,7 +10,7 @@ Template.registerHelper 'model_docs', (model) ->
         model:model
     # Template.parentData()
 
-Template.registerHelper 'dish_sort_icon', () -> Session.get('dish_sort_icon')
+Template.registerHelper 'product_sort_icon', () -> Session.get('product_sort_icon')
 Template.registerHelper 'active_path', (metric) ->
     false
 
@@ -223,10 +223,10 @@ Template.registerHelper 'is_current_admin', () ->
         if 'admin' in Meteor.user().current_roles then true else false
 
 
-Template.registerHelper 'dish_orders', () ->
+Template.registerHelper 'product_orders', () ->
     Docs.find {
         model:'order'
-        dish_id:@_id
+        product_id:@_id
     }, 
         sort:_timestamp:-1
 Template.registerHelper 'is_current_staff', () ->
@@ -312,10 +312,10 @@ Template.registerHelper 'view_template', -> "#{@field_type_slug}_view"
 Template.registerHelper 'edit_template', -> "#{@field_type_slug}_edit"
 Template.registerHelper 'is_model', -> @model is 'model'
 
-Template.registerHelper 'order_dish', ->
+Template.registerHelper 'order_product', ->
     Docs.findOne 
-        model:'dish'
-        _id:@dish_id
+        model:'product'
+        _id:@product_id
 # Template.body.events
 #     'click .toggle_sidebar': -> $('.ui.sidebar').sidebar('toggle')
 

@@ -7,9 +7,9 @@ if Meteor.isClient
 
     Template.order_view.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        # @autorun => Meteor.subscribe 'model_docs', 'dish'
+        # @autorun => Meteor.subscribe 'model_docs', 'product'
         # @autorun => Meteor.subscribe 'model_docs', 'order'
-        @autorun => Meteor.subscribe 'dish_by_order_id', Router.current().params.doc_id
+        @autorun => Meteor.subscribe 'product_by_order_id', Router.current().params.doc_id
 
 
     Template.order_view.events
@@ -45,10 +45,10 @@ if Meteor.isClient
 
 
 if Meteor.isServer
-    Meteor.publish 'dish_by_order_id', (order_id)->
+    Meteor.publish 'product_by_order_id', (order_id)->
         order = Docs.findOne order_id
         Docs.find
-            _id: order.dish_id
+            _id: order.product_id
 
     # Meteor.methods
         # order_order: (order_id)->

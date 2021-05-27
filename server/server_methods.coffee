@@ -66,53 +66,53 @@ Meteor.methods
                     "<br><h4>view your messages here:<a href=#{message_link}>#{message_link}</a>.</h4>"
             })
 
-    order_dish: (dish_id)->
-        dish = Docs.findOne dish_id
+    order_product: (product_id)->
+        product = Docs.findOne product_id
         order_id = Docs.insert
             model:'order'
-            dish_id: dish._id
+            product_id: product._id
             status:'pending'
-            order_price: dish.price_usd
+            order_price: product.price_usd
             buyer_id: Meteor.userId()
         Meteor.users.update Meteor.userId(),
-            $inc:credit:-dish.price_usd
-        Meteor.users.update dish.cook_user_id,
-            $inc:credit:dish.price_usd
-        Meteor.call 'calc_dish_data', dish_id, ->
+            $inc:credit:-product.price_usd
+        Meteor.users.update product.cook_user_id,
+            $inc:credit:product.price_usd
+        Meteor.call 'calc_product_data', product_id, ->
         order_id
 
 
-    calc_dish_data: (dish_id)->
-        dish = Docs.findOne dish_id
-        console.log dish
+    calc_product_data: (product_id)->
+        product = Docs.findOne product_id
+        console.log product
         order_count =
             Docs.find(
                 model:'order'
-                dish_id:dish_id
+                product_id:product_id
             ).count()
         console.log 'order count', order_count
-        servings_left = dish.servings_amount-order_count
+        servings_left = product.servings_amount-order_count
         console.log 'servings left', servings_left
 
-        # dish_dish =
-        #     Docs.findOne dish.dish_id
-        # console.log 'dish_dish', dish_dish
-        # if dish_dish.ingredient_ids
-        #     dish_ingredients =
+        # product_product =
+        #     Docs.findOne product.product_id
+        # console.log 'product_product', product_product
+        # if product_product.ingredient_ids
+        #     product_ingredients =
         #         Docs.find(
         #             model:'ingredient'
-        #             _id: $in:dish_dish.ingredient_ids
+        #             _id: $in:product_product.ingredient_ids
         #         ).fetch()
         #
         #     ingredient_titles = []
-        #     for ingredient in dish_ingredients
+        #     for ingredient in product_ingredients
         #         console.log ingredient.title
         #         ingredient_titles.push ingredient.title
-        #     Docs.update dish_id,
+        #     Docs.update product_id,
         #         $set:
         #             ingredient_titles:ingredient_titles
 
-        Docs.update dish_id,
+        Docs.update product_id,
             $set:
                 order_count:order_count
                 servings_left:servings_left
