@@ -4,21 +4,21 @@ template(name='order_view')
             .row
                 .four.wide.column
                     .ui.segment 
-                        with order_dish
-                            a(href="/dish/#{_id}")
+                        with order_product
+                            a(href="/product/#{_id}")
                                 img.ui.rounded.image(src="{{c.url image_id width=400 height=400}}")
-                            a.ui.header(href="/dish/#{_id}") #{title}
+                            a.ui.header(href="/product/#{_id}") #{title}
                             //- .ui.header #{cook_tip} cook tip
                             // .ui.header $#{order_total_transaction_amount} 
                             //     small total transaction amount
                     div
                 .eight.wide.column
-                    // a.ui.compact.button(href="/dish/#{dish_id}")
+                    // a.ui.compact.button(href="/product/#{product_id}")
                     //     i.left.chevron.icon
-                    //     img.ui.avatar.image(src="{{c.url order_dish.image_id width=200 height=200}}")    
-                    //     |#{order_dish.title}
+                    //     img.ui.avatar.image(src="{{c.url order_product.image_id width=200 height=200}}")    
+                    //     |#{order_product.title}
                     .ui.inline.header 
-                        // strong '#{order_dish.title}'
+                        // strong '#{order_product.title}'
                         |order
                     if can_edit
                         a(href="/order/#{_id}/edit" title='edit')
@@ -58,7 +58,7 @@ template(name='order_view')
                             strong ${{fixed order_price}}
                     div
                     .ui.inline.header ingredients
-                    each order_dish.ingredients
+                    each order_product.ingredients
                         .ui.label #{this}
                     if pickup
                         .ui.header

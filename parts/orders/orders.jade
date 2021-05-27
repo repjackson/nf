@@ -34,13 +34,13 @@ template(name='home_order')
     a.ui.grid(href="/order/#{_id}")
         .row
             .four.wide.column.zoomer
-                with order_dish
+                with order_product
                     //- img.ui.mini.image(src=image)
                     +image_view key='image_id' direct=true cl='zoomer ui fluid image'
             .twelve.wide.column.zoomer
-                .ui.header #{order_dish.title}
+                .ui.header #{order_product.title}
                 a.ui.small.header.inline.lowercase(href="/order/#{_id}")
-                    |$#{order_dish.price}
+                    |$#{order_product.price}
                 .ui.inline.header status: 
                     if kve status 'pending'
                         i.large.yellow.clock.icon
@@ -49,7 +49,7 @@ template(name='home_order')
                     else if kve status 'complete'
                         i.large.green.checkmark.icon
                     |#{status}
-                // .ui.inline.header dish_id: #{dish_id}
+                // .ui.inline.header product_id: #{product_id}
                 .ui.small.inline.header {{from_now _timestamp}} 
                     small ({{long_date _timestamp}})
                 a.ui.circular.icon.big.button(href="/order/#{_id}")

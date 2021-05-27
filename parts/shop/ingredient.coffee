@@ -11,7 +11,7 @@ if Meteor.isClient
 
     Template.ingredient_view.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'model_docs', 'dish'
+        @autorun => Meteor.subscribe 'model_docs', 'product'
     Template.ingredient_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
 

@@ -8,12 +8,12 @@ if Meteor.isClient
 
     Template.order_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'dish_from_order_id', Router.current().params.doc_id 
+        @autorun => Meteor.subscribe 'product_from_order_id', Router.current().params.doc_id 
 
     Template.order_edit.helpers
         all_shop: ->
             Docs.find
-                model:'dish'
+                model:'product'
         can_delete: ->
             order = Docs.findOne Router.current().params.doc_id
             if order.reservation_ids
@@ -26,10 +26,10 @@ if Meteor.isClient
 
 
     Template.order_edit.events
-        'click .select_dish': ->
+        'click .select_product': ->
             Docs.update Router.current().params.doc_id,
                 $set:
-                    dish_id: @_id
+                    product_id: @_id
 
 
         'click .delete_order': ->

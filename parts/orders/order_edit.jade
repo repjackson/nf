@@ -3,9 +3,9 @@ template(name='order_edit')
         .ui.stackable.padded.grid
             .five.wide.column
                 .ui.small.inline.header editing order
-                .ui.inline.header #{order_dish.title}
-                .ui.inline.header #{order_dish.price_usd}
-                each order_dish.ingredients
+                .ui.inline.header #{order_product.title}
+                .ui.inline.header #{order_product.price_usd}
+                each order_product.ingredients
                     .ui.label #{this}
                 // +array_edit key='tags' 
                 // div
@@ -13,15 +13,15 @@ template(name='order_edit')
                 div
                 .ui.header $#{order_total_transaction_amount} 
                     small total transaction amount
-                .ui.header dish
-                if order_dish
-                    .ui.small.header #{order_dish.title}
+                .ui.header product
+                if order_product
+                    .ui.small.header #{order_product.title}
             .six.wide.column
                 +kvs key='when' value='now' direct=true
                 +kvs key='when' value='later' direct=true
                 if kve 'when' 'later'
                     +datetime_edit key='pickup_datetime' direct=true
-                with order_dish
+                with order_product
                     +image_view key='image_id'
                     //- img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
                     +textarea_edit key='description' direct=true

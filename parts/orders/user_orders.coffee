@@ -1,9 +1,9 @@
 if Meteor.isClient
     Template.profile_order_item.onCreated ->
-        # @autorun => Meteor.subscribe 'dish_from_order_id', @data._id
+        # @autorun => Meteor.subscribe 'product_from_order_id', @data._id
     Template.user_orders.onCreated ->
         @autorun => Meteor.subscribe 'user_orders', Router.current().params.username
-        @autorun => Meteor.subscribe 'model_docs', 'dish'
+        @autorun => Meteor.subscribe 'model_docs', 'product'
     Template.user_orders.helpers
         orders: ->
             current_user = Meteor.users.findOne username:Router.current().params.username
@@ -21,8 +21,8 @@ if Meteor.isServer
             limit:10
             sort:_timestamp:-1
             
-    Meteor.publish 'dish_from_order_id', (order_id)->
+    Meteor.publish 'product_from_order_id', (order_id)->
         order = Docs.findOne order_id
         Docs.find
-            model:'dish'
-            _id: order.dish_id
+            model:'product'
+            _id: order.product_id

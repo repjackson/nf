@@ -46,10 +46,10 @@ template(name='ingredient_view')
                         |#{title}
                 .ui.header 
                     +icolor name='real-food-for-meals'
-                    |dishes included in
+                    |productes included in
                 .ui.large.selection.animated.list
-                    each ingredient_dishes
-                        a.item(href="/dish/#{_id}/view")
+                    each ingredient_productes
+                        a.item(href="/product/#{_id}/view")
                             img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
                             .content
                                 .header
