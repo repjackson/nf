@@ -23,6 +23,16 @@ template(name='product_view')
                 .column.scrolling
                     if can_order
                         +order_button
+                    .ui.basic.green.inverted.fluid.circular.button.add_subscription
+                        i.clock.icon
+                        |subscribe
+                    .ui.small.header 
+                        +i name='clock'
+                        |subscriptions
+                    .ui.small.header 
+                        |your subscriptions
+                    each subscriptions
+                        .ui.header #{_author_username}
                     .ui.inline.header 
                         +i name='ingredients'
                         |ingredients
