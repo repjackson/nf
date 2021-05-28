@@ -40,11 +40,11 @@ template(name='product_view')
                     if can_order
                         +order_button
                     if subscribed
-                        .ui.basic.green.inverted.fluid.circular.button.unsubscribe
+                        .ui.basic.green.inverted.circular.button.unsubscribe
                             i.undo.icon
                             |unsubscribe
                     else
-                        .ui.basic.green.inverted.fluid.circular.button.subscribe
+                        .ui.basic.green.inverted.circular.button.subscribe
                             i.undo.icon
                             |subscribe
                     .ui.small.header 
@@ -105,7 +105,7 @@ template(name='product_order_card')
 
 template(name='order_button')
     // if servings_left
-    .ui.green.fluid.large.circular.button.order_product
+    .ui.green.large.circular.button.order_product
         i.cart.plus.large.icon
         strong ${{fixed price_usd}}
         // |order #{serving_unit}
@@ -113,6 +113,6 @@ template(name='order_button')
         // strong #{price_franc}f
     // else 
     //     .ui.grey.header sold out
-        //- .ui.teal.large.fluid.button.join_waitlist
+        //- .ui.teal.large.button.join_waitlist
         //-     i.clock.large.icon
         //-     |join wait list
