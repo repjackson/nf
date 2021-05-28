@@ -14,8 +14,8 @@ template(name='product_view')
                     if can_edit
                         a(href="/product/#{_id}/edit")
                             i.pencil.blue.large.link.circular.icon
-                    a(href="{{c.url image_id}}" target="_window")
-                        img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
+                    // a(href="{{c.url image_id}}" target="_window")
+                    img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                     div
                     +voting_full
                     div 
