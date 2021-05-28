@@ -1,8 +1,8 @@
 template(name='product_view')
     with current_doc
         .ui.stackable.grid
-            .two.column.row
-                .column
+            .row
+                .six.wide.column
                     a.ui.basic.circular.button(href="/shop")
                         i.chevron.left.icon
                         +i name='food' cl='ui mini inline image'
@@ -20,7 +20,14 @@ template(name='product_view')
                     +voting_full
                     div 
                     +comments
-                .column.scrolling
+                .ten.wide.column
+                    .ui.basic.circular.button descriptions
+                    .ui.basic.circular.button subscriptions
+                    .ui.basic.circular.button orders
+                    .ui.basic.circular.button ingredients
+                    .ui.basic.circular.button recipes
+                    .ui.basic.circular.button comments
+                    
                     if can_order
                         +order_button
                     if subscribed
@@ -54,7 +61,7 @@ template(name='product_view')
                         |#{product_orders.count}
                         |orders
                         |(${{fixed product_order_total}})
-                    .ui.basic.segments.scrolling
+                    .ui.basic.segments
                         each product_orders
                             +product_order_card
                     .ui.header #{views} views
