@@ -9,6 +9,7 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'product_from_product_id', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'orders_from_product_id', Router.current().params.doc_id
+        @autorun => Meteor.subscribe 'subs_from_product_id', Router.current().params.doc_id
     Template.product_view.onRendered ->
         Meteor.call 'log_view', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
@@ -20,6 +21,9 @@ if Meteor.isClient
                 Docs.update Router.current().params.doc_id,
                     $addToSet: 
                         subscribed_ids: Meteor.userId()
+                Docs.insert 
+                    model:'product_subscription'
+                    product_id:Router.current().params.doc_id
         'click .unsubscribe': ->
             if confirm 'unsubscribe?'
                 Docs.update Router.current().params.doc_id,
@@ -65,6 +69,11 @@ if Meteor.isClient
 
 
     Template.product_view.helpers
+        product_subs: ->
+            Docs.find
+                model:'product_subscription'
+                product_id:Router.current().params.doc_id
+
         product_order_total: ->
             orders = 
                 Docs.find({
@@ -172,4 +181,10 @@ if Meteor.isServer
         # product = Docs.findOne product_id
         Docs.find
             model:'order'
+            product_id:product_id
+            
+    Meteor.publish 'subs_from_product_id', (product_id)->
+        # product = Docs.findOne product_id
+        Docs.find
+            model:'product_subscription'
             product_id:product_id

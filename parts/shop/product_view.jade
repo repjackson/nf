@@ -41,6 +41,8 @@ template(name='product_view')
                     .ui.small.header 
                         +i name='clock'
                         |subscriptions
+                    each product_subs
+                        .ui.header #{when}
                     .ui.small.header 
                         |your subscriptions
                     each subscriptions
