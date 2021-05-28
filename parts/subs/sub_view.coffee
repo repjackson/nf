@@ -19,10 +19,10 @@ if Meteor.isClient
                     model:'sub_event'
                     sub_id: Router.current().params.doc_id
                     sub_status:'ready'
-        'click .cancel_sub': ->
+        'click .unsub': ->
             if confirm 'cancel?'
                 Docs.remove @_id
-                Router.go "/"
+                Router.go "/product/#{@product_id}"
 
 
     Template.sub_view.helpers

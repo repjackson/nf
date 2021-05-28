@@ -229,6 +229,12 @@ Template.registerHelper 'product_orders', () ->
         product_id:@_id
     }, 
         sort:_timestamp:-1
+Template.registerHelper 'product_subs', () ->
+    Docs.find {
+        model:'sub'
+        product_id:@_id
+    }, 
+        sort:_timestamp:-1
 Template.registerHelper 'is_current_staff', () ->
     if Meteor.user() and Meteor.user().roles
         # if _.intersection(['dev','staff'], Meteor.user().roles) then true else false

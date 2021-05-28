@@ -67,8 +67,8 @@ template(name='sub_view')
                         .ui.header 
                             |delivery
                     if can_edit
-                        .ui.small.compact.button.cancel_sub
-                            i.remove.icon
-                            |cancel
+                        .ui.basic.circular.button.unsub
+                            i.undo.icon
+                            |unsubscribe
                     .ui.hidden.divider
                     +comments
