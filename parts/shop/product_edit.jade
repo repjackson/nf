@@ -22,6 +22,7 @@ template(name='product_edit')
                 +float_edit key='price_usd' label='$ price' direct=true
                 div
                 +array_edit key='ingredients' label='ingredients'  direct=true
+                +text_edit key='size_description' label='size description'  direct=true
                 +html_edit key='description' label='description' direct=true
                 if can_delete
                     .ui.red.button.delete_product

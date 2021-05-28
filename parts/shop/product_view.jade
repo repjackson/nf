@@ -45,6 +45,8 @@ template(name='product_view')
                         .ui.large.basic.label #{this}
                     +boolean_view key='gluten_free' label='gluten free' direct=true
                     +boolean_view key='vegan' label='vegan' direct=true
+                    +text_view key='size_description' label='size description'  direct=true
+                    
                     .ui.header #{menu_section}
                     +html_view key='description' direct=true
                     .ui.header 
