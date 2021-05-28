@@ -31,10 +31,13 @@ template(name='nav')
                 +i name='information--v1' cl=''
             // i.cart.icon
             // strong.mobile.hidden about
-        a.item.zoomer(href='/store' class="{{isActivePath '/store'}}" title='check out our new store')
+        a.item.zoomer(href='/store' class="{{isActivePath '/store'}}")
             +i name='shop' cl=''
             // i.cart.icon
             // strong.mobile.hidden about
+        a.item.zoomer(href='/subs' class="{{isActivePath '/subs'}}" title='subscriptions')
+            +i name='clock' cl='ui inline mini image'
+            // i.list.icon
         a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             +i name='list' cl='ui inline mini image'
             // i.list.icon
