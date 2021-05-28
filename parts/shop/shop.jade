@@ -134,7 +134,7 @@ template(name='set_product_limit')
 
 
 template(name='product_card')
-    .center.aligned.column.zoomer(class=product_card_class)
+    .center.aligned.column.zoomer(class=product_card_class title=ingredients)
         a.image.zoomer(href="/product/#{_id}") 
             img.ui.zoom.pointer.goto_product.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
@@ -143,10 +143,10 @@ template(name='product_card')
                 | #{title}
             //- if session_is 'view_ingredients' true
             // +ismall name='ingredients'
-            each ingredients
-                .ui.small.basic.circular.label #{this}
+            // each ingredients
+            //     .ui.small.basic.circular.label #{this}
         if gluten_free
-            +i name='services--v2' cl='ui mini inline image' title='gluten free'
+            +i name='no-gluten' cl='ui mini inline image' title='gluten free'
         if vegan
             +i name='vegan-food' cl='ui mini inline image' title='vegan'
         //- .ui.inline.small.header tags
@@ -162,7 +162,7 @@ template(name='product_card')
             .ui.inline.small.header 
                 |(#{menu_section}) 
             div
-            .ui.inline.inline.small.grey.header #{views}
-                i.eye.icon
+            // .ui.inline.inline.small.grey.header #{views}
+                // i.eye.icon
             .ui.inline.inline.small.grey.header #{points} 
-                i.line.chart.icon
+                // i.line.chart.icon
