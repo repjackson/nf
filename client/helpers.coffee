@@ -289,6 +289,9 @@ Template.registerHelper 'is_resident_or_user', () ->
         # console.log _.intersection(Meteor.user().roles, ['resident','user']).length
         if _.intersection(Meteor.user().roles, ['resident','user']).length then true else false
 
+Template.registerHelper 'subscribed', () ->
+    Meteor.userId() and Meteor.userId() in @subscribed_ids
+    
 Template.registerHelper 'is_staff_or_manager', () ->
     if Meteor.user() and Meteor.user().roles
         # console.log _.intersection(Meteor.user().roles, ['resident','user']).length

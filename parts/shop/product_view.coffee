@@ -15,6 +15,18 @@ if Meteor.isClient
 
 
     Template.product_view.events
+        'click .subscribe': ->
+            if confirm 'subscribe?'
+                Docs.update Router.current().params.doc_id,
+                    $addToSet: 
+                        subscribed_ids: Meteor.userId()
+        'click .unsubscribe': ->
+            if confirm 'unsubscribe?'
+                Docs.update Router.current().params.doc_id,
+                    $pull: 
+                        subscribed_ids: Meteor.userId()
+                                    
+    
         'click .mark_ready': ->
             if confirm 'mark product ready?'
                 Docs.update Router.current().params.doc_id,

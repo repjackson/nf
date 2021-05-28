@@ -23,9 +23,14 @@ template(name='product_view')
                 .column.scrolling
                     if can_order
                         +order_button
-                    .ui.basic.green.inverted.fluid.circular.button.add_subscription
-                        i.clock.icon
-                        |subscribe
+                    if subscribed
+                        .ui.basic.green.inverted.fluid.circular.button.unsubscribe
+                            i.undo.icon
+                            |unsubscribe
+                    else
+                        .ui.basic.green.inverted.fluid.circular.button.subscribe
+                            i.undo.icon
+                            |subscribe
                     .ui.small.header 
                         +i name='clock'
                         |subscriptions
