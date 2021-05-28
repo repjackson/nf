@@ -21,12 +21,21 @@ template(name='product_view')
                     div 
                     +comments
                 .ten.wide.column
-                    .ui.basic.circular.button descriptions
-                    .ui.basic.circular.button subscriptions
-                    .ui.basic.circular.button orders
-                    .ui.basic.circular.button ingredients
-                    .ui.basic.circular.button recipes
-                    .ui.basic.circular.button comments
+                    .ui.basic.circular.button 
+                        i.content.icon
+                        |description
+                    .ui.basic.circular.button 
+                        i.clock.icon
+                        |subs
+                    .ui.basic.circular.button
+                        i.list.icon
+                        |orders
+                    .ui.basic.circular.button 
+                        i.food.icon
+                        |recipes
+                    .ui.basic.circular.button 
+                        i.chat.icon
+                        |comments
                     
                     if can_order
                         +order_button
@@ -40,12 +49,12 @@ template(name='product_view')
                             |subscribe
                     .ui.small.header 
                         +i name='clock'
-                        |subscriptions
+                        |subs
                     each product_subs
-                        .ui.header #{when}
+                        a.ui.header(href="/sub/#{_id}") #{when} #{_author_username}
                     .ui.small.header 
-                        |your subscriptions
-                    each subscriptions
+                        |your subs
+                    each subs
                         .ui.header #{_author_username}
                     .ui.inline.header 
                         +i name='ingredients'
