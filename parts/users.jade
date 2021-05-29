@@ -83,13 +83,11 @@ template(name='user_card')
 
         .content
             a.ui.inline.header.pointer.blink(href="/user/#{username}" style="color:#{theme_color};")
-                if spirit_animal
-                    +icolor name=spirit_animal cl='ui avatar image'
                 |#{name}
                 //- |#{username}
             .ui.inline.header(style="color:#{current_user.theme_color};") #{points}pts
             .ui.basic.label(style="color:#{current_user.theme_color};" title='one ratio') {{to_percent one_ratio}}%
-            .ui.basic.label(style="color:#{current_user.theme_color};" title='flow volument') #{flow_volume}
+            .ui.basic.label(style="color:#{current_user.theme_color};" title='flow volumen') #{flow_volume}
             if debit_tags
                 div
                 i.gift.icon(title='gifted tags')

@@ -37,6 +37,10 @@ template(name='nav')
             // +i name='shop' cl=''
             i.building.large.icon
             // i.cart.icon
+        a.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
+            i.users.icon
+            | users
+            
             // strong.mobile.hidden about
         // a.item.zoomer(href='/subs' class="{{isActivePath '/subs'}}" title='subscriptions')
         //     +i name='clock' cl='ui inline mini image'
@@ -398,7 +402,7 @@ template(name='left_sidebar')
             a.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
                 |admin
                 i.database.icon
-            a.item.set_user.toggle_sidebar.no_blink(href="/m/user" class="{{isActiveRoute '/m/user'}}")
+            a.item.set_user.toggle_sidebar.no_blink(href="/user" class="{{isActiveRoute '/user'}}")
                 i.users.icon
                 | users
             a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
