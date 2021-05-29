@@ -5,7 +5,7 @@ if Meteor.isClient
         ), name:'user_dashboard'
     Router.route '/user/:username/cart', (->
         @layout 'user_layout'
-        @render 'user_cart'
+        @render 'cart'
         ), name:'user_cart'
     Router.route '/user/:username/credit', (->
         @layout 'user_layout'
@@ -27,10 +27,6 @@ if Meteor.isClient
         @layout 'user_layout'
         @render 'user_subs'
         ), name:'user_subscriptions'
-    Router.route '/user/:username/downloads', (->
-        @layout 'user_layout'
-        @render 'user_downloads'
-        ), name:'user_downloads'
     Router.route '/user/:username/addresses', (->
         @layout 'user_layout'
         @render 'user_addresses'

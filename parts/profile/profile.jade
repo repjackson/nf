@@ -11,11 +11,11 @@ template(name='user_layout')
                         //- img.ui.image.checkin_banner(src="{{c.url banner_image width=1000 height=1000 crop='crop'}}")
                         .four.wide.column
                             a.item.mobile.hidden(href="/user/#{user_from_username_param.username}")
-                                img.ui.centered.small.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
-                            .spacer
-                            a(href="/user/#{user.username}")
+                                img.ui.fluid.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                            // .spacer
+                            a(href="/user/#{username}")
                                 .ui.center.aligned.header
-                                    strong #{user.name}
+                                    strong #{name}
                                     //- 
                                     //- strong #{user.first_name} #{user.last_name}
                                     //- small @#{user.username}        
@@ -94,17 +94,15 @@ template(name='user_layout')
 
 
 template(name='user_dashboard')
-    .ui.four.stackable.cards
+    .ui.three.stackable.cards
         .ui.card
             .content
-                .ui.header 
-                    i.dashboard.icon
-                    |dashboard
-        .ui.card
-            .content
-                a.header(href="/user/#{username}/stats")
-                    +i name='line-chart' cl='ui avatar image'
-                    |stats
+                .ui.header
+                    +i name='check' cl='ui avatar image'
+                    |orders
+                .ui.list 
+                    each user_orders
+                        .item #{when}
         .ui.card
             .content
                 a.header(href="/user/#{username}/friends")
@@ -126,14 +124,6 @@ template(name='user_dashboard')
                     |subs
                 each user_subs
                     .ui.header #{when}
-        .ui.card
-            .content
-                .ui.header
-                    +i name='check' cl='ui avatar image'
-                    |orders
-                .ui.list 
-                    each user_orders
-                        .item #{when}
         .ui.card
             .content
                 .ui.header
