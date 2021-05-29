@@ -22,26 +22,29 @@ template(name='nav')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         a.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            .ui.mini.image.cart
-                +i name='shopping-cart' cl=''
+            i.cart.icon
+            // .ui.mini.image.cart
+            //     +i name='shopping-cart' cl=''
             // i.cart.icon
             // strong.mobile.hidden shop
         a.item.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-            .ui.mini.image.info
-                +i name='information--v1' cl=''
+            i.info.icon
+            // .ui.mini.image.info
+            //     +i name='information--v1' cl=''
             // i.cart.icon
             // strong.mobile.hidden about
         a.item.zoomer(href='/store' class="{{isActivePath '/store'}}")
-            +i name='shop' cl=''
+            // +i name='shop' cl=''
+            i.building.icon
             // i.cart.icon
             // strong.mobile.hidden about
-        a.item.zoomer(href='/subs' class="{{isActivePath '/subs'}}" title='subscriptions')
-            +i name='clock' cl='ui inline mini image'
-            // i.list.icon
-        a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            +i name='list' cl='ui inline mini image'
-            // i.list.icon
-            // strong.mobile.hidden orders
+        // a.item.zoomer(href='/subs' class="{{isActivePath '/subs'}}" title='subscriptions')
+        //     +i name='clock' cl='ui inline mini image'
+        //     // i.list.icon
+        // a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+        //     +i name='list' cl='ui inline mini image'
+        //     // i.list.icon
+        //     // strong.mobile.hidden orders
         // .ui.simple.dropdown.item
         //     .text get involved
         //     .menu 
@@ -54,7 +57,8 @@ template(name='nav')
         //         // i.newspaper.icon
         //         strong.mobile.hidden get involved
         a.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            +i name='phone' cl='ui inline mini image'
+            // +i name='phone' cl='ui inline mini image'
+            i.large.phone.icon
             // i8.newspaper.icon
             // strong.mobile.hidden contact
         // a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
@@ -65,14 +69,15 @@ template(name='nav')
         //     +i name='chat' cl='ui inline mini image'
         //     // i.chat.icon
         //     // strong.mobile.hidden chat
-        a.item.zoomer(href='/map' class="{{isActivePath '/map'}}" title='map')
-            .ui.mini.image.marker
-                +i name='marker' cl='ui inline mini image'
-        a.item.zoomer(href='/mail' class="{{isActivePath '/mail'}}" title='mail')
-            .ui.mini.image.mail
-                +i name='secured-letter--v1' cl='ui inline mini image'
-            // i.mail.icon
-            // strong.mobile.hidden mail
+        // a.item.zoomer(href='/map' class="{{isActivePath '/map'}}" title='map')
+        //     i.large.marker.icon
+        //     // .ui.mini.image.marker
+        //     //     +i name='marker' cl='ui inline mini image'
+        // a.item.zoomer(href='/mail' class="{{isActivePath '/mail'}}" title='mail')
+        //     .ui.mini.image.mail
+        //         +i name='secured-letter--v1' cl='ui inline mini image'
+        //     // i.mail.icon
+        //     // strong.mobile.hidden mail
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
         //         +i name='tasks' cl='ui inline mini image'
@@ -80,11 +85,12 @@ template(name='nav')
         //         +i name='database' cl='ui inline mini image'
         .right.menu
             if currentUser
-                a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
-                    i.bell.large.yellow.icon
+                // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
+                //     i.bell.large.yellow.icon
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActivePath '/cart'}}" title='current wallet balance')
-                    .ui.mini.image.wallet
-                        +i name='wallet' cl=''
+                    i.wallet.icon
+                    // .ui.mini.image.wallet
+                    //     +i name='wallet' cl=''
                     |${{int currentUser.credit}}
                     // i.cart.icon
                 // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
@@ -217,35 +223,44 @@ template(name='right_sidebar')
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |#{currentUser.name}
         with currentUser
-            a.item.toggle_rightbar.no_blink(href="/user/#{username}/" class="{{isActiveRoute 'user_dashboard'}}")
-                | dashboard (#{currentUser.points}p)
-                i.dashboard.icon
+            // a.item.toggle_rightbar.no_blink(href="/user/#{username}/" class="{{isActiveRoute 'user_dashboard'}}")
+            //     | dashboard (#{currentUser.points}p)
+            //     i.dashboard.icon
             a.item.toggle_rightbar(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
-                +i name='dashboard' cl='ui avatar image'
+                // +i name='dashboard' cl='ui avatar image'
+                i.dashboard.icon
                 |dashboard
             a.item.toggle_rightbar(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
                 +i name='money' cl='ui avatar image'
+                i.coin.icon
                 |credit
             a.item.toggle_rightbar(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
-                +i name='check' cl='ui avatar image'
+                // +i name='check' cl='ui avatar image'
+                i.money.icon
                 |orders
             a.item.toggle_rightbar(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
-                +i name='friends' cl='ui avatar image'
+                // +i name='friends' cl='ui avatar image'
+                i.users.icon
                 |friends
             a.item.toggle_rightbar(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
-                +i name='shopping-cart' cl='ui avatar image'
+                // +i name='shopping-cart' cl='ui avatar image'
+                i.cart.icon
                 |cart
             a.item.toggle_rightbar(href="/user/#{username}/downloads" class="{{isActiveRoute 'user_downloads'}}")
-                +i name='download' cl='ui avatar image'
+                // +i name='download' cl='ui avatar image'
+                i.download.icon
                 |downloads
             a.item.toggle_rightbar(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
-                +i name='clock' cl='ui avatar image'
+                // +i name='clock' cl='ui avatar image'
+                i.clock.icon
                 |subscriptions
             a.item.toggle_rightbar(href="/user/#{username}/addresses" class="{{isActiveRoute 'user_addresses'}}")
-                +i name='marker' cl='ui avatar image'
+                // +i name='marker' cl='ui avatar image'
+                i.marker.icon
                 |addresses
             a.item.toggle_rightbar(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
-                +i name='certificate' cl='ui avatar image'
+                // +i name='certificate' cl='ui avatar image'
+                i.certificate.icon
                 |gift cards
                 
             a.item.toggle_rightbar.no_blink(href="/user/#{username}/credits" class="{{isActiveRoute 'user_credits'}}")
@@ -357,34 +372,34 @@ template(name='left_sidebar')
         //     a.icon.item.toggle_dev.toggle_sidebar.no_blink
         //         |toggle dev
         //         if is_dev
-        //             i.code.blue.icon
+        //             i.code.icon
         //         else
         //             i.code.icon
         if is_in_admin
             a.icon.item.toggle_admin.toggle_sidebar.no_blink
                 |toggle admin
                 if is_admin
-                    i.shield.blue.icon
+                    i.shield.icon
                 else
                     i.shield.icon
             
         if is_admin
             // a.item.toggle_sidebar.no_blink.set_badge(href="/m/badge" class="{{isActivePath 'badges'}}")
-            //     i.certificate.blue.icon
+            //     i.certificate.icon
             //     | badges
             // a.item.toggle_sidebar.no_blink.set_debit(href="/m/debit" class="{{isActivePath regex='rentals'}}")
-            //     i.gift.blue.icon
+            //     i.gift.icon
             //     |gifts
             .divider
             // a.item.toggle_sidebar.no_blink.set_project(href="/m/project" class="{{isActivePath regex='projects'}}")
-            //     i.tasks.blue.icon
+            //     i.tasks.icon
             //     | projects
             // a.item.toggle_sidebar.no_blink(href="/m/room" class="{{isActiveRoute 'requests'}}")
-            //     i.building.blue.icon
+            //     i.building.icon
             //     |rooms
             a.blue.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
                 |admin
-                i.database.blue.icon
+                i.database.icon
             a.item.set_user.toggle_sidebar.no_blink(href="/m/user" class="{{isActiveRoute '/m/user'}}")
-                i.blue.users.icon
-                | all users
+                i.users.icon
+                | users

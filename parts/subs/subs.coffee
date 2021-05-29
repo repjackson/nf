@@ -16,10 +16,10 @@ if Meteor.isClient
 
     Template.subs.helpers
         subs: ->
-            match = {model:'sub'}
-            if Session.get('sub_delivery_filter')
-                match.delivery_method = Session.get('sub_sort_filter')
-            if Session.get('sub_sort_filter')
-                match.delivery_method = Session.get('sub_sort_filter')
+            match = {model:'product_subscription'}
+            # if Session.get('sub_delivery_filter')
+            #     match.delivery_method = Session.get('sub_sort_filter')
+            # if Session.get('sub_sort_filter')
+            #     match.delivery_method = Session.get('sub_sort_filter')
             Docs.find match,
                 sort: _timestamp:-1
