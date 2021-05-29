@@ -17,10 +17,18 @@ template(name='sub_edit')
                 if sub_product
                     .ui.small.header #{sub_product.title}
             .six.wide.column
-                +kvs key='when' value='now' direct=true
-                +kvs key='when' value='later' direct=true
-                if kve 'when' 'later'
-                    +datetime_edit key='pickup_datetime' direct=true
+                .ui.header day
+                +kvs key='day' value='sunday' direct=true
+                // +kvs key='day' value='now' direct=true
+                +kvs key='day' value='monday' direct=true
+                +kvs key='day' value='tuesday' direct=true
+                +kvs key='day' value='wednesday' direct=true
+                +kvs key='day' value='thursday' direct=true
+                +kvs key='day' value='friday' direct=true
+                +kvs key='day' value='saturday' direct=true
+                // +kvs key='when' value='later' direct=true
+                // if kve 'when' 'later'
+                //     +datetime_edit key='pickup_datetime' direct=true
                 with sub_product
                     +image_view key='image_id'
                     //- img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")

@@ -50,8 +50,9 @@ template(name='product_view')
                     .ui.small.header 
                         +i name='clock'
                         |subs
-                    each product_subs
-                        a.ui.header(href="/sub/#{_id}") #{when} #{_author_username}
+                    .ui.link.selection.animated.list
+                        each product_subs
+                            a.item(href="/sub/#{_id}") #{when} #{_author_username}
                     .ui.small.header 
                         |your subs
                     each subs

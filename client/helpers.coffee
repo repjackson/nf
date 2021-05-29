@@ -325,6 +325,10 @@ Template.registerHelper 'order_product', ->
     Docs.findOne 
         model:'product'
         _id:@product_id
+Template.registerHelper 'sub_product', ->
+    Docs.findOne 
+        model:'product'
+        _id:@product_id
 # Template.body.events
 #     'click .toggle_sidebar': -> $('.ui.sidebar').sidebar('toggle')
 

@@ -7,7 +7,7 @@ if Meteor.isClient
         # @autorun -> Meteor.subscribe 'model_docs', 'service'
         # @autorun -> Meteor.subscribe 'model_docs', 'rental'
         @autorun -> Meteor.subscribe 'model_docs', 'menu_section'
-        @autorun -> Meteor.subscribe 'model_docs', 'sub'
+        @autorun -> Meteor.subscribe 'model_docs', 'product_subscription'
         @autorun -> Meteor.subscribe 'model_docs', 'product'
         # @autorun -> Meteor.subscribe 'users'
 

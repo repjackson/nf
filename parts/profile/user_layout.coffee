@@ -19,9 +19,13 @@ if Meteor.isClient
         @layout 'user_layout'
         @render 'user_friends'
         ), name:'user_friends'
+    Router.route '/user/:username/subs', (->
+        @layout 'user_layout'
+        @render 'user_subs'
+        ), name:'user_subs'
     Router.route '/user/:username/subscriptions', (->
         @layout 'user_layout'
-        @render 'user_subscriptions'
+        @render 'user_subs'
         ), name:'user_subscriptions'
     Router.route '/user/:username/downloads', (->
         @layout 'user_layout'

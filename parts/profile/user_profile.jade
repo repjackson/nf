@@ -51,7 +51,7 @@ template(name='user_layout')
                                 a.item(href="/user/#{username}/downloads" class="{{isActiveRoute 'user_downloads'}}")
                                     +i name='download' cl='ui avatar image'
                                     |downloads
-                                a.item(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
+                                a.item(href="/user/#{username}/subs" class="{{isActiveRoute 'user_subs'}}")
                                     +i name='clock' cl='ui avatar image'
                                     |subscriptions
                                 a.item(href="/user/#{username}/addresses" class="{{isActiveRoute 'user_addresses'}}")
@@ -93,29 +93,29 @@ template(name='user_dashboard')
                     |dashboard
         .ui.card
             .content
-                .ui.header 
+                a.header(href="/user/#{username}/stats")
                     +i name='line-chart' cl='ui avatar image'
                     |stats
         .ui.card
             .content
-                .ui.header 
+                a.header(href="/user/#{username}/friends")
                     +i name='groups' cl='ui avatar image'
                     |friends
                 .ui.big.green.icon.button
                     i.checkmark.icon
         .ui.card
             .content
-                .ui.header 
+                a.header(href="/user/#{username}/mail")
                     +i name='envelope' cl='ui avatar image'
                     |mail
                 .ui.big.green.icon.circular.button
                     i.plus.icon
         .ui.card
             .content
-                a.header(href="/user/#{username}/subscriptions")
+                a.header(href="/user/#{username}/subs")
                     +i name='clock' cl='ui avatar image'
-                    |subscriptions
-                each user_subscriptions
+                    |subs
+                each user_subs
                     .ui.header #{when}
         .ui.card
             .content
