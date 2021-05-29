@@ -37,9 +37,9 @@ template(name='nav')
             // +i name='shop' cl=''
             i.building.large.icon
             // i.cart.icon
-        a.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
-            i.users.icon
-            | users
+        a.icon.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
+            i.users.large.icon
+            // | users
             
             // strong.mobile.hidden about
         // a.item.zoomer(href='/subs' class="{{isActivePath '/subs'}}" title='subscriptions')
@@ -65,10 +65,10 @@ template(name='nav')
             i.large.phone.icon
             // i8.newspaper.icon
             // strong.mobile.hidden contact
-        // a.item.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
-        //     +i name='list' cl='ui inline mini image'
-        //     // i.newspaper.icon
-        //     strong.mobile.hidden news
+        a.item.zoomer(href='/blog' class="{{isActivePath '/blog'}}" title='blog')
+            // +i name='list' cl='ui inline mini image'
+            i.newspaper.icon
+            // strong.mobile.hidden news
         // a.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
         //     +i name='chat' cl='ui inline mini image'
         //     // i.chat.icon
