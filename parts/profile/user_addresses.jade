@@ -1,0 +1,8 @@
+template(name='user_addresses')
+    .ui.inline.header 
+        i.marker.icon
+        |user addresses
+    .ui.basic.circular.icon.button.add_address
+        i.large.plus.icon
+    each user_address_docs
+        .ui.header #{location_long} #{when}

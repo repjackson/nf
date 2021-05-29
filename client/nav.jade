@@ -305,35 +305,31 @@ template(name='left_sidebar')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         a.item.toggle_sidebar.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            .ui.mini.image.cart
-                +i name='shopping-cart' cl=''
-            // i.cart.icon
+            // .ui.mini.image.cart
+            //     +i name='shopping-cart' cl=''
+            i.cart.icon
             strong.mobile.hidden shop
         a.item.toggle_sidebar.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-            .ui.mini.image.info
-                +i name='information--v1' cl=''
-            // i.cart.icon
+            // .ui.mini.image.info
+            //     +i name='information--v1' cl=''
+            i.info.icon
             strong.mobile.hidden about
-        a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            +i name='list' cl='ui inline mini image'
-            // i.list.icon
-            strong.mobile.hidden orders
         unless currentUser
             a.item.toggle_sidebar.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
                 // +i name='list' cl='ui inline mini image'
                 // i.newspaper.icon
                 strong.mobile.hidden get involved
         a.item.toggle_sidebar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
-            +i name='phone' cl='ui inline mini image'
-            // i8.newspaper.icon
+            // +i name='phone' cl='ui inline mini image'
+            i.phone.icon
             strong.mobile.hidden contact
         // a.item.toggle_sidebar.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
         //     +i name='list' cl='ui inline mini image'
         //     // i.newspaper.icon
         //     strong.mobile.hidden news
         a.item.toggle_sidebar.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
-            +i name='chat' cl='ui inline mini image'
-            // i.chat.icon
+            // +i name='chat' cl='ui inline mini image'
+            i.chat.icon
             strong.mobile.hidden chat
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
@@ -397,9 +393,14 @@ template(name='left_sidebar')
             // a.item.toggle_sidebar.no_blink(href="/m/room" class="{{isActiveRoute 'requests'}}")
             //     i.building.icon
             //     |rooms
-            a.blue.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
+            a.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
                 |admin
                 i.database.icon
             a.item.set_user.toggle_sidebar.no_blink(href="/m/user" class="{{isActiveRoute '/m/user'}}")
                 i.users.icon
                 | users
+            a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+                // +i name='list' cl='ui inline mini image'
+                i.list.icon
+                strong.mobile.hidden orders
+                
