@@ -11,11 +11,15 @@ template(name='store')
                 a.ui.big.button(href="/kiosk") 
                     i.tablet.icon
                     |kiosk
+                .ui.button.new_store_session
+                    i.plus.icon
+                    |new store session
                 .ui.header 
                     i.shield.icon
-                    |checked in customers
-                each checkedin_customers
-                    .ui.header #{username}
+                    |current store sessions
+                .ui.link.list
+                    each store_sessions
+                        a.item(href="/store_session/#{_id}")  #{_author_username} #{when}
                 .ui.header 
                     i.shield.icon
                     |customers today
@@ -26,6 +30,6 @@ template(name='store')
                     |orders today
                 each checkedin_customers
                     .ui.header #{username}
-        .centered.row
-            .fourteen.wide.column
-                +map
+        // .centered.row
+        //     .fourteen.wide.column
+        //         +map

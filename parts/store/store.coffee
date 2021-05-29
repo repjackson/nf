@@ -5,22 +5,28 @@ if Meteor.isClient
         ), name:'store'
 
     Template.store.onCreated ->
-        @autorun => Meteor.subscribe 'checkedin_customers'
+        @autorun => Meteor.subscribe 'store_sessions'
         if Meteor.isDevelopment
             pub_key = Meteor.settings.public.stripe_test_publishable
         else if Meteor.isProduction
             pub_key = Meteor.settings.public.stripe_live_publishable
 
     Template.store.helpers
-        donations: ->
+        store_sessions: ->
             Docs.find {
-                model:'donation'
+                model:'store_session'
             }, _timestamp:1
     Template.store.events
-        'click .start_donation': ->
-            donation_amount = parseInt $('.store_amount').val()*100
-            Template.instance().checkout.open
-                name: 'mmm donation'
-                # email:Meteor.user().emails[0].address
-                # description: 'mmm donation'
-                amount: donation_amount
+        'click .new_store_session': ->
+            new_session_id = Docs.insert 
+                model:'store_session'
+                
+            Router.go "/store_session/#{new_session_id}"
+            
+            
+            
+if Meteor.isServer
+    Meteor.publish 'store_sessions', ->
+        Docs.find 
+            model:'store_session'
+            
