@@ -1,84 +1,99 @@
-template(name='product_view')
-    with current_doc
-        .ui.stackable.grid
-            .row
-                .six.wide.column
-                    a.ui.basic.circular.icon.button(href="/shop")
-                        i.chevron.left.large.icon
-                        // +i name='food' cl='ui mini inline image'
+template(name='product_layout')
+    +nav
+    .ui.bottom.attached.pushable.segment
+        +left_sidebar
+        +right_sidebar
+        #main_area.global_container.pusher.scrollin
+            with current_doc
+                .ui.stackable.grid
+                    .row
+                        .six.wide.column
+                            a.ui.basic.circular.icon.button(href="/shop")
+                                i.chevron.left.large.icon
+                                // +i name='food' cl='ui mini inline image'
+                        
+                            .ui.large.inline.header 
+                                //- small viewing
+                                | #{title}
+                                //- small product
+                            if can_edit
+                                a(href="/product/#{_id}/edit")
+                                    i.pencil.blue.large.link.circular.icon
+                            // a(href="{{c.url image_id}}" target="_window")
+                            img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
+                            div
+                            +voting_full
+                            div 
+                            +boolean_view key='gluten_free' label='gluten free' direct=true
+                            +boolean_view key='vegan' label='vegan' direct=true
+                            +text_view key='size_description' label='size description'  direct=true
+                            
+                            // .ui.header #{menu_section}
                 
-                    .ui.large.inline.header 
-                        //- small viewing
-                        | #{title}
-                        //- small product
-                    if can_edit
-                        a(href="/product/#{_id}/edit")
-                            i.pencil.blue.large.link.circular.icon
-                    // a(href="{{c.url image_id}}" target="_window")
-                    img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                    div
-                    +voting_full
-                    div 
-                    +comments
-                .ten.wide.column
-                    .ui.basic.circular.large.button 
-                        i.content.icon
-                        |description
-                    .ui.basic.circular.large.button 
-                        i.clock.icon
-                        |subs
-                    .ui.basic.circular.large.button
-                        i.list.icon
-                        |orders
-                    .ui.basic.circular.large.button 
-                        i.food.icon
-                        |recipes
-                    .ui.basic.circular.large.button 
-                        i.chat.icon
-                        |comments
-                    
-                    if can_order
-                        +order_button
-                    if subscribed
-                        .ui.basic.green.inverted.circular.button.unsubscribe
-                            i.undo.icon
-                            |unsubscribe
-                    else
-                        .ui.basic.green.inverted.circular.button.subscribe
-                            i.undo.icon
-                            |subscribe
-                    .ui.small.header 
-                        +i name='clock'
-                        |subs
-                    .ui.link.selection.animated.list
-                        each product_subs
-                            a.item(href="/sub/#{_id}") #{when} #{_author_username}
-                    .ui.small.header 
-                        |your subs
-                    each subs
-                        .ui.header #{_author_username}
-                    .ui.inline.header 
-                        +i name='ingredients'
-                        |ingredients
-                    each ingredients
-                        .ui.large.basic.label #{this}
-                    +boolean_view key='gluten_free' label='gluten free' direct=true
-                    +boolean_view key='vegan' label='vegan' direct=true
-                    +text_view key='size_description' label='size description'  direct=true
-                    
-                    .ui.header #{menu_section}
-                    +html_view key='description' direct=true
-                    .ui.header 
-                        +i name='order-history'
-                        |#{product_orders.count}
-                        |orders
-                        |(${{fixed product_order_total}})
-                    .ui.basic.segments
-                        each product_orders
-                            +product_order_card
-                    .ui.header #{views} views
-                    .ui.hidden.divider
-         
+                        .ten.wide.column
+                            a.ui.basic.circular.large.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
+                                i.content.icon
+                                |description
+                            a.ui.basic.circular.large.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
+                                i.clock.icon
+                                |subs
+                            a.ui.basic.circular.large.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
+                                i.list.icon
+                                |orders
+                            a.ui.basic.circular.large.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
+                                i.food.icon
+                                |recipes
+                            a.ui.basic.circular.large.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
+                                i.chat.icon
+                                |comments
+                            +yield
+                            
+template(name='product_main')                            
+    +html_view key='description' direct=true
+    .ui.inline.header 
+        +i name='ingredients'
+        |ingredients
+    each ingredients
+        .ui.large.basic.label #{this}
+        
+        
+template(name='product_comments')      
+    +comments
+template(name='product_subscriptions')      
+    if subscribed
+        .ui.basic.green.inverted.circular.button.unsubscribe
+            i.undo.icon
+            |unsubscribe
+    else
+        .ui.basic.green.inverted.circular.button.subscribe
+            i.undo.icon
+            |subscribe
+    .ui.small.header 
+        +i name='clock'
+        |subs
+    .ui.link.selection.animated.list
+        each product_subs
+            a.item(href="/sub/#{_id}") #{when} #{_author_username}
+    .ui.small.header 
+        |your subs
+
+
+template(name='product_orders')                            
+    if can_order
+        +order_button
+    each subs
+        .ui.header #{_author_username}
+    .ui.header 
+        +i name='order-history'
+        |#{product_orders.count}
+        |orders
+        |(${{fixed product_order_total}})
+    .ui.basic.segments
+        each product_orders
+            +product_order_card
+    .ui.header #{views} views
+    .ui.hidden.divider
+
          
          
          

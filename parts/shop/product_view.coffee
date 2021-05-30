@@ -1,21 +1,37 @@
 if Meteor.isClient
     Router.route '/product/:doc_id', (->
-        @layout 'layout'
-        @render 'product_view'
-        ), name:'product_view'
+        @layout 'product_layout'
+        @render 'product_main'
+        ), name:'product_main'
+    Router.route '/product/:doc_id/orders', (->
+        @layout 'product_layout'
+        @render 'product_orders'
+        ), name:'product_orders'
+    Router.route '/product/:doc_id/subscriptions', (->
+        @layout 'product_layout'
+        @render 'product_subscriptions'
+        ), name:'product_subscriptions'
+    Router.route '/product/:doc_id/recipes', (->
+        @layout 'product_layout'
+        @render 'product_recipes'
+        ), name:'product_recipes'
+    Router.route '/product/:doc_id/comments', (->
+        @layout 'product_layout'
+        @render 'product_comments'
+        ), name:'product_comments'
 
 
-    Template.product_view.onCreated ->
+    Template.product_layout.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'product_from_product_id', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'orders_from_product_id', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'subs_from_product_id', Router.current().params.doc_id
-    Template.product_view.onRendered ->
+    Template.product_layout.onRendered ->
         Meteor.call 'log_view', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
 
 
-    Template.product_view.events
+    Template.product_layout.events
         'click .subscribe': ->
             if confirm 'subscribe?'
                 Docs.update Router.current().params.doc_id,
@@ -68,7 +84,7 @@ if Meteor.isClient
             )
 
 
-    Template.product_view.helpers
+    Template.product_layout.helpers
         product_subs: ->
             Docs.find
                 model:'product_subscription'

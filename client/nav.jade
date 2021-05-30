@@ -315,12 +315,15 @@ template(name='left_sidebar')
             // .ui.mini.image.cart
             //     +i name='shopping-cart' cl=''
             i.cart.icon
-            strong.mobile.hidden shop
+            | shop
         a.item.toggle_sidebar.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
             // .ui.mini.image.info
             //     +i name='information--v1' cl=''
             i.info.icon
-            strong.mobile.hidden about
+            | about
+        a.item.toggle_sidebar.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}")
+            i.food.icon
+            |recipes
         unless currentUser
             a.item.toggle_sidebar.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
                 // +i name='list' cl='ui inline mini image'
@@ -329,7 +332,7 @@ template(name='left_sidebar')
         a.item.toggle_sidebar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
             // +i name='phone' cl='ui inline mini image'
             i.phone.icon
-            strong.mobile.hidden contact
+            | contact
         // a.item.toggle_sidebar.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
         //     +i name='list' cl='ui inline mini image'
         //     // i.newspaper.icon
@@ -337,47 +340,19 @@ template(name='left_sidebar')
         a.item.toggle_sidebar.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
             // +i name='chat' cl='ui inline mini image'
             i.chat.icon
-            strong.mobile.hidden chat
+            | chat
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
         //         +i name='tasks' cl='ui inline mini image'
         //     a.item(href='/m/model' class="{{isActivePath '/m/model'}}" title='delta')
         //         +i name='database' cl='ui inline mini image'
-        // a.item.toggle_sidebar.no_blink(href="/questions" class="{{isActivePath '/questions'}}")
-        //     i.question.icon
-        //     |questions
-        // a.item.toggle_sidebar.no_blink(href="/m/offer" class="{{isActivePath '/m/offer'}}")
-        //     i.hand.holding.heart.icon
         //     |offers
-        // a.item.toggle_sidebar.no_blink.set_post(href="/m/post" class="{{isActivePath '/m/post'}}")
-        //     i.newspaper.icon
-        //     |news
+        a.item.toggle_sidebar(href="/blog" class="{{isActivePath '/m/post'}}")
+            i.newspaper.icon
+            |blog
         // a.item.toggle_sidebar.no_blink(href="/m/collective" class="{{isActivePath 'requests'}}")
         //     i.users.icon
         //     |collectives
-        // a.item.toggle_sidebar.no_blink.set_bug(href="/m/bug" class="{{isActivePath '/m/bug'}}")
-        //     i.bug.icon
-        //     |bugs
-        // a.icon.item.toggle_sidebar.no_blink.set_photo(href="/m/photo" class="{{isActivePath '/m/photo'}}" title='photos')
-        //     i.picture.icon
-        //     |photos  
-        // a.icon.item.toggle_sidebar.no_blink.set_expense(href="/m/expense" class="{{isActivePath '/m/expense'}}" title='expenses')
-        //     i.dollar.icon
-        //     |expenses            
-        // a.item.toggle_sidebar.no_blink.set_rental(href="/m/rental" class="{{isActivePath regex='rentals'}}")
-        //     i.clock.icon
-        //     |rentals
-        // if has_badge 'facilitator'
-        // a.item.toggle_sidebar.no_blink(href="/chat" class="{{isActivePath '/chat'}}" title='chat') 
-        //     |chat
-        //     i.chat.icon
-        // if is_eric
-        //     a.icon.item.toggle_dev.toggle_sidebar.no_blink
-        //         |toggle dev
-        //         if is_dev
-        //             i.code.icon
-        //         else
-        //             i.code.icon
         if is_in_admin
             a.icon.item.toggle_admin.toggle_sidebar.no_blink
                 |toggle admin
@@ -387,27 +362,15 @@ template(name='left_sidebar')
                     i.shield.icon
             
         if is_admin
-            // a.item.toggle_sidebar.no_blink.set_badge(href="/m/badge" class="{{isActivePath 'badges'}}")
-            //     i.certificate.icon
-            //     | badges
-            // a.item.toggle_sidebar.no_blink.set_debit(href="/m/debit" class="{{isActivePath regex='rentals'}}")
-            //     i.gift.icon
-            //     |gifts
             .divider
-            // a.item.toggle_sidebar.no_blink.set_project(href="/m/project" class="{{isActivePath regex='projects'}}")
-            //     i.tasks.icon
-            //     | projects
-            // a.item.toggle_sidebar.no_blink(href="/m/room" class="{{isActiveRoute 'requests'}}")
-            //     i.building.icon
-            //     |rooms
             a.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
-                |admin
                 i.database.icon
+                |admin
             a.item.set_user.toggle_sidebar.no_blink(href="/user" class="{{isActiveRoute '/user'}}")
                 i.users.icon
                 | users
             a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
                 // +i name='list' cl='ui inline mini image'
                 i.list.icon
-                strong.mobile.hidden orders
+                | orders
                 
