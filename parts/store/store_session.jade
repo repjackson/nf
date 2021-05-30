@@ -48,14 +48,14 @@ template(name='store_session')
                                 .ui.inline.basic.circular.label $#{price_usd}
                                 .ui.small.inline.header #{title}
                                 i.remove.circular.link.icon.remove_cart_item.zoomer(title='remove from cart')
-                    .ui.header subtotal #{subtotal}
+                    .ui.header subtotal $#{subtotal}
                     if cart_product_docs
                         .ui.fluid.green.button.checkout_session
                             i.checkmark.icon
                             |checkout
                                 
 template(name='session_product')
-    .ui.card
+    .ui.card.zoomer
         .content
             a.image.zoomer.add_to_cart 
                 img.ui.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")

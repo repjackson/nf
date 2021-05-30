@@ -291,7 +291,9 @@ if Meteor.isClient
         #         Meteor.users.findOne store_session_document.user_id
 
     Template.session_product.events
-        'click .add_to_cart': ->
+        'click .add_to_cart': (e,t)->
+            $(e.currentTarget).closest('.card').transition('pulse')
+            
             current_session = Docs.findOne
                 model:'store_session'
                 # current:true
