@@ -43,6 +43,9 @@ template(name='product_layout')
                             a.ui.basic.circular.large.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
                                 i.food.icon
                                 |recipes
+                            a.ui.basic.circular.large.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
+                                i.thumbs.up.outline.icon
+                                |reviews
                             a.ui.basic.circular.large.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
                                 i.chat.icon
                                 |comments

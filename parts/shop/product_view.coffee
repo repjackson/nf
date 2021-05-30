@@ -19,6 +19,10 @@ if Meteor.isClient
         @layout 'product_layout'
         @render 'product_comments'
         ), name:'product_comments'
+    Router.route '/product/:doc_id/reviews', (->
+        @layout 'product_layout'
+        @render 'product_reviews'
+        ), name:'product_reviews'
     Router.route '/product/:doc_id/inventory', (->
         @layout 'product_layout'
         @render 'product_inventory'

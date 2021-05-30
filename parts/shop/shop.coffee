@@ -136,15 +136,11 @@ if Meteor.isClient
         toggle_gf_class: -> if Session.get('view_gf') then 'blue' else ''
         toggle_vegan_class: -> if Session.get('view_vegan') then 'blue' else ''
         toggle_open_class: -> if Session.get('view_open') then 'blue' else ''
-        connection: ->
-            console.log Meteor.status()
-            Meteor.status()
-        connected: ->
-            Meteor.status().connected
-        invert_class: ->
-            if Meteor.user()
-                if Meteor.user().dark_mode
-                    'invert'
+        # connection: ->
+        #     console.log Meteor.status()
+        #     Meteor.status()
+        # connected: ->
+        #     Meteor.status().connected
                     
         product_count: -> Counts.get('product_counter')
      
@@ -350,6 +346,8 @@ if Meteor.isServer
             match.vegan = true
         if view_gf
             match.gluten_free = true
+        # if view_local
+        #     match.local = true
         if picked_ingredients.length > 0 then match.ingredients = $all: picked_ingredients
         if picked_sections.length > 0 then match.menu_section = $all: picked_sections
             # match.$regex:"#{product_query}", $options: 'i'}
