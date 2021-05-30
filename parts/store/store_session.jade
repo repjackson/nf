@@ -5,7 +5,7 @@ template(name='store_session')
                 .four.wide.column
                     a.ui.large.basic.circular.button(href="/store")
                         i.chevron.left.icon
-                        i.large.food.icon
+                        i.large.building.icon
                     .ui.header
                         i.clock.icon
                         |#{current_doc._author_username}'s store session
@@ -35,7 +35,7 @@ template(name='store_session')
                             i.checkmark.icon
                             |checkout
                     if skv_is 'view_barcode' true
-                        i.circular.close.icon.close_barcode(title='close barcode')
+                        i.circular.close.link.icon.zoomer.close_barcode(title='close barcode')
                         #barcode
                     else
                         .ui.large.icon.basic.circular.button.init

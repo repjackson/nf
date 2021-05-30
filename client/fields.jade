@@ -480,9 +480,7 @@ template(name='datetime_edit')
                 if icon
                     i.grey.icon(class=icon)
                     //- +i name=icon                
-                if title
-                    |#{title}
-                else if label
+                if label
                     |#{label}
                 else
                     |#{key}

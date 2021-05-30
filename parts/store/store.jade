@@ -5,9 +5,9 @@ template(name='store')
                 .ui.inline.header 
                     +i name='shop'
                     |store
-                a.ui.big.button(href="/staff") 
-                    i.shield.icon
-                    |staff portal
+                // a.ui.big.button(href="/staff") 
+                //     i.shield.icon
+                //     |staff portal
                 .ui.button.new_store_session
                     i.plus.icon
                     |new store session
@@ -16,16 +16,7 @@ template(name='store')
                     |current store sessions
                 .ui.link.list
                     each store_sessions
-                        a.item(href="/store_session/#{_id}")  #{_author_username} #{when}
-                            if open 
-                                .ui.basic.green.label
-                                    |open
-                            if closed
-                                .ui.basic.label
-                                    |closed
-                            |#{cart_product_ids.count} cart items    
-                            each cart_product_docs
-                                img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                        +store_session_item
     
                 .ui.header 
                     i.shield.icon
@@ -40,3 +31,16 @@ template(name='store')
         // .centered.row
         //     .fourteen.wide.column
         //         +map
+        
+        
+template(name='store_session_item')
+    a.item(href="/store_session/#{_id}")  #{_author_username} #{when}
+        if open 
+            .ui.basic.green.label
+                |open
+        if closed
+            .ui.basic.label
+                |closed
+        |#{cart_product_ids.length} cart items    
+        each cart_product_docs
+            img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")

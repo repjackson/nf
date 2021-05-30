@@ -2,7 +2,7 @@
 
 if Meteor.isClient
     Quagga = require('quagga')
-    console.log Quagga
+    # console.log Quagga
     Router.route '/store_session/:doc_id', (->
         @layout 'layout'
         @render 'store_session'

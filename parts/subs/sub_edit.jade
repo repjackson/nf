@@ -2,7 +2,10 @@ template(name='sub_edit')
     with current_doc
         .ui.stackable.padded.grid
             .five.wide.column
-                .ui.small.inline.header editing sub
+                .ui.header
+                    i.pencil.icon
+                    i.clock.icon
+                    |editing subscription
                 .ui.inline.header #{sub_product.title}
                 .ui.inline.header #{sub_product.price_usd}
                 each sub_product.ingredients
@@ -32,20 +35,20 @@ template(name='sub_edit')
                 with sub_product
                     +image_view key='image_id'
                     //- img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
-                    +textarea_edit key='description' direct=true
+                    +html_view key='description' direct=true
             .five.wide.column
                 // else  
                 //     .ui.red.disabled.button(title='existing reservations')
                 //         i.remove.icon   
                 //         | can't cancel  
                 .ui.header delivery method
-                +kvs key='delivery_method' value='delivery' icon='deliver-food' direct=true
-                +kvs key='delivery_method' value='pickup' icon='doormat' direct=true
+                // +kvs key='delivery_method' value='delivery' icon='deliver-food' direct=true
+                // +kvs key='delivery_method' value='pickup' icon='doormat' direct=true
 
-                if key_value_is 'delivery_method' 'delivery'
-                    +datetime_edit key='delivery_timedate' label='delivery datetime' direct=true
-                if key_value_is 'delivery_method' 'pickup'
-                    +datetime_edit key='pickup_timedate' label='pickup timedate' direct=true
+                // if key_value_is 'delivery_method' 'delivery'
+                //     +datetime_edit key='delivery_timedate' label='delivery datetime' direct=true
+                // if key_value_is 'delivery_method' 'pickup'
+                //     +datetime_edit key='pickup_timedate' label='pickup timedate' direct=true
                 unless submitted
                     a.ui.large.fluid.green.button(href="/sub/#{_id}")
                         |submit     

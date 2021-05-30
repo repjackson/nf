@@ -29,15 +29,15 @@ template(name='sub_view')
                         |when #{when}
                     // if kve 'when' 'later'
                     //     +datetime_view key='pickup_datetime'
-                    .ui.header status: #{status}
-                    .ui.header 
-                        i.shield.icon
-                        |admin
-                    if is_admin
-                        +kvs key='status' value='started' label='mark started' direct=true
-                        if kve status 'started'
-                            +kvs key='status' value='ready' label='mark ready' direct=true
-                            +kvs key='status' value='picked_up' label='picked up' direct=true
+                    // .ui.header status: #{status}
+                    // .ui.header 
+                    //     i.shield.icon
+                    //     |admin
+                    // if is_admin
+                        // +kvs key='status' value='started' label='mark started' direct=true
+                        // if kve status 'started'
+                        //     +kvs key='status' value='ready' label='mark ready' direct=true
+                        //     +kvs key='status' value='picked_up' label='picked up' direct=true
                     div
                     .ui.inline.header 
                         i.user.outline.icon
@@ -50,12 +50,12 @@ template(name='sub_view')
                     // +textarea_view key='description'
                     .ui.large.bulleted.list
                         .item
-                            small subed
+                            small added
                             strong #{when}
                             |({{long_date _timestamp}})
-                        .item
-                            small for 
-                            strong ${{fixed sub_price}}
+                        // .item
+                        //     small for 
+                        //     strong ${{fixed sub_price}}
                     div
                     .ui.inline.header ingredients
                     each sub_product.ingredients
