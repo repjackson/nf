@@ -57,7 +57,13 @@ if Meteor.isClient
                   target: document.querySelector('#barcode')
                 },
                 decoder : {
-                  readers : ["code_128_reader"]
+                    readers : ["code_128_reader"]
+                    debug: {
+                        drawBoundingBox: true,
+                        showFrequency: true,
+                        drawScanline: true,
+                        showPattern: true
+                    }
                 }
               }, (err)->
                   if err
@@ -255,4 +261,5 @@ if Meteor.isServer
     Meteor.publish 'session_products', (session_id)->
         Docs.find { 
             model:'product'
+            app:'nf'
         }, limit:10
