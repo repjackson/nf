@@ -532,6 +532,10 @@ input.username_search{
     /* border-radius: 8px !important; */
 }
 
+.attached.label {
+    z-index: 100 !important;
+}
+
 .disabled.button, .disabled.segment, .disabled.label{
     /* -webkit-border-radius: 5px !important; */
     /*filter: invert(.9) !important;*/

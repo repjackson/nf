@@ -212,9 +212,9 @@ template(name='link_view')
             +icon name=icon cl='ui avatar image'
         //- .ui.inline.header 
         //-     |#{title} #{label}
-        a.ui.header(href=field_value target='_window')
-            if label 
-                |#{label}
+        a.ui.small.header(href=field_value target='_window')
+            |#{label}
+        div
         a(href="#{field_value}" target='_window')
             |#{field_value}
         //- img.ui.fluid.image(src=field_value)

@@ -135,8 +135,12 @@ template(name='set_product_limit')
 
 template(name='product_card')
     .center.aligned.column.zoomer(class=product_card_class title=ingredients)
-        a.image.zoomer(href="/product/#{_id}") 
-            img.ui.zoom.pointer.goto_product.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+        if rescued 
+            .ui.top.right.attached.blue.label rescued
+        if local 
+            .ui.top.right.attached.orange.label local
+        a(href="/product/#{_id}") 
+            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
             a.ui.inline.header(href="/product/#{_id}") 
                 //- |#{_author.name}'s
@@ -164,5 +168,5 @@ template(name='product_card')
             // div
             // .ui.inline.inline.small.grey.header #{views}
                 // i.eye.icon
-            .ui.inline.inline.small.grey.header #{points} 
+            // .ui.inline.inline.small.grey.header #{points} 
                 // i.line.chart.icon

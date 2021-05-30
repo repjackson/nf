@@ -1,8 +1,8 @@
 template(name='product_edit')
     with current_doc
         .ui.stackable.padded.grid
-            .three.column.row
-                .column
+            .row
+                .four.wide.column
                     .ui.inline.header
                         i.pencil.icon
                         | #{title}
@@ -15,13 +15,16 @@ template(name='product_edit')
                     // each model_docs 'menu_section'
                     //     +pick_section
                     +image_edit key='image_id' label='image' direct=true
-                .column
+                    +link_edit key='product_link' label='old site link' direct=true
+                    div
+                    +float_edit key='price_usd' label='$ price' direct=true
+                .twelve.wide.column
                     +boolean_edit key='gluten_free' label='gluten free' direct=true
                     +boolean_edit key='vegan' label='vegan' direct=true
                     +boolean_edit key='local' label='local' direct=true
-                .column
+                    +boolean_edit key='rescued' label='rescued' direct=true
+                    +boolean_edit key='organic' label='organic' direct=true
                     +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true
-                    +float_edit key='price_usd' label='$ price' direct=true
                     div
                     +array_edit key='ingredients' label='ingredients'  direct=true
                     +text_edit key='size_description' label='size description'  direct=true

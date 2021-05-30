@@ -10,6 +10,7 @@ template(name='product_layout')
                         .six.wide.column
                             a.ui.basic.circular.icon.button(href="/shop")
                                 i.chevron.left.large.icon
+                                i.large.food.icon
                                 // +i name='food' cl='ui mini inline image'
                         
                             .ui.large.inline.header 
@@ -25,7 +26,8 @@ template(name='product_layout')
                             +boolean_view key='gluten_free' label='gluten free' direct=true
                             +boolean_view key='vegan' label='vegan' direct=true
                             +text_view key='size_description' label='size description'  direct=true
-                            
+                            +link_view key='product_link' label='old site link' direct=true
+
                             // .ui.header #{menu_section}
                 
                         .ten.wide.column
