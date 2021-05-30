@@ -11,21 +11,27 @@ template(name='store_session')
                         |#{current_doc._author_username}'s store session
                     .ui.header created at #{when}
                 .eight.wide.column
+                    .ui.header nf menu
+                    .ui.stackable.three.cards
+                        each products
+                            .ui.card
+                                .content
+                                    a.image.zoomer.add_to_cart 
+                                        img.ui.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                                
+                                    .ui.header #{title}
+                                    .ui.icon.circular.basic.green.button.add_to_cart
+                                        i.plus.icon
+                                        // |add to cart
+                                    a.basic.small.button.zoomer(href="/product/#{_id}")
+                                        |view
+                .four.wide.column
                     .ui.header 
                         i.large.cart.icon
                         |current cart
                     each cart_product_docs
-                        .ui.header #{title}
-                    each user_cart_items
-                        .ui.header #{title}
+                        .ui.inline.header #{title}
                         i.remove.circular.icon
-                    .ui.header nf menu
-                    each products
-                        .ui.header #{title}
-                        .ui.button.add_to_cart
-                            i.plus.icon
-                            |add to cart
-                .four.wide.column
                     if closed 
                         .ui.small.header closed
                         .ui.button.reopen_session
