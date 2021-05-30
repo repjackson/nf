@@ -28,7 +28,7 @@ template(name='store_session')
 
                                 .ui.inline.basic.circular.label $#{price_usd}
                                 .ui.small.inline.header #{title}
-                                i.remove.circular.link.icon.remove_cart_item(title='remove from cart')
+                                i.remove.circular.link.icon.remove_cart_item.zoomer(title='remove from cart')
                     .ui.header subtotal #{cart_subtotal}
                     if cart_product_docs
                         .ui.fluid.green.button

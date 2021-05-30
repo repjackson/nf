@@ -182,17 +182,20 @@ if Meteor.isClient
         #     Docs.update current_session._id,
         #         $addToSet:guest_ids:@_id
 
-        'click .remove_cart_item': ->
+        'click .remove_cart_item': (e,t)->
             current_session = Docs.findOne
                 model:'store_session'
                 # current:true
             # console.log current_session
             # console.log @valueOf()
-            Docs.update current_session._id,
-                $pull:cart_product_ids:@_id
-            $('body').toast({
-                message: 'item removed'
-            })
+            $(e.currentTarget).closest('.item').transition('slide left', 1000)
+            Meteor.setTimeout =>            
+                Docs.update current_session._id,
+                    $pull:cart_product_ids:@_id
+                $('body').toast({
+                    message: 'item removed'
+                })
+            , 1000
     
 
         # 'click .toggle_adding_guest': ->
