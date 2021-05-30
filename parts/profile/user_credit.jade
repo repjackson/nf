@@ -2,8 +2,10 @@ template(name='user_credit')
     .ui.stackable.two.column.grid
         if is_current_user
             .column
-                .ui.header 
-                    |deposits
+                .ui.header
+                    i.money.icon
+                    |#{user_from_username_param.credit}
+                    |credit
                 // |includes 2% credit card processing fee
                 .ui.action.fluid.input
                     input.deposit_amount(type='number' min='1' placeholder='deposit')
@@ -20,3 +22,7 @@ template(name='user_credit')
                                 //- if is_dev
                                 +remove_button
                                 
+            .ui.big.icon.button.add_credit(title='add credit')
+                i.plus.icon
+            .ui.big.icon.button.remove_credit(title='remove credit')
+                i.minus.icon

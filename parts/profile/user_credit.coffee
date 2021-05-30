@@ -167,6 +167,15 @@ if Meteor.isClient
 
 
     Template.user_credit.events
+        'click .add_credit': ->
+            user = Meteor.users.findOne(username:Router.current().params.username)
+            Meteor.users.update Meteor.userId(),
+                $inc:credit:1
+                # $set:credit:1
+        'click .remove_credit': ->
+            user = Meteor.users.findOne(username:Router.current().params.username)
+            Meteor.users.update Meteor.userId(),
+                $inc:credit:-1
         'click .add_credits': ->
             deposit_amount = parseInt $('.deposit_amount').val()*100
             calculated_amount = deposit_amount*1.02+20
