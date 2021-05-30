@@ -5,3 +5,18 @@ template(name='user_friends')
         |friends
     each user_friends
         .item #{username}
+        
+template(name='user_deliveries')
+    .ui.header 
+        i.truck.icon
+        |deliveries
+    .ui.button.mark_available
+        |available to deliver
+    .ui.button.mark_unavailable
+        |mark unavailable to deliver
+    each user_deliveries
+        .item #{when}
+    +map
+        
+        
+        

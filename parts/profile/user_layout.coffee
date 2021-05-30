@@ -35,6 +35,10 @@ if Meteor.isClient
         @layout 'user_layout'
         @render 'user_giftcards'
         ), name:'user_giftcards'
+    Router.route '/user/:username/deliveries', (->
+        @layout 'user_layout'
+        @render 'user_deliveries'
+        ), name:'user_deliveries'
 
 
 

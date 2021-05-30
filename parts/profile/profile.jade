@@ -94,9 +94,11 @@ template(name='user_layout')
 
 
 template(name='user_dashboard')
-    .ui.header $ earned
-    .ui.header $ spent
-    .ui.header profit rate
+    .ui.inline.header $ earned
+    .ui.inline.header $ spent
+    .ui.inline.header profit rate
+    .ui.inline.header avg hourly
+    .ui.inline.header fed comparison
     .ui.three.stackable.cards
         .ui.card
             .content
@@ -137,6 +139,8 @@ template(name='user_dashboard')
                 a.header(href="/user/#{username}/deliveries")
                     i.bicycle.icon
                     |deliveries
+                each delivery_docs
+                    .ui.header #{when}
                     
                     
                     
