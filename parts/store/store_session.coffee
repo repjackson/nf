@@ -49,6 +49,28 @@ if Meteor.isClient
 
 
     Template.store_session.events
+        'click .checkout_session': ->
+            Swal.fire({
+                title: 'confirm purchase'
+                text: "#{@subtotal} credits"
+                icon: 'question'
+                showCancelButton: true,
+                confirmButtonText: 'confirm'
+                cancelButtonText: 'cancel'
+            }).then((result) =>
+                if result.value
+                    product = Docs.findOne Router.current().params.doc_id
+                    Meteor.users.update Meteor.userId(),
+                        $inc:credit:-@subtotal
+                    Swal.fire(
+                        'order complete',
+                        ''
+                        'success'
+                    # Meteor.call 'calc_product_data', product._id, ->
+                    # Docs.remove @_id
+                    )
+            )
+
         'click .close_barcode': ->
             Session.set('view_barcode', false)
         'click .init': ->
@@ -195,6 +217,16 @@ if Meteor.isClient
                 $('body').toast({
                     message: 'item removed'
                 })
+                subtotal = 0
+                if current_session.cart_product_ids
+                    for product in Docs.find(_id:$in:current_session.cart_product_ids).fetch()
+                        if product.price_usd
+                            subtotal += product.price_usd
+                            # console.log 'product', product
+                    Docs.update current_session._id,
+                        $set:
+                            subtotal:subtotal
+                    
             , 1000
     
 
@@ -213,14 +245,14 @@ if Meteor.isClient
             Docs.find
                 model:'product'
         # current_poll: ->
-        #     store_session_document = Docs.findOne Router.current().params.doc_id
+        #     current_session = Docs.findOne Router.current().params.doc_id
         #     # console.log @
-        #     # store_session_document.user_id
+        #     # current_session.user_id
 
         #     Docs.findOne
         #         model:'vote'
-        #         upvoter_ids: $nin:[store_session_document.user_id]
-        #         downvoter_ids: $nin:[store_session_document.user_id]
+        #         upvoter_ids: $nin:[current_session.user_id]
+        #         downvoter_ids: $nin:[current_session.user_id]
 
 
 
@@ -232,10 +264,10 @@ if Meteor.isClient
         #     # Template.instance().timer.get()
 
         # rules_signed: ->
-        #     store_session_document = Docs.findOne Router.current().params.doc_id
+        #     current_session = Docs.findOne Router.current().params.doc_id
         #     # console.log @
-        #     if store_session_document.user_id
-        #         resident = Meteor.users.findOne store_session_document.user_id
+        #     if current_session.user_id
+        #         resident = Meteor.users.findOne current_session.user_id
         #         # if resident.user_id
         #         Docs.findOne
         #             model:'rules_and_regs_signing'
@@ -244,18 +276,18 @@ if Meteor.isClient
 
         # adding_guests: -> Session.get 'adding_guest'
         # checking_in_doc: ->
-        #     store_session_document = Docs.findOne Router.current().params.doc_id
-        #     # console.log store_session_document
-        #     store_session_document
+        #     current_session = Docs.findOne Router.current().params.doc_id
+        #     # console.log current_session
+        #     current_session
         # checkin_guest_docs: () ->
-        #     store_session_document = Docs.findOne Router.current().params.doc_id
+        #     current_session = Docs.findOne Router.current().params.doc_id
         #     # console.log @
         #     Docs.find
-        #         _id:$in:store_session_document.guest_ids
+        #         _id:$in:current_session.guest_ids
 
         # user: ->
-        #     store_session_document = Docs.findOne Router.current().params.doc_id
-        #     if store_session_document and store_session_document.user_id
+        #     current_session = Docs.findOne Router.current().params.doc_id
+        #     if current_session and current_session.user_id
         #         Meteor.users.findOne store_session_document.user_id
 
     Template.session_product.events
@@ -263,9 +295,22 @@ if Meteor.isClient
             current_session = Docs.findOne
                 model:'store_session'
                 # current:true
+            subtotal = 0
             Docs.update current_session._id,
                 $addToSet:
                     cart_product_ids:@_id
+            
+            current_session = Docs.findOne
+                model:'store_session'
+                # current:true
+            if current_session.cart_product_ids
+                for product in Docs.find(_id:$in:current_session.cart_product_ids).fetch()
+                    if product.price_usd
+                        subtotal += product.price_usd
+                        # console.log 'product', product
+                Docs.update current_session._id,
+                    $set:
+                        subtotal:subtotal
             $('body').toast({
                 title: "added to cart"
                 # message: 'See desk staff for key.'

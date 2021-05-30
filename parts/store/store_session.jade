@@ -2,13 +2,32 @@ template(name='store_session')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column
+                .twelve.wide.column
                     a.ui.large.basic.circular.button(href="/store")
                         i.chevron.left.icon
                         i.large.building.icon
-                    .ui.header
+                    .ui.inline.header
                         i.clock.icon
                         |#{current_doc._author_username}'s store session
+                    div
+                    if skv_is 'view_barcode' true
+                        i.circular.close.link.icon.zoomer.close_barcode(title='close barcode')
+                        .ui.small.inline.header products will be added to cart when scanned
+                        #barcode
+                    else
+                        .ui.large.icon.basic.circular.button.init
+                            i.barcode.big.icon
+                            // |start barcode reader
+                    .ui.large.icon.input
+                        i.search.icon
+                        input(type='text' placeholder='search title...')
+                    .ui.large.icon.input
+                        i.hashtag.icon
+                        input(type='number' placeholder='id #...')
+                    .ui.stackable.three.cards.scrolling
+                        each products
+                            +session_product
+                .four.wide.column
                     .ui.header created at #{when}
                     // if closed 
                     //     .ui.small.header closed
@@ -20,7 +39,7 @@ template(name='store_session')
                     //         |end session
                     .ui.header 
                         i.large.cart.icon
-                        |current cart
+                        |cart
                     .ui.list
                         each cart_product_docs
                             .item
@@ -29,22 +48,11 @@ template(name='store_session')
                                 .ui.inline.basic.circular.label $#{price_usd}
                                 .ui.small.inline.header #{title}
                                 i.remove.circular.link.icon.remove_cart_item.zoomer(title='remove from cart')
-                    .ui.header subtotal #{cart_subtotal}
+                    .ui.header subtotal #{subtotal}
                     if cart_product_docs
-                        .ui.fluid.green.button
+                        .ui.fluid.green.button.checkout_session
                             i.checkmark.icon
                             |checkout
-                    if skv_is 'view_barcode' true
-                        i.circular.close.link.icon.zoomer.close_barcode(title='close barcode')
-                        #barcode
-                    else
-                        .ui.large.icon.basic.circular.button.init
-                            i.barcode.big.icon
-                            // |start barcode reader
-                .twelve.wide.column
-                    .ui.stackable.three.cards
-                        each products
-                            +session_product
                                 
 template(name='session_product')
     .ui.card

@@ -61,12 +61,12 @@ template(name='user_item')
             .ui.inline.small.header(style="color:#{current_user.theme_color};") #{points}p
             // .ui.large.basic.label(style="color:#{current_user.theme_color};" title='one ratio') {{to_percent one_ratio}}%
             // .ui.large.basic.label(style="color:#{current_user.theme_color};") #{flow_volume} vol
-            each tags
+            each five_tags
                 .ui.basic.small.label(style="color:#{theme_color};") #{this}
-            unless is_this_user
-                i.red.gift.pointer.debit.big.icon
-                i.teal.concierge.bell.pointer.request.big.icon
-                i.blue.chat.pointer.message.big.disabled.icon
+            // unless is_this_user
+            //     i.red.gift.pointer.debit.big.icon
+            //     i.teal.concierge.bell.pointer.request.big.icon
+            //     i.blue.chat.pointer.message.big.disabled.icon
         
 template(name='user_card')
     .card.rounded.calc_points
