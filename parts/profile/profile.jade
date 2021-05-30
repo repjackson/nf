@@ -77,6 +77,8 @@ template(name='user_layout')
                                 a.ui.basic.compact.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
                                     +i name='settings' cl='ui avatar image'
                                     |edit profile
+                            unless is_current_user
+                                +friend_button
                             if is_current_user
                                 .ui.basic.compact.button.logout
                                     i.sign.out.alternate.icon
@@ -104,11 +106,7 @@ template(name='user_dashboard')
         .ui.card
             .content
                 .ui.header profit rate
-        .ui.card
-            .content
                 .ui.header avg hourly
-        .ui.card
-            .content
                 .ui.header fed comparison
         .ui.card
             .content

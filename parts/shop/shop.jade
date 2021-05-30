@@ -145,23 +145,23 @@ template(name='product_card')
             // +ismall name='ingredients'
             // each ingredients
             //     .ui.small.basic.circular.label #{this}
-        if gluten_free
-            +i name='no-gluten' cl='ui mini inline image' title='gluten free'
-        if vegan
-            +i name='vegan-food' cl='ui mini inline image' title='vegan'
-        //- .ui.inline.small.header tags
-        // .content
-        //     .right.floated.meta
-        //         | {{from_now datetime_available}}
-        //     //- if session_is 'view_users' true
-        // //- a.image(href="/product/#{_id}")
-            
+            if gluten_free
+                +i name='no-gluten' cl='ui mini inline image' title='gluten free'
+            if vegan
+                +i name='vegan-food' cl='ui mini inline image' title='vegan'
+            //- .ui.inline.small.header tags
+            // .content
+            //     .right.floated.meta
+            //         | {{from_now datetime_available}}
+            //     //- if session_is 'view_users' true
+            // //- a.image(href="/product/#{_id}")
+                
         .content    
             .ui.inline.header 
                 |${{fixed price_usd}}
-            .ui.inline.small.header 
-                |(#{menu_section}) 
-            div
+            // .ui.inline.small.header 
+            //     |(#{menu_section}) 
+            // div
             // .ui.inline.inline.small.grey.header #{views}
                 // i.eye.icon
             .ui.inline.inline.small.grey.header #{points} 

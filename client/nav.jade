@@ -8,7 +8,7 @@ template(name='nav')
             a.icon.item.toggle_sidebar.no_blink
                 i.bars.large.icon
                 
-        a.item.zoomer(href='/' class="{{isActivePath '/'}}")
+        a.item.zoomer(href='/')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
             img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
@@ -37,10 +37,10 @@ template(name='nav')
             // +i name='shop' cl=''
             i.building.large.icon
             // i.cart.icon
-        a.icon.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
+        a.icon.item(href="/users" class="{{isActiveRoute '/users'}}")
             i.users.large.icon
             // | users
-        a.icon.item.set_user.toggle_sidebar.no_blink(href="/events" class="{{isActiveRoute '/events'}}")
+        a.icon.item(href="/events" class="{{isActiveRoute '/events'}}")
             i.calendar.large.icon
             // | users
             
@@ -238,8 +238,8 @@ template(name='right_sidebar')
                 i.dashboard.icon
                 |dashboard
             a.item.toggle_rightbar(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
-                +i name='money' cl='ui avatar image'
-                i.coin.icon
+                // +i name='money' cl='ui avatar image'
+                i.coins.icon
                 |credit
             a.item.toggle_rightbar(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
                 // +i name='check' cl='ui avatar image'

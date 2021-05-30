@@ -19,7 +19,7 @@ template(name='sub_view')
                     //     |#{sub_product.title}
                     .ui.inline.header 
                         // strong '#{sub_product.title}'
-                        |sub
+                        |subscription
                     if can_edit
                         a(href="/sub/#{_id}/edit" title='edit')
                             i.pencil.link.large.circular.icon
@@ -27,8 +27,8 @@ template(name='sub_view')
                     .ui.header 
                         i.clock.icon
                         |when #{when}
-                    if kve 'when' 'later'
-                        +datetime_view key='pickup_datetime'
+                    // if kve 'when' 'later'
+                    //     +datetime_view key='pickup_datetime'
                     .ui.header status: #{status}
                     .ui.header 
                         i.shield.icon
@@ -42,7 +42,7 @@ template(name='sub_view')
                     .ui.inline.header 
                         i.user.outline.icon
                         |customer
-                    +kvs key='status' value='picked_up' label='mark picked up' direct=true
+                    // +kvs key='status' value='picked_up' label='mark picked up' direct=true
                     with buyer
                         +user_card
                 .four.wide.column

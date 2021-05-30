@@ -12,10 +12,10 @@ if Meteor.isClient
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'push'
+                    transition:'overlay'
                     exclusive:true
                     duration:200
-                    scrollLock:false
+                    scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_sidebar')
         , 1000
@@ -23,10 +23,10 @@ if Meteor.isClient
             $('.ui.right.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'push'
+                    transition:'overlay'
                     exclusive:true
                     duration:200
-                    scrollLock:false
+                    scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_rightbar')
         , 1000
