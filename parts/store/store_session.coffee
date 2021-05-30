@@ -1,4 +1,8 @@
+# Quagga = require('quagga').default; 
+
 if Meteor.isClient
+    Quagga = require('quagga')
+    console.log Quagga
     Router.route '/store_session/:doc_id', (->
         @layout 'layout'
         @render 'store_session'
@@ -45,6 +49,23 @@ if Meteor.isClient
 
 
     Template.store_session.events
+        'click .init': ->
+            Quagga.init({
+                inputStream : {
+                  name : "Live",
+                  type : "LiveStream",
+                  target: document.querySelector('#barcode')
+                },
+                decoder : {
+                  readers : ["code_128_reader"]
+                }
+              }, (err)->
+                  if err
+                      console.log(err);
+                  console.log("Initialization finished. Ready to start");
+                  Quagga.start();
+              );
+            
         # 'click .vote_yes': ->
         #     $('.poll_area').transition('fade out', 500)
         #     Meteor.setTimeout =>

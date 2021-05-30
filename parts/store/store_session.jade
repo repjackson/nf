@@ -19,6 +19,9 @@ template(name='store_session')
                             i.undo.icon
                             |end session
                 .eight.wide.column
+                    #barcode
+                    .button.init
+                        |init
                     .ui.header nf menu
                     .ui.stackable.three.cards
                         each products
@@ -33,7 +36,6 @@ template(name='store_session')
                                 .ui.inline.label $#{price_usd}
                                 .header #{title}
                                 i.remove.circular.link.icon.remove_cart_item(title='remove from cart')
-                                
                     .ui.header subtotal #{cart_subtotal}
                     if cart_product_docs
                         .ui.fluid.green.button
