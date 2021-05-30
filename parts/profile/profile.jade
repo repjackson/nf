@@ -94,6 +94,9 @@ template(name='user_layout')
 
 
 template(name='user_dashboard')
+    .ui.header $ earned
+    .ui.header $ spent
+    .ui.header profit rate
     .ui.three.stackable.cards
         .ui.card
             .content
@@ -131,7 +134,7 @@ template(name='user_dashboard')
                     |tasks
         .ui.card
             .content
-                .ui.header
+                a.header(href="/user/#{username}/deliveries")
                     i.bicycle.icon
                     |deliveries
                     
