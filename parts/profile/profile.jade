@@ -32,7 +32,7 @@ template(name='user_layout')
                                         //- +i name='coins'
                                         //- i.coins.icon
                                         |{{fixed user.credit}}c
-                            .ui.vertical.fluid.compact.menu
+                            .ui.vertical.fluid.large.menu
                                 a.item(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
                                     // +i name='dashboard' cl='ui avatar image'
                                     i.dashboard.icon
@@ -94,12 +94,22 @@ template(name='user_layout')
 
 
 template(name='user_dashboard')
-    .ui.inline.header $ earned
-    .ui.inline.header $ spent
-    .ui.inline.header profit rate
-    .ui.inline.header avg hourly
-    .ui.inline.header fed comparison
     .ui.three.stackable.cards
+        .ui.card
+            .content
+                .ui.header $ earned
+        .ui.card
+            .content
+                .ui.header $ spent
+        .ui.card
+            .content
+                .ui.header profit rate
+        .ui.card
+            .content
+                .ui.header avg hourly
+        .ui.card
+            .content
+                .ui.header fed comparison
         .ui.card
             .content
                 .ui.header
