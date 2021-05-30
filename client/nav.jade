@@ -67,7 +67,7 @@ template(name='nav')
             // strong.mobile.hidden contact
         a.item.zoomer(href='/blog' class="{{isActivePath '/blog'}}" title='blog')
             // +i name='list' cl='ui inline mini image'
-            i.newspaper.icon
+            i.newspaper.large.icon
             // strong.mobile.hidden news
         // a.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
         //     +i name='chat' cl='ui inline mini image'
@@ -94,10 +94,10 @@ template(name='nav')
                 a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
                     i.large.cart.icon
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActivePath '/cart'}}" title='current wallet balance')
-                    i.wallet.icon
+                    // i.wallet.icon
                     // .ui.mini.image.wallet
                     //     +i name='wallet' cl=''
-                    |${{int currentUser.credit}}
+                    .ui.inline.header ${{int currentUser.credit}}
                     // i.cart.icon
                 // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
                 //     .ui.inline.header #{currentUser.credit}f
@@ -108,11 +108,11 @@ template(name='nav')
                         i.user.icon
                     strong.mobile.hidden #{currentUser.name}
                 a.icon.item.toggle_rightbar.no_blink.penny.add_global_karma
-                    i.bars.icon
+                    i.bars.large.icon
                         
         unless currentUser
             a.item(href='/login' title='login') 
-                i.sign.in.icon
+                i.sign.in.large.icon
                 // +i name='internal'
                 |login
 
@@ -157,8 +157,6 @@ template(name='footer')
                     a.item(href="/cart") 
                         i.cart.icon
                         |cart
-                    a.item(href='/cart')
-                        | checkout
                     a.item(href='/contact')
                         i.phone.icon
                         |contact us
@@ -184,9 +182,9 @@ template(name='footer')
                         i.cart.icon
                         |shop
                     a.item(href='/p/transparency')
-                    
                         |transparency
-                    a.item(href='/p/hiring') We’re Hiring!
+                    a.item(href='/p/hiring') 
+                        |we’re hiring!
             .column
                 .ui.link.animated.selection.list
                     a.item(href='/p/faq') faq
