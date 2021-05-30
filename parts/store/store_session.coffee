@@ -5,7 +5,7 @@ if Meteor.isClient
         ), name:'store_session'
 
     Template.store_session.onCreated ->
-        # @autorun => Meteor.subscribe 'current_poll'
+        @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'doc', Session.get('new_guest_id')
         # @autorun => Meteor.subscribe 'checkin_guests',Router.current().params.doc_id
         @autorun -> Meteor.subscribe 'resident_from_store_session', Router.current().params.doc_id
@@ -61,6 +61,25 @@ if Meteor.isClient
             $('.poll_area').transition('fade in', 500)
 
 
+        'click .end_session': ->
+            if confirm 'end session?'
+                Docs.update @_id,
+                    $set: 
+                        status:'closed'
+                        closed:true
+                        open:false
+                Router.go '/store'
+                
+                
+        'click .reopen_session': ->
+            if confirm 'reopen session?'
+                Docs.update @_id,
+                    $set: 
+                        status:'open'
+                        closed:false
+                        open:true
+                
+                
         'click .cancel_checkin': ->
             store_session_document = Docs.findOne Router.current().params.doc_id
             if store_session_document

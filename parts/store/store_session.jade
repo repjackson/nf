@@ -1,3 +1,31 @@
 template(name='store_session')
-    .ui.header store session
-    .ui.header created at #{when}
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    a.ui.large.button(href="/store")
+                        i.chevron.left.icon
+                        i.large.food.icon
+                    .ui.header
+                        i.clock.icon
+                        |#{current_doc._author_username}'s store session
+                    .ui.header created at #{when}
+                    .ui.header 
+                        i.large.cart.icon
+                        |current cart
+                .eight.wide.column
+                    each user_cart_items
+                        .ui.header #{title}
+                        i.remove.circular.icon
+                    .ui.header nf menu
+                    each products
+                        .ui.header #{title}
+                .four.wide.column
+                    if closed 
+                        .ui.small.header closed
+                        .ui.button.reopen_session
+                            |reopen
+                    else    
+                        .ui.button.end_session
+                            i.undo.icon
+                            |end session

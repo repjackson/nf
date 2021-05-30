@@ -20,6 +20,12 @@ template(name='store')
                 .ui.link.list
                     each store_sessions
                         a.item(href="/store_session/#{_id}")  #{_author_username} #{when}
+                            if open 
+                                .ui.basic.green.label
+                                    |open
+                            if closed
+                                .ui.basic.green.label
+                                    |disabled
                 .ui.header 
                     i.shield.icon
                     |customers today

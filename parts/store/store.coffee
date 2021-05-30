@@ -16,10 +16,16 @@ if Meteor.isClient
             Docs.find {
                 model:'store_session'
             }, _timestamp:1
+            
+            
+            
     Template.store.events
         'click .new_store_session': ->
             new_session_id = Docs.insert 
                 model:'store_session'
+                status:'open'
+                open:true
+                
                 
             Router.go "/store_session/#{new_session_id}"
             
