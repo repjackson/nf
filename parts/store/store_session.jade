@@ -3,43 +3,45 @@ template(name='store_session')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                    a.ui.large.button(href="/store")
+                    a.ui.large.basic.circular.button(href="/store")
                         i.chevron.left.icon
                         i.large.food.icon
                     .ui.header
                         i.clock.icon
                         |#{current_doc._author_username}'s store session
                     .ui.header created at #{when}
-                    if closed 
-                        .ui.small.header closed
-                        .ui.button.reopen_session
-                            |reopen
-                    else    
-                        .ui.button.end_session
-                            i.undo.icon
-                            |end session
+                    // if closed 
+                    //     .ui.small.header closed
+                    //     .ui.button.reopen_session
+                    //         |reopen
+                    // else    
+                    //     .ui.button.end_session
+                    //         i.undo.icon
+                    //         |end session
                     .ui.header 
                         i.large.cart.icon
                         |current cart
                     .ui.list
                         each cart_product_docs
                             .item
-                                .ui.inline.label $#{price_usd}
-                                .header #{title}
+                                img.ui.avatar.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+
+                                .ui.inline.basic.circular.label $#{price_usd}
+                                .ui.small.inline.header #{title}
                                 i.remove.circular.link.icon.remove_cart_item(title='remove from cart')
                     .ui.header subtotal #{cart_subtotal}
                     if cart_product_docs
                         .ui.fluid.green.button
                             i.checkmark.icon
                             |checkout
-                .twelve.wide.column
                     if skv_is 'view_barcode' true
                         i.circular.close.icon.close_barcode(title='close barcode')
                         #barcode
                     else
-                        .ui.large.circular.button.init
-                            |start barcode reader
-                    .ui.header nf menu
+                        .ui.large.icon.basic.circular.button.init
+                            i.barcode.big.icon
+                            // |start barcode reader
+                .twelve.wide.column
                     .ui.stackable.three.cards
                         each products
                             +session_product
@@ -55,9 +57,9 @@ template(name='session_product')
             //     i.cart.plus.icon
             // else
             // .ui.icon.circular.basic.green.button.add_to_cart
-            .ui.icon.fluid.basic.circular.button.icon.add_to_cart
-                i.cart.plus.large.green.icon
-                // a.basic.small.button.zoomer(href="/product/#{_id}")
-                //     |view
+            // .ui.icon.fluid.basic.circular.button.icon.add_to_cart
+            //     i.cart.plus.large.green.icon
+            //     // a.basic.small.button.zoomer(href="/product/#{_id}")
+            //     //     |view
 
                                 

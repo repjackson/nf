@@ -19,7 +19,7 @@ Template.registerHelper 'cart_subtotal', () ->
         for product in Docs.find(_id:$in:store_session_document.cart_product_ids).fetch()
             if product.price_usd
                 subtotal += product.price_usd
-                console.log 'product', product
+                # console.log 'product', product
         subtotal
     
     
