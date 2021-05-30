@@ -22,21 +22,7 @@ template(name='store_session')
                     .ui.header nf menu
                     .ui.stackable.three.cards
                         each products
-                            .ui.card
-                                .content
-                                    a.image.zoomer.add_to_cart 
-                                        img.ui.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-                                
-                                    .ui.header #{title}
-                                    if current_doc.closed
-                                        .ui.icon.circular.basic.green.disabled.button
-                                            i.cart.plus.icon
-                                    else
-                                        .ui.icon.circular.basic.green.button.add_to_cart
-                                            i.cart.plus.icon
-                                            // |add to cart
-                                    a.basic.small.button.zoomer(href="/product/#{_id}")
-                                        |view
+                            +session_product
                 .four.wide.column
                     .ui.header 
                         i.large.cart.icon
@@ -44,5 +30,29 @@ template(name='store_session')
                     .ui.list
                         each cart_product_docs
                             .item
-                                .ui.inline.header #{title}
-                                i.remove.circular.icon
+                                .ui.inline.label $#{price_usd}
+                                .header #{title}
+                                i.remove.circular.link.icon.remove_cart_item(title='remove from cart')
+                                
+                    .ui.header subtotal #{cart_subtotal}
+                    if cart_product_docs
+                        .ui.fluid.green.button
+                            i.checkmark.icon
+                            |checkout
+                                
+template(name='session_product')
+    .ui.card
+        .content
+            a.image.zoomer.add_to_cart 
+                img.ui.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+            .ui.header #{title}
+            // if current_doc.closed
+            // .ui.icon.circular.basic.green.disabled.button
+            //     i.cart.plus.icon
+            // else
+            // .ui.icon.circular.basic.green.button.add_to_cart
+            i.cart.plus.large.circular.link.icon.add_to_cart
+            // a.basic.small.button.zoomer(href="/product/#{_id}")
+            //     |view
+
+                                

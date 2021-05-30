@@ -10,6 +10,19 @@ Template.registerHelper 'model_docs', (model) ->
         model:model
     # Template.parentData()
 
+Template.registerHelper 'cart_subtotal', () -> 
+    store_session_document = 
+        Docs.findOne 
+            model:'store_session'
+    if store_session_document.cart_product_ids
+        subtotal = 0
+        for product in Docs.find(_id:$in:store_session_document.cart_product_ids).fetch()
+            if product.price_usd
+                subtotal += product.price_usd
+                console.log 'product', product
+        subtotal
+    
+    
 Template.registerHelper 'product_sort_icon', () -> Session.get('product_sort_icon')
 Template.registerHelper 'active_path', (metric) ->
     false
