@@ -10,6 +10,14 @@ template(name='store_session')
                         i.clock.icon
                         |#{current_doc._author_username}'s store session
                     .ui.header created at #{when}
+                    if closed 
+                        .ui.small.header closed
+                        .ui.button.reopen_session
+                            |reopen
+                    else    
+                        .ui.button.end_session
+                            i.undo.icon
+                            |end session
                 .eight.wide.column
                     .ui.header nf menu
                     .ui.stackable.three.cards
@@ -20,23 +28,21 @@ template(name='store_session')
                                         img.ui.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
                                 
                                     .ui.header #{title}
-                                    .ui.icon.circular.basic.green.button.add_to_cart
-                                        i.plus.icon
-                                        // |add to cart
+                                    if current_doc.closed
+                                        .ui.icon.circular.basic.green.disabled.button
+                                            i.cart.plus.icon
+                                    else
+                                        .ui.icon.circular.basic.green.button.add_to_cart
+                                            i.cart.plus.icon
+                                            // |add to cart
                                     a.basic.small.button.zoomer(href="/product/#{_id}")
                                         |view
                 .four.wide.column
                     .ui.header 
                         i.large.cart.icon
                         |current cart
-                    each cart_product_docs
-                        .ui.inline.header #{title}
-                        i.remove.circular.icon
-                    if closed 
-                        .ui.small.header closed
-                        .ui.button.reopen_session
-                            |reopen
-                    else    
-                        .ui.button.end_session
-                            i.undo.icon
-                            |end session
+                    .ui.list
+                        each cart_product_docs
+                            .item
+                                .ui.inline.header #{title}
+                                i.remove.circular.icon
