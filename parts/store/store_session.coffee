@@ -263,7 +263,21 @@ if Meteor.isClient
             Docs.update current_session._id,
                 $addToSet:
                     cart_product_ids:@_id
-                
+            $('body').toast({
+                title: "added to cart"
+                # message: 'See desk staff for key.'
+                class : 'green'
+                position:'top right'
+                # className:
+                #     toast: 'ui massive message'
+                displayTime: 5000
+                transition:
+                  showMethod   : 'zoom',
+                  showDuration : 250,
+                  hideMethod   : 'fade',
+                  hideDuration : 250
+            })
+
 
 
 if Meteor.isServer
