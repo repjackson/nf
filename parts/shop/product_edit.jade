@@ -1,33 +1,35 @@
 template(name='product_edit')
     with current_doc
         .ui.stackable.padded.grid
-            .eight.wide.column
-                .ui.inline.header
-                    i.pencil.icon
-                    | #{title}
-                    small product
-                .ui.large.circular.icon.green.button.save_product(title='save product')
-                    i.checkmark.large.icon   
-                +text_edit key='title' label='title' direct=true
-                // +text_edit key='location' label='location' direct=true
-                // +text_edit key='menu_section' label='menu section' direct=true
-                // each model_docs 'menu_section'
-                //     +pick_section
-                +image_edit key='image_id' label='image' direct=true
-                +boolean_edit key='gluten_free' label='gluten free' direct=true
-                +boolean_edit key='vegan' label='vegan' direct=true
-                +boolean_edit key='local' label='local' direct=true
-            .eight.wide.column
-                +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true
-                +float_edit key='price_usd' label='$ price' direct=true
-                div
-                +array_edit key='ingredients' label='ingredients'  direct=true
-                +text_edit key='size_description' label='size description'  direct=true
-                +html_edit key='description' label='description' direct=true
-                if can_delete
-                    .ui.red.button.delete_product
-                        i.remove.icon   
-                        | delete
+            .three.column.row
+                .column
+                    .ui.inline.header
+                        i.pencil.icon
+                        | #{title}
+                        small product
+                    .ui.large.circular.icon.green.button.save_product(title='save product')
+                        i.checkmark.large.icon   
+                    +text_edit key='title' label='title' direct=true
+                    // +text_edit key='location' label='location' direct=true
+                    // +text_edit key='menu_section' label='menu section' direct=true
+                    // each model_docs 'menu_section'
+                    //     +pick_section
+                    +image_edit key='image_id' label='image' direct=true
+                .column
+                    +boolean_edit key='gluten_free' label='gluten free' direct=true
+                    +boolean_edit key='vegan' label='vegan' direct=true
+                    +boolean_edit key='local' label='local' direct=true
+                .column
+                    +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true
+                    +float_edit key='price_usd' label='$ price' direct=true
+                    div
+                    +array_edit key='ingredients' label='ingredients'  direct=true
+                    +text_edit key='size_description' label='size description'  direct=true
+                    +html_edit key='description' label='description' direct=true
+                    if can_delete
+                        .ui.red.button.delete_product
+                            i.remove.icon   
+                            | delete
                 
 
 

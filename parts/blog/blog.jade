@@ -130,39 +130,3 @@ template(name='set_view_mode_post')
 
 template(name='set_post_limit')
     .item.set_limit #{amount}
-
-
-
-template(name='post_card')
-    .center.aligned.column.zoomer(class=post_card_class title=ingredients)
-        a.image.zoomer(href="/post/#{_id}") 
-            img.ui.zoom.pointer.goto_post.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-        .content
-            a.ui.inline.header(href="/post/#{_id}") 
-                //- |#{_author.name}'s
-                | #{title}
-            //- if session_is 'view_ingredients' true
-            // +ismall name='ingredients'
-            // each ingredients
-            //     .ui.small.basic.circular.label #{this}
-            if gluten_free
-                +i name='no-gluten' cl='ui mini inline image' title='gluten free'
-            if vegan
-                +i name='vegan-food' cl='ui mini inline image' title='vegan'
-            //- .ui.inline.small.header tags
-            // .content
-            //     .right.floated.meta
-            //         | {{from_now datetime_available}}
-            //     //- if session_is 'view_users' true
-            // //- a.image(href="/post/#{_id}")
-                
-        .content    
-            .ui.inline.header 
-                |${{fixed price_usd}}
-            // .ui.inline.small.header 
-            //     |(#{menu_section}) 
-            // div
-            // .ui.inline.inline.small.grey.header #{views}
-                // i.eye.icon
-            .ui.inline.inline.small.grey.header #{points} 
-                // i.line.chart.icon

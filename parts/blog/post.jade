@@ -1,0 +1,105 @@
+template(name='post_card')
+    .ui.card.view_post.pointer
+        img.ui.fluid.rounded.image(src="{{c.url image_id height=200 width=400 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+        .content
+            a.ui.header(href="/m/post/#{_id}/view") #{title}
+            .ui.small.grey.header #{when}
+            +comments_view_small
+            +author_info
+        
+template(name='post_item')
+    .ui.fluid.segment.view_post.pointer
+        a.ui.header(href="/m/post/#{_id}/view") #{title}
+        div
+        .ui.small.grey.inline.header #{when}
+        each tags 
+            .ui.basic.small.label #{this}
+        
+
+template(name='post_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .middle.aligned.row 
+                .sixteen.wide.column
+                    a(href="/m/post")
+                        i.newspaper.circular.link.big.icon
+                    .ui.large.inline.header #{title}
+                    // div
+                    // .ui.inline.grey.header {{from_now start_datetime}}
+                    
+                    if can_edit
+                        a.edit_post(href="/m/post/#{_id}/edit" title='edit')
+                            i.big.circular.link.pencil.icon
+
+            .row 
+                .four.wide.column
+                    img.ui.fluid.rounded.image(src="{{c.url image_id }}" class=currentUser.invert_class)
+                    .ui.segment
+                        .ui.header 
+                            small author
+                        a.ui.header(href="/user/#{_author.username}") 
+                            img.ui.avatar.image(src="{{c.url _author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+                            |#{_author.username}
+                    .ui.small.grey.header 
+                        i.line.chart.icon
+                        |stats
+                    .ui.list
+                        .item #{views} views
+                    each viewers
+                        .ui.label #{username
+                    +array_view key='tags' label='tags' direct=true
+                    +voting_full
+                    //- +array_view key='location_tags' label='location_tags' direct=true
+                .twelve.wide.column
+                    // a.ui.header(href="/user/#{target.username}")
+                    //     |#{target.username}
+                    .ui.segment
+                        |!{content}
+                    div 
+                    .spacer
+                    .spacer
+                    +comments
+                // .four.wide.column
+                
+                    //- .ui.fluid.green.button.submit
+                    //-     i.checkmark.icon
+                    //-     |submit
+template(name='post_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .centered.middle.aligned.row 
+                .four.wide.center.aligned.column
+                    a.ui.icon.green.big.circular.button(href="/m/post/#{_id}/view" title='save')
+                        i.checkmark.big.icon
+                .eight.wide.center.aligned.column
+                    .ui.header 
+                        +icolor name='news' cl='ui image inline pointer'
+                        |edit post
+                .four.wide.center.aligned.column
+                    i.large.link.circular.red.remove.icon.delete_post
+            .row
+                .four.wide.column
+                    .ui.header 
+                        small author
+                        |#{_author.username}
+                    if is_admin
+                        +single_user_edit key='_author_id' label='author' direct=true
+                    +image_edit key='image_id' label='image' direct=true
+                    div 
+                    +array_edit key='tags' label='tags' direct=true
+                    +boolean_edit key='published' icon='visible' direct=true
+                    if is_admin 
+                        +text_edit key='model' label='model' direct=true
+                    //- +array_edit key='location_tags' label='location_tags' direct=true
+                    // unless published
+                    //     a.ui.fluid.green.button.submit(href="/save")
+                    //         i.checkmark.icon
+                    //         |publish
+                    // else
+                    //     .ui.basic.button.unpublish 
+                    //         |unpublish
+                    .ui.header
+                        |audience
+                .twelve.wide.column
+                    +text_edit key='title' label='title' direct=true
+                    +html_edit key='content' label='content' direct=true
