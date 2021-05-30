@@ -21,8 +21,6 @@ template(name='product_layout')
                                     i.pencil.blue.large.link.circular.icon
                             // a(href="{{c.url image_id}}" target="_window")
                             img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                            div
-                            +voting_full
                             div 
                             +boolean_view key='gluten_free' label='gluten free' direct=true
                             +boolean_view key='vegan' label='vegan' direct=true
@@ -46,6 +44,9 @@ template(name='product_layout')
                             a.ui.basic.circular.large.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
                                 i.chat.icon
                                 |comments
+                            a.ui.basic.circular.large.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
+                                i.shield.icon
+                                |inventory
                             +yield
                             
 template(name='product_main')                            
@@ -55,8 +56,15 @@ template(name='product_main')
         |ingredients
     each ingredients
         .ui.large.basic.label #{this}
+    div
+    +voting_full
         
         
+template(name='product_inventory')      
+template(name='product_recipes')
+    .ui.header recipes
+    each product_recipes
+        a.ui.header(href="/recipe/#{_id}/view") #{title}
 template(name='product_comments')      
     +comments
 template(name='product_subscriptions')      
