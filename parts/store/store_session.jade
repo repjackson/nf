@@ -18,15 +18,6 @@ template(name='store_session')
                         .ui.button.end_session
                             i.undo.icon
                             |end session
-                .eight.wide.column
-                    #barcode
-                    .ui.large.circular.button.init
-                        |start barcode reader
-                    .ui.header nf menu
-                    .ui.stackable.three.cards
-                        each products
-                            +session_product
-                .four.wide.column
                     .ui.header 
                         i.large.cart.icon
                         |current cart
@@ -41,6 +32,17 @@ template(name='store_session')
                         .ui.fluid.green.button
                             i.checkmark.icon
                             |checkout
+                .twelve.wide.column
+                    if skv_is 'view_barcode' true
+                        i.circular.close.icon.close_barcode(title='close barcode')
+                        #barcode
+                    else
+                        .ui.large.circular.button.init
+                            |start barcode reader
+                    .ui.header nf menu
+                    .ui.stackable.three.cards
+                        each products
+                            +session_product
                                 
 template(name='session_product')
     .ui.card
@@ -53,7 +55,8 @@ template(name='session_product')
             //     i.cart.plus.icon
             // else
             // .ui.icon.circular.basic.green.button.add_to_cart
-            i.cart.plus.large.circular.link.icon.add_to_cart
+        .ui.icon.fluid.green.basic.button.icon.add_to_cart
+            i.cart.plus.large.icon
             // a.basic.small.button.zoomer(href="/product/#{_id}")
             //     |view
 

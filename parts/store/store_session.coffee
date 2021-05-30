@@ -49,28 +49,33 @@ if Meteor.isClient
 
 
     Template.store_session.events
+        'click .close_barcode': ->
+            Session.set('view_barcode', false)
         'click .init': ->
-            Quagga.init({
-                inputStream : {
-                  name : "Live",
-                  type : "LiveStream",
-                  target: document.querySelector('#barcode')
-                },
-                decoder : {
-                    readers : ["code_128_reader"]
-                    debug: {
-                        drawBoundingBox: true,
-                        showFrequency: true,
-                        drawScanline: true,
-                        showPattern: true
+            Session.set('view_barcode', true)
+            Meteor.setTimeout ->
+                Quagga.init({
+                    inputStream : {
+                      name : "Live",
+                      type : "LiveStream",
+                      target: document.querySelector('#barcode')
+                    },
+                    decoder : {
+                        readers : ["code_128_reader"]
+                        debug: {
+                            drawBoundingBox: true,
+                            showFrequency: true,
+                            drawScanline: true,
+                            showPattern: true
+                        }
                     }
-                }
-              }, (err)->
-                  if err
-                      console.log(err);
-                  console.log("Initialization finished. Ready to start");
-                  Quagga.start();
-              );
+                  }, (err)->
+                      if err
+                          console.log(err);
+                      console.log("Initialization finished. Ready to start");
+                      Quagga.start();
+                  );
+            , 1000
             
         # 'click .vote_yes': ->
         #     $('.poll_area').transition('fade out', 500)
@@ -185,6 +190,10 @@ if Meteor.isClient
             # console.log @valueOf()
             Docs.update current_session._id,
                 $pull:cart_product_ids:@_id
+            $('body').toast({
+                message: 'item removed'
+            })
+    
 
         # 'click .toggle_adding_guest': ->
         #     Session.set 'adding_guest', true
