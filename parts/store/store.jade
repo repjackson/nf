@@ -8,9 +8,6 @@ template(name='store')
                 a.ui.big.button(href="/staff") 
                     i.shield.icon
                     |staff portal
-                a.ui.big.button(href="/kiosk") 
-                    i.tablet.icon
-                    |kiosk
                 .ui.button.new_store_session
                     i.plus.icon
                     |new store session
@@ -24,8 +21,12 @@ template(name='store')
                                 .ui.basic.green.label
                                     |open
                             if closed
-                                .ui.basic.green.label
-                                    |disabled
+                                .ui.basic.label
+                                    |closed
+                            |#{cart_product_ids.count} cart items    
+                            each cart_product_docs
+                                img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+    
                 .ui.header 
                     i.shield.icon
                     |customers today

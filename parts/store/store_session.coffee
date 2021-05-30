@@ -6,10 +6,11 @@ if Meteor.isClient
 
     Template.store_session.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'doc', Session.get('new_guest_id')
+        @autorun => Meteor.subscribe 'session_products', Router.current().params.doc_id
+        # @autorun => Meteor.subscribe 'doc', Session.get('new_guest_id')
         # @autorun => Meteor.subscribe 'checkin_guests',Router.current().params.doc_id
-        @autorun -> Meteor.subscribe 'resident_from_store_session', Router.current().params.doc_id
-        @autorun -> Meteor.subscribe 'store_session', Router.current().params.doc_id
+        # @autorun -> Meteor.subscribe 'resident_from_store_session', Router.current().params.doc_id
+        # @autorun -> Meteor.subscribe 'store_session', Router.current().params.doc_id
         # @autorun -> Meteor.subscribe 'model_docs', 'guest'
 
         # @autorun => Meteor.subscribe 'rules_signed_username', @data.username
@@ -141,6 +142,15 @@ if Meteor.isClient
             Router.go "/sign_guidelines/#{new_id}/#{store_session_document.resident_username}"
             # Session.set 'displaying_profile',null
 
+        'click .add_to_cart': ->
+            current_session = Docs.findOne
+                model:'store_session'
+                # current:true
+            Docs.update current_session._id,
+                $addToSet:
+                    cart_product_ids:@_id
+                
+                
         'click .add_recent_guest': ->
             current_session = Docs.findOne
                 model:'store_session'
@@ -167,6 +177,9 @@ if Meteor.isClient
             Session.set 'timer_engaged',false
 
     Template.store_session.helpers
+        products: ->
+            Docs.find
+                model:'product'
         current_poll: ->
             store_session_document = Docs.findOne Router.current().params.doc_id
             # console.log @
@@ -212,3 +225,10 @@ if Meteor.isClient
             store_session_document = Docs.findOne Router.current().params.doc_id
             if store_session_document and store_session_document.user_id
                 Meteor.users.findOne store_session_document.user_id
+
+
+if Meteor.isServer
+    Meteor.publish 'session_products', (session_id)->
+        Docs.find { 
+            model:'product'
+        }, limit:10

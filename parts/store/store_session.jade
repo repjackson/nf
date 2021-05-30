@@ -10,16 +10,21 @@ template(name='store_session')
                         i.clock.icon
                         |#{current_doc._author_username}'s store session
                     .ui.header created at #{when}
+                .eight.wide.column
                     .ui.header 
                         i.large.cart.icon
                         |current cart
-                .eight.wide.column
+                    each cart_product_docs
+                        .ui.header #{title}
                     each user_cart_items
                         .ui.header #{title}
                         i.remove.circular.icon
                     .ui.header nf menu
                     each products
                         .ui.header #{title}
+                        .ui.button.add_to_cart
+                            i.plus.icon
+                            |add to cart
                 .four.wide.column
                     if closed 
                         .ui.small.header closed

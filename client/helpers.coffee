@@ -14,6 +14,12 @@ Template.registerHelper 'product_sort_icon', () -> Session.get('product_sort_ico
 Template.registerHelper 'active_path', (metric) ->
     false
 
+Template.registerHelper 'cart_product_docs', ()->
+    if @cart_product_ids
+        Docs.find
+            model:'product'
+            _id:$in:@cart_product_ids
+
 Template.registerHelper 'user_from_id', (id)->
     Meteor.users.findOne id
 Template.registerHelper 'kve', (key,value)-> @["#{key}"] is value
