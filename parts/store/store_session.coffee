@@ -301,7 +301,9 @@ if Meteor.isClient
             Docs.update current_session._id,
                 $addToSet:
                     cart_product_ids:@_id
-            
+                $set:
+                    status:'paid'
+                    paid:true
             current_session = Docs.findOne
                 model:'store_session'
                 # current:true
@@ -322,10 +324,10 @@ if Meteor.isClient
                 #     toast: 'ui massive message'
                 displayTime: 5000
                 transition:
-                  showMethod   : 'zoom',
-                  showDuration : 250,
-                  hideMethod   : 'fade',
-                  hideDuration : 250
+                    showMethod   : 'zoom',
+                    showDuration : 250,
+                    hideMethod   : 'fade',
+                    hideDuration : 250
             })
 
 

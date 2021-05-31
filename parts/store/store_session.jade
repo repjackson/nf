@@ -45,7 +45,7 @@ template(name='store_session')
                             .item
                                 img.ui.avatar.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
 
-                                .ui.inline.basic.circular.label $#{price_usd}
+                                .ui.inline.header $#{price_usd}
                                 .ui.small.inline.header #{title}
                                 i.remove.circular.link.icon.remove_cart_item.zoomer(title='remove from cart')
                     .ui.header subtotal $#{subtotal}
