@@ -17,25 +17,25 @@ template(name='sub_edit')
                 .ui.header $#{sub_total_transaction_amount} 
                     small total transaction amount
                 .ui.header product
-                if sub_product
-                    .ui.small.header #{sub_product.title}
-            .six.wide.column
-                .ui.header day
-                +kvs key='day' value='sunday' direct=true
-                // +kvs key='day' value='now' direct=true
-                +kvs key='day' value='monday' direct=true
-                +kvs key='day' value='tuesday' direct=true
-                +kvs key='day' value='wednesday' direct=true
-                +kvs key='day' value='thursday' direct=true
-                +kvs key='day' value='friday' direct=true
-                +kvs key='day' value='saturday' direct=true
-                // +kvs key='when' value='later' direct=true
-                // if kve 'when' 'later'
-                //     +datetime_edit key='pickup_datetime' direct=true
+                // if sub_product
                 with sub_product
+                    .ui.small.header #{sub_product.title}
                     +image_view key='image_id'
                     //- img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
                     +html_view key='description' direct=true
+            .six.wide.column
+                .ui.header day
+                +kvs key='sub_day' value='sunday' direct=true
+                // +kvs key='day' value='now' direct=true
+                +kvs key='sub_day' value='monday' direct=true
+                +kvs key='sub_day' value='tuesday' direct=true
+                +kvs key='sub_day' value='wednesday' direct=true
+                +kvs key='sub_day' value='thursday' direct=true
+                +kvs key='sub_day' value='friday' direct=true
+                +kvs key='sub_day' value='saturday' direct=true
+                // +kvs key='when' value='later' direct=true
+                // if kve 'when' 'later'
+                //     +datetime_edit key='pickup_datetime' direct=true
             .five.wide.column
                 // else  
                 //     .ui.red.disabled.button(title='existing reservations')

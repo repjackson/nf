@@ -39,15 +39,18 @@ if Meteor.isClient
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
 
 
-    Template.product_layout.events
+    Template.product_subscriptions.events
         'click .subscribe': ->
             if confirm 'subscribe?'
                 Docs.update Router.current().params.doc_id,
                     $addToSet: 
                         subscribed_ids: Meteor.userId()
-                Docs.insert 
-                    model:'product_subscription'
-                    product_id:Router.current().params.doc_id
+                new_sub_id = 
+                    Docs.insert 
+                        model:'product_subscription'
+                        product_id:Router.current().params.doc_id
+                Router.go "/subscription/#{new_sub_id}/edit"
+                    
         'click .unsubscribe': ->
             if confirm 'unsubscribe?'
                 Docs.update Router.current().params.doc_id,
@@ -92,12 +95,13 @@ if Meteor.isClient
             )
 
 
-    Template.product_layout.helpers
+    Template.product_subscriptions.helpers
         product_subs: ->
             Docs.find
                 model:'product_subscription'
                 product_id:Router.current().params.doc_id
 
+    Template.product_layout.helpers
         product_order_total: ->
             orders = 
                 Docs.find({

@@ -8,6 +8,9 @@ template(name='sub_view')
                             a(href="/product/#{_id}")
                                 img.ui.rounded.image(src="{{c.url image_id width=400 height=400}}")
                             a.ui.header(href="/product/#{_id}") #{title}
+                            .ui.inline.header ingredients
+                            each ingredients
+                                .ui.basic.circular.label #{this}
                             //- .ui.header #{cook_tip} cook tip
                             // .ui.header $#{sub_total_transaction_amount} 
                             //     small total transaction amount
@@ -24,9 +27,10 @@ template(name='sub_view')
                         a(href="/sub/#{_id}/edit" title='edit')
                             i.pencil.link.large.circular.icon
                     .ui.header buyer #{_author_username}
+                    .ui.header day: #{sub_day}
                     .ui.header 
                         i.clock.icon
-                        |when #{when}
+                        |created #{when}
                     // if kve 'when' 'later'
                     //     +datetime_view key='pickup_datetime'
                     // .ui.header status: #{status}
@@ -57,9 +61,6 @@ template(name='sub_view')
                         //     small for 
                         //     strong ${{fixed sub_price}}
                     div
-                    .ui.inline.header ingredients
-                    each sub_product.ingredients
-                        .ui.label #{this}
                     if pickup
                         .ui.header
                             |pickup
