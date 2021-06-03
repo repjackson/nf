@@ -3,13 +3,26 @@ if Meteor.isClient
         @layout 'layout'
         @render 'cart'
         ), name:'cart'
+    Router.route '/checkout', (->
+        @layout 'layout'
+        @render 'checkout'
+        ), name:'checkout'
 
     Template.cart.onCreated ->
-        @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
+        # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
+        @autorun => Meteor.subscribe 'model_docs', 'product'
+        @autorun => Meteor.subscribe 'my_cart'
+    Template.checkout.onCreated ->
         @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
 
     Template.cart.events
+        'click .checkout_cart':->
+            
+            # Docs.update @_id, 
+            #     status:'checking out'
+            Router.go '/checkout'
+                
         'click .remove_item': (e,t)->
             product = 
                 Docs.findOne
@@ -59,6 +72,11 @@ if Meteor.isClient
                     $inc:amount:-1
 
     Template.cart.helpers
+        cart_items: ->
+            Docs.find
+                model:'cart_item'
+                # ingredient_ids: $in: [@_id]
+    Template.checkout.helpers
         cart_items: ->
             Docs.find
                 model:'cart_item'
