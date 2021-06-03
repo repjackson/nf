@@ -29,7 +29,7 @@ Template.registerHelper 'my_cart_subtotal', () ->
         # console.log product
         if product
             if product.price_usd
-                subtotal += product.price_usd
+                subtotal += product.price_usd*cart_item.amount
         # if product.price_usd
         #     console.log product.price_usd
             # console.log 'product', product
