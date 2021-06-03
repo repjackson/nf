@@ -50,8 +50,10 @@ template(name='checkout')
                     .ui.inline.header 
                         i.truck.icon
                         |shipping address
-                    .ui.button.use_different_shipping_address
-                        |use different shipping address
+                    +boolean_edit key='use_different_shipping_address' label='use different shipping address' direct=true
+                    if use_different_shipping_address
+                        .ui.input
+                            input(type='text' placeholder='street')
                 .ui.segment
                     .ui.header 
                         i.money.icon

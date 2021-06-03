@@ -171,8 +171,13 @@ if Meteor.isServer
         for cart_item in cart_items
             product_ids.push cart_item.product_id
         console.log product_ids
-        Docs.find 
+        Docs.find({
             model:'product'
             _id:$in:product_ids
-            
+        }, {fields:
+                title:1
+                model:1
+                image_id:1
+                price_usd:1
+        })
             
