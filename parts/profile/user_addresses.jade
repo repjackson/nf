@@ -9,11 +9,11 @@ template(name='user_addresses')
             +text_edit key='street_address' label='street address' direct=true
             +text_edit key='city' label='city' direct=true
             +number_edit key='zip_code' label='zip code' direct=true
-            .ui.big.link.green.circular.checkmark.icon.save_address
+            i.ui.big.link.green.circular.checkmark.icon.save_address
+            i.ui.link.red.circular.remove.icon.remove_address
         else 
             .ui.header 
                 |#{street_address}
             .ui.header #{city}, #{zip_code}
-            if is_author
-                .ui.large.link.circular.pencil.icon.edit_address
+            i.ui.large.link.circular.edit.icon.edit_address
                 

@@ -10,7 +10,7 @@ if Meteor.isClient
             Session.set('editing_id',null)
         'click .edit_address': ->
             Session.set('editing_id',@_id)
-        'click .delete_address': ->
+        'click .remove_address': ->
             if confirm 'confirm delete?'
                 Docs.remove @_id
         'click .add_address': ->
