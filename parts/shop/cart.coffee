@@ -98,6 +98,15 @@ if Meteor.isClient
             Docs.find
                 model:'cart_item'
                 # ingredient_ids: $in: [@_id]
+    Template.topup_button.events
+        'click .initiate':->
+            if confirm "topup for #{@amount}"
+                Docs.insert
+                    model:'balance_topup'
+                    amount:@amount
+                Meteor.users.update Meteor.userId(),
+                    $inc:credit:@amount
+            
 
 
 if Meteor.isServer

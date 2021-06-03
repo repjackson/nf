@@ -58,12 +58,10 @@ template(name='checkout')
                         |payment
                     div
                     .ui.inline.header #{currentUser.credit} credit
-                    .ui.circular.button
-                        |+$10
-                    .ui.circular.button
-                        |+$20
-                    .ui.circular.button
-                        |+$100
+                    +topup_button amount=10
+                    +topup_button amount=20
+                    +topup_button amount=50
+                    +topup_button amount=100
                     div
                     .ui.button.select_credit_card
                         |existing credit card
@@ -78,4 +76,7 @@ template(name='checkout')
                 .ui.big.circular.green.button.checkout_cart
                     i.large.send.icon
                     |submit
-                
+
+template(name='topup_button')                
+    .ui.circular.button.initiate
+        |+$#{amount}
