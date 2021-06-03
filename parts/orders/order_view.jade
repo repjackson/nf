@@ -30,6 +30,12 @@ template(name='order_view')
                     if kve 'when' 'later'
                         +datetime_view key='pickup_datetime'
                     .ui.header status: #{status}
+                    if complete
+                        .ui.header
+                            i.checkmark.icon
+                            |complete
+                        .ui.inline.header {{from_now complete_timestamp}}
+                    .ui.header complete #{complete}
                     .ui.header 
                         i.shield.icon
                         |admin
@@ -45,6 +51,8 @@ template(name='order_view')
                     +kvs key='status' value='picked_up' label='mark picked up' direct=true
                     with buyer
                         +user_card
+                    if is_admin
+                        +print_this
                 .four.wide.column
                     // |{{from_now datetime_available}}:
                     // +textarea_view key='description'
@@ -57,9 +65,6 @@ template(name='order_view')
                             small for 
                             strong ${{fixed order_price}}
                     div
-                    .ui.inline.header ingredients
-                    each order_product.ingredients
-                        .ui.label #{this}
                     if pickup
                         .ui.header
                             |pickup

@@ -140,7 +140,7 @@ if Meteor.isClient
                 model:'cart_item'
                 # ingredient_ids: $in: [@_id]
     Template.topup_button.events
-        'click .initiate':->
+        'click .initiate_topup':->
             Swal.fire({
                 title: "topup for #{@amount}"
                 # text: "#{@subtotal} credits"
@@ -151,9 +151,9 @@ if Meteor.isClient
             }).then((result) =>
                 Docs.insert
                     model:'balance_topup'
-                    amount:@amount
+                    amount:parseInt(@amount)
                 Meteor.users.update Meteor.userId(),
-                    $inc:credit:@amount
+                    $inc:credit:parseInt(@amount)
             )
 
 
