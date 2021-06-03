@@ -5,4 +5,15 @@ template(name='user_addresses')
     .ui.basic.circular.icon.button.add_address
         i.large.plus.icon
     each user_address_docs
-        .ui.header #{location_long} #{when}
+        if is_editing_address
+            +text_edit key='street_address' label='street address' direct=true
+            +text_edit key='city' label='city' direct=true
+            +number_edit key='zip_code' label='zip code' direct=true
+            .ui.big.link.green.circular.checkmark.icon.save_address
+        else 
+            .ui.header 
+                |#{street_address}
+            .ui.header #{city}, #{zip_code}
+            if is_author
+                .ui.large.link.circular.pencil.icon.edit_address
+                
