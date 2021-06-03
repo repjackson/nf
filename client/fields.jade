@@ -709,11 +709,14 @@ template(name='boolean_edit')
         //-     else
         //-         |no
 template(name='boolean_view')
-    div(title=title)
+    .ui.basic.circular.label(title=title)
         .ui.inline.grey.small.header
             if icon
-                //- i.grey.icon(class=icon)
-                +i name=icon cl='ui inline mini image'
+                if field_value
+                    +iios name=icon cl='ui inline mini image'
+                else
+                    //- i.grey.icon(class=icon)
+                    +i name=icon cl='ui inline mini image'
             if title
                 |#{title}
             else if label

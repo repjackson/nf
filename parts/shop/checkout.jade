@@ -32,12 +32,11 @@ template(name='checkout')
                         |address
                     .ui.inline.header billing address
                     each model_docs_helper 'address'
-                        .ui.header #{when}
-                    +boolean_edit key='use_profile_address' label='use profile address' direct=true
-                    if use_profile_address
-                        with currentUser
-                            .ui.header #{address}
-                    else
+                        .ui.button.pick_address(class=user_address_pick_class)
+                            .ui.header #{street_address}, #{city}, #{zip_code}
+                    // +boolean_edit key='use_profile_address' label='use profile address' direct=true
+                    +boolean_edit key='use_new_address' label='use new address' direct=true
+                    if use_new_address
                         .ui.input
                             input(type='text' placeholder='street')
                         .ui.input
