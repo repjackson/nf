@@ -9,6 +9,32 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
 
+    Template.cart.events
+        'click .remove_item': (e,t)->
+            Swal.fire({
+                title: "remove #{@product.title}?"
+                # text: "cannot be undone"
+                icon: 'question'
+                confirmButtonText: 'delete'
+                confirmButtonColor: 'red'
+                showCancelButton: true
+                cancelButtonText: 'cancel'
+                reverseButtons: true
+            }).then((result)=>
+                if result.value
+                    $(e.currentTarget).closest('.item').transition('slide left', 1000)
+                    Meteor.setTimeout =>
+                        Docs.remove @_id
+                    , 1000
+                    # Swal.fire(
+                    #     position: 'top-end',
+                    #     icon: 'success',
+                    #     title: 'item removed',
+                    #     showConfirmButton: false,
+                    #     timer: 1500
+                    # )
+            )
+
     Template.cart.helpers
         cart_items: ->
             Docs.find

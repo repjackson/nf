@@ -40,32 +40,6 @@ template(name='nav')
             // +i name='shop' cl=''
             i.building.large.icon
             // i.cart.icon
-        // a.icon.item(href="/users" class="{{isActiveRoute '/users'}}")
-        //     i.users.large.icon
-        //     // | users
-        // a.icon.item(href="/events" class="{{isActiveRoute '/events'}}")
-        //     i.calendar.large.icon
-        //     // | users
-            
-            // strong.mobile.hidden about
-        // a.item.zoomer(href='/subs' class="{{isActivePath '/subs'}}" title='subscriptions')
-        //     +i name='clock' cl='ui inline mini image'
-        //     // i.list.icon
-        // a.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-        //     +i name='list' cl='ui inline mini image'
-        //     // i.list.icon
-        //     // strong.mobile.hidden orders
-        // .ui.simple.dropdown.item
-        //     .text get involved
-        //     .menu 
-        //         .item hi
-        //         .item hi
-        //         .item hi
-        // unless currentUser
-        //     a.item.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
-        //         // +i name='list' cl='ui inline mini image'
-        //         // i.newspaper.icon
-        //         strong.mobile.hidden get involved
         a.icon.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
             // +i name='phone' cl='ui inline mini image'
             i.large.phone.icon
@@ -75,24 +49,6 @@ template(name='nav')
             // +i name='list' cl='ui inline mini image'
             i.newspaper.large.icon
             // strong.mobile.hidden news
-        // a.item.zoomer(href='/chat' class="{{isActivePath '/chat'}}" title='chat')
-        //     +i name='chat' cl='ui inline mini image'
-        //     // i.chat.icon
-        //     // strong.mobile.hidden chat
-        // a.item.zoomer(href='/map' class="{{isActivePath '/map'}}" title='map')
-        //     i.large.marker.icon
-        //     // .ui.mini.image.marker
-        //     //     +i name='marker' cl='ui inline mini image'
-        // a.item.zoomer(href='/mail' class="{{isActivePath '/mail'}}" title='mail')
-        //     .ui.mini.image.mail
-        //         +i name='secured-letter--v1' cl='ui inline mini image'
-        //     // i.mail.icon
-        //     // strong.mobile.hidden mail
-        // if is_admin
-        //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
-        //         +i name='tasks' cl='ui inline mini image'
-        //     a.item(href='/m/model' class="{{isActivePath '/m/model'}}" title='delta')
-        //         +i name='database' cl='ui inline mini image'
         .right.menu
             if currentUser
                 // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
@@ -100,7 +56,7 @@ template(name='nav')
                 a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
                     i.large.cart.icon
                     if cart_items.count
-                        .ui.basic.label #{cart_items.count}
+                        .ui.basic.label #{cart_items.count} (#{my_cart_subtotal})
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                     // i.wallet.icon
                     // .ui.mini.image.wallet
