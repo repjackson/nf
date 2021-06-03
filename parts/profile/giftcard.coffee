@@ -45,11 +45,11 @@ if Meteor.isClient
         sent_giftcards: ()->
             Docs.find   
                 model:'giftcard'
-                _author_username:username
+                _author_username:Router.current().params.username
         received_giftcards: ()->
             Docs.find   
                 model:'giftcard'
-                recipient_username:username
+                recipient_username:Router.current().params.username
         
 if Meteor.isServer
     Meteor.publish 'user_received_giftcards', (username)->
