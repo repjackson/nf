@@ -1,5 +1,5 @@
 template(name='user_credit')
-    .ui.stackable.two.column.grid
+    .ui.stackable.one.column.grid
         if is_current_user
             .column
                 .ui.header
@@ -21,11 +21,11 @@ template(name='user_credit')
                                 .description #{when} {{long_date _timestamp}}
                                 //- if is_dev
                                 +remove_button
-            .column
-                .ui.header 
-                    i.shield.icon
-                    |admin
-                .ui.big.icon.button.add_credit(title='add credit')
-                    i.plus.icon
-                .ui.big.icon.button.remove_credit(title='remove credit')
-                    i.minus.icon
+            // .column
+            //     .ui.header 
+            //         i.shield.icon
+            //         |admin
+            //     .ui.big.icon.button.add_credit(title='add credit')
+            //         i.plus.icon
+            //     .ui.big.icon.button.remove_credit(title='remove credit')
+            //         i.minus.icon

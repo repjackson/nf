@@ -124,7 +124,7 @@ if Meteor.isClient
                             complete_timestamp:Date.now()
                     Meteor.users.update Meteor.userId(),
                         $inc:credit:-subtotal.toFixed(2)
-                    Router.go("/order/#{@_id}/view")
+                    Router.go("/order/#{@_id}")
                 )
             
     

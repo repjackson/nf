@@ -3,6 +3,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'order_view'
         ), name:'order_view'
+    Router.route '/order/:doc_id/view', (->
+        @layout 'layout'
+        @render 'order_view'
+        ), name:'order_view_long'
 
 
     Template.order_view.onCreated ->
