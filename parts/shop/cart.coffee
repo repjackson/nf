@@ -11,8 +11,15 @@ if Meteor.isClient
 
     Template.cart.events
         'click .remove_item': (e,t)->
+            product = 
+                Docs.findOne
+                    model:'product'
+                    
+                    _id:@product_id
+            console.log product
+            
             Swal.fire({
-                title: "remove #{@product.title}?"
+                title: "remove #{product.title}?"
                 # text: "cannot be undone"
                 icon: 'question'
                 confirmButtonText: 'delete'
