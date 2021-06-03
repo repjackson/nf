@@ -22,6 +22,16 @@ Template.registerHelper 'cart_subtotal', () ->
                 # console.log 'product', product
         subtotal
     
+Template.registerHelper 'my_cart_subtotal', () -> 
+    subtotal = 0
+    for product in Docs.find(model:'cart_item',_author_id:Meteor.userId()).fetch()
+        if product.price_usd
+            subtotal += product.price_usd
+            # console.log 'product', product
+    console.log subtotal
+    subtotal
+    
+    
     
 Template.registerHelper 'product_sort_icon', () -> Session.get('product_sort_icon')
 Template.registerHelper 'active_path', (metric) ->

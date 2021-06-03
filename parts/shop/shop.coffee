@@ -218,7 +218,7 @@ if Meteor.isClient
 
     Template.product_card.events
         'click .add_to_cart': ->
-            Meteor.call 'add_to_cart', @_id, ->
+            Meteor.call 'add_to_cart', @_id, =>
                 $('body').toast(
                     showIcon: 'cart plus'
                     message: "#{@title} added"

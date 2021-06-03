@@ -4,7 +4,14 @@ template(name='cart')
             .ui.header
                 i.cart.icon
                 |cart
+            a.ui.big.basic.icon.button(href="/shop")
+                i.shop.icon
         .twelve.wide.column
-            each cart_items
-                .ui.header #{when}
-                +print_this
+            .ui.large.list.scrolling
+                each cart_items
+                    .item
+                        .ui.header #{product.price} #{product.title}
+                        small added #{when}
+                        +print_this
+            .ui.header subtotal: $#{my_cart_subtotal}
+            

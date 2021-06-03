@@ -68,9 +68,9 @@ Docs.helpers
     five_tags: -> if @tags then @tags[..4]
     three_tags: -> if @tags then @tags[..2]
     is_visible: -> @published in [0,1]
-    is_published: -> @published is 1
-    is_anonymous: -> @published is 0
-    is_private: -> @published is -1
+    # is_published: -> @published is 1
+    # is_anonymous: -> @published is 0
+    # is_private: -> @published is -1
     # from_user: ->
     #     if @from_user_id
     #         Meteor.users.findOne @from_user_id
@@ -87,6 +87,10 @@ Docs.helpers
         Docs.findOne
             model:'order'
             _id:@order_id
+    product: ->
+        Docs.findOne
+            model:'product'
+            _id:@product_id
 
 
 

@@ -6,7 +6,7 @@ if Meteor.isClient
 
     Template.cart.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'model_docs', 'store_session'
+        @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
 
     Template.cart.helpers
@@ -21,3 +21,4 @@ if Meteor.isServer
         Docs.find
             model:'cart_item'
             _author_id: Meteor.userId()
+            app:'nf'
