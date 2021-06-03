@@ -11,8 +11,8 @@ template(name='nav')
         a.header.item.zoomer(href='/')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
-            |gold run market
-            // img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+            // |Nude Foods Market
+            img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // span.mobile.hidden nude foods market
         // .search.item.zoomer(title='search')
         //     .ui.icon.transparent.input
@@ -22,6 +22,8 @@ template(name='nav')
         //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
+        a.icon.item.zoomer(href='/p/regenerative_agg' class="{{isActivePath '/shop'}}" title='shop')
+            i.refresh.large.icon
         a.icon.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             i.food.large.icon
             // .ui.mini.image.cart
@@ -38,12 +40,12 @@ template(name='nav')
             // +i name='shop' cl=''
             i.building.large.icon
             // i.cart.icon
-        a.icon.item(href="/users" class="{{isActiveRoute '/users'}}")
-            i.users.large.icon
-            // | users
-        a.icon.item(href="/events" class="{{isActiveRoute '/events'}}")
-            i.calendar.large.icon
-            // | users
+        // a.icon.item(href="/users" class="{{isActiveRoute '/users'}}")
+        //     i.users.large.icon
+        //     // | users
+        // a.icon.item(href="/events" class="{{isActiveRoute '/events'}}")
+        //     i.calendar.large.icon
+        //     // | users
             
             // strong.mobile.hidden about
         // a.item.zoomer(href='/subs' class="{{isActivePath '/subs'}}" title='subscriptions')

@@ -10,9 +10,6 @@ template(name='user_layout')
                     .row
                         //- img.ui.image.checkin_banner(src="{{c.url banner_image width=1000 height=1000 crop='crop'}}")
                         .four.wide.column
-                            a.item.mobile.hidden(href="/user/#{user_from_username_param.username}")
-                                img.ui.fluid.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
-                            // .spacer
                             a(href="/user/#{username}")
                                 .ui.center.aligned.header
                                     strong #{name}
@@ -86,6 +83,9 @@ template(name='user_layout')
                                 //- a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
                                 //-     i.globe.icon
                                 //-     |log out other clients
+                            a.item.mobile.hidden(href="/user/#{user_from_username_param.username}")
+                                img.ui.fluid.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                            // .spacer
                         .twelve.wide.column
                                 
                 

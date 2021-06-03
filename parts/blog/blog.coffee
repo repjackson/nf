@@ -12,7 +12,6 @@ if Meteor.isClient
         Session.setDefault 'post_limit', 42
         Session.setDefault 'view_open', true
 
-    Template.blog.onCreated ->
         @autorun => @subscribe 'post_facets',
             picked_ingredients.array()
             picked_sections.array()
@@ -24,17 +23,7 @@ if Meteor.isClient
             Session.get('post_sort_key')
             Session.get('post_sort_direction')
 
-        @autorun => @subscribe 'post_results',
-            picked_ingredients.array()
-            picked_sections.array()
-            Session.get('post_query')
-            Session.get('view_vegan')
-            Session.get('view_gf')
-            
-            Session.get('post_limit')
-            Session.get('post_sort_key')
-            Session.get('post_sort_direction')
-            
+        @autorun => @subscribe 'post_results'
         @autorun => @subscribe 'post_count',
             picked_ingredients.array()
             picked_sections.array()
@@ -236,15 +225,6 @@ if Meteor.isClient
 
 if Meteor.isServer
     Meteor.publish 'post_results', (
-        picked_ingredients
-        picked_sections
-        post_query
-        view_vegan
-        view_gf
-        
-        doc_limit
-        doc_sort_key
-        doc_sort_direction
         )->
         # console.log picked_ingredients
         if doc_limit

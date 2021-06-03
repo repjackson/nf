@@ -45,7 +45,7 @@ template(name='product_layout')
                                 |description
                             a.ui.basic.circular.large.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
                                 i.clock.icon
-                                |subs
+                                |subscriptions
                             a.ui.basic.circular.large.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
                                 i.list.icon
                                 |orders
@@ -75,13 +75,20 @@ template(name='product_main')
         
         
 template(name='product_inventory')      
+
+
+
 template(name='product_recipes')
     .ui.header recipes
     each product_recipes
         a.ui.header(href="/recipe/#{_id}/view") #{title}
+        
+        
+        
 template(name='product_comments')      
     +comments
-template(name='product_subscriptions')      
+template(name='product_subscriptions')     
+    div
     if subscribed
         .ui.basic.green.inverted.circular.button.unsubscribe
             i.undo.icon

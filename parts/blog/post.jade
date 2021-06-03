@@ -4,6 +4,7 @@ template(name='post_card')
         .content
             a.ui.header(href="/m/post/#{_id}/view") #{title}
             .ui.small.grey.header #{when}
+            | #{content}
             // +comments_view_small
             +author_info
         
@@ -12,6 +13,7 @@ template(name='post_item')
         a.ui.header(href="/m/post/#{_id}/view") #{title}
         div
         .ui.small.grey.inline.header #{when}
+        | #{content}
         each tags 
             .ui.basic.small.label #{this}
         
