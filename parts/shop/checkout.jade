@@ -80,11 +80,17 @@ template(name='checkout')
                         +i name='plus' cl='ui inline image'
                         |new credit card
                 .ui.header shipping
+                +boolean_edit key='receive_notifications' label='check this box to receive your vital reminder texts and emails (optional)' direct=true
+                +boolean_edit key='has_read_tos' label=' I have read and agree to the website terms and conditions' direct=true
+                if has_read_tos
+                    .ui.big.fluid.circular.green.button.checkout_cart
+                        i.large.send.icon
+                        |submit
+                else 
+                    .ui.big.fluid.circular.green.disabled.button
+                        i.large.send.icon
+                        |submit (must agree to terms of service)
                 
-                .ui.big.circular.green.button.checkout_cart
-                    i.large.send.icon
-                    |submit
-
 template(name='topup_button')                
     .ui.circular.compact.basic.button.initiate
         |+$#{amount}
