@@ -41,6 +41,19 @@ if Meteor.isClient
                     #     timer: 1500
                     # )
             )
+        'click .increase_amount': (e,t)->
+            Docs.update @_id, 
+                $inc:amount:1
+        'click .decrease_amount': (e,t)->
+            if @amount and @amount is 1
+                $(e.currentTarget).closest('.item').transition('slide left', 1000)
+                Meteor.setTimeout =>
+                    Docs.remove @_id
+                , 1000
+            else
+                # console.log
+                Docs.update @_id, 
+                    $inc:amount:-1
 
     Template.cart.helpers
         cart_items: ->
