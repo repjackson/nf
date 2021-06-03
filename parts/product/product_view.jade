@@ -104,7 +104,10 @@ template(name='product_subscriptions')
         |subs
     .ui.link.selection.animated.list
         each product_subs
-            a.item(href="/sub/#{_id}") #{when} #{_author_username}
+            a.item(href="/sub/#{_id}") 
+                |#{when} #{_author_username}
+                .ui.basic.label #{sub_day}
+                .ui.basic.label #{sub_frequency}
     .ui.small.header 
         |your subs
 

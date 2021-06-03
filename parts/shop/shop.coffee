@@ -216,10 +216,17 @@ if Meteor.isClient
         current_product_sort_label: -> Session.get('product_sort_label')
 
 
-    Template.set_product_limit.events
-        'click .set_limit': ->
-            console.log @
-            Session.set('product_limit', @amount)
+    Template.product_card.events
+        'click .add_to_cart': ->
+            $('body').toast(
+                showIcon: 'cart plus'
+                message: "#{@title} added"
+                # showProgress: 'bottom'
+                class: 'success'
+                displayTime: 'auto',
+                position: "top right"
+            )
+
 
     Template.set_product_sort_key.events
         'click .set_sort': ->
