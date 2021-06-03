@@ -22,8 +22,8 @@ template(name='user_layout')
                             a.ui.center.aligned.inline.header.mobile.hidden(href="/user/#{user_from_username_param.username}/credit" title='credit')
                                 |{{fixed user.credit}}c
                             .ui.two.column.middle.aligned.grid.mobile.only
-                                .column
-                                    img.ui.small.inline.image.mobile.only(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                                // .column
+                                //     img.ui.small.inline.image.mobile.only(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
                                 .column
                                     .ui.inline.header
                                         strong #{user.name}

@@ -12,6 +12,7 @@ template(name='user_credit')
                     |admin
                 .ui.big.icon.button.add_credit(title='add credit')
                     i.plus.icon
+                +number_edit key='credit' label='edit credit' direct=true
                 .ui.big.icon.button.remove_credit(title='remove credit')
                     i.minus.icon
                 +topup_button amount=10
