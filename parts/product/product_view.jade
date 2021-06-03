@@ -40,6 +40,10 @@ template(name='product_layout')
                             // .ui.header #{menu_section}
                 
                         .ten.wide.column
+                            .ui.green.circular.large.button.add_to_cart
+                                i.cart.plus.large.icon
+                                |add to cart
+
                             a.ui.basic.circular.large.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
                                 i.content.icon
                                 |description

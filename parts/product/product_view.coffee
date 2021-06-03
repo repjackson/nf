@@ -37,6 +37,17 @@ if Meteor.isClient
     Template.product_layout.onRendered ->
         Meteor.call 'log_view', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
+    Template.product_layout.events
+        'click .add_to_cart': ->
+            Meteor.call 'add_to_cart', @_id, =>
+                $('body').toast(
+                    showIcon: 'cart plus'
+                    message: "#{@title} added"
+                    # showProgress: 'bottom'
+                    class: 'success'
+                    # displayTime: 'auto',
+                    position: "bottom right"
+                )
 
 
     Template.product_subscriptions.events
