@@ -2,8 +2,8 @@ if Meteor.isClient
     Template.profile_sub_item.onCreated ->
         # @autorun => Meteor.subscribe 'product_from_sub_id', @data._id
     Template.user_subs.onCreated ->
-        @autorun => Meteor.subscribe 'user_subs', Router.current().params.username
-        @autorun => Meteor.subscribe 'model_docs', 'product'
+        # @autorun => Meteor.subscribe 'user_subs', Router.current().params.username
+        @autorun => Meteor.subscribe 'model_docs', 'sub'
     Template.user_subs.helpers
         subs: ->
             current_user = Meteor.users.findOne username:Router.current().params.username

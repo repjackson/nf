@@ -216,10 +216,6 @@ template(name='right_sidebar')
                 // +i name='shopping-cart' cl='ui avatar image'
                 i.cart.icon
                 |cart
-            a.item.toggle_rightbar(href="/user/#{username}/downloads" class="{{isActiveRoute 'user_downloads'}}")
-                // +i name='download' cl='ui avatar image'
-                i.download.icon
-                |downloads
             a.item.toggle_rightbar(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
                 // +i name='clock' cl='ui avatar image'
                 i.clock.icon

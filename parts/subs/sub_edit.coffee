@@ -3,6 +3,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'sub_edit'
         ), name:'sub_edit'
+    Router.route '/subscription/:doc_id/edit', (->
+        @layout 'layout'
+        @render 'sub_edit'
+        ), name:'sub_edit_long'
 
 
 
