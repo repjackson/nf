@@ -100,13 +100,20 @@ if Meteor.isClient
                 # ingredient_ids: $in: [@_id]
     Template.topup_button.events
         'click .initiate':->
-            if confirm "topup for #{@amount}"
+            Swal.fire({
+                title: "topup for #{@amount}"
+                # text: "#{@subtotal} credits"
+                icon: 'question'
+                showCancelButton: true,
+                confirmButtonText: 'confirm'
+                cancelButtonText: 'cancel'
+            }).then((result) =>
                 Docs.insert
                     model:'balance_topup'
                     amount:@amount
                 Meteor.users.update Meteor.userId(),
                     $inc:credit:@amount
-            
+            )
 
 
 if Meteor.isServer

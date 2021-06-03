@@ -4,6 +4,7 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'model_docs', 'deposit'
         # @autorun => Meteor.subscribe 'model_docs', 'reservation'
         @autorun => Meteor.subscribe 'model_docs', 'withdrawal'
+        @autorun => Meteor.subscribe 'my_topups'
         # if Meteor.isDevelopment
         #     pub_key = Meteor.settings.public.stripe_test_publishable
         # else if Meteor.isProduction
@@ -86,28 +87,28 @@ if Meteor.isClient
         payments: ->
             Docs.find {
                 model:'payment'
-                _author_id: Router.current().params.user_id
+                _author_username: Router.current().params.username
             }, sort:_timestamp:-1
         deposits: ->
             Docs.find {
                 model:'deposit'
-                _author_id: Router.current().params.user_id
+                _author_username: Router.current().params.username
             }, sort:_timestamp:-1
-        withdrawals: ->
+        topups: ->
             Docs.find {
-                model:'withdrawal'
-                _author_id: Router.current().params.user_id
+                model:'balance_topup'
+                _author_username: Router.current().params.username
             }, sort:_timestamp:-1
-        received_reservations: ->
-            Docs.find {
-                model:'reservation'
-                owner_username: Router.current().params.username
-            }, sort:_timestamp:-1
-        purchased_reservations: ->
-            Docs.find {
-                model:'reservation'
-                _author_id: Router.current().params.user_id
-            }, sort:_timestamp:-1
+        # received_reservations: ->
+        #     Docs.find {
+        #         model:'reservation'
+        #         owner_username: Router.current().params.username
+        #     }, sort:_timestamp:-1
+        # purchased_reservations: ->
+        #     Docs.find {
+        #         model:'reservation'
+        #         _author_username: Router.current().params.username
+        #     }, sort:_timestamp:-1
 
 
 
@@ -270,3 +271,10 @@ if Meteor.isClient
     Template.user_dashboard.events
         'click .recalc_wage_stats': (e,t)->
             Meteor.call 'recalc_wage_stats', Router.current().params.username
+            
+            
+if Meteor.isServer
+    Meteor.publish 'my_topups', ->
+        Docs.find 
+            model:'balance_topup'
+            _author_id:Meteor.userId()

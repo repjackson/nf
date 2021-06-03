@@ -57,19 +57,23 @@ template(name='checkout')
                         i.money.icon
                         |payment
                     div
-                    .ui.inline.header #{currentUser.credit} credit
+                    .ui.inline.header {{fixed currentUser.credit}} credit
                     +topup_button amount=10
                     +topup_button amount=20
                     +topup_button amount=50
                     +topup_button amount=100
                     div
-                    .ui.button.select_credit_card
+                    .ui.basic.compact.circular.button.select_credit_card
+                        +i name='card-exchange--v1' cl='ui inline image'
                         |existing credit card
-                    .ui.button.use_coupon
+                    .ui.basic.circular.button.use_coupon
+                        +i name='cutting-coupon' cl='ui inline image'
                         |use coupon
-                    .ui.button.add_gift_card
+                    .ui.basic.compact.circular.button.add_gift_card
+                        +i name='gift-card' cl='ui inline image'
                         |add gift card
-                    .ui.button.select_new_credit_card
+                    .ui.basic.compact.circular.button.select_new_credit_card
+                        +i name='plus' cl='ui inline image'
                         |new credit card
                 .ui.header shipping
                 

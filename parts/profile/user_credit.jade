@@ -13,11 +13,11 @@ template(name='user_credit')
                         i.right.chevron.icon
                         
                 .ui.large.bulleted.list
-                    each deposits
+                    each topups
                         .item 
                             .content
                                 .header 
-                                    |$#{amount} + #{bonus}c
+                                    |$#{amount}
                                 .description #{when} {{long_date _timestamp}}
                                 //- if is_dev
                                 +remove_button
