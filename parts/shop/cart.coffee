@@ -91,22 +91,41 @@ if Meteor.isClient
                 # ingredient_ids: $in: [@_id]
     Template.checkout.events
         'click .checkout_cart': ->
-            
-            Swal.fire({
-                title: "confirm purchase of #{@subtotal}"
-                # text: "#{@subtotal} credits"
-                icon: 'question'
-                showCancelButton: true,
-                confirmButtonText: 'confirm'
-                cancelButtonText: 'cancel'
-            }).then((result) =>
-                Docs.update @_id,
-                    $set:
-                        complete:true
-                        complete_timestamp:Date.now()
-                Meteor.users.update Meteor.userId(),
-                    $inc:credit:-@subtotal
-            )
+            cart_order = 
+                Docs.findOne    
+                    model:'order'
+                    complete:false
+            if cart_order
+                subtotal = 0
+                for cart_item in Docs.find(model:'cart_item',_author_id:Meteor.userId()).fetch()
+                    product = Docs.findOne(cart_item.product_id)
+                    # console.log product
+                    if product
+                        if product.price_usd
+                            subtotal += product.price_usd*cart_item.amount
+                    # if product.price_usd
+                    #     console.log product.price_usd
+                        # console.log 'product', product
+                # console.log subtotal
+                subtotal.toFixed(2)
+                Docs.update cart_order._id,
+                    $set:subtotal:subtotal.toFixed(2)
+                Swal.fire({
+                    title: "confirm purchase of #{subtotal.toFixed(2)}"
+                    # text: "#{@subtotal} credits"
+                    icon: 'question'
+                    showCancelButton: true,
+                    confirmButtonText: 'confirm'
+                    cancelButtonText: 'cancel'
+                }).then((result) =>
+                    Docs.update @_id,
+                        $set:
+                            complete:true
+                            complete_timestamp:Date.now()
+                    Meteor.users.update Meteor.userId(),
+                        $inc:credit:-subtotal.toFixed(2)
+                    Router.go("/order/#{@_id}/view")
+                )
             
     
     Template.checkout.helpers
