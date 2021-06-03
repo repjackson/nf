@@ -44,6 +44,8 @@ if Meteor.isClient
         'click .increase_amount': (e,t)->
             Docs.update @_id, 
                 $inc:amount:1
+            $(e.currentTarget).closest('.item').transition('bounce',500)
+                
         'click .decrease_amount': (e,t)->
             if @amount and @amount is 1
                 $(e.currentTarget).closest('.item').transition('slide left', 1000)
@@ -51,6 +53,7 @@ if Meteor.isClient
                     Docs.remove @_id
                 , 1000
             else
+                $(e.currentTarget).closest('.item').transition('shake', 500)
                 # console.log
                 Docs.update @_id, 
                     $inc:amount:-1
