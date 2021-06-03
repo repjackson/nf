@@ -325,6 +325,9 @@ Template.text_edit.events
         if doc
             Docs.update parent._id,
                 $set:"#{@key}":val
+        else if user
+            Meteor.users.update parent._id,
+                $set:"#{@key}":val
 
 
 

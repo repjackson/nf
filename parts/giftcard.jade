@@ -6,7 +6,9 @@ template(name='user_giftcards')
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
         .column
-            .ui.header sent 
+            .ui.header 
+                +i name='sent--v2'
+                |sent 
             .ui.stackable.cards
                 each sent_giftcards 
                     .ui.card
@@ -18,7 +20,9 @@ template(name='user_giftcards')
                                 i.large.chevron.right.icon
                             
         .column
-            .ui.header received
+            .ui.header 
+                +i name='gift--v1'
+                |received
             .ui.stackable.cards
                 each received_giftcards
                     .ui.card
