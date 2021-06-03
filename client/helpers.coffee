@@ -5,10 +5,6 @@ Template.registerHelper 'parent', () -> Template.parentData()
 Template.registerHelper 'parent_doc', () ->
     Docs.findOne @parent_id
     # Template.parentData()
-Template.registerHelper 'model_docs', (model) ->
-    Docs.find 
-        model:model
-    # Template.parentData()
 
 Template.registerHelper 'model_docs_helper', (model) ->
     console.log model

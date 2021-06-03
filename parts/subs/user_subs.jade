@@ -1,7 +1,9 @@
 template(name='user_subs')
-    .ui.header #{subs.count} subs
+    .ui.header
+        +i name='renew-subscription'
+        |#{subs.count} product subscriptions
     .scrolling
-        each model_docs 'sub' 
+        each model_docs_helper 'product_subscription' 
             +profile_sub_item
 
 template(name='profile_sub_item')
@@ -10,11 +12,13 @@ template(name='profile_sub_item')
             .four.wide.column
                 with sub_product
                     //- img.ui.mini.image(src=image)
-                    +image_view key='image_id' direct=true cl='zoomer ui fluid image'
+                    +image_view key='image_id' direct=true cl='zoomer ui tiny image'
             .twelve.wide.column
                 .ui.header #{sub_product.title}
-                a.ui.small.header.inline.lowercase(href="/sub/#{_id}")
-                    |#{sub_amount}c
+                    strong $#{sub_product.price_usd}
+                .ui.large.basic.label day:#{sub_day}
+                .ui.large.basic.label frequency:#{sub_frequency}
+                
                 .ui.inline.header status: 
                     if kve status 'pending'
                         i.large.yellow.clock.icon
