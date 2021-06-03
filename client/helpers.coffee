@@ -10,6 +10,10 @@ Template.registerHelper 'model_docs', (model) ->
         model:model
     # Template.parentData()
 
+Template.registerHelper 'model_docs_helper', (model) ->
+    console.log model
+    Docs.find 
+        model:model
 Template.registerHelper 'cart_subtotal', () -> 
     store_session_document = 
         Docs.findOne 

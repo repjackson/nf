@@ -13,7 +13,11 @@ if Meteor.isClient
         # @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
         @autorun => Meteor.subscribe 'my_cart_products'
+        if Meteor.user()
+            @autorun => Meteor.subscribe 'username_model_docs', 'address', Meteor.user().username, ->
     Template.checkout.onCreated ->
+        # if Meteor.user()
+        @autorun => Meteor.subscribe 'model_docs', 'address', ->
         @autorun => Meteor.subscribe 'my_cart_products'
         # @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'

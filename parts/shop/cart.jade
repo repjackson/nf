@@ -6,6 +6,10 @@ template(name='cart')
                 |cart
             a.ui.fluid.circular.basic.icon.button(href="/shop")
                 i.shop.large.icon
+            .ui.header subtotal: $#{my_cart_subtotal}
+            .ui.big.circular.fluid.green.button.checkout_cart
+                i.large.send.icon
+                |checkout
         .twelve.wide.column
             .ui.large.list.scrolling
                 each cart_items
@@ -28,9 +32,5 @@ template(name='cart')
                                 i.remove.red.icon
                             if is_admin
                                 +print_this
-            .ui.header subtotal: $#{my_cart_subtotal}
-            .ui.big.circular.green.button.checkout_cart
-                i.large.send.icon
-                |checkout
                 
                 
