@@ -1,0 +1,60 @@
+template(name='checkout')
+    .ui.stackable.padded.grid
+        .eight.wide.column
+            .ui.header
+                i.cart.icon
+                |checkout
+            .ui.large.list.scrolling
+                each cart_items
+                    .item
+                        // .image
+                        img.ui.tiny.inline.rounded.image(src="{{c.url product.image_id width=400 height=300 crop='pad'}}")
+                        .ui.inline.small.header $#{product.price_usd} #{product.title}
+                        div
+                        small added #{when}
+                        .ui.circular.basic.icon.button.decrease_amount
+                            i.minus.icon
+                        .ui.inline.header #{amount}
+                        .ui.circular.basic.icon.button.increase_amount
+                            i.plus.icon
+                        .ui.circular.basic.icon.button.remove_item
+                            i.remove.red.icon
+                        if is_admin
+                            +print_this
+        .eight.wide.column
+            .ui.header 
+                i.receipt.icon
+                |subtotal: $#{my_cart_subtotal}
+            .ui.segment
+                .ui.header 
+                    i.marker.icon
+                    |address
+                .ui.inline.header billing address
+                +boolean_edit key='use_profile_address' label='use profile address'
+                div
+                // .ui.button.use_profile_address
+                    |use profile address
+                .ui.header 
+                    i.truck.icon
+                    |shipping address
+                .ui.button.use_different_shipping_address
+                    |use different shipping address
+            .ui.segment
+                .ui.header 
+                    i.money.icon
+                    |payment
+                .ui.header #{currentUser.credit} credit
+                .ui.button.select_credit_card
+                    |existing credit card
+                .ui.button.use_coupon
+                    |use coupon
+                .ui.button.add_gift_card
+                    |add gift card
+                .ui.button.select_new_credit_card
+                    |new credit card
+            .ui.header shipping
+            
+            .ui.big.circular.green.button.checkout_cart
+                i.large.send.icon
+                |submit
+                

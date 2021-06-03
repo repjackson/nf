@@ -26,47 +26,11 @@ template(name='cart')
                                 i.plus.icon
                             .ui.circular.basic.icon.button.remove_item
                                 i.remove.red.icon
-                        
-                        +print_this
+                            if is_admin
+                                +print_this
             .ui.header subtotal: $#{my_cart_subtotal}
             .ui.big.circular.green.button.checkout_cart
                 i.large.send.icon
                 |checkout
                 
-                
-template(name='checkout')
-    .ui.stackable.padded.grid
-        .four.wide.column
-            .ui.header
-                i.cart.icon
-                |checkout
-            a.ui.fluid.circular.basic.icon.button(href="/shop")
-                i.shop.large.icon
-        .twelve.wide.column
-            .ui.large.list.scrolling
-                each cart_items
-                    .item
-                        // .image
-                        img.ui.small.inline.rounded.image(src="{{c.url product.image_id width=400 height=300 crop='pad'}}")
-                        .content
-                            .ui.inline.header $#{product.price_usd} #{product.title}
-                            div
-                            small added #{when}
-                            .ui.circular.basic.icon.button.decrease_amount
-                                i.minus.icon
-                            .ui.inline.header #{amount}
-                            .ui.circular.basic.icon.button.increase_amount
-                                i.plus.icon
-                            .ui.circular.basic.icon.button.remove_item
-                                i.remove.red.icon
-                        
-                        +print_this
-            .ui.header subtotal: $#{my_cart_subtotal}
-            .ui.header address
-            .ui.header payment
-            .ui.header shipping
-            
-            .ui.big.circular.green.button.checkout_cart
-                i.large.send.icon
-                |submit
                 
