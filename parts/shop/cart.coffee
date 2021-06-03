@@ -10,10 +10,12 @@ if Meteor.isClient
 
     Template.cart.onCreated ->
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'model_docs', 'product'
+        # @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
+        @autorun => Meteor.subscribe 'my_cart_products'
     Template.checkout.onCreated ->
-        @autorun => Meteor.subscribe 'model_docs', 'product'
+        @autorun => Meteor.subscribe 'my_cart_products'
+        # @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
         @autorun => Meteor.subscribe 'my_cart_order'
 
@@ -87,6 +89,26 @@ if Meteor.isClient
             Docs.find
                 model:'cart_item'
                 # ingredient_ids: $in: [@_id]
+    Template.checkout.events
+        'click .checkout_cart': ->
+            
+            Swal.fire({
+                title: "confirm purchase of #{@subtotal}"
+                # text: "#{@subtotal} credits"
+                icon: 'question'
+                showCancelButton: true,
+                confirmButtonText: 'confirm'
+                cancelButtonText: 'cancel'
+            }).then((result) =>
+                Docs.update @_id,
+                    $set:
+                        complete:true
+                        complete_timestamp:Date.now()
+                Meteor.users.update Meteor.userId(),
+                    $inc:credit:-@subtotal
+            )
+            
+    
     Template.checkout.helpers
         cart_order: ->
             Docs.findOne    
@@ -122,6 +144,7 @@ if Meteor.isServer
             model:'cart_item'
             _author_id: Meteor.userId()
             app:'nf'
+            complete:false
             
             
     Meteor.publish 'my_cart_order', ->
@@ -129,6 +152,27 @@ if Meteor.isServer
             model:'order'
             _author_id: Meteor.userId()
             complete:false
+          
+    Meteor.publish 'product_from_cart_item', (cart_item_id)->
+        cart_item = Docs.findOne cart_item_id
+        Docs.find cart_item.product_id
             
+            
+    Meteor.publish 'my_cart_products', ->
+        # cart_items = 
+        cart_items = 
+            Docs.find({
+                model:'cart_item'
+                _author_id: Meteor.userId()
+                complete:false
+            }, {fields:{product_id:1}}).fetch()
+        # console.log 'product_ids', _.values(product_ids)
+        product_ids = []
+        for cart_item in cart_items
+            product_ids.push cart_item.product_id
+        console.log product_ids
+        Docs.find 
+            model:'product'
+            _id:$in:product_ids
             
             

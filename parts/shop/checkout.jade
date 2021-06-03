@@ -57,6 +57,8 @@ template(name='checkout')
                         i.money.icon
                         |payment
                     div
+                    +i name='wallet--v1' cl='ui inline image'
+                    +boolean_edit key='use_credit' direct=true
                     .ui.inline.header {{fixed currentUser.credit}} credit
                     +topup_button amount=10
                     +topup_button amount=20
@@ -82,5 +84,5 @@ template(name='checkout')
                     |submit
 
 template(name='topup_button')                
-    .ui.circular.button.initiate
+    .ui.circular.compact.basic.button.initiate
         |+$#{amount}
