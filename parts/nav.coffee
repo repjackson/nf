@@ -2,8 +2,9 @@ if Meteor.isClient
     Template.nav.onCreated ->
         @autorun => Meteor.subscribe 'me'
         # @autorun => Meteor.subscribe 'all_users'
+        @autorun => Meteor.subscribe 'my_cart'
         @autorun => Meteor.subscribe 'my_unread_messages'
-        @autorun => Meteor.subscribe 'global_stats'
+        # @autorun => Meteor.subscribe 'global_stats'
     
     Template.nav.onRendered ->
         Meteor.setTimeout ->
@@ -81,6 +82,11 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'my_sent_messages'
     
     Template.nav.helpers
+        cart_items: ->
+            Docs.find 
+                model:'cart_item'
+                _author_id: Meteor.userId()
+                
         alert_toggle_class: ->
             if Session.get('viewing_alerts') then 'active' else ''
         unread_count: ->

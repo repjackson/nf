@@ -1,2 +1,10 @@
 template(name='cart')
-    .ui.header cart
+    .ui.stackable.padded.grid
+        .four.wide.column
+            .ui.header
+                i.cart.icon
+                |cart
+        .twelve.wide.column
+            each cart_items
+                .ui.header #{when}
+                +print_this

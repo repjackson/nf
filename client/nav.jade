@@ -99,6 +99,8 @@ template(name='nav')
                 //     i.bell.large.yellow.icon
                 a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
                     i.large.cart.icon
+                    if cart_items.count
+                        .ui.basic.label #{cart_items.count}
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActivePath '/cart'}}" title='current wallet balance')
                     // i.wallet.icon
                     // .ui.mini.image.wallet

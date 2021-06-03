@@ -218,14 +218,15 @@ if Meteor.isClient
 
     Template.product_card.events
         'click .add_to_cart': ->
-            $('body').toast(
-                showIcon: 'cart plus'
-                message: "#{@title} added"
-                # showProgress: 'bottom'
-                class: 'success'
-                displayTime: 'auto',
-                position: "top right"
-            )
+            Meteor.call 'add_to_cart', @_id, ->
+                $('body').toast(
+                    showIcon: 'cart plus'
+                    message: "#{@title} added"
+                    # showProgress: 'bottom'
+                    class: 'success'
+                    # displayTime: 'auto',
+                    position: "top right"
+                )
 
 
     Template.set_product_sort_key.events
@@ -238,6 +239,15 @@ if Meteor.isClient
 
 
 if Meteor.isServer
+    Meteor.methods
+        add_to_cart: (product_id)->
+            new_cart_doc_id = 
+                Docs.insert 
+                    model:'cart_item'
+                    product_id: product_id
+                    complete:false
+            
+                    
     Meteor.publish 'product_results', (
         picked_ingredients
         picked_sections
