@@ -98,16 +98,6 @@ template(name='user_dashboard')
     .ui.three.stackable.cards
         .ui.card
             .content
-                .ui.header $ earned
-        .ui.card
-            .content
-                .ui.header $ spent
-        .ui.card
-            .content
-                .ui.header profit rate
-                .ui.header avg hourly
-        .ui.card
-            .content
                 .ui.header
                     +i name='check' cl='ui avatar image'
                     |orders
@@ -116,36 +106,22 @@ template(name='user_dashboard')
                         .item #{when}
         .ui.card
             .content
-                a.header(href="/user/#{username}/friends")
-                    +i name='groups' cl='ui avatar image'
-                    |friends
-                .ui.big.green.icon.button
-                    i.checkmark.icon
-        // .ui.card
-        //     .content
-        //         a.header(href="/user/#{username}/mail")
-        //             +i name='envelope' cl='ui avatar image'
-        //             |mail
-        //         .ui.big.green.icon.circular.button
-        //             i.plus.icon
-        .ui.card
-            .content
-                a.header(href="/user/#{username}/subs")
+                a.header(href="/user/#{username}/subscriptions")
                     +i name='clock' cl='ui avatar image'
                     |subs
                 each user_subs
                     .ui.header #{when}
         .ui.card
             .content
-                .ui.header
-                    i.tasks.icon
-                    |tasks
+                a.header(href="/user/#{username}/friends")
+                    +i name='groups' cl='ui avatar image'
+                    |friends
         .ui.card
             .content
-                a.header(href="/user/#{username}/deliveries")
-                    i.bicycle.icon
-                    |deliveries
-                each delivery_docs
+                a.header(href="/user/#{username}/giftcards")
+                    +i name='gift-card' cl='ui avatar image'
+                    |gift cards
+                each gift_cards
                     .ui.header #{when}
                     
                     
