@@ -15,12 +15,23 @@ if Meteor.isClient
     Template.checkout.onCreated ->
         @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
+        @autorun => Meteor.subscribe 'my_cart_order'
 
     Template.cart.events
         'click .checkout_cart':->
             
             # Docs.update @_id, 
             #     status:'checking out'
+            cart_order = 
+                Docs.findOne
+                    model:'order'
+                    complete:false
+            unless cart_order
+                Docs.insert
+                    model:'order'
+                    complete:false
+                    status:'checking_out'
+                    
             Router.go '/checkout'
                 
         'click .remove_item': (e,t)->
@@ -77,6 +88,12 @@ if Meteor.isClient
                 model:'cart_item'
                 # ingredient_ids: $in: [@_id]
     Template.checkout.helpers
+        cart_order: ->
+            Docs.findOne    
+                model:'order'
+                complete:false
+            
+            
         cart_items: ->
             Docs.find
                 model:'cart_item'
@@ -89,3 +106,13 @@ if Meteor.isServer
             model:'cart_item'
             _author_id: Meteor.userId()
             app:'nf'
+            
+            
+    Meteor.publish 'my_cart_order', ->
+        Docs.find
+            model:'order'
+            _author_id: Meteor.userId()
+            complete:false
+            
+            
+            
