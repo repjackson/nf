@@ -2,12 +2,23 @@ template(name='user_credit')
     .ui.stackable.one.column.grid
         if is_current_user
             .column
-                .ui.header
+            .column
+                .ui.inline.header
                     i.money.icon
                     |{{fixed user_from_username_param.credit}}
                     |credit
+                .ui.inline.header 
+                    i.shield.icon
+                    |admin
+                .ui.big.icon.button.add_credit(title='add credit')
+                    i.plus.icon
+                .ui.big.icon.button.remove_credit(title='remove credit')
+                    i.minus.icon
+                +topup_button amount=10
+                +topup_button amount=20
+                +topup_button amount=100
                 // |includes 2% credit card processing fee
-                .ui.action.fluid.input
+                .ui.action.input
                     input.deposit_amount(type='number' min='1' placeholder='deposit')
                     .ui.icon.button.add_credits   
                         i.right.chevron.icon
@@ -21,11 +32,3 @@ template(name='user_credit')
                                 .description #{when} {{long_date _timestamp}}
                                 //- if is_dev
                                 +remove_button
-            // .column
-            //     .ui.header 
-            //         i.shield.icon
-            //         |admin
-            //     .ui.big.icon.button.add_credit(title='add credit')
-            //         i.plus.icon
-            //     .ui.big.icon.button.remove_credit(title='remove credit')
-            //         i.minus.icon
