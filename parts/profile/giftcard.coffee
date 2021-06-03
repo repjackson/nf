@@ -1,9 +1,21 @@
 if Meteor.isClient
+    Router.route '/user/:username/giftcards', (->
+        @layout 'user_layout'
+        @render 'user_giftcards'
+        ), name:'user_giftcards'
+    Router.route '/giftcard/:doc_id', (->
+        @layout 'layout'
+        @render 'giftcard_view'
+        ), name:'giftcard_view'
+    
     Template.user_giftcards.onCreated ->
         @autorun => Meteor.subscribe 'user_sent_giftcards', Router.current().params.username, ->
         @autorun => Meteor.subscribe 'user_received_giftcards', Router.current().params.username, ->
             
-        # if Meteor.isDevelopment
+    Template.giftcard_edit.onCreated ->
+        @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
+    Template.giftcard_view.onCreated ->
+        @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
     
 
     Template.user_giftcards.events
@@ -30,14 +42,14 @@ if Meteor.isClient
            
             
     Template.user_giftcards.helpers
-        is_editing_address: ->
-            Session.equals('editing_id',@_id)
-            
-            
-        user_address_docs: ->
-            Docs.find 
-                model:'address'
-                _author_username:Router.current().params.username
+        sent_giftcards: ()->
+            Docs.find   
+                model:'giftcard'
+                _author_username:username
+        received_giftcards: ()->
+            Docs.find   
+                model:'giftcard'
+                recipient_username:username
         
 if Meteor.isServer
     Meteor.publish 'user_received_giftcards', (username)->
@@ -69,7 +81,7 @@ if Meteor.isClient
 
 
     Template.giftcard_edit.events
-        'click .send_card': ->
+        'click .send_giftcard': ->
             Swal.fire({
                 title: 'confirm send card'
                 text: "#{@amount} credits"
@@ -87,7 +99,7 @@ if Meteor.isClient
                             sent:true
                             sent_timestamp:Date.now()
                     Swal.fire(
-                        'order complete',
+                        'giftcard sent',
                         ''
                         'success'
                     Router.go "/giftcard/#{@_id}/"

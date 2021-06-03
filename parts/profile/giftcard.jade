@@ -7,22 +7,26 @@ template(name='user_giftcards')
     .ui.padded.stackable.two.column.grid
         .column
             .ui.header sent 
-            each sent_giftcards 
-                .ui.header #{when} #{amount}
+            .ui.stackable.cards
+                each sent_giftcards 
+                    .ui.card
+                        .content
+                            .ui.header 
+                                |#{amount} #{recipient_username}
+                            .ui.header #{when}
+                            a.ui.circular.icon.button(href='/giftcard/#{_id}')
+                                i.large.chevron.right.icon
+                            
         .column
             .ui.header received
-            each received_giftcards
-                if is_editing_address
-                    +text_edit key='street_address' label='street address' direct=true
-                    +text_edit key='city' label='city' direct=true
-                    +number_edit key='zip_code' label='zip code' direct=true
-                    i.ui.big.link.green.circular.checkmark.icon.save_address
-                    i.ui.link.red.circular.remove.icon.remove_address
-                else 
-                    .ui.header 
-                        |#{street_address}
-                    .ui.header #{city}, #{zip_code}
-                    i.ui.large.link.circular.edit.icon.edit_address
+            .ui.stackable.cards
+                each received_giftcards
+                    .ui.card
+                        .content
+                            .ui.header 
+                                |#{amount} #{_author_username}
+                            a.ui.circular.icon.button(href='/giftcard/#{_id}')
+                            i.ui.large.link.circular.chevron.right.icon.edit_address
                 
                 
                 
@@ -58,3 +62,30 @@ template(name='giftcard_edit')
                             i.sent.large.icon
                             |send giftcard
                 
+                
+template(name='giftcard_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    .ui.inline.header
+                        | #{title}
+                        small gift card view
+                    +image_view key='image_id' label='image' direct=true
+                    div
+                    +number_view key='amount' label='$ amount' direct=true
+                    +text_view key='recipient_username' label='recipient username' direct=true
+                    +single_user_view key='recipient_id' label='recipient' direct=true
+                    if sent 
+                        .ui.header sent {{from_now sent_timestamp}} {{cal_time sent_timestamp}}
+                    else 
+                        .ui.header not sent
+                .twelve.wide.column
+                    div
+                    +array_view key='tags' label='tags' direct=true
+                    +html_view key='notes' label='description' direct=true
+                    if can_delete
+                        .ui.red.button.delete_giftcard
+                            i.remove.icon   
+                            | delete
+                    +comments                
