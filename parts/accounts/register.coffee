@@ -73,11 +73,11 @@ if Meteor.isClient
                     console.log res
                     unless username
                         username = "#{Session.get('first_name').toLowerCase()}_#{Session.get('last_name').toLowerCase()}"
-                    console.log username
+                    # console.log username
                     Meteor.users.update res,
                         $addToSet: 
-                            roles: 'explorer'
-                            levels: 'explorer'
+                            roles: 'customer'
+                            levels: 'customer'
                         $set:
                             first_name: Session.get('first_name')
                             last_name: Session.get('last_name')

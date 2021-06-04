@@ -732,7 +732,7 @@ template(name='boolean_view')
 
 
 template(name='number_edit')
-    div
+    // div
         //- i.grey.icon(class=icon)
     .ui.inline.small.header(title=tip)
         if icon
@@ -749,7 +749,7 @@ template(name='number_edit')
         div
     //- +clear_value  
     .ui.input            
-        input.edit_number(type='number' min=min max=max class=cl value=field_value placeholder=placeholder autocomplete="off")
+        input.edit_number(type='number' min=min step=step max=max class=cl value=field_value placeholder=placeholder autocomplete="off")
             
             
 template(name='number_view')

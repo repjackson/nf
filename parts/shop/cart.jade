@@ -17,8 +17,7 @@ template(name='cart')
                         // .image
                         img.ui.small.inline.rounded.image(src="{{c.url product.image_id width=400 height=300 crop='pad'}}")
                         .content
-                            .ui.inline.header 
-                                // |$#{
+                            a.ui.inline.header(href="/product/#{product._id}")
                                 small $#{product.price_usd} x
                                     | #{amount}
                                 |#{product.title}

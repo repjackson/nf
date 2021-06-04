@@ -53,6 +53,78 @@ template(name='order_view')
                         +user_card
                     if is_admin
                         +print_this
+                    .ui.header 
+                        i.shield.icon
+                        |runner
+                    unless runner_viewed
+                        .ui.basic.circular.large.button.mark_viewed
+                            +icolor name='eye-checked' cl='ui avatar image'
+                            |mark viewed
+                    if runner_viewed 
+                        div
+                        +icolor name='eye-checked' cl='ui avatar image'
+                        .ui.inline.header viewed {{from_now runner_viewed_timestamp}} 
+                        .ui.small.grey.inline.header {{cal_time runner_viewed_timestamp}}
+                        div
+                        unless preparing
+                            .ui.basic.circular.large.button.mark_preparing
+                                +icolor name='new-product--v1' cl='ui avatar image'
+                                |preparing
+                    if preparing 
+                        div
+                        +icolor name='new-product--v1' cl='ui inline image'
+                        .ui.inline.header prep started {{from_now preparing_timestamp}} 
+                        .ui.small.grey.inline.header {{cal_time preparing_timestamp}}
+                        div
+                        unless prepared
+                            .ui.basic.circular.large.button.mark_prepared
+                                +icolor name='handle-with-care' cl='ui avatar image'
+                                |prepared
+                    if prepared 
+                        div
+                        +icolor name='handle-with-care' cl='ui inline image'
+                        .ui.inline.header prepared {{from_now prepared_timestamp}} 
+                        .ui.small.grey.inline.header {{cal_time prepared_timestamp}}
+                        div
+                        unless delivering
+                            .ui.basic.circular.large.button.mark_delivering
+                                +icolor name='truck' cl='ui inline image'
+                                |delivering
+                    if delivering 
+                        div
+                        +icolor name='truck' cl='ui inline image'
+                        .ui.inline.header started delivery {{from_now delivering_timestamp}} 
+                        .ui.small.grey.inline.header {{cal_time delivering_timestamp}}
+                        
+                        div
+                        unless arrived
+                            .ui.basic.circular.large.button.mark_arrived
+                                +icolor name='checked-truck' cl='ui inline image'
+                                |arrived
+                    if arrived 
+                        div
+                        +icolor name='checked-truck' cl='ui inline image'
+                        .ui.inline.header arrived {{from_now arrived_timestamp}} 
+                        .ui.small.grey.inline.header {{cal_time arrived_timestamp}}
+                        +image_edit key='delivery_photo' direct=true
+                        if delivery_photo                        
+                            div
+                            .ui.basic.circular.large.button.mark_delivery_complete
+                                i.large.checkmark.icon
+                                |delivered
+                    div
+                    .ui.inline.header 
+                        i.user.outline.icon
+                        |customer
+                    if delivered
+                        if is_author
+                            +kvs key='status' value='picked_up' label='picked up' direct=true
+                            .ui.basic.circular.large.button.mark_arrived
+                                +icolor name='pick-up' cl='ui inline image'
+                                |mark picked up
+                            
+                    +kvs key='status' value='picked_up' label='mark picked up' direct=true
+                        
                     +comments
                 .four.wide.column
                     // |{{from_now datetime_available}}:

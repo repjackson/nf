@@ -17,6 +17,60 @@ if Meteor.isClient
 
 
     Template.order_view.events
+        'click .mark_viewed': ->
+            # if confirm 'mark viewed?'
+            Docs.update Router.current().params.doc_id, 
+                $set:
+                    runner_viewed: true
+                    runner_viewed_timestamp: Date.now()
+                    runner_username: Meteor.user().username
+                    status: 'viewed' 
+      
+        'click .mark_preparing': ->
+            # if confirm 'mark mark_preparing?'
+            Docs.update Router.current().params.doc_id, 
+                $set:
+                    preparing: true
+                    preparing_timestamp: Date.now()
+                    status: 'preparing' 
+       
+        'click .mark_prepared': ->
+            # if confirm 'mark prepared?'
+            Docs.update Router.current().params.doc_id, 
+                $set:
+                    prepared: true
+                    prepared_timestamp: Date.now()
+                    status: 'prepared' 
+     
+        'click .mark_arrived': ->
+            # if confirm 'mark arrived?'
+            Docs.update Router.current().params.doc_id, 
+                $set:
+                    arrived: true
+                    arrived_timestamp: Date.now()
+                    status: 'arrived' 
+        
+        'click .mark_delivering': ->
+            # if confirm 'mark delivering?'
+            Docs.update Router.current().params.doc_id, 
+                $set:
+                    delivering: true
+                    delivering_timestamp: Date.now()
+                    status: 'delivering' 
+      
+        'click .mark_delivered': ->
+            # if confirm 'mark delivered?'
+            Docs.update Router.current().params.doc_id, 
+                $set:
+                    delivered: true
+                    delivered_timestamp: Date.now()
+                    status: 'delivered' 
+      
+        'click .cancel_order': ->
+            if confirm 'cancel?'
+                Docs.remove @_id
+                Router.go "/"
+    
         'click .mark_ready': ->
             if confirm 'mark ready?'
                 Docs.insert 

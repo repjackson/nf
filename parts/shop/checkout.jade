@@ -22,18 +22,18 @@ template(name='checkout')
                                 i.remove.red.icon
                             if is_admin
                                 +print_this
-            .eight.wide.column
+            .eight.wide.column.scrolling
                 .ui.header 
-                    i.receipt.icon
+                    +i name='receipt'
                     |subtotal: $#{my_cart_subtotal}
                 .ui.segment
                     .ui.header 
-                        i.marker.icon
+                        +i name='marker'
                         |address
                     .ui.inline.header billing address
                     each model_docs_helper 'address'
-                        .ui.button.pick_address(class=user_address_pick_class)
-                            .ui.header #{street_address}, #{city}, #{zip_code}
+                        .ui.large.circular.button.pick_address(class=user_address_pick_class)
+                            | #{street_address}, #{city}, #{zip_code}
                     // +boolean_edit key='use_profile_address' label='use profile address' direct=true
                     +boolean_edit key='use_new_address' label='use new address' direct=true
                     if use_new_address
@@ -49,7 +49,7 @@ template(name='checkout')
                     // .ui.button.use_profile_address
                         |use profile address
                     .ui.inline.header 
-                        i.truck.icon
+                        +i name='truck'
                         |shipping address
                     +boolean_edit key='use_different_shipping_address' label='use different shipping address' direct=true
                     if use_different_shipping_address
@@ -57,7 +57,7 @@ template(name='checkout')
                             input(type='text' placeholder='street')
                 .ui.segment
                     .ui.header 
-                        i.money.icon
+                        +i name='money'
                         |payment
                     div
                     +i name='wallet--v1' cl='ui inline image'

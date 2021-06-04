@@ -115,7 +115,7 @@ if Meteor.isClient
                 Docs.update cart_order._id,
                     $set:subtotal:subtotal.toFixed(2)
                 Swal.fire({
-                    title: "confirm purchase of #{subtotal.toFixed(2)}"
+                    title: "confirm purchase of $#{subtotal.toFixed(2)}"
                     # text: "#{@subtotal} credits"
                     icon: 'question'
                     showCancelButton: true,

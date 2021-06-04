@@ -10,11 +10,11 @@ template(name='user_credit')
                 .ui.inline.header 
                     i.shield.icon
                     |admin
-                .ui.big.icon.button.add_credit(title='add credit')
-                    i.plus.icon
-                +number_edit key='credit' label='edit credit' direct=true
-                .ui.big.icon.button.remove_credit(title='remove credit')
-                    i.minus.icon
+                .ui.big.icon.basic.circular.button.add_credit(title='add credit')
+                    |+1
+                +number_edit key='credit' label='edit credit' min='0' step='.01' max='1000' direct=true
+                .ui.big.icon.basic.circular.button.remove_credit(title='remove credit')
+                    |-1
                 +topup_button amount=10
                 +topup_button amount=20
                 +topup_button amount=100
