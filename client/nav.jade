@@ -6,8 +6,8 @@ template(name='nav')
                 i.big.loading.grey.food.icon.cancel
         else 
             a.icon.item.toggle_sidebar.no_blink
-                i.bars.large.icon
-                
+                .ui.mini.image.leftmenu
+                    +i name='menu--v1'
         a.header.item.zoomer(href='/')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
@@ -76,7 +76,7 @@ template(name='nav')
                         i.user.icon
                     strong.mobile.hidden #{currentUser.name}
                 a.icon.item.toggle_rightbar.no_blink.penny.add_global_karma
-                    .ui.mini.image.right_menu
+                    .ui.mini.image.rightmenu
                         +i name='menu--v1' cl=''
                     // i.bars.large.icon
                         
