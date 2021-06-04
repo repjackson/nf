@@ -13,9 +13,10 @@ if Meteor.isClient
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    # transition:'slideout'
+                    transition:'overlay'
+                    mobileTransition:'scale'
                     exclusive:true
-                    duration:250
+                    duration:150
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_sidebar')
@@ -24,9 +25,10 @@ if Meteor.isClient
             $('.ui.rightbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'scale'
+                    transition:'overlay'
+                    mobileTransition:'scale'
                     exclusive:true
-                    duration:250
+                    duration:150
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_rightbar')
@@ -35,9 +37,10 @@ if Meteor.isClient
             $('.ui.topbar.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'scale'
+                    transition:'overlay'
+                    mobileTransition:'scale'
                     exclusive:true
-                    duration:250
+                    duration:150
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_topbar')
@@ -46,9 +49,10 @@ if Meteor.isClient
             $('.ui.sidebar.cartbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'scale'
+                    transition:'overlay'
+                    mobileTransition:'scale'
                     exclusive:true
-                    duration:250
+                    duration:150
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_cartbar')

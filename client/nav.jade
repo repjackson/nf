@@ -69,7 +69,7 @@ template(name='nav')
                         strong #{cart_items.count} ($#{my_cart_subtotal})
                 a.item.zoomer.toggle_topbar(title='alerts')
                     // i.wallet.icon
-                    .ui.mini.image.notifications
+                    .ui.mini.image.bell
                         +i name='notification' cl=''
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                     // i.wallet.icon

@@ -16,6 +16,9 @@ $.cloudinary.config
     # action: 'not_found'
 
 Template.body.events
+    # 'click .button': ->
+    #     $(e.currentTarget).closest('.button').transition('bounce', 1000)
+
     # 'click a(not:': ->
     #     $('.global_container')
     #     .transition('fade out', 200)

@@ -59,7 +59,7 @@ if Meteor.isClient
                 reverseButtons: true
             }).then((result)=>
                 if result.value
-                    $(e.currentTarget).closest('.item').transition('slide left', 1000)
+                    $(e.currentTarget).closest('.item').transition('fade left', 1000)
                     Meteor.setTimeout =>
                         Docs.remove @_id
                     , 1000

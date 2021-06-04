@@ -299,6 +299,9 @@ img {
 .marker:hover {
     content:url("/marker.gif");
 }
+.bell:hover {
+    content:url("/bell.gif");
+}
 .cart:hover {
     content:url("/cart.gif");
     width: 35px;
