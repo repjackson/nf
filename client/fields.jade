@@ -711,26 +711,27 @@ template(name='boolean_edit')
         //-     else
         //-         |no
 template(name='boolean_view')
-    .ui.basic.circular.label(title=title)
-        .ui.inline.grey.small.header
-            if icon
-                if field_value
-                    +iios name=icon cl='ui inline mini image'
+    if field_value
+        .ui.basic.circular.label(title=title)
+            .ui.inline.grey.small.header
+                if icon
+                    if field_value
+                        +i name=icon cl='ui inline mini image'
+                    else
+                        //- i.grey.icon(class=icon)
+                        +iios name=icon cl='ui inline mini image'
+                if title
+                    |#{title}
+                else if label
+                    |#{label}
+                else if key
+                    |#{key}
                 else
-                    //- i.grey.icon(class=icon)
-                    +i name=icon cl='ui inline mini image'
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            else if key
-                |#{key}
+                    |#{this}
+            if field_value
+                i.large.green.checkmark.icon
             else
-                |#{this}
-        if field_value
-            i.large.green.checkmark.icon
-        else
-            i.cancel.grey.icon
+                i.cancel.grey.icon
 
 
 template(name='number_edit')
