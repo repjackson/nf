@@ -78,12 +78,12 @@ template(name='nav')
                     // i.cart.icon
                 // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
                 //     .ui.inline.header #{currentUser.credit}f
-                a.item.mobile.hidden(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
-                    if currentUser.image_id
-                        img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                    else
-                        i.user.icon
-                    strong.mobile.hidden #{currentUser.name}
+                // a.item.mobile.hidden(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
+                //     if currentUser.image_id
+                //         img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                //     else
+                //         i.user.icon
+                //     strong.mobile.hidden #{currentUser.name}
                 a.icon.item.toggle_rightbar.no_blink
                     .ui.mini.image.rightmenu
                         if currentUser.image_id
@@ -211,9 +211,9 @@ template(name='topbar')
             
             
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.menu
+    .ui.right.sidebar.vertical.borderless.thin.menu
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
-            img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
+            img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
         with currentUser
             a.item.toggle_rightbar(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
@@ -253,30 +253,32 @@ template(name='right_sidebar')
             //     i.chevron.up.icon
         // .ui.divider
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/edit" title='edit your account')
-            i.cog.icon
+            // i.cog.icon
+            +i name='settings' cl='ui avatar image'
             |settings
         // a.item.toggle_nightmode.toggle_rightbar.no_blink(href="#")
         //     i.lightbulb.icon
         //     |dark mode
-        a.item.logout(href="/user/#{currentUser.username}/messages" class="{{isActiveRoute 'user_messages'}}" )
-            |logout
+        a.item.logout
             if is_logging_out
                 i.refresh.loading.icon
             else
-                i.sign.out.icon
+                +i name='exit-sign' cl='ui avatar image'
+                // i.sign.out.icon
+            |logout
 
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.menu
+    .ui.left.thin.sidebar.vertical.borderless.menu
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
         // a.item.set_member.toggle_sidebar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
-        a.item.toggle_sidebar.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
+        a.item.toggle_sidebar.zoomer.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
-            img.ui.small.centered.image.mobile.only(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+            img.ui.small.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // span.mobile.hidden nude foods market
         // .search.item.zoomer(title='search')
         //     .ui.icon.transparent.input

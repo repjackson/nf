@@ -50,8 +50,8 @@ head
 template(name='layout')
     // img.ui.fluid.image.(src="{{c.url 'cafe'}}")
     +nav
-    +topbar
     .ui.bottom.attached.pushable.segment
+        +topbar
         +left_sidebar
         +right_sidebar
         #ain_area.global_conainer.pusher
@@ -75,9 +75,10 @@ template(name='verification_confirmation')
 
 template(name='not_found')
     .ui.center.aligned.padded.basic.segment
+        +ibig name='park-bench' 
         .ui.center.aligned.header page not found
-        a.ui.big.basic.button(href="/") 
-            +i name='home' 
+        a.ui.big.circular.basic.button(href="/") 
+            +ibig name='home' 
             // |home
 
 
