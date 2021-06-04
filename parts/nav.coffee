@@ -13,9 +13,9 @@ if Meteor.isClient
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
+                    transition:'push'
                     exclusive:true
-                    duration:200
+                    duration:250
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_sidebar')
@@ -24,9 +24,9 @@ if Meteor.isClient
             $('.ui.right.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
+                    transition:'push'
                     exclusive:true
-                    duration:200
+                    duration:250
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_rightbar')
@@ -37,7 +37,7 @@ if Meteor.isClient
             Session.set 'logging_out', true
             Meteor.logout ->
                 Session.set 'logging_out', false
-                Router.go '/login'
+                Router.go '/'
                 
         'click .toggle_nightmode': ->
             if Meteor.user().invert_class is 'invert'
