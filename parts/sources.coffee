@@ -26,8 +26,16 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
     
 
+    Template.sources.events
+        'click .add_source': ->
+            new_id = 
+                Docs.insert 
+                    model:'source'
+            
+            Router.go "/source/#{new_id}/edit"
+            
     Template.user_sources.events
-        'click .send_source': ->
+        'click .add_source': ->
             new_id = 
                 Docs.insert 
                     model:'source'
