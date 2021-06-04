@@ -1150,3 +1150,141 @@ h1.ui.header{
   font-size: 50% !important;
   line-height: 50% !important; }
 .f0 { display:none; }
+
+
+
+.button.active {
+    /* background-color: rgba(150, 150, 150, 1) !important; */
+    background-color: rgba(17, 2, 100, 0.7) !important;
+    box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important;
+    /* background-color: rgba(50, 50, 50, .9) !important; */
+    color: white !important;
+    /* transform: translate(0, 4px); */
+}
+.button.green {
+    /* background-color: rgba(200, 200, 200, 0.5) !important; */
+    /* box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important; */
+    background-color: darkgreen !important;
+    color: white !important;
+    /* transform: translate(0, 4px); */
+}
+.button.red {
+    /* background-color: rgba(200, 200, 200, 0.5) !important; */
+    /* box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important; */
+    background-color: darkred !important;
+    color: white !important;
+    /* transform: translate(0, 4px); */
+}
+.button.teal {
+    /* background-color: rgba(200, 200, 200, 0.5) !important; */
+    /* box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important; */
+    background-color: teal !important;
+    color: white !important;
+    /* transform: translate(0, 4px); */
+}
+.button.orange {
+    /* background-color: rgba(200, 200, 200, 0.5) !important; */
+    /* box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important; */
+    background-color: darkorange !important;
+    color: white !important;
+    /* transform: translate(0, 4px); */
+}
+.button.pink {
+    /* background-color: rgba(200, 200, 200, 0.5) !important; */
+    /* box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important; */
+    background-color: pink !important;
+    color: white !important;
+    /* transform: translate(0, 4px); */
+}
+.button.blue {
+    /* background-color: rgba(200, 200, 200, 0.5) !important; */
+    /* box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important; */
+    background-color: navy !important;
+    color: white !important;
+    /* transform: translate(0, 4px); */
+}
+
+.button:hover {
+    background-color: rgba(200, 200, 200, 0.5) !important;
+    /* box-shadow: 0 0px 2px 1px rgba(50, 50, 100, 0.2) !important; */
+    /* background-color: rgba(43, 33, 0, .9) !important; */
+    /* color: white !important; */
+    transform: translate(0, 1px);
+}
+
+
+.button:active {
+    -webkit-box-shadow:
+        0px 3px rgba(128,128,128,1),
+        0px 4px rgba(118,118,118,1),
+        0px 5px rgba(108,108,108,1),
+        0px 6px rgba(98,98,98,1),
+        0px 10px rgba(88,88,88,1),
+        0px 8px rgba(78,78,78,1),
+        0px 10px 2px 0px rgba(128,128,128,.6);
+}
+
+.button:active{
+    -webkit-transform: translate(0, 2px) !important; /* depth of button press */
+    transform: translate(0, 2px) !important; /* depth of button press */
+}
+
+
+
+.slider-header {
+  color: #fff;
+  padding: 10px;
+  font-size: 3em !important;
+}
+.slider-subheader {
+  color: #fff;
+  padding: 10px;
+}
+/* @font-face {
+  font-family: imogen;
+  src: url("/fonts/ImogenAgnes.ttf");
+}
+@font-face {
+  font-family: imogen_swash;
+  src: url("/fonts/ImogenAgnesSwash.ttf");
+}
+@font-face {
+  font-family: bat_white;
+  src: url("/bat_white.ttf");
+}
+@font-face {
+  font-family: bat_black;
+  src: url("/bat_black.ttf");
+} */
+.big-header {
+  font-size: 800% !important;
+  padding: 20px;
+}
+.large {
+  font-size: 130%;
+  line-height: 130%;
+}
+.big {
+  font-size: 200%;
+  line-height: 120%;
+}
+.center {
+  text-align: center;
+}
+.big-text {
+  font-size: 500% !important;
+  padding-bottom: 0.25em;
+}
+.large-text {
+  font-size: 300% !important;
+  padding-bottom: 0.25em;
+}
+.slider_header {
+  font-size: 20em !important;
+  color: #fff;
+}
+#slider{
+    /* -webkit-mask-image:linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%); !important; */
+    -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 90%) !important;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.3)) !important;
+}

@@ -34,6 +34,10 @@ Template.body.events
     #     .transition('fade in', 5000)
 
 
+Tracker.autorun ->
+    current = Router.current()
+    Tracker.afterFlush ->
+        $(window).scrollTop 0
 
 
 # Stripe.setPublishableKey Meteor.settings.public.stripe_publishable

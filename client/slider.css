@@ -1,0 +1,182 @@
+.slider {
+  position: relative;
+  width: 100%;
+  /* width: 1000px; */
+  height: 400px;
+  background: black !important;
+  /* height: 100%; */
+  overflow: hidden;
+}
+
+.slides {
+  height: 100%;
+  overflow: hidden;
+  *zoom: 1;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+}
+
+.slide-item{
+  height: 100%;
+  width: 100%;
+  float: left;
+  clear: none;
+}
+
+.slider-arrow {
+  position: absolute;
+  display: block;
+  margin-bottom: -20px;
+  padding: 20px;
+}
+.slide-title {
+    position: absolute;
+    display: block;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.slider-arrow--right {
+  bottom: 50%;
+  right: 30px;
+}
+
+.slider-arrow--left {
+  bottom: 50%;
+  left: 30px;
+}
+
+.slider-nav {
+  position: absolute;
+  bottom: 60px;
+}
+
+.slider-nav__item {
+  width: 12px;
+  height: 12px;
+  float: left;
+  border-radius: 10px;
+  clear: none;
+  display: block;
+  margin: 0 5px;
+  background: #fff;
+}
+
+.slider-nav__item:hover {
+  background: #ccc;
+}
+
+.slider-nav__item--current {
+  background: #ccc;
+}
+
+.ls-bottom-slidebuttons > a {
+    border-radius: 10px;
+}
+/* unique slider css */
+.slider-nav__item {
+  border-radius:50%;
+}
+.slider-arrow--left {
+    background-image: url('https://img.icons8.com/color/48/000000/chevron-left.png');
+    background-repeat:no-repeat;
+    width: 48px;
+    height: 48px;
+    display: block;
+    padding: 0;
+}
+.slider-arrow--right {
+    background-image: url('https://img.icons8.com/color/48/000000/chevron-right.png');
+    background-repeat:no-repeat;
+    width: 48px;
+    height: 48px;
+    display: block;
+    padding: 0;
+}
+.slider-arrow--right {
+/* background-position: -17px 0; */
+}
+.slider-arrow--left {
+
+}
+
+/* home page slider - start */
+.slider1 .slide-item {
+  height:100%;
+  width:100%;
+  background-position: center;
+  background-size: cover;
+}
+.slider1 .item1 {
+  background-color: blue;
+  /* background:url("/old-jeffry-in/assets/dream1.jpg") no-repeat center; */
+}
+.slider1 .item2 {
+  background-color: red;
+  /* background:url("/old-jeffry-in/assets/dream2.jpg") no-repeat center; */
+}
+.slider1 .item3 {
+  background-color: yellow;
+  /* background:url("/old-jeffry-in/assets/dream3.jpg") no-repeat center; */
+}
+.slider1 .item4 {
+  background-color: teal;
+  /* background:url("/old-jeffry-in/assets/dream4.jpg") no-repeat center; */
+}
+.slider1 {
+  color:#fff;
+}
+.slider1 .content {
+  margin-top: 5%;
+  margin-left: 5%;
+}
+.slider1 .slide-title {
+  font-family:'Ubuntu', sans-serif;
+  font-size:5em;
+  font-weight:200;
+  margin-top: 20%;
+  color:white !important;
+  /* text-shadow: 0 .05em .05em #c25b1d !important; */
+}
+.slider1 .note {
+  max-height:5em;
+  min-height:5em;
+  max-width:5em;
+  min-width:5em;
+  display:inline !important;
+}
+/* home page slider - start */
+
+/* resume page slider - highlights - start */
+.slider2, .slider3 {
+  background-color:#CEE4ED;
+  border: 1px solid #B8E3F5;
+  border-radius:5px;
+  margin-bottom:2em;
+}
+/* .slider2 .slider-arrow--right, .slider2 .slider-arrow--left,
+.slider3 .slider-arrow--right, .slider3 .slider-arrow--left,
+.slider5 .slider-arrow--right, .slider5 .slider-arrow--left{
+  background-image: url('/https://img.icons8.com/color/48/000000/chevron-left.png');
+} */
+.slider2 .slider-nav, .slider3 .slider-nav, .slider5 .slider-nav {
+  display:none;
+}
+/* resume page slider - highlights - end */
+
+
+
+
+.slide_bg {
+    position: relative !important;
+    /* background-attachment: fixed !important; */
+    /* max-height: 100% !important; */
+    /* max-height: 1000px !important; */
+    /* top:0px; */
+    /* filter: invert(1); */
+    margin-top:10%;
+    margin-left:20%;
+    opacity: 0.9;
+    -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+}
