@@ -8,9 +8,8 @@ template(name='user_edit')
                         | #{user_from_username_param.first_name} #{user_from_username_param.last_name}
                     //- +i name='pencil'
                     .ui.small.inline.header @#{user_from_username_param.username}
-                    a.ui.button(href="/user/#{user_from_username_param.username}/") 
-                        i.checkmark.green.icon
-                        strong save
+                    a.ui.circular.green.icon.button(href="/user/#{user_from_username_param.username}/") 
+                        i.checkmark.large.icon
                     .ui.hidden.divider
                     +image_edit key='image_id' icon='picture' title='profile image' direct=true
                     if is_current_user
@@ -24,6 +23,7 @@ template(name='user_edit')
                                 |delete user
                 .eight.wide.column
                     .ui.form
+                        +text_edit key='display_name' label='display name' direct=true
                         +text_edit key='first_name' label='first name' direct=true
                         +text_edit key='last_name' label='last name' direct=true
                         div
@@ -31,10 +31,11 @@ template(name='user_edit')
                             i.envelope.outline.icon
                             |emails
                         +emails_edit
+                        .ui.hidden.divider
                         +phone_edit key='phone' label='phone' icon='phone' direct=true
                 .four.wide.column
-                    +array_edit key='allergens' label='allergens' direct=true
-                    +array_edit key='food_dislikes' label='food dislikes' direct=true
+                    +array_edit key='allergens' label='allergens' icon='no-milk' direct=true
+                    +array_edit key='food_dislikes' label='food dislikes' icon='disgusting' direct=true
                     
 template(name='user_settings')
     .ui.segment
@@ -63,7 +64,7 @@ template(name='username_edit')
 
      
 template(name='phone_editor')
-    .ui.small.header    
+    .ui.header    
         i.phone.icon
         |phone
     .ui.icon.fluid.input(title='Add Phone')
@@ -127,18 +128,19 @@ template(name='emails_edit')
                 //         .ui.button Verify
                 .content
                     if verified
-                        .ui.big.label(title='verified')
+                        .ui.big.green.label(title='verified')
                             | #{address}
                             i.checkmark.icon
                     else
-                        .ui.big.label
+                        .ui.big.orange.label
                             //- i.ban.icon
                             | #{address}
+                            small unverified
                         if is_staff
                             .send_verification_email.ui.button 
                                 |verify
                                 i.caret.right.icon
-                    .ui.small.icon.button.remove_email
+                    .ui.small.icon.circular.basic.button.remove_email
                         i.remove.icon
     .ui.action.fluid.icon.action.input
         input#new_email(type='email' placeholder='add new email address' autocomplete="off")

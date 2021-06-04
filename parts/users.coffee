@@ -2,8 +2,8 @@ if Meteor.isClient
     Router.route '/users', -> @render 'users'
 
     Template.users.onCreated ->
-        @autorun -> Meteor.subscribe('users')
-        # @autorun => Meteor.subscribe 'user_search', Session.get('username_query')
+        # @autorun -> Meteor.subscribe('users')
+        @autorun => Meteor.subscribe 'user_search', Session.get('username_query')
     Template.users.helpers
         user_docs: ->
             username_query = Session.get('username_query')
@@ -14,7 +14,7 @@ if Meteor.isClient
                     },{ limit:20 }).fetch()
             else
                 Meteor.users.find({
-                    },{ limit:20 }).fetch()
+                    },{ limit:100 }).fetch()
 
     Template.users.events
         'click .add_user': ->
@@ -51,21 +51,66 @@ if Meteor.isServer
                 Meteor.users.find({
                     username: {$regex:"#{username}", $options: 'i'}
                     # roles:$in:[role]
-                },{ limit:20})
+                },{ 
+                    limit:200, 
+                    fields:
+                        roles:1
+                        username:1
+                        image_id:1
+                        tags:1
+                        credit:1
+                }
+                )
             else
                 Meteor.users.find({
                     # roles:$in:[role]
-                },{ limit:20})
+                },{ 
+                    limit:200, 
+                    fields:
+                        roles:1
+                        username:1
+                        image_id:1
+                        tags:1
+                        credit:1
+                }
+                )
         else
             if username
                 Meteor.users.find({
                     username: {$regex:"#{username}", $options: 'i'}
                     # roles:$in:[role]
-                },{ limit:20})
+                },{ 
+                    limit:200, 
+                    fields:
+                        roles:1
+                        username:1
+                        image_id:1
+                        tags:1
+                        credit:1
+                }
+                )
             else
                 Meteor.users.find({
                     # roles:$in:[role]
-                },{ limit:20})
-            Meteor.users.find({
-                username: {$regex:"#{username}", $options: 'i'}
-            },{ limit:20})
+                },{ 
+                    limit:200, 
+                    fields:
+                        roles:1
+                        username:1
+                        image_id:1
+                        tags:1
+                        credit:1
+                }
+                )
+            # Me.teorusers.find({
+            #     username: {$regex:"#{username}", $options: 'i'}
+            # },{ 
+            #     limit:200, 
+            #     fields:
+            #         roles:1
+            #         username:1
+            #         image_id:1
+            #         tags:1
+            #         credit:1
+            # }
+            # )

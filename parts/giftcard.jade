@@ -9,13 +9,18 @@ template(name='user_giftcards')
             .ui.header 
                 +i name='sent--v2'
                 |sent 
-            .ui.stackable.cards
+            .ui.stackable.cards.scrolling
                 each sent_giftcards 
                     .ui.card
                         .content
+                            a(href="/giftcard/#{_id}") 
+                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+    
                             .ui.header 
                                 |#{amount} #{recipient_username}
-                            .ui.header #{when}
+                            // |created #{when}
+                            |sent {{from_now sent_timestamp}}
+                            small {{cal_time sent_timestamp}}
                             a.ui.circular.icon.button(href='/giftcard/#{_id}')
                                 i.large.chevron.right.icon
                             
@@ -23,12 +28,16 @@ template(name='user_giftcards')
             .ui.header 
                 +i name='gift--v1'
                 |received
-            .ui.stackable.cards
+            .ui.stackable.cards.scrolling
                 each received_giftcards
                     .ui.card
                         .content
+                            a(href="/giftcard/#{_id}") 
+                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
                             .ui.header 
                                 |#{amount} #{_author_username}
+                            |received {{from_now sent_timestamp}}
+                            small {{cal_time sent_timestamp}}
                             a.ui.circular.icon.button(href='/giftcard/#{_id}')
                             i.ui.large.link.circular.chevron.right.icon.edit_address
                 
