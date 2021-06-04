@@ -18,10 +18,10 @@ template(name='nav')
                 img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             img.ui.mini.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
-        // .search.item.zoomer(title='search')
-        //     .ui.icon.transparent.input
-        //         i.search.icon
-        //         input.search_global(type='text')
+        .search.item.zoomer.mobile.hidden(title='search')
+            .ui.icon.transparent.input
+                i.search.icon
+                input.search_global(type='text')
         // else 
         //     a.item.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
@@ -29,11 +29,14 @@ template(name='nav')
         // a.icon.item.zoomer(href='/p/regenerative_agg' class="{{isActivePath '/shop'}}" title='shop')
         //     i.refresh.large.icon
         a.icon.item.zoomer.mobile.hidden(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            // i.food.large.icon
             .ui.mini.image
                 +i name='ingredients' cl=''
-            // i.cart.icon
-            // strong.mobile.hidden shop
+        a.icon.item.zoomer.mobile.hidden(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
+            .ui.mini.image.farm
+                +i name='farm' cl=''
+        a.icon.item.zoomer.mobile.hidden(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
+            .ui.mini.image.recipes
+                +i name='cookbook' cl=''
         unless currentUser
             a.icon.item.zoomer.mobile.hidden(href='/p/about' class="{{isActivePath '/about'}}" title='about')
                 // i.info.large.icon

@@ -1,4 +1,8 @@
 if Meteor.isClient
+    Router.route '/ingredients', (->
+        @layout 'layout'
+        @render 'ingredients'
+        ), name:'ingredients'
     Router.route '/ingredient/:doc_id/edit', (->
         @layout 'layout'
         @render 'ingredient_edit'
@@ -9,6 +13,8 @@ if Meteor.isClient
         ), name:'ingredient_view'
 
 
+    Template.ingredients.onCreated ->
+        @autorun => Meteor.subscribe 'model_docs', 'ingredient', ->
     Template.ingredient_view.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'model_docs', 'product'

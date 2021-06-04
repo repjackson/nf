@@ -27,7 +27,7 @@ template(name='product_layout')
                             img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                             div 
                             +text_view key='size_description' label='size description'  direct=true
-                            +link_view key='product_link' label='old site link' direct=true
+                            +link_view key='product_link' label='link' icon='wordpress' direct=true
                             +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
                             +boolean_view key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
                             +boolean_view key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'
@@ -62,11 +62,11 @@ template(name='product_layout')
                                 +i name='cookbook' cl='ui avatar image'
                                 |recipes
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
-                                +i name='popular-product' cl='ui avatar image'
+                                +i name='popular-topic' cl='ui avatar image'
                                 |reviews
-                            a.ui.basic.circular.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
-                                +i name='chat' cl='ui avatar image'
-                                |comments
+                            // a.ui.basic.circular.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
+                            //     +i name='chat' cl='ui avatar image'
+                            //     |comments
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
                                 +i name='shield' cl='ui avatar image'
                                 |inventory
@@ -81,6 +81,7 @@ template(name='product_main')
         .ui.large.basic.label #{this}
     div
     +voting_full
+    +comments
         
         
 template(name='product_inventory')      

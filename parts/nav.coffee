@@ -13,7 +13,7 @@ if Meteor.isClient
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'scale'
+                    transition:'overlay'
                     mobileTransition:'scale'
                     exclusive:true
                     duration:150
