@@ -5,13 +5,13 @@ template(name='product_layout')
         +right_sidebar
         #main_area.global_container.pusher.scrollin
             with current_doc
-                .ui.stackable.grid
+                .ui.stackable.padded.grid
                     .row
                         .six.wide.column
                             a.ui.basic.circular.icon.button(href="/shop")
                                 i.chevron.left.large.icon
-                                i.large.food.icon
-                                // +i name='food' cl='ui mini inline image'
+                                // i.large.food.icon
+                                +i name='food-cart' cl='ui mini inline image'
                         
                             .ui.large.inline.header 
                                 //- small viewing

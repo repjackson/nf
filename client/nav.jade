@@ -25,24 +25,26 @@ template(name='nav')
         // a.icon.item.zoomer(href='/p/regenerative_agg' class="{{isActivePath '/shop'}}" title='shop')
         //     i.refresh.large.icon
         a.icon.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            i.food.large.icon
-            // .ui.mini.image.cart
-            //     +i name='shopping-cart' cl=''
+            // i.food.large.icon
+            .ui.mini.image.cart
+                +i name='shopping-cart' cl=''
             // i.cart.icon
             // strong.mobile.hidden shop
-        a.icon.item.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-            i.info.large.icon
-            // .ui.mini.image.info
-            //     +i name='information--v1' cl=''
+        a.icon.item.zoomer.mobile.hidden(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+            // i.info.large.icon
+            .ui.mini.image.info
+                +i name='information--v1' cl=''
             // i.cart.icon
             // strong.mobile.hidden about
         a.icon.item.zoomer(href='/store' class="{{isActivePath '/store'}}")
             // +i name='shop' cl=''
-            i.building.large.icon
+            // i.building.large.icon
+            .ui.mini.image.shop
+                +i name='shop' cl=''
             // i.cart.icon
-        a.icon.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            // +i name='phone' cl='ui inline mini image'
-            i.large.phone.icon
+        a.icon.item.zoomer.mobile.hidden(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
+            +i name='phone' cl='ui inline mini image'
+            // i.large.phone.icon
             // i8.newspaper.icon
             // strong.mobile.hidden contact
         // a.item.zoomer(href='/blog' class="{{isActivePath '/blog'}}" title='blog')
@@ -54,14 +56,16 @@ template(name='nav')
                 // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
                 //     i.bell.large.yellow.icon
                 a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
-                    i.large.cart.icon
+                    // i.large.cart.icon
+                    .ui.mini.image.cart
+                        +i name='shopping-cart' cl=''
                     if cart_items.count
                         strong #{cart_items.count} ($#{my_cart_subtotal})
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                     // i.wallet.icon
-                    // .ui.mini.image.wallet
-                    //     +i name='wallet' cl=''
-                    .ui.inline.header ${{int currentUser.credit}}
+                    .ui.mini.image.wallet
+                        +i name='wallet' cl=''
+                    strong ${{int currentUser.credit}}
                     // i.cart.icon
                 // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
                 //     .ui.inline.header #{currentUser.credit}f
@@ -72,7 +76,9 @@ template(name='nav')
                         i.user.icon
                     strong.mobile.hidden #{currentUser.name}
                 a.icon.item.toggle_rightbar.no_blink.penny.add_global_karma
-                    i.bars.large.icon
+                    .ui.mini.image.right_menu
+                        +i name='menu--v1' cl=''
+                    // i.bars.large.icon
                         
         unless currentUser
             a.item(href='/login' title='login') 

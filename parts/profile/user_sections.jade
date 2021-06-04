@@ -1,14 +1,15 @@
 // template(name='user_subs')
 template(name='user_friends')
     .ui.header 
-        i.users.icon
+        // i.users.icon
+        +i name='friends'
         |friends
     each user_friends
         .item #{username}
         
 template(name='user_deliveries')
     .ui.header 
-        i.truck.icon
+        +i name='bicycle'
         |deliveries
     .ui.button.mark_available
         |available to deliver

@@ -104,6 +104,9 @@ if Meteor.isClient
                     Docs.remove @_id
                     )
             )
+    Template.product_inventory.onCreated ->
+        @autorun => Meteor.subscribe 'inventory_from_product_id', Router.current().params.doc_id
+            
     Template.product_inventory.events
         'click .add_inventory': ->
             new_id = Docs.insert 
@@ -245,4 +248,9 @@ if Meteor.isServer
         # product = Docs.findOne product_id
         Docs.find
             model:'product_subscription'
+            product_id:product_id
+    Meteor.publish 'inventory_from_product_id', (product_id)->
+        # product = Docs.findOne product_id
+        Docs.find
+            model:'inventory_item'
             product_id:product_id

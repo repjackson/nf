@@ -27,11 +27,11 @@ template(name='checkout')
                     +i name='receipt'
                     |subtotal: $#{my_cart_subtotal}
                 .ui.segment
-                    .ui.header 
+                    a.ui.header(href="/user/#{currentUser.username}/addresses")
                         +i name='marker'
-                        |address
-                    .ui.inline.header billing address
+                        |billing address
                     each model_docs_helper 'address'
+                        div
                         .ui.large.circular.button.pick_address(class=user_address_pick_class)
                             | #{street_address}, #{city}, #{zip_code}
                     // +boolean_edit key='use_profile_address' label='use profile address' direct=true
@@ -61,8 +61,8 @@ template(name='checkout')
                         |payment
                     div
                     +i name='wallet--v1' cl='ui inline image'
-                    +boolean_edit key='use_credit' direct=true
-                    .ui.inline.header {{fixed currentUser.credit}} credit
+                    .ui.inline.header ${{fixed currentUser.credit}} credit
+                    +boolean_edit key='use_credit' label='use credit' direct=true
                     +topup_button amount=10
                     +topup_button amount=20
                     +topup_button amount=50
