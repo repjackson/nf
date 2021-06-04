@@ -3,7 +3,7 @@
   "short_name": "nude foods",
   "description": "zero-waste grocery delivery",
   "theme_color": "#ffffff",
-  "background_color": "orange",
+  "background_color": "#ff8c00",
   "display": "standalone"
 
  "icons": [
