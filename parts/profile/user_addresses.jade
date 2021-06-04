@@ -1,7 +1,7 @@
 template(name='user_addresses')
     .ui.inline.header 
         +i name='marker'
-        |#{user_from_username_param.username} addresses
+        |#{user_address_docs.count} #{user_from_username_param.username} addresses
     .ui.basic.circular.icon.button.add_address
         i.large.plus.icon
     .ui.hidden.divider

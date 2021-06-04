@@ -7,7 +7,7 @@ template(name='recipes')
             .ui.basic.circular.icon.button.add_recipe
                 i.large.plus.icon
         .twelve.wide.column
-            each recipes
+            each model_docs_helper 'recipe'
                 .ui.header #{title}
      
 template(name='product_recipes')
@@ -32,7 +32,7 @@ template(name='user_recipes')
         .column
             .ui.header 
                 +i name='sent--v2'
-                |sent 
+                |authored 
             .ui.stackable.cards.scrolling
                 each sent_recipes 
                     .ui.card
@@ -51,9 +51,9 @@ template(name='user_recipes')
         .column
             .ui.header 
                 +i name='gift--v1'
-                |received
+                |favorites
             .ui.stackable.cards.scrolling
-                each received_recipes
+                each favorited
                     .ui.card
                         .content
                             a(href="/recipe/#{_id}") 
@@ -71,33 +71,23 @@ template(name='recipe_edit')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column
+                .six.wide.column
                     .ui.inline.header
                         i.pencil.icon
                         | #{title}
-                        small gift card
+                        small recipe
+                    a.ui.large.circular.icon.green.button(href="/recipe/#{_id}/" title='save product')
+                        i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
                     div
-                    +number_edit key='amount' label='$ amount' direct=true
-                    +text_edit key='recipient_username' label='recipient username' direct=true
-                    +single_user_edit key='recipient_id' label='recipient' direct=true
-                .twelve.wide.column
+                .ten.wide.column
                     div
-                    +array_edit key='tags' label='tags' direct=true
                     +html_edit key='notes' label='description' direct=true
-                    if can_delete
-                        .ui.red.button.delete_recipe
-                            i.remove.icon   
-                            | delete
-                    if recipient_id
-                        .ui.large.circular.icon.green.button.send_recipe(title='save product')
-                            i.sent.large.icon
-                            |send recipe
-                    else
-                        .ui.large.circular.icon.green.disabled.button.send_recipe(title='save product')
-                            i.sent.large.icon
-                            |send recipe
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
+                    .ui.red.button.delete_recipe
+                        i.remove.icon   
+                        | delete
                 
                 
 template(name='recipe_view')
@@ -107,20 +97,13 @@ template(name='recipe_view')
                 .four.wide.column
                     .ui.inline.header
                         | #{title}
-                        small gift card view
+                        small recipe view
                     +image_view key='image_id' label='image' direct=true
                     div
-                    +number_view key='amount' label='$ amount' direct=true
-                    +text_view key='recipient_username' label='recipient username' direct=true
-                    +single_user_view key='recipient_id' label='recipient' direct=true
-                    if sent 
-                        .ui.header sent {{from_now sent_timestamp}} {{cal_time sent_timestamp}}
-                    else 
-                        .ui.header not sent
                 .twelve.wide.column
                     div
-                    +array_view key='tags' label='tags' direct=true
                     +html_view key='notes' label='description' direct=true
+                    // +array_view key='tags' label='tags' icon='tags' direct=true
                     if can_delete
                         .ui.red.button.delete_recipe
                             i.remove.icon   

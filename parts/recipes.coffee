@@ -11,6 +11,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'recipe_view'
         ), name:'recipe_view'
+    Router.route '/recipe/:doc_id/view', (->
+        @layout 'layout'
+        @render 'recipe_view'
+        ), name:'recipe_view_long'
     Router.route '/product/:doc_id/recipes', (->
         @layout 'product_layout'
         @render 'product_recipes'
@@ -33,6 +37,12 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
     
 
+    Template.recipes.events
+        'click .add_recipe': ->
+            new_id = Docs.insert 
+                model:'recipe'
+            Router.go "/recipe/#{new_id}/edit"    
+    
     Template.product_recipes.events
         'click .add_recipe': ->
             new_id = Docs.insert 
