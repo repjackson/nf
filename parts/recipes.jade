@@ -7,8 +7,16 @@ template(name='recipes')
             .ui.basic.circular.icon.button.add_recipe
                 i.large.plus.icon
         .twelve.wide.column
-            each model_docs_helper 'recipe'
-                .ui.header #{title}
+            .ui.stackable.cards
+                each model_docs_helper 'recipe'
+                    .ui.card
+                        a(href="/recipe/#{_id}") 
+                            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                        a.content(href="/recipe/#{_id}") 
+                            .ui.header 
+                                |#{title}
+                            |added #{when} by #{_author_username}
+    
      
 template(name='product_recipes')
     .ui.inline.header 
@@ -24,8 +32,8 @@ template(name='product_recipes')
                 
 template(name='user_recipes')
     .ui.inline.header 
-        +i name='gift-card'
-        |user gift cards
+        +i name='cookbook'
+        |user recipes
     .ui.basic.circular.icon.button.send_recipe
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
@@ -95,6 +103,8 @@ template(name='recipe_view')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
+                    a.ui.circular.icon.button(href="/recipes")
+                        i.food.big.icon
                     .ui.inline.header
                         | #{title}
                         small recipe view

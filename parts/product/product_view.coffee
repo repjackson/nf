@@ -105,9 +105,11 @@ if Meteor.isClient
             
     Template.product_inventory.events
         'click .add_inventory': ->
+            count = Docs.find(model:'inventory_item').count()
             new_id = Docs.insert 
                 model:'inventory_item'
                 product_id:@_id
+                id:count++
             Session.set('editing_inventory_id', @_id)
         'click .edit_inventory_item': -> 
             Session.set('editing_inventory_id', @_id)
