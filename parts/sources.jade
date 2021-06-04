@@ -1,9 +1,16 @@
 template(name='sources')
-    .ui.inline.header 
-        +i name='farm'
-        |sources
-    .ui.basic.circular.icon.button.add_source
-        i.large.plus.icon
+    .ui.stackable.padded.grid
+        .four.wide.column
+            .ui.inline.header 
+                +i name='farm'
+                |sources
+            .ui.basic.circular.icon.button.add_source
+                i.large.plus.icon
+        .twelve.wide.column
+            each sources
+                .ui.header #{title}
+                
+                
 template(name='user_sources')
     .ui.inline.header 
         +i name='gift-card'

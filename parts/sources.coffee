@@ -12,6 +12,10 @@ if Meteor.isClient
         @render 'source_view'
         ), name:'source_view'
     
+    Template.sources.onCreated ->
+        @autorun => Meteor.subscribe 'model_docs', 'source', ->
+            
+            
     Template.user_sources.onCreated ->
         @autorun => Meteor.subscribe 'user_sent_sources', Router.current().params.username, ->
         @autorun => Meteor.subscribe 'user_received_sources', Router.current().params.username, ->

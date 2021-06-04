@@ -29,10 +29,11 @@ template(name='product_edit')
                     +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
                     +number_edit key='calories' label='calories' direct=true
                     div
-                    +array_edit key='ingredients' label='ingredients'  direct=true
-                    +array_edit key='location_tags' label='location tags' direct=true
+                    +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
+                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
                     +text_edit key='size_description' label='size description'  direct=true
                     +html_edit key='description' label='description' direct=true
+                    +text_edit key='packaging' label='packaging' icon='package' direct=true
                     if can_delete
                         .ui.red.button.delete_product
                             i.remove.icon   
