@@ -1,7 +1,7 @@
 if Meteor.isClient
     Template.user_credit.onCreated ->
         # @autorun => Meteor.subscribe 'joint_transactions', Router.current().params.username
-        @autorun => Meteor.subscribe 'model_docs', 'deposit'
+        # @autorun => Meteor.subscribe 'model_docs', 'deposit'
         # @autorun => Meteor.subscribe 'model_docs', 'reservation'
         # @autorun => Meteor.subscribe 'model_docs', 'withdrawal'
         @autorun => Meteor.subscribe 'my_topups'

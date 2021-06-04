@@ -1,5 +1,5 @@
 template(name='user_credit')
-    .ui.stackable.one.column.grid
+    .ui.stackable.one.column.padded.grid
         if is_current_user
             .column
             .column
@@ -24,7 +24,7 @@ template(name='user_credit')
                     .ui.icon.button.add_credits   
                         i.right.chevron.icon
                         
-                .ui.large.bulleted.list
+                .ui.large.bulleted.list.scrolling
                     each topups
                         .item 
                             .content

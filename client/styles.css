@@ -381,11 +381,6 @@ img {
 }
 
 
-.button:active {
-    color: black !important;
-    background-color: darkgrey !important; 
-    box-shadow: inset 5px 5px 10px #333 !important; 
-}}
 
 .home_segment{
     -webkit-transition: all 0.5s ease;

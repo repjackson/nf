@@ -57,34 +57,35 @@ template(name='user_layout')
                                 +i name='dashboard' cl='ui avatar image'
                                 // i.dashboard.icon
                                 |dashboard
-                            a.ui.basic.circular.compact.button(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
-                                +i name='money' cl='ui avatar image'
-                                // i.money.icon
-                                |credit
-                            a.ui.basic.circular.compact.button(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
-                                +i name='check' cl='ui avatar image'
-                                // i.list.icon
-                                |orders
-                            a.ui.basic.circular.compact.button(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
-                                +i name='friends' cl='ui avatar image'
-                                // i.users.icon
-                                |friends
-                            a.ui.basic.circular.compact.button(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
-                                +i name='shopping-cart' cl='ui avatar image'
-                                // i.cart.icon
-                                |cart
-                            // a.ui.basic.circular.compact.button(href="/user/#{username}/downloads" class="{{isActiveRoute 'user_downloads'}}")
-                            //     +i name='download' cl='ui avatar image'
-                            //     i.download.icon
-                            //     |downloads
-                            a.ui.basic.circular.compact.button(href="/user/#{username}/subs" class="{{isActiveRoute 'user_subs'}}")
-                                +i name='clock' cl='ui avatar image'
-                                // i.clock.icon
-                                |subscriptions
-                            a.ui.basic.circular.compact.button(href="/user/#{username}/addresses" class="{{isActiveRoute 'user_addresses'}}")
-                                +i name='marker' cl='ui avatar image'
-                                // i.marker.icon
-                                |addresses
+                            if is_current_user
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
+                                    +i name='money' cl='ui avatar image'
+                                    // i.money.icon
+                                    |credit
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
+                                    +i name='check' cl='ui avatar image'
+                                    // i.list.icon
+                                    |orders
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
+                                    +i name='friends' cl='ui avatar image'
+                                    // i.users.icon
+                                    |friends
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
+                                    +i name='shopping-cart' cl='ui avatar image'
+                                    // i.cart.icon
+                                    |cart
+                                // a.ui.basic.circular.compact.button(href="/user/#{username}/downloads" class="{{isActiveRoute 'user_downloads'}}")
+                                //     +i name='download' cl='ui avatar image'
+                                //     i.download.icon
+                                //     |downloads
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/subs" class="{{isActiveRoute 'user_subs'}}")
+                                    +i name='clock' cl='ui avatar image'
+                                    // i.clock.icon
+                                    |subscriptions
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/addresses" class="{{isActiveRoute 'user_addresses'}}")
+                                    +i name='marker' cl='ui avatar image'
+                                    // i.marker.icon
+                                    |addresses
                             a.ui.basic.circular.compact.button(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
                                 +i name='certificate' cl='ui avatar image'
                                 // i.certificate.icon
