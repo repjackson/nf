@@ -66,6 +66,10 @@ template(name='nav')
                         +i name='shopping-cart' cl=''
                     if cart_items.count
                         strong #{cart_items.count} ($#{my_cart_subtotal})
+                a.item.zoomer.toggle_topbar(title='alerts')
+                    // i.wallet.icon
+                    .ui.mini.image.notifications
+                        +i name='notification' cl=''
                 a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                     // i.wallet.icon
                     .ui.mini.image.wallet
@@ -90,23 +94,25 @@ template(name='nav')
                     // i.bars.large.icon
                         
         unless currentUser
-            a.item(href='/login' title='login') 
-                i.sign.in.large.icon
-                // +i name='internal'
-                |login
+            if subs_ready
+                a.item(href='/login' title='login') 
+                    i.sign.in.large.icon
+                    // +i name='internal'
+                    |login
+            else 
+                i.food.loading.icon
 
 
-
-// template(name='my_latest_activity')
-//     .ui.grey.header 
-//         i.grey.rss.icon
-//         |your activity
-//     .ui.list
-//         each my_latest_activity
-//             .item 
-//                 img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
-//                 |#{text} #{body}
-//                 small #{when}
+template(name='my_latest_activity')
+    .ui.grey.header 
+        i.grey.rss.icon
+        |your activity
+    .ui.list
+        each my_latest_activity
+            .item 
+                img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
+                |#{text} #{body}
+                small #{when}
 
 
 // template(name='latest_activity')
@@ -181,14 +187,15 @@ template(name='footer')
 
 
 
-// template(name='topbar')
-//     .ui.fluid.attached.segment
-//         .ui.middle.aligned.divided.list
-//             each recent_alerts
-//                 +recent_alert
-//         a.ui.icon.attached.basic.button.item.close_topbar(href="/inbox")
-//             i.inbox.icon
-//             |inbox
+template(name='topbar')
+    .ui.fluid.attached.segment.topbar.top.sidebar
+        .ui.middle.aligned.divided.list
+        .ui.list
+            each recent_alerts
+                +recent_alert
+        a.ui.basic.button.item.close_topbar(href="/inbox")
+            i.inbox.icon
+            |inbox
         
 // template(name='recent_alert')        
 //     .item.alert
@@ -332,10 +339,11 @@ template(name='left_sidebar')
                 +i name='shield' cl='ui inline mini image'
                 |admin
             a.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
-                i.users.icon
+                +i name='groups' cl='ui inline mini image'
+                // i.users.icon
                 | users
             a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-                // +i name='list' cl='ui inline mini image'
-                i.list.icon
+                +i name='list' cl='ui inline mini image'
+                // i.list.icon
                 | orders
                 

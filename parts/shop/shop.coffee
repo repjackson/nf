@@ -193,8 +193,6 @@ if Meteor.isClient
                 sort: "#{Session.get('product_sort_key')}":parseInt(Session.get('product_sort_direction'))
                 limit:Session.get('product_limit')
 
-        subs_ready: ->
-            Template.instance().subscriptionsReady()
         users: ->
             # if picked_tags.array().length > 0
             Meteor.users.find {

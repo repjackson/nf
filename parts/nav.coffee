@@ -13,7 +13,7 @@ if Meteor.isClient
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'push'
+                    # transition:'slideout'
                     exclusive:true
                     duration:250
                     scrollLock:true
@@ -24,12 +24,23 @@ if Meteor.isClient
             $('.ui.right.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'push'
+                    transition:'scale'
                     exclusive:true
                     duration:250
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_rightbar')
+        , 1000
+        Meteor.setTimeout ->
+            $('.ui.topbar.sidebar')
+                .sidebar({
+                    context: $('.bottom.segment')
+                    transition:'scale'
+                    exclusive:true
+                    duration:250
+                    scrollLock:true
+                })
+                .sidebar('attach events', '.toggle_topbar')
         , 1000
     
     Template.right_sidebar.events

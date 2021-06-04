@@ -10,6 +10,9 @@ Template.registerHelper 'model_docs_helper', (model) ->
     console.log model
     Docs.find 
         model:model
+Template.registerHelper 'subs_ready', () -> 
+    Template.instance().subscriptionsReady()
+
 Template.registerHelper 'cart_subtotal', () -> 
     store_session_document = 
         Docs.findOne 
