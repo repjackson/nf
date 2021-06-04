@@ -21,7 +21,7 @@ if Meteor.isClient
                 .sidebar('attach events', '.toggle_sidebar')
         , 1000
         Meteor.setTimeout ->
-            $('.ui.right.sidebar')
+            $('.ui.rightbar')
                 .sidebar({
                     context: $('.bottom.segment')
                     transition:'scale'
@@ -41,6 +41,17 @@ if Meteor.isClient
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_topbar')
+        , 1000
+        Meteor.setTimeout ->
+            $('.ui.sidebar.cartbar')
+                .sidebar({
+                    context: $('.bottom.segment')
+                    transition:'scale'
+                    exclusive:true
+                    duration:250
+                    scrollLock:true
+                })
+                .sidebar('attach events', '.toggle_cartbar')
         , 1000
     
     Template.right_sidebar.events

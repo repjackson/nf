@@ -60,7 +60,8 @@ template(name='nav')
             if currentUser
                 // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
                 //     i.bell.large.yellow.icon
-                a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
+                // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
+                a.icon.item.toggle_cartbar
                     // i.large.cart.icon
                     .ui.mini.image.cart
                         +i name='shopping-cart' cl=''
@@ -210,8 +211,12 @@ template(name='topbar')
             
             
             
+template(name='cartbar')
+    .ui.right.sidebar.cartbar
+        +cart
+        
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.thin.menu
+    .ui.right.sidebar.vertical.borderless.thin.menu.rightbar
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
