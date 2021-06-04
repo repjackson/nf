@@ -34,6 +34,11 @@ if Meteor.isClient
         
 if Meteor.isServer
     Meteor.publish 'username_model_docs', (model, username)->
-        Docs.find   
-            model:model
-            _author_username:username
+        if username 
+            Docs.find   
+                model:model
+                _author_username:username
+        else 
+            Docs.find   
+                model:model
+                _author_username:Meteor.user().username
