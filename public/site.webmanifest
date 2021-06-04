@@ -1,20 +1,14 @@
 {
-    "name": "Nude Foods Market",
-    "short_name": "nude foods",
-    "description": "zero-waste grocery delivery",
+    "name": "Nude Foods",
+    "short_name": "Nude Foods",
     "icons": [
         {
-            "src": "/android-icon-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-icon-512x512.png",
-            "sizes": "512x512",
+            "src": "/android-chrome-96x96.png",
+            "sizes": "96x96",
             "type": "image/png"
         }
     ],
     "theme_color": "#ffffff",
-    "background_color": "orange",
+    "background_color": "#ffffff",
     "display": "standalone"
 }
