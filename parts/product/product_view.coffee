@@ -104,6 +104,25 @@ if Meteor.isClient
                     Docs.remove @_id
                     )
             )
+    Template.product_inventory.events
+        'click .add_inventory': ->
+            new_id = Docs.insert 
+                model:'inventory_item'
+                product_id:@_id
+            Session.set('editing_inventory_id', @_id)
+        'click .edit_inventory_item': -> 
+            Session.set('editing_inventory_id', @_id)
+        'click .save_inventory_item': -> 
+            Session.set('editing_inventory_id', null)
+        
+    Template.product_inventory.helpers
+        editing_this: ->
+            Session.equals('editing_inventory_id', @_id)
+        inventory_items: ->
+            Docs.find 
+                model:'inventory_item'
+                product_id:@_id
+            
 
 
     Template.product_subscriptions.helpers

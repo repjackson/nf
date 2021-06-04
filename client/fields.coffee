@@ -248,6 +248,9 @@ Template.array_edit.events
                 if doc
                     Docs.update parent._id,
                         $addToSet:"#{@key}":element_val
+                if user
+                    Meteor.users.update parent._id,
+                        $addToSet:"#{@key}":element_val
                 # window.speechSynthesis.speak new SpeechSynthesisUtterance element_val
                 t.$('.new_element').val('')
 
@@ -265,6 +268,9 @@ Template.array_edit.events
         user = Meteor.users.findOne parent._id
         if doc
             Docs.update parent._id,
+                $pull:"#{field.key}":element
+        else if user
+            Meteor.users.update parent._id,
                 $pull:"#{field.key}":element
 
         t.$('.new_element').focus()

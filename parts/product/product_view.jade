@@ -41,29 +41,31 @@ template(name='product_layout')
                 
                         .ten.wide.column
                             .ui.green.circular.large.button.add_to_cart
-                                i.cart.plus.large.icon
+                                // i.cart.plus.large.icon
+                                
+                                +i name='add-shopping-cart--v1' cl='ui avatar image'
                                 |add to cart
 
-                            a.ui.basic.circular.large.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
-                                i.content.icon
+                            a.ui.basic.circular.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
+                                +i name='content' cl='ui avatar image'
                                 |description
-                            a.ui.basic.circular.large.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
-                                i.clock.icon
+                            a.ui.basic.circular.compact.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
+                                +i name='clock' cl='ui avatar image'
                                 |subscriptions
-                            a.ui.basic.circular.large.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
-                                i.list.icon
+                            a.ui.basic.circular.compact.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
+                                +i name='list' cl='ui avatar image'
                                 |orders
-                            a.ui.basic.circular.large.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
-                                i.food.icon
+                            a.ui.basic.circular.compact.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
+                                +i name='cookbook' cl='ui avatar image'
                                 |recipes
-                            a.ui.basic.circular.large.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
-                                i.thumbs.up.outline.icon
+                            a.ui.basic.circular.compact.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
+                                +i name='popular-product' cl='ui avatar image'
                                 |reviews
-                            a.ui.basic.circular.large.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
-                                i.chat.icon
+                            a.ui.basic.circular.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
+                                +i name='chat' cl='ui avatar image'
                                 |comments
-                            a.ui.basic.circular.large.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
-                                i.shield.icon
+                            a.ui.basic.circular.compact.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
+                                +i name='shield' cl='ui avatar image'
                                 |inventory
                             +yield
                             
@@ -79,11 +81,37 @@ template(name='product_main')
         
         
 template(name='product_inventory')      
+    .ui.inline.header 
+        +i name='shield'
+        |inventory
+    if is_admin
+        a.ui.icon.circular.basic.button.add_inventory
+            i.plus.icon
+    .ui.list
+        each inventory_items
+            .item 
+                unless editing_this
+                    .ui.inline.header id: #{id}
+                    .ui.inline.header location: #{location}
+                    i.edit.circular.link.icon.edit_inventory_item
+                if editing_this
+                    +number_edit key='id' label='id number' direct=true
+                    +text_edit key='location' label='location' icon='marker' direct=true
+                    i.checkmark.green.circular.link.icon.save_inventory_item
 
 
 
 template(name='product_recipes')
-    .ui.header recipes
+    .ui.header 
+        +i name='cookbook'
+        |recipes
+    each product_recipes
+        a.ui.header(href="/recipe/#{_id}/view") #{title}
+        
+template(name='product_reviews')
+    .ui.header 
+        +i name='voting'
+        |reviews
     each product_recipes
         a.ui.header(href="/recipe/#{_id}/view") #{title}
         
@@ -113,7 +141,7 @@ template(name='product_subscriptions')
                 .ui.basic.label #{sub_day}
                 .ui.basic.label #{sub_frequency}
     .ui.small.header 
-        |your subs
+        |your subscriptions
 
 
 template(name='product_orders')                            
@@ -130,7 +158,25 @@ template(name='product_orders')
         each product_orders
             +product_order_card
     .ui.header #{views} views
+    +order_status_icons
     .ui.hidden.divider
+                
+template(name='order_status_icons')  
+    a.zoomer(href="/order/#{_id}")
+        if runner_viewed
+            +icolor name='eye-checked' cl='ui avatar image'
+        if preparing
+            +icolor name='new-product--v1' cl='ui avatar image'
+        if prepared
+            +icolor name='handle-with-care' cl='ui inline image'
+        if arrived
+            +icolor name='checked-truck' cl='ui inline image'
+        if delivered
+            +icolor name='checkmark' cl='ui inline image'
+        
+        if delivery_photo
+            +image_view key='delivery_photo' direct=true cl='ui tiny inline image'
+
 
          
          
