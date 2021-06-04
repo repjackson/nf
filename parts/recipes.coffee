@@ -11,11 +11,18 @@ if Meteor.isClient
         @layout 'layout'
         @render 'recipe_view'
         ), name:'recipe_view'
+    Router.route '/product/:doc_id/recipes', (->
+        @layout 'product_layout'
+        @render 'product_recipes'
+        ), name:'product_recipes'
+    
     
     Template.recipes.onCreated ->
         @autorun => Meteor.subscribe 'model_docs', 'recipe', ->
             
             
+    Template.product_recipes.onCreated ->
+        @autorun => Meteor.subscribe 'product_recipes', Router.current().params.doc_id, ->
     Template.user_recipes.onCreated ->
         @autorun => Meteor.subscribe 'user_sent_recipes', Router.current().params.username, ->
         @autorun => Meteor.subscribe 'user_received_recipes', Router.current().params.username, ->
@@ -26,6 +33,13 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
     
 
+    Template.product_recipes.events
+        'click .add_recipe': ->
+            new_id = Docs.insert 
+                model:'recipe'
+                product_id:Router.current().params.doc_id
+            Router.go "/recipe/#{new_id}/edit"    
+                
     Template.user_recipes.events
         'click .send_recipe': ->
             new_id = 
@@ -70,6 +84,10 @@ if Meteor.isServer
         Docs.find   
             model:'recipe'
             _author_username:username
+    Meteor.publish 'product_recipes', (product_id)->
+        Docs.find   
+            model:'recipe'
+            product_id:product_id
             
             
             

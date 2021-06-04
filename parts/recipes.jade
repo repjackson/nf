@@ -9,6 +9,17 @@ template(name='recipes')
         .twelve.wide.column
             each recipes
                 .ui.header #{title}
+     
+template(name='product_recipes')
+    .ui.inline.header 
+        +i name='cookbook'
+        |recipes
+    .ui.icon.basic.button.add_recipe
+        i.plus.green.icon
+    div
+    each model_docs_helper 'recipe'
+        a.ui.header(href="/recipe/#{_id}/view") #{title}
+        
                 
                 
 template(name='user_recipes')

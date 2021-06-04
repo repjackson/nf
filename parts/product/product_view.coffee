@@ -11,10 +11,6 @@ if Meteor.isClient
         @layout 'product_layout'
         @render 'product_subscriptions'
         ), name:'product_subscriptions'
-    Router.route '/product/:doc_id/recipes', (->
-        @layout 'product_layout'
-        @render 'product_recipes'
-        ), name:'product_recipes'
     Router.route '/product/:doc_id/comments', (->
         @layout 'product_layout'
         @render 'product_comments'

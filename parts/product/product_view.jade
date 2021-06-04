@@ -105,13 +105,6 @@ template(name='product_inventory')
 
 
 
-template(name='product_recipes')
-    .ui.header 
-        +i name='cookbook'
-        |recipes
-    each product_recipes
-        a.ui.header(href="/recipe/#{_id}/view") #{title}
-        
 template(name='product_reviews')
     .ui.header 
         +i name='voting'
@@ -121,8 +114,6 @@ template(name='product_reviews')
         
         
         
-template(name='product_comments')      
-    +comments
     
     
 template(name='product_subscriptions')     
