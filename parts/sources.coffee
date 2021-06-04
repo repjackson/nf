@@ -1,30 +1,34 @@
 if Meteor.isClient
-    Router.route '/user/:username/giftcards', (->
-        @layout 'user_layout'
-        @render 'user_giftcards'
-        ), name:'user_giftcards'
-    Router.route '/giftcard/:doc_id', (->
+    Router.route '/sources', (->
         @layout 'layout'
-        @render 'giftcard_view'
-        ), name:'giftcard_view'
+        @render 'sources'
+        ), name:'sources'
+    Router.route '/user/:username/sources', (->
+        @layout 'user_layout'
+        @render 'user_sources'
+        ), name:'user_sources'
+    Router.route '/source/:doc_id', (->
+        @layout 'layout'
+        @render 'source_view'
+        ), name:'source_view'
     
-    Template.user_giftcards.onCreated ->
-        @autorun => Meteor.subscribe 'user_sent_giftcards', Router.current().params.username, ->
-        @autorun => Meteor.subscribe 'user_received_giftcards', Router.current().params.username, ->
+    Template.user_sources.onCreated ->
+        @autorun => Meteor.subscribe 'user_sent_sources', Router.current().params.username, ->
+        @autorun => Meteor.subscribe 'user_received_sources', Router.current().params.username, ->
             
-    Template.giftcard_edit.onCreated ->
+    Template.source_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
-    Template.giftcard_view.onCreated ->
+    Template.source_view.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
     
 
-    Template.user_giftcards.events
-        'click .send_giftcard': ->
+    Template.user_sources.events
+        'click .send_source': ->
             new_id = 
                 Docs.insert 
-                    model:'giftcard'
+                    model:'source'
             
-            Router.go "/giftcard/#{new_id}/edit"
+            Router.go "/source/#{new_id}/edit"
             
             
         # 'click .edit_address': ->
@@ -41,47 +45,47 @@ if Meteor.isClient
            
            
             
-    Template.user_giftcards.helpers
-        is_editing_address: ->
-            Session.equals('editing_id',@_id)
-            
-            
-if Meteor.isServer
-    Meteor.publish 'user_sent_giftcards', (username)->
-        Docs.find   
-            model:'giftcard'
-            _author_username:username
+    Template.user_sources.helpers
+        sent_sources: ()->
+            Docs.find   
+                model:'source'
+                _author_username:Router.current().params.username
+        received_sources: ()->
+            Docs.find   
+                model:'source'
+                recipient_username:Router.current().params.username
         
-    Meteor.publish 'user_received_giftcards', (username)->
+if Meteor.isServer
+    Meteor.publish 'user_received_sources', (username)->
         Docs.find   
-            model:'giftcard'
+            model:'source'
             recipient_username:username
             
             
-    Meteor.publish 'user_sent_giftcards', (username)->
+    Meteor.publish 'user_sent_sources', (username)->
         Docs.find   
-            model:'giftcard'
+            model:'source'
             _author_username:username
             
             
             
             
 if Meteor.isClient
-    Router.route '/giftcard/:doc_id/edit', (->
+    Router.route '/source/:doc_id/edit', (->
         @layout 'layout'
-        @render 'giftcard_edit'
-        ), name:'giftcard_edit'
+        @render 'source_edit'
+        ), name:'source_edit'
 
 
 
-    Template.giftcard_edit.onCreated ->
+    Template.source_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'model_docs', 'menu_section'
 
 
-    Template.giftcard_edit.events
-        'click .send_giftcard': ->
+    Template.source_edit.events
+        'click .send_source': ->
             Swal.fire({
                 title: 'confirm send card'
                 text: "#{@amount} credits"
@@ -91,24 +95,24 @@ if Meteor.isClient
                 cancelButtonText: 'cancel'
             }).then((result) =>
                 if result.value
-                    giftcard = Docs.findOne Router.current().params.doc_id
+                    source = Docs.findOne Router.current().params.doc_id
                     Meteor.users.update Meteor.userId(),
                         $inc:credit:-@amount
-                    Docs.update giftcard._id,
+                    Docs.update source._id,
                         $set:
                             sent:true
                             sent_timestamp:Date.now()
                     Swal.fire(
-                        'giftcard sent',
+                        'source sent',
                         ''
                         'success'
-                    Router.go "/giftcard/#{@_id}/"
+                    Router.go "/source/#{@_id}/"
                     )
             )
 
 
             
-    Template.giftcard_edit.helpers
+    Template.source_edit.helpers
         all_shop: ->
             Docs.find
-                model:'giftcard'
+                model:'source'

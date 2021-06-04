@@ -217,7 +217,7 @@ template(name='cartbar')
         +cart
         
 template(name='walletbar')
-    .ui.right.wide.sidebar.walletbar
+    .ui.right.sidebar.walletbar
         +user_credit
         
 template(name='right_sidebar')
@@ -308,6 +308,11 @@ template(name='left_sidebar')
                 +i name='information--v1' cl=''
             // i.info.icon
             | about
+        a.item.toggle_sidebar.zoomer(href='/sources' class="{{isActivePath '/sources'}}")
+            .ui.mini.image.farm
+                +i name='farm' cl=''
+            // i.info.icon
+            | sources
         a.item.toggle_sidebar.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}")
             .ui.mini.image.info
                 +i name='cookbook' cl=''
