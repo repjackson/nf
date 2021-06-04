@@ -98,29 +98,29 @@ template(name='nav')
 
 
 
-template(name='my_latest_activity')
-    .ui.grey.header 
-        i.grey.rss.icon
-        |your activity
-    .ui.list
-        each my_latest_activity
-            .item 
-                img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
-                |#{text} #{body}
-                small #{when}
+// template(name='my_latest_activity')
+//     .ui.grey.header 
+//         i.grey.rss.icon
+//         |your activity
+//     .ui.list
+//         each my_latest_activity
+//             .item 
+//                 img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
+//                 |#{text} #{body}
+//                 small #{when}
 
 
-template(name='latest_activity')
-    .ui.grey.header 
-        i.grey.rss.icon
-        |all activity
-    .ui.list
-        each latest_activity
-            .item 
-                img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
-                |#{text} #{body} 
-                .ui.label #{log_type}
-                small #{when}
+// template(name='latest_activity')
+//     .ui.grey.header 
+//         i.grey.rss.icon
+//         |all activity
+//     .ui.list
+//         each latest_activity
+//             .item 
+//                 img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
+//                 |#{text} #{body} 
+//                 .ui.label #{log_type}
+//                 small #{when}
 
 
 template(name='footer')
@@ -181,24 +181,24 @@ template(name='footer')
 
 
 
-template(name='topbar')
-    .ui.fluid.attached.segment
-        .ui.middle.aligned.divided.list
-            each recent_alerts
-                +recent_alert
-        a.ui.icon.attached.basic.button.item.close_topbar(href="/inbox")
-            i.inbox.icon
-            |inbox
+// template(name='topbar')
+//     .ui.fluid.attached.segment
+//         .ui.middle.aligned.divided.list
+//             each recent_alerts
+//                 +recent_alert
+//         a.ui.icon.attached.basic.button.item.close_topbar(href="/inbox")
+//             i.inbox.icon
+//             |inbox
         
-template(name='recent_alert')        
-    .item.alert
-        .right.floated.content
-            i.eye.link.icon.mark_read(title='mark read')
-        img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
-        .content
-            .header
-                |#{description} 
-            .description #{author.name} #{when}
+// template(name='recent_alert')        
+//     .item.alert
+//         .right.floated.content
+//             i.eye.link.icon.mark_read(title='mark read')
+//         img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
+//         .content
+//             .header
+//                 |#{description} 
+//             .description #{author.name} #{when}
             
             
             
@@ -328,7 +328,8 @@ template(name='left_sidebar')
         if is_admin
             .divider
             a.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
-                i.database.icon
+                // i.database.icon
+                +i name='shield' cl='ui inline mini image'
                 |admin
             a.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
                 i.users.icon

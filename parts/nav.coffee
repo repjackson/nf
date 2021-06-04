@@ -77,9 +77,9 @@ if Meteor.isClient
             
         'click .clear_tags': -> picked_tags.clear()
     
-    Template.topbar.onCreated ->
-        @autorun => Meteor.subscribe 'my_received_messages'
-        @autorun => Meteor.subscribe 'my_sent_messages'
+    # Template.topbar.onCreated ->
+    #     @autorun => Meteor.subscribe 'my_received_messages'
+    #     @autorun => Meteor.subscribe 'my_sent_messages'
     
     Template.nav.helpers
         cart_items: ->
@@ -95,29 +95,29 @@ if Meteor.isClient
                 recipient_id:Meteor.userId()
                 read_ids:$nin:[Meteor.userId()]
             ).count()
-    Template.topbar.helpers
-        recent_alerts: ->
-            Docs.find 
-                model:'message'
-                recipient_id:Meteor.userId()
-                read_ids:$nin:[Meteor.userId()]
-            , sort:_timestamp:-1
+    # Template.topbar.helpers
+    #     recent_alerts: ->
+    #         Docs.find 
+    #             model:'message'
+    #             recipient_id:Meteor.userId()
+    #             read_ids:$nin:[Meteor.userId()]
+    #         , sort:_timestamp:-1
             
-    Template.recent_alert.events
-        'click .mark_read': (e,t)->
-            # console.log @
-            # console.log $(e.currentTarget).closest('.alert')
-            # $(e.currentTarget).closest('.alert').transition('slide left')
-            Meteor.call 'mark_read', @_id, ->
+    # Template.recent_alert.events
+    #     'click .mark_read': (e,t)->
+    #         # console.log @
+    #         # console.log $(e.currentTarget).closest('.alert')
+    #         # $(e.currentTarget).closest('.alert').transition('slide left')
+    #         Meteor.call 'mark_read', @_id, ->
                 
-            # Meteor.setTimeout ->
-            # , 500
+    #         # Meteor.setTimeout ->
+    #         # , 500
          
          
             
-    Template.topbar.events
-        'click .close_topbar': ->
-            Session.set('viewing_alerts', false)
+    # Template.topbar.events
+    #     'click .close_topbar': ->
+    #         Session.set('viewing_alerts', false)
     
             
             
