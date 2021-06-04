@@ -678,9 +678,9 @@ input.username_search{
 }
 
 
-.button, .selector, .card, body, .item{
-    animation: fadein .5s;
-    /* -webkit-transition: opacity 2s ease-out; */
+.button, .selector, .card, p, .header, .item, .image {
+    animation: fadein 1s;
+     -webkit-transition: opacity 2s ease-out; 
     /* animation: fadeout 1s; */
 }
 .global_container {

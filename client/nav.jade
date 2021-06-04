@@ -12,7 +12,9 @@ template(name='nav')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
             // |Nude Foods Market
-            img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+            .mobile.hidden
+                img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+            img.ui.mini.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
         // .search.item.zoomer(title='search')
         //     .ui.icon.transparent.input
