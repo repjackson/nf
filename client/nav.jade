@@ -71,7 +71,8 @@ template(name='nav')
                     // i.wallet.icon
                     .ui.mini.image.bell
                         +i name='notification' cl=''
-                a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
+                // a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
+                a.item.zoomer.toggle_walletbar(title='nudebucks')
                     // i.wallet.icon
                     .ui.mini.image.wallet
                         +i name='wallet' cl=''
@@ -214,6 +215,10 @@ template(name='topbar')
 template(name='cartbar')
     .ui.right.sidebar.cartbar
         +cart
+        
+template(name='walletbar')
+    .ui.right.sidebar.walletbar
+        +user_credit
         
 template(name='right_sidebar')
     .ui.right.sidebar.vertical.borderless.thin.menu.rightbar

@@ -8,13 +8,13 @@ if Meteor.isClient
     
     Template.nav.onRendered ->
         Meteor.setTimeout ->
-            $('.menu .item')
-                .popup()
+            # $('.menu .item')
+            #     .popup()
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
-                    mobileTransition:'scale'
+                    # transition:'uncover'
+                    # mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
@@ -25,8 +25,8 @@ if Meteor.isClient
             $('.ui.rightbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
-                    mobileTransition:'scale'
+                    # transition:'uncover'
+                    # mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
@@ -37,8 +37,8 @@ if Meteor.isClient
             $('.ui.topbar.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
-                    mobileTransition:'scale'
+                    # transition:'uncover'
+                    # mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
@@ -49,13 +49,25 @@ if Meteor.isClient
             $('.ui.sidebar.cartbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
-                    mobileTransition:'scale'
+                    # transition:'uncover'
+                    # mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_cartbar')
+        , 1000
+        Meteor.setTimeout ->
+            $('.ui.sidebar.walletbar')
+                .sidebar({
+                    context: $('.bottom.segment')
+                    # transition:'uncover'
+                    # mobileTransition:'scale'
+                    exclusive:true
+                    duration:150
+                    scrollLock:true
+                })
+                .sidebar('attach events', '.toggle_walletbar')
         , 1000
     
     Template.right_sidebar.events

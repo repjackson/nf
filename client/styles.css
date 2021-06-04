@@ -237,7 +237,7 @@ img {
 }
 
 #topnav {
-    border-radius: 0px 0px 10px 10px !important;
+    /*border-radius: 0px 0px 10px 10px !important;*/
 }
 .hour_picked {
     /* outline: lightgreen solid 2px !important; */
@@ -384,7 +384,7 @@ img {
 .button:active {
     color: black !important;
     background-color: darkgrey !important; 
-    /* box-shadow: inset 5px 5px 10px #333 !important; */
+    box-shadow: inset 5px 5px 10px #333 !important; 
 }}
 
 .home_segment{
@@ -452,7 +452,7 @@ img {
     /* max-height: 1000px !important; */
     /* top:0px; */
     /*filter: invert(1);*/
-    opacity: 0.1;
+    /*opacity: 0.1;*/
     -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 }
@@ -591,7 +591,7 @@ input.username_search{
     box-shadow: 0 1px 1px 1px rgba(50, 50, 100, 0.1) !important;
     /* background-color: rgba(50, 50, 50, .9) !important; */
     color: white !important;
-    /* transform: translate(0, 4px); */
+    transform: translate(0, 4px); 
 }
 .button.green {
     /* background-color: rgba(200, 200, 200, 0.5) !important; */
@@ -1095,7 +1095,7 @@ h1.ui.header{
 }
 
 .topnav::-webkit-scrollbar {
-    height: 1px;
+    height: 0px;
 }
 
 .secnav::-webkit-scrollbar {

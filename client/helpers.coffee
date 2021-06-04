@@ -347,13 +347,16 @@ Template.registerHelper 'is_eric', () -> if Meteor.userId() and Meteor.userId() 
 
 Template.registerHelper 'current_user', () ->  Meteor.users.findOne username:Router.current().params.username
 Template.registerHelper 'is_current_user', () ->
-    if Meteor.user().username is Router.current().params.username
-        true
-    else
-        if Meteor.user().roles and 'dev' in Meteor.user().roles
+    if Meteor.user()
+        if Meteor.user().username is Router.current().params.username
             true
         else
-            false
+            if Meteor.user().roles and 'dev' in Meteor.user().roles
+                true
+            else
+                false
+    else 
+        false
 Template.registerHelper 'view_template', -> "#{@field_type_slug}_view"
 Template.registerHelper 'edit_template', -> "#{@field_type_slug}_edit"
 Template.registerHelper 'is_model', -> @model is 'model'
@@ -390,7 +393,10 @@ Template.registerHelper 'current_doc', ->
 Template.registerHelper 'user_from_username_param', () ->
     found = Meteor.users.findOne username:Router.current().params.username
     # console.log found
-    found
+    if found
+        found
+    else 
+        Meteor.user()
 Template.registerHelper 'field_value', () ->
     # console.log @
     parent = Template.parentData()
