@@ -80,9 +80,7 @@ template(name='nav')
                         i.user.icon
                     strong.mobile.hidden #{currentUser.name}
                 a.icon.item.toggle_rightbar.no_blink
-                    .ui.mini.image.mobile.hidden.rightmenu
-                        +i name='menu--v1' cl=''
-                    .mobile.only.ui.mini.image.rightmenu
+                    .ui.mini.image.rightmenu
                         if currentUser.image_id
                             img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
                         else
@@ -204,7 +202,7 @@ template(name='footer')
             
             
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.menu
+    .ui.right.sidebar.vertical.borderless.menu
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
@@ -261,7 +259,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.menu
+    .ui.left.sidebar.vertical.borderless.menu
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
@@ -269,7 +267,7 @@ template(name='left_sidebar')
         a.item.toggle_sidebar.zoomer(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
-            img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+            img.ui.small.centered.image.mobile.only(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // span.mobile.hidden nude foods market
         // .search.item.zoomer(title='search')
         //     .ui.icon.transparent.input

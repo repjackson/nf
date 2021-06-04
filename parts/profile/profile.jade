@@ -33,17 +33,17 @@ template(name='user_layout')
                                         //- i.coins.icon
                                         |{{fixed user.credit}}c
                             if is_current_user
-                                a.ui.basic.compact.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
+                                a.ui.basic.circular.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
                                     i.cog.icon
                                     |edit profile
                             else if is_admin
-                                a.ui.basic.compact.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
+                                a.ui.basic.circular.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
                                     +i name='settings' cl='ui avatar image'
                                     |edit profile
                             unless is_current_user
                                 +friend_button
                             if is_current_user
-                                .ui.basic.compact.button.logout
+                                .ui.basic.circular.button.logout
                                     i.sign.out.alternate.icon
                                     |log out
                                 //- a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
