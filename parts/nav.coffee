@@ -13,8 +13,8 @@ if Meteor.isClient
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    # transition:'uncover'
-                    # mobileTransition:'scale'
+                    transition:'scale'
+                    mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
@@ -25,8 +25,8 @@ if Meteor.isClient
             $('.ui.rightbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    # transition:'uncover'
-                    # mobileTransition:'scale'
+                    transition:'overlay'
+                    mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
@@ -37,8 +37,8 @@ if Meteor.isClient
             $('.ui.topbar.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    # transition:'uncover'
-                    # mobileTransition:'scale'
+                    transition:'overlay'
+                    mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
@@ -49,8 +49,8 @@ if Meteor.isClient
             $('.ui.sidebar.cartbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    # transition:'uncover'
-                    # mobileTransition:'scale'
+                    transition:'scale'
+                    mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
@@ -61,8 +61,8 @@ if Meteor.isClient
             $('.ui.sidebar.walletbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    # transition:'uncover'
-                    # mobileTransition:'scale'
+                    transition:''
+                    mobileTransition:'scale'
                     exclusive:true
                     duration:150
                     scrollLock:true
