@@ -8,21 +8,26 @@ template(name='sources')
                 i.large.plus.icon
         .twelve.wide.column
             each model_docs_helper 'source'
-                .ui.header #{title}
-                    |added #{when}
+                .ui.card
+                    a(href="/source/#{_id}") 
+                        img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                    a.content(href="/source/#{_id}") 
+                        .ui.header 
+                            |#{title}
+                        |added #{when} by #{_author_username}
                 
                 
 template(name='user_sources')
     .ui.inline.header 
-        +i name='gift-card'
-        |user gift cards
+        +i name='farm'
+        |user sources
     .ui.basic.circular.icon.button.send_source
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
         .column
             .ui.header 
                 +i name='sent--v2'
-                |sent 
+                |favorites 
             .ui.stackable.cards.scrolling
                 each sent_sources 
                     .ui.card
@@ -61,33 +66,27 @@ template(name='source_edit')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column
+                .six.wide.column
                     .ui.inline.header
                         i.pencil.icon
                         | #{title}
-                        small gift card
+                        small source edit
                     +text_edit key='title' label='title' direct=true
-                    +image_edit key='image_id' label='image' direct=true
+                    +image_edit key='image_id' label='image' direct=true icon='image'
                     div
-                    +number_edit key='amount' label='$ amount' direct=true
-                    +text_edit key='recipient_username' label='recipient username' direct=true
-                    +single_user_edit key='recipient_id' label='recipient' direct=true
-                .twelve.wide.column
+                    +link_edit key='link' label='link' direct=true icon='link'
                     div
-                    +array_edit key='tags' label='tags' direct=true
-                    +html_edit key='notes' label='description' direct=true
+                    +text_edit key='location' label='location' direct=true icon='marker'
+                .ten.wide.column
+                    div
+                    +array_edit key='tags' label='tags' direct=true icon='tags'
+                    +html_edit key='description' label='description' direct=true icon='content'
                     if can_delete
                         .ui.red.button.delete_source
                             i.remove.icon   
                             | delete
-                    if recipient_id
-                        .ui.large.circular.icon.green.button.send_source(title='save product')
-                            i.sent.large.icon
-                            |send source
-                    else
-                        .ui.large.circular.icon.green.disabled.button.send_source(title='save product')
-                            i.sent.large.icon
-                            |send source
+                    a.ui.large.icon.green.button(href="/source/#{_id}" title='save product')
+                        i.checkmark.big.icon
                 
                 
 template(name='source_view')
@@ -95,18 +94,17 @@ template(name='source_view')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
+                    a.ui.basic.circular.icon.button(href="/sources")
+                        +ibig name='farm'
+                    
                     .ui.inline.header
                         | #{title}
-                        small gift card view
+                        small source
+                    if can_edit 
+                        a.ui.circular.icon.button(href="/source/#{_id}/edit")
+                            i.pencil.icon
                     +image_view key='image_id' label='image' direct=true
                     div
-                    +number_view key='amount' label='$ amount' direct=true
-                    +text_view key='recipient_username' label='recipient username' direct=true
-                    +single_user_view key='recipient_id' label='recipient' direct=true
-                    if sent 
-                        .ui.header sent {{from_now sent_timestamp}} {{cal_time sent_timestamp}}
-                    else 
-                        .ui.header not sent
                 .twelve.wide.column
                     div
                     +array_view key='tags' label='tags' direct=true
