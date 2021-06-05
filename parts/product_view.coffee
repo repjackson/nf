@@ -35,6 +35,13 @@ if Meteor.isClient
         Meteor.call 'log_view', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
     Template.product_layout.events
+        'click .goto_source': (e,t)->
+            $(e.currentTarget).closest('.pushable').transition('fade right', 240)
+            product = Docs.findOne Router.current().params.doc_id
+            Meteor.setTimeout =>
+                Router.go "/source/#{product.source_id}"
+            , 240
+        
         'click .add_to_cart': ->
             Meteor.call 'add_to_cart', @_id, =>
                 $('body').toast(
