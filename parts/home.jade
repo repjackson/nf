@@ -34,7 +34,7 @@ template(name='home')
                     .ui.icon.header
                         i.icon 
                             +ibig name='food-cart'
-                        |products
+                        |#{product_count} products
                 a.column(href="/deliveries")
                     .ui.icon.header
                         i.icon 
@@ -49,12 +49,12 @@ template(name='home')
                     .ui.icon.header
                         i.icon 
                             +ibig name='gift-card'
-                        |giftcards
+                        |#{giftcard_count} giftcards
                 a.column.zoomer(href="/users")
                     .ui.icon.header
                         i.icon 
                             +ibig name='groups'
-                        |customers
+                        |#{customer_count} customers
                 .column
                     .ui.icon.header
                         i.icon 
@@ -69,12 +69,12 @@ template(name='home')
                     .ui.icon.header
                         i.icon 
                             +ibig name='field-and-tractor'
-                        |sources
+                        |#{source_count} sources
                 a.column.zoomer(href="/ingredients")
                     .ui.icon.header
                         i.icon 
                             +ibig name='ingredients'
-                        |ingredients
+                        |#{ingredient_count} ingredients
                 a.column.zoomer(href="/orders")
                     .ui.icon.header
                         i.icon 
