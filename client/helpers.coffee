@@ -17,7 +17,13 @@ Template.registerHelper 'source_products', () ->
     Docs.find
         model:'product'
         source_id:@_id
-
+Template.registerHelper 'product_source', () -> 
+    found = 
+        Docs.findOne
+            model:'source'
+            _id:@source_id
+    console.log found
+    found
 
 
 Template.registerHelper 'cart_subtotal', () -> 

@@ -26,13 +26,13 @@ if Meteor.isClient
 
 
     Template.product_layout.onCreated ->
+        @autorun => Meteor.subscribe 'product_source', Router.current().params.doc_id, ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'product_from_product_id', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'orders_from_product_id', Router.current().params.doc_id
         @autorun => Meteor.subscribe 'subs_from_product_id', Router.current().params.doc_id
     Template.product_layout.onRendered ->
         Meteor.call 'log_view', Router.current().params.doc_id
-        Meteor.call 'model_docs', 'source'
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
     Template.product_layout.events
         'click .add_to_cart': ->
@@ -237,6 +237,12 @@ if Meteor.isClient
         # )
 
 if Meteor.isServer
+    Meteor.publish 'product_source', (product_id)->
+        product = Docs.findOne product_id
+        console.log 'need source from this product', product
+        Docs.find
+            model:'source'
+            _id:product.source_id
     Meteor.publish 'orders_from_product_id', (product_id)->
         # product = Docs.findOne product_id
         Docs.find

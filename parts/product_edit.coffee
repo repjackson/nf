@@ -39,8 +39,6 @@ if Meteor.isClient
     Template.product_edit.onCreated ->
         @autorun => @subscribe 'source_search_results', Session.get('source_search'), ->
     Template.product_edit.helpers
-        product_source: ->
-            Docs.findOne @source_id
         search_results: ->
             Docs.find 
                 model:'source'
