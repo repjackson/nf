@@ -91,8 +91,9 @@ template(name='recipe_edit')
                     div
                 .ten.wide.column
                     div
-                    +html_edit key='notes' label='description' direct=true
+                    +html_edit key='directions' label='directions' direct=true
                     +array_edit key='tags' label='tags' icon='tags' direct=true
+                    +array_edit key='ingredients' label='ingredients' icon='tags' direct=true
                     .ui.red.button.delete_recipe
                         i.remove.icon   
                         | delete
@@ -110,17 +111,37 @@ template(name='recipe_view')
                         small recipe view
                     +image_view key='image_id' label='image' direct=true
                     div
-                .twelve.wide.column
+                    a.ui.icon.button(href="/recipe/#{_id}/edit")
+                        i.pencil.icon
+                .eight.wide.column
                     div
-                    +html_view key='notes' label='description' direct=true
-                    .ui.button 
-                        +i name='chef-cooking-skin-type-4'
-                        |I've cooked this
-                    each recipe_chefs
-                        .ui.header #{username}
+                    +html_view key='directions' label='directions' direct=true
+                    +array_view key='ingredients' label='ingredients' icon='ingredients' direct=true
                     // +array_view key='tags' label='tags' icon='tags' direct=true
                     if can_delete
                         .ui.red.button.delete_recipe
                             i.remove.icon   
                             | delete
                     +comments                
+                .four.wide.column
+                    unless is_cook
+                        .ui.basic.button.mark_cook
+                            +i name='chef-cooking-skin-type-4' cl='ui inline image'
+                            |I've cooked this
+                    else 
+                        .ui.basic.small.compact.button.unmark_cook
+                            i.grey.undo.icon
+                            |mark not cooked
+                    unless is_fav
+                        .ui.basic.button.mark_fav 
+                            +i name='heart' cl='ui inline image'
+                            |favorite
+                    else
+                        .ui.basic.small.compact.button.unmark_fav 
+                            i.grey.undo.icon
+                            |mark unfavorite
+                    each cook_ids
+                        .ui.header #{this}
+                    each favorite_user_ids
+                        .ui.header #{this}
+                        +user_from_id this

@@ -37,6 +37,40 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
     
 
+    Template.recipe_view.helpers
+        is_cook: -> Meteor.userId() in @cook_ids
+        is_fav: -> Meteor.userId() in @favorite_user_ids
+    Template.recipe_view.events
+        'click .mark_cook': ->
+            Docs.update Router.current().params.doc_id, 
+                $addToSet: cook_ids:Meteor.userId()
+            $('body').toast(
+                showIcon: 'food'
+                message: "marked cooked"
+                showProgress: 'bottom'
+                class: 'success'
+                # displayTime: 'auto',
+                position: "bottom right"
+            )
+        'click .unmark_cook': ->
+            Docs.update Router.current().params.doc_id, 
+                $pull: cook_ids:Meteor.userId()
+       
+        'click .mark_fav': ->
+            Docs.update Router.current().params.doc_id, 
+                $addToSet: favorite_user_ids:Meteor.userId()
+            $('body').toast(
+                showIcon: 'heart'
+                message: "marked favorite"
+                showProgress: 'bottom'
+                class: 'success'
+                # displayTime: 'auto',
+                position: "bottom right"
+            )
+        'click .unmark_fav': ->
+            Docs.update Router.current().params.doc_id, 
+                $pull: favorite_user_ids:Meteor.userId()
+
     Template.recipes.events
         'click .add_recipe': ->
             new_id = Docs.insert 
