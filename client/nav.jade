@@ -19,7 +19,7 @@ template(name='nav')
             img.ui.mini.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
         .search.item.zoomer.mobile.hidden(title='search')
-            .ui.icon.transparent.input
+            .ui.icon.input
                 i.search.icon
                 input.search_ingredients(type='text')
         // else 
@@ -29,6 +29,9 @@ template(name='nav')
         // a.icon.item.zoomer(href='/p/regenerative_agg' class="{{isActivePath '/shop'}}" title='shop')
         //     i.refresh.large.icon
         a.icon.item.zoomer.mobile.hidden(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+            .ui.mini.image
+                +i name='grocery-shelf' cl=''
+        a.icon.item.zoomer.mobile.hidden(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
             .ui.mini.image
                 +i name='ingredients' cl=''
         a.icon.item.zoomer.mobile.hidden(href='/sources' class="{{isActivePath '/sources'}}" title='sources')

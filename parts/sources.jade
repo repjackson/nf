@@ -7,14 +7,15 @@ template(name='sources')
             .ui.basic.circular.icon.button.add_source
                 i.large.plus.icon
         .twelve.wide.column
-            each model_docs_helper 'source'
-                .ui.card
-                    a(href="/source/#{_id}") 
-                        img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-                    a.content(href="/source/#{_id}") 
-                        .ui.header 
-                            |#{title}
-                        |added #{when} by #{_author_username}
+            .ui.cards
+                each model_docs_helper 'source'
+                    .ui.card
+                        a(href="/source/#{_id}") 
+                            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                        a.content(href="/source/#{_id}") 
+                            .ui.header 
+                                |#{title}
+                            |added #{when} by #{_author_username}
                 
                 
 template(name='user_sources')

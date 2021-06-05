@@ -6,6 +6,7 @@ if Meteor.isClient
 
     Template.store.onCreated ->
         @autorun => Meteor.subscribe 'store_sessions'
+        @autorun => Meteor.subscribe 'model_docs', 'product'
         if Meteor.isDevelopment
             pub_key = Meteor.settings.public.stripe_test_publishable
         else if Meteor.isProduction
