@@ -96,7 +96,8 @@ template(name='post_card')
         .content
             a.ui.header(href="/post/#{_id}") #{title}
             .ui.small.grey.header #{when}
-            | !{content}
+            .smallscroll
+                | !{content}
             // +comments_view_small
             +author_info
         
@@ -134,6 +135,13 @@ template(name='post_view')
                     .ui.small.grey.header 
                         i.line.chart.icon
                         |stats
+                    .ui.header  
+                        +i name='food-cart'
+                        | products
+                    .ui.header  
+                        +i name='cookbook'
+                        | recipes
+                        
                     .ui.list
                         .item #{views} views
                     each viewers
