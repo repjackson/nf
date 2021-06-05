@@ -36,8 +36,22 @@ if Meteor.isClient
             else
                 true
 
+    Template.product_edit.onCreated ->
+        @autorun => @subscribe 'source_search_results', Session.get('source_search'), ->
+    Template.product_edit.helpers
+        search_results: ->
+            Docs.find 
+                model:'source'
+                
 
     Template.product_edit.events
+        'keyup .source_search': (e,t)->
+            # if e.which is '13'
+            val = t.$('.source_search').val()
+            console.log val
+            Session.set('source_search', val)
+                
+            
         'click .save_product': ->
             product_id = Router.current().params.doc_id
             Meteor.call 'calc_product_data', product_id, ->
@@ -77,3 +91,9 @@ if Meteor.isClient
             if confirm 'refund orders and cancel product?'
                 Docs.remove Router.current().params.doc_id
                 Router.go "/"
+
+if Meteor.isServer 
+    Meteor.publish 'source_search_results', (source_title_queary)->
+        Docs.find 
+            model:'source'
+            title: {$regex:"#{source_title_queary}",$options:'i'}

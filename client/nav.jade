@@ -235,7 +235,7 @@ template(name='walletbar')
         +user_credit
         
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.thin.menu.rightbar
+    .ui.right.sidebar.vertical.borderless.menu.rightbar
         a.item.toggle_rightbar.zoomer.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
@@ -250,23 +250,21 @@ template(name='right_sidebar')
                 |credit
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
                 +i name='check' cl='ui avatar image'
-                // i.money.icon
                 |orders
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
                 +i name='clock' cl='ui avatar image'
-                // i.clock.icon
                 |subscriptions
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
                 +i name='friends' cl='ui avatar image'
-                // i.users.icon
                 |friends
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
                 +i name='shopping-cart' cl='ui avatar image'
-                // i.cart.icon
                 |cart
+            a.item.toggle_rightbar.zoomer(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
+                +i name='dishes-shelf' cl='ui avatar image'
+                |pantry
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
                 +i name='certificate' cl='ui avatar image'
-                // i.certificate.icon
                 |gift cards
                 
             // a.item.toggle_rightbar.zoomer.no_blink(href="/user/#{username}/credits" class="{{isActiveRoute 'user_credits'}}")

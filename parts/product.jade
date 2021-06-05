@@ -231,7 +231,7 @@ template(name='product_edit')
                     +link_edit key='product_link' label='old site link' direct=true
                     div
                     +float_edit key='price_usd' label='$ price' direct=true
-                .twelve.wide.column
+                .eight.wide.column
                     +boolean_edit key='gluten_free' label='gluten free' direct=true icon='no-gluten'
                     +boolean_edit key='paleo' label='paleo' direct=true icon='caveman'
                     +boolean_edit key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
@@ -255,7 +255,24 @@ template(name='product_edit')
                         .ui.red.button.delete_product
                             i.remove.icon   
                             | delete
-                
+                .four.wide.column
+                    .ui.header 
+                        +i name='field-and-tractor'
+                        |source
+                    with product_source
+                        .ui.header #{title}
+                    unless source_id
+                        if is_admin
+                            .ui.icon.input 
+                                i.building.icon
+                                input.source_search(type='text' placeholder='search source title')
+                            each search_results
+                                .ui.header.pick_source #{title}
+                            
+                            
+                            
+                            
+                            
 
 
 template(name='pick_section')
