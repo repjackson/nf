@@ -103,14 +103,28 @@ template(name='source_view')
                     if can_edit 
                         a.ui.circular.icon.button(href="/source/#{_id}/edit")
                             i.pencil.icon
-                    +image_view key='image_id' label='image' direct=true
                     div
-                .twelve.wide.column
+                .six.wide.column
+                    +image_view key='image_id' label='image' direct=true
                     .ui.big.header
                         | #{title}
                     div
                     +html_view key='description' label='description' direct=true
                     +array_view key='tags' label='tags' direct=true
+                    +link_view key='link' direct=true
+                .six.wide.column
+                    .ui.header 
+                        +i name='marker'
+                        |#{location}
+                    .ui.header
+                        +i name='love'
+                        |fans
+                    div
+                    .ui.inline.header 
+                        +i name='grocery-shelf'
+                        |products
+                    .ui.icon.small.compact.basic.button.add_source_product
+                        i.plus.icon
                     if can_delete
                         .ui.red.button.delete_source
                             i.remove.icon   
