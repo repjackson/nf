@@ -40,6 +40,12 @@ template(name='nav')
         a.icon.item.zoomer.mobile.hidden(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             .ui.mini.image.recipes
                 +i name='cookbook' cl=''
+        a.icon.item.zoomer.mobile.hidden(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+            .ui.mini.image.orders
+                +i name='invoice' cl=''
+        a.icon.item.zoomer.mobile.hidden(href='/users' class="{{isActivePath '/users'}}" title='users')
+            .ui.mini.image.users
+                +i name='groups' cl=''
         unless currentUser
             a.icon.item.zoomer.mobile.hidden(href='/p/about' class="{{isActivePath '/about'}}" title='about')
                 // i.info.large.icon
@@ -123,17 +129,17 @@ template(name='my_latest_activity')
                 small #{when}
 
 
-// template(name='latest_activity')
-//     .ui.grey.header 
-//         i.grey.rss.icon
-//         |all activity
-//     .ui.list
-//         each latest_activity
-//             .item 
-//                 img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
-//                 |#{text} #{body} 
-//                 .ui.label #{log_type}
-//                 small #{when}
+template(name='latest_activity')
+    .ui.grey.header 
+        i.grey.rss.icon
+        |all activity
+    .ui.list
+        each latest_activity
+            .item 
+                img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
+                |#{text} #{body} 
+                .ui.label #{log_type}
+                small #{when}
 
 
 template(name='footer')
@@ -307,22 +313,22 @@ template(name='left_sidebar')
         a.item.toggle_sidebar.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
                 +i name='food-cart' cl=''
-            // i.cart.icon
             | shop
+        a.item.toggle_sidebar.zoomer(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
+            .ui.mini.image
+                +i name='ingredients' cl=''
+            | ingredients
         a.item.toggle_sidebar.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
             .ui.mini.image.info
                 +i name='information--v1' cl=''
-            // i.info.icon
             | about
         a.item.toggle_sidebar.zoomer(href='/sources' class="{{isActivePath '/sources'}}")
             .ui.mini.image.farm
                 +i name='farm' cl=''
-            // i.info.icon
             | sources
         a.item.toggle_sidebar.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}")
             .ui.mini.image.info
                 +i name='cookbook' cl=''
-            // i.food.icon
             |recipes
         // unless currentUser
         //     a.item.toggle_sidebar.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
@@ -333,10 +339,10 @@ template(name='left_sidebar')
             +i name='phone' cl='ui inline mini image'
             // i.phone.icon
             | contact
-        // a.item.toggle_sidebar.zoomer(href='/news' class="{{isActivePath '/news'}}" title='news')
-        //     +i name='list' cl='ui inline mini image'
-        //     // i.newspaper.icon
-        //     strong.mobile.hidden news
+        a.item.toggle_sidebar.zoomer(href='/blog' class="{{isActivePath '/blog'}}" title='blog')
+            +i name='list' cl='ui inline mini image'
+            // i.blogpaper.icon
+            strong.mobile.hidden blog
         // if is_admin
         //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
         //         +i name='tasks' cl='ui inline mini image'

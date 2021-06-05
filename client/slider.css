@@ -28,6 +28,8 @@
   display: block;
   margin-bottom: -20px;
   padding: 20px;
+  border-radius: 10px;
+  
 }
 .slide-title {
     position: absolute;
@@ -39,11 +41,13 @@
 .slider-arrow--right {
   bottom: 50%;
   right: 30px;
+  border-radius: 10px;
 }
 
 .slider-arrow--left {
   bottom: 50%;
   left: 30px;
+  border-radius: 10px;
 }
 
 .slider-nav {

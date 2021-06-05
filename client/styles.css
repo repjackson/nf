@@ -778,6 +778,9 @@ h1.ui.header{
 }
 
 .secnav {
+	overflow-x:scroll;
+}
+.secnav {
     opacity: .9 !important;
     max-width: 100% !important;
 	overflow-y:hidden;

@@ -3,14 +3,6 @@ template(name='home')
     .ui.stackable.padded.centered.grid
         .one.column.row
             .center.aligned.column
-                .ui.big.basic.circular.button
-                    |40lbs plastic prevented
-                .ui.big.basic.circular.button
-                    |1200 orders
-                .ui.big.basic.circular.button
-                    |112 customers users
-                .ui.big.basic.circular.button
-                    |234 products
                 .ui.big.header.f20.lower
                     |{{lower "we deliver local, organic groceries, meals and household products in zero-waste, reusable containers to your door by bicycles"}}
 
@@ -82,83 +74,83 @@ template(name='home')
         //             |trips
     .ui.vertical.stripe.segment
         .ui.middle.aligned.stackable.grid.container
-            .ui.center.aligned.header MMM's mission is to empower K-5 students with money management mindset and skills, so that they can make effective financial decisions for themselves, their families, and their communities
+            // .ui.center.aligned.header MMM's mission is to empower K-5 students with money management mindset and skills, so that they can make effective financial decisions for themselves, their families, and their communities
             .row
-                .eight.wide.column
-                    .ui.inline.header 
-                        |stats
-                    if is_admin
-                        .ui.icon.button.recalc_stats
-                            i.refresh.icon
-                    div
-                    .ui.large.list
-                        .item 
-                            //- i.users.icon
-                            +ismall name='groups'
-                            |#{hs.user_count} users
-                        .item 
-                            //- i.user.shield.icon
-                            +ismall name='teacher'
-                            |#{hs.teacher_count} teachers
-                        .item 
-                            +ismall name='classroom'
-                            |#{hs.classroom_count} classrooms
-                        //- .item 
-                        //-     |#{hs.donor_count} donors
-                        //- .item $#{hs.credit_count} money raised
-                        .item 
-                            +ismall name='donate'
-                            |#{hs.debit_count} debits
-                        .item 
-                            +ismall name='donate'
-                            |#{hs.credit_count} credits
-                        //- .item #{hs.product_count} products in marketplace
-                .six.wide.right.floated.column
-                    .ui.small.header sponsored by
-                    with home_sponsor
-                        img.ui.rounded.image(src="{{c.url image width=400 height=400}}")
-                    .ui.hidden.divider
-                    a.ui.small.compact.button(href="/sponsorship")
-                        |become a sponsor
-            .row
-                .eight.wide.column
-                    p
-                        |we believe that students, regardless of background, deserve preparation for real-world financial challenges
-                    //- p
-                    //-     |MMM’s mission is to empower K-5 teachers and students with money management mindset and skills, so that they can make effective financial decisions for themselves, their families and their communities. 
-                    p
-                        |minimoney is an integrated, elementary classroom-economy app that is engaging for students and low-effort for teachers while simulating real-world financial challenges
-                    //- p
-                        //- |minimoney is a classroom economy app that integrates seamlessly into the classroom to empower students with real-world financial literacy
-                    a.ui.huge.fluid.center.aligned.button(href='/choose_user_type') sign up
-                    //- p
-                    //-     | Yes that&apos;s right, you thought it was the stuff of dreams, but even bananas can be bioengineered.
-                .six.wide.right.floated.column
-                    img.ui.rounded.image.recalc_stats(src="{{c.url 'mmm_logo_small' width=400 height=400}}")
-                    .ui.small.center.aligned.header a classroom culture and incentive tool
+                // .eight.wide.column
+                //     .ui.inline.header 
+                //         |stats
+                //     if is_admin
+                //         .ui.icon.button.recalc_stats
+                //             i.refresh.icon
+                //     div
+                //     .ui.large.list
+                //         .item 
+                //             //- i.users.icon
+                //             +ismall name='groups'
+                //             |#{hs.user_count} users
+                //         .item 
+                //             //- i.user.shield.icon
+                //             +ismall name='teacher'
+                //             |#{hs.teacher_count} teachers
+                //         .item 
+                //             +ismall name='classroom'
+                //             |#{hs.classroom_count} classrooms
+                //         //- .item 
+                //         //-     |#{hs.donor_count} donors
+                //         //- .item $#{hs.credit_count} money raised
+                //         .item 
+                //             +ismall name='donate'
+                //             |#{hs.debit_count} debits
+                //         .item 
+                //             +ismall name='donate'
+                //             |#{hs.credit_count} credits
+                //         //- .item #{hs.product_count} products in marketplace
+                // .six.wide.right.floated.column
+                //     .ui.small.header sponsored by
+                //     with home_sponsor
+                //         img.ui.rounded.image(src="{{c.url image width=400 height=400}}")
+                //     .ui.hidden.divider
+                //     a.ui.small.compact.button(href="/sponsorship")
+                //         |become a sponsor
+            // .row
+            //     .eight.wide.column
+            //         p
+            //             |we believe that students, regardless of background, deserve preparation for real-world financial challenges
+            //         //- p
+            //         //-     |MMM’s mission is to empower K-5 teachers and students with money management mindset and skills, so that they can make effective financial decisions for themselves, their families and their communities. 
+            //         p
+            //             |minimoney is an integrated, elementary classroom-economy app that is engaging for students and low-effort for teachers while simulating real-world financial challenges
+            //         //- p
+            //             //- |minimoney is a classroom economy app that integrates seamlessly into the classroom to empower students with real-world financial literacy
+            //         a.ui.huge.fluid.center.aligned.button(href='/choose_user_type') sign up
+            //         //- p
+            //         //-     | Yes that&apos;s right, you thought it was the stuff of dreams, but even bananas can be bioengineered.
+            //     .six.wide.right.floated.column
+            //         img.ui.rounded.image.recalc_stats(src="{{c.url 'mmm_logo_small' width=400 height=400}}")
+            //         .ui.small.center.aligned.header a classroom culture and incentive tool
         .ui.divider
         .ui.stackable.grid
             .four.column.center.aligned.row
                 .column
                     .ui.icon.header
                         i.icon 
-                            +i name='shopping-cart'
-                        |student marketplace
+                            +ibig name='shopping-cart'
+                        |100s of products
                 .column
                     .ui.icon.header
                         i.icon 
-                            +i name='credit-card'
-                        |credit card account
+                            +ibig name='protected-bike-lane'
+                        |delivered by bike
                 .column
                     .ui.icon.header
                         i.icon 
-                            +i name='qr-code'
-                        |qr code money
+                            +ibig name='qr-code'
+                        |qr code purchasing
                 .column
                     .ui.icon.header
                         i.icon 
-                            +i name='ticket-purchase'
-                        |buying and selling assets
+                            +ibig name='gift-card'
+                        |giftcards
                 .column
                     .ui.icon.header
                         i.icon 
@@ -192,71 +184,56 @@ template(name='home')
                 .column
                     .ui.icon.header
                         i.icon 
-                            +i name='group-task'
-                        |group accountability
+                            +ibig name='technical-fluid'
+                        |pounds of plastic prevented
                 .column
                     .ui.icon.header
                         i.icon 
-                            +i name='seesaw'
-                        |encourage good behavior
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='bank-building'
-                        |simulated centralized bank
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='earth-planet'
-                        |schools and diversity
+                            +ibig name='earth-planet'
+                        |reverse climate change
                 .column
                     .ui.icon.header
                         i.icon 
                             +i name='total-sales-1'
-                        |teach financial literacy
+                        |ingredients
                 .column
                     .ui.icon.header
                         i.icon 
-                            +i name='line-chart'
-                        |results
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='friends'
-                        |proven model
-    .ui.vertical.stripe.quote.segment
-        .ui.equal.width.stackable.internally.celled.grid
-            .center.aligned.row
-                .column
-                    //- h3 &quot;What a Company&quot;
-                    h4.f7 PEOPLE ARE TALKING… “I am loving everything about it. The delivery, the box, the box return, the ethics, the local, the organic, the ugly, the return of the ball jars, the selection, the quality, the variety, the utter lack of plastic and commercial capitalistic compromise. It feels 100% good, like what you who are behind it would want for your own selves and family.”
+                            +i name='invoice'
+                        |orders
+    // .ui.vertical.stripe.quote.segment
+    //     .ui.equal.width.stackable.internally.celled.grid
+    //         .center.aligned.row
+    //             .column
+    //                 //- h3 &quot;What a Company&quot;
+    //                 h4.f7 PEOPLE ARE TALKING… “I am loving everything about it. The delivery, the box, the box return, the ethics, the local, the organic, the ugly, the return of the ball jars, the selection, the quality, the variety, the utter lack of plastic and commercial capitalistic compromise. It feels 100% good, like what you who are behind it would want for your own selves and family.”
 
 
-                    //- p That is what they all say about us
-                .column
-                    h4.f7 &quot;I think it is really important because my students have absolutely no idea about real life situations in regards to money and that makes me nervous for them.&quot;
-                    //- p
-                    //- img.ui.avatar.image(src='assets/images/avatar/nan.jpg')
-                    //- b Nan
-                    //- |  Chief Fun Officer Acme Toys
-    .ui.vertical.stripe.segment
-        .ui.stackable.padded.grid
-            .eight.wide.column
-                h3.ui.header problem
-                p
-                    |millenials have an average of $28,000 in debt with 25% being credit card debt
-                p
-                    |the Council for Economic Education released national financial literacy standards for grades K-12, recently adopted by Colorado
-                p
-                    |there are limited curriculum and other resources available to teachers to achieve these standards
-                p
-                    |the curriculum available uses an old-fashioned way of teaching which typically includes 20 hours of class time
-            .eight.wide.column
-                h3.ui.header solution
-                p
-                    |mini money management is an experiential learning resource for teachers and students to use
-                p
-                    |it meets all the financial literacy standards in Elementary Schools (K-5)
-                p
-                    |it is designed to be used  in the normal course of the school day  to provide  real-life money management experiences for the students
+    //                 //- p That is what they all say about us
+    //             .column
+    //                 h4.f7 &quot;I think it is really important because my students have absolutely no idea about real life situations in regards to money and that makes me nervous for them.&quot;
+    //                 //- p
+    //                 //- img.ui.avatar.image(src='assets/images/avatar/nan.jpg')
+    //                 //- b Nan
+    //                 //- |  Chief Fun Officer Acme Toys
+    // .ui.vertical.stripe.segment
+    //     .ui.stackable.padded.grid
+    //         .eight.wide.column
+    //             h3.ui.header problem
+    //             p
+    //                 |millenials have an average of $28,000 in debt with 25% being credit card debt
+    //             p
+    //                 |the Council for Economic Education released national financial literacy standards for grades K-12, recently adopted by Colorado
+    //             p
+    //                 |there are limited curriculum and other resources available to teachers to achieve these standards
+    //             p
+    //                 |the curriculum available uses an old-fashioned way of teaching which typically includes 20 hours of class time
+    //         .eight.wide.column
+    //             h3.ui.header solution
+    //             p
+    //                 |mini money management is an experiential learning resource for teachers and students to use
+    //             p
+    //                 |it meets all the financial literacy standards in Elementary Schools (K-5)
+    //             p
+    //                 |it is designed to be used  in the normal course of the school day  to provide  real-life money management experiences for the students
     +footer
