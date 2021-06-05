@@ -62,7 +62,10 @@ if Meteor.isServer
 Docs.helpers
     author: -> Meteor.users.findOne @_author_id
     # cook: -> Meteor.users.findOne @cook_user_id
-
+    source_products: ->
+        Docs.find
+            model:'product'
+            source_id:@_id
     when: -> moment(@_timestamp).fromNow()
     ten_tags: -> if @tags then @tags[..10]
     five_tags: -> if @tags then @tags[..4]

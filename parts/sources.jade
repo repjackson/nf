@@ -123,6 +123,9 @@ template(name='source_view')
                     .ui.inline.header 
                         +i name='grocery-shelf'
                         |products
+                    .ui.large.link.selection.animated.list
+                        each source_products
+                            a.ui.header.item(href="/product/#{_id}/") #{title}
                     .ui.icon.small.compact.basic.button.add_source_product
                         i.plus.icon
                     if can_delete

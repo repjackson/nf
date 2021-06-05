@@ -13,6 +13,13 @@ Template.registerHelper 'model_docs_helper', (model) ->
 Template.registerHelper 'subs_ready', () -> 
     Template.instance().subscriptionsReady()
 
+Template.registerHelper 'source_products', () -> 
+    Docs.find
+        model:'product'
+        source_id:@_id
+
+
+
 Template.registerHelper 'cart_subtotal', () -> 
     store_session_document = 
         Docs.findOne 

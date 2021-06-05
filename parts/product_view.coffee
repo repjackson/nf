@@ -32,6 +32,7 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'subs_from_product_id', Router.current().params.doc_id
     Template.product_layout.onRendered ->
         Meteor.call 'log_view', Router.current().params.doc_id
+        Meteor.call 'model_docs', 'source'
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
     Template.product_layout.events
         'click .add_to_cart': ->

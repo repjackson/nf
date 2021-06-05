@@ -24,7 +24,14 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
     Template.source_view.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
+        @autorun => Meteor.subscribe 'source_products', Router.current().params.doc_id
     
+
+    Template.source_view.helpers
+        source_products:->
+            Docs.find
+                model:'product'
+                source_id:@_id
 
     Template.source_view.events
         'click .add_source_product': ->
@@ -80,6 +87,11 @@ if Meteor.isServer
         Docs.find   
             model:'source'
             recipient_username:username
+            
+    Meteor.publish 'source_products', (source_id)->
+        Docs.find   
+            model:'product'
+            source_id:source_id
             
             
     Meteor.publish 'user_sent_sources', (username)->
