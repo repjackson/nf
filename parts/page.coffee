@@ -8,6 +8,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'team'
         ), name:'team'
+    Router.route '/produce', (->
+        @layout 'layout'
+        @render 'produce'
+        ), name:'produce'
 
     Template.page.onCreated ->
         # console.log @

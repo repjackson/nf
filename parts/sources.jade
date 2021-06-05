@@ -15,7 +15,9 @@ template(name='sources')
                         a.content(href="/source/#{_id}") 
                             .ui.header 
                                 |#{title}
-                            |added #{when} by #{_author_username}
+                            each source_product
+                                .ui.header #{title}
+                            // |added #{when} by #{_author_username}
                 
                 
 template(name='user_sources')

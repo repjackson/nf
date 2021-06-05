@@ -51,14 +51,9 @@ template(name='nav')
                 // i.info.large.icon
                 .ui.mini.image.info
                     +i name='information--v1' cl=''
-                // i.cart.icon
-                // strong.mobile.hidden about
         a.icon.item.zoomer.mobile.hidden(href='/store' class="{{isActivePath '/store'}}")
-            // +i name='shop' cl=''
-            // i.building.large.icon
             .ui.mini.image.shop
                 +i name='shop' cl=''
-            // i.cart.icon
         a.icon.item.zoomer.mobile.hidden(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
             +i name='phone' cl='ui inline mini image'
             // i.large.phone.icon
@@ -180,6 +175,9 @@ template(name='footer')
                     a.item(hre='/p/refer') 
                         i.reply.icon
                         |refer a friend
+                    a.item(href='/produce') 
+                        i.food.icon
+                        |produce
                     a.item(hre='/shop') 
                         i.cart.icon
                         |shop
