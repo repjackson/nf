@@ -20,7 +20,7 @@ template(name='home')
                 // i.users.icon
                 img.ui.circular.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/Producebox300x300-300x300.jpg")
                 // +i name='conference' cl='ui inline image'
-                .ui.header ugly produce
+                .ui.header 'ugly' produce
             a.center.aligned.column.zoomer(href="/shop")
                 img.ui.circular.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/buildyourown600x600-300x300.jpg")
                 .ui.header pantry staples
@@ -131,56 +131,26 @@ template(name='home')
         .ui.divider
         .ui.stackable.grid
             .four.column.center.aligned.row
-                .column
+                a.column.zoomer(href="/shop")
                     .ui.icon.header
                         i.icon 
-                            +ibig name='shopping-cart'
-                        |100s of products
-                .column
+                            +ibig name='food-cart'
+                        |products
+                a.column(href="/deliveries")
                     .ui.icon.header
                         i.icon 
                             +ibig name='protected-bike-lane'
-                        |delivered by bike
-                .column
+                        |deliveries
+                a.column.zoomer(href='/store')
                     .ui.icon.header
                         i.icon 
                             +ibig name='qr-code'
                         |qr code purchasing
-                .column
+                a.column.zoomer(href="/giftcards")
                     .ui.icon.header
                         i.icon 
                             +ibig name='gift-card'
                         |giftcards
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='invoice'
-                        |automated bills
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='check-book'
-                        |digital checkbooks and wire order
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='check-book'
-                        |digital checkbooks and wire order
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='money-box'
-                        |savings accounts
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='debt'
-                        |loans
-                .column
-                    .ui.icon.header
-                        i.icon 
-                            +i name='duration-finance'
-                        |interest
                 .column
                     .ui.icon.header
                         i.icon 
@@ -191,15 +161,20 @@ template(name='home')
                         i.icon 
                             +ibig name='earth-planet'
                         |reverse climate change
-                .column
+                a.column.zoomer(href="/sources")
                     .ui.icon.header
                         i.icon 
-                            +i name='total-sales-1'
+                            +ibig name='farm'
+                        |sources
+                a.column.zoomer(href="/ingredients")
+                    .ui.icon.header
+                        i.icon 
+                            +ibig name='ingredients'
                         |ingredients
-                .column
+                a.column.zoomer(href="/orders")
                     .ui.icon.header
                         i.icon 
-                            +i name='invoice'
+                            +ibig name='invoice'
                         |orders
     // .ui.vertical.stripe.quote.segment
     //     .ui.equal.width.stackable.internally.celled.grid
