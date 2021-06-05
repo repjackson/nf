@@ -260,7 +260,11 @@ template(name='product_edit')
                         +i name='field-and-tractor'
                         |source
                     with product_source
-                        .ui.header #{title}
+                        .ui.header picked source
+                        a.ui.header(href="/source/#{_id}") #{title}
+                        if is_admin
+                            i.remove.circular.link.icon.remove_source
+                            
                     unless source_id
                         if is_admin
                             .ui.icon.input 
