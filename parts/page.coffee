@@ -12,6 +12,10 @@ if Meteor.isClient
         @layout 'layout'
         @render 'produce'
         ), name:'produce'
+    Router.route '/packaging', (->
+        @layout 'layout'
+        @render 'packaging'
+        ), name:'packaging'
 
     Template.page.onCreated ->
         # console.log @

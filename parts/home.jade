@@ -27,108 +27,7 @@ template(name='home')
             a.center.aligned.column.zoomer(href="/shop")
                 img.ui.circular.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/10/Lemony-Lentil-Soup-e1604278933195.jpg")
                 .ui.header nude meals
-        .one.column.row
-            // .center.aligned.column
-            //     a.ui.big.basic.circular.button(href="/shop")
-            //         +i name='shopping-cart' cl='ui inline image'
-            //         // i.food.icon
-            //         |shop
-            //     a.ui.big.basic.circular.button(href="/users") 
-            //         // i.users.icon
-            //         +i name='conference' cl='ui inline image'
-            //         |users
-            //     a.ui.big.basic.circular.button(href="/staff")
-            //         // i.shield.icon
-            //         +i name='employee-card' cl='ui inline image'
-            //         |staff
-            // .center.aligned.column
-            //     a.ui.icon.header(href="/staff")
-            //         // i.shield.icon
-            //         +i name='employee-card' cl='icon zoomer'
-            //         |staff
-                a.ui.icon.header(href="/shop")
-                    +i name='sell' cl='icon zoomer'
-                    // i.food.icon
-                    |become a seller
-                a.ui.icon.header(href="/orders")
-                    +i name='bill' cl='icon zoomer'
-                    // i.list.icon
-                    |orders
-                a.ui.icon.header(href="/inbox")
-                    +i name='inbox' cl='icon zoomer'
-                    // i.mail.icon
-                    |inbox
-        // .one.column.row
-        //     .center.aligned.column
-        //         .ui.header 
-        //             i.shield.icon
-        //             |admin
-        //         a.ui.big.basic.disabled.button(href="/inventory")
-        //             +i name='list' cl='ui inline image'
-        //             |inventory
-        //         a.ui.big.basic.disabled.button(href="/bikers")
-        //             +i name='cycling-road' cl='ui inline image'
-        //             |bikers
-        //         a.ui.big.basic.disabled.button(href="/trips")
-        //             +i name='time-machine' cl='ui inline image'
-        //             |trips
     .ui.vertical.stripe.segment
-        .ui.middle.aligned.stackable.grid.container
-            // .ui.center.aligned.header MMM's mission is to empower K-5 students with money management mindset and skills, so that they can make effective financial decisions for themselves, their families, and their communities
-            .row
-                // .eight.wide.column
-                //     .ui.inline.header 
-                //         |stats
-                //     if is_admin
-                //         .ui.icon.button.recalc_stats
-                //             i.refresh.icon
-                //     div
-                //     .ui.large.list
-                //         .item 
-                //             //- i.users.icon
-                //             +ismall name='groups'
-                //             |#{hs.user_count} users
-                //         .item 
-                //             //- i.user.shield.icon
-                //             +ismall name='teacher'
-                //             |#{hs.teacher_count} teachers
-                //         .item 
-                //             +ismall name='classroom'
-                //             |#{hs.classroom_count} classrooms
-                //         //- .item 
-                //         //-     |#{hs.donor_count} donors
-                //         //- .item $#{hs.credit_count} money raised
-                //         .item 
-                //             +ismall name='donate'
-                //             |#{hs.debit_count} debits
-                //         .item 
-                //             +ismall name='donate'
-                //             |#{hs.credit_count} credits
-                //         //- .item #{hs.product_count} products in marketplace
-                // .six.wide.right.floated.column
-                //     .ui.small.header sponsored by
-                //     with home_sponsor
-                //         img.ui.rounded.image(src="{{c.url image width=400 height=400}}")
-                //     .ui.hidden.divider
-                //     a.ui.small.compact.button(href="/sponsorship")
-                //         |become a sponsor
-            // .row
-            //     .eight.wide.column
-            //         p
-            //             |we believe that students, regardless of background, deserve preparation for real-world financial challenges
-            //         //- p
-            //         //-     |MMM’s mission is to empower K-5 teachers and students with money management mindset and skills, so that they can make effective financial decisions for themselves, their families and their communities. 
-            //         p
-            //             |minimoney is an integrated, elementary classroom-economy app that is engaging for students and low-effort for teachers while simulating real-world financial challenges
-            //         //- p
-            //             //- |minimoney is a classroom economy app that integrates seamlessly into the classroom to empower students with real-world financial literacy
-            //         a.ui.huge.fluid.center.aligned.button(href='/choose_user_type') sign up
-            //         //- p
-            //         //-     | Yes that&apos;s right, you thought it was the stuff of dreams, but even bananas can be bioengineered.
-            //     .six.wide.right.floated.column
-            //         img.ui.rounded.image.recalc_stats(src="{{c.url 'mmm_logo_small' width=400 height=400}}")
-            //         .ui.small.center.aligned.header a classroom culture and incentive tool
-        .ui.divider
         .ui.stackable.grid
             .four.column.center.aligned.row
                 a.column.zoomer(href="/shop")
@@ -180,40 +79,7 @@ template(name='home')
                     .ui.icon.header
                         i.icon 
                             +ibig name='invoice'
-                        |orders
-    // .ui.vertical.stripe.quote.segment
-    //     .ui.equal.width.stackable.internally.celled.grid
-    //         .center.aligned.row
-    //             .column
-    //                 //- h3 &quot;What a Company&quot;
-    //                 h4.f7 PEOPLE ARE TALKING… “I am loving everything about it. The delivery, the box, the box return, the ethics, the local, the organic, the ugly, the return of the ball jars, the selection, the quality, the variety, the utter lack of plastic and commercial capitalistic compromise. It feels 100% good, like what you who are behind it would want for your own selves and family.”
-
-
-    //                 //- p That is what they all say about us
-    //             .column
-    //                 h4.f7 &quot;I think it is really important because my students have absolutely no idea about real life situations in regards to money and that makes me nervous for them.&quot;
-    //                 //- p
-    //                 //- img.ui.avatar.image(src='assets/images/avatar/nan.jpg')
-    //                 //- b Nan
-    //                 //- |  Chief Fun Officer Acme Toys
-    // .ui.vertical.stripe.segment
-    //     .ui.stackable.padded.grid
-    //         .eight.wide.column
-    //             h3.ui.header problem
-    //             p
-    //                 |millenials have an average of $28,000 in debt with 25% being credit card debt
-    //             p
-    //                 |the Council for Economic Education released national financial literacy standards for grades K-12, recently adopted by Colorado
-    //             p
-    //                 |there are limited curriculum and other resources available to teachers to achieve these standards
-    //             p
-    //                 |the curriculum available uses an old-fashioned way of teaching which typically includes 20 hours of class time
-    //         .eight.wide.column
-    //             h3.ui.header solution
-    //             p
-    //                 |mini money management is an experiential learning resource for teachers and students to use
-    //             p
-    //                 |it meets all the financial literacy standards in Elementary Schools (K-5)
-    //             p
-    //                 |it is designed to be used  in the normal course of the school day  to provide  real-life money management experiences for the students
+                        |#{order_count} orders
+                        
+                        
     +footer

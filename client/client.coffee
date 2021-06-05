@@ -9,6 +9,14 @@ Tracker.autorun ->
         $(window).scrollTop 0
 
 
+Template.home.onCreated ->
+    @autorun => @subscribe 'order_count'
+Template.home.helpers
+    order_count:->
+        Counts.get('order_count')
+        
+        
+        
 Template.not_found.events
     'click .browser_back': ->
           window.history.back();
