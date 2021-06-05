@@ -16,7 +16,7 @@ if Meteor.isClient
                     transition:'overlay'
                     mobileTransition:'scale'
                     exclusive:true
-                    duration:150
+                    duration:200
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_sidebar')
@@ -28,7 +28,7 @@ if Meteor.isClient
                     transition:'overlay'
                     mobileTransition:'scale'
                     exclusive:true
-                    duration:150
+                    duration:200
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_rightbar')
@@ -40,7 +40,7 @@ if Meteor.isClient
                     transition:'overlay'
                     mobileTransition:'scale'
                     exclusive:true
-                    duration:150
+                    duration:200
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_topbar')
@@ -52,7 +52,7 @@ if Meteor.isClient
                     transition:'scale'
                     mobileTransition:'scale'
                     exclusive:true
-                    duration:150
+                    duration:200
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_cartbar')
@@ -64,7 +64,7 @@ if Meteor.isClient
                     transition:''
                     mobileTransition:'scale'
                     exclusive:true
-                    duration:150
+                    duration:200
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_walletbar')
@@ -90,6 +90,8 @@ if Meteor.isClient
         'keyup .search_ingredients': _.throttle((e,t)->
             # console.log Router.current().route.getName()
             current_name = Router.current().route.getName()
+            $(e.currentTarget).closest('.input').transition('pulse', 100)
+
             unless current_name is 'shop'
                 Router.go '/shop'
             query = $('.search_ingredients').val()
@@ -111,7 +113,7 @@ if Meteor.isClient
                     # Meteor.setTimeout ->
                     #     Session.set('dummy', !Session.get('dummy'))
                     # , 10000
-        , 1000)
+        , 250)
     
         'click .add_post': ->
             new_id = 

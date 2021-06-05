@@ -1,17 +1,24 @@
 template(name='ingredients')
-    .ui.card
-        if image_id
-            a(href="/ingredient/#{_id}/view")
-                img.ui.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
-        .content
-            a.ui.header(href="/ingredient/#{_id}/view") #{title}
-            div created {{from_now _timestamp}} by #{_author_username}
-            each tags
-                .ui.basic.circular.label #{this}
-            //- .ui.large.basic.label 
-            //-     |#{points} points
-        .content
-            +voting
+    .ui.stackable.padded.grid
+        .ui.four.wide.column
+            .ui.header
+                +ibig name='ingredients'
+                |ingredients
+        .ui.twelve.wide.column
+            each ingredients
+                .ui.card
+                    if image_id
+                        a(href="/ingredient/#{_id}/view")
+                            img.ui.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
+                    .content
+                        a.ui.header(href="/ingredient/#{_id}/view") #{title}
+                        div created {{from_now _timestamp}} by #{_author_username}
+                        each tags
+                            .ui.basic.circular.label #{this}
+                        //- .ui.large.basic.label 
+                        //-     |#{points} points
+                    .content
+                        +voting
 
             
             

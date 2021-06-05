@@ -49,6 +49,11 @@ template(name='user_layout')
                                 .ui.basic.circular.button.logout
                                     i.sign.out.alternate.icon
                                     |log out
+                            if is_admin
+                                .ui.dividing.header
+                                    i.shield.icon
+                                    |admin
+                            +array_edit key='roles' label='roles' direct=true
                                 //- a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
                                 //-     i.globe.icon
                                 //-     |log out other clients

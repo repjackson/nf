@@ -113,6 +113,11 @@ template(name='recipe_view')
                 .twelve.wide.column
                     div
                     +html_view key='notes' label='description' direct=true
+                    .ui.button 
+                        +i name='chef-cooking-skin-type-4'
+                        |I've cooked this
+                    each recipe_chefs
+                        .ui.header #{username}
                     // +array_view key='tags' label='tags' icon='tags' direct=true
                     if can_delete
                         .ui.red.button.delete_recipe

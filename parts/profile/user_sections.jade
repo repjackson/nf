@@ -4,6 +4,12 @@ template(name='user_friends')
         // i.users.icon
         +i name='friends'
         |friends
+    // .ui.input
+    //     i.plus.icon
+    //     input.search_friend(type='text' placeholder='add by username...')
+    +multi_user_edit key='friend_ids' label='friends' direct=true
+    each friend_search_results
+        .ui.header #{username}
     each user_friends
         .item #{username}
         
