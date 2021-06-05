@@ -13,6 +13,14 @@ if Meteor.isClient
         ), name:'ingredient_view'
 
 
+    Template.ingredients.events
+        'click .add_ingredient': ->
+            new_id = 
+                Docs.insert     
+                    model:'ingredient'
+            Router.go "/ingredient/#{new_id}/edit"
+            
+            
     Template.ingredients.onCreated ->
         @autorun => Meteor.subscribe 'model_docs', 'ingredient', ->
     Template.ingredient_view.onCreated ->
@@ -22,7 +30,7 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
 
     Template.ingredient_view.helpers
-        meal_inclusions: ->
+        ingredient_products: ->
             Docs.find
-                model:'meal'
+                model:'product'
                 ingredient_ids: $in: [@_id]

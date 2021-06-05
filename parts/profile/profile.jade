@@ -53,10 +53,10 @@ template(name='user_layout')
                                 .ui.dividing.header
                                     i.shield.icon
                                     |admin
-                            +array_edit key='roles' label='roles' direct=true
-                                //- a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
-                                //-     i.globe.icon
-                                //-     |log out other clients
+                            +array_edit key='roles' label='roles' direct=true icon='shield'
+                            a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
+                                i.globe.icon
+                                |log out other clients
                         .twelve.wide.column
                             a.ui.basic.circular.compact.button(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
                                 +i name='dashboard' cl='ui avatar image'
@@ -91,6 +91,12 @@ template(name='user_layout')
                                     +i name='marker' cl='ui avatar image'
                                     // i.marker.icon
                                     |addresses
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/favorites" class="{{isActiveRoute 'user_favorites'}}")
+                                    +i name='love' cl='ui avatar image'
+                                    |favorites
+                                a.ui.basic.circular.compact.button(href="/user/#{username}/recipes" class="{{isActiveRoute 'user_recipes'}}")
+                                    +i name='cookbook' cl='ui avatar image'
+                                    |recipes
                             a.ui.basic.circular.compact.button(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
                                 +i name='certificate' cl='ui avatar image'
                                 // i.certificate.icon

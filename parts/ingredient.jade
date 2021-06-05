@@ -4,8 +4,10 @@ template(name='ingredients')
             .ui.header
                 +ibig name='ingredients'
                 |ingredients
+            .ui.button.add_ingredient
+                i.plus.icon
         .ui.twelve.wide.column
-            each ingredients
+            each model_docs_helper 'ingredient'
                 .ui.card
                     if image_id
                         a(href="/ingredient/#{_id}/view")
@@ -96,17 +98,15 @@ template(name='ingredient_edit')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                .eight.wide.column
+                .six.wide.column
                     .ui.header edit '#{title}' ingredient
-                .four.wide.column
-                    a.ui.large.circular.basic.button(href="/ingredient/#{_id}/view")
-                        i.checkmark.green.icon
+                    a.ui.large.circular.green.button(href="/ingredient/#{_id}/view")
+                        i.checkmark.icon
                         |save        
-            .five.wide.column
-                .ui.header #{title}
-                +text_edit key='title' direct=true
-                +array_edit key='tags' direct=true
-                +image_edit key='image_id' direct=true
-            .six.wide.column
-                img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
-                +textarea_edit key='description' direct=true
+                    .ui.header #{title}
+                    +text_edit key='title' direct=true
+                    +array_edit key='tags' direct=true
+                    +image_edit key='image_id' direct=true
+                .six.wide.column
+                    img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
+                    +html_edit key='description' direct=true
