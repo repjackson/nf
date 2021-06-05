@@ -88,9 +88,15 @@ template(name='recipe_edit')
                         i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
+                    +text_edit key='ready_in' label='ready in' direct=true
+                    +text_edit key='prep_time' label='prep time' direct=true
+                    +text_edit key='cook_time' label='cook time' direct=true
+                    +text_edit key='servings' label='servings' direct=true
+                    +text_edit key='servings' label='servings' direct=true
                     div
                 .ten.wide.column
                     div
+                    +textarea_edit key='description' label='description' direct=true
                     +html_edit key='directions' label='directions' direct=true
                     +array_edit key='tags' label='tags' icon='tags' direct=true
                     +array_edit key='ingredients' label='ingredients' icon='tags' direct=true
@@ -104,8 +110,8 @@ template(name='recipe_view')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                    a.ui.circular.icon.button(href="/recipes")
-                        i.food.big.icon
+                    a.ui.basic.circular.icon.button(href="/recipes")
+                        +i name='cookbook'
                     .ui.inline.header
                         | #{title}
                         small recipe view
@@ -113,6 +119,13 @@ template(name='recipe_view')
                     div
                     a.ui.icon.button(href="/recipe/#{_id}/edit")
                         i.pencil.icon
+                    .ui.header 
+                        +i name='ingredients'
+                        |ingredients
+                    .ui.large.selection.link.animated.list
+                        each ingredients
+                            .item 
+                                .ui.header #{title}
                 .eight.wide.column
                     div
                     +html_view key='directions' label='directions' direct=true
@@ -122,8 +135,15 @@ template(name='recipe_view')
                         .ui.red.button.delete_recipe
                             i.remove.icon   
                             | delete
-                    +comments                
                 .four.wide.column
+                    +text_view key='ready_in' label='ready in' direct=true
+                    +text_view key='prep_time' label='prep time' direct=true
+                    +text_view key='cook_time' label='cook time' direct=true
+                    +text_view key='servings' label='servings' direct=true
+                    +text_view key='servings' label='servings' direct=true
+                    div
+                    div
+                    +html_view key='description' label='description' direct=true
                     unless is_cook
                         .ui.basic.button.mark_cook
                             +i name='chef-cooking-skin-type-4' cl='ui inline image'
@@ -132,6 +152,8 @@ template(name='recipe_view')
                         .ui.basic.small.compact.button.unmark_cook
                             i.grey.undo.icon
                             |mark not cooked
+                    each cook_ids
+                        .ui.header #{this}
                     unless is_fav
                         .ui.basic.button.mark_fav 
                             +i name='heart' cl='ui inline image'
@@ -140,8 +162,12 @@ template(name='recipe_view')
                         .ui.basic.small.compact.button.unmark_fav 
                             i.grey.undo.icon
                             |mark unfavorite
-                    each cook_ids
-                        .ui.header #{this}
                     each favorite_user_ids
                         .ui.header #{this}
-                        +user_from_id this
+                        // +user_from_id this
+                    .ui.header 
+                        +i name='popular-topic' cl='ui inline image'
+                        |reviews
+                    each recipe_reviews
+                        .ui.header #{when}
+                    +comments

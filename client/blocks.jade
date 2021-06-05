@@ -45,6 +45,28 @@ template(name='comments')
                             +voting_small
                             if can_edit
                                 +remove_button
+                                
+                                
+template(name='reviews')
+    .ui.header
+        +i name='popular-topic' cl='ui inline image'
+        |reviews
+    div
+    if currentUser
+        .ui.fluid.icon.large.input
+            i.plus.icon
+    .ui.reviews
+        each doc_reviews
+            .comment
+                .content
+                    .ui.header #{body}
+                    .meta #{when}
+                        |by 
+                        a(href="/user/#{author.username}") #{author.first_name} #{author.last_name}
+                        if currentUser
+                            +voting_small
+                            if can_edit
+                                +remove_button
 
 
 template(name='viewing')
