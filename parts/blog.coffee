@@ -50,24 +50,6 @@ if Meteor.isClient
         'click .toggle_pickup': -> Session.set('view_pickup', !Session.get('view_pickup'))
         'click .toggle_open': -> Session.set('view_open', !Session.get('view_open'))
 
-        'click .pick_section': -> picked_sections.push @title
-        'click .unpick_section': -> picked_sections.remove @valueOf()
-        'click .pick_ingredient': -> picked_ingredients.push @title
-        'click .unpick_ingredient': -> picked_ingredients.remove @valueOf()
-            # console.log picked_ingredients.array()
-            # if picked_ingredients.array().length is 1
-                # Meteor.call 'call_wiki', search, ->
-
-            # if picked_ingredients.array().length > 0
-                # Meteor.call 'search_reddit', picked_ingredients.array(), ->
-
-        'click .clear_picked_ingredients': ->
-            Session.set('post_query',null)
-            picked_ingredients.clear()
-
-        'click .clear_post_query': ->
-            Session.set('post_query', null)
-
         'keyup #post_search': _.throttle((e,t)->
             query = $('#post_search').val()
             Session.set('post_query', query)
@@ -227,34 +209,35 @@ if Meteor.isServer
     Meteor.publish 'post_results', (
         )->
         # console.log picked_ingredients
-        if doc_limit
-            limit = doc_limit
-        else
-            limit = 42
-        if doc_sort_key
-            sort_key = doc_sort_key
-        if doc_sort_direction
-            sort_direction = parseInt(doc_sort_direction)
+        # if doc_limit
+        #     limit = doc_limit
+        # else
+        limit = 42
+        # if doc_sort_key
+        #     sort_key = doc_sort_key
+        # if doc_sort_direction
+        #     sort_direction = parseInt(doc_sort_direction)
         self = @
         match = {model:'post', app:'nf'}
-        if picked_ingredients.length > 0
-            match.ingredients = $all: picked_ingredients
-            # sort = 'price_per_serving'
-        if picked_sections.length > 0
-            match.menu_section = $all: picked_sections
+        # if picked_ingredients.length > 0
+        #     match.ingredients = $all: picked_ingredients
+        #     # sort = 'price_per_serving'
+        # if picked_sections.length > 0
+        #     match.menu_section = $all: picked_sections
             # sort = 'price_per_serving'
         # else
             # match.tags = $nin: ['wikipedia']
         sort = '_timestamp'
+        match.published = true
             # match.source = $ne:'wikipedia'
-        if view_vegan
-            match.vegan = true
-        if view_gf
-            match.gluten_free = true
-        if post_query and post_query.length > 1
-            console.log 'searching post_query', post_query
-            match.title = {$regex:"#{post_query}", $options: 'i'}
-            # match.tags_string = {$regex:"#{query}", $options: 'i'}
+        # if view_vegan
+        #     match.vegan = true
+        # if view_gf
+        #     match.gluten_free = true
+        # if post_query and post_query.length > 1
+        #     console.log 'searching post_query', post_query
+        #     match.title = {$regex:"#{post_query}", $options: 'i'}
+        #     # match.tags_string = {$regex:"#{query}", $options: 'i'}
 
         # match.tags = $all: picked_ingredients
         # if filter then match.model = filter
@@ -265,13 +248,13 @@ if Meteor.isServer
         #         match["#{key}"] = $all: key_array
             # console.log 'current facet filter array', current_facet_filter_array
 
-        console.log 'post match', match
-        console.log 'sort key', sort_key
-        console.log 'sort direction', sort_direction
+        # console.log 'post match', match
+        # console.log 'sort key', sort_key
+        # console.log 'sort direction', sort_direction
         Docs.find match,
-            sort:"#{sort_key}":sort_direction
+            # sort:"#{sort_key}":sort_direction
             # sort:_timestamp:-1
-            limit: limit
+            limit: 42
             
             
     Meteor.publish 'post_count', (

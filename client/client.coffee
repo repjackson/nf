@@ -9,18 +9,13 @@ Tracker.autorun ->
         $(window).scrollTop 0
 
 
-Template.home.onCreated ->
+Template.nav.onCreated ->
     @autorun => @subscribe 'order_count'
     @autorun => @subscribe 'product_count'
     @autorun => @subscribe 'ingredient_count'
     @autorun => @subscribe 'subscription_count'
     @autorun => @subscribe 'source_count'
-Template.home.helpers
-    order_count:-> Counts.get('order_count')
-    product_count:-> Counts.get('product_count')
-    ingredient_count:-> Counts.get('ingredient_count')
-    subscription_count:-> Counts.get('subscription_count')
-    source_countt:-> Counts.get('source_count')
+Template.nav.helpers
         
         
         

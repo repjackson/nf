@@ -1,12 +1,13 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.large.menu
+    #topnav.topnav.ui.attached.borderless.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.food.icon.cancel
         else 
             a.icon.item.toggle_sidebar.no_blink
-                .ui.mini.image.leftmenu
+                // .ui.mini.image.leftmenu
+                .ui.mini.image
                     .mobile.hidden
                         +i name='menu--v1'
                     img.ui.mini.image.mobile.only(src="/android-chrome-96x96.png")
@@ -43,6 +44,9 @@ template(name='nav')
         a.icon.item.zoomer.mobile.hidden(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             .ui.mini.image.orders
                 +i name='invoice' cl=''
+        a.icon.item.zoomer.mobile.hidden(href='/blog' class="{{isActivePath '/blog'}}" title='blog')
+            .ui.mini.image
+                +i name='blog' cl=''
         if currentUser
             a.icon.item.zoomer.mobile.hidden(href='/users' class="{{isActivePath '/users'}}" title='users')
                 .ui.mini.image.users
@@ -139,7 +143,6 @@ template(name='latest_activity')
 
 
 template(name='footer')
-    .ui.hidden.divider
     .ui.stackable.padded.grid
         .four.column.row
             .column
@@ -152,6 +155,9 @@ template(name='footer')
                     a.item (720) 815-5588
             .column
                 .ui.link.animated.selection.grey.list
+                    a.item(href="/") 
+                        i.home.icon
+                        |home
                     a.item(href="/cart") 
                         i.cart.icon
                         |cart
@@ -161,9 +167,6 @@ template(name='footer')
                     a.item 
                         i.smile.icon
                         |get involved
-                    a.item 
-                        i.home.icon
-                        |home
                     a.item(href='/account') 
                         i.user.icon
                         |account
@@ -176,15 +179,6 @@ template(name='footer')
                     a.item(hre='/p/refer') 
                         i.reply.icon
                         |refer a friend
-                    a.item(href='/produce') 
-                        i.food.icon
-                        |produce
-                    a.item(href='/packaging') 
-                        i.package.icon
-                        |packaging
-                    a.item(hre='/shop') 
-                        i.cart.icon
-                        |shop
                     a.item(href='/p/transparency')
                         |transparency
                     a.item(href='/p/hiring') 
@@ -195,6 +189,18 @@ template(name='footer')
                     a.item(href='p/how') how we work
                     a.item(href='/p/privacy-policy') privacy policy
                     a.item(href='/p/tos') terms of service
+                    a.item(href='/produce') 
+                        i.food.icon
+                        |produce
+                    a.item(href='/packaging') 
+                        i.box.icon
+                        |packaging
+                    a.item(href='/p/local_products') 
+                        i.box.icon
+                        |local products
+                    a.item(href='/shop') 
+                        i.cart.icon
+                        |shop
             .column
                 +icolor name='facebook'
                 +icolor name='instagram'
@@ -292,7 +298,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.menu.smallscroll
+    .ui.left.sidebar.vertical.borderless.small.menu.smallscroll
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
@@ -313,23 +319,23 @@ template(name='left_sidebar')
         a.item.toggle_sidebar.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
                 +i name='food-cart' cl=''
-            | shop
+            | #{product_count} products
         a.item.toggle_sidebar.zoomer(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
             .ui.mini.image
                 +i name='ingredients' cl=''
-            | ingredients
-        a.item.toggle_sidebar.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-            .ui.mini.image.info
-                +i name='information--v1' cl=''
-            | about
+            | #{ingredient_count} ingredients
+        // a.item.toggle_sidebar.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+        //     .ui.mini.image.info
+        //         +i name='information--v1' cl=''
+        //     | about
         a.item.toggle_sidebar.zoomer(href='/sources' class="{{isActivePath '/sources'}}")
             .ui.mini.image.farm
                 +i name='field-and-tractor' cl=''
-            | sources
+            | #{source_count} sources
         a.item.toggle_sidebar.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}")
             .ui.mini.image.info
                 +i name='cookbook' cl=''
-            |recipes
+            |#{recipe_count} recipes
         // unless currentUser
         //     a.item.toggle_sidebar.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
         //         +i name='list' cl='ui inline mini image'
@@ -337,22 +343,10 @@ template(name='left_sidebar')
         //         strong.mobile.hidden get involved
         a.item.toggle_sidebar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
             +i name='phone' cl='ui inline mini image'
-            // i.phone.icon
             | contact
         a.item.toggle_sidebar.zoomer(href='/blog' class="{{isActivePath '/blog'}}" title='blog')
-            +i name='list' cl='ui inline mini image'
-            // i.blogpaper.icon
-            strong.mobile.hidden blog
-        // if is_admin
-        //     a.item(href='/tasks' class="{{isActivePath '/tasks'}}" title='tasks')
-        //         +i name='tasks' cl='ui inline mini image'
-        //     a.item(href='/m/model' class="{{isActivePath '/m/model'}}" title='delta')
-        //         +i name='database' cl='ui inline mini image'
-        //     |offers
-        a.item.toggle_sidebar(href="/blog" class="{{isActivePath '/m/post'}}")
-            // i.newspaper.icon
             +i name='blog' cl='ui inline mini image'
-            |blog
+            | #{post_count} posts
         if is_in_admin
             a.icon.item.toggle_admin.toggle_sidebar.no_blink
                 |toggle admin
@@ -364,15 +358,12 @@ template(name='left_sidebar')
         if is_admin
             .divider
             a.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
-                // i.database.icon
                 +i name='shield' cl='ui inline mini image'
                 |admin
             a.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
                 +i name='groups' cl='ui inline mini image'
-                // i.users.icon
                 | users
             a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
                 +i name='list' cl='ui inline mini image'
-                // i.list.icon
                 | orders
                 

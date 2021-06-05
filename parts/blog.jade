@@ -13,44 +13,8 @@ template(name='blog')
             if currentUser
                 a.ui.icon.button.add_post(title='cook')
                     i.plus.green.large.icon
-            
-            // .ui.left.icon.search.input
-            //     i.search.icon.refresh_tags
-            //     input#search_ingredient.prompt(type='text' autocomplete="off" placeholder='ingredients')
-            // if picked_ingredient_plural
-            //     .ui.icon.black.compact.button.clear_picked_ingredients
-            //         i.remove.icon
-            .ui.basic.icon.circular.button.toggle_gf(class=toggle_gf_class)
-                +icolor name='no-gluten' cl='ui mini inline image'
-            .ui.basic.icon.circular.button.toggle_vegan(class=toggle_vegan_class)
-                +i name='vegan-food' cl='ui mini inline image'
-            each picked_ingredients
-                button.ui.blue.compact.small.circular.button.unpick_ingredient(tabindex='0')
-                    //- i.remove.icon
-                    | #{this}
-            +i name='ingredients' cl='ui inline mini image'
-            each ingredients
-                button.ui.compact.tertiary.circular.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
-                    //- small #{count}
         .twelve.wide.column.scrolling
-            // each picked_sections
-            //     button.ui.blue.compact.small.circular.button.unpick_section(tabindex='0')
-            //         //- i.remove.icon
-            //         | #{this}
-            // // div
-            // +i name='clock' cl='ui inline mini image'
-            // each sections
-            //     button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
-            //         //- small #{count}
-            // // unless one_post
             .sorting_row
-                // +session_set key='view_users' value='grid' icon='th' 
-                // +session_set key='view_users' value='list' icon='list'
-                // +session_set key='sort_users_direction' value='-1' icon='chevron down'
-                // +session_set key='sort_users_direction' value='1' icon='chevron up'
-                // +session_set key='sort_users_key' value='points' icon='coins'
-                // +session_set key='sort_users_key' value='created_date' icon='clock'
-                // +session_set key='view_limit' value=1
                 +session_set key='view_limit' value=10
                 +session_set key='view_limit' value=20
 
