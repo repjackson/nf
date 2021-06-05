@@ -1,4 +1,8 @@
 if Meteor.isClient
+    Router.route '/posts', (->
+        @layout 'layout'
+        @render 'posts'
+        ), name:'posts'
     Router.route '/post/:doc_id/edit', (->
         @layout 'layout'
         @render 'post_edit'
@@ -7,18 +11,16 @@ if Meteor.isClient
         @layout 'layout'
         @render 'post_view'
         ), name:'post_view'
+    Router.route '/post/:doc_id/view', (->
+        @layout 'layout'
+        @render 'post_view'
+        ), name:'post_view_long'
     
     Template.registerHelper 'claimer', () ->
         Meteor.users.findOne @claimed_user_id
     Template.registerHelper 'completer', () ->
         Meteor.users.findOne @completed_by_user_id
     
-    
-    # Router.route '/posts', (->
-    #     @layout 'layout'
-    #     @render 'posts'
-    #     ), name:'posts'
-
     Template.post_view.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id, ->
     Template.post_edit.onCreated ->
@@ -29,10 +31,10 @@ if Meteor.isClient
 
     Template.post_card.events
         'click .view_post': ->
-            Router.go "/m/post/#{@_id}/view"
+            Router.go "/post/#{@_id}"
     Template.post_item.events
         'click .view_post': ->
-            Router.go "/m/post/#{@_id}/view"
+            Router.go "/post/#{@_id}"
 
 
     Template.post_edit.events
@@ -56,7 +58,7 @@ if Meteor.isClient
                         showConfirmButton: false,
                         timer: 1500
                     )
-                    Router.go "/m/post"
+                    Router.go "/post"
             )
 
         'click .publish': ->
@@ -105,13 +107,7 @@ if Meteor.isClient
             
             
 if Meteor.isClient
-    Router.route '/blog', (->
-        @layout 'layout'
-        @render 'blog'
-        ), name:'blog'
-
-
-    Template.blog.onCreated ->
+    Template.posts.onCreated ->
         Session.setDefault 'view_mode', 'list'
         Session.setDefault 'post_sort_key', 'datetime_available'
         Session.setDefault 'post_sort_label', 'available'
@@ -143,7 +139,7 @@ if Meteor.isClient
             
 
 
-    Template.blog.events
+    Template.posts.events
         'click .add_post': ->
             new_id =
                 Docs.insert
@@ -203,7 +199,7 @@ if Meteor.isClient
                 Session.set('post_sort_direction', -1)
 
 
-    Template.blog.helpers
+    Template.posts.helpers
         quickbuying_post: ->
             Docs.findOne Session.get('quickbuying_id')
 

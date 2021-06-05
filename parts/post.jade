@@ -1,4 +1,4 @@
-template(name='blog')
+template(name='posts')
     .ui.stackable.padded.grid
         .four.wide.column
             .ui.inline.header
@@ -17,8 +17,6 @@ template(name='blog')
             .sorting_row
                 +session_set key='view_limit' value=10
                 +session_set key='view_limit' value=20
-
-                
                 |sort by
                 .ui.compact.small.menu
                     .ui.simple.dropdown.item
@@ -50,23 +48,23 @@ template(name='blog')
                 .ui.hidden.divider
             if subs_ready
                 if one_post
-                    .ui.stackable.centered.one.column.grid
+                    .ui.stackable.one.column.grid
                         each post_docs
                             +post_card
                 else if two_posts
-                    .ui.stackable.centered.two.column.grid
+                    .ui.stackable.two.column.grid
                         each post_docs
                             +post_card
                 else if three_posts
-                    .ui.stackable.centered.three.column.grid
+                    .ui.stackable.three.column.grid
                         each post_docs
                             +post_card
                 else
-                    .ui.stackable.centered.three.column.grid
+                    .ui.stackable.three.column.grid
                         each post_docs
                             +post_card
             else 
-                .ui.basic.center.aligned.segment
+                .ui.basic.segment
                     i.massive.loading.food.icon
 
 template(name='set_post_sort_key')
@@ -115,9 +113,9 @@ template(name='post_item')
 template(name='post_view')
     with current_doc
         .ui.stackable.padded.grid
-            .middle.aligned.row 
-                .sixteen.wide.column
-                    a(href="/post")
+            .row 
+                .four.wide.column
+                    a(href="/posts")
                         i.newspaper.circular.link.big.icon
                     .ui.large.inline.header #{title}
                     // div
@@ -127,9 +125,6 @@ template(name='post_view')
                         a.edit_post(href="/post/#{_id}/edit" title='edit')
                             i.big.circular.link.pencil.icon
 
-            .row 
-                .four.wide.column
-                    img.ui.fluid.rounded.image(src="{{c.url image_id }}" class=currentUser.invert_class)
                     .ui.segment
                         .ui.header 
                             small author
@@ -146,7 +141,8 @@ template(name='post_view')
                     +array_view key='tags' label='tags' direct=true
                     +voting_full
                     //- +array_view key='location_tags' label='location_tags' direct=true
-                .twelve.wide.column
+                .twelve.wide.column.scrolling
+                    img.ui.rounded.image(src="{{c.url image_id }}" class=currentUser.invert_class)
                     // a.ui.header(href="/user/#{target.username}")
                     //     |#{target.username}
                     .ui.segment
@@ -163,8 +159,8 @@ template(name='post_view')
 template(name='post_edit')
     with current_doc
         .ui.stackable.padded.grid
-            .centered.middle.aligned.row 
-                .four.wide.center.aligned.column
+            .row 
+                .four.wide.column
                     .ui.header 
                         +icolor name='news' cl='ui image inline pointer'
                         |edit post
@@ -173,7 +169,7 @@ template(name='post_edit')
                 .eight.wide.column
                     +text_edit key='title' label='title' direct=true
                     +html_edit key='content' label='content' direct=true
-                .four.wide.center.aligned.column
+                .four.wide.column
                     i.large.link.circular.red.remove.icon.delete_post
                     .ui.header 
                         small author
@@ -182,7 +178,7 @@ template(name='post_edit')
                         +single_user_edit key='_author_id' label='author' direct=true
                     +image_edit key='image_id' label='image' direct=true
                     div 
-                    +array_edit key='tags' label='tags' direct=true
+                    +array_edit key='tags' label='tags' direct=true icon='tags'
                     +boolean_edit key='published' icon='visible' direct=true
                     if is_admin 
                         +text_edit key='model' label='model' direct=true

@@ -87,15 +87,15 @@ template(name='verification_confirmation')
 
 template(name='not_found')
     .ui.center.aligned.padded.basic.segment
-        .ui.basic.button.browser_back
-            i.large.undo.icon
-            |go back
         +ibig name='park-bench' 
             |browser_back
         .ui.center.aligned.header page not found
         a.ui.big.circular.basic.button(href="/") 
-            +ibig name='home' 
+            +i name='home' 
             // |home
+        .ui.basic.fluid.button.browser_back
+            i.large.undo.icon
+            |go back
 
 
 template(name='shortcut_modal')
