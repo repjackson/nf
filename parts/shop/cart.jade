@@ -25,17 +25,16 @@ template(name='cart_item')
     .item
         // .image
         img.ui.tiny.inline.rounded.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-        .content
-            a.ui.inline.header(href="/product/#{product._id}")
-                small $#{product_price} x
-                    | #{amount}
-                |#{product_title}
-            small added #{when}
-            .ui.basic.icon.button.decrease_amount
-                i.minus.icon
-            .ui.basic.icon.button.increase_amount
-                i.plus.icon
-            .ui.basic.icon.button.remove_item
-                i.remove.red.icon
-            if is_admin
-                +print_this
+        a.ui.inline.header(href="/product/#{product._id}")
+            |$#{product_price}
+            // | #{amount}
+            strong #{product_title}
+        small #{when}
+        // .ui.basic.icon.button.decrease_amount
+        //     i.minus.icon
+        // .ui.basic.icon.button.increase_amount
+        //     i.plus.icon
+        .ui.basic.icon.button.remove_item
+            i.remove.red.icon
+        // if is_admin
+        //     +print_this
