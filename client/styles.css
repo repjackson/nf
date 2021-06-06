@@ -483,7 +483,7 @@ input:not(.no_format){
     margin-top: 3px !important;
     /* font-size: 120% !important; */
     /* -moz-border-radius: 50px !important; */
-    border-radius: 10px !important;
+    /*border-radius: 10px !important;*/
     /* -webkit-border-radius: 5px !important; */
     /* -moz-border-radius: 5px !important; */
     background: rgba(250, 250, 250, 0.9) !important;

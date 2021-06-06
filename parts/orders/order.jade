@@ -6,7 +6,7 @@ template(name='order_view')
                     .ui.inline.header 
                         // strong '#{order_product.title}'
                         +i name='invoice' cl='ui avatar image'
-                        |order view
+                        |order
                     // .ui.segment 
                     //     with order_product
                     //         a(href="/product/#{_id}")
@@ -27,7 +27,29 @@ template(name='order_view')
                     if is_admin
                         +print_this
                     +comments
+                    .ui.grey.header 
+                        i.eye.icon
+                        |viewers
+                    .ui.small.button.mark_viewed
+                        |mark viewed
+                    each view_events
+                        .item 
+                            |#{username} {{from_now view_timestamp}}
                 .six.wide.column
+                    .ui.feed
+                        .event
+                            .label
+                                // event author
+                                img.avatar
+                            .content
+                                .summary
+                                    a.user dev 
+                                    |message
+                                    .date #{when}
+                                .meta
+                                    a.like
+                                        i.like.icon
+                                        |4 likes
                     // a.ui.compact.button(href="/product/#{product_id}")
                     //     i.left.chevron.icon
                     //     img.ui.avatar.image(src="{{c.url order_product.image_id width=200 height=200}}")    
@@ -38,9 +60,6 @@ template(name='order_view')
                     each cart_items 
                         .ui.header #{title}
                     
-                    if can_edit
-                        a(href="/order/#{_id}/edit" title='edit')
-                            i.pencil.link.large.circular.icon
                     if kve 'when' 'later'
                         +datetime_view key='pickup_datetime'
                     .ui.header status: #{status}
