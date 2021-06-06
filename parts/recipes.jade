@@ -1,12 +1,11 @@
 template(name='recipes')
     .ui.stackable.padded.grid
-        .four.wide.column
+        .sixteen.wide.column
             .ui.inline.header 
                 +i name='cookbook'
                 |recipes
             .ui.basic.circular.icon.button.add_recipe
                 i.large.plus.icon
-        .twelve.wide.column
             // each picked_sections
             //     button.ui.blue.compact.small.circular.button.unpick_section(tabindex='0')
             //         //- i.remove.icon
@@ -17,7 +16,7 @@ template(name='recipes')
             //     button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
             //         //- small #{count}
             // // unless one_post
-            .sorting_row
+            span.sorting_row
                 // +session_set key='view_users' value='grid' icon='th' 
                 // +session_set key='view_users' value='list' icon='list'
                 // +session_set key='sort_users_direction' value='-1' icon='chevron down'
@@ -54,7 +53,7 @@ template(name='recipes')
                             +set_product_limit amount=20
                 .spacer 
         
-            .ui.stackable.cards.scrolling
+            span.ui.stackable.cards.scrolling
                 each model_docs_helper 'recipe'
                     .ui.card
                         a(href="/recipe/#{_id}") 
