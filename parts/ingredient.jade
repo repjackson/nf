@@ -1,12 +1,11 @@
 template(name='ingredients')
     .ui.stackable.padded.grid
-        .ui.four.wide.column
-            .ui.header
+        .ui.sixteen.wide.column
+            .ui.inline.header
                 +ibig name='ingredients'
                 |ingredients
-            .ui.button.add_ingredient
-                i.plus.icon
-        .ui.twelve.wide.column
+            i.plus.circular.link.icon.add_ingredient
+        .ui.sixteen.wide.column
             .ui.stackable.centered.cards
                 each model_docs_helper 'ingredient'
                     .ui.card

@@ -45,7 +45,7 @@ template(name='nav')
                 // a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                 a.item.zoomer.toggle_walletbar(title='nudebucks')
                     // i.wallet.icon
-                    .ui.mini.image.wallet
+                    .ui.mini.image
                         +i name='wallet' cl=''
                     strong ${{int currentUser.credit}}
                     // i.cart.icon
@@ -58,12 +58,12 @@ template(name='nav')
                 //         i.user.icon
                 //     strong.mobile.hidden #{currentUser.name}
                 a.icon.item.toggle_rightbar.no_blink
-                    .ui.mini.image.rightmenu
+                    .ui.mini.image
                         if currentUser.image_id
-                            img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                            img.ui.mini.inline.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
                         else
-                            i.user.icon
-                        strong.mobile.hidden #{currentUser.name}
+                            i.user.large.icon
+                    strong.mobile.hidden #{currentUser.name}
                     // i.bars.large.icon
                         
         unless currentUser
@@ -100,7 +100,7 @@ template(name='nav')
             +i name='phone' cl='ui inline mini image'
         if currentUser
             a.icon.item.zoomer(href='/users' class="{{isActivePath '/users'}}" title='users')
-                .ui.avatar.image.users
+                .ui.mini.image.users
                     +i name='groups' cl=''
         unless currentUser
             a.icon.item.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
@@ -235,7 +235,7 @@ template(name='walletbar')
         +user_credit
         
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.menu.rightbar
+    .ui.right.sidebar.vertical.borderless.large.menu.rightbar
         a.item.toggle_rightbar.zoomer.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
@@ -284,7 +284,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.small.menu.smallscroll
+    .ui.left.sidebar.vertical.borderless.big.thin.menu.smallscroll
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
