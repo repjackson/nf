@@ -20,7 +20,7 @@ template(name='nav')
             img.ui.mini.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
         .search.item.zoomer.mobile.hidden(title='search')
-            .ui.icon.input
+            .ui.icon.large.transparent.input
                 i.search.icon
                 input.search_ingredients(type='text')
         a.icon.item.zoomer.mobile.hidden(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
@@ -254,33 +254,22 @@ template(name='right_sidebar')
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
                 +i name='clock' cl='ui avatar image'
                 |subscriptions
+            a.item.toggle_rightbar.zoomer(href="/user/#{username}/pantry" class="{{isActiveRoute 'user_pantry'}}")
+                +i name='clock' cl='ui avatar image'
+                |pantry
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
                 +i name='friends' cl='ui avatar image'
                 |friends
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
                 +i name='shopping-cart' cl='ui avatar image'
                 |cart
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
-                +i name='dishes-shelf' cl='ui avatar image'
-                |pantry
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
                 +i name='certificate' cl='ui avatar image'
                 |gift cards
-                
-            // a.item.toggle_rightbar.zoomer.no_blink(href="/user/#{username}/credits" class="{{isActiveRoute 'user_credits'}}")
-            //     | #{total_credit_amount}p received
-            //     i.chevron.down.icon
-            // a.item.toggle_rightbar.no_blink(href="/user/#{username}/debits" class="{{isActiveRoute 'user_sent'}}")
-            //     | #{currentUser.total_debit_amount}p sent
-            //     i.chevron.up.icon
         // .ui.divider
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/edit" title='edit your account')
-            // i.cog.icon
             +i name='settings' cl='ui avatar image'
             |settings
-        // a.item.toggle_nightmode.toggle_rightbar.no_blink(href="#")
-        //     i.lightbulb.icon
-        //     |dark mode
         a.item.logout
             if is_logging_out
                 i.refresh.loading.icon
@@ -318,10 +307,6 @@ template(name='left_sidebar')
             .ui.mini.image
                 +i name='ingredients' cl=''
             | #{ingredient_count} ingredients
-        // a.item.toggle_sidebar.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-        //     .ui.mini.image.info
-        //         +i name='information--v1' cl=''
-        //     | about
         a.item.toggle_sidebar.zoomer(href='/sources' class="{{isActivePath '/sources'}}")
             .ui.mini.image.farm
                 +i name='field-and-tractor' cl=''
@@ -330,9 +315,6 @@ template(name='left_sidebar')
             .ui.mini.image.info
                 +i name='cookbook' cl=''
             |#{recipe_count} recipes
-        // unless currentUser
-        //     a.item.toggle_sidebar.zoomer(href='/p/get-involved' class="{{isActivePath '/p/get-involved'}}" title='news')
-        //         +i name='list' cl='ui inline mini image'
         //         // i.newspaper.icon
         //         strong.mobile.hidden get involved
         a.item.toggle_sidebar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')

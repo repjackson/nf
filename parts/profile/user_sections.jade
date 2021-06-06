@@ -25,5 +25,17 @@ template(name='user_deliveries')
         .item #{when}
     +map
         
+template(name='user_pantry')
+    .ui.header 
+        +i name='kitchen'
+        |pantry
+    .ui.button.add_pantry_item
+        |add item
+    each pantry_items
+        a.item(href='') #{title} 
+    .ui.header 
+        |recommended recipes
+    .ui.header 
+        |missing items
         
         

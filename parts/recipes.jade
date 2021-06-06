@@ -64,12 +64,13 @@ template(name='recipes')
                                 |#{title}
                             |added #{when} by #{_author_username}
                         .content
-                            i.heart.outline.icon.favorite
+                            +favorite_icon_toggle
                             i.clock.icon
                             i.food.icon
                             i.chat.icon
                             i.users.icon
-    
+template(name='favorite_icon_toggle')
+    i.heart.link.icon.toggle_fav(class=icon_class)
      
 template(name='product_recipes')
     .ui.inline.header 

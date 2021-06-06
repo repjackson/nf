@@ -26,7 +26,7 @@ template(name='bookmark_button')
 
 template(name='comments')
     .ui.header
-        i.chat.blue.outline.icon
+        i.chat.outline.icon
         |comments
     div
     if currentUser
@@ -328,10 +328,10 @@ template(name='voting_full')
     // .ui.inline.header 
     //     |voting
     .ui.large.icon.compact.circular.basic.button.upvote(title='upvote')
-        i.thumbs.up.outline.green.icon(class=upvote_class)
+        i.thumbs.up.outline.icon(class=upvote_class)
         //- |like
     .ui.large.icon.compact.circular.basic.button.downvote(title='downvote')
-        i.thumbs.down.outline.red.icon(class=downvote_class)
+        i.thumbs.down.outline.icon(class=downvote_class)
         //- |dislike
     if points
         .ui.large.basic.label(title='points') #{points}pts

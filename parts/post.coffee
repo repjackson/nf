@@ -36,7 +36,30 @@ if Meteor.isClient
         'click .view_post': ->
             Router.go "/post/#{@_id}"
 
+    Template.post_view.events
+        'click .add_post_recipe': ->
+            new_id = 
+                Docs.insert 
+                    model:'recipe'
+                    post_ids:[@_id]
+            Router.go "/recipe/#{new_id}/edit"
 
+    Template.favorite_icon_toggle.helpers
+        icon_class: ->
+            if Meteor.userId() in @favorite_ids
+                'red'
+            else
+                'outline'
+    Template.favorite_icon_toggle.events
+        'click .toggle_fav': ->
+            if Meteor.userId() in @favorite_ids
+                Docs.update @_id, 
+                    $pull:favorite_ids:Meteor.userId()
+            else
+                Docs.update @_id, 
+                    $addToSet:favorite_ids:Meteor.userId()
+    
+    
     Template.post_edit.events
         'click .delete_post': ->
             Swal.fire({

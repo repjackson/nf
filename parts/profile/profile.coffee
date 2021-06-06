@@ -43,6 +43,10 @@ if Meteor.isClient
         @layout 'user_layout'
         @render 'user_posts'
         ), name:'user_posts'
+    Router.route '/user/:username/pantry', (->
+        @layout 'user_layout'
+        @render 'user_pantry'
+        ), name:'user_pantry'
 
 
 

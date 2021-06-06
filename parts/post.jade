@@ -185,9 +185,11 @@ template(name='post_view')
                     .ui.header  
                         +i name='food-cart'
                         | products
-                    .ui.header  
+                    div
+                    .ui.inline.header  
                         +i name='cookbook'
                         | recipes
+                    i.circular.plus.link.icon.add_post_recipe
                         
                     .ui.list
                         .item #{views} views
