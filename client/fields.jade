@@ -152,9 +152,9 @@ template(name='icon_view')
 template(name='i')
     //- i.icon(class=name)
     if is_hovering
-        img.content(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
+        img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
     else
-        img.content(src="https://img.icons8.com/ios/50/000000/#{name}.png" class=cl title=title)
+        img.content.fade(src="https://img.icons8.com/ios/50/000000/#{name}.png" class=cl title=title)
     // img(src="https://img.icons8.com/dusk/64/000000/#{name}.png" class=cl title=title)
     // img(src="https://img.icons8.com/fluent/48/000000/#{name}.png" class=cl title=title)
     // img(src="https://img.icons8.com/doodle/48/000000/#{name}.png" class=cl title=title)
@@ -176,7 +176,10 @@ template(name='icolor')
     // img(src="https://img.icons8.com/dusk/48/000000/#{name}.png" class=cl title=title)
 template(name='ibig')
     // i.icon(name=name)
-    img(src="https://img.icons8.com/ios/96/000000/#{name}.png" class=cl title=title)
+    if is_hovering
+        img.content.fade(src="https://img.icons8.com/color/96/000000/#{name}.png" class=cl title=title)
+    else
+        img.content.fade(src="https://img.icons8.com/ios/96/000000/#{name}.png" class=cl title=title)
 template(name='iios')
     img(src="https://img.icons8.com/ios/48/000000/#{name}.png" class=cl title=title)
     //- img(src="https://img.icons8.com/ultraviolet/48/000000/#{name}.png" class=cl title=title)
