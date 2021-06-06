@@ -23,11 +23,6 @@ template(name='nav')
             .ui.icon.transparent.large.input
                 i.search.icon
                 input.search_ingredients(type='text')
-        a.icon.item.zoomer.mobile.hidden(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            +i name='phone' cl='ui inline mini image'
-            // i.large.phone.icon
-            // i8.newspaper.icon
-            // strong.mobile.hidden contact
         // a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
         //     // +i name='list' cl='ui inline mini image'
         //     i.newspaper.large.icon
@@ -80,30 +75,32 @@ template(name='nav')
             else 
                 i.food.loading.icon
     .ui.attached.borderless.small.menu 
-        a.icon.item.zoomer.mobile.hidden(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            .ui.avatar.image
+        a.icon.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+            .ui.mini.image
                 +i name='grocery-shelf' cl=''
-        a.icon.item.zoomer.mobile.hidden(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
-            .ui.avatar.image
+        a.icon.item.zoomer(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
+            .ui.mini.image
                 +i name='ingredients' cl=''
-        a.icon.item.zoomer.mobile.hidden(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
-            .ui.avatar.image.farm
+        a.icon.item.zoomer(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
+            .ui.mini.image.farm
                 +i name='field-and-tractor' cl=''
-        a.icon.item.zoomer.mobile.hidden(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
-            .ui.avatar.image.recipes
+        a.icon.item.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
+            .ui.mini.image.recipes
                 +i name='cookbook' cl=''
-        a.icon.item.zoomer.mobile.hidden(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            .ui.avatar.image.orders
+        a.icon.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+            .ui.mini.image.orders
                 +i name='invoice' cl=''
-        a.icon.item.zoomer.mobile.hidden(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            .ui.avatar.image
+        a.icon.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+            .ui.mini.image
                 +i name='blog' cl=''
+        a.icon.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
+            +i name='phone' cl='ui inline mini image'
         if currentUser
-            a.icon.item.zoomer.mobile.hidden(href='/users' class="{{isActivePath '/users'}}" title='users')
+            a.icon.item.zoomer(href='/users' class="{{isActivePath '/users'}}" title='users')
                 .ui.avatar.image.users
                     +i name='groups' cl=''
         unless currentUser
-            a.icon.item.zoomer.mobile.hidden(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+            a.icon.item.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
                 // i.info.large.icon
                 .ui.mini.image.info
                     +i name='information--v1' cl=''
