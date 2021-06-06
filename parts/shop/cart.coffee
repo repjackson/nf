@@ -12,6 +12,7 @@ if Meteor.isClient
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
+        @autorun => Meteor.subscribe 'my_cart_order'
         @autorun => Meteor.subscribe 'my_cart_products'
         if Meteor.user()
             @autorun => Meteor.subscribe 'username_model_docs', 'address', ->
@@ -40,6 +41,7 @@ if Meteor.isClient
                     
             Router.go '/checkout'
                 
+    Template.cart_item.events
         'click .remove_item': (e,t)->
             product = 
                 Docs.findOne
@@ -49,7 +51,7 @@ if Meteor.isClient
             console.log product
             
             Swal.fire({
-                title: "remove #{product.title}?"
+                title: "remove #{@product_title}?"
                 # text: "cannot be undone"
                 icon: 'question'
                 confirmButtonText: 'delete'
@@ -89,9 +91,14 @@ if Meteor.isClient
                     $inc:amount:-1
 
     Template.cart.helpers
-        cart_items: ->
+        cart_order: ->
+            Docs.findOne 
+                model:'order'
+                status:'cart'
+        items: ->
             Docs.find
-                model:'cart_item'
+                model:'item'
+                status:'cart'
                 # ingredient_ids: $in: [@_id]
     Template.checkout.events
         'click .checkout_cart': ->
@@ -101,12 +108,12 @@ if Meteor.isClient
                     complete:false
             if cart_order
                 subtotal = 0
-                for cart_item in Docs.find(model:'cart_item',_author_id:Meteor.userId()).fetch()
-                    product = Docs.findOne(cart_item.product_id)
+                for item in Docs.find(model:'item',_author_id:Meteor.userId()).fetch()
+                    # product = Docs.findOne(item.product_id)
                     # console.log product
-                    if product
-                        if product.price_usd
-                            subtotal += product.price_usd*cart_item.amount
+                    # if product
+                    #     if product.price_usd
+                    subtotal += item.product_price
                     # if product.price_usd
                     #     console.log product.price_usd
                         # console.log 'product', product
@@ -139,9 +146,9 @@ if Meteor.isClient
                 complete:false
             
             
-        cart_items: ->
+        items: ->
             Docs.find
-                model:'cart_item'
+                model:'item'
                 # ingredient_ids: $in: [@_id]
     Template.topup_button.events
         'click .initiate_topup':->
@@ -179,26 +186,26 @@ if Meteor.isServer
         Docs.find
             model:'order'
             _author_id: Meteor.userId()
-            complete:false
+            # complete:false
             status:'cart'
           
-    Meteor.publish 'product_from_cart_item', (cart_item_id)->
-        cart_item = Docs.findOne cart_item_id
-        Docs.find cart_item.product_id
+    Meteor.publish 'product_from_item', (item_id)->
+        item = Docs.findOne item_id
+        Docs.find item.product_id
             
             
     Meteor.publish 'my_cart_products', ->
-        # cart_items = 
-        cart_items = 
+        # items = 
+        items = 
             Docs.find({
-                model:'cart_item'
+                model:'item'
                 _author_id: Meteor.userId()
                 complete:false
             }, {fields:{product_id:1}}).fetch()
         # console.log 'product_ids', _.values(product_ids)
         product_ids = []
-        for cart_item in cart_items
-            product_ids.push cart_item.product_id
+        for item in items
+            product_ids.push item.product_id
         console.log product_ids
         Docs.find({
             model:'product'

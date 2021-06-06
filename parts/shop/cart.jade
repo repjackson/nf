@@ -1,36 +1,40 @@
 template(name='cart')
-    .ui.stackable.padded.grid
-        .sixteen.wide.column
-            .ui.header
-                +i name='shopping-cart'
-                |cart
-            .ui.large.list.scrolli
-                each cart_items
-                    .item
-                        // .image
-                        img.ui.small.inline.rounded.image(src="{{c.url product.image_id width=400 height=300 crop='pad'}}")
-                        .content
-                            a.ui.inline.header(href="/product/#{product._id}")
-                                small $#{product.price_usd} x
-                                    | #{amount}
-                                |#{product.title}
-                            div
-                            small added #{when}
-                            .ui.circular.basic.icon.button.decrease_amount
-                                i.minus.icon
-                            .ui.circular.basic.icon.button.increase_amount
-                                i.plus.icon
-                            .ui.circular.basic.icon.button.remove_item
-                                i.remove.red.icon
-                            if is_admin
-                                +print_this
-        .sixteen.wide.column
-            // a.ui.fluid.circular.basic.icon.button(href="/shop")
-            //     // i.chevron.left.icon
-            //     +i name='food-cart'
-            .ui.header subtotal: $#{my_cart_subtotal}
-            .ui.big.fluid.button.checkout_cart
-                i.large.send.icon
-                |checkout
+    with cart_order
+        .ui.stackable.padded.grid
+            .sixteen.wide.column
+                a.ui.header(href="/cart")
+                    +i name='shopping-cart'
+                    |cart
+                .ui.large.list.scrolli
+                    each items
+                        +cart_item
+            .sixteen.wide.column
+                // a.ui.fluid.circular.basic.icon.button(href="/shop")
+                //     // i.chevron.left.icon
+                //     +i name='food-cart'
+                .ui.header subtotal: $#{my_cart_subtotal}
+                .ui.big.fluid.button.checkout_cart
+                    i.large.send.icon
+                    |checkout
                 
                 
+
+template(name='cart_item')
+    .item
+        // .image
+        img.ui.small.inline.rounded.image(src="{{c.url product.image_id width=400 height=300 crop='pad'}}")
+        .content
+            a.ui.inline.header(href="/product/#{product._id}")
+                small $#{product.price_usd} x
+                    | #{amount}
+                |#{product.title}
+            div
+            small added #{when}
+            .ui.circular.basic.icon.button.decrease_amount
+                i.minus.icon
+            .ui.circular.basic.icon.button.increase_amount
+                i.plus.icon
+            .ui.circular.basic.icon.button.remove_item
+                i.remove.red.icon
+            if is_admin
+                +print_this

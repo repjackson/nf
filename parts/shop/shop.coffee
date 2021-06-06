@@ -265,9 +265,11 @@ if Meteor.isServer
             new_cart_doc_id = 
                 Docs.insert 
                     model:'item'
-                    product_id: product_id
                     status:'cart'
+                    product_id: product_id
                     product_price:product.price_usd
+                    product_title:product.title
+                    image_id:product.image_id
                     order_id:order_id
             console.log new_cart_doc_id
             
