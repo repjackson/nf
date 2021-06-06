@@ -22,10 +22,16 @@ template(name='trips')
                 
 template(name='user_trips')
     .ui.inline.header 
-        +i name='field-and-tractor'
+        +i name='bicycle'
         |user trips
-    .ui.basic.circular.icon.button.send_trip
-        i.large.plus.icon
+        
+    if available_for_trips
+        .ui.button
+            |request delivery
+        .ui.header
+            |available for trips
+    if is_current_user
+        +boolean_edit key='available_for_trips' direct=true
     .ui.padded.stackable.two.column.grid
         .column
             .ui.header 

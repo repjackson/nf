@@ -263,6 +263,9 @@ template(name='right_sidebar')
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
                 +i name='shopping-cart' cl='ui avatar image'
                 |cart
+            a.item.toggle_rightbar.zoomer(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
+                +i name='bicycle' cl='ui avatar image'
+                |trips
             a.item.toggle_rightbar.zoomer(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
                 +i name='certificate' cl='ui avatar image'
                 |gift cards
@@ -315,6 +318,10 @@ template(name='left_sidebar')
             .ui.mini.image.info
                 +i name='cookbook' cl=''
             |#{recipe_count} recipes
+        a.item.toggle_sidebar.zoomer(href='/trips' class="{{isActivePath '/trips'}}")
+            .ui.mini.image.info
+                +i name='bicycle' cl=''
+            |#{recipe_count} trips
         //         // i.newspaper.icon
         //         strong.mobile.hidden get involved
         a.item.toggle_sidebar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')

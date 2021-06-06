@@ -60,12 +60,10 @@ template(name='user_layout')
                         .twelve.wide.column
                             a.ui.basic.compact.button(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
                                 +i name='dashboard' cl='ui avatar image'
-                                // i.dashboard.icon
                                 |dashboard
                             if is_current_user
                                 a.ui.basic.compact.button(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
                                     +i name='money' cl='ui avatar image'
-                                    // i.money.icon
                                     |credit
                                 a.ui.basic.compact.button(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
                                     +i name='check' cl='ui avatar image'
@@ -85,7 +83,6 @@ template(name='user_layout')
                                     |subscriptions
                                 a.ui.basic.compact.button(href="/user/#{username}/addresses" class="{{isActiveRoute 'user_addresses'}}")
                                     +i name='marker' cl='ui avatar image'
-                                    // i.marker.icon
                                     |addresses
                                 a.ui.basic.compact.button(href="/user/#{username}/favorites" class="{{isActiveRoute 'user_favorites'}}")
                                     +i name='love' cl='ui avatar image'
@@ -98,8 +95,10 @@ template(name='user_layout')
                                     |recipes
                             a.ui.basic.compact.button(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
                                 +i name='certificate' cl='ui avatar image'
-                                // i.certificate.icon
                                 |gift cards
+                            a.ui.basic.compact.button(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
+                                +i name='bicycle' cl='ui avatar image'
+                                |trips
                                 
                 
                             div.global_container

@@ -324,7 +324,7 @@ if Meteor.isServer
                 local:1
                 gluten_free:1
             
-    Meteor.publish 'product_count', (
+    Meteor.publish 'product_search_count', (
         picked_ingredients
         picked_sections
         product_query
