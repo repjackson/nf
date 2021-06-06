@@ -39,17 +39,24 @@ template(name='order_view')
                     .ui.feed
                         .event
                             .label
-                                // event author
-                                img.avatar
+                                img.ui.mini.inline.image(src="{{c.url author.image_id width=200 height=200 gravity='face' crop='fill'}}")
                             .content
                                 .summary
-                                    a.user dev 
-                                    |message
+                                    a.user #{_author_username}
+                                    |started
                                     .date #{when}
-                                .meta
-                                    a.like
-                                        i.like.icon
-                                        |4 likes
+                        // .event
+                        //     .label
+                        //         img.avatar
+                        //     .content
+                        //         .summary
+                        //             a.user dev 
+                        //             |message
+                        //             .date #{when}
+                        //         .meta
+                        //             a.like
+                        //                 i.like.icon
+                        //                 |4 likes
                     // a.ui.compact.button(href="/product/#{product_id}")
                     //     i.left.chevron.icon
                     //     img.ui.avatar.image(src="{{c.url order_product.image_id width=200 height=200}}")    
@@ -94,14 +101,6 @@ template(name='order_view')
                     +product_delivery
                     // |{{from_now datetime_available}}:
                     // +textarea_view key='description'
-                    .ui.large.bulleted.list
-                        .item
-                            small ordered
-                            strong #{when}
-                            |({{long_date _timestamp}})
-                        .item
-                            small for 
-                            strong ${{fixed order_price}}
                     div
                     if pickup
                         .ui.header
