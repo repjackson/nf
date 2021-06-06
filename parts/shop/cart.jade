@@ -5,7 +5,7 @@ template(name='cart')
                 a.ui.header(href="/cart")
                     +i name='shopping-cart'
                     |cart
-                .ui.large.list.scrolli
+                .ui.vertical.fluid.menu.scrolli
                     each cart_items
                         +cart_item
             .sixteen.wide.column
@@ -24,13 +24,12 @@ template(name='cart')
 template(name='cart_item')
     .item
         // .image
-        img.ui.small.inline.rounded.image(src="{{c.url product.image_id width=400 height=300 crop='pad'}}")
+        img.ui.tiny.inline.rounded.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
             a.ui.inline.header(href="/product/#{product._id}")
-                small $#{product.price_usd} x
+                small $#{product_price} x
                     | #{amount}
-                |#{product.title}
-            div
+                |#{product_title}
             small added #{when}
             .ui.basic.icon.button.decrease_amount
                 i.minus.icon
