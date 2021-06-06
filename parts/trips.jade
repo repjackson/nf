@@ -23,47 +23,54 @@ template(name='trips')
 template(name='user_trips')
     .ui.inline.header 
         +i name='bicycle'
-        |user trips
+        |#{user_from_username.username} trips
         
     if available_for_trips
         .ui.button
             |request delivery
-        .ui.header
+        .ui.inline.header
+            i.checkmark.icon
             |available for trips
+    .ui.header
+        |available jobs
+    each available_jobs
+        a.ui.header(href="/order/#{_id}/view") #{order_product.title} #{when}
     if is_current_user
-        +boolean_edit key='available_for_trips' direct=true
+        +boolean_edit key='available_for_trips' label='available' direct=true
     .ui.padded.stackable.two.column.grid
         .column
             .ui.header 
-                +i name='sent--v2'
-                |favorites 
+                +i name='clock'
+                |past trips 
             .ui.stackable.cards.scrolling
-                each sent_trips 
+                each user_past_trips
                     .ui.card
                         .content
                             a(href="/trip/#{_id}") 
                                 img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-    
                             .ui.header 
                                 |#{amount} #{recipient_username}
                             // |created #{when}
-                            |sent {{from_now sent_timestamp}}
-                            small {{cal_time sent_timestamp}}
+                            |sent {{from_now start_timestamp}}
+                            small {{cal_time start_timestamp}}
+                            |sent {{from_now end_timestamp}}
+                            small {{cal_time end_timestamp}}
                             a.ui.circular.icon.button(href='/trip/#{_id}')
                                 i.large.chevron.right.icon
                             
         .column
             .ui.header 
-                +i name='gift--v1'
-                |received
+                +i name='arow'
+                |future
             .ui.stackable.cards.scrolling
-                each received_trips
+                each future_trips
                     .ui.card
                         .content
                             a(href="/trip/#{_id}") 
                                 img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
                             .ui.header 
                                 |#{amount} #{_author_username}
+                            |requested time #{from_now requested_timedate}
                             |received {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
                             a.ui.circular.icon.button(href='/trip/#{_id}')
