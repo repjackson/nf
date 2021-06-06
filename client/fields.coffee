@@ -140,6 +140,13 @@ Template.link_edit.events
                 $set:"#{@key}":val
 
 
+Template.i.onCreated ->
+    @hovering = new ReactiveVar false
+Template.i.events
+    'mouseover .content': (e,t)-> 
+        t.hovering.set true
+Template.i.helpers
+    is_hovering: -> Template.instance().hovering.get()
 Template.icon_edit.events
     'blur .icon_val': (e,t)->
         val = t.$('.icon_val').val()

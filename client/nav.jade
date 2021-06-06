@@ -93,6 +93,9 @@ template(name='nav')
         a.icon.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
             .ui.mini.image
                 +i name='blog' cl=''
+        a.icon.item.zoomer(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
+            .ui.mini.image
+                +i name='bicycle' cl=''
         a.icon.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
             +i name='phone' cl='ui inline mini image'
         if currentUser
