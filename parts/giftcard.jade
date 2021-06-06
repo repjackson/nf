@@ -1,3 +1,26 @@
+template(name='giftcards')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            .ui.inline.header 
+                +i name='gift-card'
+                |Giftcards
+            .ui.basic.circular.icon.button.add_giftcard
+                i.large.plus.icon
+        .sixteen.wide.column
+            .ui.four.stackable.centered.cards
+                each model_docs_helper 'giftcard'
+                    .ui.card
+                        a(href="/giftcard/#{_id}") 
+                            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                        a.content(href="/giftcard/#{_id}") 
+                            .ui.header 
+                                |#{title}
+                            each giftcard_product
+                                .ui.header #{title}
+                            // |added #{when} by #{_author_username}
+                
+
+
 template(name='user_giftcards')
     .ui.inline.header 
         +i name='gift-card'

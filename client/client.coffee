@@ -15,8 +15,8 @@ Template.nav.onCreated ->
     @autorun => @subscribe 'ingredient_count'
     @autorun => @subscribe 'subscription_count'
     @autorun => @subscribe 'source_count'
-Template.nav.helpers
-        
+    @autorun => @subscribe 'giftcard_count'
+    @autorun => @subscribe 'user_count'
         
         
 Template.not_found.events

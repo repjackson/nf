@@ -29,17 +29,17 @@ template(name='home')
                 .ui.header nude meals
     .ui.vertical.stripe.segment
         .ui.stackable.grid
-            .four.column.center.aligned.row
+            .five.column.center.aligned.row
                 a.column.zoomer(href="/shop")
                     .ui.icon.header
                         i.icon 
                             +ibig name='food-cart'
                         |#{product_count} products
-                a.column(href="/deliveries")
+                a.column(href="/trips")
                     .ui.icon.header
                         i.icon 
                             +ibig name='protected-bike-lane'
-                        |deliveries
+                        |trips
                 a.column.zoomer(href='/store')
                     .ui.icon.header
                         i.icon 
@@ -60,6 +60,16 @@ template(name='home')
                         i.icon 
                             +ibig name='technical-fluid'
                         |pounds of plastic prevented
+                .column
+                    .ui.icon.header
+                        i.icon 
+                            +ibig name='clock'
+                        |#{subscription_count} subscriptions
+                .column
+                    .ui.icon.header
+                        i.icon 
+                            +ibig name='staff'
+                        |#{staff_count} staff
                 .column
                     .ui.icon.header
                         i.icon 

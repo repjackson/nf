@@ -13,23 +13,16 @@ Template.registerHelper 'model_docs_helper', (model) ->
 Template.registerHelper 'subs_ready', () -> 
     Template.instance().subscriptionsReady()
 
-Template.registerHelper 'source_products', () -> 
-    Docs.find
-        model:'product'
-        source_id:@_id
-Template.registerHelper 'product_source', () -> 
-    found = 
-        Docs.findOne
-            model:'source'
-            _id:@source_id
-    console.log found
-    found
 
 Template.registerHelper 'order_count',-> Counts.get('order_count')
 Template.registerHelper 'product_count',-> Counts.get('product_count')
 Template.registerHelper 'ingredient_count',-> Counts.get('ingredient_count')
 Template.registerHelper 'subscription_count',-> Counts.get('subscription_count')
 Template.registerHelper 'source_count',-> Counts.get('source_count')
+Template.registerHelper 'giftcard_count',-> Counts.get('giftcard_count')
+Template.registerHelper 'user_count',-> Counts.get('user_count')
+Template.registerHelper 'staff_count',-> Counts.get('staff_count')
+Template.registerHelper 'customer_count',-> Counts.get('customer_count')
 
 
 Template.registerHelper 'cart_subtotal', () -> 

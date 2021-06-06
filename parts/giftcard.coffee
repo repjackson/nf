@@ -1,4 +1,8 @@
 if Meteor.isClient
+    Router.route '/giftcards', (->
+        @layout 'layout'
+        @render 'giftcards'
+        ), name:'giftcards'
     Router.route '/user/:username/giftcards', (->
         @layout 'user_layout'
         @render 'user_giftcards'

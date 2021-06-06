@@ -474,7 +474,7 @@ img {
 
 .input{
     /*-webkit-border-radius: 10px !important;*/
-    border-radius: 10px !important;
+    /*border-radius: 0px !important;*/
 }
 input:not(.no_format){
     /* -webkit-border-radius: 10px !important; */ */

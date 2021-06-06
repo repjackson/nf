@@ -26,3 +26,19 @@ Meteor.publish 'source_count', (
     match = {model:'source', app:'nf'}
     Counts.publish this, 'source_count', Docs.find(match)
     return undefined
+Meteor.publish 'subscription_count', (
+    )->
+    @unblock()
+    self = @
+    match = {model:'product_subscription', app:'nf'}
+    Counts.publish this, 'subscription_count', Docs.find(match)
+    return undefined
+    
+    
+Meteor.publish 'giftcard_count', (
+    )->
+    @unblock()
+    self = @
+    match = {model:'giftcard', app:'nf'}
+    Counts.publish this, 'giftcard_count', Docs.find(match)
+    return undefined

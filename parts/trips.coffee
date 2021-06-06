@@ -1,73 +1,61 @@
 if Meteor.isClient
-    Template.registerHelper 'source_products', () -> 
-        Docs.find
-            model:'product'
-            source_id:@_id
-    Template.registerHelper 'product_source', () -> 
-        found = 
-            Docs.findOne
-                model:'source'
-                _id:@source_id
-        console.log found
-        found
-    
-    Router.route '/sources', (->
+    Router.route '/trips', (->
         @layout 'layout'
-        @render 'sources'
-        ), name:'sources'
-    Router.route '/user/:username/sources', (->
+        @render 'trips'
+        ), name:'trips'
+    Router.route '/user/:username/trips', (->
         @layout 'user_layout'
-        @render 'user_sources'
-        ), name:'user_sources'
-    Router.route '/source/:doc_id', (->
+        @render 'user_trips'
+        ), name:'user_trips'
+    Router.route '/trip/:doc_id', (->
         @layout 'layout'
-        @render 'source_view'
-        ), name:'source_view'
+        @render 'trip_view'
+        ), name:'trip_view'
     
-    Template.sources.onCreated ->
-        @autorun => Meteor.subscribe 'model_docs', 'source', ->
+    Template.trips.onCreated ->
+        @autorun => Meteor.subscribe 'model_docs', 'trip', ->
             
             
-    Template.user_sources.onCreated ->
-        @autorun => Meteor.subscribe 'user_sent_sources', Router.current().params.username, ->
-        @autorun => Meteor.subscribe 'user_received_sources', Router.current().params.username, ->
+    Template.user_trips.onCreated ->
+        @autorun => Meteor.subscribe 'user_sent_trips', Router.current().params.username, ->
+        @autorun => Meteor.subscribe 'user_received_trips', Router.current().params.username, ->
             
-    Template.source_edit.onCreated ->
+    Template.trip_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
-    Template.source_view.onCreated ->
+    Template.trip_view.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'source_products', Router.current().params.doc_id
+        @autorun => Meteor.subscribe 'trip_products', Router.current().params.doc_id
     
 
-    Template.source_view.helpers
-        source_products:->
+    Template.trip_view.helpers
+        trip_products:->
             Docs.find
                 model:'product'
-                source_id:@_id
+                trip_id:@_id
 
-    Template.source_view.events
-        'click .add_source_product': ->
+    Template.trip_view.events
+        'click .add_trip_product': ->
             new_id = 
                 Docs.insert 
                     model:'product'
-                    source_id: Router.current().params.doc_id
+                    trip_id: Router.current().params.doc_id
             Router.go "/product/#{new_id}/edit"        
             
-    Template.sources.events
-        'click .add_source': ->
+    Template.trips.events
+        'click .add_trip': ->
             new_id = 
                 Docs.insert 
-                    model:'source'
+                    model:'trip'
             
-            Router.go "/source/#{new_id}/edit"
+            Router.go "/trip/#{new_id}/edit"
             
-    Template.user_sources.events
-        'click .add_source': ->
+    Template.user_trips.events
+        'click .add_trip': ->
             new_id = 
                 Docs.insert 
-                    model:'source'
+                    model:'trip'
             
-            Router.go "/source/#{new_id}/edit"
+            Router.go "/trip/#{new_id}/edit"
             
             
         # 'click .edit_address': ->
@@ -84,52 +72,52 @@ if Meteor.isClient
            
            
             
-    Template.user_sources.helpers
-        sent_sources: ()->
+    Template.user_trips.helpers
+        sent_trips: ()->
             Docs.find   
-                model:'source'
+                model:'trip'
                 _author_username:Router.current().params.username
-        received_sources: ()->
+        received_trips: ()->
             Docs.find   
-                model:'source'
+                model:'trip'
                 recipient_username:Router.current().params.username
         
 if Meteor.isServer
-    Meteor.publish 'user_received_sources', (username)->
+    Meteor.publish 'user_received_trips', (username)->
         Docs.find   
-            model:'source'
+            model:'trip'
             recipient_username:username
             
-    Meteor.publish 'source_products', (source_id)->
+    Meteor.publish 'trip_products', (trip_id)->
         Docs.find   
             model:'product'
-            source_id:source_id
+            trip_id:trip_id
             
             
-    Meteor.publish 'user_sent_sources', (username)->
+    Meteor.publish 'user_sent_trips', (username)->
         Docs.find   
-            model:'source'
+            model:'trip'
             _author_username:username
             
             
             
             
 if Meteor.isClient
-    Router.route '/source/:doc_id/edit', (->
+    Router.route '/trip/:doc_id/edit', (->
         @layout 'layout'
-        @render 'source_edit'
-        ), name:'source_edit'
+        @render 'trip_edit'
+        ), name:'trip_edit'
 
 
 
-    Template.source_edit.onCreated ->
+    Template.trip_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'model_docs', 'menu_section'
 
 
-    Template.source_edit.events
-        'click .send_source': ->
+    Template.trip_edit.events
+        'click .send_trip': ->
             Swal.fire({
                 title: 'confirm send card'
                 text: "#{@amount} credits"
@@ -139,24 +127,24 @@ if Meteor.isClient
                 cancelButtonText: 'cancel'
             }).then((result) =>
                 if result.value
-                    source = Docs.findOne Router.current().params.doc_id
+                    trip = Docs.findOne Router.current().params.doc_id
                     Meteor.users.update Meteor.userId(),
                         $inc:credit:-@amount
-                    Docs.update source._id,
+                    Docs.update trip._id,
                         $set:
                             sent:true
                             sent_timestamp:Date.now()
                     Swal.fire(
-                        'source sent',
+                        'trip sent',
                         ''
                         'success'
-                    Router.go "/source/#{@_id}/"
+                    Router.go "/trip/#{@_id}/"
                     )
             )
 
 
             
-    Template.source_edit.helpers
+    Template.trip_edit.helpers
         all_shop: ->
             Docs.find
-                model:'source'
+                model:'trip'

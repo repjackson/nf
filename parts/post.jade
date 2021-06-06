@@ -202,8 +202,7 @@ template(name='post_view')
                     img.ui.rounded.image(src="{{c.url image_id }}" class=currentUser.invert_class)
                     // a.ui.header(href="/user/#{target.username}")
                     //     |#{target.username}
-                    .ui.segment
-                        |!{content}
+                    |!{content}
                     div 
                     .spacer
                     .spacer
@@ -217,13 +216,12 @@ template(name='post_edit')
     with current_doc
         .ui.stackable.padded.grid
             .row 
-                .four.wide.column
+                .twelve.wide.column
                     .ui.header 
                         +icolor name='news' cl='ui image inline pointer'
                         |edit post
                     a.ui.icon.green.big.circular.button(href="/post/#{_id}/view" title='save')
                         i.checkmark.big.icon
-                .eight.wide.column
                     +text_edit key='title' label='title' direct=true
                     +html_edit key='content' label='content' direct=true
                 .four.wide.column
