@@ -84,7 +84,7 @@ template(name='user_things')
     .ui.inline.header 
         +i name='cookbook'
         |user things
-    .ui.basic.circular.icon.button.send_thing
+    .ui.basic.icon.button.send_thing
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
         .column
@@ -103,7 +103,7 @@ template(name='user_things')
                             // |created #{when}
                             |sent {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/thing/#{_id}')
+                            a.ui.icon.button(href='/thing/#{_id}')
                                 i.large.chevron.right.icon
                             
         .column
@@ -120,8 +120,8 @@ template(name='user_things')
                                 |#{amount} #{_author_username}
                             |received {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/thing/#{_id}')
-                            i.ui.large.link.circular.chevron.right.icon.edit_address
+                            a.ui.icon.button(href='/thing/#{_id}')
+                            i.ui.large.link.chevron.right.icon.edit_address
                 
         
         
@@ -164,13 +164,13 @@ template(name='thing_view')
             .row 
                 .four.wide.column
                     a(href="/things")
-                        i.newspaper.circular.link.big.icon
+                        i.newspaper.link.big.icon
                     // div
                     // .ui.inline.grey.header {{from_now start_datetime}}
                     
                     if can_edit
                         a.edit_thing(href="/thing/#{_id}/edit" title='edit')
-                            i.big.circular.link.pencil.icon
+                            i.big.link.pencil.icon
 
                     .ui.segment
                         .ui.header 
@@ -188,7 +188,7 @@ template(name='thing_view')
                     .ui.inline.header  
                         +i name='cookbook'
                         | recipes
-                    i.circular.plus.link.icon.add_thing_recipe
+                    i.plus.link.icon.add_thing_recipe
                         
                     .ui.list
                         .item #{views} views
@@ -220,12 +220,12 @@ template(name='thing_edit')
                     .ui.header 
                         +icolor name='news' cl='ui image inline pointer'
                         |edit thing
-                    a.ui.icon.green.big.circular.button(href="/thing/#{_id}/view" title='save')
+                    a.ui.icon.green.big.button(href="/thing/#{_id}/view" title='save')
                         i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +html_edit key='content' label='content' direct=true
                 .four.wide.column
-                    i.large.link.circular.red.remove.icon.delete_thing
+                    i.large.link.red.remove.icon.delete_thing
                     .ui.header 
                         small author
                         |#{_author.username}

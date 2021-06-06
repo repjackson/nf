@@ -4,7 +4,7 @@ template(name='ingredients')
             .ui.inline.header
                 +ibig name='ingredients'
                 |ingredients
-            i.plus.circular.link.icon.add_ingredient
+            i.plus.link.icon.add_ingredient
         .ui.sixteen.wide.column
             .ui.stackable.centered.cards
                 each model_docs_helper 'ingredient'
@@ -16,7 +16,7 @@ template(name='ingredients')
                             a.ui.header(href="/ingredient/#{_id}/view") #{title}
                             div created {{from_now _timestamp}} by #{_author_username}
                             each tags
-                                .ui.basic.circular.label #{this}
+                                .ui.basic.label #{this}
                             //- .ui.large.basic.label 
                             //-     |#{points} points
                         .content
@@ -33,7 +33,7 @@ template(name='ingredient_card')
             a.ui.header(href="/ingredient/#{_id}/view") #{title}
             div created {{from_now _timestamp}} by #{_author_username}
             each tags
-                .ui.basic.circular.label #{this}
+                .ui.basic.label #{this}
             //- .ui.large.basic.label 
             //-     |#{points} points
         .content
@@ -49,14 +49,14 @@ template(name='ingredient_view')
         .ui.stackable.padded.grid
             .centered.middle.aligned.row
                 .four.wide.center.aligned.column
-                    a.ui.basic.circular.compact.button(href="/ingredients")
+                    a.ui.basic.compact.button(href="/ingredients")
                         i.left.chevron.icon
                         +icolor name='ingredients' classes='ui inline mini image'
                         |ingredients
                 .eight.wide.center.aligned.column
                     .ui.center.aligned.header #{title}
                 .four.wide.center.aligned.column
-                    a.ui.basic.circular.button(href="/ingredient/#{_id}/edit")
+                    a.ui.basic.button(href="/ingredient/#{_id}/edit")
                         i.blue.pencil.icon
                         |edit        
             .five.wide.column
@@ -100,7 +100,7 @@ template(name='ingredient_edit')
                 .four.wide.column
                 .six.wide.column
                     .ui.header edit '#{title}' ingredient
-                    a.ui.large.circular.green.button(href="/ingredient/#{_id}/view")
+                    a.ui.large.green.button(href="/ingredient/#{_id}/view")
                         i.checkmark.icon
                         |save        
                     .ui.header #{title}

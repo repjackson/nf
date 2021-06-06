@@ -4,7 +4,7 @@ template(name='sources')
             .ui.inline.header 
                 +i name='field-and-tractor'
                 |Sources
-            .ui.basic.circular.icon.button.add_source
+            .ui.basic.icon.button.add_source
                 i.large.plus.icon
         .sixteen.wide.column
             .ui.four.stackable.centered.cards
@@ -24,7 +24,7 @@ template(name='user_sources')
     .ui.inline.header 
         +i name='field-and-tractor'
         |user sources
-    .ui.basic.circular.icon.button.send_source
+    .ui.basic.icon.button.send_source
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
         .column
@@ -43,7 +43,7 @@ template(name='user_sources')
                             // |created #{when}
                             |sent {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/source/#{_id}')
+                            a.ui.icon.button(href='/source/#{_id}')
                                 i.large.chevron.right.icon
                             
         .column
@@ -60,8 +60,8 @@ template(name='user_sources')
                                 |#{amount} #{_author_username}
                             |received {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/source/#{_id}')
-                            i.ui.large.link.circular.chevron.right.icon.edit_address
+                            a.ui.icon.button(href='/source/#{_id}')
+                            i.ui.large.link.chevron.right.icon.edit_address
                 
                 
                 
@@ -97,11 +97,11 @@ template(name='source_view')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                    a.ui.basic.circular.icon.button(href="/sources")
+                    a.ui.basic.icon.button(href="/sources")
                         +ibig name='field-and-tractor'
                     
                     if can_edit 
-                        a.ui.circular.icon.button(href="/source/#{_id}/edit")
+                        a.ui.icon.button(href="/source/#{_id}/edit")
                             i.pencil.icon
                     div
                 .six.wide.column

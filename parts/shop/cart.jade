@@ -9,7 +9,7 @@ template(name='cart')
                     each cart_items
                         +cart_item
             .sixteen.wide.column
-                // a.ui.fluid.circular.basic.icon.button(href="/shop")
+                // a.ui.fluid.basic.icon.button(href="/shop")
                 //     // i.chevron.left.icon
                 //     +i name='food-cart'
                 if cart_items.length
@@ -32,11 +32,11 @@ template(name='cart_item')
                 |#{product.title}
             div
             small added #{when}
-            .ui.circular.basic.icon.button.decrease_amount
+            .ui.basic.icon.button.decrease_amount
                 i.minus.icon
-            .ui.circular.basic.icon.button.increase_amount
+            .ui.basic.icon.button.increase_amount
                 i.plus.icon
-            .ui.circular.basic.icon.button.remove_item
+            .ui.basic.icon.button.remove_item
                 i.remove.red.icon
             if is_admin
                 +print_this

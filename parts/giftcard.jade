@@ -4,7 +4,7 @@ template(name='giftcards')
             .ui.inline.header 
                 +i name='gift-card'
                 |Giftcards
-            .ui.basic.circular.icon.button.add_giftcard
+            .ui.basic.icon.button.add_giftcard
                 i.large.plus.icon
         .sixteen.wide.column
             .ui.four.stackable.centered.cards
@@ -25,7 +25,7 @@ template(name='user_giftcards')
     .ui.inline.header 
         +i name='gift-card'
         |user gift cards
-    .ui.basic.circular.icon.button.send_giftcard
+    .ui.basic.icon.button.send_giftcard
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
         .column
@@ -44,7 +44,7 @@ template(name='user_giftcards')
                             // |created #{when}
                             |sent {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/giftcard/#{_id}')
+                            a.ui.icon.button(href='/giftcard/#{_id}')
                                 i.large.chevron.right.icon
                             
         .column
@@ -61,8 +61,8 @@ template(name='user_giftcards')
                                 |#{amount} #{_author_username}
                             |received {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/giftcard/#{_id}')
-                            i.ui.large.link.circular.chevron.right.icon.edit_address
+                            a.ui.icon.button(href='/giftcard/#{_id}')
+                            i.ui.large.link.chevron.right.icon.edit_address
                 
                 
                 
@@ -90,11 +90,11 @@ template(name='giftcard_edit')
                             i.remove.icon   
                             | delete
                     if recipient_id
-                        .ui.large.circular.icon.green.button.send_giftcard(title='save product')
+                        .ui.large.icon.green.button.send_giftcard(title='save product')
                             i.sent.large.icon
                             |send giftcard
                     else
-                        .ui.large.circular.icon.green.disabled.button.send_giftcard(title='save product')
+                        .ui.large.icon.green.disabled.button.send_giftcard(title='save product')
                             i.sent.large.icon
                             |send giftcard
                 

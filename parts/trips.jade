@@ -4,7 +4,7 @@ template(name='trips')
             .ui.inline.header 
                 +i name='bicycle'
                 |trips
-            .ui.basic.circular.icon.button.add_trip
+            .ui.basic.icon.button.add_trip
                 i.large.plus.icon
         .eight.wide.column
             .ui.four.stackable.centered.cards
@@ -58,7 +58,7 @@ template(name='user_trips')
                             small {{cal_time start_timestamp}}
                             |sent {{from_now end_timestamp}}
                             small {{cal_time end_timestamp}}
-                            a.ui.circular.icon.button(href='/trip/#{_id}')
+                            a.ui.icon.button(href='/trip/#{_id}')
                                 i.large.chevron.right.icon
                             
         .column
@@ -76,8 +76,8 @@ template(name='user_trips')
                             |requested time #{from_now requested_timedate}
                             |received {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/trip/#{_id}')
-                            i.ui.large.link.circular.chevron.right.icon.edit_address
+                            a.ui.icon.button(href='/trip/#{_id}')
+                            i.ui.large.link.chevron.right.icon.edit_address
                 
                 
                 
@@ -113,11 +113,11 @@ template(name='trip_view')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                    a.ui.basic.circular.icon.button(href="/trips")
+                    a.ui.basic.icon.button(href="/trips")
                         +ibig name='field-and-tractor'
                     
                     if can_edit 
-                        a.ui.circular.icon.button(href="/trip/#{_id}/edit")
+                        a.ui.icon.button(href="/trip/#{_id}/edit")
                             i.pencil.icon
                     div
                 .six.wide.column

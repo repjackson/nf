@@ -6,6 +6,7 @@ if Meteor.isClient
     Template.orders.onCreated ->
         @autorun -> Meteor.subscribe 'model_docs', 'order', 20
         @autorun -> Meteor.subscribe 'model_docs', 'product', 20
+        @autorun -> Meteor.subscribe 'model_docs', 'thing', 20
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->

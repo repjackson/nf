@@ -10,7 +10,7 @@ template(name='sub_view')
                             a.ui.header(href="/product/#{_id}") #{title}
                             .ui.inline.header ingredients
                             each ingredients
-                                .ui.basic.circular.label #{this}
+                                .ui.basic.label #{this}
                             //- .ui.header #{cook_tip} cook tip
                             // .ui.header $#{sub_total_transaction_amount} 
                             //     small total transaction amount
@@ -25,7 +25,7 @@ template(name='sub_view')
                         |subscription
                     if can_edit
                         a(href="/sub/#{_id}/edit" title='edit')
-                            i.pencil.link.large.circular.icon
+                            i.pencil.link.large.icon
                     .ui.header buyer #{_author_username}
                     .ui.header day: #{sub_day}
                     .ui.header frequency: #{sub_frequency}
@@ -69,7 +69,7 @@ template(name='sub_view')
                         .ui.header 
                             |delivery
                     if can_edit
-                        .ui.basic.circular.button.unsub
+                        .ui.basic.button.unsub
                             i.undo.icon
                             |unsubscribe
                     .ui.hidden.divider

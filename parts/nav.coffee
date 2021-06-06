@@ -89,14 +89,6 @@ if Meteor.isClient
                 Session.set 'logging_out', false
                 Router.go '/'
                 
-        'click .toggle_nightmode': ->
-            if Meteor.user().invert_class is 'invert'
-                Meteor.users.update Meteor.userId(),
-                    $set:invert_class:''
-            else
-                Meteor.users.update Meteor.userId(),
-                    $set:invert_class:'invert'
-                
     
     Template.nav.events
         'keyup .search_ingredients': _.throttle((e,t)->
@@ -163,7 +155,7 @@ if Meteor.isClient
 
         cart_amount: ->
             cart_amount = Docs.find({
-                model:'item'
+                model:'thing'
                 status:'cart'
                 _author_id:Meteor.userId()
             }).count()
@@ -175,7 +167,7 @@ if Meteor.isClient
             #         _author_id:Meteor.userId()
             # if co 
             Docs.find 
-                model:'item'
+                model:'thing'
                 _author_id: Meteor.userId()
                 # order_id:co._id
                 status:'cart'

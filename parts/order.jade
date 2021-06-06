@@ -15,6 +15,9 @@ template(name='orders')
                         each orders
                             +order_item
                 .four.wide.column
+                    .ui.header 
+                        |alerts
+                        i.alert.icon
                     |view
                     +skvs key='order_sort_filter' value='open'               
                     +skvs key='order_sort_filter' value='now'               
@@ -37,35 +40,37 @@ template(name='order_item')
             //     with order_product
             //         //- img.ui.mini.image(src=image)
             //         +image_view key='image_id' direct=true cl='zoomer ui fluid image'
-            .sixteen.wide.column.zoomer
-                .ui.header #{product_title}
-                a.ui.small.header.inline.lowercase(href="/order/#{_id}")
-                    |$#{product_price}
-                .ui.inline.header status: 
-                    if kve status 'pending'
-                        i.large.yellow.clock.icon
-                    else if kve status 'ready'
-                        i.large.green.clock.icon
-                    else if kve status 'complete'
-                        i.large.green.checkmark.icon
-                    |#{status}
-                // .ui.inline.header product_id: #{product_id}
-                .ui.small.inline.header {{from_now _timestamp}} 
-                    small ({{long_date _timestamp}})
-                a.ui.circular.icon.big.button(href="/order/#{_id}")
+            .sixteen.wide.column
+                each order_things
+                    .ui.header #{product_title}
+                    a.ui.small.header.inline.lowercase(href="/order/#{_id}")
+                        |$#{product_price}
+                    .ui.inline.header status: 
+                        if kve status 'pending'
+                            i.large.yellow.clock.icon
+                        else if kve status 'ready'
+                            i.large.green.clock.icon
+                        else if kve status 'complete'
+                            i.large.green.checkmark.icon
+                        |status:#{status}
+                    // .ui.inline.header product_id: #{product_id}
+                    .ui.small.inline.header {{from_now _timestamp}} 
+                        small ({{long_date _timestamp}})
+                a.ui.icon.big.button(href="/order/#{_id}")
                     i.right.chevron.large.icon
+                .ui.inline.header #{status}
                 if in_dev 
                     +print_this
                 i.cubes.icon(title='things')
-                each order_things
-                    |#{when}, #{model}
+                // each order_things
+                |#{when}, #{_author_username} 
 
 template(name='order')
     with current_doc
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                    a.ui.circular.icon.button(href="/orders")
+                    a.ui.icon.button(href="/orders")
                         i.chevron.left.icon
                         // +i name='invoice' cl='ui avatar image'
                     .ui.inline.header 
@@ -166,7 +171,7 @@ template(name='order')
                     if delivered
                         if is_author
                             +kvs key='status' value='picked_up' label='picked up' direct=true
-                            .ui.basic.circular.large.button.mark_arrived
+                            .ui.basic.large.button.mark_arrived
                                 +i name='pick-up' cl='ui inline image'
                                 |mark picked up
                             
@@ -222,7 +227,7 @@ template(name='product_delivery')
             i.shield.icon
             |runner
         unless runner_viewed
-            .ui.basic.circular.large.button.mark_viewed
+            .ui.basic.large.button.mark_viewed
                 +i name='eye-checked' cl='ui avatar image'
                 |mark viewed
         if runner_viewed 
@@ -232,7 +237,7 @@ template(name='product_delivery')
             .ui.small.grey.inline.header {{cal_time runner_viewed_timestamp}}
             div
             unless preparing
-                .ui.basic.circular.large.button.mark_preparing
+                .ui.basic.large.button.mark_preparing
                     +i name='new-product--v1' cl='ui avatar image'
                     |preparing
         if preparing 
@@ -242,7 +247,7 @@ template(name='product_delivery')
             .ui.small.grey.inline.header {{cal_time preparing_timestamp}}
             div
             unless prepared
-                .ui.basic.circular.large.button.mark_prepared
+                .ui.basic.large.button.mark_prepared
                     +i name='handle-with-care' cl='ui avatar image'
                     |prepared
         if prepared 
@@ -252,7 +257,7 @@ template(name='product_delivery')
             .ui.small.grey.inline.header {{cal_time prepared_timestamp}}
             div
             unless delivering
-                .ui.basic.circular.large.button.mark_delivering
+                .ui.basic.large.button.mark_delivering
                     +i name='truck' cl='ui inline image'
                     |delivering
         if delivering 
@@ -263,7 +268,7 @@ template(name='product_delivery')
             
             div
             unless arrived
-                .ui.basic.circular.large.button.mark_arrived
+                .ui.basic.large.button.mark_arrived
                     +i name='checked-truck' cl='ui inline image'
                     |arrived
         if arrived 
@@ -274,7 +279,7 @@ template(name='product_delivery')
             +image_edit key='delivery_photo' direct=true
             if delivery_photo                        
                 div
-                .ui.basic.circular.large.button.mark_delivery_complete
+                .ui.basic.large.button.mark_delivery_complete
                     i.large.checkmark.icon
                     |delivered
 
@@ -315,7 +320,7 @@ template(name='user_order_item')
                 |#{status}
                 // .ui.inline.header product_id: #{product_id}
                 
-        a.ui.circular.icon.big.button(href="/order/#{_id}")
+        a.ui.icon.big.button(href="/order/#{_id}")
             i.right.chevron.large.icon
         |#{status}
         i.clock.icon

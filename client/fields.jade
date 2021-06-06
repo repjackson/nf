@@ -534,7 +534,7 @@ template(name='array_edit')
                 .ui.basic.large.label.touch_element
                     i.delete.icon.remove_element
                     |#{this}
-                // .ui.compact.circular.button.pick_tag
+                // .ui.compact.button.pick_tag
                 //     |#{this}
             else
                 a.ui.basic.label.pick_tag
@@ -558,13 +558,13 @@ template(name='array_edit')
 //     if field_value
 //         each field_value
 //             if in_dev
-//                 .ui.large.circular.label
+//                 .ui.large.label
 //                     i.delete.icon.remove_element
 //                     |#{this}
-//                 .ui.compact.circular.button.pick_tag
+//                 .ui.compact.button.pick_tag
 //                     |#{this}
 //             else
-//                 .ui.compact.circular.button.pick_tag
+//                 .ui.compact.button.pick_tag
 //                     |#{this}
             
                 
@@ -688,7 +688,7 @@ template(name='skvs')
 
 template(name='boolean_edit')
     //- div
-    .ui.circular.compact.button.toggle_boolean(class="#{boolean_toggle_class} #{cl}" title=tooltip)
+    .ui.compact.button.toggle_boolean(class="#{boolean_toggle_class} #{cl}" title=tooltip)
         if field_value
             i.green.checkmark.icon
         else
@@ -719,7 +719,7 @@ template(name='boolean_edit')
         //-         |no
 template(name='boolean_view')
     if field_value
-        .ui.basic.circular.large.label(title=title)
+        .ui.basic.large.label(title=title)
             .ui.inline.grey.small.header
                 if icon
                     if field_value
@@ -1001,7 +1001,7 @@ template(name='single_user_edit')
             .ui.inline.header
                 img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=currentUser.invert_class)
                 |#{name}
-            i.pull_user.remove.link.circular.icon
+            i.pull_user.remove.link.icon
 
 
 template(name='single_user_view')
@@ -1055,7 +1055,7 @@ template(name='multi_user_edit')
             .ui.inline.header
                 img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=currentUser.invert_class)
                 |#{name}
-            i.pull_user.remove.link.circular.icon
+            i.pull_user.remove.link.icon
 
 template(name='multi_doc_input')
     //- .ui.form

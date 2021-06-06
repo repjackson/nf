@@ -52,7 +52,7 @@ template(name='home_sub')
                 // .ui.inline.header product_id: #{product_id}
                 .ui.small.inline.header {{from_now _timestamp}} 
                     small ({{long_date _timestamp}})
-                a.ui.circular.icon.big.button(href="/sub/#{_id}")
+                a.ui.icon.big.button(href="/sub/#{_id}")
                     i.right.chevron.large.icon
                 if in_dev 
                     +print_this

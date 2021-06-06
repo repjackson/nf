@@ -21,7 +21,7 @@ template(name='login')
                 //- if username
                 //- if logging_in
                 .ui.hidden.divider
-                .ui.fluid.big.basic.circular.button.enter(title="login #{username}" class=enter_class)
+                .ui.fluid.big.basic.button.enter(title="login #{username}" class=enter_class)
                     +i name='internal' cl='ui mini inline image'
                     |login
                     strong #{username}
@@ -32,10 +32,10 @@ template(name='login')
                 //         |forgot password
 
                 .ui.center.aligned.basic.segment    
-                    a.ui.basic.circular.button(href='/register')
+                    a.ui.basic.button(href='/register')
                         i.plus.icon
                         |register
-                    a.ui.basic.circular.button(href='/forgot_password')
+                    a.ui.basic.button(href='/forgot_password')
                         i.refresh.icon
                         |forgot password
 
@@ -68,16 +68,16 @@ template(name='register')
                 .ui.hidden.divider
                 if can_register
                     //- if registering
-                    .ui.fluid.big.basic.circular.button.register(class=enter_class)
+                    .ui.fluid.big.basic.button.register(class=enter_class)
                         i.user.plus.icon
                         |register
                 else
-                    .ui.fluid.big.disabled.circular.button(class=enter_class)
+                    .ui.fluid.big.disabled.button(class=enter_class)
                         i.user.plus.icon
                         |register
                     // // .ui.small.header username "#{username}" found
                     
-                    a.ui.basic.circular.button(href='/login') 
+                    a.ui.basic.button(href='/login') 
                         // i.right.chevron.icon
                         +i name='internal' cl='ui avatar image'
                         |login

@@ -3,7 +3,7 @@
 //         .ui.stackable.padded.grid
 //             .row
 //                 .twelve.wide.column
-//                     a.ui.large.basic.circular.button(href="/store")
+//                     a.ui.large.basic.button(href="/store")
 //                         i.chevron.left.icon
 //                         i.large.building.icon
 //                     .ui.inline.header
@@ -11,11 +11,11 @@
 //                         |#{current_doc._author_username}'s store session
 //                     div
 //                     if skv_is 'view_barcode' true
-//                         i.circular.close.link.icon.zoomer.close_barcode(title='close barcode')
+//                         i.close.link.icon.zoomer.close_barcode(title='close barcode')
 //                         .ui.small.inline.header products will be added to cart when scanned
 //                         #barcode
 //                     else
-//                         .ui.large.icon.basic.circular.button.init
+//                         .ui.large.icon.basic.button.init
 //                             i.barcode.big.icon
 //                             // |start barcode reader
 //                     .ui.large.icon.input
@@ -47,7 +47,7 @@
 
 //                                 .ui.inline.header $#{price_usd}
 //                                 .ui.small.inline.header #{title}
-//                                 i.remove.circular.link.icon.remove_cart_item.zoomer(title='remove from cart')
+//                                 i.remove.link.icon.remove_cart_item.zoomer(title='remove from cart')
 //                     .ui.header subtotal $#{subtotal}
 //                     if cart_product_docs
 //                         .ui.fluid.green.button.checkout_session
@@ -61,11 +61,11 @@
 //                 img.ui.centered.image.rounded(src="{{c.url image_id width=400 height=300 crop='pad'}}")
 //             .ui.header #{title}
 //             // if current_doc.closed
-//             // .ui.icon.circular.basic.green.disabled.button
+//             // .ui.icon.basic.green.disabled.button
 //             //     i.cart.plus.icon
 //             // else
-//             // .ui.icon.circular.basic.green.button.add_to_cart
-//             // .ui.icon.fluid.basic.circular.button.icon.add_to_cart
+//             // .ui.icon.basic.green.button.add_to_cart
+//             // .ui.icon.fluid.basic.button.icon.add_to_cart
 //             //     i.cart.plus.large.green.icon
 //             //     // a.basic.small.button.zoomer(href="/product/#{_id}")
 //             //     //     |view

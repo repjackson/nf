@@ -216,16 +216,15 @@ if Meteor.isClient
 
     Template.product_card.events
         'click .add_to_cart': (e,t)->
-            $(e.currentTarget).closest('.image').transition('bounce',500)
+            $(e.currentTarget).closest('.card').transition('bounce',500)
             Meteor.call 'add_to_cart', @_id, =>
-
                 $('body').toast(
                     showIcon: 'cart plus'
                     message: "#{@title} added"
                     # showProgress: 'bottom'
                     class: 'success'
                     # displayTime: 'auto',
-                    position: "top right"
+                    position: "bottom center"
                 )
 
 

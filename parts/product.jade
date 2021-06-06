@@ -11,7 +11,7 @@ template(name='product_layout')
                 .ui.stackable.padded.grid
                     .row
                         .six.wide.column
-                            a.ui.basic.circular.icon.button(href="/shop")
+                            a.ui.basic.icon.button(href="/shop")
                                 i.chevron.left.large.icon
                                 // i.large.food.icon
                                 +i name='food-cart' cl='ui mini inline image'
@@ -22,7 +22,7 @@ template(name='product_layout')
                                 //- small product
                             if can_edit
                                 a(href="/product/#{_id}/edit")
-                                    i.pencil.blue.large.link.circular.icon
+                                    i.pencil.blue.large.link.icon
                             // a(href="{{c.url image_id}}" target="_window")
                             img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                             div 
@@ -49,31 +49,31 @@ template(name='product_layout')
                             // .ui.header #{menu_section}
                 
                         .ten.wide.column
-                            .ui.green.basic.inverted.circular.large.button.add_to_cart
+                            .ui.green.basic.inverted.large.button.add_to_cart
                                 // i.cart.plus.large.icon
                                 
                                 +i name='add-shopping-cart--v1' cl='ui avatar image'
                                 |add to cart
 
-                            a.ui.basic.circular.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
+                            a.ui.basic.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
                                 +i name='content' cl='ui avatar image'
                                 |description
-                            a.ui.basic.circular.compact.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
+                            a.ui.basic.compact.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
                                 +i name='clock' cl='ui avatar image'
                                 |subscriptions
-                            a.ui.basic.circular.compact.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
+                            a.ui.basic.compact.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
                                 +i name='list' cl='ui avatar image'
                                 |orders
-                            a.ui.basic.circular.compact.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
+                            a.ui.basic.compact.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
                                 +i name='cookbook' cl='ui avatar image'
                                 |recipes
-                            a.ui.basic.circular.compact.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
+                            a.ui.basic.compact.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
                                 +i name='popular-topic' cl='ui avatar image'
                                 |reviews
-                            // a.ui.basic.circular.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
+                            // a.ui.basic.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
                             //     +i name='chat' cl='ui avatar image'
                             //     |comments
-                            a.ui.basic.circular.compact.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
+                            a.ui.basic.compact.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
                                 +i name='shield' cl='ui avatar image'
                                 |inventory
                             div
@@ -96,7 +96,7 @@ template(name='product_inventory')
         +i name='shield'
         |inventory
     if is_admin
-        a.ui.icon.circular.basic.button.add_inventory
+        a.ui.icon.basic.button.add_inventory
             i.plus.icon
     .ui.list
         each inventory_items
@@ -104,11 +104,11 @@ template(name='product_inventory')
                 unless editing_this
                     .ui.inline.header id: #{id}
                     .ui.inline.header location: #{location}
-                    i.edit.circular.link.icon.edit_inventory_item
+                    i.edit.link.icon.edit_inventory_item
                 if editing_this
                     +number_edit key='id' label='id number' direct=true
                     +text_edit key='location' label='location' icon='marker' direct=true
-                    i.checkmark.green.circular.link.icon.save_inventory_item
+                    i.checkmark.green.link.icon.save_inventory_item
 
 
 
@@ -126,11 +126,11 @@ template(name='product_reviews')
 template(name='product_subscriptions')     
     div
     if subscribed
-        .ui.basic.green.inverted.circular.button.unsubscribe
+        .ui.basic.green.inverted.button.unsubscribe
             i.undo.icon
             |unsubscribe
     else
-        .ui.basic.green.inverted.circular.button.subscribe
+        .ui.basic.green.inverted.button.subscribe
             i.undo.icon
             |subscribe
     .ui.small.header 
@@ -207,7 +207,7 @@ template(name='product_order_card')
 
 template(name='order_button')
     // if servings_left
-    .ui.green.large.circular.button.order_product
+    .ui.green.large.button.order_product
         i.cart.plus.large.icon
         strong ${{fixed price_usd}}
         // |order #{serving_unit}
@@ -231,7 +231,7 @@ template(name='product_edit')
                         i.pencil.icon
                         | #{title}
                         small product
-                    .ui.large.circular.icon.green.button.save_product(title='save product')
+                    .ui.large.icon.green.button.save_product(title='save product')
                         i.checkmark.large.icon   
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
@@ -270,7 +270,7 @@ template(name='product_edit')
                         .ui.header picked source
                         a.ui.header(href="/source/#{_id}") #{title}
                         if is_admin
-                            i.remove.circular.link.icon.remove_source
+                            i.remove.link.icon.remove_source
                             
                     unless source_id
                         if is_admin

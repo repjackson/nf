@@ -13,12 +13,12 @@ template(name='checkout')
                             .ui.inline.small.header $#{product.price_usd} #{product.title}
                             div
                             small added #{when}
-                            .ui.circular.basic.icon.button.decrease_amount
+                            .ui.basic.icon.button.decrease_amount
                                 i.minus.icon
                             .ui.inline.header #{amount}
-                            .ui.circular.basic.icon.button.increase_amount
+                            .ui.basic.icon.button.increase_amount
                                 i.plus.icon
-                            .ui.circular.basic.icon.button.remove_item
+                            .ui.basic.icon.button.remove_item
                                 i.remove.red.icon
                             if is_admin
                                 +print_this
@@ -34,11 +34,11 @@ template(name='checkout')
                 +boolean_edit key='receive_notifications' label='check this box to receive your vital reminder texts and emails (optional)' direct=true
                 +boolean_edit key='has_read_tos' label=' I have read and agree to the website terms and conditions' direct=true
                 if has_read_tos
-                    .ui.big.fluid.circular.green.button.checkout_cart
+                    .ui.big.fluid.green.button.checkout_cart
                         i.large.send.icon
                         |submit
                 else 
-                    .ui.big.fluid.circular.green.disabled.button
+                    .ui.big.fluid.green.disabled.button
                         i.large.send.icon
                         |submit (must agree to terms of service)
     
@@ -50,7 +50,7 @@ template(name='location_section')
             |billing address
         each model_docs_helper 'address'
             div
-            .ui.large.circular.button.pick_address(class=user_address_pick_class)
+            .ui.large.button.pick_address(class=user_address_pick_class)
                 | #{street_address}, #{city}, #{zip_code}
         // +boolean_edit key='use_profile_address' label='use profile address' direct=true
         +boolean_edit key='use_new_address' label='use new address' direct=true
@@ -113,18 +113,18 @@ template(name='payment_section')
         // +topup_button amount=100
         unless use_credit
             div
-            .ui.basic.compact.circular.button.select_credit_card
+            .ui.basic.compact.button.select_credit_card
                 +i name='card-exchange--v1' cl='ui avatar image'
                 |existing credit card
-            .ui.basic.circular.button.use_coupon
+            .ui.basic.button.use_coupon
                 +i name='cutting-coupon' cl='ui avatar image'
                 |use coupon
-            .ui.basic.compact.circular.button.add_gift_card
+            .ui.basic.compact.button.add_gift_card
                 +i name='gift-card' cl='ui avatar image'
                 |add gift card
-            .ui.basic.compact.circular.button.select_new_credit_card
+            .ui.basic.compact.button.select_new_credit_card
                 +i name='plus' cl='ui avatar image'
                 |new credit card
 template(name='topup_button')                
-    .ui.circular.compact.basic.button.initiate_topup
+    .ui.compact.basic.button.initiate_topup
         |+$#{amount}

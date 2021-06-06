@@ -133,9 +133,11 @@ template(name='set_product_limit')
 template(name='product_card')
     .center.aligned.column.zoomer(class=product_card_class title=ingredients)
         if rescued 
-            .ui.top.right.attached.blue.label rescued
+            .ui.top.right.attached.blue.label(title='rescued')
+                i.search.icon
         if local 
-            .ui.top.right.attached.orange.label local
+            .ui.top.right.attached.corner.green.label(title='local')
+                i.marker.icon
         a(href="/product/#{_id}") 
             img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
@@ -160,7 +162,7 @@ template(name='product_card')
         .content    
             .ui.inline.header 
                 |${{fixed price_usd}}
-            i.large.link.cart.plus.green.icon.add_to_cart
+            i.big.link.cart.plus.icon.add_to_cart
             if is_admin
                 a(href="/product/#{_id}/edit")
                     i.pencil.link.icon

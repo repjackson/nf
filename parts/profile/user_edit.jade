@@ -8,7 +8,7 @@ template(name='user_edit')
                         | #{user_from_username_param.first_name} #{user_from_username_param.last_name}
                     //- +i name='pencil'
                     .ui.small.inline.header @#{user_from_username_param.username}
-                    a.ui.circular.green.icon.button(href="/user/#{user_from_username_param.username}/") 
+                    a.ui.green.icon.button(href="/user/#{user_from_username_param.username}/") 
                         i.checkmark.big.icon
                     .ui.hidden.divider
                     +image_edit key='image_id' icon='picture' title='profile image' direct=true
@@ -140,7 +140,7 @@ template(name='emails_edit')
                             .send_verification_email.ui.button 
                                 |verify
                                 i.caret.right.icon
-                    .ui.small.icon.circular.basic.button.remove_email
+                    .ui.small.icon.basic.button.remove_email
                         i.remove.icon
     .ui.action.fluid.icon.action.input
         input#new_email(type='email' placeholder='add new email address' autocomplete="off")
