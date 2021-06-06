@@ -1,4 +1,20 @@
 if Meteor.isClient
+    Template.session_toggle.events
+        'click .toggle_session_var': ->
+            Session.set(@key, !Session.get(@key))
+            $('body').toast(
+                # showIcon: 'heart'
+                message: "#{@key} #{Session.get(@key)}"
+                # showProgress: 'bottom'
+                # class: 'success'
+                displayTime: 'auto',
+                position: "bottom right"
+            )
+
+    Template.session_toggle.helpers
+        session_toggle_class: ->
+            if Session.get(@key) then 'active' else 'basic'
+   
     Template.session_set.events
         'click .set_value': ->
             Session.set(@key, @value)

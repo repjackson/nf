@@ -4,16 +4,16 @@ template(name='recipes')
             .ui.inline.header 
                 +i name='cookbook'
                 |recipes
-            .ui.basic.circular.icon.button.add_recipe
+            .ui.basic.icon.button.add_recipe
                 i.large.plus.icon
             // each picked_sections
-            //     button.ui.blue.compact.small.circular.button.unpick_section(tabindex='0')
+            //     button.ui.blue.compact.small.button.unpick_section(tabindex='0')
             //         //- i.remove.icon
             //         | #{this}
             // // div
             // +i name='clock' cl='ui inline mini image'
             // each sections
-            //     button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+            //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
             //         //- small #{count}
             // // unless one_post
             span.sorting_row
@@ -88,7 +88,7 @@ template(name='user_recipes')
     .ui.inline.header 
         +i name='cookbook'
         |user recipes
-    .ui.basic.circular.icon.button.send_recipe
+    .ui.basic.icon.button.send_recipe
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
         .column
@@ -107,7 +107,7 @@ template(name='user_recipes')
                             // |created #{when}
                             |sent {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/recipe/#{_id}')
+                            a.ui.icon.button(href='/recipe/#{_id}')
                                 i.large.chevron.right.icon
                             
         .column
@@ -124,8 +124,8 @@ template(name='user_recipes')
                                 |#{amount} #{_author_username}
                             |received {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.circular.icon.button(href='/recipe/#{_id}')
-                            i.ui.large.link.circular.chevron.right.icon.edit_address
+                            a.ui.icon.button(href='/recipe/#{_id}')
+                            i.ui.large.link.chevron.right.icon.edit_address
                 
                 
                 
@@ -138,7 +138,7 @@ template(name='recipe_edit')
                         i.pencil.icon
                         | #{title}
                         small recipe
-                    a.ui.large.circular.icon.green.button(href="/recipe/#{_id}/" title='save product')
+                    a.ui.large.icon.green.button(href="/recipe/#{_id}/" title='save product')
                         i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
@@ -165,7 +165,7 @@ template(name='recipe_view')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                    a.ui.basic.circular.icon.button(href="/recipes")
+                    a.ui.basic.icon.button(href="/recipes")
                         +i name='cookbook'
                     .ui.inline.header
                         | #{title}

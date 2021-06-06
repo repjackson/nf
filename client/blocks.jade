@@ -12,6 +12,17 @@ template(name='doc_array_togggle')
             |#{label}
         //- each list_users
         //-     +user_info
+        
+template(name='session_toggle') 
+    .ui.icon.button.toggle_session_var(class=session_toggle_class title=key)
+        i.large.icon(class=icon)
+        // if on
+        //     i.checkmark.icon
+        //     // |#{key}
+        // else    
+        //     // |#{key}
+        
+        
 template(name='bookmark_button')
     if currentUser
         .ui.icon.compact.button.toggle(class=bookmark_button_class title=label)
@@ -90,7 +101,7 @@ template(name='user_info')
 
 
 template(name='session_boolean_toggle')
-    .ui.circular.compact.button.toggle_session_key(class=calculated_class)
+    .ui.compact.button.toggle_session_key(class=calculated_class)
         +i name=icon cl='ui avatar image'
         |#{label}
         //- if icon_view 
@@ -327,10 +338,10 @@ template(name='voting_full')
     // +ismall name='elections'
     // .ui.inline.header 
     //     |voting
-    .ui.large.icon.compact.circular.basic.button.upvote(title='upvote')
+    .ui.large.icon.compact.basic.button.upvote(title='upvote')
         i.thumbs.up.outline.icon(class=upvote_class)
         //- |like
-    .ui.large.icon.compact.circular.basic.button.downvote(title='downvote')
+    .ui.large.icon.compact.basic.button.downvote(title='downvote')
         i.thumbs.down.outline.icon(class=downvote_class)
         //- |dislike
     if points
@@ -359,12 +370,12 @@ template(name='view_button')
 
 
 template(name='remove_button')
-    .ui.icon.circular.basic.button.remove_doc(title='delete')
+    .ui.icon.basic.button.remove_doc(title='delete')
         i.remove.red.icon
         //- |Delete
 
 template(name='remove_icon')
-    i.remove.circular.icon.remove_doc(title='delete')
+    i.remove.icon.remove_doc(title='delete')
     //- |Delete
 
 template(name='add_button')
@@ -432,12 +443,12 @@ template(name='email_validation_check')
         
 
 template(name='print_this')
-    .ui.icon.circular.basic.button.print
+    .ui.icon.basic.button.print
         i.orange.code.icon
 
 
 template(name='session_set')
-    .ui.icon.circular.button.set_value(class=session_set_class)
+    .ui.icon.button.set_value(class=session_set_class)
         if icon
             i.icon(class=icon)
         else 

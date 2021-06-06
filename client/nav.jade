@@ -5,7 +5,7 @@ template(name='nav')
             .icon.item
                 i.big.loading.grey.food.icon.cancel
         else 
-            a.icon.item.toggle_sidebar.no_blink
+            a.icon.item.toggle_leftbar.no_blink
                 // .ui.mini.image.leftmenu
                 .ui.mini.image
                     .mobile.hidden
@@ -289,11 +289,11 @@ template(name='right_sidebar')
 
 template(name='left_sidebar')
     .ui.left.sidebar.vertical.borderless.menu.smallscroll
-        // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
+        // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
-        // a.item.set_member.toggle_sidebar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
-        a.item.toggle_sidebar.zoomer.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
+        // a.item.set_member.toggle_leftbar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
+        a.item.toggle_leftbar.zoomer.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
             img.ui.small.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
@@ -303,39 +303,39 @@ template(name='left_sidebar')
         //         i.search.icon
         //         input.search_global(type='text')
         // else 
-        //     a.item.toggle_sidebar.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
+        //     a.item.toggle_leftbar.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
-        a.item.toggle_sidebar.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+        a.item.toggle_leftbar.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
                 +i name='food-cart' cl=''
             | #{product_count} products
-        a.item.toggle_sidebar.zoomer(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
+        a.item.toggle_leftbar.zoomer(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
             .ui.mini.image
                 +i name='ingredients' cl=''
             | #{ingredient_count} ingredients
-        a.item.toggle_sidebar.zoomer(href='/sources' class="{{isActivePath '/sources'}}")
+        a.item.toggle_leftbar.zoomer(href='/sources' class="{{isActivePath '/sources'}}")
             .ui.mini.image.farm
                 +i name='field-and-tractor' cl=''
             | #{source_count} sources
-        a.item.toggle_sidebar.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}")
+        a.item.toggle_leftbar.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}")
             .ui.mini.image.info
                 +i name='cookbook' cl=''
             |#{recipe_count} recipes
-        a.item.toggle_sidebar.zoomer(href='/trips' class="{{isActivePath '/trips'}}")
+        a.item.toggle_leftbar.zoomer(href='/trips' class="{{isActivePath '/trips'}}")
             .ui.mini.image.info
                 +i name='bicycle' cl=''
             |#{recipe_count} trips
         //         // i.newspaper.icon
         //         strong.mobile.hidden get involved
-        a.item.toggle_sidebar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
+        a.item.toggle_leftbar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
             +i name='phone' cl='ui inline mini image'
             | contact
-        a.item.toggle_sidebar.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+        a.item.toggle_leftbar.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
             +i name='blog' cl='ui inline mini image'
             | #{post_count} posts
         if is_in_admin
-            a.icon.item.toggle_admin.toggle_sidebar.no_blink
+            a.icon.item.toggle_admin.toggle_leftbar.no_blink
                 |toggle admin
                 if is_admin
                     i.shield.icon
@@ -344,13 +344,13 @@ template(name='left_sidebar')
             
         if is_admin
             .divider
-            a.item.set_model.toggle_sidebar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
+            a.item.set_model.toggle_leftbar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
                 +i name='shield' cl='ui inline mini image'
                 |admin
-            a.item.set_user.toggle_sidebar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
+            a.item.set_user.toggle_leftbar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
                 +i name='groups' cl='ui inline mini image'
                 | users
-            a.item.toggle_sidebar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+            a.item.toggle_leftbar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
                 +i name='list' cl='ui inline mini image'
                 | orders
                 

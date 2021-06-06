@@ -20,30 +20,32 @@ template(name='shop')
             // if picked_ingredient_plural
             //     .ui.icon.black.compact.button.clear_picked_ingredients
             //         i.remove.icon
-            .ui.basic.icon.circular.button.toggle_gf(class=toggle_gf_class)
+            .ui.basic.icon.button.toggle_gf(class=toggle_gf_class)
                 +icolor name='no-gluten' cl='ui mini inline image'
-            .ui.basic.icon.circular.button.toggle_vegan(class=toggle_vegan_class)
+            .ui.basic.icon.button.toggle_vegan(class=toggle_vegan_class)
                 +i name='vegan-food' cl='ui mini inline image'
             each picked_ingredients
-                button.ui.blue.compact.small.circular.button.unpick_ingredient(tabindex='0')
+                button.ui.blue.compact.small.button.unpick_ingredient(tabindex='0')
                     //- i.remove.icon
                     | #{this}
             +i name='ingredients' cl='ui inline mini image'
             each ingredients
-                button.ui.compact.tertiary.circular.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
+                button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
         .twelve.wide.column.scrolling
             // each picked_sections
-            //     button.ui.blue.compact.small.circular.button.unpick_section(tabindex='0')
+            //     button.ui.blue.compact.small.button.unpick_section(tabindex='0')
             //         //- i.remove.icon
             //         | #{this}
             // // div
             // +i name='clock' cl='ui inline mini image'
             // each sections
-            //     button.ui.compact.circular.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+            //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
             //         //- small #{count}
             // // unless one_post
             .sorting_row
+                if currentUser
+                    +session_toggle key='shop_filter_published' icon='eye'
                 // +session_set key='view_users' value='grid' icon='th' 
                 // +session_set key='view_users' value='list' icon='list'
                 // +session_set key='sort_users_direction' value='-1' icon='chevron down'
@@ -98,7 +100,7 @@ template(name='shop')
                             +product_card
             else 
                 .ui.basic.center.aligned.segment
-                    i.massive.loading.food.circular.icon
+                    i.massive.loading.food.icon
 
 
 
@@ -106,7 +108,7 @@ template(name='shop')
 
         
 template(name='set_product_sort_key')
-    .ui.compact.circular.basic.button.set_sort
+    .ui.compact.basic.button.set_sort
         if color
             .ui.label(class=color) #{label}
         else 
@@ -143,7 +145,7 @@ template(name='product_card')
             //- if session_is 'view_ingredients' true
             +ismall name='ingredients'
             each ingredients
-                .ui.small.basic.circular.label #{this}
+                .ui.small.basic.label #{this}
             if gluten_free
                 +i name='no-gluten' cl='ui mini inline image' title='gluten free'
             if vegan
@@ -158,7 +160,7 @@ template(name='product_card')
         .content    
             .ui.inline.header 
                 |${{fixed price_usd}}
-            i.large.link.circular.cart.plus.green.icon.add_to_cart
+            i.large.link.cart.plus.green.icon.add_to_cart
             if is_admin
                 a(href="/product/#{_id}/edit")
                     i.pencil.link.icon

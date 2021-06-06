@@ -19,7 +19,7 @@ if Meteor.isClient
                     duration:200
                     scrollLock:true
                 })
-                .sidebar('attach events', '.toggle_sidebar')
+                .sidebar('attach events', '.toggle_leftbar')
         , 1000
         Meteor.setTimeout ->
             $('.ui.rightbar')
@@ -55,7 +55,7 @@ if Meteor.isClient
         #             duration:200
         #             scrollLock:true
         #         })
-        #         .sidebar('attach events', '.toggle_sidebar')
+        #         .sidebar('attach events', '.toggle_leftbar')
         # , 1000
         Meteor.setTimeout ->
             $('.ui.sidebar.cartbar')
@@ -215,7 +215,7 @@ if Meteor.isClient
             
             
     Template.left_sidebar.events
-        # 'click .toggle_sidebar': ->
+        # 'click .toggle_leftbar': ->
         #     $('.ui.sidebar')
         #         .sidebar('setting', 'transition', 'push')
         #         .sidebar('toggle')
