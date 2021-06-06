@@ -44,7 +44,7 @@ Template.registerHelper 'cart_subtotal', () ->
 Template.registerHelper 'my_cart_subtotal', () ->
     
     subtotal = 0
-    for item in Docs.find(model:'item',_author_id:Meteor.userId(),status:'cart').fetch()
+    for item in Docs.find(model:'thing',_author_id:Meteor.userId(),status:'cart').fetch()
         # product = Docs.findOne(item.product_id)
         # console.log product
         subtotal += item.product_price

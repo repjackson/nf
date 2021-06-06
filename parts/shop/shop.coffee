@@ -263,7 +263,7 @@ if Meteor.isServer
                         status:'cart'
             new_cart_doc_id = 
                 Docs.insert 
-                    model:'item'
+                    model:'thing'
                     status:'cart'
                     product_id: product_id
                     product_price:product.price_usd

@@ -144,8 +144,6 @@ if Meteor.isClient
             Docs.findOne    
                 model:'order'
                 complete:false
-            
-            
         items: ->
             Docs.find
                 model:'thing'
@@ -170,17 +168,18 @@ if Meteor.isClient
 
 if Meteor.isServer
     Meteor.publish 'my_cart', ->
-        current_order = 
-            Docs.findOne
-                model:'order'
-                status:'cart'
-        if current_order
-            Docs.find
-                model:'thing'
-                status:'cart'
-                _author_id: Meteor.userId()
-                app:'nf'
-                order_id:current_order._id            
+        # current_order = 
+        #     Docs.findOne
+        #         model:'order'
+        #         status:'cart'
+        #         _author_id:Meteor.userId()
+        # if current_order
+        Docs.find
+            model:'thing'
+            status:'cart'
+            _author_id: Meteor.userId()
+            app:'nf'
+            # order_id:current_order._id            
             
     Meteor.publish 'my_cart_order', ->
         Docs.find
