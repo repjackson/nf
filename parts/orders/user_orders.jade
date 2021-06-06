@@ -1,5 +1,16 @@
 template(name='user_orders')
-    .ui.header #{orders.count} orders
+    .ui.inline.header #{orders.count} 
+        +i name='invoice'
+        |orders
+    .ui.button
+        |view complete
+    |sort by
+    .ui.button
+        |price
+    .ui.button
+        |time
+    .ui.button 
+        |delivery
     .scrolling
         each orders 
             +profile_order_item

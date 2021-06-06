@@ -22,10 +22,32 @@ template(name='checkout')
                                 i.remove.red.icon
                             if is_admin
                                 +print_this
-            .eight.wide.column.scrolling
                 .ui.header 
                     +i name='receipt'
                     |subtotal: $#{my_cart_subtotal}
+            .eight.wide.column.scrolling
+                .ui.segment
+                    .ui.header
+                        +i name='truck'
+                        |delivery
+                    +kvs key='delivery_time_type' value='now' icon='present' direct=true
+                    +kvs key='delivery_time_type' value='later' icon='clock' direct=true
+                    // else  
+                    //     .ui.red.disabled.button(title='existing reservations')
+                    //         i.remove.icon   
+                    //         | can't cancel  
+                    div
+                    .ui.inline.header method
+                    // +kvs key='delivery_type' value='pickup' icon='pick-up' direct=true
+                    // +kvs key='delivery_type' value='delivery' icon='bicycle' direct=true
+                    +kvs key='delivery_method' value='delivery' icon='bicycle' direct=true
+                    +kvs key='delivery_method' value='pickup' icon='doormat' direct=true
+                    if is delivery_time_type 'later' 
+                        if key_value_is 'delivery_method' 'delivery'
+                            +datetime_edit key='delivery_timedate' label='delivery datetime' direct=true
+                        if key_value_is 'delivery_method' 'pickup'
+                            +datetime_edit key='pickup_timedate' label='pickup timedate' direct=true
+                    
                 .ui.segment
                     a.ui.header(href="/user/#{currentUser.username}/addresses")
                         +i name='marker'
@@ -63,23 +85,24 @@ template(name='checkout')
                     +i name='wallet--v1' cl='ui inline image'
                     .ui.inline.header ${{fixed currentUser.credit}} credit
                     +boolean_edit key='use_credit' label='use credit' direct=true
-                    +topup_button amount=10
-                    +topup_button amount=20
-                    +topup_button amount=50
-                    +topup_button amount=100
-                    div
-                    .ui.basic.compact.circular.button.select_credit_card
-                        +i name='card-exchange--v1' cl='ui inline image'
-                        |existing credit card
-                    .ui.basic.circular.button.use_coupon
-                        +i name='cutting-coupon' cl='ui inline image'
-                        |use coupon
-                    .ui.basic.compact.circular.button.add_gift_card
-                        +i name='gift-card' cl='ui inline image'
-                        |add gift card
-                    .ui.basic.compact.circular.button.select_new_credit_card
-                        +i name='plus' cl='ui inline image'
-                        |new credit card
+                    // +topup_button amount=10
+                    // +topup_button amount=20
+                    // +topup_button amount=50
+                    // +topup_button amount=100
+                    unless use_credit
+                        div
+                        .ui.basic.compact.circular.button.select_credit_card
+                            +i name='card-exchange--v1' cl='ui avatar image'
+                            |existing credit card
+                        .ui.basic.circular.button.use_coupon
+                            +i name='cutting-coupon' cl='ui avatar image'
+                            |use coupon
+                        .ui.basic.compact.circular.button.add_gift_card
+                            +i name='gift-card' cl='ui avatar image'
+                            |add gift card
+                        .ui.basic.compact.circular.button.select_new_credit_card
+                            +i name='plus' cl='ui avatar image'
+                            |new credit card
                 .ui.header shipping
                 +boolean_edit key='receive_notifications' label='check this box to receive your vital reminder texts and emails (optional)' direct=true
                 +boolean_edit key='has_read_tos' label=' I have read and agree to the website terms and conditions' direct=true

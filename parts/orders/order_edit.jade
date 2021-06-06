@@ -21,22 +21,6 @@ template(name='order_edit')
                     //- img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
                     +html_view key='description' direct=true
             .six.wide.column
-                +kvs key='when' value='now' direct=true
-                +kvs key='when' value='later' direct=true
-                if kve 'when' 'later'
-                    +datetime_edit key='pickup_datetime' direct=true
-                // else  
-                //     .ui.red.disabled.button(title='existing reservations')
-                //         i.remove.icon   
-                //         | can't cancel  
-                .ui.header delivery method
-                +kvs key='delivery_method' value='delivery' icon='deliver-food' direct=true
-                +kvs key='delivery_method' value='pickup' icon='doormat' direct=true
-
-                if key_value_is 'delivery_method' 'delivery'
-                    +datetime_edit key='delivery_timedate' label='delivery datetime' direct=true
-                if key_value_is 'delivery_method' 'pickup'
-                    +datetime_edit key='pickup_timedate' label='pickup timedate' direct=true
             .five.wide.column
                 unless submitted
                     a.ui.large.fluid.green.button(href="/order/#{_id}")
