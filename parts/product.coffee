@@ -87,27 +87,6 @@ if Meteor.isClient
                         ready:false
                         ready_timestamp:null
 
-        'click .cancel_order': ->
-            Swal.fire({
-                title: 'confirm cancel'
-                text: "this will refund you #{@order_price} credits"
-                icon: 'question'
-                showCancelButton: true,
-                confirmButtonText: 'confirm'
-                cancelButtonText: 'cancel'
-            }).then((result) =>
-                if result.value
-                    product = Docs.findOne Router.current().params.doc_id
-                    Meteor.users.update Meteor.userId(),
-                        $inc:credit:@order_price
-                    Swal.fire(
-                        'refund processed',
-                        ''
-                        'success'
-                    Meteor.call 'calc_product_data', product._id, ->
-                    Docs.remove @_id
-                    )
-            )
     Template.product_inventory.onCreated ->
         @autorun => Meteor.subscribe 'inventory_from_product_id', Router.current().params.doc_id
             

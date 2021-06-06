@@ -20,7 +20,7 @@ if Meteor.isClient
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_leftbar')
-        , 1000
+        , 2000
         Meteor.setTimeout ->
             $('.ui.rightbar')
                 .sidebar({
@@ -32,7 +32,7 @@ if Meteor.isClient
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_rightbar')
-        , 1000
+        , 2000
         Meteor.setTimeout ->
             $('.ui.topbar.sidebar')
                 .sidebar({
@@ -44,7 +44,7 @@ if Meteor.isClient
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_topbar')
-        , 1000
+        , 2000
         # Meteor.setTimeout ->
         #     $('.ui.secnav.sidebar')
         #         .sidebar({
@@ -56,7 +56,7 @@ if Meteor.isClient
         #             scrollLock:true
         #         })
         #         .sidebar('attach events', '.toggle_leftbar')
-        # , 1000
+        # , 2000
         Meteor.setTimeout ->
             $('.ui.sidebar.cartbar')
                 .sidebar({
@@ -68,7 +68,7 @@ if Meteor.isClient
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_cartbar')
-        , 1000
+        , 2000
         Meteor.setTimeout ->
             $('.ui.sidebar.walletbar')
                 .sidebar({
@@ -80,7 +80,7 @@ if Meteor.isClient
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_walletbar')
-        , 1000
+        , 2000
     
     Template.right_sidebar.events
         'click .logout': ->

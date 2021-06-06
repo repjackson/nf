@@ -11,9 +11,9 @@ template(name='orders')
                     .ui.button later
                     .ui.button sort order
                     .ui.button sort by
-                    // .ui.selection.animated.list.scrolling
-                    each orders
-                        +home_order
+                    .scrolling
+                        each orders
+                            +order_item
                 .four.wide.column
                     |view
                     +skvs key='order_sort_filter' value='open'               
@@ -30,17 +30,17 @@ template(name='orders')
             
             
             
-template(name='home_order')
+template(name='order_item')
     a.ui.grid(href="/order/#{_id}")
         .row
-            .four.wide.column.zoomer
-                with order_product
-                    //- img.ui.mini.image(src=image)
-                    +image_view key='image_id' direct=true cl='zoomer ui fluid image'
-            .twelve.wide.column.zoomer
-                .ui.header #{order_product.title}
+            // .four.wide.column.zoomer
+            //     with order_product
+            //         //- img.ui.mini.image(src=image)
+            //         +image_view key='image_id' direct=true cl='zoomer ui fluid image'
+            .sixteen.wide.column.zoomer
+                .ui.header #{product_title}
                 a.ui.small.header.inline.lowercase(href="/order/#{_id}")
-                    |$#{order_product.price}
+                    |$#{product_price}
                 .ui.inline.header status: 
                     if kve status 'pending'
                         i.large.yellow.clock.icon
@@ -56,8 +56,11 @@ template(name='home_order')
                     i.right.chevron.large.icon
                 if in_dev 
                     +print_this
+                i.cubes.icon(title='things')
+                each order_things
+                    |#{when}, #{model}
 
-template(name='order_view')
+template(name='order')
     with current_doc
         .ui.stackable.padded.grid
             .row

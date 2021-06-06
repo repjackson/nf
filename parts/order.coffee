@@ -4,12 +4,8 @@ if Meteor.isClient
         ), name:'orders'
 
     Template.orders.onCreated ->
-        # @autorun -> Meteor.subscribe 'model_docs', 'service'
-        # @autorun -> Meteor.subscribe 'model_docs', 'rental'
-        @autorun -> Meteor.subscribe 'model_docs', 'menu_section'
-        @autorun -> Meteor.subscribe 'model_docs', 'order'
-        @autorun -> Meteor.subscribe 'model_docs', 'product'
-        # @autorun -> Meteor.subscribe 'users'
+        @autorun -> Meteor.subscribe 'model_docs', 'order', 20
+        @autorun -> Meteor.subscribe 'model_docs', 'product', 20
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
@@ -26,22 +22,20 @@ if Meteor.isClient
 if Meteor.isClient
     Router.route '/order/:doc_id', (->
         @layout 'layout'
-        @render 'order_view'
-        ), name:'order_view'
+        @render 'order'
+        ), name:'order'
     Router.route '/order/:doc_id/view', (->
         @layout 'layout'
-        @render 'order_view'
-        ), name:'order_view_long'
+        @render 'order'
+        ), name:'order_long'
 
 
-    Template.order_view.onCreated ->
+    Template.order.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        # @autorun => Meteor.subscribe 'model_docs', 'product'
-        # @autorun => Meteor.subscribe 'model_docs', 'order'
         @autorun => Meteor.subscribe 'product_by_order_id', Router.current().params.doc_id
 
 
-    Template.order_view.events
+    Template.order.events
         'click .mark_viewed': ->
             # if confirm 'mark viewed?'
             Docs.update Router.current().params.doc_id, 
@@ -108,7 +102,7 @@ if Meteor.isClient
                 Router.go "/"
 
 
-    Template.order_view.helpers
+    Template.order.helpers
         can_order: ->
             # if StripeCheckout
             unless @_author_id is Meteor.userId()

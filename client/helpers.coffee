@@ -13,6 +13,10 @@ Template.registerHelper 'model_docs_helper', (model) ->
 Template.registerHelper 'subs_ready', () -> 
     Template.instance().subscriptionsReady()
 
+Template.registerHelper 'order_things',-> 
+    Docs.find 
+        model:'thing'
+        order_id:@_id
 
 Template.registerHelper 'order_count',-> Counts.get('order_count')
 Template.registerHelper 'product_count',-> Counts.get('product_count')

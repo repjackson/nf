@@ -95,9 +95,9 @@ if Meteor.isClient
             Docs.findOne 
                 model:'order'
                 status:'cart'
-        items: ->
+        cart_items: ->
             Docs.find
-                model:'item'
+                model:'thing'
                 status:'cart'
                 # ingredient_ids: $in: [@_id]
     Template.checkout.events
@@ -108,7 +108,7 @@ if Meteor.isClient
                     complete:false
             if cart_order
                 subtotal = 0
-                for item in Docs.find(model:'item',_author_id:Meteor.userId()).fetch()
+                for item in Docs.find(model:'thing',_author_id:Meteor.userId()).fetch()
                     # product = Docs.findOne(item.product_id)
                     # console.log product
                     # if product
@@ -148,7 +148,7 @@ if Meteor.isClient
             
         items: ->
             Docs.find
-                model:'item'
+                model:'thing'
                 # ingredient_ids: $in: [@_id]
     Template.topup_button.events
         'click .initiate_topup':->
@@ -176,7 +176,7 @@ if Meteor.isServer
                 status:'cart'
         if current_order
             Docs.find
-                model:'item'
+                model:'thing'
                 status:'cart'
                 _author_id: Meteor.userId()
                 app:'nf'
@@ -198,7 +198,7 @@ if Meteor.isServer
         # items = 
         items = 
             Docs.find({
-                model:'item'
+                model:'thing'
                 _author_id: Meteor.userId()
                 complete:false
             }, {fields:{product_id:1}}).fetch()

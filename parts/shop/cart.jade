@@ -6,16 +6,18 @@ template(name='cart')
                     +i name='shopping-cart'
                     |cart
                 .ui.large.list.scrolli
-                    each items
+                    each cart_items
                         +cart_item
             .sixteen.wide.column
                 // a.ui.fluid.circular.basic.icon.button(href="/shop")
                 //     // i.chevron.left.icon
                 //     +i name='food-cart'
-                .ui.header subtotal: $#{my_cart_subtotal}
-                .ui.big.fluid.button.checkout_cart
-                    i.large.send.icon
-                    |checkout
+                if cart_items.length
+                    .ui.header subtotal: $#{my_cart_subtotal}
+                    .ui.big.fluid.button.checkout_cart
+                        i.large.send.icon
+                        |checkout
+                    
                 
                 
 
