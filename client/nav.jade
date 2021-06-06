@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.menu
+    #topnav.topnav.ui.attached.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.food.icon.cancel
@@ -77,7 +77,7 @@ template(name='nav')
                 
                 
 template(name='secnav')
-    .ui.attached.borderless.small.menu.topnav
+    .ui.attached.small.menu.topnav
         a.icon.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
                 +i name='grocery-shelf' cl=''
@@ -238,7 +238,7 @@ template(name='walletbar')
         +user_credit
         
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.large.menu.rightbar
+    .ui.right.sidebar.vertical.large.menu.rightbar
         a.item.toggle_rightbar.zoomer.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
@@ -287,7 +287,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.menu.smallscroll
+    .ui.left.sidebar.vertical.menu.smallscroll
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
