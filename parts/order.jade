@@ -278,12 +278,11 @@ template(name='user_orders')
     .ui.button 
         |delivery
     .scrolling
-        each orders 
+        each model_docs_helper 'order' 
             +user_order_item
 
 template(name='user_order_item')
-    .ui.grid
-        .row
+    .ui.segment
         each order_items
             img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
             .ui.header #{product_title}
@@ -300,8 +299,11 @@ template(name='user_order_item')
                 |#{status}
                 // .ui.inline.header product_id: #{product_id}
                 
-                a.ui.circular.icon.big.button(href="/order/#{_id}")
-                    i.right.chevron.large.icon
-                if is_admin 
-                    +print_this
-                    +remove_button
+        a.ui.circular.icon.big.button(href="/order/#{_id}")
+            i.right.chevron.large.icon
+        |#{status}
+        i.clock.icon
+        |#{when}
+        if is_admin 
+            +print_this
+            +remove_button
