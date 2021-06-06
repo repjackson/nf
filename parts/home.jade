@@ -30,71 +30,66 @@ template(name='home')
     .ui.vertical.stripe.segment
         .ui.stackable.padded.grid
             .six.column.center.aligned.row
-                a.column.zoomer(href="/shop")
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href="/shop")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='food-cart'
                         |#{product_count} products
-                a.column(href="/trips")
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column(href="/trips")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='protected-bike-lane'
                         |trips
-                a.column.zoomer(href='/store')
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href='/store')
+                    .ui.icon.header
                         i.icon 
                             +ibig name='qr-code'
                         |qr code purchasing
-                a.column.zoomer(href="/giftcards")
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href="/giftcards")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='gift-card'
                         |#{giftcard_count} giftcards
-                a.column.zoomer(href="/users")
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href="/users")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='groups'
                         |#{customer_count} customers
-                .column
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column
+                    .ui.icon.header
                         i.icon 
                             +ibig name='technical-fluid'
                         |pounds of plastic prevented
-                .column
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column(href="/subscriptions")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='clock'
                         |#{subscription_count} subscriptions
-                .column
-                    .ui.icon.center.aligned.header
+                .center.aligned.column
+                    .ui.icon.header
                         i.icon 
                             +ibig name='staff'
                         |#{staff_count} staff
-                .column
-                    .ui.icon.center.aligned.header
-                        i.icon 
-                            +ibig name='earth-planet'
-                        |reverse climate change
-                a.column.zoomer(href="/sources")
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href="/sources")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='field-and-tractor'
                         |#{source_count} sources
-                a.column.zoomer(href="/ingredients")
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href="/ingredients")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='ingredients'
                         |#{ingredient_count} ingredients
-                a.column.zoomer(href="/orders")
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href="/orders")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='invoice'
                         |#{order_count} orders
-                a.column.zoomer
-                    .ui.icon.center.aligned.header
+                a.center.aligned.column.zoomer(href="/stats")
+                    .ui.icon.header
                         i.icon 
                             +ibig name='eye'
-                        |#{home_views} homepage views
+                        |#{stats.homepage_views} homepage views
                         
                         
     +footer

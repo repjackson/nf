@@ -217,15 +217,15 @@ template(name='topbar')
             i.inbox.icon
             |inbox
         
-// template(name='recent_alert')        
-//     .item.alert
-//         .right.floated.content
-//             i.eye.link.icon.mark_read(title='mark read')
-//         img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
-//         .content
-//             .header
-//                 |#{description} 
-//             .description #{author.name} #{when}
+template(name='recent_alert')        
+    .item.alert
+        .right.floated.content
+            i.eye.link.icon.mark_read(title='mark read')
+        img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
+        .content
+            .header
+                |#{description} 
+            .description #{author.name} #{when}
             
             
             

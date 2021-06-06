@@ -3,6 +3,20 @@ Meteor.methods
         Docs.update doc_id,
             $inc:views:1
 
+    log_homepage_view: ->
+        stats_doc = 
+            Docs.findOne
+                model:'stats'
+        if stats_doc
+            console.log stats_doc
+            Docs.remove stats_doc._id
+            # Docs.update stats_doc._id,
+            #     $inc:homepage_views:1
+        else 
+            Docs.insert 
+                model:'stats'
+                app:'nf'
+                homepage_views:1
 
     add_user: (username)->
         options = {}
@@ -210,3 +224,12 @@ Meteor.methods
         user = Meteor.users.findOne(user_id)
         console.log 'sending enrollment email to username', user.username
         Accounts.sendEnrollmentEmail(user_id)
+# {
+# I20210606-18:09:20.217(0)?   _id: 'ep8vJCZWFvNhKPGBL',
+# I20210606-18:09:20.218(0)?   model: 'stats',
+# I20210606-18:09:20.218(0)?   home_views: 596,
+# I20210606-18:09:20.218(0)?   _timestamp: 1611288685997,
+# I20210606-18:09:20.219(0)?   _timestamp_long: 'Friday, January 22nd 2021, 4:11:25 am',
+# I20210606-18:09:20.219(0)?   _timestamp_tags: [ 'am', 'friday', 'january', '22nd', '2021' ],
+# I20210606-18:09:20.219(0)?   homepage_views: 7
+# I20210606-18:09:20.220(0)? }                
