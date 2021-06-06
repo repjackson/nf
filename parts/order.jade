@@ -183,8 +183,8 @@ template(name='order')
                     else if delivery
                         .ui.header 
                             |delivery
-                    if can_edit
-                        .ui.small.compact.button.cancel_order
+                    if is_admin
+                        .ui.small.compact.button.delete_order
                             i.remove.icon
                             |cancel
                     .ui.hidden.divider

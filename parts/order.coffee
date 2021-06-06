@@ -86,10 +86,11 @@ if Meteor.isClient
                     delivered_timestamp: Date.now()
                     status: 'delivered' 
       
-        'click .cancel_order': ->
-            if confirm 'cancel?'
+        'click .delete_order': ->
+            thing_count = Docs.find(model:'thing').count()
+            if confirm "delete? #{thing_count} things still"
                 Docs.remove @_id
-                Router.go "/"
+                Router.go "/orders"
     
         'click .mark_ready': ->
             if confirm 'mark ready?'
@@ -97,10 +98,6 @@ if Meteor.isClient
                     model:'order_event'
                     order_id: Router.current().params.doc_id
                     order_status:'ready'
-        'click .cancel_order': ->
-            if confirm 'cancel?'
-                Docs.remove @_id
-                Router.go "/"
 
 
     Template.order.helpers
