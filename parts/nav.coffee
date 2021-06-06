@@ -90,7 +90,7 @@ if Meteor.isClient
         'keyup .search_ingredients': _.throttle((e,t)->
             # console.log Router.current().route.getName()
             current_name = Router.current().route.getName()
-            $(e.currentTarget).closest('.input').transition('pulse', 100)
+            # $(e.currentTarget).closest('.input').transition('pulse', 100)
 
             unless current_name is 'shop'
                 Router.go '/shop'
@@ -113,7 +113,7 @@ if Meteor.isClient
                     # Meteor.setTimeout ->
                     #     Session.set('dummy', !Session.get('dummy'))
                     # , 10000
-        , 250)
+        , 500)
     
         'click .add_post': ->
             new_id = 

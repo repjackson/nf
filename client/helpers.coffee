@@ -29,7 +29,7 @@ Template.registerHelper 'order_count',-> Counts.get('order_count')
 Template.registerHelper 'product_count',-> Counts.get('product_count')
 Template.registerHelper 'ingredient_count',-> Counts.get('ingredient_count')
 Template.registerHelper 'subscription_count',-> Counts.get('subscription_count')
-Template.registerHelper 'source_countt',-> Counts.get('source_count')
+Template.registerHelper 'source_count',-> Counts.get('source_count')
 
 
 Template.registerHelper 'cart_subtotal', () -> 

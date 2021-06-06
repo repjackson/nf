@@ -71,6 +71,7 @@ template(name='recipes')
                             i.users.icon
 template(name='favorite_icon_toggle')
     i.heart.link.icon.toggle_fav(class=icon_class)
+    |#{favorite_ids.length}
      
 template(name='product_recipes')
     .ui.inline.header 
@@ -142,11 +143,12 @@ template(name='recipe_edit')
                         i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
-                    +text_edit key='ready_in' label='ready in' direct=true
-                    +text_edit key='prep_time' label='prep time' direct=true
-                    +text_edit key='cook_time' label='cook time' direct=true
-                    +text_edit key='servings' label='servings' direct=true
-                    +text_edit key='servings' label='servings' direct=true
+                    +text_edit key='ready_in' label='ready in' direct=true icon='clock'
+                    +text_edit key='prep_time' label='prep time' direct=true icon='clock'
+                    +text_edit key='cook_time' label='cook time' direct=true icon='oven'
+                    +text_edit key='servings' label='servings' direct=true icon='users'
+                    // +text_edit key='servings' label='servings' direct=true
+                    +link_edit key='link' label='link' icon='link'
                     div
                 .ten.wide.column
                     div
@@ -181,14 +183,16 @@ template(name='recipe_view')
                             .item 
                                 .ui.header #{title}
                 .eight.wide.column
-                    div
-                    +html_view key='directions' label='directions' direct=true
+                    div.scrolling
+                        +html_view key='directions' label='directions' direct=true
                     +array_view key='ingredients' label='ingredients' icon='ingredients' direct=true
                     // +array_view key='tags' label='tags' icon='tags' direct=true
-                    if can_delete
-                        .ui.red.button.delete_recipe
-                            i.remove.icon   
-                            | delete
+                    .ui.header 
+                        +i name='popular-topic' cl='ui inline image'
+                        |reviews
+                    each recipe_reviews
+                        .ui.header #{when}
+                    +comments
                 .four.wide.column
                     +text_view key='ready_in' label='ready in' direct=true
                     +text_view key='prep_time' label='prep time' direct=true
@@ -200,7 +204,7 @@ template(name='recipe_view')
                     +html_view key='description' label='description' direct=true
                     unless is_cook
                         .ui.basic.button.mark_cook
-                            +i name='chef-cooking-skin-type-4' cl='ui inline image'
+                            +i name='chef' cl='ui inline image'
                             |I've cooked this
                     else 
                         .ui.basic.small.compact.button.unmark_cook
@@ -219,9 +223,3 @@ template(name='recipe_view')
                     each favorite_user_ids
                         .ui.header #{this}
                         // +user_from_id this
-                    .ui.header 
-                        +i name='popular-topic' cl='ui inline image'
-                        |reviews
-                    each recipe_reviews
-                        .ui.header #{when}
-                    +comments

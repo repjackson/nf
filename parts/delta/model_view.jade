@@ -67,6 +67,8 @@ template(name='model_view')
                 each model_docs
                     .ui.fluid.card
                         .content
+                            if title
+                                .ui.header #{title} 
                             +Template.dynamic template=model_doc
                             +array_view key='tags'
                             +edit_button
