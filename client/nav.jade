@@ -74,6 +74,9 @@ template(name='nav')
                     |login
             else 
                 i.food.loading.icon
+                
+                
+template(name='secnav')
     .ui.attached.borderless.small.menu.topnav
         a.icon.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
@@ -284,7 +287,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.big.thin.menu.smallscroll
+    .ui.left.sidebar.vertical.borderless.menu.smallscroll
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One

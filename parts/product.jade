@@ -53,29 +53,29 @@ template(name='product_layout')
                                 // i.cart.plus.large.icon
                                 
                                 +i name='add-shopping-cart--v1' cl='ui avatar image'
-                                |add to cart
+                                // |add to cart
 
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
                                 +i name='content' cl='ui avatar image'
-                                |description
+                                // |description
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
                                 +i name='clock' cl='ui avatar image'
-                                |subscriptions
+                                // |subscriptions
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
                                 +i name='list' cl='ui avatar image'
-                                |orders
+                                // |orders
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
                                 +i name='cookbook' cl='ui avatar image'
-                                |recipes
+                                // |recipes
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
                                 +i name='popular-topic' cl='ui avatar image'
-                                |reviews
+                                // |reviews
                             // a.ui.basic.circular.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
                             //     +i name='chat' cl='ui avatar image'
                             //     |comments
                             a.ui.basic.circular.compact.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
                                 +i name='shield' cl='ui avatar image'
-                                |inventory
+                                // |inventory
                             +yield
                             
 template(name='product_main')                            
