@@ -65,6 +65,9 @@ template(name='order')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
+                    a.ui.circular.icon.button(href="/orders")
+                        i.chevron.left.icon
+                        // +i name='invoice' cl='ui avatar image'
                     .ui.inline.header 
                         // strong '#{order_product.title}'
                         +i name='invoice' cl='ui avatar image'
@@ -107,6 +110,16 @@ template(name='order')
                                     a.user #{_author_username}
                                     |started
                                     .date #{when}
+                        each order_things
+                            .event
+                                .label
+                                    img.ui.mini.inline.image(src="{{c.url author.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    .summary
+                                        a.user #{_author_username}
+                                        |#{model}
+                                        .date #{when}
+                                    
                         // .event
                         //     .label
                         //         img.avatar
