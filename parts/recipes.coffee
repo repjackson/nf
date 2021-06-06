@@ -63,7 +63,7 @@ if Meteor.isClient
                 showIcon: 'heart'
                 message: "marked favorite"
                 showProgress: 'bottom'
-                class: 'success'
+                class: 'error'
                 # displayTime: 'auto',
                 position: "bottom right"
             )
