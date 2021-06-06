@@ -6,7 +6,7 @@ template(name='order_view')
                     .ui.inline.header 
                         // strong '#{order_product.title}'
                         +i name='invoice' cl='ui avatar image'
-                        |order
+                        |order view
                     // .ui.segment 
                     //     with order_product
                     //         a(href="/product/#{_id}")
@@ -26,6 +26,7 @@ template(name='order_view')
                         +user_card
                     if is_admin
                         +print_this
+                    +comments
                 .six.wide.column
                     // a.ui.compact.button(href="/product/#{product_id}")
                     //     i.left.chevron.icon
@@ -36,7 +37,6 @@ template(name='order_view')
                         |cart items
                     each cart_items 
                         .ui.header #{title}
-                    .ui.header notes
                     
                     if can_edit
                         a(href="/order/#{_id}/edit" title='edit')
@@ -62,11 +62,6 @@ template(name='order_view')
                     .ui.inline.header 
                         i.user.outline.icon
                         |customer
-                    +kvs key='status' value='picked_up' label='mark picked up' direct=true
-                    div
-                    .ui.inline.header 
-                        i.user.outline.icon
-                        |customer
                     if delivered
                         if is_author
                             +kvs key='status' value='picked_up' label='picked up' direct=true
@@ -76,7 +71,6 @@ template(name='order_view')
                             
                     +kvs key='status' value='picked_up' label='mark picked up' direct=true
                         
-                    +comments
                 .six.wide.column
                     +product_delivery
                     // |{{from_now datetime_available}}:
@@ -108,9 +102,29 @@ template(name='order_view')
                     
 template(name='product_delivery')
     .ui.segment
-        .ui.header 
+        .ui.inline.header 
             +i name='bicycle'
             |delivery
+        if is delivery_method 'delivery'
+            .ui.header 
+                +i name='bicycle'
+                |type: delivery
+        if is delivery_method 'pickup'
+            .ui.header 
+                +i name='doormat'
+                |type: pickup
+        if is delivery_time_type 'now'
+            .ui.header 
+                +i name='present'
+                small for when: 
+                strong now
+        if is delivery_time_type 'later'
+            .ui.header 
+                +i name='clock'
+                |for when: 
+                strong later
+        
+    
         .ui.header 
             i.shield.icon
             |runner
