@@ -1,3 +1,62 @@
+template(name='orders')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column.scrolling
+            .ui.stackable.grid 
+                .twelve.wide.column
+                    a.ui.center.aligned.header(href="/orders")
+                        +i name='clock' cl='ui tiny inline image'
+                        | orders
+                    .ui.button today
+                    .ui.button now
+                    .ui.button later
+                    .ui.button sort order
+                    .ui.button sort by
+                    // .ui.selection.animated.list.scrolling
+                    each orders
+                        +home_order
+                .four.wide.column
+                    |view
+                    +skvs key='order_sort_filter' value='open'               
+                    +skvs key='order_sort_filter' value='now'               
+                    +skvs key='order_sort_filter' value='later'   
+                    +skvs key='order_sort_filter' value=null label='all'
+                    |delivery
+                    +skvs key='order_delivery_filter' value='pickup'   
+                    +skvs key='order_delivery_filter' value='delivery'   
+                    +skvs key='order_delivery_filter' value=null label='all'   
+                    div
+                    |sort by
+                    +skvs key='order_sort_key' value='price'               
+            
+            
+            
+template(name='home_order')
+    a.ui.grid(href="/order/#{_id}")
+        .row
+            .four.wide.column.zoomer
+                with order_product
+                    //- img.ui.mini.image(src=image)
+                    +image_view key='image_id' direct=true cl='zoomer ui fluid image'
+            .twelve.wide.column.zoomer
+                .ui.header #{order_product.title}
+                a.ui.small.header.inline.lowercase(href="/order/#{_id}")
+                    |$#{order_product.price}
+                .ui.inline.header status: 
+                    if kve status 'pending'
+                        i.large.yellow.clock.icon
+                    else if kve status 'ready'
+                        i.large.green.clock.icon
+                    else if kve status 'complete'
+                        i.large.green.checkmark.icon
+                    |#{status}
+                // .ui.inline.header product_id: #{product_id}
+                .ui.small.inline.header {{from_now _timestamp}} 
+                    small ({{long_date _timestamp}})
+                a.ui.circular.icon.big.button(href="/order/#{_id}")
+                    i.right.chevron.large.icon
+                if in_dev 
+                    +print_this
+
 template(name='order_view')
     with current_doc
         .ui.stackable.padded.grid
@@ -202,3 +261,47 @@ template(name='product_delivery')
                 .ui.basic.circular.large.button.mark_delivery_complete
                     i.large.checkmark.icon
                     |delivered
+
+
+
+template(name='user_orders')
+    .ui.inline.header #{orders.count} 
+        +i name='invoice'
+        |orders
+    .ui.button
+        |view complete
+    |sort by
+    .ui.button
+        |price
+    .ui.button
+        |time
+    .ui.button 
+        |delivery
+    .scrolling
+        each orders 
+            +user_order_item
+
+template(name='user_order_item')
+    .ui.grid
+        .row
+        each order_items
+            img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+            .ui.header #{product_title}
+            a.ui.small.header.inline.lowercase(href="/order/#{_id}")
+                |#{subtitle}c
+            .ui.inline.header
+                |status: 
+                if is status 'pending'
+                    i.large.yellow.clock.icon
+                else if is status 'ready'
+                    i.large.green.clock.icon
+                else if is status 'complete'
+                    i.large.green.checkmark.icon
+                |#{status}
+                // .ui.inline.header product_id: #{product_id}
+                
+                a.ui.circular.icon.big.button(href="/order/#{_id}")
+                    i.right.chevron.large.icon
+                if is_admin 
+                    +print_this
+                    +remove_button

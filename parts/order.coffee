@@ -1,4 +1,29 @@
 if Meteor.isClient
+    Router.route '/orders', (->
+        @render 'orders'
+        ), name:'orders'
+
+    Template.orders.onCreated ->
+        # @autorun -> Meteor.subscribe 'model_docs', 'service'
+        # @autorun -> Meteor.subscribe 'model_docs', 'rental'
+        @autorun -> Meteor.subscribe 'model_docs', 'menu_section'
+        @autorun -> Meteor.subscribe 'model_docs', 'order'
+        @autorun -> Meteor.subscribe 'model_docs', 'product'
+        # @autorun -> Meteor.subscribe 'users'
+
+    # Template.delta.onRendered ->
+    #     Meteor.call 'log_view', @_id, ->
+
+    Template.orders.helpers
+        orders: ->
+            match = {model:'order'}
+            if Session.get('order_delivery_filter')
+                match.delivery_method = Session.get('order_sort_filter')
+            if Session.get('order_sort_filter')
+                match.delivery_method = Session.get('order_sort_filter')
+            Docs.find match,
+                sort: _timestamp:-1
+if Meteor.isClient
     Router.route '/order/:doc_id', (->
         @layout 'layout'
         @render 'order_view'
@@ -121,3 +146,34 @@ if Meteor.isServer
         #     Meteor.users.update order._author_id,
         #         $inc:credit:order.price_per_serving
         #     Meteor.call 'calc_order_data', order_id, ->
+
+
+
+if Meteor.isClient
+    Template.user_order_item.onCreated ->
+        # @autorun => Meteor.subscribe 'product_from_order_id', @data._id
+    Template.user_orders.onCreated ->
+        @autorun => Meteor.subscribe 'user_orders', Router.current().params.username
+        @autorun => Meteor.subscribe 'model_docs', 'product'
+    Template.user_orders.helpers
+        orders: ->
+            current_user = Meteor.users.findOne username:Router.current().params.username
+            Docs.find {
+                model:'order'
+            }, sort:_timestamp:-1
+
+if Meteor.isServer
+    Meteor.publish 'user_orders', (username)->
+        user = Meteor.users.findOne username:username
+        Docs.find {
+            model:'order'
+            _author_id: user._id
+        }, 
+            limit:10
+            sort:_timestamp:-1
+            
+    Meteor.publish 'product_from_order_id', (order_id)->
+        order = Docs.findOne order_id
+        Docs.find
+            model:'product'
+            _id: order.product_id
