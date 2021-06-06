@@ -236,8 +236,13 @@ if Meteor.isClient
                     recipient_id: @_id
             Router.go "/request/#{new_id}/edit"    
     Template.nav.events
-        'mouseenter .item': (e,t)->
-            $(e.currentTarget).closest('.item').transition('pulse')
+        'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
+    Template.left_sidebar.events
+        'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
+    Template.right_sidebar.events
+        'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
+    Template.secnav.events
+        'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
         # 'click .menu_dropdown': ->
             # $('.menu_dropdown').dropdown(
                 # on:'hover'
