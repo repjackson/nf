@@ -163,18 +163,24 @@ if Meteor.isClient
 
 if Meteor.isServer
     Meteor.publish 'my_cart', ->
-        Docs.find
-            model:'cart_item'
-            _author_id: Meteor.userId()
-            app:'nf'
-            complete:false
-            
+        current_order = 
+            Docs.findOne
+                model:'order'
+                status:'cart'
+        if current_order
+            Docs.find
+                model:'item'
+                status:'cart'
+                _author_id: Meteor.userId()
+                app:'nf'
+                order_id:current_order._id            
             
     Meteor.publish 'my_cart_order', ->
         Docs.find
             model:'order'
             _author_id: Meteor.userId()
             complete:false
+            status:'cart'
           
     Meteor.publish 'product_from_cart_item', (cart_item_id)->
         cart_item = Docs.findOne cart_item_id

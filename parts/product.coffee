@@ -246,7 +246,7 @@ if Meteor.isClient
 if Meteor.isServer
     Meteor.publish 'product_source', (product_id)->
         product = Docs.findOne product_id
-        console.log 'need source from this product', product
+        # console.log 'need source from this product', product
         Docs.find
             model:'source'
             _id:product.source_id

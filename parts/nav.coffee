@@ -127,52 +127,67 @@ if Meteor.isClient
                     # , 10000
         , 500)
     
-        'click .add_post': ->
-            new_id = 
-                Docs.insert 
-                    model:'post'
-            Router.go "/p/#{new_id}/edit"
-    
-        'click .alerts': ->
-            Session.set('viewing_alerts', !Session.get('viewing_alerts'))
+        # 'click .alerts': ->
+        #     Session.set('viewing_alerts', !Session.get('viewing_alerts'))
             
-        'click .toggle_admin': ->
-            if 'admin' in Meteor.user().roles
-                Meteor.users.update Meteor.userId(),
-                    $pull:'roles':'admin'
-            else
-                Meteor.users.update Meteor.userId(),
-                    $addToSet:'roles':'admin'
-        'click .toggle_dev': ->
-            if 'dev' in Meteor.user().roles
-                Meteor.users.update Meteor.userId(),
-                    $pull:'roles':'dev'
-            else
-                Meteor.users.update Meteor.userId(),
-                    $addToSet:'roles':'dev'
-        'click .view_profile': ->
-            Meteor.call 'calc_user_points', Meteor.userId(), ->
+        # 'click .toggle_admin': ->
+        #     if 'admin' in Meteor.user().roles
+        #         Meteor.users.update Meteor.userId(),
+        #             $pull:'roles':'admin'
+        #     else
+        #         Meteor.users.update Meteor.userId(),
+        #             $addToSet:'roles':'admin'
+        # 'click .toggle_dev': ->
+        #     if 'dev' in Meteor.user().roles
+        #         Meteor.users.update Meteor.userId(),
+        #             $pull:'roles':'dev'
+        #     else
+        #         Meteor.users.update Meteor.userId(),
+        #             $addToSet:'roles':'dev'
+        # 'click .view_profile': ->
+        #     Meteor.call 'calc_user_points', Meteor.userId(), ->
             
-        'click .clear_tags': -> picked_tags.clear()
+        # 'click .clear_tags': -> picked_tags.clear()
     
     # Template.topbar.onCreated ->
     #     @autorun => Meteor.subscribe 'my_received_messages'
     #     @autorun => Meteor.subscribe 'my_sent_messages'
     
     Template.nav.helpers
+        unread_count: ->
+            unread_count = Docs.find({
+                model:'message'
+                to_username:Meteor.user().username
+                read_by_ids:$nin:[Meteor.userId()]
+            }).count()
+
+        cart_amount: ->
+            cart_amount = Docs.find({
+                model:'item'
+                status:'cart'
+                _author_id:Meteor.userId()
+            }).count()
         cart_items: ->
+            # co = 
+            #     Docs.findOne 
+            #         model:'order'
+            #         status:'cart'
+            #         _author_id:Meteor.userId()
+            # if co 
             Docs.find 
-                model:'cart_item'
+                model:'item'
                 _author_id: Meteor.userId()
+                # order_id:co._id
+                status:'cart'
                 
         alert_toggle_class: ->
             if Session.get('viewing_alerts') then 'active' else ''
-        unread_count: ->
-            Docs.find( 
-                model:'message'
-                recipient_id:Meteor.userId()
-                read_ids:$nin:[Meteor.userId()]
-            ).count()
+        # unread_count: ->
+        #     Docs.find( 
+        #         model:'message'
+        #         recipient_id:Meteor.userId()
+        #         read_ids:$nin:[Meteor.userId()]
+        #     ).count()
     Template.topbar.helpers
         recent_alerts: ->
             Docs.find 
@@ -218,23 +233,6 @@ if Meteor.isClient
             else
                 Meteor.users.update Meteor.userId(),
                     $addToSet:'roles':'dev'
-                    
-                
-        'click .add_gift': ->
-            # user = Meteor.users.findOne(username:@username)
-            new_gift_id =
-                Docs.insert
-                    model:'gift'
-                    recipient_id: @_id
-            Router.go "/debit/#{new_gift_id}/edit"
-    
-        'click .add_request': ->
-            # user = Meteor.users.findOne(username:@username)
-            new_id =
-                Docs.insert
-                    model:'request'
-                    recipient_id: @_id
-            Router.go "/request/#{new_id}/edit"    
     # Template.nav.events
     #     'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
     # Template.left_sidebar.events
@@ -256,16 +254,4 @@ if Meteor.isClient
 
 
     Template.nav.helpers
-        unread_count: ->
-            unread_count = Docs.find({
-                model:'message'
-                to_username:Meteor.user().username
-                read_by_ids:$nin:[Meteor.userId()]
-            }).count()
-
-        cart_amount: ->
-            cart_amount = Docs.find({
-                model:'cart_item'
-                _author_id:Meteor.userId()
-            }).count()
 

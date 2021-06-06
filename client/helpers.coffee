@@ -37,14 +37,15 @@ Template.registerHelper 'cart_subtotal', () ->
                 # console.log 'product', product
         subtotal
     
-Template.registerHelper 'my_cart_subtotal', () -> 
+Template.registerHelper 'my_cart_subtotal', () ->
+    
     subtotal = 0
-    for cart_item in Docs.find(model:'cart_item',_author_id:Meteor.userId()).fetch()
-        product = Docs.findOne(cart_item.product_id)
+    for item in Docs.find(model:'item',_author_id:Meteor.userId(),status:'cart').fetch()
+        product = Docs.findOne(item.product_id)
         # console.log product
-        if product
-            if product.price_usd
-                subtotal += product.price_usd*cart_item.amount
+        subtotal += item.product_price
+        # if product
+        #     if product.price_usd
         # if product.price_usd
         #     console.log product.price_usd
             # console.log 'product', product

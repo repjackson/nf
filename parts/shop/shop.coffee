@@ -241,20 +241,35 @@ if Meteor.isClient
 if Meteor.isServer
     Meteor.methods
         add_to_cart: (product_id)->
-            existing_cart_item_with_product = 
+            # existing_cart_item_with_product = 
+            #     Docs.findOne 
+            #         model:'cart_item'
+            #         product_id:product_id
+            # if existing_cart_item_with_product
+            #     Docs.update existing_cart_item_with_product._id,
+            #         $inc:amount:1
+            # else 
+            product = Docs.findOne product_id
+            current_order = 
                 Docs.findOne 
-                    model:'cart_item'
-                    product_id:product_id
-            if existing_cart_item_with_product
-                Docs.update existing_cart_item_with_product._id,
-                    $inc:amount:1
-            else 
-                new_cart_doc_id = 
+                    model:'order'
+                    _author_id:Meteor.userId()
+                    status:'cart'
+            if current_order
+                order_id = current_order._id
+            else
+                order_id = 
                     Docs.insert 
-                        model:'cart_item'
-                        product_id: product_id
-                        complete:false
-                        amount:1
+                        model:'order'
+                        status:'cart'
+            new_cart_doc_id = 
+                Docs.insert 
+                    model:'item'
+                    product_id: product_id
+                    status:'cart'
+                    product_price:product.price_usd
+                    order_id:order_id
+            console.log new_cart_doc_id
             
                     
     Meteor.publish 'product_results', (
