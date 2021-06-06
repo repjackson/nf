@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.menu
+    #topnav.topnav.ui.attached.borderless.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.food.icon.cancel
@@ -27,7 +27,7 @@ template(name='nav')
         //     // +i name='list' cl='ui inline mini image'
         //     i.newspaper.large.icon
         //     // strong.mobile.hidden news
-        .right.menu
+        .right.borderless.menu
             if currentUser
                 // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
                 //     i.bell.large.yellow.icon
@@ -38,10 +38,10 @@ template(name='nav')
                         +i name='shopping-cart' cl=''
                     if cart_items.count
                         strong #{cart_items.count} ($#{my_cart_subtotal})
-                a.item.zoomer.toggle_topbar(title='alerts')
-                    // i.wallet.icon
-                    .ui.mini.image.bell
-                        +i name='notification' cl=''
+                // a.item.zoomer.toggle_topbar(title='alerts')
+                //     // i.wallet.icon
+                //     .ui.mini.image.bell
+                //         +i name='notification' cl=''
                 // a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                 a.item.zoomer.toggle_walletbar(title='nudebucks')
                     // i.wallet.icon
@@ -77,7 +77,7 @@ template(name='nav')
                 
                 
 template(name='secnav')
-    .ui.attached.small.menu.topnav
+    .ui.attached.small.borderless.menu.topnav
         a.icon.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
                 +i name='grocery-shelf' cl=''
@@ -238,7 +238,7 @@ template(name='walletbar')
         +user_credit
         
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.large.menu.rightbar
+    .ui.right.sidebar.vertical.large.borderless.menu.rightbar
         a.item.toggle_rightbar.zoomer.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
@@ -287,7 +287,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.menu.smallscroll
+    .ui.left.sidebar.vertical.borderless.menu.smallscroll
         // a.item.toggle_sidebar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
