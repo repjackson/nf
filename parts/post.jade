@@ -138,7 +138,7 @@ template(name='set_post_limit')
 
 
 template(name='post_card')
-    .ui.card.view_post.pointer
+    .ui.column.view_post.pointer
         img.ui.fluid.rounded.image(src="{{c.url image_id height=200 width=400 gravity='face' crop='fill'}}" class=currentUser.invert_class)
         .content
             a.ui.header(href="/post/#{_id}") #{title}
@@ -165,7 +165,6 @@ template(name='post_view')
                 .four.wide.column
                     a(href="/posts")
                         i.newspaper.circular.link.big.icon
-                    .ui.large.inline.header #{title}
                     // div
                     // .ui.inline.grey.header {{from_now start_datetime}}
                     
@@ -199,6 +198,7 @@ template(name='post_view')
                     +voting_full
                     //- +array_view key='location_tags' label='location_tags' direct=true
                 .twelve.wide.column.scrolling
+                    .ui.header #{title}
                     img.ui.rounded.image(src="{{c.url image_id }}" class=currentUser.invert_class)
                     // a.ui.header(href="/user/#{target.username}")
                     //     |#{target.username}
