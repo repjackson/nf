@@ -2,11 +2,11 @@ template(name='trips')
     .ui.stackable.padded.grid
         .sixteen.wide.column
             .ui.inline.header 
-                +i name='field-and-tractor'
+                +i name='bicycle'
                 |trips
             .ui.basic.circular.icon.button.add_trip
                 i.large.plus.icon
-        .sixteen.wide.column
+        .eight.wide.column
             .ui.four.stackable.centered.cards
                 each model_docs_helper 'trip'
                     .ui.card
@@ -18,7 +18,10 @@ template(name='trips')
                             each trip_product
                                 .ui.header #{title}
                             // |added #{when} by #{_author_username}
-                
+        .eight.wide.column
+            .ui.header available jobs
+            each available_jobs
+                a.ui.header(href="/order/#{_id}") #{title}
                 
 template(name='user_trips')
     .ui.inline.header 
