@@ -4,10 +4,6 @@ template(name='cart')
             a.ui.header(href="/cart")
                 +i name='shopping-cart'
                 |cart
-            .ui.vertical.fluid.menu.scrolli
-                each cart_items
-                    +cart_item
-        .sixteen.wide.column
             // a.ui.fluid.basic.icon.button(href="/shop")
             //     // i.chevron.left.icon
             //     +i name='food-cart'
@@ -16,6 +12,8 @@ template(name='cart')
                 .ui.big.fluid.button.checkout_cart
                     i.large.send.icon
                     |checkout
+            each cart_items
+                +cart_item
                     
                 
                 

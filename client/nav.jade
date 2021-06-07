@@ -32,15 +32,15 @@ template(name='nav')
                 // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
                 //     i.bell.large.yellow.icon
                 // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
-                a.icon.item.toggle_cartbar
-                    // i.large.cart.icon
-                    if cart_items.count
+                if cart_items.count
+                    a.icon.item.toggle_cartbar
+                        // i.large.cart.icon
                         strong #{cart_items.count}
-                    .ui.avatar.image.cart
-                        +i name='shopping-cart' cl=''
-                    |$#{my_cart_subtotal}
-                    each cart_items
-                        img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                        |$#{my_cart_subtotal}
+                        .ui.avatar.image.cart
+                            +i name='shopping-cart' cl=''
+                        each cart_items
+                            img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
                 a.item.toggle_topbar(title='alerts')
                     // i.wallet.icon
                     .ui.avatar.image.bell
@@ -234,7 +234,7 @@ template(name='recent_alert')
             
             
 template(name='cartbar')
-    .ui.right.sidebar.cartbar
+    .ui.right.wide.sidebar.cartbar
         +cart
         
 template(name='walletbar')
