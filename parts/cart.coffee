@@ -23,6 +23,11 @@ if Meteor.isClient
         # @autorun => Meteor.subscribe 'model_docs', 'product'
         @autorun => Meteor.subscribe 'my_cart'
         @autorun => Meteor.subscribe 'my_cart_order'
+    Template.checkout.helpers
+        cart_items: ->
+            Docs.find 
+                model:'thing'
+                status:'cart'
 
     Template.cart.events
         'click .checkout_cart':->
@@ -143,11 +148,9 @@ if Meteor.isClient
         cart_order: ->
             Docs.findOne    
                 model:'order'
-                complete:false
-        items: ->
-            Docs.find
-                model:'thing'
-                # ingredient_ids: $in: [@_id]
+                status:'cart'
+                _author_id:Meteor.userId()
+                # complete:false
     Template.topup_button.events
         'click .initiate_topup':->
             Swal.fire({
