@@ -115,16 +115,16 @@ template(name='order')
                             .content
                                 .summary
                                     a.user #{_author_username}
-                                    |started
+                                    |started order 
                                     .date #{when}
                         each order_things
                             .event
                                 .label
-                                    img.ui.mini.inline.image(src="{{c.url author.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                    img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
                                 .content
                                     .summary
-                                        a.user #{_author_username}
-                                        |#{model}
+                                        a.user #{product_title}
+                                        |added for $#{product_price}
                                         .date #{when}
                                     
                         // .event
