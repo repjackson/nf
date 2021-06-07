@@ -176,7 +176,10 @@ if Meteor.isClient
                     )
             )
 
-
+        'click .delete_recipe':->
+            if confirm 'delete?'
+                Docs.remove @_id
+                Router.go "/recipes"
             
     Template.recipe_edit.helpers
         all_shop: ->
