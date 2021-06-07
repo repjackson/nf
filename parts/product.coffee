@@ -261,7 +261,7 @@ if Meteor.isClient
     Template.product_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        # @autorun => Meteor.subscribe 'model_docs', 'menu_section'
+        @autorun => Meteor.subscribe 'model_docs', 'source'
 
     Template.product_edit.onRendered ->
         Meteor.setTimeout ->

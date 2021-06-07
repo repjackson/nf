@@ -96,7 +96,9 @@ template(name='viewing')
 
 template(name='user_info')
     with user_from_id this
-        .ui.header #{username}
+        a.ui.large.link.label(href="/user/#{username}")
+            img.ui.avatar.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+            |#{username}
     // .ui.header #{this}
 
 

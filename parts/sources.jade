@@ -15,8 +15,10 @@ template(name='sources')
                         a.content(href="/source/#{_id}") 
                             .ui.header 
                                 |#{title}
-                            each source_product
+                            each source_products
                                 .ui.header #{title}
+                            i.marker.icon
+                            |#{location}
                             // |added #{when} by #{_author_username}
                 
                 

@@ -46,8 +46,6 @@ template(name='product_layout')
                                         |#{product_source.title}
                             // .ui.header #{menu_section}
                                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
-                            +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
-                            +link_view key='external_link' label='external link' icon='globe' direct=true
 
                         .ten.wide.column
                             .ui.green.basic.inverted.large.button.add_to_cart
@@ -89,6 +87,8 @@ template(name='product_main')
         .ui.large.basic.label #{this}
     div
     +voting_full
+    +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
+    +link_view key='external_link' label='external link' icon='globe' direct=true
     +comments
         
         
@@ -270,10 +270,11 @@ template(name='product_edit')
                         +i name='field-and-tractor'
                         |source
                     with product_source
-                        .ui.header picked source
-                        a.ui.header(href="/source/#{_id}") #{title}
-                        if is_admin
-                            i.remove.link.icon.remove_source
+                        a.ui.header(href="/source/#{_id}")
+                            img.ui.avatar.image(src="{{c.url image_id width=100 height=100 gravity='face' crop='fill'}}")
+                            |#{title}
+                        i.remove.link.circular.red.icon.remove_source
+                        // if is_admin
                             
                     unless source_id
                         if is_admin
