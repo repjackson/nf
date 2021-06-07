@@ -1,22 +1,21 @@
 template(name='cart')
-    with cart_order
-        .ui.stackable.padded.grid
-            .sixteen.wide.column
-                a.ui.header(href="/cart")
-                    +i name='shopping-cart'
-                    |cart
-                .ui.vertical.fluid.menu.scrolli
-                    each cart_items
-                        +cart_item
-            .sixteen.wide.column
-                // a.ui.fluid.basic.icon.button(href="/shop")
-                //     // i.chevron.left.icon
-                //     +i name='food-cart'
-                if cart_items.count
-                    .ui.header subtotal: $#{my_cart_subtotal}
-                    .ui.big.fluid.button.checkout_cart
-                        i.large.send.icon
-                        |checkout
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            a.ui.header(href="/cart")
+                +i name='shopping-cart'
+                |cart
+            .ui.vertical.fluid.menu.scrolli
+                each cart_items
+                    +cart_item
+        .sixteen.wide.column
+            // a.ui.fluid.basic.icon.button(href="/shop")
+            //     // i.chevron.left.icon
+            //     +i name='food-cart'
+            if cart_items.count
+                .ui.header subtotal: $#{my_cart_subtotal}
+                .ui.big.fluid.button.checkout_cart
+                    i.large.send.icon
+                    |checkout
                     
                 
                 
