@@ -41,12 +41,12 @@ template(name='nav')
                     |$#{my_cart_subtotal}
                     each cart_items
                         img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-                a.item.zoomer.toggle_topbar(title='alerts')
+                a.item.toggle_topbar(title='alerts')
                     // i.wallet.icon
                     .ui.avatar.image.bell
                         +i name='notification' cl=''
-                // a.item.zoomer(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
-                a.item.zoomer.toggle_walletbar(title='nudebucks')
+                // a.item(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
+                a.item.toggle_walletbar(title='credit')
                     // i.wallet.icon
                     .ui.avatar.image
                         +i name='wallet' cl=''
@@ -81,39 +81,39 @@ template(name='nav')
                 
 template(name='secnav')
     .ui.attached.small.borderless.menu.secnav
-        a.icon.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+        a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.mini.image
                 +i name='grocery-shelf' cl=''
-        a.icon.item.zoomer(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
+        a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
             .ui.mini.image
                 +i name='ingredients' cl=''
-        a.icon.item.zoomer(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
+        a.icon.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
             .ui.mini.image.farm
                 +i name='field-and-tractor' cl=''
-        a.icon.item.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
+        a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             .ui.mini.image.recipes
                 +i name='cookbook' cl=''
-        a.icon.item.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+        a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             .ui.mini.image.orders
                 +i name='invoice' cl=''
-        a.icon.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+        a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
             .ui.mini.image
                 +i name='blog' cl=''
-        a.icon.item.zoomer(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
+        a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
             .ui.mini.image
                 +i name='bicycle' cl=''
-        a.icon.item.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
+        a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
             .ui.mini.image
                 +i name='phone' cl='ui inline mini image'
-        a.icon.item.zoomer(href='/things' class="{{isActivePath '/things'}}" title='thing')
+        a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
             .ui.mini.image
                 +i name='cup' cl=''
         if currentUser
-            a.icon.item.zoomer(href='/users' class="{{isActivePath '/users'}}" title='users')
+            a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
                 .ui.mini.image.users
                     +i name='groups' cl=''
         unless currentUser
-            a.icon.item.zoomer(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+            a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
                 // i.info.large.icon
                 .ui.mini.image.info
                     +i name='information--v1' cl=''
@@ -243,37 +243,37 @@ template(name='walletbar')
         
 template(name='right_sidebar')
     .ui.right.sidebar.vertical.borderless.menu.rightbar
-        a.item.toggle_rightbar.zoomer.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
+        a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
         with currentUser
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
+            a.item.toggle_rightbar(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
                 +i name='dashboard' cl='ui avatar image'
                 // i.dashboard.icon
                 |dashboard
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
                 +i name='money' cl='ui avatar image'
                 // i.coins.icon
                 |credit
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
                 +i name='check' cl='ui avatar image'
                 |orders
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
                 +i name='clock' cl='ui avatar image'
                 |subscriptions
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/pantry" class="{{isActiveRoute 'user_pantry'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/pantry" class="{{isActiveRoute 'user_pantry'}}")
                 +i name='cupboard' cl='ui avatar image'
                 |pantry
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
                 +i name='friends' cl='ui avatar image'
                 |friends
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
                 +i name='shopping-cart' cl='ui avatar image'
                 |cart
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
                 +i name='bicycle' cl='ui avatar image'
                 |trips
-            a.item.toggle_rightbar.zoomer(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
+            a.item.toggle_rightbar(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
                 +i name='certificate' cl='ui avatar image'
                 |gift cards
         // .ui.divider
@@ -296,32 +296,32 @@ template(name='left_sidebar')
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
         // a.item.set_member.toggle_leftbar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
-        a.item.toggle_leftbar.zoomer.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
+        a.item.toggle_leftbar.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
             // +i name='food' cl='ui inline mini image'
             // i.home.icon
             img.ui.small.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // span.mobile.hidden nude foods market
-        // .search.item.zoomer(title='search')
+        // .search.item(title='search')
         //     .ui.icon.transparent.input
         //         i.search.icon
         //         input.search_global(type='text')
         // else 
-        //     a.item.toggle_leftbar.zoomer(href='/' class="{{isActivePath '/'}}" title='food')
+        //     a.item.toggle_leftbar(href='/' class="{{isActivePath '/'}}" title='food')
         //         // +i name='home' cl='ui inline mini image'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
-        a.item.toggle_leftbar.zoomer(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+        a.item.toggle_leftbar(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
             .ui.avatar.image
                 +i name='food-cart' cl=''
             | #{product_count} products
-        a.item.toggle_leftbar.zoomer(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
+        a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
             .ui.avatar.image
                 +i name='ingredients' cl=''
             | #{ingredient_count} ingredients
-        a.item.toggle_leftbar.zoomer(href='/sources' class="{{isActivePath '/sources'}}")
+        a.item.toggle_leftbar(href='/sources' class="{{isActivePath '/sources'}}")
             .ui.avatar.image.farm
                 +i name='field-and-tractor' cl=''
             | #{source_count} sources
-        a.item.toggle_leftbar.zoomer(href='/recipes' class="{{isActivePath '/recipes'}}")
+        a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
             .ui.avatar.image.info
                 +i name='cookbook' cl=''
             |#{recipe_count} recipes

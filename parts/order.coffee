@@ -7,7 +7,7 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'orders',
             Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
-        # @autorun -> Meteor.subscribe 'model_docs', 'thing', 20
+        @autorun -> Meteor.subscribe 'model_docs', 'thing', 100
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->

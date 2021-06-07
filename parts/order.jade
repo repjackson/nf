@@ -61,6 +61,10 @@ template(name='order_item')
                 a.ui.icon.big.button(href="/order/#{_id}")
                     i.right.chevron.large.icon
                 .ui.inline.header #{status}
+                .ui.inline.header $#{subtotal}
+                .ui.inline.header paid: #{paid}
+                each order_things
+                    img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
                 if in_dev 
                     +print_this
                 i.cubes.icon(title='things')
