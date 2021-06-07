@@ -35,7 +35,7 @@ template(name='checkout')
                 +boolean_edit key='receive_notifications' label='check this box to receive your vital reminder texts and emails (optional)' direct=true
                 +boolean_edit key='has_read_tos' label=' I have read and agree to the website terms and conditions' direct=true
                 if has_read_tos
-                    .ui.big.fluid.green.button.checkout_cart
+                    .ui.big.fluid.green.button.submit_order
                         i.large.send.icon
                         |submit
                 else 

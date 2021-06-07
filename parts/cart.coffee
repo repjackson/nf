@@ -37,13 +37,8 @@ if Meteor.isClient
             cart_order = 
                 Docs.findOne
                     model:'order'
-                    complete:false
-            unless cart_order
-                Docs.insert
-                    model:'order'
-                    complete:false
-                    status:'checking_out'
-                    
+                    status:'cart'
+                
             Router.go '/checkout'
                 
     Template.cart_item.events
@@ -106,19 +101,20 @@ if Meteor.isClient
                 status:'cart'
                 # ingredient_ids: $in: [@_id]
     Template.checkout.events
-        'click .checkout_cart': ->
+        'click .submit_order': ->
             cart_order = 
                 Docs.findOne    
                     model:'order'
-                    complete:false
+                    # complete:false
+                    status:'cart'
             if cart_order
                 subtotal = 0
-                for item in Docs.find(model:'thing',_author_id:Meteor.userId()).fetch()
+                for thing in Docs.find(model:'thing',status:'cart',_author_id:Meteor.userId()).fetch()
                     # product = Docs.findOne(item.product_id)
                     # console.log product
                     # if product
                     #     if product.price_usd
-                    subtotal += item.product_price
+                    subtotal += thing.product_price
                     # if product.price_usd
                     #     console.log product.price_usd
                         # console.log 'product', product
