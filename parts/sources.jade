@@ -74,6 +74,8 @@ template(name='source_edit')
                         i.pencil.icon
                         | #{title}
                         small source edit
+                    a.ui.large.icon.green.button(href="/source/#{_id}" title='save product')
+                        i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true icon='image'
                     div
@@ -84,12 +86,10 @@ template(name='source_edit')
                     div
                     +array_edit key='tags' label='tags' direct=true icon='tags'
                     +html_edit key='description' label='description' direct=true icon='content'
-                    if can_delete
+                    if can_edit
                         .ui.red.button.delete_source
                             i.remove.icon   
                             | delete
-                    a.ui.large.icon.green.button(href="/source/#{_id}" title='save product')
-                        i.checkmark.big.icon
                 
                 
 template(name='source_view')

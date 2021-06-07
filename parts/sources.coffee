@@ -154,6 +154,10 @@ if Meteor.isClient
                     )
             )
 
+        'click .delete_source':->
+            if confirm 'delete?'
+                Docs.remove @_id
+                Router.go "/sources"
 
             
     Template.source_edit.helpers
