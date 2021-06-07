@@ -47,7 +47,10 @@ template(name='product_layout')
                                 
                                     |#{product_source.title}
                             // .ui.header #{menu_section}
-                
+                                    +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                            +link_edit key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
+                            +link_edit key='external_link' label='external link' icon='globe' direct=true
+
                         .ten.wide.column
                             .ui.green.basic.inverted.large.button.add_to_cart
                                 // i.cart.plus.large.icon
@@ -253,6 +256,8 @@ template(name='product_edit')
                     +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
                     +number_edit key='calories' label='calories' direct=true
                     div
+                    +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                    +link_edit key='external_link' label='external link' icon='globe' direct=true
                     +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
                     +array_edit key='location_tags' label='location tags' icon='marker' direct=true
                     +text_edit key='size_description' label='size description'  direct=true
