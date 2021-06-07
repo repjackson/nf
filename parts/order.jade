@@ -108,7 +108,7 @@ template(name='order')
                         .item 
                             |#{username} {{from_now view_timestamp}}
                 .six.wide.column
-                    .ui.feed
+                    .ui.large.feed
                         .event
                             .label
                                 img.ui.mini.inline.image(src="{{c.url author.image_id width=200 height=200 gravity='face' crop='fill'}}")
@@ -124,9 +124,16 @@ template(name='order')
                                 .content
                                     .summary
                                         a.user #{product_title}
-                                        |added for $#{product_price}
+                                        |added for ${{fixed product_price}}
                                         .date #{when}
-                                    
+                        if completed
+                            .event
+                                .label
+                                    img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    .summary
+                                        a.user payment completed
+                                        .date {{from_now payment_timestamp}}
                         // .event
                         //     .label
                         //         img.avatar
@@ -152,21 +159,21 @@ template(name='order')
                     if kve 'when' 'later'
                         +datetime_view key='pickup_datetime'
                     .ui.header status: #{status}
-                    if complete
-                        .ui.header
-                            i.checkmark.icon
-                            |complete
-                        .ui.inline.header {{from_now complete_timestamp}}
-                    .ui.header complete #{complete}
-                    .ui.header 
-                        i.shield.icon
-                        |admin
-                    if is_admin
-                        +kvs key='status' value='started' label='mark started' direct=true
-                        if kve status 'started'
-                            +kvs key='status' value='ready' label='mark ready' direct=true
-                            +kvs key='status' value='picked_up' label='picked up' direct=true
-                    div
+                    // if complete
+                    //     .ui.header
+                    //         i.checkmark.icon
+                    //         |complete
+                    //     .ui.inline.header {{from_now complete_timestamp}}
+                    // .ui.header complete #{complete}
+                    // .ui.header 
+                    //     i.shield.icon
+                    //     |admin
+                    // if is_admin
+                    //     +kvs key='status' value='started' label='mark started' direct=true
+                    //     if kve status 'started'
+                    //         +kvs key='status' value='ready' label='mark ready' direct=true
+                    //         +kvs key='status' value='picked_up' label='picked up' direct=true
+                    // div
                     .ui.inline.header 
                         i.user.outline.icon
                         |customer
@@ -202,9 +209,9 @@ template(name='order')
                     
 template(name='product_delivery')
     .ui.segment
-        .ui.inline.header 
-            +i name='bicycle'
-            |delivery
+        // .ui.inline.header 
+        //     +i name='bicycle'
+        //     |delivery
         if is delivery_method 'delivery'
             .ui.header 
                 +i name='bicycle'
@@ -227,7 +234,7 @@ template(name='product_delivery')
     
         .ui.header 
             i.shield.icon
-            |runner
+            |staff
         unless runner_viewed
             .ui.basic.large.button.mark_viewed
                 +i name='eye-checked' cl='ui avatar image'
