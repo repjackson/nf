@@ -39,17 +39,15 @@ template(name='product_layout')
                             +boolean_view key='organic' label='organic' direct=true icon='organic-food'
                             +boolean_view key='no_gmo' label='no gmo' direct=true icon='no-gmo'
                             +boolean_view key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
-                            .ui.segment.link.zoomer.goto_source
-                                // a.ui.header(href="/source/#{source_id}") 
-                                img.ui.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-
-                                .ui.header.zoomer
-                                
-                                    |#{product_source.title}
+                            .ui.link.card.zoomer.goto_source
+                                img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    .ui.header.zoomer
+                                        |#{product_source.title}
                             // .ui.header #{menu_section}
                                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
-                            +link_edit key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
-                            +link_edit key='external_link' label='external link' icon='globe' direct=true
+                            +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
+                            +link_view key='external_link' label='external link' icon='globe' direct=true
 
                         .ten.wide.column
                             .ui.green.basic.inverted.large.button.add_to_cart

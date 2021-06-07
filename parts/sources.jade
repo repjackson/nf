@@ -96,23 +96,21 @@ template(name='source_view')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column
+                .ten.wide.column
                     a.ui.basic.icon.button(href="/sources")
-                        +ibig name='field-and-tractor'
-                    
+                        +i name='field-and-tractor'
                     if can_edit 
                         a.ui.icon.button(href="/source/#{_id}/edit")
                             i.pencil.icon
                     div
-                .six.wide.column
                     +image_view key='image_id' label='image' direct=true
                     .ui.big.header
                         | #{title}
                     div
                     +html_view key='description' label='description' direct=true
+                .six.wide.column
                     +array_view key='tags' label='tags' direct=true
                     +link_view key='link' direct=true
-                .six.wide.column
                     .ui.header 
                         +i name='marker'
                         |#{location}
