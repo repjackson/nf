@@ -4,9 +4,10 @@ if Meteor.isClient
         ), name:'orders'
 
     Template.orders.onCreated ->
-        @autorun -> Meteor.subscribe 'model_docs', 'order', 20
-        @autorun -> Meteor.subscribe 'model_docs', 'product', 20
-        @autorun -> Meteor.subscribe 'model_docs', 'thing', 20
+        @autorun -> Meteor.subscribe 'orders',
+            Session.get('order_status_filter')
+        # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
+        # @autorun -> Meteor.subscribe 'model_docs', 'thing', 20
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
@@ -14,6 +15,8 @@ if Meteor.isClient
     Template.orders.helpers
         orders: ->
             match = {model:'order'}
+            if Session.get('order_status_filter')
+                match.status = Session.get('order_status_filter')
             if Session.get('order_delivery_filter')
                 match.delivery_method = Session.get('order_sort_filter')
             if Session.get('order_sort_filter')
@@ -121,6 +124,14 @@ if Meteor.isClient
 
 
 if Meteor.isServer
+    Meteor.publish 'orders', (order_id, status)->
+        # order = Docs.findOne order_id
+        match = {model:'order', app:'nf'}
+        if status 
+            match.status = status
+
+        Docs.find match
+        
     Meteor.publish 'product_by_order_id', (order_id)->
         order = Docs.findOne order_id
         Docs.find

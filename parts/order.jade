@@ -2,6 +2,24 @@ template(name='orders')
     .ui.stackable.padded.grid
         .sixteen.wide.column.scrolling
             .ui.stackable.grid 
+                .four.wide.column
+                    .ui.header 
+                        |alerts
+                        i.alert.icon
+                    |view
+                    // +skvs key='order_sort_filter' value='open'               
+                    +skvs key='order_sort_filter' value='now'               
+                    +skvs key='order_sort_filter' value='later'   
+                    +skvs key='order_sort_filter' value=null label='all'
+                    |delivery
+                    +skvs key='order_delivery_filter' value='pickup'   
+                    +skvs key='order_delivery_filter' value='delivery'   
+                    +skvs key='order_delivery_filter' value=null label='all'   
+                    +skvs key='order_status_filter' value='cart' label='cart' icon='cart'   
+                    +skvs key='order_status_filter' value=null label='all status' icon='cart'   
+                    div
+                    |sort by
+                    +skvs key='order_sort_key' value='price'               
                 .twelve.wide.column
                     a.ui.center.aligned.header(href="/orders")
                         +i name='clock' cl='ui tiny inline image'
@@ -14,23 +32,7 @@ template(name='orders')
                     .scrolling
                         each orders
                             +order_item
-                .four.wide.column
-                    .ui.header 
-                        |alerts
-                        i.alert.icon
-                    |view
-                    +skvs key='order_sort_filter' value='open'               
-                    +skvs key='order_sort_filter' value='now'               
-                    +skvs key='order_sort_filter' value='later'   
-                    +skvs key='order_sort_filter' value=null label='all'
-                    |delivery
-                    +skvs key='order_delivery_filter' value='pickup'   
-                    +skvs key='order_delivery_filter' value='delivery'   
-                    +skvs key='order_delivery_filter' value=null label='all'   
-                    div
-                    |sort by
-                    +skvs key='order_sort_key' value='price'               
-            
+                            .ui.divider
             
             
 template(name='order_item')
@@ -41,21 +43,21 @@ template(name='order_item')
             //         //- img.ui.mini.image(src=image)
             //         +image_view key='image_id' direct=true cl='zoomer ui fluid image'
             .sixteen.wide.column
-                each order_things
-                    .ui.header #{product_title}
-                    a.ui.small.header.inline.lowercase(href="/order/#{_id}")
-                        |$#{product_price}
-                    .ui.inline.header status: 
-                        if kve status 'pending'
-                            i.large.yellow.clock.icon
-                        else if kve status 'ready'
-                            i.large.green.clock.icon
-                        else if kve status 'complete'
-                            i.large.green.checkmark.icon
-                        |status:#{status}
-                    // .ui.inline.header product_id: #{product_id}
-                    .ui.small.inline.header {{from_now _timestamp}} 
-                        small ({{long_date _timestamp}})
+                .ui.list
+                    each order_things
+                        .item
+                            strong #{product_title}
+                            small $#{product_price}
+                            |status:#{status}
+                            // if kve status 'pending'
+                            //     i.large.yellow.clock.icon
+                            // else if kve status 'ready'
+                            //     i.large.green.clock.icon
+                            // else if kve status 'complete'
+                            //     i.large.green.checkmark.icon
+                            // .ui.inline.header product_id: #{product_id}
+                            | {{from_now _timestamp}} 
+                            small ({{long_date _timestamp}})
                 a.ui.icon.big.button(href="/order/#{_id}")
                     i.right.chevron.large.icon
                 .ui.inline.header #{status}
