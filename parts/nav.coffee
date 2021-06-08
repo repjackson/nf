@@ -70,7 +70,7 @@ if Meteor.isClient
                     scrollLock:true
                 })
                 .sidebar('attach events', '.toggle_cartbar')
-        , 2000
+        , 3000
         Meteor.setTimeout ->
             $('.ui.sidebar.walletbar')
                 .sidebar({

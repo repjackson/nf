@@ -90,6 +90,16 @@ template(name='home')
                         i.icon 
                             +ibig name='eye'
                         |#{stats.homepage_views} homepage views
-                        
+        .ui.stackable.padded.grid
+            .ui.header 
+                |latest updated documents
+            each latest_updated
+                .ui.header #{title}
+            .ui.header 
+                |latest created documents
+            each latest_created
+                .ui.header #{title}
+            .ui.header 
+                
                         
     +footer

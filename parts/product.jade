@@ -114,9 +114,12 @@ template(name='product_inventory')
 
 
 template(name='product_reviews')
-    .ui.header 
-        +i name='voting'
+    .ui.inline.header 
+        +i name='popular-topic'
         |reviews
+    .ui.circular.basic.icon.button.add_review
+        i.plus.icon
+    div
     each product_recipes
         a.ui.header(href="/recipe/#{_id}/view") #{title}
         
