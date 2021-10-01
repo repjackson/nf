@@ -4,11 +4,13 @@ template(name='user_credit')
             .column
             .column
                 .ui.inline.header
-                    i.money.icon
+                    // i.money.icon
+                    +i name='money'
                     |{{fixed user_from_username_param.credit}}
                     |credit
                 .ui.inline.header 
-                    i.shield.icon
+                    // i.shield.icon
+                    +i name='shield'
                     |admin
                 .ui.big.icon.basic.button.add_credit(title='add credit')
                     |+1

@@ -15,7 +15,7 @@ if Meteor.isClient
             $('.ui.left.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
+                    transition:'push'
                     mobileTransition:'scale'
                     exclusive:true
                     duration:200
@@ -27,8 +27,8 @@ if Meteor.isClient
             $('.ui.rightbar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
-                    mobileTransition:'scale'
+                    transition:'push'
+                    mobileTransition:'push'
                     exclusive:true
                     duration:200
                     scrollLock:true
@@ -39,8 +39,8 @@ if Meteor.isClient
             $('.ui.topbar.sidebar')
                 .sidebar({
                     context: $('.bottom.segment')
-                    transition:'overlay'
-                    mobileTransition:'scale'
+                    transition:'push'
+                    mobileTransition:'push'
                     exclusive:true
                     duration:200
                     scrollLock:true
@@ -51,7 +51,7 @@ if Meteor.isClient
         #     $('.ui.secnav.sidebar')
         #         .sidebar({
         #             context: $('.bottom.segment')
-        #             transition:'overlay'
+        #             transition:'push'
         #             mobileTransition:'scale'
         #             exclusive:true
         #             duration:200

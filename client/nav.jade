@@ -19,18 +19,18 @@ template(name='nav')
                 img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
-        .search.item.zoomer.mobile.hidden(title='search')
-            .ui.icon.transparent.large.input
-                i.search.icon
-                input.search_ingredients(type='text')
+        // .search.item.zoomer.mobile.hidden(title='search')
+        //     .ui.icon.transparent.large.input
+        //         i.search.icon
+        //         input.search_ingredients(type='text' autocomplete="off")
+        .icon.item 
+            i.large.search.icon
         // a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
         //     // +i name='list' cl='ui inline mini image'
         //     i.newspaper.large.icon
         //     // strong.mobile.hidden news
         .right.menu
             if currentUser
-                // a.icon.item(href="/alerts" class="{{isActivePath '/alerts'}}")
-                //     i.bell.large.yellow.icon
                 // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
                 if cart_items.count
                     a.icon.item.toggle_cartbar
@@ -45,6 +45,9 @@ template(name='nav')
                     // i.wallet.icon
                     .ui.avatar.image.bell
                         +i name='notification' cl=''
+                if is_admin
+                    a.item(href="/admin" title='admin')
+                        +i name='shield'
                 // a.item(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                 a.item.toggle_walletbar(title='credit')
                     // i.wallet.icon

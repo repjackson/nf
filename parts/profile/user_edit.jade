@@ -3,12 +3,12 @@ template(name='user_edit')
         //- img.ui.fluid.image.checkin_banner(src="{{c.url banner_image_id width=1000 height=500 crop='crop'}}")    
         .ui.stackable.padded.grid
             .row
-                .five.wide.column
+                .four.wide.column.scrolling
                     .ui.center.aligned.large.inline.grey.header
                         | #{user_from_username_param.first_name} #{user_from_username_param.last_name}
                     //- +i name='pencil'
                     .ui.small.inline.header @#{user_from_username_param.username}
-                    a.ui.green.icon.button(href="/user/#{user_from_username_param.username}/") 
+                    a.ui.green.icon.large.fluid.button(href="/user/#{user_from_username_param.username}/") 
                         i.checkmark.big.icon
                     .ui.hidden.divider
                     +image_edit key='image_id' icon='picture' title='profile image' direct=true
@@ -21,7 +21,7 @@ template(name='user_edit')
                             .ui.orange.button.remove_user 
                                 i.remove.icon
                                 |delete user
-                .nine.wide.column
+                .eight.wide.column.scrolling
                     .ui.form
                         +text_edit key='display_name' label='display name' direct=true
                         +text_edit key='first_name' label='first name' direct=true
@@ -36,6 +36,17 @@ template(name='user_edit')
                 .four.wide.column
                     +array_edit key='allergens' label='allergens' icon='no-milk' direct=true
                     +array_edit key='food_dislikes' label='food dislikes' icon='disgusting' direct=true
+                    if is_admin
+                        .ui.header
+                            i.shield.icon
+                            |admin
+                        +boolean_edit key='admin' icon='shield' direct=true
+                        +array_edit key='roles' icon='shield' direct=true
+                    else if in_dev
+                        +array_edit key='roles' icon='shield' direct=true
+                        +boolean_edit key='admin' direct=true
+                    
+                    
                     
 template(name='user_settings')
     .ui.segment

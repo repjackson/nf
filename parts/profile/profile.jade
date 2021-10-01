@@ -33,8 +33,7 @@ template(name='user_layout')
                                         strong #{user.name}
                                         //- small @#{user.username}        
                                     a.ui.inline.header(href="/user/#{user_from_username_param.username}/credit" title='credit')
-                                        //- +i name='coins'
-                                        //- i.coins.icon
+                                        +i name='coins'
                                         |{{fixed user.credit}}c
                             if is_current_user
                                 a.ui.basic.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
@@ -50,11 +49,11 @@ template(name='user_layout')
                                 .ui.basic.button.logout
                                     i.sign.out.alternate.icon
                                     |log out
-                            if is_admin
-                                .ui.dividing.header
+                            if admin
+                                .ui.header
                                     i.shield.icon
                                     |admin
-                            +array_edit key='roles' label='roles' direct=true icon='shield'
+                            +array_view key='roles' label='roles' direct=true icon='shield'
                             a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
                                 i.globe.icon
                                 |log out other clients
