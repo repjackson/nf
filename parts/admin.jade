@@ -8,14 +8,22 @@ template(name='admin')
             .ui.header
                 +i name='stall'
                 |foh
-            .ui.massive.button.call_help
-                +i name='alert'
-                |call help
+            unless admin_settings.foh_calling
+                .ui.massive.button.call_help
+                    +i name='alert'
+                    |call help
+            else 
+                .ui.massive.button.end_call
+                    +i name='cancel'
+                    |end call
+                
         .eight.wide.column
             .ui.header 
                 +i name='scan-stock'
                 |boh
-            // if calling_for_help
-            .ui.fluid.red.message
-                img(src="/bell.gif")
-                |foh help requested
+            if admin_settings.foh_calling
+                .ui.fluid.red.message
+                    img(src="/bell.gif")
+                    .header 
+                        |foh help requested
+            
