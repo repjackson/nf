@@ -1,3 +1,21 @@
 template(name='admin')
-    .ui.header 
-        |admin
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            .ui.header 
+                +i name='shield'
+                |admin
+        .eight.wide.column
+            .ui.header
+                +i name='stall'
+                |foh
+            .ui.massive.button.call_help
+                +i name='alert'
+                |call help
+        .eight.wide.column
+            .ui.header 
+                +i name='scan-stock'
+                |boh
+            // if calling_for_help
+            .ui.fluid.red.message
+                img(src="/bell.gif")
+                |foh help requested
