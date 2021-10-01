@@ -1,10 +1,15 @@
 Router.route '/admin', -> @render 'admin'
+Router.route '/boh', -> @render 'boh'
+Router.route '/foh', -> @render 'foh'
 if Meteor.isClient 
-    Template.admin.onCreated ->
+    Template.foh.onCreated ->
+        @autorun => @subscribe 'admin_settings', ->
+        @autorun => @subscribe 'model_docs', 'foh_call', ->
+    Template.boh.onCreated ->
         @autorun => @subscribe 'admin_settings', ->
         @autorun => @subscribe 'model_docs', 'foh_call', ->
             
-    Template.admin.events
+    Template.foh.events
         'click .end_call': ->
             settings = Docs.findOne model:'admin_settings'
             Docs.update settings._id, 
@@ -19,8 +24,13 @@ if Meteor.isClient
                     model:'admin_settings'
             Docs.insert 
                 model:'foh_call'
+    Template.foh.events
             
-    Template.admin.helpers
+    Template.boh.helpers
+        admin_settings: ->
+            Docs.findOne 
+                model:'admin_settings'
+    Template.foh.helpers
         admin_settings: ->
             Docs.findOne 
                 model:'admin_settings'
