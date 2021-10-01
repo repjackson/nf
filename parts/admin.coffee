@@ -2,6 +2,7 @@ Router.route '/admin', -> @render 'admin'
 if Meteor.isClient 
     Template.admin.onCreated ->
         @autorun => @subscribe 'admin_settings', ->
+        @autorun => @subscribe 'model_docs', 'foh_call', ->
             
     Template.admin.events
         'click .end_call': ->
@@ -23,7 +24,9 @@ if Meteor.isClient
         admin_settings: ->
             Docs.findOne 
                 model:'admin_settings'
-            
+        call_docs: ->
+            Docs.find 
+                model:'foh_call'
             
 if Meteor.isServer
     Meteor.publish 'admin_settings', ->

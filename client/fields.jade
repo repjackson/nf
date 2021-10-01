@@ -154,7 +154,10 @@ template(name='i')
     // if is_hovering
     //     img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
     // else
-    img.content.fade(src="https://img.icons8.com/color/50/000000/#{name}.png" class=cl title=title)
+    if cl.length
+        img.content.fade(src="https://img.icons8.com/color/50/000000/#{name}.png" class=cl title=title)
+    else 
+        img.content.fade(src="https://img.icons8.com/color/50/000000/#{name}.png" class='ui avatar image' title=title)
     // img.content.fade(src="https://img.icons8.com/ios/24/000000/#{name}.png" class=cl title=title)
     // img(src="https://img.icons8.com/dusk/64/000000/#{name}.png" class=cl title=title)
     // img(src="https://img.icons8.com/fluent/48/000000/#{name}.png" class=cl title=title)
@@ -162,7 +165,6 @@ template(name='i')
     //- img.icon8(src="https://img.icons8.com/ios/50/000000/#{name}.png" class=cl title=title)
     //- img(src="https://img.icons8.com/ultraviolet/48/000000/#{name}.png" class=cl title=title)
     //- img(src="https://img.icons8.com/office/48/000000/#{name}.png" class=cl title=title)
-    //- if cl.length
     //-     img(src="https://img.icons8.com/#{gs.icon_theme}/48/000000/#{name}.png" class=cl title=title)
     //- else 
     //-     img.ui.mini.inline.image(src="https://img.icons8.com/#{gs.icon_theme}/48/000000/#{name}.png" class=cl title=title)

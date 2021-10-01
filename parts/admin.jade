@@ -7,7 +7,7 @@ template(name='admin')
         .eight.wide.column
             .ui.header
                 +i name='stall'
-                |foh
+                |front of house
             unless admin_settings.foh_calling
                 .ui.massive.button.call_help
                     +i name='alert'
@@ -16,14 +16,21 @@ template(name='admin')
                 .ui.massive.button.end_call
                     +i name='cancel'
                     |end call
-                
+            .ui.header 
+                +i name='clock'
+                |previous calls
+            .ui.list
+                each call_docs 
+                    .item #{when}
         .eight.wide.column
             .ui.header 
                 +i name='scan-stock'
-                |boh
+                |back of house
             if admin_settings.foh_calling
-                .ui.fluid.red.message
-                    img(src="/bell.gif")
-                    .header 
-                        |foh help requested
+                .ui.fluid.red.inverted.segment.middle.aligned.grid
+                    .eight.wide.column
+                        img.ui.inline.rounded.image(src="/bell.gif")
+                    .eight.wide.column
+                        .ui.header 
+                            |foh help requested
             
