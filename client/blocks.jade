@@ -1,3 +1,37 @@
+template(name='session_key_value_edit')
+    .ui.button.set_key_value(class=set_key_value_class)
+        if key_value_is 'key' 'sort_key'
+            if session_is 'sort_key' value
+                if sorting_up
+                    i.sort.amount.down.icon
+                else
+                    i.sort.amount.up.icon
+        if icon 
+            +i name=icon cl='ui avatar image'
+            // i.icon(class=icon)
+        |#{label}
+
+
+template(name='limit_menu')
+    .ui.inline.small.grey.header
+        |limit
+    .ui.compact.menu
+        .ui.simple.dropdown.item
+            strong #{current_limit}
+            i.dropdown.icon
+            .menu
+                +set_limit amount=1
+                +set_limit amount=5
+                +set_limit amount=10
+                +set_limit amount=20
+
+
+template(name='key_value_edit')
+    .ui.compact.button.set_key_value(class=set_key_value_class)
+        if icon 
+            +i name=icon cl='ui avatar image'
+            // i.icon(class=icon)
+        |#{label}
 template(name='doc_array_togggle')
     if currentUser
         .ui.button.toggle(class=doc_array_toggle_class title=label)

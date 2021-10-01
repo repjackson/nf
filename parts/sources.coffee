@@ -8,7 +8,7 @@ if Meteor.isClient
             Docs.findOne
                 model:'source'
                 _id:@source_id
-        console.log found
+        # console.log found
         found
     
     Router.route '/sources', (->

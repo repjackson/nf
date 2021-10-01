@@ -10,7 +10,7 @@ template(name='product_layout')
             with current_doc
                 .ui.stackable.padded.grid
                     .row
-                        .six.wide.column
+                        .six.wide.column.scrolling
                             a.ui.basic.icon.button(href="/shop")
                                 i.chevron.left.large.icon
                                 // i.large.food.icon
@@ -22,7 +22,7 @@ template(name='product_layout')
                                 //- small product
                             if can_edit
                                 a(href="/product/#{_id}/edit")
-                                    i.pencil.blue.large.link.icon
+                                    i.pencil.blue.large.link.circular.icon
                             // a(href="{{c.url image_id}}" target="_window")
                             img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                             div 
@@ -47,10 +47,9 @@ template(name='product_layout')
                             // .ui.header #{menu_section}
                                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
 
-                        .ten.wide.column
-                            .ui.green.basic.inverted.large.button.add_to_cart
+                        .ten.wide.column.scrolling
+                            .ui.green.large.button.add_to_cart
                                 // i.cart.plus.large.icon
-                                
                                 +i name='add-shopping-cart--v1' cl='ui avatar image'
                                 |add to cart
 
@@ -235,7 +234,7 @@ template(name='product_edit')
                         i.pencil.icon
                         | #{title}
                         small product
-                    .ui.large.icon.green.button.save_product(title='save product')
+                    .ui.large.icon.fluid.green.button.save_product(title='save product')
                         i.checkmark.large.icon   
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
@@ -243,19 +242,21 @@ template(name='product_edit')
                     div
                     +float_edit key='price_usd' label='$ price' direct=true
                 .eight.wide.column
-                    +boolean_edit key='gluten_free' label='gluten free' direct=true icon='no-gluten'
-                    +boolean_edit key='paleo' label='paleo' direct=true icon='caveman'
-                    +boolean_edit key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
-                    +boolean_edit key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'
-                    +boolean_edit key='vegan' label='vegan' direct=true icon='vegan-symbol'
-                    +boolean_edit key='no_gmo' label='no gmo' direct=true icon='no-gmo'
-                    +boolean_edit key='local' label='local' direct=true icon='marker'
-                    +boolean_edit key='nut_free' label='nut free' direct=true icon='no-peanut'
-                    +boolean_edit key='rescued' label='rescued' direct=true icon='nothing-found'
-                    +boolean_edit key='kosher' label='kosher' direct=true icon='kosher-food'
-                    +boolean_edit key='organic' label='organic' direct=true icon='organic-food'
-                    +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
-                    +number_edit key='calories' label='calories' direct=true
+                    +boolean_edit key='is_food' label='is food' direct=true icon='food'
+                    if is_food
+                        +boolean_edit key='gluten_free' label='gluten free' direct=true icon='no-gluten'
+                        +boolean_edit key='paleo' label='paleo' direct=true icon='caveman'
+                        +boolean_edit key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
+                        +boolean_edit key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'
+                        +boolean_edit key='vegan' label='vegan' direct=true icon='vegan-symbol'
+                        +boolean_edit key='no_gmo' label='no gmo' direct=true icon='no-gmo'
+                        +boolean_edit key='local' label='local' direct=true icon='marker'
+                        +boolean_edit key='nut_free' label='nut free' direct=true icon='no-peanut'
+                        +boolean_edit key='rescued' label='rescued' direct=true icon='nothing-found'
+                        +boolean_edit key='kosher' label='kosher' direct=true icon='kosher-food'
+                        +boolean_edit key='organic' label='organic' direct=true icon='organic-food'
+                        +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
+                        +number_edit key='calories' label='calories' direct=true
                     div
                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
                     +link_edit key='external_link' label='external link' icon='globe' direct=true

@@ -1,112 +1,255 @@
 template(name='ingredients')
     .ui.stackable.padded.grid
-        .ui.sixteen.wide.column
-            .ui.inline.header
-                +ibig name='ingredients'
+        .four.wide.column
+            .ui.inline.header 
+                +i name='ingredients'
+                |#{ingredient_docs.count}
                 |ingredients
-            i.plus.link.icon.add_ingredient
-        .ui.sixteen.wide.column
-            .ui.stackable.centered.cards
-                each model_docs_helper 'ingredient'
-                    .ui.card
-                        if image_id
-                            a(href="/ingredient/#{_id}/view")
-                                img.ui.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
-                        .content
-                            a.ui.header(href="/ingredient/#{_id}/view") #{title}
-                            div created {{from_now _timestamp}} by #{_author_username}
-                            each tags
-                                .ui.basic.label #{this}
-                            //- .ui.large.basic.label 
-                            //-     |#{points} points
-                        .content
-                            +voting
-
-            
-            
-template(name='ingredient_card')
-    .ui.card
-        if image_id
-            a(href="/ingredient/#{_id}/view")
-                img.ui.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
-        .content
-            a.ui.header(href="/ingredient/#{_id}/view") #{title}
-            div created {{from_now _timestamp}} by #{_author_username}
+            // if currentUser
+            a.ui.icon.circular.button.add_ingredient(title='add ingredient')
+                i.plus.green.large.icon
+            .ui.left.icon.search.small.input
+                i.search.icon.refresh_tags
+                input#search_tag.prompt(type='text' autocomplete="off" placeholder='tags')
+            if selected_tag_plural
+                .ui.icon.circular.black.compact.button.clear_picked_tags
+                    i.remove.icon
+            each picked_tags
+                button.ui.blue.compact.circular.small.button.unselect_tag(tabindex='0')
+                    //- i.remove.icon
+                    | #{this}
             each tags
-                .ui.basic.label #{this}
-            //- .ui.large.basic.label 
-            //-     |#{points} points
-        .content
-            +voting
+                button.ui.circular.compact.button.tag_result(tabindex="0" class=result_class title=count) #{title}
+                    //- small #{count}
+            // +key_value_edit key='view_private' value=true  label='view private'
+            // +key_value_edit key='view_private' value=false label='view all'
+            .spacer
+        .twelve.wide.column
+            // .ui.inline.header CC demo data 
+            .spacer 
+            .sorting_row
+                .ui.icon.input
+                    i.search.icon
+                    input.tag_search(type='text' placeholder='search...')
+                +key_value_edit key='sort_key' value='cookTime' label='cook time' icon='kitchen'
+                +key_value_edit key='sort_key' value='prepTime' label='prep time' icon='clock'
+                |&nbsp;
+                |&nbsp;
+                +limit_menu
+            .ui.stackable.three.cards.scrolling
+                each ingredient_docs
+                    +ingredient_card
 
-            
-            
-            
-            
+
+template(name='ingredient_card')
+    .ui.card.card_fly_right(class=ingredient_card_class)
+        a.image.zoomer(href="/ingredient/#{_id}")
+            if image_id
+                img.ui.zoomer.pointer.goto_ingredient.image(src="{{c.url image_id width=400 height=400}}")
+            else if images.full
+                img(src=images.full)
+        .content
+            a.ui.header.zoomer(href="/ingredient/#{_id}/") 
+                | #{title}
+            a.zoomer.pointer.zoomer(href="/ingredient/#{_id}/") 
+                |!{description}
+            if tags
+                +ismall name='tags'
+                each tags
+                    .ui.small.basic.label #{this}
+        .content
+            if ingredients
+                span(title='ingredients')
+                    |#{ingredients.count}
+                    +i name='ingredients'
+                each ingredients 
+                    .ui.basic.label #{name}
+            // .right.floated.meta
+            //     | {{from_now _timestamp}}
+            // a(href="/user/#{author.username}")
+            //     img.ui.avatar.image(src="{{c.url author.image_id width=400 height=600 crop='fit'}}")
+            //     |#{author.username}
+        .content    
+            .ui.inline.header
+                |serves #{servings}
+            // +number_view key='servings' label='servings'
+            span 
+                +i name='clock'
+                |#{prepTime}
+            span 
+                +i name='kitchen'
+                |#{cookTime}
+            // +number_view key='prepTime' label='prep time' icon='clock' direct=true
+            // +number_view key='prepTime' label='cook time' icon='oven' direct=true
+            // +date_view key='postDate' label='post date' icon='pencil' direct=true
+            // +date_view key='postDate' label='post date' icon='pencil' direct=true
+        
+            // if ingredients 
+            //     |#{ingredients.length} ingredients
+            // if directions 
+            //     |#{directions.length} directions
+            // if private 
+            //     i.big.lock.icon
+            // if can_edit
+            a.ui.icon.circular.basic.button.zoomer(href="/ingredient/#{_id}/edit")
+                i.pencil.icon
+            a.ui.icon.circular.basic.button.zoomer(href="/ingredient/#{_id}")
+                i.right.chevron.icon
+
 
 template(name='ingredient_view')
     with current_doc
         .ui.stackable.padded.grid
-            .centered.middle.aligned.row
-                .four.wide.center.aligned.column
-                    a.ui.basic.compact.button(href="/ingredients")
+            .row
+                .four.wide.column 
+                    a.ui.compact.circular.basic.button.fly_left(href="/ingredients")
                         i.left.chevron.icon
-                        +icolor name='ingredients' classes='ui inline mini image'
-                        |ingredients
-                .eight.wide.center.aligned.column
-                    .ui.center.aligned.header #{title}
-                .four.wide.center.aligned.column
-                    a.ui.basic.button(href="/ingredient/#{_id}/edit")
-                        i.blue.pencil.icon
-                        |edit        
-            .five.wide.column
-                +image_view key='image_id' direct=true
-                +array_view key='tags' direct=true
-            .six.wide.column
-                .ui.header
-                    +icolor name='meal'
-                    | meals included in
-                each meal_inclusions
-                    a.ui.small.header(href="/meal/#{_id}/view")
-                        img.ui.large.rounded.image(src="{{c.url image width=500 height=500 gravity='face' crop='fill'}}")
-                        |#{title}
-                .ui.header 
-                    +icolor name='real-food-for-meals'
-                    |productes included in
-                .ui.large.selection.animated.list
-                    each ingredient_productes
-                        a.item(href="/product/#{_id}/view")
-                            img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-                            .content
-                                .header
-                                    |#{title}
-                img.ui.large.rounded.image(src="{{c.url image width=500 height=500 gravity='face' crop='fill'}}")
-                +textarea_view key='description' direct=true
-                +comments
-            .five.wide.column
-                with current_doc
+                        +i name='food' cl='ui inline image'
+                        // |ingredients
+                    img.ui.fluid.rounded.image(src=images.full)
+                    .ui.small.grey.inline.header 
+                        small viewing ingredient
+                        // strong #{title}
+                    // if can_edit
+                    a.ui.icon.circular.button(href="/ingredient/#{_id}/edit")
+                        i.pencil.large.icon
+                    .ui.header source: #{source}
                     +voting_full
-                    .ui.header similar ingredients
-                    .ui.header alerts
-                    |alergen alert
-                    |#{alergen_alert}
+                    +viewing
+                    if in_dev 
+                        +print_this
+                    +view_visibility
+                    +author_card
+                .eight.wide.column
+                    h1.ui.header #{title} 
+                    a(href="https://www.google.com/search?q=#{instructions}" target='_window' title='search instructions')
+                        i.search.icon
+                    a(href="https://www.google.com/search?tbm=isch&q=#{instructions}" target='_window' title='image search instructions')
+                        i.image.icon
+                    a(href="https://www.amazon.com/s?k=#{title}&ref=nb_sb_noss_2" target='_window' title='amazon search instructions')
+                        i.amazon.icon
+                    +image_view key='image_id' label='image' direct=true
+                    +image_view key='images.full' label='image' direct=true
+                    +image_view key='images.medium' label='image' direct=true
+                    +image_view key='small' label='image' direct=true
+                    .f6
+                        +html_view key='description' icon='content' label='body' direct=true
+                    +array_view key='location_tags' label='location tags' icon='marker' direct=true
+                    +array_view key='tags' label='tags' icon='tags' direct=true
+                    div
+                    .ui.header 
+                        +i name='ingredients'
+                        |#{ingredients.length}
+                        |ingredients
+                    .ui.three.doubling.cards 
+                        each ingredients
+                            .card
+                                .content
+                                    .header #{name}
+                                    |#{amount} #{measurement}
+                                // .item(title='String') 
+                                // .item(title='String') uuid: #{uuid}
+                                // .item(title='Number') amount: #{amount}
+                                // .item measurement: String #{measurement}
+                    .ui.header 
+                        +i name='list'
+                        |#{directions.length}
+                        |directions
+                    .ui.ordered.big.spaced.list
+                        each directions
+                            .item.zoomer
+                                |#{instructions}
+                                a(href="https://www.google.com/search?q=#{instructions}" target='_window' title='search instructions')
+                                    i.search.icon
+                                a(href="https://www.google.com/search?tbm=isch&q=#{instructions}" target='_window' title='image search instructions')
+                                    i.image.icon
 
+                                if optional 
+                                    | (optional)
+                            // // .item instructions: String #{instructions}
+                            // .item optional: Boolean #{optional}
 
+                    +comments
+                    if watson 
+                        +watson_view
+                .four.wide.column
+                    if can_purchase
+                        .ui.header 
+                            +i name='coins' cl='ui avatar image'
+                            |purchase price: #{purchase_price}pt
+                        +purchase_ingredient_button
+                        +ingredient_orders
+                    +number_view key='servings' label='servings'
+                    // .item     prepTime: Number
+                    +number_view key='prepTime' label='prep time' icon='clock' direct=true
+                    // .item     cookTime: Number
+                    +number_view key='cookTime' label='cook time' icon='kitchen' direct=true
+                    // .item     postDate: Date
+                    +date_view key='postDate' label='post date' icon='pencil' direct=true
+                    // .item     editDate: Date
+                    +date_view key='editDate' label='edit date' icon='pencil' direct=true
+                
+                
+                
+template(name='purchase_ingredient_button')                
+    unless has_purchased
+        .ui.button.purchase_ingredient
+            |purchase ingredient for #{purchase_price}
+    else 
+        .ui.header 
+            |purchased on {{medium_date purchase_timestamp}}
+                
+                
+template(name='ingredient_orders')
+    .ui.header
+        +i name='order-history'
+        |ingredient orders 
+    .ui.selection.link.animated.list
+        each ingredient_order_docs 
+            a.item.fly_right(href="/order/#{_id}")
+                |#{when}
+                |#{_author_username}
+    
+        
+                
 
 template(name='ingredient_edit')
     with current_doc
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                .six.wide.column
-                    .ui.header edit '#{title}' ingredient
-                    a.ui.large.green.button(href="/ingredient/#{_id}/view")
-                        i.checkmark.icon
-                        |save        
-                    .ui.header #{title}
+                    .ui.header 
+                        small editing ingredient
+                        strong #{title}
+                    a.ui.big.icon.green.button(href="/#{model}/#{_id}" title='save')
+                        i.checkmark.big.icon
+                    +remove_button
+                    +image_edit key='image_id' label='image' direct=true
+                    +visibility_settings
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
+                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+                    // +boolean_edit key='private' label='private' direct=true
+                    if in_dev 
+                        +text_edit key='model' label='model' direct=true
+                .seven.wide.column.scrolling
                     +text_edit key='title' direct=true
-                    +array_edit key='tags' direct=true
-                    +image_edit key='image_id' direct=true
-                .six.wide.column
-                    img.ui.large.image(src="{{c.url image width=800 height=500 gravity='face' crop='fill'}}")
-                    +html_edit key='description' direct=true
+                    +text_edit key='name' direct=true
+                    +html_edit key='body' label='body' icon='content' direct=true
+                .four.wide.column.scrolling
+                    +text_edit key='uuid' label='uuid'
+                    +text_edit key='title' label='title'
+                    +number_edit key='servings' label='servings'
+                    // .item     prepTime: Number
+                    +number_edit key='prepTime' label='prep time' icon='clock' direct=true
+                    // .item     cookTime: Number
+                    +number_edit key='prepTime' label='cook time' icon='oven' direct=true
+                    // .item     postDate: Date
+                    +date_edit key='postDate' label='post date' icon='pencil' direct=true
+                    // .item     editDate: Date
+                    +date_edit key='editDate' label='post date' icon='pencil' direct=true
+                    each ingredients
+                        +text_edit key='uuid' label='uuid' direct=true
+                
+                    +boolean_edit key='can_purchase' label='charge for access' direct=true icon='coins'
+                    if can_purchase 
+                        +number_edit key='purchase_price' label='purchase price' direct=true icon='coins'

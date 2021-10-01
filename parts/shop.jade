@@ -1,7 +1,8 @@
 template(name='shop')
     .ui.stackable.padded.grid
         .four.wide.column
-            .ui.inline.header
+            .ui.header
+                +i name='food-cart'
                 |#{product_count}
                 |products
             .ui.icon.input
