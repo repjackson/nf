@@ -1073,6 +1073,7 @@ h1.ui.header{
 
 .topnav{
 	overflow-y:hidden;
+    border-bottom: 0px;
 	/*overflow-x:scroll;*/
 	/*max-height:1000px;*/
 	/*max-height:85vh;*/
