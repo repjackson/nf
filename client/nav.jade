@@ -12,7 +12,7 @@ template(name='nav')
                         +i name='menu--v1'
                     img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
         a.header.item.zoomer.mobile.hidden(href='/')
-            // +i name='food' cl='ui inline mini image'
+            // +i name='food'
             // i.home.icon
             // |Nude Foods Market
             .mobile.hidden
@@ -26,7 +26,7 @@ template(name='nav')
         .icon.item 
             i.large.search.icon
         // a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-        //     // +i name='list' cl='ui inline mini image'
+        //     // +i name='list'
         //     i.newspaper.large.icon
         //     // strong.mobile.hidden news
         .right.menu
@@ -38,13 +38,13 @@ template(name='nav')
                         strong #{cart_items.count}
                         |$#{my_cart_subtotal}
                         .ui.avatar.image.cart
-                            +i name='shopping-cart' cl=''
+                            +i name='shopping-cart'
                         each cart_items
                             img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
                 a.item.toggle_topbar(title='alerts')
                     // i.wallet.icon
                     .ui.avatar.image.bell
-                        +i name='notification' cl=''
+                        +i name='notification'
                 if is_admin
                     a.item(href="/admin" title='admin')
                         +i name='shield'
@@ -52,7 +52,7 @@ template(name='nav')
                 a.item.toggle_walletbar(title='credit')
                     // i.wallet.icon
                     .ui.avatar.image
-                        +i name='wallet' cl=''
+                        +i name='wallet'
                     strong ${{int currentUser.credit}}
                     // i.cart.icon
                 // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
@@ -85,41 +85,30 @@ template(name='nav')
 template(name='secnav')
     .ui.attached.small.borderless.menu.secnav
         a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            .ui.mini.image
-                +i name='grocery-shelf' cl=''
+            +i name='grocery-shelf'
         a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
-            .ui.mini.image
-                +i name='ingredients' cl=''
+            +i name='ingredients'
         a.icon.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
-            .ui.mini.image.farm
-                +i name='field-and-tractor' cl=''
+            +i name='field-and-tractor'
         a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
-            .ui.mini.image.recipes
-                +i name='cookbook' cl=''
+            +i name='cookbook'
         a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            .ui.mini.image.orders
-                +i name='invoice' cl=''
+            +i name='invoice'
         a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            .ui.mini.image
-                +i name='blog' cl=''
+            +i name='blog'
         a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
-            .ui.mini.image
-                +i name='bicycle' cl=''
+            +i name='bicycle'
         a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            .ui.mini.image
-                +i name='phone' cl='ui inline mini image'
+            +i name='phone'
         a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
-            .ui.mini.image
-                +i name='cup' cl=''
+            +i name='cup'
         if currentUser
             a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
-                .ui.mini.image.users
-                    +i name='groups' cl=''
+                +i name='groups'
         unless currentUser
             a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
                 // i.info.large.icon
-                .ui.mini.image.info
-                    +i name='information--v1' cl=''
+                +i name='information--v1'
 
 template(name='my_latest_activity')
     .ui.grey.header 
@@ -300,7 +289,7 @@ template(name='left_sidebar')
         //     |One
         // a.item.set_member.toggle_leftbar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
         a.item.toggle_leftbar.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
-            // +i name='food' cl='ui inline mini image'
+            // +i name='food'
             // i.home.icon
             img.ui.small.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // span.mobile.hidden nude foods market
@@ -310,35 +299,30 @@ template(name='left_sidebar')
         //         input.search_global(type='text')
         // else 
         //     a.item.toggle_leftbar(href='/' class="{{isActivePath '/'}}" title='food')
-        //         // +i name='home' cl='ui inline mini image'
+        //         // +i name='home'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         a.item.toggle_leftbar(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            .ui.avatar.image
-                +i name='food-cart' cl=''
+            +i name='food-cart'
             | #{product_count} products
         a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
-            .ui.avatar.image
-                +i name='ingredients' cl=''
+            +i name='ingredients'
             | #{ingredient_count} ingredients
         a.item.toggle_leftbar(href='/sources' class="{{isActivePath '/sources'}}")
-            .ui.avatar.image.farm
-                +i name='field-and-tractor' cl=''
+            +i name='field-and-tractor'
             | #{source_count} sources
         a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
-            .ui.avatar.image.info
-                +i name='cookbook' cl=''
+            +i name='cookbook'
             |#{recipe_count} recipes
         a.item.toggle_leftbar.zoomer(href='/trips' class="{{isActivePath '/trips'}}")
-            .ui.avatar.image.info
-                +i name='bicycle' cl=''
+            +i name='bicycle'
             |#{recipe_count} trips
         //         // i.newspaper.icon
         //         strong.mobile.hidden get involved
         a.item.toggle_leftbar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
-            +i name='phone' cl='ui inline mini image'
+            +i name='phone'
             | contact
         a.item.toggle_leftbar.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            +i name='blog' cl='ui inline mini image'
+            +i name='blog'
             | #{post_count} posts
         if is_in_admin
             a.icon.item.toggle_admin.toggle_leftbar.no_blink
@@ -351,12 +335,12 @@ template(name='left_sidebar')
         if is_admin
             .divider
             a.item.set_model.toggle_leftbar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
-                +i name='shield' cl='ui inline mini image'
+                +i name='shield'
                 |admin
             a.item.set_user.toggle_leftbar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
-                +i name='groups' cl='ui inline mini image'
+                +i name='groups'
                 | users
             a.item.toggle_leftbar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-                +i name='list' cl='ui inline mini image'
+                +i name='list'
                 | orders
                 
