@@ -23,6 +23,32 @@ template(name='nav')
         //     .ui.icon.transparent.large.input
         //         i.search.icon
         //         input.search_ingredients(type='text' autocomplete="off")
+        a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+            +i name='grocery-shelf'
+        a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
+            +i name='ingredients'
+        a.icon.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
+            +i name='field-and-tractor'
+        a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
+            +i name='cookbook'
+        a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+            +i name='invoice'
+        a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+            +i name='blog'
+        a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
+            +i name='bicycle'
+        a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
+            +i name='phone'
+        a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
+            +i name='cup'
+        if currentUser
+            a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
+                +i name='groups'
+        unless currentUser
+            a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+                // i.info.large.icon
+                +i name='information--v1'
+
         .icon.item 
             i.large.search.icon
         // a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
@@ -84,31 +110,6 @@ template(name='nav')
                 
 template(name='secnav')
     .ui.attached.small.borderless.menu.secnav
-        a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            +i name='grocery-shelf'
-        a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
-            +i name='ingredients'
-        a.icon.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
-            +i name='field-and-tractor'
-        a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
-            +i name='cookbook'
-        a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            +i name='invoice'
-        a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            +i name='blog'
-        a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
-            +i name='bicycle'
-        a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            +i name='phone'
-        a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
-            +i name='cup'
-        if currentUser
-            a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
-                +i name='groups'
-        unless currentUser
-            a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-                // i.info.large.icon
-                +i name='information--v1'
 
 template(name='my_latest_activity')
     .ui.grey.header 

@@ -1055,7 +1055,7 @@ h1.ui.header{
 }
 .scrolling::-webkit-scrollbar {
     /*display: none;*/
-    width: 1px;
+    width: 0px;
 }
 .smallscroll::-webkit-scrollbar {
     width: 2px;
