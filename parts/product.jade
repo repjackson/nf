@@ -236,25 +236,26 @@ template(name='product_edit')
                         small product
                     .ui.large.icon.fluid.green.button.save_product(title='save product')
                         i.checkmark.large.icon   
-                    +text_edit key='title' label='title' direct=true
+                    +text_edit key='title' label='title' icon='text' direct=true
+                    +text_edit key='slug' label='slug' icon='slug' direct=true
                     +image_edit key='image_id' label='image' direct=true
                     +link_edit key='product_link' label='old site link' direct=true
-                    div
-                    +float_edit key='price_usd' label='$ price' direct=true
+                    // div
+                    // +float_edit key='price_usd' label='$ price' direct=true
                 .eight.wide.column
                     .ui.header sizes
                     div
                     +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'
                     if has_2cup
-                        +number_edit key='2cup_price' label='2 cup price' icon='cup' direct=true
+                        +float_edit key='2cup_price' label='2 cup price' icon='cup' direct=true
                     div
                     +boolean_edit key='has_4cup' label='4 cup' direct=true icon='mason-jar'
                     if has_4cup
-                        +number_edit key='4cup_price' label='4 cup price' icon='mason-cup' direct=true
+                        +float_edit key='4cup_price' label='4 cup price' icon='mason-cup' direct=true
                     div
                     +boolean_edit key='has_8cup' label='8 cup' direct=true icon='glass-jar'
                     if has_8cup
-                        +number_edit key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
+                        +float_edit key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
                     div
                     .ui.inline.header food
                     +boolean_edit key='is_food' label='is food' direct=true icon='food'
@@ -274,18 +275,18 @@ template(name='product_edit')
                         div
                         +number_edit key='calories' label='calories' icon='food' direct=true
                     div
-                    +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
-                    +link_edit key='external_link' label='external link' icon='globe' direct=true
-                    +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
-                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
-                    +text_edit key='size_description' label='size description'  direct=true
                     +html_edit key='description' label='description' direct=true
-                    +text_edit key='packaging' label='packaging' icon='package' direct=true
                     if can_delete
                         .ui.red.button.delete_product
                             i.remove.icon   
                             | delete
                 .four.wide.column
+                    +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                    +link_edit key='external_link' label='external link' icon='globe' direct=true
+                    +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
+                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+                    +text_edit key='size_description' label='size description'  direct=true
+                    +text_edit key='packaging' label='packaging' icon='package' direct=true
                     .ui.header 
                         +i name='field-and-tractor'
                         |source

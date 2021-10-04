@@ -207,12 +207,13 @@ template(name='iflat')
 template(name='link_edit')
     div
     if icon
-        i.icon(class=icon)
+        +i name=icon cl='ui avatar image'
+        // i.icon(class=icon)
     .ui.inline.header
         |#{title} #{label}
     .ui.fluid.input
         input.edit_url(type='url' value=field_value placeholder='url' autocomplete="off")
-
+    .spacer
 
 template(name='link_view')
     if field_value
