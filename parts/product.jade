@@ -10,7 +10,7 @@ template(name='product_layout')
             with current_doc
                 .ui.stackable.padded.grid
                     .row
-                        .four.wide.column.scrollin
+                        .five.wide.column.scrollin
                             .ui.large.header 
                                 //- small viewing
                                 | #{title}
@@ -25,6 +25,8 @@ template(name='product_layout')
                                     i.pencil.blue.large.link.circular.icon
                             // a(href="{{c.url image_id}}" target="_window")
                             img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
+                            if image_id2
+                                img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id2}}")
                             div 
                             +text_view key='size_description' label='size description'  direct=true
                             +link_view key='product_link' label='link' icon='wordpress' direct=true
@@ -54,7 +56,7 @@ template(name='product_layout')
                                 +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
 
                         .eight.wide.column.scrollin
-
+                            // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                             a.ui.basic.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
                                 +i name='content' cl='ui avatar image'
                                 |description
@@ -78,7 +80,7 @@ template(name='product_layout')
                                 |inventory
                             div
                             +yield
-                        .four.wide.column.scrolling
+                        .three.wide.column.scrollin
                             .ui.green.large.button.add_to_cart
                                 // i.cart.plus.large.icon
                                 +i name='add-shopping-cart--v1' cl='ui avatar image'

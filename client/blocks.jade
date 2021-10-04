@@ -147,15 +147,17 @@ template(name='session_boolean_toggle')
             else 
                 |#{value}
 
-template(name='session_edit_value_button')
-    .ui.button.set_session_value(class=calculated_class)
-        if icon_view 
-            i.icon(class=icon)
+template(name='session_set')
+    .ui.compact.button.set_session_value(class=calculated_class)
+        if icon
+            +i name=icon
+        // if icon_view 
+        //     i.icon(class=icon)
+        // else 
+        if label
+            |#{label}
         else 
-            if label
-                |#{label}
-            else 
-                |#{value}
+            |#{value}
                 
                 
                 
@@ -495,13 +497,6 @@ template(name='print_this')
     .ui.icon.basic.button.print
         i.orange.code.icon
 
-
-template(name='session_set')
-    .ui.icon.button.set_value(class=session_set_class)
-        if icon
-            i.icon(class=icon)
-        else 
-            |#{value}
 
 
 template(name='friend_button')

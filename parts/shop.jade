@@ -5,7 +5,7 @@ template(name='shop')
                 +i name='food-cart'
                 |#{product_count}
                 |products
-            .ui.icon.input
+            .ui.icon.large.input
                 if product_query
                     i.remove.link.large.red.icon.clear_product_query(title='clear search')
                 else 
@@ -21,10 +21,10 @@ template(name='shop')
             // if picked_ingredient_plural
             //     .ui.icon.black.compact.button.clear_picked_ingredients
             //         i.remove.icon
-            .ui.basic.icon.button.toggle_gf(class=toggle_gf_class)
+            .ui.basic.icon.circular.button.toggle_gf(class=toggle_gf_class)
                 +icolor name='no-gluten' cl='ui mini inline image'
                 |gluten free
-            .ui.basic.icon.button.toggle_vegan(class=toggle_vegan_class)
+            .ui.basic.icon.circular.button.toggle_vegan(class=toggle_vegan_class)
                 +i name='vegan-food' cl='ui mini inline image'
                 |vegan
             each picked_ingredients
@@ -43,15 +43,9 @@ template(name='shop')
             //         | #{this}
             // // div
             // +i name='clock' cl='ui inline mini image'
-            .ui.basic.button 
-                +i name='coffee'
-                |coffee
-            .ui.basic.button 
-                +i name='white-beans'
-                |beans
-            .ui.basic.button 
-                +i name='white-beans'
-                |non food
+            +session_set key='view_shop_section' value='coffee' label='coffee' icon='coffee'
+            +session_set key='view_shop_section' value='beans' label='beans' icon='white-beans'
+            +session_set key='view_shop_section' value='nonfood' label='non-food' icon='shampoo-dispenser'
             // each sections
             //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
             //         //- small #{count}

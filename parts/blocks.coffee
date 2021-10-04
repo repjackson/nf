@@ -338,20 +338,22 @@ if Meteor.isClient
             Router.go "/user/#{username}"
 
 
-    Template.session_edit_value_button.events
+    Template.session_set.events
         'click .set_session_value': ->
             # console.log @key
             # console.log @value
             Session.set(@key, @value)
 
-    Template.session_edit_value_button.helpers
+    Template.session_set.helpers
         calculated_class: ->
             res = ''
             # console.log @
             if @cl
                 res += @cl
             if Session.equals(@key,@value)
-                res += ' active'
+                res += ' orange'
+            else 
+                res += ' basic'
             # console.log res
             res
 
