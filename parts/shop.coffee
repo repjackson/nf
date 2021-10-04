@@ -7,7 +7,8 @@ if Meteor.isClient
 
     Template.shop.onCreated ->
         Session.setDefault 'view_mode', 'list'
-        Session.setDefault 'product_sort_key', 'datetime_available'
+        Session.setDefault 'sort_direction', 1
+        Session.setDefault 'sort_key', '_timestamp'
         Session.setDefault 'product_sort_label', 'available'
         Session.setDefault 'product_limit', 42
         Session.setDefault 'view_open', true
@@ -21,8 +22,8 @@ if Meteor.isClient
             
             Session.get('product_query')
             Session.get('product_limit')
-            Session.get('product_sort_key')
-            Session.get('product_sort_direction')
+            Session.get('sort_key')
+            Session.get('sort_direction')
 
         @autorun => @subscribe 'product_results',
             picked_ingredients.array()
@@ -32,8 +33,8 @@ if Meteor.isClient
             Session.get('view_gf')
             
             Session.get('product_limit')
-            Session.get('product_sort_key')
-            Session.get('product_sort_direction')
+            Session.get('sort_key')
+            Session.get('sort_direction')
             
         @autorun => @subscribe 'product_count',
             picked_ingredients.array()
@@ -43,8 +44,8 @@ if Meteor.isClient
             Session.get('view_gf')
             
             Session.get('product_limit')
-            Session.get('product_sort_key')
-            Session.get('product_sort_direction')
+            Session.get('sort_key')
+            Session.get('sort_direction')
             
 
 
@@ -120,10 +121,10 @@ if Meteor.isClient
 
 
         'click .set_sort_direction': ->
-            if Session.get('product_sort_direction') is -1
-                Session.set('product_sort_direction', 1)
+            if Session.get('sort_direction') is -1
+                Session.set('sort_direction', 1)
             else
-                Session.set('product_sort_direction', -1)
+                Session.set('sort_direction', -1)
 
 
     Template.shop.helpers
@@ -131,7 +132,7 @@ if Meteor.isClient
             Docs.findOne Session.get('quickbuying_id')
 
         sorting_up: ->
-            parseInt(Session.get('product_sort_direction')) is 1
+            parseInt(Session.get('sort_direction')) is 1
 
         toggle_gf_class: -> if Session.get('view_gf') then 'blue' else ''
         toggle_vegan_class: -> if Session.get('view_vegan') then 'blue' else ''
@@ -190,7 +191,7 @@ if Meteor.isClient
             Docs.find {
                 model:'product'
             },
-                sort: "#{Session.get('product_sort_key')}":parseInt(Session.get('product_sort_direction'))
+                sort: "#{Session.get('sort_key')}":parseInt(Session.get('sort_direction'))
                 limit:Session.get('product_limit')
 
         users: ->
@@ -228,10 +229,10 @@ if Meteor.isClient
                 )
 
 
-    Template.set_product_sort_key.events
+    Template.set_sort_key.events
         'click .set_sort': ->
             console.log @
-            Session.set('product_sort_key', @key)
+            Session.set('sort_key', @key)
             Session.set('product_sort_label', @label)
             Session.set('product_sort_icon', @icon)
 
@@ -280,19 +281,11 @@ if Meteor.isServer
         view_vegan
         view_gf
         
-        doc_limit
-        doc_sort_key
-        doc_sort_direction
+        limit=42
+        sort_key='_timestamp'
+        sort_direction=1
         )->
         # console.log picked_ingredients
-        if doc_limit
-            limit = doc_limit
-        else
-            limit = 42
-        if doc_sort_key
-            sort_key = doc_sort_key
-        if doc_sort_direction
-            sort_direction = parseInt(doc_sort_direction)
         self = @
         match = {model:'product', app:'nf'}
         if picked_ingredients.length > 0
