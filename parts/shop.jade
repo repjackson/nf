@@ -36,23 +36,25 @@ template(name='shop')
             each ingredients
                 button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
-        .twelve.wide.column.scrolling
+        .twelve.wide.column.scrollin
             // each picked_sections
             //     button.ui.blue.compact.small.button.unpick_section(tabindex='0')
             //         //- i.remove.icon
             //         | #{this}
             // // div
             // +i name='clock' cl='ui inline mini image'
-            +session_set key='view_shop_section' value='coffee' label='coffee' icon='coffee'
-            +session_set key='view_shop_section' value='beans' label='beans' icon='white-beans'
-            +session_set key='view_shop_section' value='nonfood' label='non-food' icon='shampoo-dispenser'
-            // each sections
-            //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
-            //         //- small #{count}
-            // // unless one_post
             .sorting_row
-                if currentUser
-                    +session_toggle key='shop_filter_published' icon='eye'
+                +session_set key='view_shop_section' value='coffee' label='coffee' icon='coffee'
+                +session_set key='view_shop_section' value='beans' label='beans' icon='white-beans'
+                +session_set key='view_shop_section' value='nonfood' label='non-food' icon='shampoo-dispenser'
+                +session_set key='view_shop_section' value='pasta' label='pasta' icon='spaghetti'
+                +session_set key='view_shop_section' value='dairy' label='dairy' icon='milk-bottle'
+                // each sections
+                //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+                //         //- small #{count}
+                // // unless one_post
+                // if currentUser
+                //     +session_toggle key='shop_filter_published' icon='eye'
                 // +session_set key='view_users' value='grid' icon='th' 
                 // +session_set key='view_users' value='list' icon='list'
                 // +session_set key='sort_users_direction' value='-1' icon='chevron down'
@@ -60,9 +62,9 @@ template(name='shop')
                 // +session_set key='sort_users_key' value='points' icon='coins'
                 // +session_set key='sort_users_key' value='created_date' icon='clock'
                 // +session_set key='view_limit' value=1
-                +session_set key='view_limit' value=10
-                +session_set key='view_limit' value=20
-                +session_set key='view_limit' value=50
+                // +session_set key='view_limit' value=10
+                // +session_set key='view_limit' value=20
+                // +session_set key='view_limit' value=50
 
                 
                 i.large.sort.icon
@@ -90,19 +92,19 @@ template(name='shop')
                 .spacer 
             if subs_ready
                 if one_post
-                    .ui.stackable.center.aligned.one.column.grid
+                    .ui.stackable.center.aligned.one.column.grid.scrolling
                         each product_docs
                             +product_card
                 else if two_posts
-                    .ui.stackable.centered.two.column.grid
+                    .ui.stackable.centered.two.column.grid.scrolling
                         each product_docs
                             +product_card
                 else if three_posts
-                    .ui.stackable.centered.three.column.grid
+                    .ui.stackable.centered.three.column.grid.scrolling
                         each product_docs
                             +product_card
                 else
-                    .ui.stackable.centered.three.column.grid
+                    .ui.stackable.centered.four.column.grid.scrolling
                         each product_docs
                             +product_card
             else 
@@ -142,9 +144,9 @@ template(name='product_card')
                 //- |#{_author.name}'s
                 | #{title}
             //- if session_is 'view_ingredients' true
-            +ismall name='ingredients'
-            each ingredients
-                .ui.small.basic.label #{this}
+            // +ismall name='ingredients'
+            // each ingredients
+            //     .ui.small.basic.label #{this}
             if gluten_free
                 +i name='no-gluten' cl='ui mini inline image' title='gluten free'
             if vegan

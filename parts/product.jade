@@ -258,6 +258,9 @@ template(name='product_edit')
                     // div
                     // +float_edit key='price_usd' label='$ price' direct=true
                 .seven.wide.column.scrolling
+                    .ui.inline.header section
+                    +key_value_edit key='shop_section' value='beans' label='beans' icon='white-beans'
+                    +key_value_edit key='shop_section' value='coffee' label='coffee' icon='coffee'
                     .ui.inline.header sizes
                     // div
                     +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'

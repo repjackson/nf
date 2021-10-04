@@ -11,7 +11,7 @@ template(name='nav')
                     .mobile.hidden
                         +i name='menu--v1'
                     img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
-        a.header.item.zoomer.mobile.hidden(href='/')
+        a.header.item.zoomer.mobile.hidden(href='/' class="{{isActivePath '/shop'}}" )
             // +i name='food'
             // i.home.icon
             // |Nude Foods Market
