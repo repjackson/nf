@@ -82,7 +82,8 @@ if Meteor.isClient
 
         'keyup #product_search': _.throttle((e,t)->
             query = $('#product_search').val()
-            Session.set('product_query', query)
+            if query.length > 2
+                Session.set('product_query', query)
             # console.log Session.get('product_query')
             if e.key == "Escape"
                 Session.set('product_query', null)

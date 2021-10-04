@@ -130,9 +130,9 @@ template(name='product_card')
             .ui.top.right.attached.corner.green.label(title='local')
                 i.marker.icon
         a.zoomer.fly_right(href="/product/#{_id}") 
-            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+            img.ui.centered.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
-            a.ui.inline.header.fly_right(href="/product/#{_id}") 
+            a.ui.header.fly_right(href="/product/#{_id}") 
                 //- |#{_author.name}'s
                 | #{title}
             //- if session_is 'view_ingredients' true
