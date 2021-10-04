@@ -4,6 +4,8 @@ template(name='admin')
             .ui.header 
                 +i name='shield'
                 |admin
+        each admin_users 
+            +user_card
         .eight.wide.column
             +foh
         .eight.wide.column

@@ -10,7 +10,7 @@ if Meteor.isClient
         Session.setDefault 'sort_direction', 1
         Session.setDefault 'sort_key', '_timestamp'
         Session.setDefault 'product_sort_label', 'available'
-        Session.setDefault 'product_limit', 42
+        Session.setDefault 'product_limit', 20
         Session.setDefault 'view_open', true
 
     Template.shop.onCreated ->
@@ -282,7 +282,7 @@ if Meteor.isServer
         view_vegan
         view_gf
         
-        limit=42
+        limit=20
         sort_key='_timestamp'
         sort_direction=1
         )->
