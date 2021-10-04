@@ -1,105 +1,105 @@
-template(name='home')
-    +home_slider
-    .ui.stackable.padded.centered.grid
-        // .one.column.row
-        //     .center.aligned.column
-        //         .ui.big.header.f20.lower
-        //             |{{lower "we deliver local, organic groceries, meals and household products in zero-waste, reusable containers to your door by bicycles"}}
+// template(name='home')
+//     +home_slider
+//     .ui.stackable.padded.centered.grid
+//         // .one.column.row
+//         //     .center.aligned.column
+//         //         .ui.big.header.f20.lower
+//         //             |{{lower "we deliver local, organic groceries, meals and household products in zero-waste, reusable containers to your door by bicycles"}}
 
-        // .one.column.row
-        //     .center.aligned.column
-        //         .ui.header start shopping zero waste!
+//         // .one.column.row
+//         //     .center.aligned.column
+//         //         .ui.header start shopping zero waste!
 
-        .four.column.row
-            a.center.aligned.column.zoomer(href="/shop")
-                img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/localbites300x300-300x300.jpg")
-                // +i name='shopping-cart' cl='ui inline image'
-                // i.food.icon
-                .ui.header local bites
-            a.center.aligned.column.zoomer(href="/shop") 
-                // i.users.icon
-                img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/Producebox300x300-300x300.jpg")
-                // +i name='conference' cl='ui inline image'
-                .ui.header 'ugly' produce
-            a.center.aligned.column.zoomer(href="/shop")
-                img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/buildyourown600x600-300x300.jpg")
-                .ui.header pantry staples
-            a.center.aligned.column.zoomer(href="/shop")
-                img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/10/Lemony-Lentil-Soup-e1604278933195.jpg")
-                .ui.header nude meals
-    .ui.vertical.stripe.segment
-        .ui.stackable.padded.grid
-            .seven.column.center.aligned.row
-                a.center.aligned.column.zoomer(href="/shop")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='food-cart'
-                        |#{product_count} products
-                a.center.aligned.column(href="/trips")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='protected-bike-lane'
-                        |trips
-                a.center.aligned.column.zoomer(href='/store')
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='qr-code'
-                        |qr code purchasing
-                a.center.aligned.column.zoomer(href="/giftcards")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='gift-card'
-                        |#{giftcard_count} giftcards
-                a.center.aligned.column.zoomer(href="/users")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='groups'
-                        |#{customer_count} customers
-                a.center.aligned.column
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='technical-fluid'
-                        |pounds of plastic prevented
-                a.center.aligned.column(href="/subscriptions")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='clock'
-                        |#{subscription_count} subscriptions
-                .center.aligned.column
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='staff'
-                        |#{staff_count} staff
-                a.center.aligned.column.zoomer(href="/sources")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='field-and-tractor'
-                        |#{source_count} sources
-                a.center.aligned.column.zoomer(href="/ingredients")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='ingredients'
-                        |#{ingredient_count} ingredients
-                a.center.aligned.column.zoomer(href="/orders")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='invoice'
-                        |#{order_count} orders
-                a.center.aligned.column.zoomer(href="/stats")
-                    .ui.icon.header
-                        i.icon 
-                            +ibig name='eye'
-                        |#{stats.homepage_views} homepage views
-        .ui.stackable.padded.grid
-            .ui.header 
-                |latest updated documents
-            each latest_updated
-                .ui.header #{title}
-            .ui.header 
-                |latest created documents
-            each latest_created
-                .ui.header #{title}
-            .ui.header 
+//         .four.column.row
+//             a.center.aligned.column.zoomer(href="/shop")
+//                 img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/localbites300x300-300x300.jpg")
+//                 // +i name='shopping-cart' cl='ui inline image'
+//                 // i.food.icon
+//                 .ui.header local bites
+//             a.center.aligned.column.zoomer(href="/shop") 
+//                 // i.users.icon
+//                 img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/Producebox300x300-300x300.jpg")
+//                 // +i name='conference' cl='ui inline image'
+//                 .ui.header 'ugly' produce
+//             a.center.aligned.column.zoomer(href="/shop")
+//                 img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/09/buildyourown600x600-300x300.jpg")
+//                 .ui.header pantry staples
+//             a.center.aligned.column.zoomer(href="/shop")
+//                 img.ui.image(src="https://nudefoodsmarket.com/wp-content/uploads/2020/10/Lemony-Lentil-Soup-e1604278933195.jpg")
+//                 .ui.header nude meals
+//     .ui.vertical.stripe.segment
+//         .ui.stackable.padded.grid
+//             .seven.column.center.aligned.row
+//                 a.center.aligned.column.zoomer(href="/shop")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='food-cart'
+//                         |#{product_count} products
+//                 a.center.aligned.column(href="/trips")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='protected-bike-lane'
+//                         |trips
+//                 a.center.aligned.column.zoomer(href='/store')
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='qr-code'
+//                         |qr code purchasing
+//                 a.center.aligned.column.zoomer(href="/giftcards")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='gift-card'
+//                         |#{giftcard_count} giftcards
+//                 a.center.aligned.column.zoomer(href="/users")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='groups'
+//                         |#{customer_count} customers
+//                 a.center.aligned.column
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='technical-fluid'
+//                         |pounds of plastic prevented
+//                 a.center.aligned.column(href="/subscriptions")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='clock'
+//                         |#{subscription_count} subscriptions
+//                 .center.aligned.column
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='staff'
+//                         |#{staff_count} staff
+//                 a.center.aligned.column.zoomer(href="/sources")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='field-and-tractor'
+//                         |#{source_count} sources
+//                 a.center.aligned.column.zoomer(href="/ingredients")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='ingredients'
+//                         |#{ingredient_count} ingredients
+//                 a.center.aligned.column.zoomer(href="/orders")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='invoice'
+//                         |#{order_count} orders
+//                 a.center.aligned.column.zoomer(href="/stats")
+//                     .ui.icon.header
+//                         i.icon 
+//                             +ibig name='eye'
+//                         |#{stats.homepage_views} homepage views
+//         .ui.stackable.padded.grid
+//             .ui.header 
+//                 |latest updated documents
+//             each latest_updated
+//                 .ui.header #{title}
+//             .ui.header 
+//                 |latest created documents
+//             each latest_created
+//                 .ui.header #{title}
+//             .ui.header 
                 
                         
-    +footer
+//     +footer

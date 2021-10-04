@@ -9,15 +9,15 @@ Tracker.autorun ->
         $(window).scrollTop 0
 
 
-Template.home.onCreated ->
-    @autorun => @subscribe 'model_docs', 'stats', ->
-Template.home.onRendered ->
-    Meteor.call 'log_homepage_view', ->
-        console.log '?'
-Template.home.helpers
-    stats: ->
-        Docs.findOne
-            model:'stats'
+# Template.home.onCreated ->
+#     @autorun => @subscribe 'model_docs', 'stats', ->
+# Template.home.onRendered ->
+#     Meteor.call 'log_homepage_view', ->
+#         console.log '?'
+# Template.home.helpers
+#     stats: ->
+#         Docs.findOne
+#             model:'stats'
 
 Template.nav.onCreated ->
     @autorun => @subscribe 'order_count'
