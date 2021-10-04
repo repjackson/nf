@@ -11,15 +11,15 @@ template(name='product_layout')
                 .ui.stackable.padded.grid
                     .row
                         .four.wide.column.scrollin
+                            .ui.large.header 
+                                //- small viewing
+                                | #{title}
+                                //- small product
                             a.ui.basic.icon.button.fly_left(href="/shop")
                                 i.chevron.left.large.icon
                                 // i.large.food.icon
                                 +i name='food-cart' cl='ui mini inline image'
                         
-                            .ui.large.inline.header 
-                                //- small viewing
-                                | #{title}
-                                //- small product
                             if can_edit
                                 a(href="/product/#{_id}/edit")
                                     i.pencil.blue.large.link.circular.icon
@@ -241,7 +241,7 @@ template(name='product_edit')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .five.wide.column
+                .five.wide.column.scrolling
                     .ui.inline.header
                         i.pencil.icon
                         | #{title}
@@ -255,7 +255,7 @@ template(name='product_edit')
                     +link_edit key='product_link' label='old site link' direct=true
                     // div
                     // +float_edit key='price_usd' label='$ price' direct=true
-                .seven.wide.column
+                .seven.wide.column.scrolling
                     .ui.inline.header sizes
                     // div
                     +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'
@@ -297,7 +297,7 @@ template(name='product_edit')
                         .ui.red.button.delete_product
                             i.remove.icon   
                             | delete
-                .four.wide.column
+                .four.wide.column.scrolling
                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
                     +link_edit key='external_link' label='external link' icon='globe' direct=true
                     +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
