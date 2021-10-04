@@ -242,6 +242,21 @@ template(name='product_edit')
                     div
                     +float_edit key='price_usd' label='$ price' direct=true
                 .eight.wide.column
+                    .ui.header sizes
+                    div
+                    +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'
+                    if has_2cup
+                        +number_edit key='2cup_price' label='2 cup price' icon='cup' direct=true
+                    div
+                    +boolean_edit key='has_4cup' label='4 cup' direct=true icon='mason-jar'
+                    if has_4cup
+                        +number_edit key='4cup_price' label='4 cup price' icon='mason-cup' direct=true
+                    div
+                    +boolean_edit key='has_8cup' label='8 cup' direct=true icon='glass-jar'
+                    if has_8cup
+                        +number_edit key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
+                    div
+                    .ui.inline.header food
                     +boolean_edit key='is_food' label='is food' direct=true icon='food'
                     if is_food
                         +boolean_edit key='gluten_free' label='gluten free' direct=true icon='no-gluten'
@@ -253,10 +268,11 @@ template(name='product_edit')
                         +boolean_edit key='local' label='local' direct=true icon='marker'
                         +boolean_edit key='nut_free' label='nut free' direct=true icon='no-peanut'
                         +boolean_edit key='rescued' label='rescued' direct=true icon='nothing-found'
-                        +boolean_edit key='kosher' label='kosher' direct=true icon='kosher-food'
+                        +boolean_edit key='kosher' label='kosher' direct=true icon='judaism'
                         +boolean_edit key='organic' label='organic' direct=true icon='organic-food'
                         +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
-                        +number_edit key='calories' label='calories' direct=true
+                        div
+                        +number_edit key='calories' label='calories' icon='food' direct=true
                     div
                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
                     +link_edit key='external_link' label='external link' icon='globe' direct=true

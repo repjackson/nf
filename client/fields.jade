@@ -748,8 +748,8 @@ template(name='number_edit')
         //- i.grey.icon(class=icon)
     .ui.inline.small.header(title=tip)
         if icon
-            i.icon(class=icon)
-            // +icon name=icon cl='ui avatar image'
+            // i.icon(class=icon)
+            +i name=icon cl='ui avatar image'
         if title
             |#{title}
         else if label
