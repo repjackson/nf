@@ -161,12 +161,22 @@ template(name='product_card')
             // //- a.image(href="/product/#{_id}")
                 
         .content    
-            .ui.inline.header 
-                |${{fixed price_usd}}
-            i.big.link.cart.plus.icon.add_to_cart
-            if is_admin
-                a(href="/product/#{_id}/edit")
-                    i.pencil.link.icon
+            +boolean_view key='has_2cup' label='2 cup' direct=true icon='cup'
+            if has_2cup
+                +float_view key='2cup_price' label='2 cup price' icon='cup' direct=true
+            +boolean_view key='has_4cup' label='4 cup' direct=true icon='mason-jar'
+            if has_4cup
+                +float_view key='4cup_price' label='4 cup price' icon='mason-cup' direct=true
+            +boolean_view key='has_8cup' label='8 cup' direct=true icon='glass-jar'
+            if has_8cup
+                +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
+        
+            // .ui.inline.header 
+            //     |${{fixed price_usd}}
+            i.big.link.cart.plus.circular.green.icon.add_to_cart
+            // if is_admin
+            //     a(href="/product/#{_id}/edit")
+            //         i.pencil.link.icon
             // .ui.inline.small.header 
             //     |(#{menu_section}) 
             // div

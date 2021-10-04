@@ -10,7 +10,7 @@ template(name='product_layout')
             with current_doc
                 .ui.stackable.padded.grid
                     .row
-                        .six.wide.column.scrolling
+                        .four.wide.column.scrollin
                             a.ui.basic.icon.button(href="/shop")
                                 i.chevron.left.large.icon
                                 // i.large.food.icon
@@ -39,15 +39,21 @@ template(name='product_layout')
                             +boolean_view key='organic' label='organic' direct=true icon='organic-food'
                             +boolean_view key='no_gmo' label='no gmo' direct=true icon='no-gmo'
                             +boolean_view key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
-                            .ui.link.card.zoomer.goto_source
-                                img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                                .content
-                                    .ui.header.zoomer
-                                        |#{product_source.title}
                             // .ui.header #{menu_section}
                                     +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                            +boolean_view key='has_2cup' label='2 cup' direct=true icon='cup'
+                            if has_2cup
+                                +float_view key='2cup_price' label='2 cup price' icon='cup' direct=true
+                            div
+                            +boolean_view key='has_4cup' label='4 cup' direct=true icon='mason-jar'
+                            if has_4cup
+                                +float_view key='4cup_price' label='4 cup price' icon='mason-cup' direct=true
+                            div
+                            +boolean_view key='has_8cup' label='8 cup' direct=true icon='glass-jar'
+                            if has_8cup
+                                +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
 
-                        .ten.wide.column.scrolling
+                        .eight.wide.column.scrollin
                             .ui.green.large.button.add_to_cart
                                 // i.cart.plus.large.icon
                                 +i name='add-shopping-cart--v1' cl='ui avatar image'
@@ -76,6 +82,12 @@ template(name='product_layout')
                                 |inventory
                             div
                             +yield
+                        .four.wide.column.scrolling
+                            .ui.link.card.zoomer.goto_source
+                                img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    .ui.header.zoomer
+                                        |#{product_source.title}
                             
 template(name='product_main')                            
     +html_view key='description' direct=true
