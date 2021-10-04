@@ -108,16 +108,6 @@ template(name='shop')
 
 
         
-template(name='set_sort_key')
-    .ui.compact.basic.button.set_sort
-        if color
-            .ui.label(class=color) #{label}
-        else 
-            if emoji
-                em(data-emoji=emoji)
-            else if icon
-                i.icon(class=icon)
-            |#{label}
         
 
 template(name='set_view_mode_product')

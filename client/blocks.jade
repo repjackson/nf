@@ -156,10 +156,11 @@ template(name='session_edit_value_button')
                 |#{label}
             else 
                 |#{value}
-
-
+                
+                
+                
 template(name='set_sort_key')
-    .item.set_sort
+    .ui.compact.basic.button.set_sort
         if color
             .ui.label(class=color) #{label}
         else 
@@ -168,6 +169,18 @@ template(name='set_sort_key')
             else if icon
                 i.icon(class=icon)
             |#{label}
+
+
+// template(name='set_sort_key')
+//     .item.set_sort
+//         if color
+//             .ui.label(class=color) #{label}
+//         else 
+//             if emoji
+//                 em(data-emoji=emoji)
+//             else if icon
+//                 i.icon(class=icon)
+//             |#{label}
 
 template(name='goto_model')
     if is_staff
