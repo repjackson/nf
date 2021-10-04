@@ -84,7 +84,7 @@ template(name='shop')
                 .spacer 
             if subs_ready
                 if one_post
-                    .ui.stackable.centered.one.column.grid
+                    .ui.stackable.center.aligned.one.column.grid
                         each product_docs
                             +product_card
                 else if two_posts
@@ -129,10 +129,10 @@ template(name='product_card')
         if local 
             .ui.top.right.attached.corner.green.label(title='local')
                 i.marker.icon
-        a(href="/product/#{_id}") 
+        a.zoomer.fly_right(href="/product/#{_id}") 
             img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
         .content
-            a.ui.inline.header(href="/product/#{_id}") 
+            a.ui.inline.header.fly_right(href="/product/#{_id}") 
                 //- |#{_author.name}'s
                 | #{title}
             //- if session_is 'view_ingredients' true

@@ -11,7 +11,7 @@ template(name='product_layout')
                 .ui.stackable.padded.grid
                     .row
                         .four.wide.column.scrollin
-                            a.ui.basic.icon.button(href="/shop")
+                            a.ui.basic.icon.button.fly_left(href="/shop")
                                 i.chevron.left.large.icon
                                 // i.large.food.icon
                                 +i name='food-cart' cl='ui mini inline image'
@@ -54,10 +54,6 @@ template(name='product_layout')
                                 +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
 
                         .eight.wide.column.scrollin
-                            .ui.green.large.button.add_to_cart
-                                // i.cart.plus.large.icon
-                                +i name='add-shopping-cart--v1' cl='ui avatar image'
-                                |add to cart
 
                             a.ui.basic.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
                                 +i name='content' cl='ui avatar image'
@@ -83,6 +79,10 @@ template(name='product_layout')
                             div
                             +yield
                         .four.wide.column.scrolling
+                            .ui.green.large.button.add_to_cart
+                                // i.cart.plus.large.icon
+                                +i name='add-shopping-cart--v1' cl='ui avatar image'
+                                |add to cart
                             .ui.link.card.zoomer.goto_source
                                 img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
                                 .content
@@ -241,7 +241,7 @@ template(name='product_edit')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column
+                .five.wide.column
                     .ui.inline.header
                         i.pencil.icon
                         | #{title}
@@ -251,23 +251,28 @@ template(name='product_edit')
                     +text_edit key='title' label='title' icon='text' direct=true
                     +text_edit key='slug' label='slug' icon='slug' direct=true
                     +image_edit key='image_id' label='image' direct=true
+                    +image_edit key='image_id2' label='alt image' direct=true
                     +link_edit key='product_link' label='old site link' direct=true
                     // div
                     // +float_edit key='price_usd' label='$ price' direct=true
-                .eight.wide.column
-                    .ui.header sizes
-                    div
+                .seven.wide.column
+                    .ui.inline.header sizes
+                    // div
                     +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'
                     if has_2cup
                         +float_edit key='2cup_price' label='2 cup price' icon='cup' direct=true
-                    div
+                    // div
                     +boolean_edit key='has_4cup' label='4 cup' direct=true icon='mason-jar'
                     if has_4cup
                         +float_edit key='4cup_price' label='4 cup price' icon='mason-cup' direct=true
-                    div
+                    // div
                     +boolean_edit key='has_8cup' label='8 cup' direct=true icon='glass-jar'
                     if has_8cup
                         +float_edit key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
+                    +boolean_edit key='has_other_size' label='other size' direct=true icon='glass-jar'
+                    if has_other_size
+                        +text_edit key='other_size_description' label='other cup description' icon='content' direct=true
+                        +float_edit key='other_size_price' label='other cup price' icon='glass-jar' direct=true
                     div
                     .ui.inline.header food
                     +boolean_edit key='is_food' label='is food' direct=true icon='food'

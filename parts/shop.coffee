@@ -229,12 +229,12 @@ if Meteor.isClient
                 )
 
 
-    Template.set_sort_key.events
-        'click .set_sort': ->
-            console.log @
-            Session.set('sort_key', @key)
-            Session.set('product_sort_label', @label)
-            Session.set('product_sort_icon', @icon)
+    # Template.set_sort_key.events
+    #     'click .set_sort': ->
+    #         console.log @
+    #         Session.set('sort_key', @key)
+    #         Session.set('product_sort_label', @label)
+    #         Session.set('product_sort_icon', @icon)
 
 
 
