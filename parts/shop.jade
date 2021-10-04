@@ -7,10 +7,10 @@ template(name='shop')
                 |products
             .ui.icon.input
                 if product_query
-                    i.remove.link.icon.clear_product_query(title='clear search')
+                    i.remove.link.large.red.icon.clear_product_query(title='clear search')
                 else 
                     i.search.icon
-                input#product_search(type='text' placeholder='title...' value=product_query)
+                input#product_search(type='text' placeholder='title...' value=product_query autocomplete='off')
             if currentUser
                 a.ui.icon.button.add_product(title='cook')
                     i.plus.green.large.icon
