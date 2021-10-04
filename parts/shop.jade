@@ -23,12 +23,15 @@ template(name='shop')
             //         i.remove.icon
             .ui.basic.icon.button.toggle_gf(class=toggle_gf_class)
                 +icolor name='no-gluten' cl='ui mini inline image'
+                |gluten free
             .ui.basic.icon.button.toggle_vegan(class=toggle_vegan_class)
                 +i name='vegan-food' cl='ui mini inline image'
+                |vegan
             each picked_ingredients
                 button.ui.blue.compact.small.button.unpick_ingredient(tabindex='0')
                     //- i.remove.icon
                     | #{this}
+            // if ingredients
             +i name='ingredients' cl='ui inline mini image'
             each ingredients
                 button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}

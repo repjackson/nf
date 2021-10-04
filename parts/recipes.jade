@@ -30,11 +30,11 @@ template(name='recipes')
 
                 
                 i.large.sort.icon
-                +set_product_sort_key key='price_usd' label='price' icon='money'
-                //- +set_product_sort_key key='_timestamp' label='added' icon='clock'
-                +set_product_sort_key key='comment_count' label='comment count' icon='chat'
-                +set_product_sort_key key='views' label='views' icon='eye'
-                +set_product_sort_key key='points' label='points' icon='line chart'
+                +set_sort_key key='price_usd' label='price' icon='money'
+                //- +set_sort_key key='_timestamp' label='added' icon='clock'
+                +set_sort_key key='comment_count' label='comment count' icon='chat'
+                +set_sort_key key='views' label='views' icon='eye'
+                +set_sort_key key='points' label='points' icon='line chart'
                 .ui.compact.icon.button.set_sort_direction(title='toggle sort direction')
                     if sorting_up
                         i.sort.amount.down.icon
