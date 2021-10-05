@@ -351,7 +351,37 @@ if Meteor.isClient
             # console.log res
             res
 
+    
 
+
+
+    Template.key_value_edit.events
+        'click .set_key_value': ->
+            # console.log @key
+            # console.log @value
+            Docs.update Router.current().params.doc_id, 
+                $set:
+                    "#{@key}":@value
+            # Session.set(@key, @value)
+
+    Template.key_value_edit.helpers
+        calculated_class: ->
+            res = ''
+            doc = Docs.findOne Router.current().params.doc_id
+            # console.log @
+            if @cl
+                res += @cl
+            # if Session.equals(@key,@value)
+            if doc["#{@key}"]  is @value
+                res += ' black'
+            else 
+                res += ' basic'
+            # console.log res
+            res
+
+
+
+    
 
     Template.session_boolean_toggle.events
         'click .toggle_session_key': ->
