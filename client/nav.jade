@@ -23,10 +23,11 @@ template(name='nav')
         //     .ui.icon.transparent.large.input
         //         i.search.icon
         //         input.search_ingredients(type='text' autocomplete="off")
-        a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            +i name='grocery-shelf'
+        // a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+        //     +i name='grocery-shelf'
         a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
-            +i name='ingredients'
+            // +i name='ingredients'
+            +i name='grocery-shelf'
         a.icon.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
             +i name='field-and-tractor'
         a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
