@@ -235,39 +235,39 @@ template(name='product_edit')
                     // div
                     // +float_edit key='price_usd' label='$ price' direct=true
                 .four.wide.column
-                    .ui.segment
-                        .ui.inline.header 
-                            +i name='category'
-                            |Section
-                        div
-                        +number_edit key='a_number' label="'A' number" direct=true
-                        +number_edit key='b_number' label="'B' number" direct=true
-                        +key_value_edit key='shop_section' value='beans' label='beans' icon='white-beans'
-                        +key_value_edit key='shop_section' value='coffee' label='coffee' icon='coffee'
-                        +key_value_edit key='shop_section' value='snacks' label='snacks' icon='potato-chips'
-                        +key_value_edit key='shop_section' value='fridge' label='fridge' icon='fridge'
-                        +key_value_edit key='shop_section' value='freezer' label='freezer' icon='ice-cream-freezer'
+                    .ui.inline.header 
+                        +i name='category'
+                        |Section
+                    div
+                    +number_edit key='a_number' label="'A' number" direct=true
+                    +number_edit key='b_number' label="'B' number" direct=true
+                    +key_value_edit key='shop_section' value='beans' label='beans' icon='white-beans'
+                    +key_value_edit key='shop_section' value='coffee' label='coffee' icon='coffee'
+                    +key_value_edit key='shop_section' value='snacks' label='snacks' icon='potato-chips'
+                    +key_value_edit key='shop_section' value='fridge' label='fridge' icon='fridge'
+                    +key_value_edit key='shop_section' value='freezer' label='freezer' icon='ice-cream-freezer'
+                    +key_value_edit key='shop_section' value='nuts_seeds' label='nuts & seeds' icon='chia-seeds'
+                    // +key_value_edit key='shop_section' value='seeds' label='seeds' icon='seeds'
                 .four.wide.column
-                    .ui.segment 
-                        .ui.inline.header 
-                            +i name='line-chart'
-                            |Sizes
-                        div
-                        +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'
-                        if has_2cup
-                            +float_edit key='2cup_price' label='2 cup price' icon='cup' direct=true
-                        // div
-                        +boolean_edit key='has_4cup' label='4 cup' direct=true icon='mason-jar'
-                        if has_4cup
-                            +float_edit key='4cup_price' label='4 cup price' icon='mason-jar' direct=true
-                        // div
-                        +boolean_edit key='has_8cup' label='8 cup' direct=true icon='glass-jar'
-                        if has_8cup
-                            +float_edit key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
-                        +boolean_edit key='has_other_size' label='other size' direct=true icon='glass-jar'
-                        if has_other_size
-                            +text_edit key='other_size_description' label='other cup description' icon='content' direct=true
-                            +float_edit key='other_size_price' label='other cup price' icon='glass-jar' direct=true
+                    .ui.inline.header 
+                        +i name='line-chart'
+                        |Sizes
+                    div
+                    +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'
+                    if has_2cup
+                        +float_edit key='2cup_price' label='2 cup price' icon='cup' direct=true
+                    // div
+                    +boolean_edit key='has_4cup' label='4 cup' direct=true icon='mason-jar'
+                    if has_4cup
+                        +float_edit key='4cup_price' label='4 cup price' icon='mason-jar' direct=true
+                    // div
+                    +boolean_edit key='has_8cup' label='8 cup' direct=true icon='glass-jar'
+                    if has_8cup
+                        +float_edit key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
+                    +boolean_edit key='has_other_size' label='other size' direct=true icon='glass-jar'
+                    if has_other_size
+                        +text_edit key='other_size_description' label='other cup description' icon='content' direct=true
+                        +float_edit key='other_size_price' label='other cup price' icon='glass-jar' direct=true
                 .four.wide.column
                     .ui.inline.header food
                     +boolean_edit key='is_food' label='is food' direct=true icon='food'
@@ -294,11 +294,11 @@ template(name='product_edit')
                             i.remove.icon   
                             | delete
                 .four.wide.column
-                    +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
-                    +link_edit key='external_link' label='external link' icon='globe' direct=true
+                    // +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                    // +link_edit key='external_link' label='external link' icon='globe' direct=true
                     +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
-                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
-                    +text_edit key='size_description' label='size description'  direct=true
+                    // +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+                    // +text_edit key='size_description' label='size description'  direct=true
                     +text_edit key='packaging' label='packaging' icon='package' direct=true
                 .four.wide.column
                     .ui.header 

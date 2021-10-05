@@ -1,6 +1,6 @@
 template(name='ingredients')
     .ui.stackable.padded.grid
-        .four.wide.column
+        .three.wide.column
             .ui.inline.header 
                 +i name='ingredients'
                 |#{ingredient_docs.count}
@@ -24,7 +24,7 @@ template(name='ingredients')
             // +key_value_edit key='view_private' value=true  label='view private'
             // +key_value_edit key='view_private' value=false label='view all'
             .spacer
-        .twelve.wide.column
+        .thirteen.wide.column
             // .ui.inline.header CC demo data 
             .spacer 
             .sorting_row
@@ -36,7 +36,7 @@ template(name='ingredients')
                 |&nbsp;
                 |&nbsp;
                 +limit_menu
-            .ui.stackable.three.cards.scrolling
+            .ui.stackable.five.cards.scrolling
                 each ingredient_docs
                     +ingredient_card
 
@@ -118,8 +118,8 @@ template(name='ingredient_view')
                     +viewing
                     if in_dev 
                         +print_this
-                    +view_visibility
-                    +author_card
+                    // +view_visibility
+                    // +author_card
                 .eight.wide.column
                     h1.ui.header #{title} 
                     a(href="https://www.google.com/search?q=#{instructions}" target='_window' title='search instructions')
@@ -225,7 +225,7 @@ template(name='ingredient_edit')
                         i.checkmark.big.icon
                     +remove_button
                     +image_edit key='image_id' label='image' direct=true
-                    +visibility_settings
+                    // +visibility_settings
                     +array_edit key='tags' label='tags' icon='tags' direct=true
                     +array_edit key='location_tags' label='location tags' icon='marker' direct=true
                     // +boolean_edit key='private' label='private' direct=true
