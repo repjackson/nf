@@ -90,6 +90,11 @@ template(name='product_layout')
                                 .content
                                     .ui.header.zoomer
                                         |#{product_source.title}
+                            .ui.header 
+                                i.fork.icon
+                                |related products
+                            each related_products
+                                a.ui.header(href="/product/#{_id}") #{title}
                             
 template(name='product_main')                            
     +html_view key='description' direct=true

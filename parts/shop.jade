@@ -1,11 +1,5 @@
 template(name='shop')
     .ui.stackable.padded.grid
-        .sixteen.wide.center.aligned.column
-            .ui.inline.header
-                |beta app, go to our current site to order and manage account
-            a.ui.button(href="https://nudefoodsmarket.com/")
-                i.external.icon
-                |current site  
         .four.wide.column
             .ui.header
                 +i name='food-cart'
@@ -43,6 +37,14 @@ template(name='shop')
                 button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
         .twelve.wide.column.scrollin
+            .ui.inline.header
+                |beta app, go to our 
+            a.ui.basic.compact.large.button(href="https://nudefoodsmarket.com/")
+                i.external.icon
+                |current site  
+            .ui.inline.header
+                | to order and manage account
+        
             // each picked_sections
             //     button.ui.blue.compact.small.button.unpick_section(tabindex='0')
             //         //- i.remove.icon
