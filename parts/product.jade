@@ -1,114 +1,92 @@
-template(name='product_layout')
-    +nav
-    .ui.bottom.attached.pushable.segment
-        +topbar
-        +cartbar
-        +left_sidebar
-        +right_sidebar
-        +walletbar
-        #main_are.global_containe.pusher.scrollin
-            with current_doc
-                .ui.stackable.padded.grid
-                    .row
-                        .five.wide.column.scrollin
-                            .ui.large.header 
-                                //- small viewing
-                                | #{title}
-                                //- small product
-                            a.ui.basic.icon.button.fly_left(href="/shop")
-                                i.chevron.left.large.icon
-                                // i.large.food.icon
-                                +i name='food-cart' cl='ui mini inline image'
-                        
-                            if can_edit
-                                a(href="/product/#{_id}/edit")
-                                    i.pencil.blue.large.link.circular.icon
-                            // a(href="{{c.url image_id}}" target="_window")
-                            img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                            if image_id2
-                                img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id2}}")
-                            div 
-                            +text_view key='size_description' label='size description'  direct=true
-                            +link_view key='product_link' label='link' icon='wordpress' direct=true
-                            +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
-                            +boolean_view key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
-                            +boolean_view key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'
-                            +boolean_view key='vegan' label='vegan' direct=true icon='vegan-symbol'
-                            +boolean_view key='paleo' label='paleo' direct=true icon='caveman'
-                            +boolean_view key='local' label='local' direct=true icon='marker'
-                            +boolean_view key='nut_free' label='nut free' direct=true icon='no-peanut'
-                            +boolean_view key='rescued' label='rescued' direct=true icon='nothing-found'
-                            +boolean_view key='organic' label='organic' direct=true icon='organic-food'
-                            +boolean_view key='no_gmo' label='no gmo' direct=true icon='no-gmo'
-                            +boolean_view key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
-                            // .ui.header #{menu_section}
-                                    +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
-                            +boolean_view key='has_2cup' label='2 cup' direct=true icon='cup'
-                            if has_2cup
-                                +float_view key='2cup_price' label='2 cup price' icon='cup' direct=true
-                            div
-                            +boolean_view key='has_4cup' label='4 cup' direct=true icon='mason-jar'
-                            if has_4cup
-                                +float_view key='4cup_price' label='4 cup price' icon='mason-jar' direct=true
-                            div
-                            +boolean_view key='has_8cup' label='8 cup' direct=true icon='glass-jar'
-                            if has_8cup
-                                +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
-
-                        .eight.wide.column.scrollin
-                            // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                            a.ui.basic.compact.button(href="/product/#{_id}/" class="{{isActiveRoute 'product_main'}}")
-                                +i name='content' cl='ui avatar image'
-                                |description
-                            a.ui.basic.compact.button(href="/product/#{_id}/subscriptions" class="{{isActiveRoute 'product_subscriptions'}}") 
-                                +i name='clock' cl='ui avatar image'
-                                |subscriptions
-                            a.ui.basic.compact.button(href="/product/#{_id}/orders" class="{{isActiveRoute 'product_orders'}}")
-                                +i name='list' cl='ui avatar image'
-                                |orders
-                            a.ui.basic.compact.button(href="/product/#{_id}/recipes" class="{{isActiveRoute 'product_recipes'}}") 
-                                +i name='cookbook' cl='ui avatar image'
-                                |recipes
-                            a.ui.basic.compact.button(href="/product/#{_id}/reviews" class="{{isActiveRoute 'product_reviews'}}") 
-                                +i name='popular-topic' cl='ui avatar image'
-                                |reviews
-                            // a.ui.basic.compact.button(href="/product/#{_id}/comments" class="{{isActiveRoute 'product_comments'}}") 
-                            //     +i name='chat' cl='ui avatar image'
-                            //     |comments
-                            a.ui.basic.compact.button(href="/product/#{_id}/inventory" class="{{isActiveRoute 'product_inventory'}}") 
-                                +i name='shield' cl='ui avatar image'
-                                |inventory
-                            div
-                            +yield
-                        .three.wide.column.scrollin
-                            .ui.green.large.button.add_to_cart
-                                // i.cart.plus.large.icon
-                                +i name='add-shopping-cart--v1' cl='ui avatar image'
-                                |add to cart
-                            .ui.link.card.zoomer.goto_source
-                                img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                                .content
-                                    .ui.header.zoomer
-                                        |#{product_source.title}
-                            .ui.header 
-                                i.fork.icon
-                                |related products
-                            each related_products
-                                a.ui.header(href="/product/#{_id}") #{title}
+template(name='product_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    .ui.large.inline.header 
+                        //- small viewing
+                        | #{title}
+                        //- small product
+                    a.ui.basic.icon.button.fly_left(href="/shop")
+                        i.chevron.left.large.icon
+                        // i.large.food.icon
+                        +i name='food-cart' cl='ui mini inline image'
+                    if can_edit
+                        a(href="/product/#{_id}/edit")
+                            i.pencil.blue.large.link.circular.icon
+                    // a(href="{{c.url image_id}}" target="_window")
+                    img.ui.rounded.image.zoomer(src="{{c.url image_id}}")
+                    if image_id2
+                        img.ui.rounded.image.zoomer(src="{{c.url image_id2}}")
+                    // div 
+                .four.wide.column
+                    +text_view key='size_description' label='size description'  direct=true
+                    +link_view key='product_link' label='link' icon='wordpress' direct=true
+                .four.wide.column
+                    +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
+                    +boolean_view key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
+                    +boolean_view key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'
+                    +boolean_view key='vegan' label='vegan' direct=true icon='vegan-symbol'
+                    +boolean_view key='paleo' label='paleo' direct=true icon='caveman'
+                    +boolean_view key='local' label='local' direct=true icon='marker'
+                    +boolean_view key='nut_free' label='nut free' direct=true icon='no-peanut'
+                    +boolean_view key='rescued' label='rescued' direct=true icon='nothing-found'
+                    +boolean_view key='organic' label='organic' direct=true icon='organic-food'
+                    +boolean_view key='no_gmo' label='no gmo' direct=true icon='no-gmo'
+                    +boolean_view key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
+                    // .ui.header #{menu_section}
+                            +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                    +boolean_view key='has_2cup' label='2 cup' direct=true icon='cup'
+                    if has_2cup
+                        +float_view key='2cup_price' label='2 cup price' icon='cup' direct=true
+                    div
+                    +boolean_view key='has_4cup' label='4 cup' direct=true icon='mason-jar'
+                    if has_4cup
+                        +float_view key='4cup_price' label='4 cup price' icon='mason-jar' direct=true
+                    div
+                    +boolean_view key='has_8cup' label='8 cup' direct=true icon='glass-jar'
+                    if has_8cup
+                        +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
+                    // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
+                .four.wide.column
+                    +html_view key='description' direct=true
+                .four.wide.column
+                    .ui.inline.header 
+                        +i name='ingredients'
+                        |ingredients
+                    each ingredients
+                        .ui.large.basic.label #{this}
+                .four.wide.column
+                    +voting_full
+                    +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
+                    +link_view key='external_link' label='external link' icon='globe' direct=true
+                    +comments
+                .four.wide.column
+                    +product_inventory
+                .four.wide.column
+                    +product_reviews
+                .four.wide.column
+                    +product_subscriptions
+                .four.wide.column
+                    +product_orders
+                .four.wide.column
+                    +product_subscriptions
+                .three.wide.column
+                    .ui.green.large.button.add_to_cart
+                        // i.cart.plus.large.icon
+                        +i name='add-shopping-cart--v1' cl='ui avatar image'
+                        |add to cart
+                    .ui.link.card.zoomer.goto_source
+                        img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                        .content
+                            .ui.header.zoomer
+                                |#{product_source.title}
+                    .ui.header 
+                        i.fork.icon
+                        |related products
+                    each related_products
+                        a.ui.header(href="/product/#{_id}") #{title}
                             
-template(name='product_main')                            
-    +html_view key='description' direct=true
-    .ui.inline.header 
-        +i name='ingredients'
-        |ingredients
-    each ingredients
-        .ui.large.basic.label #{this}
-    div
-    +voting_full
-    +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
-    +link_view key='external_link' label='external link' icon='globe' direct=true
-    +comments
-        
         
 template(name='product_inventory')      
     .ui.inline.header 
@@ -129,8 +107,6 @@ template(name='product_inventory')
                     +text_edit key='location' label='location' icon='marker' direct=true
                     i.checkmark.green.link.icon.save_inventory_item
 
-
-
 template(name='product_reviews')
     .ui.inline.header 
         +i name='popular-topic'
@@ -141,10 +117,6 @@ template(name='product_reviews')
     each product_recipes
         a.ui.header(href="/recipe/#{_id}/view") #{title}
         
-        
-        
-    
-    
 template(name='product_subscriptions')     
     div
     if subscribed
@@ -166,7 +138,6 @@ template(name='product_subscriptions')
                 .ui.basic.label #{sub_frequency}
     .ui.small.header 
         |your subscriptions
-
 
 template(name='product_orders')                            
     if can_order
