@@ -117,7 +117,7 @@ template(name='icon_edit')
     div
     if icon
         //- i.grey.icon(class=icon)
-        +icon name=icon cl='ui avatar image'
+        +icon name=icon
     .ui.inline.header
         if title
             |#{title}
@@ -207,7 +207,7 @@ template(name='iflat')
 template(name='link_edit')
     div
     if icon
-        +i name=icon cl='ui avatar image'
+        +i name=icon
         // i.icon(class=icon)
     .ui.inline.header
         |#{title} #{label}
@@ -219,14 +219,14 @@ template(name='link_view')
     if field_value
         div
         if icon
-            +i name=icon cl='ui avatar image'
+            +i name=icon
         //- .ui.inline.header 
         //-     |#{title} #{label}
-        a.ui.small.header(href=field_value target='_window')
+        a.ui.small.header(href=field_value target='_window' title=field_value)
             |#{label}
-        div
-        a(href="#{field_value}" target='_window')
-            |#{field_value}
+        // div
+        // a(href="#{field_value}" target='_window')
+        //     |#{field_value}
         //- img.ui.fluid.image(src=field_value)
         
         
@@ -316,7 +316,7 @@ template(name='raw_edit')
             label 
                 if icon
                     // i.icon(class=field_value)
-                    +i name=icon cl='ui avatar image'
+                    +i name=icon
                 if title
                     |#{title}
                 else if label
@@ -335,7 +335,7 @@ template(name='raw_view')
             label 
                 if icon
                     // i.icon(class=field_value)
-                    +i name=icon cl='ui avatar image'
+                    +i name=icon
                 if title
                     |#{title}
                 else if label
@@ -353,7 +353,7 @@ template(name='textarea_edit')
             label 
                 if icon
                     // i.icon(class=field_value)
-                    +i name=icon cl='ui avatar image'
+                    +i name=icon
                 if title
                     |#{title}
                 else if label
@@ -369,7 +369,7 @@ template(name='text_edit')
     div
     if icon
         //- i.grey.icon(class=icon)
-        +icon name=icon cl='ui avatar image'
+        +icon name=icon
     .ui.inline.small.header
         if title
             |#{title}
@@ -437,7 +437,7 @@ template(name='date_view')
     if field_value
         div
         if icon
-            +i name=icon cl='ui avatar image'
+            +i name=icon
         .ui.grey.inline.small.header
             if title
                 |#{title}
@@ -516,7 +516,7 @@ template(name='array_edit')
     .spacer
     // if icon
     //     i.grey.icon(class=i)
-    //     // +icon name=icon cl='ui avatar image'
+    //     // +icon name=icon
     .ui.inline.header
         |#{field_value.length}
         if title
@@ -547,7 +547,7 @@ template(name='array_edit')
 //     .spacer
 //     if i
 //         i.grey.icon(class=i)
-//         // +icon name=icon cl='ui avatar image'
+//         // +icon name=icon
 //     .ui.inline.header
 //         if title
 //             |#{title}
@@ -661,7 +661,7 @@ template(name='kvs')
     .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
         //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
         if icon
-            +i name=icon cl='ui avatar image'
+            +i name=icon
         .inline.f12
             //- if field_value
             //-     i.checkmark.icon
@@ -677,7 +677,7 @@ template(name='skvs')
     .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
         //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
         if icon
-            +i name=icon cl='ui avatar image'
+            +i name=icon
         .inline.f12
             //- if field_value
             //-     i.checkmark.icon
@@ -698,7 +698,7 @@ template(name='boolean_edit')
             i.circle.outline.icon
         //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
         if icon
-            +i name=icon cl='ui avatar image'
+            +i name=icon
         .inline.f12
             //- if field_value
             //-     i.checkmark.icon
@@ -720,24 +720,27 @@ template(name='boolean_edit')
         //-         i.large.icon(class=false_icon)
         //-     else
         //-         |no
+        
+        
+        
 template(name='boolean_view')
     if field_value
-        .ui.basic.large.label(title=title)
-            .ui.inline.grey.small.header
-                if icon
-                    if field_value
-                        +ibig name=icon cl='ui inline mini image'
-                    else
-                        //- i.grey.icon(class=icon)
-                        +iios name=icon cl='ui inline mini image'
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                else if key
-                    |#{key}
+        .ui.basic.label(title=title)
+            // .ui.inline.grey.small.header
+            if icon
+                if field_value
+                    +i name=icon cl='ui inline mini image'
                 else
-                    |#{this}
+                    //- i.grey.icon(class=icon)
+                    +iios name=icon cl='ui inline mini image'
+            if title
+                |#{title}
+            else if label
+                |#{label}
+            else if key
+                |#{key}
+            else
+                |#{this}
             if field_value
                 i.large.green.checkmark.icon
             else
@@ -750,7 +753,7 @@ template(name='number_edit')
     .ui.inline.small.header(title=tip)
         if icon
             // i.icon(class=icon)
-            +i name=icon cl='ui avatar image'
+            +i name=icon
         if title
             |#{title}
         else if label
@@ -790,7 +793,7 @@ template(name='float_edit')
     .ui.small.grey.inline.header(title=tip)
         if icon
             // i.grey.icon(class=icon)
-            +ismall name=icon
+            +i name=icon
         if title
             |#{title}
         else if label
@@ -822,7 +825,7 @@ template(name='phone_view')
         unless header
             div
             //- if icon
-            //-     +i name=icon cl='ui avatar image'          
+            //-     +i name=icon          
             .ui.inline.grey.header
                 if title
                     |#{title}
@@ -899,7 +902,7 @@ template(name='single_doc_view')
         .ui.label
             if icon
                 //- i.grey.icon(class=icon)
-                +i name=icon cl='ui avatar image'
+                +i name=icon
             |#{field_value}
 
 

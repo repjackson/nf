@@ -16,7 +16,7 @@ body {
     filter: invert(1) !important;
 } */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 2px;
 }
 
 #barcode { 
@@ -1002,7 +1002,7 @@ h1.ui.header{
 .scrolling{
 	overflow-y:scroll;
 	overflow-x:hidden;
-	max-height:101vh;
+	max-height:95vh;
 	/*max-height:85vh;*/
 	padding-top: 1em;
 	padding-left: 1em;
