@@ -262,6 +262,9 @@ template(name='right_sidebar')
             a.item.toggle_rightbar(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
                 +i name='shopping-cart' cl='ui avatar image'
                 |cart
+            a.item.toggle_rightbar(href="/work" class="{{isActiveRoute 'work'}}")
+                +i name='trust' cl='ui avatar image'
+                |work
             a.item.toggle_rightbar(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
                 +i name='bicycle' cl='ui avatar image'
                 |trips

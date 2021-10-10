@@ -171,6 +171,11 @@ Template.registerHelper 'parent_key_value_is', (key, value)->
 
 
 
+Template.registerHelper 'in_role', (role)->
+    if Meteor.userId() and Meteor.user().roles 
+       role in Meteor.user().roles 
+       
+
 # Template.registerHelper 'parent_template', () -> Template.parentData()
     # Session.get 'displaying_profile'
 

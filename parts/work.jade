@@ -1,0 +1,20 @@
+template(name='work')
+    .ui.stackable.padded.grid 
+        .four.wide.column
+            .ui.header 
+                +i name='trust'
+                |work
+            if in_role 'staff'
+                .ui.button.add_shift 
+                    |add shift
+            if accepted
+                |accepted 
+            else 
+                .ui.button.apply
+                    |apply
+        .twelve.wide.column
+            .ui.header 
+                |your shifts 
+            .ui.header 
+                |available shifts 
+            
