@@ -39,4 +39,20 @@ if Meteor.isClient
         # @autorun => Meteor.subscribe 'model_docs', 'source'
 
     Template.shift_edit.onRendered ->
-            
+               
+               
+                        
+if Meteor.isClient
+    Router.route '/shift/:doc_id', (->
+        @layout 'layout'
+        @render 'shift_view'
+        ), name:'shift_view'
+
+
+
+    Template.shift_view.onCreated ->
+        @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
+        # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
+        # @autorun => Meteor.subscribe 'model_docs', 'source'
+
+    Template.shift_edit.helpers

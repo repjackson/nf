@@ -139,6 +139,18 @@ Template.link_edit.events
             Docs.update parent._id,
                 $set:"#{@key}":val
 
+Template.datetime_edit.events
+    'blur .edit_datetime': (e,t)->
+        val = t.$('.edit_datetime').val()
+        if @direct
+            parent = Template.parentData()
+        else
+            parent = Template.parentData(5)
+        doc = Docs.findOne parent._id
+        if doc
+            Docs.update parent._id,
+                $set:"#{@key}":val
+
 
 Template.i.onCreated ->
     @hovering = new ReactiveVar false

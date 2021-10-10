@@ -17,7 +17,8 @@ template(name='product_view')
                     // a(href="{{c.url image_id}}" target="_window")
                 .four.wide.column
                     img.ui.rounded.image.zoomer(src="{{c.url image_id}}")
-                    if image_id2
+                if image_id2
+                    .four.wide.column
                         img.ui.rounded.image.zoomer(src="{{c.url image_id2}}")
                     // div 
                 .four.wide.column

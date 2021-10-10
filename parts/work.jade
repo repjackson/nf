@@ -63,7 +63,8 @@ template(name='shift_view')
                     +voting_full
                     //- +array_view key='location_tags' label='location_tags' direct=true
                 .twelve.wide.column.scrolling
-                    .ui.header #{title}
+                    +datetime_view key='start_datetime' label='start date/time' direct=true
+                    +single_user_view key='staff_assigned' label='staff assigned' direct=true
                     img.ui.rounded.image(src="{{c.url image_id }}" class=currentUser.invert_class)
                     // a.ui.header(href="/user/#{target.username}")
                     //     |#{target.username}
@@ -85,10 +86,12 @@ template(name='shift_edit')
                     .ui.inline.header 
                         +icolor name='news' cl='ui image inline pointer'
                         |edit shift
-                    a.ui.icon.green.big.button(href="/shift/#{_id}/view" title='save')
+                    a.ui.icon.green.big.button(href="/shift/#{_id}" title='save')
                         i.checkmark.big.icon
-                    +text_edit key='title' label='title' direct=true
-                    +html_edit key='content' label='content' direct=true
+                    +datetime_edit key='start_datetime' label='start date/time' direct=true
+                    +single_user_edit key='staff_assigned' label='staff assigned' direct=true
+                    // +text_edit key='title' label='title' direct=true
+                    // +html_edit key='content' label='content' direct=true
                 .four.wide.column
                     i.large.link.red.remove.icon.delete_shift
                     .ui.header 
