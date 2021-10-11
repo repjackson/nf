@@ -2,7 +2,7 @@ template(name='product_view')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column
+                .eight.wide.column
                     .ui.large.inline.header 
                         //- small viewing
                         | #{title}
@@ -15,7 +15,7 @@ template(name='product_view')
                         a(href="/product/#{_id}/edit")
                             i.pencil.blue.large.link.circular.icon
                     // a(href="{{c.url image_id}}" target="_window")
-                .four.wide.column
+                    // .four.wide.column
                     img.ui.rounded.image.zoomer(src="{{c.url image_id}}")
                 if image_id2
                     .four.wide.column
@@ -288,7 +288,7 @@ template(name='product_edit')
                         +boolean_edit key='jar' label='jar container (requires deposit & return)' direct=true icon='mason-jar'
                         div
                         +number_edit key='calories' label='calories' icon='food' direct=true
-                .four.wide.column
+                .eight.wide.column
                     div
                     +html_edit key='description' label='description' direct=true
                     if can_delete
