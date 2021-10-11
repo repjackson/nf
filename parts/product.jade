@@ -2,7 +2,7 @@ template(name='product_view')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .eight.wide.column
+                .six.wide.column
                     .ui.large.inline.header 
                         //- small viewing
                         | #{title}
@@ -16,12 +16,14 @@ template(name='product_view')
                             i.pencil.blue.large.link.circular.icon
                     // a(href="{{c.url image_id}}" target="_window")
                     // .four.wide.column
-                    img.ui.rounded.image.zoomer(src="{{c.url image_id}}")
+                    img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                 if image_id2
                     .four.wide.column
                         img.ui.rounded.image.zoomer(src="{{c.url image_id2}}")
                     // div 
                 .four.wide.column
+                    +html_view key='description' direct=true
+                .five.wide.column
                     +text_view key='size_description' label='size description'  direct=true
                     +link_view key='product_link' label='link' icon='wordpress' direct=true
                     +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
@@ -49,8 +51,6 @@ template(name='product_view')
                     if has_8cup
                         +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
                     // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                .four.wide.column
-                    +html_view key='description' direct=true
                 .four.wide.column
                     .ui.inline.header 
                         +i name='ingredients'
@@ -306,20 +306,23 @@ template(name='product_edit')
                     .ui.header 
                         +i name='field-and-tractor'
                         |source
-                    with product_source
-                        a.ui.header(href="/source/#{_id}")
-                            img.ui.avatar.image(src="{{c.url image_id width=100 height=100 gravity='face' crop='fill'}}")
-                            |#{title}
-                        i.remove.link.circular.red.icon.remove_source
-                        // if is_admin
+                        with product_source
+                            a.ui.header.pointer.zoomer(href="/source/#{_id}")
+                                img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
+                                |#{title}
+                            i.remove.link.circular.red.icon.remove_source
+                            // if is_admin
                             
                     unless source_id
-                        if is_admin
-                            .ui.icon.input 
-                                i.building.icon
-                                input.source_search(type='text' placeholder='search source title')
+                        // if is_admin
+                        .ui.icon.input 
+                            i.building.icon
+                            input.source_search(type='text' placeholder='search source title')
+                        .ui.selection.link.animated.list
                             each search_results
-                                .ui.header.pick_source #{title}
+                                .ui.item.pick_source.zoomer
+                                    img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
+                                    |#{title}
                             
                             
                             
