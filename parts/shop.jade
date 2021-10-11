@@ -53,13 +53,21 @@ template(name='shop')
             //         | #{this}
             // // div
             // +i name='clock' cl='ui inline mini image'
-            .sorting_row
-                +session_set key='view_shop_section' value='coffee' label='coffee' icon='coffee'
+            .sorting_row.hscroll
                 +session_set key='view_shop_section' value='beans' label='beans' icon='white-beans'
-                +session_set key='view_shop_section' value='nonfood' label='non-food' icon='shampoo-dispenser'
-                +session_set key='view_shop_section' value='pasta' label='pasta' icon='spaghetti'
-                +session_set key='view_shop_section' value='dairy' label='dairy' icon='milk-bottle'
-                // each sections
+                +session_set key='view_shop_section' value='coffee' label='coffee' icon='coffee'
+                +session_set key='view_shop_section' value='snacks' label='snacks' icon='potato-chips'
+                +session_set key='view_shop_section' value='fridge' label='fridge' icon='fridge'
+                +session_set key='view_shop_section' value='freezer' label='freezer' icon='ice-cream-freezer'
+                +session_set key='view_shop_section' value='nuts_seeds' label='nuts & seeds' icon='chia-seeds'
+                +session_set key='view_shop_section' value='rice_grains' label='rice & grains' icon='wheat'
+            
+                // +session_set key='view_shop_section' value='coffee' label='coffee' icon='coffee'
+                // +session_set key='view_shop_section' value='beans' label='beans' icon='white-beans'
+                // +session_set key='view_shop_section' value='nonfood' label='non-food' icon='shampoo-dispenser'
+                // +session_set key='view_shop_section' value='pasta' label='pasta' icon='spaghetti'
+                // +session_set key='view_shop_section' value='dairy' label='dairy' icon='milk-bottle'
+                // // each sections
                 //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
                 //         //- small #{count}
                 // // unless one_post

@@ -47,6 +47,18 @@ body {
 	/*padding-left: 1em;*/
 }
 
+.hscroll{
+	overflow-y:hidden;
+	overflow-x:scroll;
+	/*max-height:700px;*/
+	/*max-height:85vh;*/
+	/*padding-top: 1em;*/
+	/*padding-left: 1em;*/
+}
+
+.hscroll::-webkit-scrollbar {
+  height: 1px;
+}
 
 
 /* Track */

@@ -369,13 +369,13 @@ if Meteor.isServer
         return undefined
 
     Meteor.publish 'product_facets', (
-        picked_ingredients
-        picked_sections
-        product_query
-        view_vegan
-        view_gf
-        shop_section
-        doc_limit
+        picked_ingredients=[]
+        picked_section=[]
+        product_query=null
+        view_vegan=false
+        view_gf=false
+        shop_section=null
+        doc_limit=20
         doc_sort_key
         doc_sort_direction
         view_delivery
