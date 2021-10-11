@@ -19,7 +19,7 @@ if Meteor.isClient
             picked_sections.array()
             Session.get('view_vegan')
             Session.get('view_gf')
-            
+            Session.get('view_shop_section')
             Session.get('product_query')
             Session.get('product_limit')
             Session.get('sort_key')
@@ -31,7 +31,7 @@ if Meteor.isClient
             Session.get('product_query')
             Session.get('view_vegan')
             Session.get('view_gf')
-            
+            Session.get('view_shop_section')
             Session.get('product_limit')
             Session.get('sort_key')
             Session.get('sort_direction')
@@ -281,7 +281,7 @@ if Meteor.isServer
         product_query
         view_vegan
         view_gf
-        
+        shop_section=null
         limit=20
         sort_key='_timestamp'
         sort_direction=1
@@ -289,6 +289,8 @@ if Meteor.isServer
         # console.log picked_ingredients
         self = @
         match = {model:'product', app:'nf'}
+        if shop_section 
+            match.shop_section = shop_section
         if picked_ingredients.length > 0
             match.ingredients = $all: picked_ingredients
             # sort = 'price_per_serving'
@@ -372,6 +374,7 @@ if Meteor.isServer
         product_query
         view_vegan
         view_gf
+        shop_section
         doc_limit
         doc_sort_key
         doc_sort_direction
@@ -381,11 +384,13 @@ if Meteor.isServer
         )->
         # console.log 'dummy', dummy
         # console.log 'query', query
-        console.log 'picked ingredients', picked_ingredients
+        # console.log 'picked ingredients', picked_ingredients
 
         self = @
         match = {app:'nf'}
         match.model = 'product'
+        if shop_section 
+            match.shop_section = shop_section
         if view_vegan
             match.vegan = true
         if view_gf

@@ -17,12 +17,10 @@ template(name='product_view')
                     // a(href="{{c.url image_id}}" target="_window")
                     // .four.wide.column
                     img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
+                    +html_view key='description' direct=true
                 if image_id2
                     .four.wide.column
                         img.ui.rounded.image.zoomer(src="{{c.url image_id2}}")
-                    // div 
-                .four.wide.column
-                    +html_view key='description' direct=true
                 .five.wide.column
                     +text_view key='size_description' label='size description'  direct=true
                     +link_view key='product_link' label='link' icon='wordpress' direct=true
