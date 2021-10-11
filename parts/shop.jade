@@ -3,11 +3,11 @@ template(name='shop')
         .four.wide.column
             .ui.header
                 +i name='food-cart'
-                |#{product_count}
+                |#{product_docs.count}
                 |products
             .ui.icon.large.input
                 if product_query
-                    i.remove.link.large.red.icon.clear_product_query(title='clear search')
+                    i.remove.link.large.red.icon.clear_product_query.zoomer(title='clear search')
                 else 
                     i.search.icon
                 input#product_search(type='text' placeholder='title...' value=product_query autocomplete='off')
@@ -37,13 +37,15 @@ template(name='shop')
                 button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
         .twelve.wide.column.scrollin
-            .ui.inline.header
-                |beta app, go to our 
-            a.ui.basic.compact.large.button(href="https://nudefoodsmarket.com/")
-                i.external.icon
-                |current site  
-            .ui.inline.header
-                | to order and manage account
+            .ui.info.message
+                .content
+                    .ui.inline.header
+                        |beta app, go to our 
+                    a.ui.basic.compact.large.button(href="https://nudefoodsmarket.com/")
+                        i.external.icon
+                        |current site  
+                    .ui.inline.header
+                        | to order and manage account
         
             // each picked_sections
             //     button.ui.blue.compact.small.button.unpick_section(tabindex='0')

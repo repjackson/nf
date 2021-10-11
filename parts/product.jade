@@ -302,29 +302,30 @@ template(name='product_edit')
                     // +array_edit key='location_tags' label='location tags' icon='marker' direct=true
                     // +text_edit key='size_description' label='size description'  direct=true
                     +text_edit key='packaging' label='packaging' icon='package' direct=true
-                .four.wide.column
-                    .ui.header 
-                        +i name='field-and-tractor'
-                        |source
-                        with product_source
-                            a.ui.header.pointer.zoomer(href="/source/#{_id}")
-                                img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
-                                |#{title}
-                            i.remove.link.circular.red.icon.remove_source
-                            // if is_admin
-                            
-                    unless source_id
-                        // if is_admin
-                        .ui.icon.input 
-                            i.building.icon
-                            input.source_search(type='text' placeholder='search source title')
-                        .ui.selection.link.animated.list
-                            each search_results
-                                .ui.item.pick_source.zoomer
+                .five.wide.column
+                    .ui.segment
+                        .ui.header 
+                            +i name='field-and-tractor'
+                            |source
+                            with product_source
+                                a.ui.header.pointer.zoomer(href="/source/#{_id}")
                                     img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
                                     |#{title}
-                            
-                            
+                                i.remove.link.circular.red.icon.remove_source
+                                // if is_admin
+                                
+                        unless source_id
+                            // if is_admin
+                            .ui.icon.input 
+                                i.building.icon
+                                input.source_search(type='text' placeholder='search source title')
+                            .ui.selection.link.animated.list
+                                each search_results
+                                    .ui.item.pick_source.zoomer
+                                        img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
+                                        |#{title}
+                                
+                                
                             
                             
                             
