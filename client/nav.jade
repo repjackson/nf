@@ -32,26 +32,26 @@ template(name='nav')
             +i name='field-and-tractor'
         a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             +i name='cookbook'
-        a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            +i name='invoice'
+        // a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+        //     +i name='invoice'
         a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
             +i name='blog'
-        a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
-            +i name='bicycle'
-        a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            +i name='phone'
-        a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
-            +i name='cup'
+        // a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
+        //     +i name='bicycle'
+        // a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
+        //     +i name='phone'
+        // a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
+        //     +i name='cup'
         if currentUser
             a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
                 +i name='groups'
-        unless currentUser
-            a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-                // i.info.large.icon
-                +i name='information--v1'
+        // unless currentUser
+        //     a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
+        //         // i.info.large.icon
+        //         +i name='information--v1'
 
-        .icon.item 
-            i.large.search.icon
+        // .icon.item 
+        //     i.large.search.icon
         // a.item.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
         //     // +i name='list'
         //     i.newspaper.large.icon
@@ -68,10 +68,10 @@ template(name='nav')
                             +i name='shopping-cart'
                         each cart_items
                             img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-                a.item.toggle_topbar(title='alerts')
-                    // i.wallet.icon
-                    .ui.avatar.image.bell
-                        +i name='notification'
+                // a.item.toggle_topbar(title='alerts')
+                //     // i.wallet.icon
+                //     .ui.avatar.image.bell
+                //         +i name='notification'
                 if is_admin
                     a.item(href="/admin" title='admin')
                         +i name='shield'
