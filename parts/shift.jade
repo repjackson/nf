@@ -28,13 +28,14 @@ template(name='shift_view')
         .ui.stackable.padded.grid
             .row 
                 .four.wide.column
-                    a(href="/shifts")
-                        i.newspaper.link.big.icon
+                    a.ui.button(href="/shifts")
+                        i.clock.icon
+                        |shifts
                     // div
                     // .ui.inline.grey.header {{from_now start_datetime}}
                     
                     if can_edit
-                        a.edit_shift(href="/shift/#{_id}/edit" title='edit')
+                        a.ui.icon.button.edit_shift(href="/shift/#{_id}/edit" title='edit')
                             i.big.link.pencil.icon
 
                     .ui.segment

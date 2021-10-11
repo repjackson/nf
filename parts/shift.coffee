@@ -1,5 +1,5 @@
 if Meteor.isClient
-    Router.route '/work', (->
+    Router.route '/shifts', (->
         @layout 'layout'
         @render 'shifts'
         ), name:'shifts'
@@ -56,3 +56,4 @@ if Meteor.isClient
         # @autorun => Meteor.subscribe 'model_docs', 'source'
 
     Template.shift_edit.helpers
+        
