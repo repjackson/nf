@@ -37,7 +37,7 @@ template(name='shop')
                 button.ui.compact.tertiary.button.pick_ingredient(tabindex="0" class=result_class title=count) #{title}
                     //- small #{count}
         .twelve.wide.column.scrollin
-            .ui.info.message
+            .ui.info.small.message
                 .content
                     .ui.inline.header
                         |beta app, go to our 
@@ -109,19 +109,24 @@ template(name='shop')
                             +set_product_limit amount=20
                 .spacer 
             if subs_ready
-                if one_post
+                if no_products
+                    .ui.basic.center.aligned.segment
+                        .ui.header no products found
+                        .ui.button.request_product
+                            |request product
+                else if one_product
                     .ui.stackable.center.aligned.one.column.grid.scrolling
                         each product_docs
                             +product_card
-                else if two_posts
+                else if two_products
                     .ui.stackable.centered.two.column.grid.scrolling
                         each product_docs
                             +product_card
-                else if three_posts
+                else if three_products
                     .ui.stackable.centered.three.column.grid.scrolling
                         each product_docs
                             +product_card
-                else
+                else 
                     .ui.stackable.centered.four.column.grid.scrolling
                         each product_docs
                             +product_card

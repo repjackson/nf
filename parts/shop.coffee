@@ -181,11 +181,13 @@ if Meteor.isClient
 
         product_query: -> Session.get('product_query')
 
-        one_post: ->
+        no_products: ->
+            Docs.find(model:'product').count() is 0
+        one_product: ->
             Docs.find(model:'product').count() is 1
-        two_posts: ->
+        two_products: ->
             Docs.find(model:'product').count() is 2
-        three_posts: ->
+        three_products: ->
             Docs.find(model:'product').count() is 3
         product_docs: ->
             # if picked_ingredients.array().length > 0

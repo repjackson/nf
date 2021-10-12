@@ -104,8 +104,7 @@ if Meteor.isClient
             Session.set('editing_inventory_id', null)
         
     Template.product_inventory.helpers
-        editing_this: ->
-            Session.equals('editing_inventory_id', @_id)
+        editing_this: -> Session.equals('editing_inventory_id', @_id)
         inventory_items: ->
             Docs.find 
                 model:'inventory_item'
@@ -261,7 +260,7 @@ if Meteor.isClient
     Template.product_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'model_docs', 'source'
+        # @autorun => Meteor.subscribe 'model_docs', 'source'
 
     Template.product_edit.onRendered ->
         Meteor.setTimeout ->
@@ -275,9 +274,9 @@ if Meteor.isClient
         , 2000
 
     Template.product_edit.helpers
-        all_shop: ->
-            Docs.find
-                model:'product'
+        # all_shop: ->
+        #     Docs.find
+        #         model:'product'
         can_delete: ->
             product = Docs.findOne Router.current().params.doc_id
             if product.reservation_ids
@@ -356,3 +355,18 @@ if Meteor.isServer
         Docs.find 
             model:'source'
             title: {$regex:"#{source_title_queary}",$options:'i'}
+
+
+if Meteor.isClientr
+    Template.ingredient_picker.onCreated ->
+        @autorun => @subscribe 'ingredient_search_results', Session.get('ingredient_search'), ->
+    Template.ingredient_picker.helpers
+        search_results: ->
+            Docs.find 
+                model:'ingredient'
+
+if Meteor.isServer 
+    Meteor.publish 'ingredient_search_results', (ingredient_title_queary)->
+        Docs.find 
+            model:'ingredient'
+            title: {$regex:"#{ingredient_title_queary}",$options:'i'}
