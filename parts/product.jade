@@ -337,16 +337,23 @@ template(name='ingredient_picker')
         +i name='ingredients'
         |ingredients
     // if is_admin
-    .ui.icon.input 
-        i.search.icon
-        input.ingredient_search(type='text' placeholder='search')
+    .ui.icon.large.input 
+        if ingredient_search_value
+            i.large.red.remove.link.icon.zoomer
+        else 
+            i.search.icon
+        input.ingredient_search(type='text' placeholder='search' value=ingredient_search_value)
     .ui.selection.link.animated.list
         each ingredient_results
             .ui.item.pick_ingredient.zoomer
                 img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
                 |#{title}
-    each product_ingredients
-        .ui.header #{title}
+    .ui.header picked ingredients
+    .ui.list
+        each product_ingredients
+            .ui.item
+                |#{title}
+                i.remove.link.icon.zoomer.remove_ingredient
 
                             
                             

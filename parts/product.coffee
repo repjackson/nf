@@ -360,20 +360,33 @@ if Meteor.isServer
 if Meteor.isClient
     Template.ingredient_picker.onCreated ->
         @autorun => @subscribe 'ingredient_search_results', Session.get('ingredient_search'), ->
+        @autorun => @subscribe 'model_docs', 'ingredient', ->
     Template.ingredient_picker.helpers
         ingredient_results: ->
             Docs.find 
                 model:'ingredient'
+                title: {$regex:"#{Session.get('ingredient_search')}",$options:'i'}
+                
+        product_ingredients: ->
+            Docs.find 
+                model:'ingredient'
+                _id:$in:@ingredient_ids
+        ingredient_search_value: ->
+            Session.get('ingredient_search')
+        
     Template.ingredient_picker.events
         'click .remove_ingredient': (e,t)->
-            if confirm 'remove ingredient?'
+            if confirm "remove #{@title} ingredient?"
                 Docs.update Router.current().params.doc_id,
-                    $pull:ingredient_ids:null
+                    $pull:
+                        ingredient_ids:@_id
+                        ingredient_titles:@title
         'click .pick_ingredient': (e,t)->
             Docs.update Router.current().params.doc_id,
                 $addToSet:
                     ingredient_ids:@_id
                     ingredient_titles:@title
+            Session.set('ingredient_search',null)
                     
         'keyup .ingredient_search': (e,t)->
             # if e.which is '13'
