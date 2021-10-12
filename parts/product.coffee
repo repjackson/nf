@@ -368,9 +368,10 @@ if Meteor.isClient
                 title: {$regex:"#{Session.get('ingredient_search')}",$options:'i'}
                 
         product_ingredients: ->
+            product = Docs.findOne Router.current().params.doc_id
             Docs.find 
-                model:'ingredient'
-                _id:$in:@ingredient_ids
+                # model:'ingredient'
+                _id:$in:product.ingredient_ids
         ingredient_search_value: ->
             Session.get('ingredient_search')
         

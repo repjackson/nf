@@ -63,12 +63,12 @@ Meteor.publish 'model_docs', (model,limit)->
     if limit
         Docs.find {
             model: model
-            app:'nf'
+            # app:'nf'
         }, 
             limit:limit
     else
         Docs.find {
-            app:'nf'
+            # app:'nf'
             model: model
         }, sort:_timestamp:-1
 Meteor.publish 'me', ->
