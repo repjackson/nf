@@ -357,13 +357,30 @@ if Meteor.isServer
             title: {$regex:"#{source_title_queary}",$options:'i'}
 
 
-if Meteor.isClientr
+if Meteor.isClient
     Template.ingredient_picker.onCreated ->
         @autorun => @subscribe 'ingredient_search_results', Session.get('ingredient_search'), ->
     Template.ingredient_picker.helpers
-        search_results: ->
+        ingredient_results: ->
             Docs.find 
                 model:'ingredient'
+    Template.ingredient_picker.events
+        'click .remove_ingredient': (e,t)->
+            if confirm 'remove ingredient?'
+                Docs.update Router.current().params.doc_id,
+                    $pull:ingredient_ids:null
+        'click .pick_ingredient': (e,t)->
+            Docs.update Router.current().params.doc_id,
+                $addToSet:
+                    ingredient_ids:@_id
+                    ingredient_titles:@title
+                    
+        'keyup .ingredient_search': (e,t)->
+            # if e.which is '13'
+            val = t.$('.ingredient_search').val()
+            console.log val
+            Session.set('ingredient_search', val)
+
 
 if Meteor.isServer 
     Meteor.publish 'ingredient_search_results', (ingredient_title_queary)->

@@ -300,11 +300,11 @@ template(name='product_edit')
                 .four.wide.column
                     // +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
                     // +link_edit key='external_link' label='external link' icon='globe' direct=true
-                    +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
+                    // +array_edit key='ingredients' label='ingredients' icon='ingredients' direct=true
                     +ingredient_picker
                     // +array_edit key='location_tags' label='location tags' icon='marker' direct=true
                     // +text_edit key='size_description' label='size description'  direct=true
-                    +text_edit key='packaging' label='packaging' icon='package' direct=true
+                    // +text_edit key='packaging' label='packaging' icon='package' direct=true
                 .five.wide.column
                     .ui.segment
                         .ui.header 
@@ -334,17 +334,19 @@ template(name='product_edit')
                                 
 template(name='ingredient_picker')
     .ui.header 
-        +i name='ingredient'
+        +i name='ingredients'
         |ingredients
     // if is_admin
     .ui.icon.input 
         i.search.icon
         input.ingredient_search(type='text' placeholder='search')
     .ui.selection.link.animated.list
-        each search_results
+        each ingredient_results
             .ui.item.pick_ingredient.zoomer
                 img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
                 |#{title}
+    each product_ingredients
+        .ui.header #{title}
 
                             
                             
