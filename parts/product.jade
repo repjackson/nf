@@ -239,6 +239,7 @@ template(name='product_edit')
                         |Section
                     div
                     +number_edit key='a_number' label="'A' number" direct=true
+                    div
                     +number_edit key='b_number' label="'B' number" direct=true
                     +key_value_edit key='shop_section' value='beans' label='beans' icon='white-beans'
                     +key_value_edit key='shop_section' value='coffee' label='coffee' icon='coffee'
@@ -255,14 +256,17 @@ template(name='product_edit')
                     div
                     +boolean_edit key='has_2cup' label='2 cup' direct=true icon='cup'
                     if has_2cup
+                        div
                         +float_edit key='2cup_price' label='2 cup price' icon='cup' direct=true
-                    // div
+                    div
                     +boolean_edit key='has_4cup' label='4 cup' direct=true icon='mason-jar'
                     if has_4cup
+                        div
                         +float_edit key='4cup_price' label='4 cup price' icon='mason-jar' direct=true
-                    // div
+                    div
                     +boolean_edit key='has_8cup' label='8 cup' direct=true icon='glass-jar'
                     if has_8cup
+                        div
                         +float_edit key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
                     +boolean_edit key='has_other_size' label='other size' direct=true icon='glass-jar'
                     if has_other_size

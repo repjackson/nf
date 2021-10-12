@@ -46,8 +46,8 @@ template(name='ingredient_card')
         a.image.zoomer(href="/ingredient/#{_id}")
             if image_id
                 img.ui.zoomer.pointer.goto_ingredient.image(src="{{c.url image_id width=400 height=400}}")
-            else if images.full
-                img(src=images.full)
+            // else if images.full
+            //     img(src=images.full)
         .content
             a.ui.header.zoomer(href="/ingredient/#{_id}/") 
                 | #{title}
@@ -58,12 +58,12 @@ template(name='ingredient_card')
                 each tags
                     .ui.small.basic.label #{this}
         .content
-            if ingredients
-                span(title='ingredients')
-                    |#{ingredients.count}
-                    +i name='ingredients'
-                each ingredients 
-                    .ui.basic.label #{name}
+            if tags
+                span(title='tags')
+                    |#{tags.count}
+                    // +i name='ingredients'
+            each ingredient_products
+                .ui.basic.label #{title}
             // .right.floated.meta
             //     | {{from_now _timestamp}}
             // a(href="/user/#{author.username}")
@@ -71,26 +71,8 @@ template(name='ingredient_card')
             //     |#{author.username}
         .content    
             .ui.inline.header
-                |serves #{servings}
+                |#{product_count} products
             // +number_view key='servings' label='servings'
-            span 
-                +i name='clock'
-                |#{prepTime}
-            span 
-                +i name='kitchen'
-                |#{cookTime}
-            // +number_view key='prepTime' label='prep time' icon='clock' direct=true
-            // +number_view key='prepTime' label='cook time' icon='oven' direct=true
-            // +date_view key='postDate' label='post date' icon='pencil' direct=true
-            // +date_view key='postDate' label='post date' icon='pencil' direct=true
-        
-            // if ingredients 
-            //     |#{ingredients.length} ingredients
-            // if directions 
-            //     |#{directions.length} directions
-            // if private 
-            //     i.big.lock.icon
-            // if can_edit
             a.ui.icon.circular.basic.button.zoomer(href="/ingredient/#{_id}/edit")
                 i.pencil.icon
             a.ui.icon.circular.basic.button.zoomer(href="/ingredient/#{_id}")
