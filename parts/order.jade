@@ -1,39 +1,14 @@
-template(name='mishi')
-    .ui.stackable.padded.grid
-        .sixteen.wide.column.scrolling
-            .ui.stackable.grid 
-                .four.wide.column
-                    .ui.header 
-                        i.money.icon
-                        |mishi
-                    // .ui.button.import
-                    //     |import
-                    .ui.inline.small.header
-                        i.download.icon
-                        |import
-                    .ui.input.import
-                        input(type='file' accept='.csv')
-                .twelve.wide.column
-                    .ui.cards
-                        each mishi_orders
-                            .card
-                                .content
-                                    .ui.list 
-                                        .item Store_ID: #{Store_ID}
-                                        .item Charge_ID: #{Charge_ID}
-                                        .item Order_ID: #{Order_ID}
-                                        .item Ean_Code: #{Ean_Code}
-                                        .item Retailer_Product_ID: #{Retailer_Product_ID}
-                                        .item Original_Price: #{Original_Price}
-                                        .item Qty: #{Qty}
-                                        .item Discounted_Line_Amount: #{Discounted_Line_Amount}
-                                        .item Promo_Code: #{Promo_Code}
-                                        .item Vat_Rate: #{Vat_Rate}
-                                        .item Txn_Timestamp: #{Txn_Timestamp}
 
                         
-
-
+template(name='cfacet')
+    .ui.header #{key}
+    each picked
+        .ui.button.unpick
+            |#{name}
+    each unpicked 
+        .ui.button.pick
+            |#{name}
+        
 template(name='orders')
     .ui.stackable.padded.grid
         .sixteen.wide.column.scrolling

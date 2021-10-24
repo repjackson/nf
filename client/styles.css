@@ -899,15 +899,6 @@ h1.ui.header{
 }
 
 
-.slider-header {
-  color: #fff;
-  padding: 10px;
-  font-size: 3em !important;
-}
-.slider-subheader {
-  color: #fff;
-  padding: 10px;
-}
 /* @font-face {
   font-family: imogen;
   src: url("/fonts/ImogenAgnes.ttf");

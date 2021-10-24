@@ -6,7 +6,7 @@ if Meteor.isClient
 
 
     Template.shop.onCreated ->
-        console.log papa
+        # console.log papa
         Session.setDefault 'view_mode', 'list'
         Session.setDefault 'sort_direction', 1
         Session.setDefault 'sort_key', '_timestamp'

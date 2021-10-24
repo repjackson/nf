@@ -1,0 +1,44 @@
+template(name='mishi')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column.scrolling
+            .ui.stackable.grid 
+                .four.wide.column
+                    .ui.header 
+                        i.money.icon
+                        |mishi
+                    +cfacet key='_product' model='mishi_order'
+                    +cfacet key='_week_number' model='mishi_order'
+                    .ui.inline.small.header
+                        i.download.icon
+                        |import
+                    .ui.fluid.input.import
+                        input(type='file' accept='.csv')
+                .twelve.wide.column.scrolling
+                    .ui.cards
+                        each mishi_orders
+                            .card
+                                .content
+                                    .ui.list 
+                                        .item Store_ID: #{Store_ID}
+                                        .item Charge_ID: #{Charge_ID}
+                                        .item Order_ID: #{Order_ID}
+                                        .item Ean_Code: #{Ean_Code}
+                                        .item Retailer_Product_ID: #{Retailer_Product_ID}
+                                        .item Original_Price: #{Original_Price}
+                                        .item Qty: #{Qty}
+                                        .item Discounted_Line_Amount: #{Discounted_Line_Amount}
+                                        .item Promo_Code: #{Promo_Code}
+                                        .item Vat_Rate: #{Vat_Rate}
+                                        .item Txn_Timestamp: #{Txn_Timestamp}
+                                    .ui.list 
+                                        // .item meta info
+                                        .item _converted_date: #{_converted_date}
+                                        .item product: #{_product}
+                                        .item _month: #{_month}
+                                        .item day: #{day}
+                                        .item _weekdaynum: #{_weekdaynum}
+                                        .item _week_number: #{_week_number}
+                                        .item _weekday: #{_weekday}
+
+                                    .ui.icon.button.calc
+                                        i.refresh.icon

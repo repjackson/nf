@@ -1,67 +1,9 @@
 papa =  require 'papaparse'
 
 if Meteor.isClient
-    Router.route '/mishi', (->
-        @render 'mishi'
-        ), name:'mishi'
     Router.route '/orders', (->
         @render 'orders'
         ), name:'orders'
-
-    Template.mishi.onCreated ->
-        @autorun -> Meteor.subscribe 'model_docs', 'mishi_order'
-        # Session.get('order_status_filter')
-        # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
-        # @autorun -> Meteor.subscribe 'model_docs', 'thing', 100
-
-    # Template.delta.onRendered ->
-    #     Meteor.call 'log_view', @_id, ->
-
-    Template.mishi.helpers
-        mishi_orders: ->
-            match = {model:'mishi_order'}
-            if Session.get('order_status_filter')
-                match.status = Session.get('order_status_filter')
-            if Session.get('order_delivery_filter')
-                match.delivery_method = Session.get('order_sort_filter')
-            if Session.get('order_sort_filter')
-                match.delivery_method = Session.get('order_sort_filter')
-            Docs.find match,
-                sort: _timestamp:-1
-
-    Template.mishi.events
-        'change .import': (e,t)->
-            papa.parse(e.target.files[0], {
-                header: true
-                complete: (results)->
-                    console.log results
-                    Meteor.call 'parse_mishi', results, ->
-                    # _.each(results.data, (csvData)-> 
-                    #     console.log(csvData.empId + ' , ' + csvData.empCode)
-                    # )
-                skipEmptyLines: true
-            })
-
-if Meteor.isServer 
-    Meteor.methods
-        parse_mishi: (parsed_results)->
-            # console.log parsed_results
-            # console.log parsed_results.data.length
-            for item in parsed_results.data[..100]
-                # console.log item
-                found_item = 
-                    Docs.findOne    
-                        model:'mishi_order'
-                        Charge_ID:item.Charge_ID
-                if found_item 
-                    console.log 'skipping existing item', item.Charge_ID
-                else 
-                    converted = moment(item.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
-                    item.model = 'mishi_order'
-                    item._converted_date = converted 
-                    item._month = moment(converted).format('MMMM')
-                    Docs.insert item
-                # console.log item.Txn_Timestamp, converted
 
                         
                 

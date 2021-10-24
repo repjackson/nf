@@ -2,7 +2,7 @@ Meteor.publish 'delta', (match)->
     console.log match
 
 Meteor.publish 'facet', (
-    picked_theme_tags
+    picked_tags
     picked_author_ids=[]
     picked_location_tags
     picked_building_tags
@@ -20,7 +20,7 @@ Meteor.publish 'facet', (
         self = @
         match = {}
 
-        # match.tags = $all: picked_theme_tags
+        # match.tags = $all: picked_tags
         if model then match.model = model
         if parent_id then match.parent_id = parent_id
 
@@ -30,7 +30,7 @@ Meteor.publish 'facet', (
         # if view_private is false
         #     match.published = $in: [0,1]
 
-        if picked_theme_tags.length > 0 then match.tags = $all: picked_theme_tags
+        if picked_tags.length > 0 then match.tags = $all: picked_tags
 
         if picked_author_ids.length > 0
             match.author_id = $in: picked_author_ids
@@ -94,7 +94,7 @@ Meteor.publish 'facet', (
             { $project: tags: 1 }
             { $unwind: "$tags" }
             { $group: _id: '$tags', count: $sum: 1 }
-            { $match: _id: $nin: picked_theme_tags }
+            { $match: _id: $nin: picked_tags }
             { $sort: count: -1, _id: 1 }
             { $limit: limit }
             { $project: _id: 0, name: '$_id', count: 1 }
@@ -113,7 +113,7 @@ Meteor.publish 'facet', (
         # #     { $project: watson_keywords: 1 }
         # #     { $unwind: "$watson_keywords" }
         # #     { $group: _id: '$watson_keywords', count: $sum: 1 }
-        # #     { $match: _id: $nin: picked_theme_tags }
+        # #     { $match: _id: $nin: picked_tags }
         # #     { $sort: count: -1, _id: 1 }
         # #     { $limit: limit }
         # #     { $project: _id: 0, name: '$_id', count: 1 }
@@ -325,7 +325,7 @@ Meteor.publish 'facet', (
 # #             { $project: parent_id: 1 }
 # #             # { $unwind: "$tags" }
 # #             { $group: _id: '$parent_id', count: $sum: 1 }
-# #             { $match: _id: $nin: picked_theme_tags }
+# #             { $match: _id: $nin: picked_tags }
 # #             { $sort: count: -1, _id: 1 }
 # #             { $limit: limit }
 # #             { $project: _id: 0, name: '$_id', count: 1 }
