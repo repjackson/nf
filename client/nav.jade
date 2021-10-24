@@ -288,7 +288,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.borderless.menu.smallscroll
+    .ui.left.sidebar.vertical.menu.smallscroll
         // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
@@ -315,6 +315,9 @@ template(name='left_sidebar')
         a.item.toggle_leftbar(href='/sources' class="{{isActivePath '/sources'}}")
             +i name='field-and-tractor'
             | #{source_count} sources
+        a.item.toggle_leftbar(href='/mishi' class="{{isActivePath '/mishi'}}")
+            +i name='money'
+            | mishi orders
         a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
             +i name='cookbook'
             |#{recipe_count} recipes

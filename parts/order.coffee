@@ -47,8 +47,8 @@ if Meteor.isServer
         parse_mishi: (parsed_results)->
             # console.log parsed_results
             # console.log parsed_results.data.length
-            for item in parsed_results.data[..10]
-                console.log item
+            for item in parsed_results.data[..100]
+                # console.log item
                 found_item = 
                     Docs.findOne    
                         model:'mishi_order'
@@ -56,11 +56,12 @@ if Meteor.isServer
                 if found_item 
                     console.log 'skipping existing item', item.Charge_ID
                 else 
+                    converted = moment(item.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
                     item.model = 'mishi_order'
+                    item._converted_date = converted 
+                    item._month = moment(converted).format('MMMM')
                     Docs.insert item
-                converted = moment(item.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
-                console.log item.Txn_Timestamp, converted
-                console.log 'month', moment(converted).format('MMMM')
+                # console.log item.Txn_Timestamp, converted
 
                         
                 
