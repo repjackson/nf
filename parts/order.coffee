@@ -1,7 +1,61 @@
+papa =  require 'papaparse'
+
 if Meteor.isClient
+    Router.route '/mishi', (->
+        @render 'mishi'
+        ), name:'mishi'
     Router.route '/orders', (->
         @render 'orders'
         ), name:'orders'
+
+    Template.mishi.onCreated ->
+        @autorun -> Meteor.subscribe 'mishi',
+            Session.get('order_status_filter')
+        # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
+        # @autorun -> Meteor.subscribe 'model_docs', 'thing', 100
+
+    # Template.delta.onRendered ->
+    #     Meteor.call 'log_view', @_id, ->
+
+    Template.mishi.helpers
+        mishi_orders: ->
+            match = {model:'mishi_order'}
+            if Session.get('order_status_filter')
+                match.status = Session.get('order_status_filter')
+            if Session.get('order_delivery_filter')
+                match.delivery_method = Session.get('order_sort_filter')
+            if Session.get('order_sort_filter')
+                match.delivery_method = Session.get('order_sort_filter')
+            Docs.find match,
+                sort: _timestamp:-1
+
+    Template.mishi.events
+        # 'click .import': ->
+        #     console.log papa
+        'input .import': (e,t)->
+            console.log papa
+            files = e.target.files[0]
+            console.log files
+            #     ).parse({
+            # 	config: {
+            # 		// base config to use for each file
+            # 	},
+            # 	before: function(file, inputElem)
+            # 	{
+            # 		// executed before parsing each file begins;
+            # 		// what you return here controls the flow
+            # 	},
+            # 	error: function(err, file, inputElem, reason)
+            # 	{
+            # 		// executed if an error occurs while loading the file,
+            # 		// or if before callback aborted for some reason
+            # 	},
+            # 	complete: function()
+            # 	{
+            # 		// executed after all files are complete
+            # 	}
+            # });
+
 
     Template.orders.onCreated ->
         @autorun -> Meteor.subscribe 'orders',
@@ -23,7 +77,8 @@ if Meteor.isClient
                 match.delivery_method = Session.get('order_sort_filter')
             Docs.find match,
                 sort: _timestamp:-1
-if Meteor.isClient
+
+
     Router.route '/order/:doc_id', (->
         @layout 'layout'
         @render 'order'
@@ -40,6 +95,9 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'order_things', Router.current().params.doc_id
 
 
+                
+            
+            
     Template.order.events
         'click .mark_viewed': ->
             # if confirm 'mark viewed?'

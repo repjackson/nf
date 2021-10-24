@@ -1,11 +1,34 @@
+template(name='mishi')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column.scrolling
+            .ui.stackable.grid 
+                .four.wide.column
+                    .ui.header 
+                        i.money.icon
+                        |mishi
+                    // .ui.button.import
+                    //     |import
+                    .ui.input.import
+                        input(type='file')
+                        |import
+                    |view
+                .twelve.wide.column
+                    each mishi_orders
+                        .ui.header #{when}
+
+
 template(name='orders')
     .ui.stackable.padded.grid
         .sixteen.wide.column.scrolling
             .ui.stackable.grid 
                 .four.wide.column
                     .ui.header 
-                        |alerts
-                        i.alert.icon
+                        +i name='money'
+                        |orders
+                    // .ui.button.import
+                    //     |import
+                    a.ui.button(href="/mishi")
+                        |mishi
                     |view
                     // +skvs key='order_sort_filter' value='open'               
                     +skvs key='order_sort_filter' value='now'               

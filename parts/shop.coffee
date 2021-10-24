@@ -6,6 +6,7 @@ if Meteor.isClient
 
 
     Template.shop.onCreated ->
+        console.log papa
         Session.setDefault 'view_mode', 'list'
         Session.setDefault 'sort_direction', 1
         Session.setDefault 'sort_key', '_timestamp'
@@ -339,8 +340,8 @@ if Meteor.isServer
                 gluten_free:1
             
     Meteor.publish 'product_search_count', (
-        picked_ingredients
-        picked_sections
+        picked_ingredients=[]
+        picked_sections=[]
         product_query
         view_vegan
         view_gf
