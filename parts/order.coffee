@@ -36,27 +36,23 @@ if Meteor.isClient
             console.log papa
             files = e.target.files[0]
             console.log files
-            #     ).parse({
-            # 	config: {
-            # 		// base config to use for each file
-            # 	},
-            # 	before: function(file, inputElem)
-            # 	{
-            # 		// executed before parsing each file begins;
-            # 		// what you return here controls the flow
-            # 	},
-            # 	error: function(err, file, inputElem, reason)
-            # 	{
-            # 		// executed if an error occurs while loading the file,
-            # 		// or if before callback aborted for some reason
-            # 	},
-            # 	complete: function()
-            # 	{
-            # 		// executed after all files are complete
-            # 	}
-            # });
+            Meteor.call 'parse_mishi', files, ->
 
+if Meteor.isServer 
+    Meteor.methods
+        parse_mishi: (file)->
+            papa.parse(files, {
+                header: true
+                complete: (results)->
+                    console.log results
+                    # _.each(results.data, (csvData)-> 
+                    #     console.log(csvData.empId + ' , ' + csvData.empCode)
+                    # )
+                skipEmptyLines: true
+            })
 
+    
+if Meteor.isClient
     Template.orders.onCreated ->
         @autorun -> Meteor.subscribe 'orders',
             Session.get('order_status_filter')

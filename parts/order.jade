@@ -8,10 +8,11 @@ template(name='mishi')
                         |mishi
                     // .ui.button.import
                     //     |import
-                    .ui.input.import
-                        input(type='file')
+                    .ui.inline.small.header
+                        i.download.icon
                         |import
-                    |view
+                    .ui.input.import
+                        input(type='file' accept='.csv')
                 .twelve.wide.column
                     each mishi_orders
                         .ui.header #{when}
