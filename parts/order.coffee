@@ -9,8 +9,8 @@ if Meteor.isClient
         ), name:'orders'
 
     Template.mishi.onCreated ->
-        @autorun -> Meteor.subscribe 'mishi',
-            Session.get('order_status_filter')
+        @autorun -> Meteor.subscribe 'model_docs', 'mishi_order'
+        # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
         # @autorun -> Meteor.subscribe 'model_docs', 'thing', 100
 
@@ -30,28 +30,40 @@ if Meteor.isClient
                 sort: _timestamp:-1
 
     Template.mishi.events
-        # 'click .import': ->
-        #     console.log papa
-        'input .import': (e,t)->
-            console.log papa
-            files = e.target.files[0]
-            console.log files
-            Meteor.call 'parse_mishi', files, ->
-
-if Meteor.isServer 
-    Meteor.methods
-        parse_mishi: (file)->
-            papa.parse(files, {
+        'change .import': (e,t)->
+            papa.parse(e.target.files[0], {
                 header: true
                 complete: (results)->
                     console.log results
+                    Meteor.call 'parse_mishi', results, ->
                     # _.each(results.data, (csvData)-> 
                     #     console.log(csvData.empId + ' , ' + csvData.empCode)
                     # )
                 skipEmptyLines: true
             })
 
-    
+if Meteor.isServer 
+    Meteor.methods
+        parse_mishi: (parsed_results)->
+            # console.log parsed_results
+            # console.log parsed_results.data.length
+            for item in parsed_results.data[..10]
+                console.log item
+                found_item = 
+                    Docs.findOne    
+                        model:'mishi_order'
+                        Charge_ID:item.Charge_ID
+                if found_item 
+                    console.log 'skipping existing item', item.Charge_ID
+                else 
+                    item.model = 'mishi_order'
+                    Docs.insert item
+                converted = moment(item.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
+                console.log item.Txn_Timestamp, converted
+                console.log 'month', moment(converted).format('MMMM')
+
+                        
+                
 if Meteor.isClient
     Template.orders.onCreated ->
         @autorun -> Meteor.subscribe 'orders',

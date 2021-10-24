@@ -62,11 +62,6 @@ if Meteor.isServer
             recipient_username:username
             
             
-    Meteor.publish 'user_sent_giftcards', (username)->
-        Docs.find   
-            model:'giftcard'
-            _author_username:username
-            
             
             
             
