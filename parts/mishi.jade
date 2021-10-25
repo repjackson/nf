@@ -24,7 +24,7 @@ template(name='mishi')
                         input.search_product(type='text' placeholder='product' value=current_search)
                     .scrolling
                         .ui.cards
-                            if mishi_orders
+                            if mishi_orders.count
                                 each mishi_orders
                                     +mishi_order
                             else 

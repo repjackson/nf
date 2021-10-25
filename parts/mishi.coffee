@@ -143,7 +143,7 @@ if Meteor.isServer
         parse_mishi: (parsed_results)->
             # console.log parsed_results
             # console.log parsed_results.data.length
-            for item in parsed_results.data[..100]
+            for item in parsed_results.data
                 # console.log item
                 found_item = 
                     Docs.findOne    
