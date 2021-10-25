@@ -149,6 +149,7 @@ if Meteor.isServer
                     Docs.findOne    
                         model:'mishi_order'
                         Charge_ID:item.Charge_ID
+                        Ean_Code:item.Ean_Code
                 if found_item 
                     console.log 'skipping existing item', item.Charge_ID
                     Meteor.call 'mishi_meta', found_item._id
@@ -277,7 +278,7 @@ if Meteor.isServer
                 { $group: _id: '$_product', count: $sum: 1 }
                 { $match: _id: $nin: picked_products }
                 { $sort: count: -1, _id: 1 }
-                { $limit: 10 }
+                { $limit: 20 }
                 { $project: _id: 0, name: '$_id', count: 1 }
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
