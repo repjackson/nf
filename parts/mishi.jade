@@ -6,8 +6,8 @@ template(name='mishi')
                     .ui.header 
                         i.money.icon
                         |mishi
-                    +cfacet key='_product' model='mishi_order'
-                    +cfacet key='_week_number' model='mishi_order'
+                    +cfacet model='_product'
+                    +cfacet model='_week_number'
                     .ui.inline.small.header
                         i.download.icon
                         |import
@@ -42,3 +42,21 @@ template(name='mishi')
 
                                     .ui.icon.button.calc
                                         i.refresh.icon
+
+
+template(name='cfacet')
+    .ui.header #{key}
+    each picked
+        +unpick
+    each unpicked 
+        +pick
+        
+        
+template(name='unpick')        
+    .ui.blue.button.unpick
+        |#{this}
+
+template(name='pick')        
+    .ui.button.pick
+        |#{name}
+        small #{count}
