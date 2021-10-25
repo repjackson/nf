@@ -14,7 +14,10 @@ if Meteor.isClient
             picked_products.array()
             picked_weeks.array()
             Session.get('product_search')
-        @autorun => @subscribe 'mishi_total'
+        @autorun => @subscribe 'mishi_total',
+            picked_products.array()
+            picked_weeks.array()
+            Session.get('product_search')
             
         # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
@@ -43,7 +46,7 @@ if Meteor.isClient
                     model:'product'
                     slug:@_product
             if related_product
-                Router.go "/product/#{@_id}"
+                Router.go "/product/#{related_product._id}"
             else 
                 new_id = 
                     Docs.insert 

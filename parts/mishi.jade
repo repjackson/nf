@@ -6,6 +6,8 @@ template(name='mishi')
                     .ui.header 
                         i.money.icon
                         |mishi
+                    .ui.small.header 
+                        |#{mishi_total} results
                     +cfacet model='_product'
                     +cfacet model='_week_number'
                     .ui.inline.small.header
