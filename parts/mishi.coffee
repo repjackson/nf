@@ -1,5 +1,5 @@
-@picked__products = new ReactiveArray []
-@picked__weeks = new ReactiveArray []
+@picked_products = new ReactiveArray []
+@picked_weeks = new ReactiveArray []
 
 if Meteor.isClient
     Router.route '/mishi', (->
@@ -10,8 +10,8 @@ if Meteor.isClient
 
     Template.mishi.onCreated ->
         @autorun -> Meteor.subscribe 'mishi_facets',
-            picked__products.array()
-            picked__weeks.array()
+            picked_products.array()
+            picked_weeks.array()
         # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
         # @autorun -> Meteor.subscribe 'model_docs', 'thing', 100
@@ -22,9 +22,10 @@ if Meteor.isClient
         'click .pick': ->
             console.log @
             if @model is '_product'
-                picked__products.push @name
+                picked_products.push @name
+                console.log picked_products.array()
             else if @model is '_week'
-                picked__products.push @name
+                picked_products.push @name
                 
             # "picked_#{@model}".push @name
             
@@ -33,17 +34,17 @@ if Meteor.isClient
             console.log Template.parentData()
             
             if Template.parentData().model is '_week_number'
-                picked__weeks.remove @valueOf()
+                picked_weeks.remove @valueOf()
             else if Template.parentData().model is '_product'
-                picked__products.remove @valueOf()
+                picked_products.remove @valueOf()
             
     Template.cfacet.helpers
         picked: ->
             console.log @
             if @model is '_week_number'
-                picked__weeks.array()
+                picked_weeks.array()
             else if @model is '_product'
-                picked__products.array()
+                picked_products.array()
         unpicked: ->
             console.log @
             Results.find 
@@ -128,8 +129,8 @@ if Meteor.isServer
             # if view_private is false
             #     match.published = $in: [0,1]
     
-            if picked_products.length > 0 then match._product = picked_products
-            if picked_weeks.length > 0 then match._week_number = picked_weeks
+            if picked_products.length > 0 then match._product = $in:picked_products
+            if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
     
             # if picked_author_ids.length > 0
             #     match.author_id = $in: picked_author_ids
@@ -321,6 +322,7 @@ if Meteor.isServer
             #         text: author_id.text
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
+            console.log 'doc match', match
             subHandle = Docs.find(match, {limit:20, sort: timestamp:-1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
