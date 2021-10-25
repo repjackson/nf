@@ -14,7 +14,7 @@ if Meteor.isClient
             picked_products.array()
             picked_weeks.array()
             Session.get('product_search')
-        @autorun => @subscribe 'product_count'
+        @autorun => @subscribe 'mishi_total'
             
         # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
@@ -50,6 +50,7 @@ if Meteor.isClient
                         model:'product'
                         slug:@_product
                         title:@_product
+                        product_link:@Ean_Code
                 Router.go "/product/#{new_id}/edit"
                 
                 
@@ -181,7 +182,7 @@ if Meteor.isServer
 
 
     Meteor.publish 'product_by_mishi', (mishi_order)->
-        console.log mishi_order
+        # console.log mishi_order
         Docs.find({
             model:'product'
             slug:mishi_order._product
@@ -380,7 +381,7 @@ if Meteor.isServer
             #         text: author_id.text
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
-            console.log 'doc match', match
+            # console.log 'doc match', match
             subHandle = Docs.find(match, {limit:42, sort: timestamp:-1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields

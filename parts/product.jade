@@ -17,11 +17,11 @@ template(name='product_view')
                     // a(href="{{c.url image_id}}" target="_window")
                     // .four.wide.column
                     img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                    +html_view key='description' direct=true
                 if image_id2
                     .four.wide.column
                         img.ui.rounded.image.zoomer(src="{{c.url image_id2}}")
                 .five.wide.column
+                    +html_view key='description' direct=true
                     +text_view key='size_description' label='size description'  direct=true
                     +link_view key='product_link' label='link' icon='wordpress' direct=true
                     +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
@@ -49,12 +49,13 @@ template(name='product_view')
                     if has_8cup
                         +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
                     // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                .four.wide.column
-                    .ui.inline.header 
-                        +i name='ingredients'
-                        |ingredients
-                    each ingredients
-                        .ui.large.basic.label #{this}
+                if ingredients
+                    .four.wide.column
+                        .ui.inline.header 
+                            +i name='ingredients'
+                            |ingredients
+                        each ingredients
+                            .ui.large.basic.label #{this}
                 .four.wide.column
                     +voting_full
                     +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
@@ -223,7 +224,7 @@ template(name='product_edit')
                         i.pencil.icon
                         | #{title}
                         small product
-                    .ui.large.icon.fluid.green.button.save_product(title='save product')
+                    .ui.large.icon.fluid.green.button.save_product.fly_right(title='save product')
                         i.checkmark.large.icon   
                     +text_edit key='title' label='title' icon='text' direct=true
                     +text_edit key='slug' label='slug' icon='slug' direct=true
@@ -344,17 +345,25 @@ template(name='ingredient_picker')
         else 
             i.search.icon
         input.ingredient_search(type='text' placeholder='search' value=ingredient_search_value)
-    .ui.selection.link.animated.list
-        each ingredient_results
-            .ui.item.pick_ingredient.zoomer
-                img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
-                |#{title}
-    .ui.header picked ingredients
-    .ui.list
-        each product_ingredients
-            .ui.item
-                |#{title}
-                i.remove.link.icon.zoomer.remove_ingredient
+    if ingredient_results
+        .ui.selection.link.animated.list
+            each ingredient_results
+                .ui.item.pick_ingredient.zoomer
+                    img.ui.avatar.image(src="{{c.url image_id width=300 height=300 gravity='face' crop='fill'}}")
+                    |#{title}
+    // else if ingredient_search_value
+    .ui.button.create_ingredient
+        |add #{ingredient_search_value}
+    
+    if product_ingredients
+        .ui.header 
+            |#{product_ingredients}
+            |picked ingredients
+        .ui.list
+            each product_ingredients
+                .ui.item
+                    |#{title}
+                    i.remove.link.icon.zoomer.remove_ingredient
 
                             
                             

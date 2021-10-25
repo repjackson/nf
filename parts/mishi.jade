@@ -22,8 +22,12 @@ template(name='mishi')
                         input.search_product(type='text' placeholder='product' value=current_search)
                     .scrolling
                         .ui.cards
-                            each mishi_orders
-                                +mishi_order
+                            if mishi_orders
+                                each mishi_orders
+                                    +mishi_order
+                            else 
+                                .ui.center.aligned.basic.segment 
+                                    i.money.big.loading.icon
                                 
                             
 template(name='mishi_order')
@@ -34,7 +38,6 @@ template(name='mishi_order')
                 // .item Charge_ID: #{Charge_ID}
                 // .item Order_ID: #{Order_ID}
                 // .item Ean_Code: #{Ean_Code}
-                // a.item.goto_product(href=Ean_Code target='_window')
                 with related_product
                     img.ui.tiny.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
                     .ui.inline.small.header 
@@ -42,6 +45,8 @@ template(name='mishi_order')
                 a.item.goto_product
                     | #{_product}
                 // .item Retailer_Product_ID: #{Retailer_Product_ID}
+                a(href=Ean_Code target='_window')
+                    i.wikipedia.link.icon
                 .item(title='original price') $#{Original_Price}
                 .item Qty: #{Qty}
                 .item Discounted_Line_Amount: #{Discounted_Line_Amount}

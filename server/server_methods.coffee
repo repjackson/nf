@@ -98,15 +98,15 @@ Meteor.methods
 
     calc_product_data: (product_id)->
         product = Docs.findOne product_id
-        console.log product
+        # console.log product
         order_count =
             Docs.find(
                 model:'order'
                 product_id:product_id
             ).count()
-        console.log 'order count', order_count
+        # console.log 'order count', order_count
         servings_left = product.servings_amount-order_count
-        console.log 'servings left', servings_left
+        # console.log 'servings left', servings_left
 
         # product_product =
         #     Docs.findOne product.product_id

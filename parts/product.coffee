@@ -395,6 +395,13 @@ if Meteor.isClient
             console.log val
             Session.set('ingredient_search', val)
 
+        'click .create_ingredient': ->
+            new_id = 
+                Docs.insert 
+                    model:'ingredient'
+                    title:Session.get('ingredient_search')
+            Router.go "/ingredient/#{new_id}/edit"
+
 
 if Meteor.isServer 
     Meteor.publish 'ingredient_search_results', (ingredient_title_queary)->

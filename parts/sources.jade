@@ -10,7 +10,7 @@ template(name='sources')
             .ui.five.stackable.centered.cards
                 each model_docs_helper 'source'
                     .ui.card
-                        a(href="/source/#{_id}") 
+                        a.fly_right(href="/source/#{_id}") 
                             img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
                         a.content(href="/source/#{_id}") 
                             .ui.header 

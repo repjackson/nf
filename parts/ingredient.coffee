@@ -10,7 +10,7 @@ if Meteor.isClient
         Session.setDefault 'sort_key', '_timestamp'
         Session.setDefault 'sort_direction', -1
         # Session.setDefault 'ingredient_sort_label', 'complete'
-        Session.setDefault 'limit', 5
+        Session.setDefault 'limit', 42
         Session.setDefault 'view_open', true
 
     Template.ingredients.onCreated ->
@@ -120,7 +120,8 @@ if Meteor.isClient
                 model:'ingredient'
             },
                 sort: "#{Session.get('sort_key')}":parseInt(Session.get('sort_direction'))
-                limit:Session.get('limit')
+                # limit:Session.get('limit')
+                limit:20
 
         home_subs_ready: ->
             Template.instance().subscriptionsReady()
@@ -204,7 +205,7 @@ if Meteor.isServer
         Docs.find match,
             sort:"#{sort_key}":sort_direction
             # sort:_timestamp:-1
-            limit: limit
+            limit: 20
 
     Meteor.publish 'ingredient_facets', (
         picked_tags

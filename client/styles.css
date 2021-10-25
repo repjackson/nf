@@ -552,8 +552,7 @@ input.username_search{
     opacity:.9 !important;
     font-family: 'Ubuntu', sans-serif !important;
     /*filter: invert(.9) !important;*/
-
-     /*border-radius: 8px !important; */
+    border-radius: 10px !important; 
 }
 
 .attached.label {
