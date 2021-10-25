@@ -1,5 +1,6 @@
 @picked_products = new ReactiveArray []
 @picked_weeks = new ReactiveArray []
+@picked_months = new ReactiveArray []
 papa =  require 'papaparse'
 
 
@@ -13,6 +14,7 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'mishi_facets',
             picked_products.array()
             picked_weeks.array()
+            picked_months.array()
             Session.get('product_search')
         @autorun => @subscribe 'mishi_total',
             picked_products.array()
@@ -152,11 +154,11 @@ if Meteor.isServer
                         Ean_Code:item.Ean_Code
                 if found_item 
                     console.log 'skipping existing item', item.Charge_ID
-                    Meteor.call 'mishi_meta', found_item._id
+                    Meteor.call 'mishi_meta', found_item._id, ->
                 else 
                     item.model = 'mishi_order'
                     new_id = Docs.insert item
-                    Meteor.call 'mishi_meta', new_id
+                    Meteor.call 'mishi_meta', new_id, ->
                 # console.log item.Txn_Timestamp, converted
 
     Meteor.publish 'mishi_total', (
@@ -194,6 +196,7 @@ if Meteor.isServer
     Meteor.publish 'mishi_facets', (
         picked_products=[]
         picked_weeks=[]
+        picked_months=[]
         product_search=''
         )->
             self = @
@@ -211,6 +214,7 @@ if Meteor.isServer
     
             if picked_products.length > 0 then match._product = $in:picked_products
             if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
+            if picked_months.length > 0 then match._month = $in:picked_months
             if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
 
@@ -275,7 +279,11 @@ if Meteor.isServer
                 { $match: match }
                 { $project: _product: 1 }
                 # { $unwind: "$tags" }
-                { $group: _id: '$_product', count: $sum: 1 }
+                { $group: 
+                    _id: '$_product', 
+                    count: $sum: 1
+                    qty_total: { $sum: "$qty" },
+                }
                 { $match: _id: $nin: picked_products }
                 { $sort: count: -1, _id: 1 }
                 { $limit: 20 }
@@ -287,6 +295,7 @@ if Meteor.isServer
                     name: product.name
                     model:'_product'
                     count: product.count
+                    qty_total: product.qty_total
                     index: i
                     
             week_cloud = Docs.aggregate [
@@ -305,6 +314,24 @@ if Meteor.isServer
                     name: week.name
                     model:'_week_number'
                     count: week.count
+                    index: i
+    
+            month_cloud = Docs.aggregate [
+                { $match: match }
+                { $project: _month: 1 }
+                # { $unwind: "$tags" }
+                { $group: _id: '$_month', count: $sum: 1 }
+                { $match: _id: $nin: picked_months }
+                { $sort: count: -1, _id: 1 }
+                { $limit: 10 }
+                { $project: _id: 0, name: '$_id', count: 1 }
+                ]
+            # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
+            month_cloud.forEach (month, i) ->
+                self.added 'results', Random.id(),
+                    name: month.name
+                    model:'_month_number'
+                    count: month.count
                     index: i
     
             # timestamp_tags_cloud = Docs.aggregate [

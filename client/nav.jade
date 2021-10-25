@@ -21,8 +21,11 @@ template(name='nav')
             // span.mobile.hidden nude foods market
         .search.item.zoomer.mobile.hidden(title='search')
             .ui.icon.transparent.input
-                i.search.icon
-                input.search_ingredients(type='text' autocomplete="off")
+                if current_product_search
+                    i.remove.large.red.link.icon.clear_search
+                else
+                    i.search.icon
+                input.search_products(type='text' autocomplete="off" value=current_product_search)
         // a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
         //     +i name='grocery-shelf'
         a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')

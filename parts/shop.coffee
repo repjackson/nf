@@ -279,9 +279,9 @@ if Meteor.isServer
             
                     
     Meteor.publish 'product_results', (
-        picked_ingredients
-        picked_sections
-        product_query
+        picked_ingredients=[]
+        picked_sections=[]
+        product_query=''
         view_vegan
         view_gf
         shop_section=null
@@ -373,7 +373,7 @@ if Meteor.isServer
 
     Meteor.publish 'product_facets', (
         picked_ingredients=[]
-        picked_section=[]
+        picked_sections=[]
         product_query=null
         view_vegan=false
         view_gf=false

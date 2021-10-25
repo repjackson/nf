@@ -93,14 +93,15 @@ if Meteor.isClient
                 
     
     Template.nav.events
-        'keyup .search_ingredients': _.throttle((e,t)->
+        'click .clear_search': -> Session.set('product_query',null)
+        'keyup .search_products': _.throttle((e,t)->
             # console.log Router.current().route.getName()
             current_name = Router.current().route.getName()
             # $(e.currentTarget).closest('.input').transition('pulse', 100)
 
             unless current_name is 'shop'
                 Router.go '/shop'
-            query = $('.search_ingredients').val()
+            query = $('.search_products').val()
             Session.set('product_query', query)
             # console.log Session.get('product_query')
             if e.key == "Escape"
@@ -148,6 +149,7 @@ if Meteor.isClient
     #     @autorun => Meteor.subscribe 'my_sent_messages'
     
     Template.nav.helpers
+        current_product_search: -> Session.get('product_query')
         unread_count: ->
             unread_count = Docs.find({
                 model:'message'
