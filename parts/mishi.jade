@@ -16,36 +16,42 @@ template(name='mishi')
                 .twelve.wide.column.scrolling
                     .ui.cards
                         each mishi_orders
-                            .card
-                                .content
-                                    .ui.list 
-                                        .item Store_ID: #{Store_ID}
-                                        .item Charge_ID: #{Charge_ID}
-                                        .item Order_ID: #{Order_ID}
-                                        .item Ean_Code: #{Ean_Code}
-                                        .item Retailer_Product_ID: #{Retailer_Product_ID}
-                                        .item Original_Price: #{Original_Price}
-                                        .item Qty: #{Qty}
-                                        .item Discounted_Line_Amount: #{Discounted_Line_Amount}
-                                        .item Promo_Code: #{Promo_Code}
-                                        .item Vat_Rate: #{Vat_Rate}
-                                        .item Txn_Timestamp: #{Txn_Timestamp}
-                                    .ui.list 
-                                        // .item meta info
-                                        .item _converted_date: #{_converted_date}
-                                        .item product: #{_product}
-                                        .item _month: #{_month}
-                                        .item day: #{day}
-                                        .item _weekdaynum: #{_weekdaynum}
-                                        .item _week_number: #{_week_number}
-                                        .item _weekday: #{_weekday}
+                            +mishi_order
+                            
+                            
+template(name='mishi_order')
+    .card
+        .content
+            .ui.list 
+                .item Store_ID: #{Store_ID}
+                .item Charge_ID: #{Charge_ID}
+                .item Order_ID: #{Order_ID}
+                .item Ean_Code: #{Ean_Code}
+                .item Retailer_Product_ID: #{Retailer_Product_ID}
+                .item Original_Price: #{Original_Price}
+                .item Qty: #{Qty}
+                .item Discounted_Line_Amount: #{Discounted_Line_Amount}
+                .item Promo_Code: #{Promo_Code}
+                .item Vat_Rate: #{Vat_Rate}
+                .item Txn_Timestamp: #{Txn_Timestamp}
+            .ui.list 
+                // .item meta info
+                .item _converted_date: #{_converted_date}
+                a.item.goto_product product: #{_product}
+                with related_product
+                    .ui.header #{title}
+                .item _month: #{_month}
+                .item day: #{day}
+                .item _weekdaynum: #{_weekdaynum}
+                .item _week_number: #{_week_number}
+                .item _weekday: #{_weekday}
 
-                                    .ui.icon.button.calc
-                                        i.refresh.icon
+            .ui.icon.button.calc
+                i.refresh.icon
 
 
 template(name='cfacet')
-    .ui.header #{key}
+    .ui.inline.header #{model}
     each picked
         +unpick
     each unpicked 
@@ -56,7 +62,8 @@ template(name='unpick')
     .ui.blue.button.unpick
         |#{this}
 
-template(name='pick')        
-    .ui.button.pick
-        |#{name}
-        small #{count}
+template(name='pick')     
+    if name
+        .ui.button.pick
+            |#{name}
+            small #{count}

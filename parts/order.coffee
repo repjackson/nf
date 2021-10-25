@@ -1,5 +1,3 @@
-papa =  require 'papaparse'
-
 if Meteor.isClient
     Router.route '/orders', (->
         @render 'orders'

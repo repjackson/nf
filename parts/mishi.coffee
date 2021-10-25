@@ -1,5 +1,8 @@
 @picked_products = new ReactiveArray []
 @picked_weeks = new ReactiveArray []
+papa =  require 'papaparse'
+
+
 
 if Meteor.isClient
     Router.route '/mishi', (->
@@ -18,6 +21,28 @@ if Meteor.isClient
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
+    Template.mishi_order.onCreated ->
+        @autorun => Meteor.subscribe 'product_by_mishi', @data, ->
+    Template.mishi_order.helpers
+        related_product: -> 
+            Docs.findOne
+                model:'product'
+                slug:@_product
+    Template.mishi_order.events
+        'click .goto_product': ->
+            related_product = 
+                Docs.findOne
+                    model:'product'
+                    slug:@_product
+            if related_product
+                Router.go "/product/#{@_id}"
+            else 
+                new_id = 
+                    Docs.insert 
+                        model:'product'
+                        slug:@_product
+                        title:@_product
+                Router.go "/product/#{new_id}/edit"
     Template.pick.events
         'click .pick': ->
             console.log @
@@ -106,12 +131,20 @@ if Meteor.isServer
                         Charge_ID:item.Charge_ID
                 if found_item 
                     console.log 'skipping existing item', item.Charge_ID
+                    Meteor.call 'mishi_meta', found_item._id
                 else 
                     item.model = 'mishi_order'
-                    Docs.insert item
+                    new_id = Docs.insert item
+                    Meteor.call 'mishi_meta', new_id
                 # console.log item.Txn_Timestamp, converted
 
 if Meteor.isServer
+    Meteor.publish 'product_by_mishi', (mishi_order)->
+        console.log mishi_order
+        Docs.find({
+            model:'product'
+            slug:mishi_order._product
+        }, limit:1)
     Meteor.publish 'mishi_facets', (
         picked_products
         picked_weeks
