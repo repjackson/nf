@@ -9,12 +9,13 @@ if Meteor.isClient
         @render 'mishi'
         ), name:'mishi'
 
-
-
     Template.mishi.onCreated ->
         @autorun -> Meteor.subscribe 'mishi_facets',
             picked_products.array()
             picked_weeks.array()
+            Session.get('product_search')
+        @autorun => @subscribe 'product_count'
+            
         # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
         # @autorun -> Meteor.subscribe 'model_docs', 'thing', 100
@@ -28,6 +29,13 @@ if Meteor.isClient
             Docs.findOne
                 model:'product'
                 slug:@_product
+    Template.mishi.events
+        'keyup .search_product': ->
+            search = $('.search_product').val()
+            # if search.length > 2
+            Session.set('product_search', search)
+            
+            
     Template.mishi_order.events
         'click .goto_product': ->
             related_product = 
@@ -43,6 +51,8 @@ if Meteor.isClient
                         slug:@_product
                         title:@_product
                 Router.go "/product/#{new_id}/edit"
+                
+                
     Template.pick.events
         'click .pick': ->
             console.log @
@@ -86,8 +96,14 @@ if Meteor.isClient
                 match.delivery_method = Session.get('order_sort_filter')
             Docs.find match,
                 sort: _timestamp:-1
+        
+        
+        mishi_total: -> Counts.get('mishi_total')        
+        current_search: ->
+            Session.get('product_search')
 
     Template.mishi.events
+        'click .clear_search': (e,t)-> Session.set('product_search',null)
         'click .calc': (e,t)->
             Meteor.call 'mishi_meta', @_id, ->
         'change .import': (e,t)->
@@ -138,7 +154,32 @@ if Meteor.isServer
                     Meteor.call 'mishi_meta', new_id
                 # console.log item.Txn_Timestamp, converted
 
-if Meteor.isServer
+    Meteor.publish 'mishi_total', (
+        picked_products=[]
+        picked_weeks=[]
+        product_search=''
+        )->
+        # @unblock()
+        self = @
+        match = {model:'mishi_order'}
+
+        # match.tags = $all: picked_tags
+        # if model then match.model = model
+        # if parent_id then match.parent_id = parent_id
+
+        # if view_private is true
+        #     match.author_id = Meteor.userId()
+
+        # if view_private is false
+        #     match.published = $in: [0,1]
+
+        if picked_products.length > 0 then match._product = $in:picked_products
+        if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
+        if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
+        Counts.publish this, 'mishi_total', Docs.find(match)
+        return undefined
+
+
     Meteor.publish 'product_by_mishi', (mishi_order)->
         console.log mishi_order
         Docs.find({
@@ -146,8 +187,9 @@ if Meteor.isServer
             slug:mishi_order._product
         }, limit:1)
     Meteor.publish 'mishi_facets', (
-        picked_products
-        picked_weeks
+        picked_products=[]
+        picked_weeks=[]
+        product_search=''
         )->
             self = @
             match = {model:'mishi_order'}
@@ -164,7 +206,9 @@ if Meteor.isServer
     
             if picked_products.length > 0 then match._product = $in:picked_products
             if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
-    
+            if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
+            #     username: {$regex:"#{username}", $options: 'i'}
+
             # if picked_author_ids.length > 0
             #     match.author_id = $in: picked_author_ids
             #     match.published = 1
@@ -258,25 +302,6 @@ if Meteor.isServer
                     count: week.count
                     index: i
     
-            # 
-            #
-            # # watson_keyword_cloud = Docs.aggregate [
-            # #     { $match: match }
-            # #     { $project: watson_keywords: 1 }
-            # #     { $unwind: "$watson_keywords" }
-            # #     { $group: _id: '$watson_keywords', count: $sum: 1 }
-            # #     { $match: _id: $nin: picked_tags }
-            # #     { $sort: count: -1, _id: 1 }
-            # #     { $limit: limit }
-            # #     { $project: _id: 0, name: '$_id', count: 1 }
-            # #     ]
-            # # # console.log 'cloud, ', cloud
-            # # watson_keyword_cloud.forEach (keyword, i) ->
-            # #     self.added 'watson_keywords', Random.id(),
-            # #         name: keyword.name
-            # #         count: keyword.count
-            # #         index: i
-            #
             # timestamp_tags_cloud = Docs.aggregate [
             #     { $match: match }
             #     { $project: timestamp_tags: 1 }
@@ -356,7 +381,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:20, sort: timestamp:-1}).observeChanges(
+            subHandle = Docs.find(match, {limit:42, sort: timestamp:-1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id

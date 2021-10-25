@@ -13,38 +13,49 @@ template(name='mishi')
                         |import
                     .ui.fluid.input.import
                         input(type='file' accept='.csv')
-                .twelve.wide.column.scrolling
-                    .ui.cards
-                        each mishi_orders
-                            +mishi_order
-                            
+                .twelve.wide.column
+                    .ui.icon.input(title='search product')
+                        if current_search
+                            i.remove.red.link.icon.zoomer.clear_search
+                        else
+                            i.search.icon
+                        input.search_product(type='text' placeholder='product' value=current_search)
+                    .scrolling
+                        .ui.cards
+                            each mishi_orders
+                                +mishi_order
+                                
                             
 template(name='mishi_order')
     .card
         .content
             .ui.list 
-                .item Store_ID: #{Store_ID}
-                .item Charge_ID: #{Charge_ID}
-                .item Order_ID: #{Order_ID}
-                .item Ean_Code: #{Ean_Code}
-                .item Retailer_Product_ID: #{Retailer_Product_ID}
-                .item Original_Price: #{Original_Price}
+                // .item Store_ID: #{Store_ID}
+                // .item Charge_ID: #{Charge_ID}
+                // .item Order_ID: #{Order_ID}
+                // .item Ean_Code: #{Ean_Code}
+                // a.item.goto_product(href=Ean_Code target='_window')
+                with related_product
+                    img.ui.tiny.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
+                    .ui.inline.small.header 
+                        |#{title}
+                a.item.goto_product
+                    | #{_product}
+                // .item Retailer_Product_ID: #{Retailer_Product_ID}
+                .item(title='original price') $#{Original_Price}
                 .item Qty: #{Qty}
                 .item Discounted_Line_Amount: #{Discounted_Line_Amount}
-                .item Promo_Code: #{Promo_Code}
+                if Promo_Code
+                    .item Promo_Code: #{Promo_Code}
                 .item Vat_Rate: #{Vat_Rate}
-                .item Txn_Timestamp: #{Txn_Timestamp}
-            .ui.list 
+                // .item Txn_Timestamp: #{Txn_Timestamp}
                 // .item meta info
-                .item _converted_date: #{_converted_date}
-                a.item.goto_product product: #{_product}
-                with related_product
-                    .ui.header #{title}
-                .item _month: #{_month}
-                .item day: #{day}
-                .item _weekdaynum: #{_weekdaynum}
+                .item(title='_converted_date') #{_converted_date}
+                .item(title='month') #{_month}
+                // .item day: #{day}
+                // .item _weekdaynum: #{_weekdaynum}
                 .item _week_number: #{_week_number}
-                .item _weekday: #{_weekday}
+                .item(title='_weekday') #{_weekday}
 
             .ui.icon.button.calc
                 i.refresh.icon
@@ -64,6 +75,6 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        .ui.button.pick
+        .ui.compact.basic.circular.button.pick
             |#{name}
             small #{count}
