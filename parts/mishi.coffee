@@ -126,6 +126,22 @@ if Meteor.isClient
 
 if Meteor.isServer 
     Meteor.methods
+        convert_qty: (doc_id)->
+            found = Docs.findOne
+                model:'mishi_order'
+                Qty:$type:2
+            console.log 'found string qty', found
+            int = parseInt(found.Qty)
+            console.log 'new int', int, typeof(int)
+            
+            Docs.update found._id, 
+                $set:
+                    Qty:int
+                    
+            updated = 
+                Docs.findOne found._id
+            console.log 'updated order with int', updated
+        
         mishi_meta: (doc_id)->
             mishi_order = Docs.findOne doc_id
             split = mishi_order.Ean_Code.split('/')
@@ -279,11 +295,13 @@ if Meteor.isServer
                 { $match: match }
                 { $project: _product: 1 }
                 # { $unwind: "$tags" }
-                { $group: 
-                    _id: '$_product', 
-                    count: $sum: 1
-                    qty_total: { $sum: "$qty" },
-                }
+                { $group: _id: '$_product', count: $sum: '$Qty' }
+
+                # { $group: 
+                #     _id: '$_product'
+                #     # count: $sum: 1
+                #     count: $sum: "$Qty"
+                # }
                 { $match: _id: $nin: picked_products }
                 { $sort: count: -1, _id: 1 }
                 { $limit: 20 }

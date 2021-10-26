@@ -8,7 +8,6 @@ template(name='mishi')
                         |mishi
                     .ui.small.header 
                         |#{mishi_total} results
-                    +cfacet model='_product'
                     +cfacet model='_week_number'
                     .ui.inline.small.header
                         i.download.icon
@@ -16,6 +15,7 @@ template(name='mishi')
                     .ui.fluid.input.import
                         input(type='file' accept='.csv')
                 .twelve.wide.column
+                    +cfacet model='_product'
                     .ui.icon.input(title='search product')
                         if current_search
                             i.remove.red.link.icon.zoomer.clear_search
@@ -82,6 +82,6 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        .ui.compact.basic.circular.button.pick
+        .ui.compact.circular.button.pick
             |#{name}
             small #{count}
