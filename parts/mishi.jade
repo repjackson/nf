@@ -63,7 +63,7 @@ template(name='mishi_order')
                 // .item _weekdaynum: #{_weekdaynum}
                 .item _week_number: #{_week_number}
                 .item(title='_weekday') #{_weekday}
-
+            +print_this
             .ui.icon.button.calc
                 i.refresh.icon
 
@@ -85,3 +85,4 @@ template(name='pick')
         .ui.compact.circular.button.pick
             |#{name}
             small #{count}
+            |(#{total})

@@ -127,20 +127,20 @@ if Meteor.isClient
 if Meteor.isServer 
     Meteor.methods
         convert_qty: (doc_id)->
-            found = Docs.findOne
+            targets = Docs.find({
                 model:'mishi_order'
                 Qty:$type:2
-            console.log 'found string qty', found
-            int = parseInt(found.Qty)
-            console.log 'new int', int, typeof(int)
-            
-            Docs.update found._id, 
-                $set:
-                    Qty:int
-                    
-            updated = 
-                Docs.findOne found._id
-            console.log 'updated order with int', updated
+            }, limit:500)
+            # console.log 'new int', int, typeof(int)
+            for found in targets.fetch()
+                console.log 'found string qty', found.Qty, found._id
+                int = parseInt(found.Qty)
+                Docs.update found._id, 
+                    $set:
+                        Qty:int
+                updated = 
+                    Docs.findOne found._id
+                console.log 'updated order with int', updated.Qty, updated._id
         
         mishi_meta: (doc_id)->
             mishi_order = Docs.findOne doc_id
@@ -293,19 +293,28 @@ if Meteor.isServer
     
             product_cloud = Docs.aggregate [
                 { $match: match }
-                { $project: _product: 1 }
+                { $project: 
+                    _product: 1
+                    Qty: 1
+                    # sale_total: 
+                    #     $sum: '$Qty' 
+                }
                 # { $unwind: "$tags" }
-                { $group: _id: '$_product', count: $sum: '$Qty' }
-
                 # { $group: 
-                #     _id: '$_product'
-                #     # count: $sum: 1
-                #     count: $sum: "$Qty"
+                #     _id: '$_product', 
                 # }
-                { $match: _id: $nin: picked_products }
-                { $sort: count: -1, _id: 1 }
+                { $group: 
+                    _id: '$_product'
+                    total: 
+                        $sum: "$Qty"
+                    count: 
+                        $sum: 1
+                }
+                # { $match: _id: $nin: picked_products }
+                # { $sort: count: -1, _id: 1 }
+                { $sort: total: -1, _id: 1 }
                 { $limit: 20 }
-                { $project: _id: 0, name: '$_id', count: 1 }
+                { $project: _id:0, name:'$_id', count:1, total:1}
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
             product_cloud.forEach (product, i) ->
@@ -313,8 +322,8 @@ if Meteor.isServer
                     name: product.name
                     model:'_product'
                     count: product.count
-                    qty_total: product.qty_total
-                    index: i
+                    total: product.total
+                    # index: i
                     
             week_cloud = Docs.aggregate [
                 { $match: match }
@@ -332,7 +341,7 @@ if Meteor.isServer
                     name: week.name
                     model:'_week_number'
                     count: week.count
-                    index: i
+                    # index: i
     
             month_cloud = Docs.aggregate [
                 { $match: match }
@@ -350,7 +359,7 @@ if Meteor.isServer
                     name: month.name
                     model:'_month_number'
                     count: month.count
-                    index: i
+                    # index: i
     
             # timestamp_tags_cloud = Docs.aggregate [
             #     { $match: match }
