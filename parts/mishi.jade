@@ -8,7 +8,19 @@ template(name='mishi')
                         |mishi
                     .ui.small.inline.header 
                         |#{mishi_total} results
-                    +cfacet model='_week_number'
+                    .ui.inline.header 
+                        i.hashtag.icon
+                        |week
+                    // +cfacet model='_week_number'
+                    each week_results
+                        .ui.button.pick_week
+                            |#{name}
+                    .ui.inline.header
+                        i.calendar.icon
+                        |month
+                    each month_results
+                        .ui.button.pick_month
+                            |#{name}
                     .ui.inline.small.header
                         i.download.icon
                         |import

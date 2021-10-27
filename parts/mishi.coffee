@@ -91,7 +91,13 @@ if Meteor.isClient
             Results.find 
                 model:@model
         
-    Template.mishi.helpers
+    Template.mishi.helpers 
+        month_results: ->
+            Results.find 
+                model:'month'
+        week_results: ->
+            Results.find 
+                model:'week_number'
         mishi_orders: ->
             match = {model:'mishi_order'}
             if Session.get('order_status_filter')
@@ -339,7 +345,7 @@ if Meteor.isServer
             week_cloud.forEach (week, i) ->
                 self.added 'results', Random.id(),
                     name: week.name
-                    model:'_week_number'
+                    model:'week_number'
                     count: week.count
                     # index: i
     
@@ -357,7 +363,7 @@ if Meteor.isServer
             month_cloud.forEach (month, i) ->
                 self.added 'results', Random.id(),
                     name: month.name
-                    model:'_month_number'
+                    model:'month'
                     count: month.count
                     # index: i
     
