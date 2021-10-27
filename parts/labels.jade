@@ -1,13 +1,13 @@
-template(name='mishi')
+template(name='labels')
     .ui.stackable.padded.grid
         .sixteen.wide.column.scrolling
             .ui.stackable.grid 
                 .four.wide.column
                     .ui.inline.header 
                         i.money.icon
-                        |mishi
+                        |label
                     .ui.small.inline.header 
-                        |#{mishi_total} results
+                        |#{label_total} results
                     div
                     .ui.inline.header 
                         i.hashtag.icon
@@ -31,7 +31,7 @@ template(name='mishi')
                     .ui.fluid.input.import
                         input(type='file' accept='.csv')
                 .twelve.wide.column
-                    +cfacet model='_product'
+                    // +cfacet model='_product'
                     .ui.icon.input(title='search product')
                         if current_search
                             i.remove.red.link.icon.zoomer.clear_search
@@ -40,15 +40,15 @@ template(name='mishi')
                         input.search_product(type='text' placeholder='product' value=current_search)
                     .scrolling
                         .ui.four.doubling.cards
-                            if mishi_orders.count
-                                each mishi_orders
-                                    +mishi_order
+                            if labels.count
+                                each label_docs
+                                    +label_card
                             else 
                                 .ui.center.aligned.basic.segment 
                                     i.money.big.loading.icon
                                 
                             
-template(name='mishi_order')
+template(name='label_card')
     .card
         .content
             .ui.list 
@@ -84,22 +84,22 @@ template(name='mishi_order')
                 i.refresh.icon
 
 
-template(name='cfacet')
-    .ui.inline.header #{model}
-    each picked
-        +unpick
-    each unpicked 
-        +pick
+// template(name='cfacet')
+//     .ui.inline.header #{model}
+//     each picked
+//         +unpick
+//     each unpicked 
+//         +pick
         
         
-template(name='unpick')        
-    .ui.blue.button.unpick
-        |#{this}
+// template(name='unpick')        
+//     .ui.blue.button.unpick
+//         |#{this}
 
-template(name='pick')     
-    if name
-        .ui.compact.circular.large.button.pick
-            |#{name}
-            small #{count}x
-            |(=#{total})
+// template(name='pick')     
+//     if name
+//         .ui.compact.circular.large.button.pick
+//             |#{name}
+//             small #{count}x
+//             |(=#{total})
             
