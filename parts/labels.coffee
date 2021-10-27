@@ -98,14 +98,14 @@ if Meteor.isClient
         week_results: ->
             Results.find 
                 model:'week_number'
-        labels: ->
+        label_docs: ->
             match = {model:'label'}
-            if Session.get('order_status_filter')
-                match.status = Session.get('order_status_filter')
-            if Session.get('order_delivery_filter')
-                match.delivery_method = Session.get('order_sort_filter')
-            if Session.get('order_sort_filter')
-                match.delivery_method = Session.get('order_sort_filter')
+            # if Session.get('order_status_filter')
+            #     match.status = Session.get('order_status_filter')
+            # if Session.get('order_delivery_filter')
+            #     match.delivery_method = Session.get('order_sort_filter')
+            # if Session.get('order_sort_filter')
+            #     match.delivery_method = Session.get('order_sort_filter')
             Docs.find match,
                 sort: _timestamp:-1
         
@@ -167,20 +167,48 @@ if Meteor.isServer
         parse_labels: (parsed_results)->
             # console.log parsed_results
             # console.log parsed_results.data.length
-            for item in parsed_results.data
-                # console.log item
-                found_item = 
+            
+            # "": "4"
+            # COGS: ""
+            # Color: "efad7d"
+            # Description: ""
+            # GF: ""
+            # Goes well with: ""
+            # Ingredients: "Organic Quick Oats"
+            # Local: ""
+            # Name: "Organic Quick Oats"
+            # Net Weight (lbs): "1.6"
+            # Net Weight (oz): "25.6"
+            # Nude Made: ""
+            # Origin: "Canada"
+            # Packaging: ""
+            # Price/oz: "0.14"
+            # Rescued: ""
+            # Retail Price: "3.7"
+            # Shelf Life: ""
+            # Size (cups): "8"
+            # URL: "https://nudefoodsmarket.com/product/quick-oats/?attribute_size=8+cup+jar"
+            # Vegan: "1"
+            # We love it in: ""
+            # Wholefoods Retail Price: ""
+            # Wholesale Price: ""
+            
+            
+            for label in parsed_results.data[..2]
+                console.log label
+                found_label = 
                     Docs.findOne    
                         model:'label'
-                        Charge_ID:item.Charge_ID
-                        Ean_Code:item.Ean_Code
-                if found_item 
-                    console.log 'skipping existing item', item.Charge_ID
-                    Meteor.call 'labels_meta', found_item._id, ->
+                        URL:label.URL
+                        # Charge_ID:label.Charge_ID
+                        # Ean_Code:label.Ean_Code
+                if found_label 
+                    console.log 'skipping existing label', label.URL
+                    # Meteor.call 'labels_meta', found_label._id, ->
                 else 
-                    item.model = 'label'
-                    new_id = Docs.insert item
-                    Meteor.call 'labels_meta', new_id, ->
+                    label.model = 'label'
+                    new_id = Docs.insert label
+                    # Meteor.call 'labels_meta', new_id, ->
                 # console.log item.Txn_Timestamp, converted
 
     Meteor.publish 'labels_total', (

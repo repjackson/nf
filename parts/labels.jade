@@ -40,7 +40,7 @@ template(name='labels')
                         input.search_product(type='text' placeholder='product' value=current_search)
                     .scrolling
                         .ui.four.doubling.cards
-                            if labels.count
+                            if label_docs.count
                                 each label_docs
                                     +label_card
                             else 
