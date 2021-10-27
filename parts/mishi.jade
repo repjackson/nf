@@ -3,10 +3,10 @@ template(name='mishi')
         .sixteen.wide.column.scrolling
             .ui.stackable.grid 
                 .four.wide.column
-                    .ui.header 
+                    .ui.inline.header 
                         i.money.icon
                         |mishi
-                    .ui.small.header 
+                    .ui.small.inline.header 
                         |#{mishi_total} results
                     +cfacet model='_week_number'
                     .ui.inline.small.header
@@ -23,7 +23,7 @@ template(name='mishi')
                             i.search.icon
                         input.search_product(type='text' placeholder='product' value=current_search)
                     .scrolling
-                        .ui.doubling.four.cards
+                        .ui.four.doubling.cards
                             if mishi_orders.count
                                 each mishi_orders
                                     +mishi_order
@@ -82,7 +82,8 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        .ui.compact.circular.button.pick
+        .ui.compact.circular.large.button.pick
             |#{name}
-            small #{count}
-            |(#{total})
+            small #{count}x
+            |(=#{total})
+            

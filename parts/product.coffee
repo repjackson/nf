@@ -42,6 +42,31 @@ if Meteor.isClient
                 Router.go "/source/#{product.source_id}"
             , 240
         
+        'click .goto_ingredient': (e,t)->
+            # $(e.currentTarget).closest('.pushable').transition('fade right', 240)
+            product = Docs.findOne Router.current().params.doc_id
+            console.log @
+            found_ingredient = 
+                Docs.findOne 
+                    model:'ingredient'
+                    title:@valueOf()
+            if found_ingredient
+                Router.go "/ingredient/#{found_ingredient._id}"
+            else 
+                new_id = 
+                    Docs.insert 
+                        model:'ingredient'
+                        title:@valueOf()
+                Router.go "/ingredient/#{new_id}/edit"
+                
+            # found_ingredient = 
+            #     Docs.findOne 
+            #         model:'ingredient'
+            #         title:@valueOf()
+            # Meteor.setTimeout =>
+            #     Router.go "/source/#{product.source_id}"
+            # , 240
+        
         'click .add_to_cart': ->
             Meteor.call 'add_to_cart', @_id, =>
                 $('body').toast(

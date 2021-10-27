@@ -55,7 +55,7 @@ template(name='product_view')
                             +i name='ingredients'
                             |ingredients
                         each ingredients
-                            .ui.large.basic.label #{this}
+                            .ui.large.basic.label.goto_ingredient #{this}
                 .four.wide.column
                     +voting_full
                     +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
