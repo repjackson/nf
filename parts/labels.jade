@@ -4,11 +4,14 @@ template(name='labels')
             .ui.stackable.grid 
                 .four.wide.column
                     .ui.inline.header 
-                        i.money.icon
+                        +i name='tags'
                         |label
                     .ui.small.inline.header 
                         |#{label_total} results
                     div
+                    if in_dev 
+                        .ui.icon.button.clear_labels 
+                            i.remove.icon
                     .ui.inline.header 
                         i.hashtag.icon
                         |week
@@ -52,33 +55,30 @@ template(name='label_card')
     .card
         .content
             .ui.list 
-                // .item Store_ID: #{Store_ID}
-                // .item Charge_ID: #{Charge_ID}
-                // .item Order_ID: #{Order_ID}
-                // .item Ean_Code: #{Ean_Code}
-                with related_product
-                    img.ui.tiny.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
-                    .ui.inline.small.header 
-                        |#{title}
-                a.item.goto_product
-                    | #{_product}
-                // .item Retailer_Product_ID: #{Retailer_Product_ID}
-                a(href=Ean_Code target='_window')
-                    i.wikipedia.link.icon
-                .item(title='original price') $#{Original_Price}
-                .item Qty: #{Qty}
-                .item Discounted_Line_Amount: #{Discounted_Line_Amount}
-                if Promo_Code
-                    .item Promo_Code: #{Promo_Code}
-                .item Vat_Rate: #{Vat_Rate}
-                // .item Txn_Timestamp: #{Txn_Timestamp}
-                // .item meta info
-                .item(title='_converted_date') #{_converted_date}
-                .item(title='month') #{_month}
-                // .item day: #{day}
-                // .item _weekdaynum: #{_weekdaynum}
-                .item _week_number: #{_week_number}
-                .item(title='_weekday') #{_weekday}
+                .item cogs: #{cogs}
+                .item color: #{color}
+                .item description: #{description}
+                .item gf: #{gf}
+                .item goes_well_with: #{goes_well_with}
+                .item ingredients: #{ingredients}
+                .item local: #{local}
+                .item model: #{model}
+                .item name: #{name}
+                .item net_weight_: #{net_weight_}
+                .item net_weight_: #{net_weight_}
+                .item nude_made: #{nude_made}
+                .item origin: #{origin}
+                .item packaging: #{packaging}
+                .item price: #{price}
+                .item rescued: #{rescued}
+                .item retail_price: #{retail_price}
+                .item shelf_life: #{shelf_life}
+                .item size_: #{size_}
+                .item url: #{url}
+                .item vegan: #{vegan}
+                .item we_love_it_in: #{we_love_it_in}
+                .item wholefoods_retail_price: #{wholefoods_retail_price}
+                .item wholesale_price: #{wholesale_price}
             +print_this
             .ui.icon.button.calc
                 i.refresh.icon

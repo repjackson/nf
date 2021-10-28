@@ -35,6 +35,9 @@ if Meteor.isClient
                 model:'product'
                 slug:@_product
     Template.labels.events
+        'click .clear_labels': ->
+            if confirm 'clear labels?'
+                Meteor.call 'clear_labels', ->
         'keyup .search_product': ->
             search = $('.search_product').val()
             # if search.length > 2
@@ -121,6 +124,13 @@ if Meteor.isClient
         'change .import': (e,t)->
             papa.parse(e.target.files[0], {
                 header: true
+                transformHeader: (header, index)->
+                    console.log 'header', header
+                    console.log 'index', index
+                    # replaced = header.replace(" ","_");
+                    replaced = header.split(' ').join('_')
+                    console.log 'replaced', replaced.toLowerCase()
+                    replaced.toLowerCase()
                 complete: (results)->
                     console.log results
                     Meteor.call 'parse_labels', results, ->
@@ -132,6 +142,9 @@ if Meteor.isClient
 
 if Meteor.isServer 
     Meteor.methods
+        clear_labels: ->
+            Docs.remove 
+                model:'label'
         # convert_qty: (doc_id)->
         #     targets = Docs.find({
         #         model:'label'
@@ -194,16 +207,16 @@ if Meteor.isServer
             # Wholesale Price: ""
             
             
-            for label in parsed_results.data[..2]
+            for label in parsed_results.data
                 console.log label
                 found_label = 
                     Docs.findOne    
                         model:'label'
-                        URL:label.URL
+                        URL:label.url
                         # Charge_ID:label.Charge_ID
                         # Ean_Code:label.Ean_Code
                 if found_label 
-                    console.log 'skipping existing label', label.URL
+                    console.log 'skipping existing label', label.url
                     # Meteor.call 'labels_meta', found_label._id, ->
                 else 
                     label.model = 'label'
