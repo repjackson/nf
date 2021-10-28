@@ -106,14 +106,14 @@ template(name='nav')
                     strong.mobile.hidden #{currentUser.name}
                     // i.bars.large.icon
                         
-        unless currentUser
-            if subs_ready
-                a.item(href='/login' title='login') 
-                    i.sign.in.large.icon
-                    // +i name='internal'
-                    |login
-            else 
-                i.food.loading.icon
+        // unless currentUser
+        //     if subs_ready
+        //         a.item(href='/login' title='login') 
+        //             i.sign.in.large.icon
+        //             // +i name='internal'
+        //             |login
+        //     else 
+        //         i.food.loading.icon
         
                 
 
