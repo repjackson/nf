@@ -111,9 +111,9 @@ template(name='label_card')
                 i.about.icon
                 |#{description}
             if url
-                a(href=url target='_blank' title=url)
+                a.ui.circular.icon.button(href=url target='_blank' title=url)
                     // |#{url}
-                    i.external.link.icon.zoomer.pointer
+                    i.external.large.icon
             if ingredients
                 +i name='ingredients'
                 |#{ingredients}

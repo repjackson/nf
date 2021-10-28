@@ -28,17 +28,29 @@ template(name='nav')
                 input.search_products(type='text' autocomplete="off" value=current_product_search)
         // a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
         //     +i name='grocery-shelf'
-        a.icon.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
+        a.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
             // +i name='ingredients'
-            +ibig name='grocery-shelf'
-        a.icon.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
+            |&nbsp; 
+            |&nbsp; 
+            |ibig name='grocery-shelf'
+            |ingredients
+        a.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
             +ibig name='field-and-tractor'
-        a.icon.item(href='/mishi' class="{{isActivePath '/mishi'}}" title='mishi orders')
+            |&nbsp; 
+            |&nbsp; 
+            |sources
+        a.item(href='/mishi' class="{{isActivePath '/mishi'}}" title='mishi orders')
             +ibig name='money'
-        a.icon.item(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
+            |&nbsp; 
+            |orders
+        a.item(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
             +ibig name='tags'
-        a.icon.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
+            |&nbsp; 
+            |labels
+        a.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             +ibig name='cookbook'
+            |&nbsp; 
+            |recipes
         // a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
         //     +i name='invoice'
         // a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
