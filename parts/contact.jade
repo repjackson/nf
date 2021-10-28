@@ -1,19 +1,19 @@
-template(name='contact')
-    .ui.stackable.padded.grid
-        .centered.row
-            .twelve.wide.column
-                .ui.header 
-                    +i name='phone'
-                    |contact
-                .ui.form
-                    .field
-                        label message 
-                        textarea.message(rows='4')
-                .ui.fluid.green.button.submit_message
-                    |submit
-                .ui.list
-                    each contact_submissions
-                        .item 
-                            |#{when} #{message}
-                            if is_admin
-                                +remove_button
+// template(name='contact')
+//     .ui.stackable.padded.grid
+//         .centered.row
+//             .twelve.wide.column
+//                 .ui.header 
+//                     +i name='phone'
+//                     |contact
+//                 .ui.form
+//                     .field
+//                         label message 
+//                         textarea.message(rows='4')
+//                 .ui.fluid.green.button.submit_message
+//                     |submit
+//                 .ui.list
+//                     each contact_submissions
+//                         .item 
+//                             |#{when} #{message}
+//                             if is_admin
+//                                 +remove_button

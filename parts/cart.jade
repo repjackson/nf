@@ -1,166 +1,166 @@
-template(name='cart')
-    .ui.stackable.padded.grid
-        .sixteen.wide.column
-            a.ui.header(href="/cart")
-                +i name='shopping-cart'
-                |cart
-            // a.ui.fluid.basic.icon.button(href="/shop")
-            //     // i.chevron.left.icon
-            //     +i name='food-cart'
-            if cart_items.count
-                .ui.header subtotal: $#{my_cart_subtotal}
-                .ui.big.fluid.button.checkout_cart
-                    i.large.send.icon
-                    |checkout
-            each cart_items
-                +cart_item
+// template(name='cart')
+//     .ui.stackable.padded.grid
+//         .sixteen.wide.column
+//             a.ui.header(href="/cart")
+//                 +i name='shopping-cart'
+//                 |cart
+//             // a.ui.fluid.basic.icon.button(href="/shop")
+//             //     // i.chevron.left.icon
+//             //     +i name='food-cart'
+//             if cart_items.count
+//                 .ui.header subtotal: $#{my_cart_subtotal}
+//                 .ui.big.fluid.button.checkout_cart
+//                     i.large.send.icon
+//                     |checkout
+//             each cart_items
+//                 +cart_item
                     
                 
                 
 
-template(name='cart_item')
-    .item
-        // .image
-        img.ui.tiny.inline.rounded.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-        a.ui.inline.header(href="/product/#{product_id}")
-            |$#{product_price}
-            // | #{amount}
-            strong #{product_title}
-        small added #{when}
-        // .ui.basic.icon.button.decrease_amount
-        //     i.minus.icon
-        // .ui.basic.icon.button.increase_amount
-        //     i.plus.icon
-        .ui.basic.icon.button.remove_item
-            i.remove.red.icon
-        // if is_admin
-        //     +print_this
-template(name='checkout')
-    with cart_order
-        .ui.stackable.padded.three.column.grid
-            .column
-                .ui.header
-                    i.cart.icon
-                    |checkout
-                .ui.large.list.scrolling
-                    each cart_items
-                        .item
-                            // .image
-                            img.ui.tiny.inline.rounded.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-                            .ui.inline.small.header $#{product_price} #{product_title}
-                            div
-                            small added #{when}
-                            .ui.basic.icon.button.decrease_amount
-                                i.minus.icon
-                            // .ui.inline.header #{amount}
-                            .ui.basic.icon.button.increase_amount
-                                i.plus.icon
-                            .ui.basic.icon.button.remove_item
-                                i.remove.red.icon
-                            // if is_admin
-                            //     +print_this
-                .ui.header 
-                    +i name='receipt'
-                    |subtotal: $#{my_cart_subtotal}
-            .column
-                +delivery_section
-                +location_section
-            .column
-                +payment_section
-                +boolean_edit key='receive_notifications' label='check this box to receive your vital reminder texts and emails (optional)' direct=true
-                +boolean_edit key='has_read_tos' label=' I have read and agree to the website terms and conditions' direct=true
-                if has_read_tos
-                    .ui.big.fluid.green.button.submit_order
-                        i.large.send.icon
-                        |submit
-                else 
-                    .ui.big.fluid.green.disabled.button
-                        i.large.send.icon
-                        |submit (must agree to terms of service)
+// template(name='cart_item')
+//     .item
+//         // .image
+//         img.ui.tiny.inline.rounded.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+//         a.ui.inline.header(href="/product/#{product_id}")
+//             |$#{product_price}
+//             // | #{amount}
+//             strong #{product_title}
+//         small added #{when}
+//         // .ui.basic.icon.button.decrease_amount
+//         //     i.minus.icon
+//         // .ui.basic.icon.button.increase_amount
+//         //     i.plus.icon
+//         .ui.basic.icon.button.remove_item
+//             i.remove.red.icon
+//         // if is_admin
+//         //     +print_this
+// template(name='checkout')
+//     with cart_order
+//         .ui.stackable.padded.three.column.grid
+//             .column
+//                 .ui.header
+//                     i.cart.icon
+//                     |checkout
+//                 .ui.large.list.scrolling
+//                     each cart_items
+//                         .item
+//                             // .image
+//                             img.ui.tiny.inline.rounded.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+//                             .ui.inline.small.header $#{product_price} #{product_title}
+//                             div
+//                             small added #{when}
+//                             .ui.basic.icon.button.decrease_amount
+//                                 i.minus.icon
+//                             // .ui.inline.header #{amount}
+//                             .ui.basic.icon.button.increase_amount
+//                                 i.plus.icon
+//                             .ui.basic.icon.button.remove_item
+//                                 i.remove.red.icon
+//                             // if is_admin
+//                             //     +print_this
+//                 .ui.header 
+//                     +i name='receipt'
+//                     |subtotal: $#{my_cart_subtotal}
+//             .column
+//                 +delivery_section
+//                 +location_section
+//             .column
+//                 +payment_section
+//                 +boolean_edit key='receive_notifications' label='check this box to receive your vital reminder texts and emails (optional)' direct=true
+//                 +boolean_edit key='has_read_tos' label=' I have read and agree to the website terms and conditions' direct=true
+//                 if has_read_tos
+//                     .ui.big.fluid.green.button.submit_order
+//                         i.large.send.icon
+//                         |submit
+//                 else 
+//                     .ui.big.fluid.green.disabled.button
+//                         i.large.send.icon
+//                         |submit (must agree to terms of service)
     
     
-template(name='location_section')
-    .ui.basic.segment
-        a.ui.header(href="/user/#{currentUser.username}/addresses")
-            +i name='marker'
-            |billing address
-        each model_docs_helper 'address'
-            div
-            .ui.large.button.pick_address(class=user_address_pick_class)
-                | #{street_address}, #{city}, #{zip_code}
-        // +boolean_edit key='use_profile_address' label='use profile address' direct=true
-        +boolean_edit key='use_new_address' label='use new address' direct=true
-        if use_new_address
-            .ui.input
-                input(type='text' placeholder='street')
-            .ui.input
-                input(type='text' placeholder='city')
-            .ui.input
-                input(type='text' placeholder='state')
-            .ui.input
-                input(type='number' placeholder='zip code')
-        div
-        // .ui.button.use_profile_address
-            |use profile address
-        .ui.inline.header 
-            +i name='truck'
-            |shipping address
-        +boolean_edit key='use_different_shipping_address' label='use different shipping address' direct=true
-        if use_different_shipping_address
-            .ui.input
-                input(type='text' placeholder='street')
+// template(name='location_section')
+//     .ui.basic.segment
+//         a.ui.header(href="/user/#{currentUser.username}/addresses")
+//             +i name='marker'
+//             |billing address
+//         each model_docs_helper 'address'
+//             div
+//             .ui.large.button.pick_address(class=user_address_pick_class)
+//                 | #{street_address}, #{city}, #{zip_code}
+//         // +boolean_edit key='use_profile_address' label='use profile address' direct=true
+//         +boolean_edit key='use_new_address' label='use new address' direct=true
+//         if use_new_address
+//             .ui.input
+//                 input(type='text' placeholder='street')
+//             .ui.input
+//                 input(type='text' placeholder='city')
+//             .ui.input
+//                 input(type='text' placeholder='state')
+//             .ui.input
+//                 input(type='number' placeholder='zip code')
+//         div
+//         // .ui.button.use_profile_address
+//             |use profile address
+//         .ui.inline.header 
+//             +i name='truck'
+//             |shipping address
+//         +boolean_edit key='use_different_shipping_address' label='use different shipping address' direct=true
+//         if use_different_shipping_address
+//             .ui.input
+//                 input(type='text' placeholder='street')
 
     
-template(name='delivery_section')    
-    .ui.basic.segment
-        .ui.inline.header
-            +i name='truck'
-            |delivery
-        +kvs key='delivery_time_type' value='now' icon='present' direct=true
-        +kvs key='delivery_time_type' value='later' icon='clock' direct=true
-        // else  
-        //     .ui.red.disabled.button(title='existing reservations')
-        //         i.remove.icon   
-        //         | can't cancel  
-        div
-        .ui.inline.header method
-        // +kvs key='delivery_type' value='pickup' icon='pick-up' direct=true
-        // +kvs key='delivery_type' value='delivery' icon='bicycle' direct=true
-        +kvs key='delivery_method' value='delivery' icon='bicycle' direct=true
-        +kvs key='delivery_method' value='pickup' icon='doormat' direct=true
-        if is delivery_time_type 'later' 
-            if key_value_is 'delivery_method' 'delivery'
-                +datetime_edit key='delivery_timedate' label='delivery datetime' direct=true
-            if key_value_is 'delivery_method' 'pickup'
-                +datetime_edit key='pickup_timedate' label='pickup timedate' direct=true
+// template(name='delivery_section')    
+//     .ui.basic.segment
+//         .ui.inline.header
+//             +i name='truck'
+//             |delivery
+//         +kvs key='delivery_time_type' value='now' icon='present' direct=true
+//         +kvs key='delivery_time_type' value='later' icon='clock' direct=true
+//         // else  
+//         //     .ui.red.disabled.button(title='existing reservations')
+//         //         i.remove.icon   
+//         //         | can't cancel  
+//         div
+//         .ui.inline.header method
+//         // +kvs key='delivery_type' value='pickup' icon='pick-up' direct=true
+//         // +kvs key='delivery_type' value='delivery' icon='bicycle' direct=true
+//         +kvs key='delivery_method' value='delivery' icon='bicycle' direct=true
+//         +kvs key='delivery_method' value='pickup' icon='doormat' direct=true
+//         if is delivery_time_type 'later' 
+//             if key_value_is 'delivery_method' 'delivery'
+//                 +datetime_edit key='delivery_timedate' label='delivery datetime' direct=true
+//             if key_value_is 'delivery_method' 'pickup'
+//                 +datetime_edit key='pickup_timedate' label='pickup timedate' direct=true
         
-template(name='payment_section')                
-    .ui.segment
-        .ui.header 
-            +i name='money'
-            |payment
-        div
-        +i name='wallet--v1' cl='ui inline image'
-        .ui.inline.header ${{fixed currentUser.credit}} credit
-        +boolean_edit key='use_credit' label='use credit' direct=true
-        // +topup_button amount=10
-        // +topup_button amount=20
-        // +topup_button amount=50
-        // +topup_button amount=100
-        unless use_credit
-            div
-            .ui.basic.compact.button.select_credit_card
-                +i name='card-exchange--v1' cl='ui avatar image'
-                |existing credit card
-            .ui.basic.button.use_coupon
-                +i name='cutting-coupon' cl='ui avatar image'
-                |use coupon
-            .ui.basic.compact.button.add_gift_card
-                +i name='gift-card' cl='ui avatar image'
-                |add gift card
-            .ui.basic.compact.button.select_new_credit_card
-                +i name='plus' cl='ui avatar image'
-                |new credit card
-template(name='topup_button')                
-    .ui.compact.basic.button.initiate_topup
-        |+$#{amount}
+// template(name='payment_section')                
+//     .ui.segment
+//         .ui.header 
+//             +i name='money'
+//             |payment
+//         div
+//         +i name='wallet--v1' cl='ui inline image'
+//         .ui.inline.header ${{fixed currentUser.credit}} credit
+//         +boolean_edit key='use_credit' label='use credit' direct=true
+//         // +topup_button amount=10
+//         // +topup_button amount=20
+//         // +topup_button amount=50
+//         // +topup_button amount=100
+//         unless use_credit
+//             div
+//             .ui.basic.compact.button.select_credit_card
+//                 +i name='card-exchange--v1' cl='ui avatar image'
+//                 |existing credit card
+//             .ui.basic.button.use_coupon
+//                 +i name='cutting-coupon' cl='ui avatar image'
+//                 |use coupon
+//             .ui.basic.compact.button.add_gift_card
+//                 +i name='gift-card' cl='ui avatar image'
+//                 |add gift card
+//             .ui.basic.compact.button.select_new_credit_card
+//                 +i name='plus' cl='ui avatar image'
+//                 |new credit card
+// template(name='topup_button')                
+//     .ui.compact.basic.button.initiate_topup
+//         |+$#{amount}

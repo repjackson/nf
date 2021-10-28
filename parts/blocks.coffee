@@ -127,33 +127,33 @@ if Meteor.isClient
 
 
 
-    Template.user_card.onCreated ->
-        @autorun => Meteor.subscribe 'user_from_username', @data
-    Template.user_card.helpers
-        user: -> Meteor.users.findOne @valueOf()
+    # Template.user_card.onCreated ->
+    #     @autorun => Meteor.subscribe 'user_from_username', @data
+    # Template.user_card.helpers
+    #     user: -> Meteor.users.findOne @valueOf()
 
 
 
 
-    Template.big_user_card.onCreated ->
-        @autorun => Meteor.subscribe 'user_from_username', @data
-    Template.big_user_card.helpers
-        user: -> Meteor.users.findOne username:@valueOf()
+    # Template.big_user_card.onCreated ->
+    #     @autorun => Meteor.subscribe 'user_from_username', @data
+    # Template.big_user_card.helpers
+    #     user: -> Meteor.users.findOne username:@valueOf()
 
 
 
 
-    Template.username_info.onCreated ->
-        @autorun => Meteor.subscribe 'user_from_username', @data
-    Template.username_info.events
-        'click .goto_profile': ->
-            user = Meteor.users.findOne username:@valueOf()
-            if user.is_current_member
-                Router.go "/member/#{user.username}/"
-            else
-                Router.go "/user/#{user.username}/"
-    Template.username_info.helpers
-        user: -> Meteor.users.findOne username:@valueOf()
+    # Template.username_info.onCreated ->
+    #     @autorun => Meteor.subscribe 'user_from_username', @data
+    # Template.username_info.events
+    #     'click .goto_profile': ->
+    #         user = Meteor.users.findOne username:@valueOf()
+    #         if user.is_current_member
+    #             Router.go "/member/#{user.username}/"
+    #         else
+    #             Router.go "/user/#{user.username}/"
+    # Template.username_info.helpers
+    #     user: -> Meteor.users.findOne username:@valueOf()
 
 
 
@@ -177,26 +177,26 @@ if Meteor.isClient
 
 
 
-    Template.user_list_info.onCreated ->
-        @autorun => Meteor.subscribe 'user', @data
+    # Template.user_list_info.onCreated ->
+    #     @autorun => Meteor.subscribe 'user', @data
 
-    Template.user_list_info.helpers
-        user: ->
-            console.log @
-            Meteor.users.findOne @valueOf()
+    # Template.user_list_info.helpers
+    #     user: ->
+    #         console.log @
+    #         Meteor.users.findOne @valueOf()
 
 
 
-    Template.user_field.helpers
-        key_value: ->
-            user = Meteor.users.findOne Router.current().params.doc_id
-            user["#{@key}"]
+    # Template.user_field.helpers
+    #     key_value: ->
+    #         user = Meteor.users.findOne Router.current().params.doc_id
+    #         user["#{@key}"]
 
-    Template.user_field.events
-        'blur .user_field': (e,t)->
-            value = t.$('.user_field').val()
-            Meteor.users.update Router.current().params.doc_id,
-                $set:"#{@key}":value
+    # Template.user_field.events
+    #     'blur .user_field': (e,t)->
+    #         value = t.$('.user_field').val()
+    #         Meteor.users.update Router.current().params.doc_id,
+    #             $set:"#{@key}":value
 
 
     Template.goto_model.events

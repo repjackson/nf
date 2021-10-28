@@ -2,13 +2,13 @@ template(name='mishi')
     .ui.stackable.padded.grid
         .sixteen.wide.column.scrolling
             .ui.stackable.grid 
-                .four.wide.column
+                .sixteen.wide.column
                     .ui.inline.header 
                         i.money.icon
                         |mishi
                     .ui.small.inline.header 
                         |#{mishi_total} results
-                    div
+                    // div
                     .ui.inline.header 
                         i.hashtag.icon
                         |week
@@ -17,9 +17,10 @@ template(name='mishi')
                         .ui.button.pick_week
                             |#{name}
                             small #{count}
-                    div
+                    // div
                     .ui.inline.header
-                        i.calendar.icon
+                        // i.calendar.icon
+                        +i name='month'
                         |month
                     each month_results
                         .ui.button.pick_month
@@ -27,10 +28,9 @@ template(name='mishi')
                             small #{count}
                     .ui.inline.small.header
                         i.download.icon
-                        |import
-                    .ui.fluid.input.import
+                        // |import
+                    .ui.input.import
                         input(type='file' accept='.csv')
-                .twelve.wide.column
                     +cfacet model='_product'
                     .ui.icon.input(title='search product')
                         if current_search
