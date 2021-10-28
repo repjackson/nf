@@ -282,8 +282,8 @@ if Meteor.isServer
             #     match.published = $in: [0,1]
     
             # if picked_products.length > 0 then match._product = $in:picked_products
-            if picked_colors then match.color = picked_color
-            if picked_origin then match._origin = picked_origin
+            if picked_color then match.color = picked_color
+            if picked_origin then match.origin = picked_origin
             if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
 
@@ -344,39 +344,39 @@ if Meteor.isServer
             #         count: ancestor_id.count
             #         index: i
     
-            product_cloud = Docs.aggregate [
-                { $match: match }
-                { $project: 
-                    _product: 1
-                    # Qty: 1
-                    # sale_total: 
-                    #     $sum: '$Qty' 
-                }
-                # { $unwind: "$tags" }
-                # { $group: 
-                #     _id: '$_product', 
-                # }
-                { $group: 
-                    _id: '$name'
-                    # total: 
-                    #     $sum: "$Qty"
-                    count: 
-                        $sum: 1
-                }
-                # { $match: _id: $nin: picked_products }
-                # { $sort: count: -1, _id: 1 }
-                { $sort: total: -1, _id: 1 }
-                { $limit: 42 }
-                { $project: _id:0, name:'$_id', count:1 }
-                ]
-            # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
-            product_cloud.forEach (product, i) ->
-                self.added 'results', Random.id(),
-                    name: product.name
-                    model:'product'
-                    count: product.count
-                    # total: product.total
-                    # index: i
+            # product_cloud = Docs.aggregate [
+            #     { $match: match }
+            #     { $project: 
+            #         _product: 1
+            #         # Qty: 1
+            #         # sale_total: 
+            #         #     $sum: '$Qty' 
+            #     }
+            #     # { $unwind: "$tags" }
+            #     # { $group: 
+            #     #     _id: '$_product', 
+            #     # }
+            #     { $group: 
+            #         _id: '$name'
+            #         # total: 
+            #         #     $sum: "$Qty"
+            #         count: 
+            #             $sum: 1
+            #     }
+            #     # { $match: _id: $nin: picked_products }
+            #     # { $sort: count: -1, _id: 1 }
+            #     { $sort: total: -1, _id: 1 }
+            #     { $limit: 42 }
+            #     { $project: _id:0, name:'$_id', count:1 }
+            #     ]
+            # # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
+            # product_cloud.forEach (product, i) ->
+            #     self.added 'results', Random.id(),
+            #         name: product.name
+            #         model:'product'
+            #         count: product.count
+            #         # total: product.total
+            #         # index: i
                     
             vegan_cloud = Docs.aggregate [
                 { $match: match }
@@ -511,7 +511,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:100, sort: name:1}).observeChanges(
+            subHandle = Docs.find(match, {limit:42, sort: name:1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id
