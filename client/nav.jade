@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.menu
+    #topnav.topnav.ui.attached.borderless.eight.item.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -41,17 +41,17 @@ template(name='nav')
             +ibig name='cookbook'
         // a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
         //     +i name='invoice'
-        a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            +ibig name='blog'
+        // a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+        //     +ibig name='blog'
         // a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
         //     +i name='bicycle'
         // a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
         //     +i name='phone'
         // a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
         //     +i name='cup'
-        if currentUser
-            a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
-                +ibig name='groups'
+        // if currentUser
+        //     a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
+        //         +ibig name='groups'
         // unless currentUser
         //     a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
         //         // i.info.large.icon
@@ -63,48 +63,48 @@ template(name='nav')
         //     // +i name='list'
         //     i.newspaper.large.icon
         //     // strong.mobile.hidden news
-        .right.menu
-            if currentUser
-                // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
-                if cart_items.count
-                    a.icon.item.toggle_cartbar
-                        // i.large.cart.icon
-                        strong #{cart_items.count}
-                        |$#{my_cart_subtotal}
-                        .ui.avatar.image.cart
-                            +ibig name='shopping-cart'
-                        each cart_items
-                            img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-                // a.item.toggle_topbar(title='alerts')
-                //     // i.wallet.icon
-                //     .ui.avatar.image.bell
-                //         +i name='notification'
-                if is_admin
-                    a.item(href="/admin" title='admin')
-                        +ibig name='shield'
-                // a.item(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
-                a.item.toggle_walletbar(title='credit')
-                    // i.wallet.icon
-                    .ui.avatar.image
-                        +ibig name='wallet'
-                    strong ${{int currentUser.credit}}
-                    // i.cart.icon
-                // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
-                //     .ui.inline.header #{currentUser.credit}f
-                // a.item.mobile.hidden(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
-                //     if currentUser.image_id
-                //         img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                //     else
-                //         i.user.icon
-                //     strong.mobile.hidden #{currentUser.name}
-                a.icon.item.toggle_rightbar.no_blink
-                    .ui.avatar.image
-                        if currentUser.image_id
-                            img.ui.mini.inline.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                        else
-                            i.user.large.icon
-                    strong.mobile.hidden #{currentUser.name}
-                    // i.bars.large.icon
+        // .right.menu
+        //     if currentUser
+        //         // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
+        //         if cart_items.count
+        //             a.icon.item.toggle_cartbar
+        //                 // i.large.cart.icon
+        //                 strong #{cart_items.count}
+        //                 |$#{my_cart_subtotal}
+        //                 .ui.avatar.image.cart
+        //                     +ibig name='shopping-cart'
+        //                 each cart_items
+        //                     img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+        //         // a.item.toggle_topbar(title='alerts')
+        //         //     // i.wallet.icon
+        //         //     .ui.avatar.image.bell
+        //         //         +i name='notification'
+        //         if is_admin
+        //             a.item(href="/admin" title='admin')
+        //                 +ibig name='shield'
+        //         // a.item(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
+        //         a.item.toggle_walletbar(title='credit')
+        //             // i.wallet.icon
+        //             .ui.avatar.image
+        //                 +ibig name='wallet'
+        //             strong ${{int currentUser.credit}}
+        //             // i.cart.icon
+        //         // a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
+        //         //     .ui.inline.header #{currentUser.credit}f
+        //         // a.item.mobile.hidden(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
+        //         //     if currentUser.image_id
+        //         //         img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
+        //         //     else
+        //         //         i.user.icon
+        //         //     strong.mobile.hidden #{currentUser.name}
+        //         a.icon.item.toggle_rightbar.no_blink
+        //             .ui.avatar.image
+        //                 if currentUser.image_id
+        //                     img.ui.mini.inline.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
+        //                 else
+        //                     i.user.large.icon
+        //             strong.mobile.hidden #{currentUser.name}
+        //             // i.bars.large.icon
                         
         // unless currentUser
         //     if subs_ready
@@ -117,178 +117,178 @@ template(name='nav')
         
                 
 
-template(name='my_latest_activity')
-    .ui.grey.header 
-        i.grey.rss.icon
-        |your activity
-    .ui.list
-        each my_latest_activity
-            .item 
-                img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
-                |#{text} #{body}
-                small #{when}
+// template(name='my_latest_activity')
+//     .ui.grey.header 
+//         i.grey.rss.icon
+//         |your activity
+//     .ui.list
+//         each my_latest_activity
+//             .item 
+//                 img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
+//                 |#{text} #{body}
+//                 small #{when}
 
 
-template(name='latest_activity')
-    .ui.grey.header 
-        i.grey.rss.icon
-        |all activity
-    .ui.list
-        each latest_activity
-            .item 
-                img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
-                |#{text} #{body} 
-                .ui.label #{log_type}
-                small #{when}
+// template(name='latest_activity')
+//     .ui.grey.header 
+//         i.grey.rss.icon
+//         |all activity
+//     .ui.list
+//         each latest_activity
+//             .item 
+//                 img.ui.avatar.image(src="{{c.url author.kiosk_photo width=200 height=200 gravity='face' crop='fill'}}")
+//                 |#{text} #{body} 
+//                 .ui.label #{log_type}
+//                 small #{when}
 
 
-template(name='footer')
-    .ui.stackable.padded.grid
-        .four.column.row
-            .column
-                img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+// template(name='footer')
+//     .ui.stackable.padded.grid
+//         .four.column.row
+//             .column
+//                 img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             
-                .ui.link.list
-                    a.item hello@nudefoodsmarket.com
-                    a.item 555 30th Street
-                    a.item Boulder, CO 80303
-                    a.item (720) 815-5588
-            .column
-                .ui.link.animated.selection.grey.list
-                    a.item(href="/") 
-                        i.home.icon
-                        |Home
-                    a.item(href="/cart") 
-                        i.cart.icon
-                        |Cart
-                    a.item(href='/contact')
-                        i.phone.icon
-                        |Contact us
-                    a.item 
-                        i.smile.icon
-                        |Get Involved
-                    a.item(href='/account') 
-                        i.user.icon
-                        | Account
-                    a.item(href='/p/newsletter') 
-                        i.newspaper.icon
-                        | Newsletter
-                    a.item(href='/p/team') 
-                        i.users.icon
-                        | Nude Foods Team
-                    a.item(hre='/p/refer') 
-                        i.reply.icon
-                        |Refer a Friend
-                    a.item(href='/p/transparency')
-                        |Transparency
-                    a.item(href='/p/hiring') 
-                        | We’re hiring!
-            .column
-                .ui.link.animated.selection.list
-                    a.item(href='/p/faq') FAQ
-                    a.item(href='p/how') How we work
-                    a.item(href='/p/privacy-policy') Privacy policy
-                    a.item(href='/p/tos') Terms of Service
-                    a.item(href='/produce') 
-                        i.food.icon
-                        | Produce
-                    a.item(href='/packaging') 
-                        i.box.icon
-                        | Packaging
-                    a.item(href='/p/local_products') 
-                        i.plant.icon
-                        | Local Products
-                    a.item(href='/shop') 
-                        i.shop.icon
-                        | Shop
-            .column
-                +icolor name='facebook'
-                +icolor name='instagram'
+//                 .ui.link.list
+//                     a.item hello@nudefoodsmarket.com
+//                     a.item 555 30th Street
+//                     a.item Boulder, CO 80303
+//                     a.item (720) 815-5588
+//             .column
+//                 .ui.link.animated.selection.grey.list
+//                     a.item(href="/") 
+//                         i.home.icon
+//                         |Home
+//                     a.item(href="/cart") 
+//                         i.cart.icon
+//                         |Cart
+//                     a.item(href='/contact')
+//                         i.phone.icon
+//                         |Contact us
+//                     a.item 
+//                         i.smile.icon
+//                         |Get Involved
+//                     a.item(href='/account') 
+//                         i.user.icon
+//                         | Account
+//                     a.item(href='/p/newsletter') 
+//                         i.newspaper.icon
+//                         | Newsletter
+//                     a.item(href='/p/team') 
+//                         i.users.icon
+//                         | Nude Foods Team
+//                     a.item(hre='/p/refer') 
+//                         i.reply.icon
+//                         |Refer a Friend
+//                     a.item(href='/p/transparency')
+//                         |Transparency
+//                     a.item(href='/p/hiring') 
+//                         | We’re hiring!
+//             .column
+//                 .ui.link.animated.selection.list
+//                     a.item(href='/p/faq') FAQ
+//                     a.item(href='p/how') How we work
+//                     a.item(href='/p/privacy-policy') Privacy policy
+//                     a.item(href='/p/tos') Terms of Service
+//                     a.item(href='/produce') 
+//                         i.food.icon
+//                         | Produce
+//                     a.item(href='/packaging') 
+//                         i.box.icon
+//                         | Packaging
+//                     a.item(href='/p/local_products') 
+//                         i.plant.icon
+//                         | Local Products
+//                     a.item(href='/shop') 
+//                         i.shop.icon
+//                         | Shop
+//             .column
+//                 +icolor name='facebook'
+//                 +icolor name='instagram'
 
 
 
 
 
-template(name='topbar')
-    .ui.fluid.attached.segment.topbar.top.sidebar
-        .ui.middle.aligned.divided.list
-        .ui.list
-            each recent_alerts
-                +recent_alert
-        a.ui.basic.button.item.close_topbar(href="/inbox")
-            i.inbox.icon
-            |inbox
+// template(name='topbar')
+//     .ui.fluid.attached.segment.topbar.top.sidebar
+//         .ui.middle.aligned.divided.list
+//         .ui.list
+//             each recent_alerts
+//                 +recent_alert
+//         a.ui.basic.button.item.close_topbar(href="/inbox")
+//             i.inbox.icon
+//             |inbox
         
-template(name='recent_alert')        
-    .item.alert
-        .right.floated.content
-            i.eye.link.icon.mark_read(title='mark read')
-        img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
-        .content
-            .header
-                |#{description} 
-            .description #{author.name} #{when}
+// template(name='recent_alert')        
+//     .item.alert
+//         .right.floated.content
+//             i.eye.link.icon.mark_read(title='mark read')
+//         img.ui.avatar.image(src="{{c.url author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}")
+//         .content
+//             .header
+//                 |#{description} 
+//             .description #{author.name} #{when}
             
             
             
             
-template(name='cartbar')
-    .ui.right.wide.sidebar.cartbar
-        +cart
+// template(name='cartbar')
+//     .ui.right.wide.sidebar.cartbar
+//         +cart
         
-template(name='walletbar')
-    .ui.right.sidebar.walletbar
-        +user_credit
+// template(name='walletbar')
+//     .ui.right.sidebar.walletbar
+//         +user_credit
         
-template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.menu.rightbar
-        a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
-            img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
-            |#{currentUser.name}
-        with currentUser
-            a.item.toggle_rightbar(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
-                +ibig name='dashboard' cl='ui avatar image'
-                // i.dashboard.icon
-                |dashboard
-            a.item.toggle_rightbar(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
-                +ibig name='money' cl='ui avatar image'
-                // i.coins.icon
-                |credit
-            a.item.toggle_rightbar(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
-                +ibig name='check' cl='ui avatar image'
-                |orders
-            a.item.toggle_rightbar(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
-                +ibig name='clock' cl='ui avatar image'
-                |subscriptions
-            a.item.toggle_rightbar(href="/user/#{username}/pantry" class="{{isActiveRoute 'user_pantry'}}")
-                +ibig name='cupboard' cl='ui avatar image'
-                |pantry
-            a.item.toggle_rightbar(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
-                +ibig name='friends' cl='ui avatar image'
-                |friends
-            a.item.toggle_rightbar(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
-                +ibig name='shopping-cart' cl='ui avatar image'
-                |cart
-            a.item.toggle_rightbar(href="/work" class="{{isActiveRoute 'work'}}")
-                +ibig name='trust' cl='ui avatar image'
-                |work
-            a.item.toggle_rightbar(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
-                +ibig name='bicycle' cl='ui avatar image'
-                |trips
-            a.item.toggle_rightbar(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
-                +ibig name='certificate' cl='ui avatar image'
-                |gift cards
-        // .ui.divider
-        a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/edit" title='edit your account')
-            +ibig name='settings' cl='ui avatar image'
-            |settings
-        a.item.logout
-            if is_logging_out
-                i.refresh.loading.icon
-            else
-                +ibig name='exit-sign' cl='ui avatar image'
-                // i.sign.out.icon
-            |logout
+// template(name='right_sidebar')
+//     .ui.right.sidebar.vertical.borderless.menu.rightbar
+//         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
+//             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
+//             |#{currentUser.name}
+//         with currentUser
+//             a.item.toggle_rightbar(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
+//                 +ibig name='dashboard' cl='ui avatar image'
+//                 // i.dashboard.icon
+//                 |dashboard
+//             a.item.toggle_rightbar(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
+//                 +ibig name='money' cl='ui avatar image'
+//                 // i.coins.icon
+//                 |credit
+//             a.item.toggle_rightbar(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
+//                 +ibig name='check' cl='ui avatar image'
+//                 |orders
+//             a.item.toggle_rightbar(href="/user/#{username}/subscriptions" class="{{isActiveRoute 'user_subscriptions'}}")
+//                 +ibig name='clock' cl='ui avatar image'
+//                 |subscriptions
+//             a.item.toggle_rightbar(href="/user/#{username}/pantry" class="{{isActiveRoute 'user_pantry'}}")
+//                 +ibig name='cupboard' cl='ui avatar image'
+//                 |pantry
+//             a.item.toggle_rightbar(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
+//                 +ibig name='friends' cl='ui avatar image'
+//                 |friends
+//             a.item.toggle_rightbar(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
+//                 +ibig name='shopping-cart' cl='ui avatar image'
+//                 |cart
+//             a.item.toggle_rightbar(href="/work" class="{{isActiveRoute 'work'}}")
+//                 +ibig name='trust' cl='ui avatar image'
+//                 |work
+//             a.item.toggle_rightbar(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
+//                 +ibig name='bicycle' cl='ui avatar image'
+//                 |trips
+//             a.item.toggle_rightbar(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
+//                 +ibig name='certificate' cl='ui avatar image'
+//                 |gift cards
+//         // .ui.divider
+//         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}/edit" title='edit your account')
+//             +ibig name='settings' cl='ui avatar image'
+//             |settings
+//         a.item.logout
+//             if is_logging_out
+//                 i.refresh.loading.icon
+//             else
+//                 +ibig name='exit-sign' cl='ui avatar image'
+//                 // i.sign.out.icon
+//             |logout
 
 
 

@@ -1,12 +1,12 @@
 if Meteor.isClient
     Template.nav.onCreated ->
-        @autorun => Meteor.subscribe 'me'
+        # @autorun => Meteor.subscribe 'me'
         # @autorun => Meteor.subscribe 'all_users'
-        @autorun => Meteor.subscribe 'my_cart'
+        # @autorun => Meteor.subscribe 'my_cart'
         # @autorun => Meteor.subscribe 'my_unread_messages'
         # @autorun => Meteor.subscribe 'global_stats'
-        @autorun => Meteor.subscribe 'my_cart_order'
-        @autorun => Meteor.subscribe 'my_cart_products'
+        # @autorun => Meteor.subscribe 'my_cart_order'
+        # @autorun => Meteor.subscribe 'my_cart_products'
 
     Template.nav.onRendered ->
         Meteor.setTimeout ->
@@ -35,18 +35,18 @@ if Meteor.isClient
                 })
                 .sidebar('attach events', '.toggle_rightbar')
         , 2000
-        Meteor.setTimeout ->
-            $('.ui.topbar.sidebar')
-                .sidebar({
-                    context: $('.bottom.segment')
-                    transition:'push'
-                    mobileTransition:'push'
-                    exclusive:true
-                    duration:200
-                    scrollLock:true
-                })
-                .sidebar('attach events', '.toggle_topbar')
-        , 2000
+        # Meteor.setTimeout ->
+        #     $('.ui.topbar.sidebar')
+        #         .sidebar({
+        #             context: $('.bottom.segment')
+        #             transition:'push'
+        #             mobileTransition:'push'
+        #             exclusive:true
+        #             duration:200
+        #             scrollLock:true
+        #         })
+        #         .sidebar('attach events', '.toggle_topbar')
+        # , 2000
         # Meteor.setTimeout ->
         #     $('.ui.secnav.sidebar')
         #         .sidebar({
@@ -59,37 +59,37 @@ if Meteor.isClient
         #         })
         #         .sidebar('attach events', '.toggle_leftbar')
         # , 2000
-        Meteor.setTimeout ->
-            $('.ui.sidebar.cartbar')
-                .sidebar({
-                    context: $('.bottom.segment')
-                    transition:'scale'
-                    mobileTransition:'scale'
-                    exclusive:true
-                    duration:200
-                    scrollLock:true
-                })
-                .sidebar('attach events', '.toggle_cartbar')
-        , 3000
-        Meteor.setTimeout ->
-            $('.ui.sidebar.walletbar')
-                .sidebar({
-                    context: $('.bottom.segment')
-                    transition:''
-                    mobileTransition:'scale'
-                    exclusive:true
-                    duration:200
-                    scrollLock:true
-                })
-                .sidebar('attach events', '.toggle_walletbar')
-        , 2000
+        # Meteor.setTimeout ->
+        #     $('.ui.sidebar.cartbar')
+        #         .sidebar({
+        #             context: $('.bottom.segment')
+        #             transition:'scale'
+        #             mobileTransition:'scale'
+        #             exclusive:true
+        #             duration:200
+        #             scrollLock:true
+        #         })
+        #         .sidebar('attach events', '.toggle_cartbar')
+        # , 3000
+        # Meteor.setTimeout ->
+        #     $('.ui.sidebar.walletbar')
+        #         .sidebar({
+        #             context: $('.bottom.segment')
+        #             transition:''
+        #             mobileTransition:'scale'
+        #             exclusive:true
+        #             duration:200
+        #             scrollLock:true
+        #         })
+        #         .sidebar('attach events', '.toggle_walletbar')
+        # , 2000
     
-    Template.right_sidebar.events
-        'click .logout': ->
-            Session.set 'logging_out', true
-            Meteor.logout ->
-                Session.set 'logging_out', false
-                Router.go '/'
+    # Template.right_sidebar.events
+    #     'click .logout': ->
+    #         Session.set 'logging_out', true
+    #         Meteor.logout ->
+    #             Session.set 'logging_out', false
+    #             Router.go '/'
                 
     
     Template.nav.events
@@ -184,29 +184,29 @@ if Meteor.isClient
         #         recipient_id:Meteor.userId()
         #         read_ids:$nin:[Meteor.userId()]
         #     ).count()
-    Template.topbar.helpers
-        recent_alerts: ->
-            Docs.find 
-                model:'message'
-                recipient_id:Meteor.userId()
-                read_ids:$nin:[Meteor.userId()]
-            , sort:_timestamp:-1
+    # Template.topbar.helpers
+    #     recent_alerts: ->
+    #         Docs.find 
+    #             model:'message'
+    #             recipient_id:Meteor.userId()
+    #             read_ids:$nin:[Meteor.userId()]
+    #         , sort:_timestamp:-1
             
-    Template.recent_alert.events
-        'click .mark_read': (e,t)->
-            # console.log @
-            # console.log $(e.currentTarget).closest('.alert')
-            # $(e.currentTarget).closest('.alert').transition('slide left')
-            Meteor.call 'mark_read', @_id, ->
+    # Template.recent_alert.events
+    #     'click .mark_read': (e,t)->
+    #         # console.log @
+    #         # console.log $(e.currentTarget).closest('.alert')
+    #         # $(e.currentTarget).closest('.alert').transition('slide left')
+    #         Meteor.call 'mark_read', @_id, ->
                 
-            # Meteor.setTimeout ->
-            # , 500
+    #         # Meteor.setTimeout ->
+    #         # , 500
          
          
             
-    Template.topbar.events
-        'click .close_topbar': ->
-            Session.set('viewing_alerts', false)
+    # Template.topbar.events
+    #     'click .close_topbar': ->
+    #         Session.set('viewing_alerts', false)
     
             
             
