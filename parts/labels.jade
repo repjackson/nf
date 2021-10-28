@@ -16,9 +16,9 @@ template(name='labels')
                     |##{picked_color}
             else 
                 each color_results
-                    .ui.big.compact.button.pick_color(style="background-color:##{name}" title=name)
+                    button.ui.big.circular.button.pick_color(style="background-color:##{name}" title="#{count} #{name}")
                         // |#{name}
-                        |#{count}
+                        // |#{count}
             +i name='vegan-symbol'
             +i name='kitchen'
             // .ui.inline.header 
@@ -49,7 +49,7 @@ template(name='labels')
                     i.search.icon
                 input.search_product(type='text' placeholder='product' value=current_search)
             // .scrolling
-        .ui.twelve.wide.colum
+        .twelve.wide.column
             .ui.doubling.centered.four.cards.scrolling
                 if label_docs.count
                     each label_docs

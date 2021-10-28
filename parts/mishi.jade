@@ -40,47 +40,46 @@ template(name='mishi')
                 else
                     i.search.icon
                 input.search_product(type='text' placeholder='product' value=current_search)
-            .scrollin
-                .ui.five.doubling.cards
-                    if mishi_orders.count
+            .scrolling
+                if mishi_orders.count
+                    .ui.four.doubling.cards
                         each mishi_orders
                             +mishi_order
-                    else 
-                        .ui.center.aligned.basic.segment 
-                            i.money.big.loading.icon
+                else 
+                    .ui.center.aligned.basic.segment 
+                        i.money.massive.grey.loading.icon
                                 
                             
 template(name='mishi_order')
     .card
         .content
-            .ui.list 
-                // .item Store_ID: #{Store_ID}
-                // .item Charge_ID: #{Charge_ID}
-                // .item Order_ID: #{Order_ID}
-                // .item Ean_Code: #{Ean_Code}
-                with related_product
-                    img.ui.tiny.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
-                    .ui.inline.small.header 
-                        |#{title}
-                a.item.goto_product
-                    | #{_product}
-                // .item Retailer_Product_ID: #{Retailer_Product_ID}
-                a(href=Ean_Code target='_window')
-                    i.wikipedia.link.icon
-                .item(title='original price') $#{Original_Price}
-                .item(title='quantity') ##{Qty}
-                .item Discounted_Line_Amount: #{Discounted_Line_Amount}
-                if Promo_Code
-                    .item Promo_Code: #{Promo_Code}
-                .item Vat_Rate: #{Vat_Rate}
-                // .item Txn_Timestamp: #{Txn_Timestamp}
-                // .item meta info
-                .item(title='_converted_date') #{_converted_date}
-                .item(title='month') #{_month}
-                // .item day: #{day}
-                // .item _weekdaynum: #{_weekdaynum}
-                .item week #{_week_number}
-                .item(title='_weekday') #{_weekday}
+            // .item Store_ID: #{Store_ID}
+            // .item Charge_ID: #{Charge_ID}
+            // .item Order_ID: #{Order_ID}
+            // .item Ean_Code: #{Ean_Code}
+            with related_product
+                img.ui.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
+                .ui.inline.header 
+                    |#{title}
+            a.item.goto_product
+                | #{_product}
+            // .item Retailer_Product_ID: #{Retailer_Product_ID}
+            .ui.inline.header(title='original price') $#{Original_Price}
+            a(href=Ean_Code target='_window')
+                i.wikipedia.link.icon
+            .item(title='quantity') ##{Qty}
+            .item Discounted_Line_Amount: #{Discounted_Line_Amount}
+            if Promo_Code
+                .item Promo_Code: #{Promo_Code}
+            .item Vat_Rate: #{Vat_Rate}
+            // .item Txn_Timestamp: #{Txn_Timestamp}
+            // .item meta info
+            .item(title='_converted_date') #{_converted_date}
+            .item(title='month') #{_month}
+            // .item day: #{day}
+            // .item _weekdaynum: #{_weekdaynum}
+            .item week #{_week_number}
+            .item(title='_weekday') #{_weekday}
             +print_this
             .ui.icon.button.calc
                 i.refresh.icon
@@ -101,13 +100,14 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        .ui.compact.basic.large.button.pick(style="backgroun-color:#{pick_product.color}" title=name)
-        if pick_product
-            img.ui.avatar.image(src="{{c.url pick_product.image_id width=400 height=400 gravity='face' crop='fill'}}")
-        strong #{pick_product.title}
-        i.grey.cart.icon(title='orders')
-        | #{count}
-        i.hashtag.grey.icon(title='units sold')
-        // |(=#{total})
-        |#{total}
-        
+        a.ui.image.big.label.zoomer.pick(style="backgroun-color:#{pick_product.color}" title=name)
+            if pick_product
+                img.ui.avatar.image(src="{{c.url pick_product.image_id width=400 height=400 gravity='face' crop='fill'}}")
+                strong #{pick_product.title}
+            else 
+                strong #{name}
+            // i.grey.cart.icon(title='orders')
+            | #{count}x#{total}
+            // i.hashtag.grey.icon(title='units sold')
+            // |(=#{total})
+            
