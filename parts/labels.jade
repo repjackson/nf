@@ -18,7 +18,7 @@ template(name='labels')
                         |color
                     // +cfacet model='_week_number'
                     each color_results
-                        .ui.button.pick_color
+                        .ui.button.pick_color(style="background-color:##{name}")
                             |#{name}
                             small #{count}
                     .ui.inline.header 
