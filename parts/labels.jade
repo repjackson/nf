@@ -7,9 +7,6 @@ template(name='labels')
                 |labels
             // .ui.small.inline.header 
             //     |#{label_total}
-            // if in_dev 
-            //     .ui.icon.button.clear_labels 
-            //         i.remove.icon
             // +cfacet model='_week_number'
             if picked_color
                 .ui.button.unpick_color(style="background-color:##{picked_color}" )
@@ -19,28 +16,44 @@ template(name='labels')
                     button.ui.big.circular.button.pick_color(style="background-color:##{name}" title="#{count} #{name}")
                         // |#{name}
                         // |#{count}
+            div
+            // .ui.circular.basic.button
             +i name='vegan-symbol'
-            +i name='kitchen'
             // .ui.inline.header 
                 // |vegan
             // +cfacet model='_week_number'
             each vegan_results
-                .ui.button.pick_vegan
-                    |#{name}
-                    small #{count}
+                // .ui.button.pick_vegan
+                //     |#{name}
+                //     small #{count}
+                if name 
+                    .ui.icon.circular.button.pick_vegan(title=count)
+                        // |#{name}
+                        i.large.checkmark.icon
+                else
+                    .ui.icon.circular.button.pick_vegan(title=count)
+                        i.remove.large.icon
+                        // small #{count}-
+            div
+            .ui.circular.basic.button
+                +i name='kitchen'
+            div
             +i name='no-gluten'
             // .ui.inline.header 
                 // |gluten free
             // +cfacet model='_week_number'
             each gluten_results
-                .ui.button.pick_gluten
-                    |#{name}
-                    small #{count}
+                if name 
+                    .ui.icon.circular.button.pick_gluten(title=count)
+                        // |#{name}
+                        i.large.checkmark.icon
+                else
+                    .ui.icon.circular.button.pick_gluten(title=count)
+                        i.remove.large.icon
+                        // small #{count}-
             // .ui.small.inline.header
             //     i.download.icon
             //     |'Info for Labels'
-            // .ui.input.import
-            //     input(type='file' accept='.csv')
             // // +cfacet model='_product'
             .ui.icon.input(title='search product')
                 if current_search
@@ -49,6 +62,13 @@ template(name='labels')
                     i.search.icon
                 input.search_product(type='text' placeholder='product' value=current_search)
             // .scrolling
+            if in_dev 
+                div
+                i.code.icon
+                .ui.icon.button.clear_labels 
+                    i.remove.icon
+                .ui.input.import
+                    input(type='file' accept='.csv')
         .twelve.wide.column
             .ui.doubling.centered.four.cards.scrolling
                 if label_docs.count
