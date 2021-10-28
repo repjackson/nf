@@ -38,8 +38,8 @@ template(name='mishi')
                         else
                             i.search.icon
                         input.search_product(type='text' placeholder='product' value=current_search)
-                    .scrolling
-                        .ui.four.doubling.cards
+                    .scrollin
+                        .ui.five.doubling.cards
                             if mishi_orders.count
                                 each mishi_orders
                                     +mishi_order
@@ -66,7 +66,7 @@ template(name='mishi_order')
                 a(href=Ean_Code target='_window')
                     i.wikipedia.link.icon
                 .item(title='original price') $#{Original_Price}
-                .item Qty: #{Qty}
+                .item(title='quantity') ##{Qty}
                 .item Discounted_Line_Amount: #{Discounted_Line_Amount}
                 if Promo_Code
                     .item Promo_Code: #{Promo_Code}
@@ -77,7 +77,7 @@ template(name='mishi_order')
                 .item(title='month') #{_month}
                 // .item day: #{day}
                 // .item _weekdaynum: #{_weekdaynum}
-                .item _week_number: #{_week_number}
+                .item week #{_week_number}
                 .item(title='_weekday') #{_weekday}
             +print_this
             .ui.icon.button.calc
@@ -93,12 +93,12 @@ template(name='cfacet')
         
         
 template(name='unpick')        
-    .ui.blue.button.unpick
+    .ui.blue.big.button.unpick
         |#{this}
 
 template(name='pick')     
     if name
-        .ui.compact.circular.large.button.pick
+        .ui.compact.circular.big.button.pick
             |#{name}
             small #{count}x
             |(=#{total})

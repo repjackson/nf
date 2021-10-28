@@ -37,34 +37,34 @@ Router.configure
 # });
 
 
-Router.route('enroll', {
-    path: '/enroll-account/:token'
-    template: 'reset_password'
-    onBeforeAction: ()=>
-        Meteor.logout()
-        Session.set('_resetPasswordToken', this.params.token)
-        @subscribe('enrolledUser', this.params.token).wait()
-})
+# Router.route('enroll', {
+#     path: '/enroll-account/:token'
+#     template: 'reset_password'
+#     onBeforeAction: ()=>
+#         Meteor.logout()
+#         Session.set('_resetPasswordToken', this.params.token)
+#         @subscribe('enrolledUser', this.params.token).wait()
+# })
 
 
-Router.route('verify-email', {
-    path:'/verify-email/:token',
-    onBeforeAction: ->
-        console.log @
-        # Session.set('_resetPasswordToken', this.params.token)
-        # @subscribe('enrolledUser', this.params.token).wait()
-        console.log @params
-        Accounts.verifyEmail(@params.token, (err) =>
-            if err
-                console.log err
-                alert err
-                @next()
-            else
-                # alert 'email verified'
-                # @next()
-                Router.go "/verification_confirmation/"
-        )
-})
+# Router.route('verify-email', {
+#     path:'/verify-email/:token',
+#     onBeforeAction: ->
+#         console.log @
+#         # Session.set('_resetPasswordToken', this.params.token)
+#         # @subscribe('enrolledUser', this.params.token).wait()
+#         console.log @params
+#         Accounts.verifyEmail(@params.token, (err) =>
+#             if err
+#                 console.log err
+#                 alert err
+#                 @next()
+#             else
+#                 # alert 'email verified'
+#                 # @next()
+#                 Router.go "/verification_confirmation/"
+#         )
+# })
 
 
 # Router.route '/m/:model_slug', (->
@@ -77,23 +77,23 @@ Router.route('verify-email', {
 # Router.route '/model/edit/:doc_id', -> @render 'model_edit'
 
 # Router.route '/user/:username', -> @render 'user'
-Router.route '/verification_confirmation', -> @render 'verification_confirmation'
-Router.route '*', -> @render 'not_found'
+# Router.route '/verification_confirmation', -> @render 'verification_confirmation'
+Router.route '*', -> @render 'shop'
 
 # Router.route '/user/:username/m/:type', -> @render 'user_layout', 'user_section'
 # Router.route '/add_resident', (->
 #     @layout 'layout'
 #     @render 'add_resident'
 #     ), name:'add_resident'
-Router.route '/forgot_password', -> @render 'forgot_password'
+# Router.route '/forgot_password', -> @render 'forgot_password'
 
-# Router.route "/food/:food_id", -> @render 'food_doc'
+# # Router.route "/food/:food_id", -> @render 'food_doc'
 
-Router.route '/reset_password/:token', (->
-    @render 'reset_password'
-    ), name:'reset_password'
+# Router.route '/reset_password/:token', (->
+#     @render 'reset_password'
+#     ), name:'reset_password'
 
-Router.route '/login', -> @render 'login'
+# Router.route '/login', -> @render 'login'
 
 Router.route '/', -> @render 'shop'
 # Router.route '/', -> @redirect "/user/#{Meteor.user().username}"
