@@ -98,16 +98,16 @@ if Meteor.isClient
         week_results: ->
             Results.find 
                 model:'week_number'
-        mishi_orders: ->
-            match = {model:'mishi_order'}
-            if Session.get('order_status_filter')
-                match.status = Session.get('order_status_filter')
-            if Session.get('order_delivery_filter')
-                match.delivery_method = Session.get('order_sort_filter')
-            if Session.get('order_sort_filter')
-                match.delivery_method = Session.get('order_sort_filter')
-            Docs.find match,
-                sort: _timestamp:-1
+        # mishi_orders: ->
+        #     match = {model:'mishi_order'}
+        #     if Session.get('order_status_filter')
+        #         match.status = Session.get('order_status_filter')
+        #     if Session.get('order_delivery_filter')
+        #         match.delivery_method = Session.get('order_sort_filter')
+        #     if Session.get('order_sort_filter')
+        #         match.delivery_method = Session.get('order_sort_filter')
+        #     Docs.find match,
+        #         sort: _timestamp:-1
         
         
         mishi_total: -> Counts.get('mishi_total')        
