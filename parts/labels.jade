@@ -67,7 +67,7 @@ template(name='label_card')
         if related_product.image_id
             img.ui.image(src="{{c.url related_product.image_id width=500 height=500 gravity='face' crop='fill'}}")
         .content
-            .ui.header #{name}
+            .ui.header.goto_product.pointer.zoomer.fly_left #{name}
             if local
                 +i name='marker' cl='pointer zoomer' title='local'
             if gf

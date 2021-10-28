@@ -293,7 +293,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.menu.smallscroll
+    .ui.left.sidebar.vertical.big.labeled.icon.borderless.menu.smallscroll
         // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
@@ -312,7 +312,7 @@ template(name='left_sidebar')
         //         // +i name='home'
         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
         a.item.toggle_leftbar(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            +ibig name='food-cart'
+            +i name='food-cart'
             | #{product_count} products
         a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
             +i name='ingredients'
