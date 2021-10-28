@@ -11,7 +11,7 @@ template(name='product_view')
                         i.chevron.left.large.icon
                         // i.large.food.icon
                         +i name='food-cart' cl='ui mini inline image'
-                    if can_edit
+                    if in_dev
                         a(href="/product/#{_id}/edit")
                             i.pencil.blue.large.link.circular.icon
                     // a(href="{{c.url image_id}}" target="_window")
@@ -63,24 +63,24 @@ template(name='product_view')
                     +comments
                 .four.wide.column
                     +product_inventory
-                .four.wide.column
-                    +product_reviews
-                .four.wide.column
-                    +product_subscriptions
+                // .four.wide.column
+                //     +product_reviews
+                // .four.wide.column
+                //     +product_subscriptions
                 .four.wide.column
                     +product_orders
                 .four.wide.column
                     +product_subscriptions
                 .three.wide.column
-                    .ui.green.large.button.add_to_cart
-                        // i.cart.plus.large.icon
-                        +i name='add-shopping-cart--v1' cl='ui avatar image'
-                        |add to cart
-                    .ui.link.card.zoomer.goto_source
-                        img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                        .content
-                            .ui.header.zoomer
-                                |#{product_source.title}
+                    // .ui.green.large.button.add_to_cart
+                    //     // i.cart.plus.large.icon
+                    //     +i name='add-shopping-cart--v1' cl='ui avatar image'
+                    //     |add to cart
+                    // .ui.link.card.zoomer.goto_source
+                    //     img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                    //     .content
+                    //         .ui.header.zoomer
+                    //             |#{product_source.title}
                     .ui.header 
                         i.fork.icon
                         |related products
