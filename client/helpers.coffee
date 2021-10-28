@@ -83,8 +83,8 @@ Template.registerHelper 'display_mode', () -> Session.get('display_mode',true)
 Template.registerHelper 'is_loading', () -> Session.get 'loading'
 Template.registerHelper 'dev', () -> Meteor.isDevelopment
 # Template.registerHelper 'is_author', ()-> @_author_id is Meteor.userId()
-Template.registerHelper 'is_handler', ()-> @handler_username is Meteor.user().username
-Template.registerHelper 'is_owner', ()-> @owner_username is Meteor.user().username
+# Template.registerHelper 'is_handler', ()-> @handler_username is Meteor.user().username
+# Template.registerHelper 'is_owner', ()-> @owner_username is Meteor.user().username
 Template.registerHelper 'is_grandparent_author', () ->
     grandparent = Template.parentData(2)
     grandparent._author_id is Meteor.userId()
@@ -112,15 +112,15 @@ Template.registerHelper 'first_letter', (user) ->
 Template.registerHelper 'first_initial', (user) ->
     @first_name[..2]+'.'
     # moment(input).fromNow()
-Template.registerHelper 'logging_out', () -> Session.get 'logging_out'
-Template.registerHelper 'upvote_class', () ->
-    if Meteor.userId()
-        if @upvoter_ids and Meteor.userId() in @upvoter_ids then 'green' else 'outline'
-    else ''
-Template.registerHelper 'downvote_class', () ->
-    if Meteor.userId()
-        if @downvoter_ids and Meteor.userId() in @downvoter_ids then 'red' else 'outline'
-    else ''
+# Template.registerHelper 'logging_out', () -> Session.get 'logging_out'
+# Template.registerHelper 'upvote_class', () ->
+#     if Meteor.userId()
+#         if @upvoter_ids and Meteor.userId() in @upvoter_ids then 'green' else 'outline'
+#     else ''
+# Template.registerHelper 'downvote_class', () ->
+#     if Meteor.userId()
+#         if @downvoter_ids and Meteor.userId() in @downvoter_ids then 'red' else 'outline'
+#     else ''
 
 Template.registerHelper 'current_month', () -> moment(Date.now()).format("MMMM")
 Template.registerHelper 'current_day', () -> moment(Date.now()).format("DD")

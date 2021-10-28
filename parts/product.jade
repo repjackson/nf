@@ -49,43 +49,35 @@ template(name='product_view')
                     if has_8cup
                         +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
                     // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
-                if ingredients
-                    .four.wide.column
-                        .ui.inline.header 
-                            +i name='ingredients'
-                            |ingredients
-                        each ingredients
-                            .ui.large.basic.label.goto_ingredient #{this}
                 .four.wide.column
+                    .ui.inline.header 
+                        +i name='ingredients'
+                        |ingredients
+                    each ingredients
+                        .ui.large.basic.label.goto_ingredient #{this}
                     +voting_full
                     +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
                     +link_view key='external_link' label='external link' icon='globe' direct=true
                     +comments
-                .four.wide.column
-                    +product_inventory
-                // .four.wide.column
+                    +product_orders
+                    // +product_inventory
                 //     +product_reviews
                 // .four.wide.column
                 //     +product_subscriptions
-                .four.wide.column
-                    +product_orders
-                // .four.wide.column
-                //     +product_subscriptions
-                .three.wide.column
-                    // .ui.green.large.button.add_to_cart
-                    //     // i.cart.plus.large.icon
-                    //     +i name='add-shopping-cart--v1' cl='ui avatar image'
-                    //     |add to cart
-                    // .ui.link.card.zoomer.goto_source
-                    //     img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                    //     .content
-                    //         .ui.header.zoomer
-                    //             |#{product_source.title}
-                    .ui.header 
-                        i.fork.icon
-                        |related products
-                    each related_products
-                        a.ui.header(href="/product/#{_id}") #{title}
+                    // // .ui.green.large.button.add_to_cart
+                    // //     // i.cart.plus.large.icon
+                    // //     +i name='add-shopping-cart--v1' cl='ui avatar image'
+                    // //     |add to cart
+                    // // .ui.link.card.zoomer.goto_source
+                    // //     img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                    // //     .content
+                    // //         .ui.header.zoomer
+                    // //             |#{product_source.title}
+                    // .ui.header 
+                    //     i.fork.icon
+                    //     |related products
+                    // each related_products
+                    //     a.ui.header(href="/product/#{_id}") #{title}
                             
         
 template(name='product_inventory')      

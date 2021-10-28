@@ -1,5 +1,5 @@
 @picked_products = new ReactiveArray []
-@picked_weeks = new ReactiveArray []
+@picked_colors = new ReactiveArray []
 @picked_origins = new ReactiveArray []
 papa =  require 'papaparse'
 
@@ -11,14 +11,14 @@ if Meteor.isClient
         ), name:'labels'
 
     Template.labels.onCreated ->
+        Session.setDefault('picked_color',null)
         @autorun -> Meteor.subscribe 'labels_facets',
-            picked_products.array()
-            picked_weeks.array()
-            picked_origins.array()
+            Session.get('picked_color')
+            Session.get('picked_origin')
             Session.get('product_search')
         @autorun => @subscribe 'labels_total',
-            picked_products.array()
-            picked_weeks.array()
+            Session.get('picked_color')
+            Session.get('picked_origin')
             Session.get('product_search')
             
         # Session.get('order_status_filter')
@@ -37,6 +37,7 @@ if Meteor.isClient
                 model:'product'
                 title:@name
     Template.labels.events
+        'click .pick_color': -> Session.set('picked_color',@name)
         'click .clear_labels': ->
             if confirm 'clear labels?'
                 Meteor.call 'clear_labels', ->
@@ -79,16 +80,16 @@ if Meteor.isClient
     #     'click .unpick': ->
     #         console.log Template.parentData()
             
-    #         if Template.parentData().model is '_week_number'
-    #             picked_weeks.remove @valueOf()
+    #         if Template.parentData().model is 'color'
+    #             picked_colors.remove @valueOf()
     #         else if Template.parentData().model is '_product'
     #             picked_products.remove @valueOf()
             
     # Template.cfacet.helpers
     #     picked: ->
     #         console.log @
-    #         if @model is '_week_number'
-    #             picked_weeks.array()
+    #         if @model is 'color'
+    #             picked_colors.array()
     #         else if @model is '_product'
     #             picked_products.array()
     #     unpicked: ->
@@ -117,7 +118,7 @@ if Meteor.isClient
             Docs.find match,
                 sort: name:-1
         
-        
+        picked_color: -> Session.get('picked_color')
         labels_total: -> Counts.get('labels_total')        
         current_search: ->
             Session.get('product_search')
@@ -179,7 +180,7 @@ if Meteor.isServer
                     _converted_date: converted 
                     _origin: moment(converted).format('MMMM')
                     _weekdaynum: moment(converted).isoWeekday()
-                    _week_number: moment(converted).week()
+                    color: moment(converted).week()
                     _weekday: moment(converted).format('dddd')
 
         parse_labels: (parsed_results)->
@@ -231,7 +232,7 @@ if Meteor.isServer
 
     Meteor.publish 'labels_total', (
         picked_products=[]
-        picked_weeks=[]
+        picked_colors=[]
         product_search=''
         )->
         # @unblock()
@@ -249,7 +250,7 @@ if Meteor.isServer
         #     match.published = $in: [0,1]
 
         if picked_products.length > 0 then match._product = $in:picked_products
-        if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
+        if picked_colors.length > 0 then match.color = $in:picked_colors
         if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
         Counts.publish this, 'labels_total', Docs.find(match)
         return undefined
@@ -262,9 +263,9 @@ if Meteor.isServer
             title:label.name
         }, limit:1)
     Meteor.publish 'labels_facets', (
-        picked_products=[]
-        picked_weeks=[]
-        picked_origins=[]
+        # picked_products=[]
+        picked_color=null
+        picked_origin=null
         product_search=''
         )->
             self = @
@@ -280,9 +281,9 @@ if Meteor.isServer
             # if view_private is false
             #     match.published = $in: [0,1]
     
-            if picked_products.length > 0 then match._product = $in:picked_products
-            if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
-            if picked_origins.length > 0 then match._origin = $in:picked_origins
+            # if picked_products.length > 0 then match._product = $in:picked_products
+            if picked_colors then match.color = picked_color
+            if picked_origin then match._origin = picked_origin
             if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
 
@@ -402,7 +403,7 @@ if Meteor.isServer
                 { $group: _id: '$color', count: $sum: 1 }
                 # { $match: _id: $nin:  }
                 { $sort: count: -1, _id: 1 }
-                { $limit: 42 }
+                { $limit: 20 }
                 { $project: _id: 0, name: '$_id', count: 1 }
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
