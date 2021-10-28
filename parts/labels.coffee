@@ -101,6 +101,9 @@ if Meteor.isClient
         vegan_results: ->
             Results.find 
                 model:'vegan'
+        color_results: ->
+            Results.find 
+                model:'color'
         label_docs: ->
             match = {model:'label'}
             # if Session.get('order_status_filter')
