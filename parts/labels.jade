@@ -18,9 +18,9 @@ template(name='labels')
                         |color
                     // +cfacet model='_week_number'
                     each color_results
-                        .ui.button.pick_color(style="background-color:##{name}")
-                            |#{name}
-                            small #{count}
+                        .ui.big.compact.button.pick_color(style="background-color:##{name}")
+                            // |#{name}
+                            |#{count}
                     .ui.inline.header 
                         +i name='vegan-symbol'
                         |vegan
