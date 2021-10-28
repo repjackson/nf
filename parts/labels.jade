@@ -49,14 +49,14 @@ template(name='labels')
                         else
                             i.search.icon
                         input.search_product(type='text' placeholder='product' value=current_search)
-                    .scrolling
-                        .ui.four.doubling.cards
-                            if label_docs.count
-                                each label_docs
-                                    +label_card
-                            else 
-                                .ui.center.aligned.basic.segment 
-                                    i.money.big.loading.icon
+                    // .scrolling
+                    .ui.doubling.centered.cards
+                        if label_docs.count
+                            each label_docs
+                                +label_card
+                        else 
+                            .ui.center.aligned.basic.segment 
+                                i.tags.massive.loading.red.icon
                                 
                             
 template(name='label_card')
