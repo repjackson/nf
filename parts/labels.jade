@@ -13,23 +13,23 @@ template(name='labels')
                     if in_dev 
                         .ui.icon.button.clear_labels 
                             i.remove.icon
-                    .ui.inline.header 
-                        i.hashtag.icon
-                        |week
+                    .ui.header 
+                        +i name='vegan-symbol'
+                        |vegan
                     // +cfacet model='_week_number'
-                    each week_results
-                        .ui.button.pick_week
+                    each vegan_results
+                        .ui.button.pick_vegan
                             |#{name}
                             small #{count}
                     div
-                    .ui.inline.header
+                    .ui.header
                         i.calendar.icon
                         |month
                     each month_results
                         .ui.button.pick_month
                             |#{name}
                             small #{count}
-                    .ui.inline.small.header
+                    .ui.small.header
                         i.download.icon
                         |import
                     .ui.fluid.input.import
@@ -57,21 +57,26 @@ template(name='label_card')
         .content
             .ui.header #{name}
             if local
-                .ui.label 
-                    i.red.marker.icon
-                    |local
+                +i name='marker' cl='pointer zoomer' title='local'
             if gf
-                +i name='no-gluten'
+                +i name='no-gluten' cl='pointer zoomer' title='gluten free'
             if vegan
-                +i name='vegan-symbol'
+                +i name='vegan-symbol' cl='pointer zoomer' title='vegan'
+            if origin
+                i.red.marker.icon
+                |#{origin}
+            if retail_price
+                .ui.inline.header
+                    |$#{retail_price}
+            .item 
+                if description
+                    i.about.icon
+                    |#{description}
+                    
             .ui.list 
                 .item 
                     if cogs
                         |cogs: #{cogs}
-                .item 
-                    if description
-                        i.about.icon
-                        |#{description}
                 // .item 
                 //     if gf
                 //         |gf: #{gf}
@@ -92,9 +97,6 @@ template(name='label_card')
                     if nude_made
                         |nude_made: #{nude_made}
                 .item 
-                    if origin
-                        |origin: #{origin}
-                .item 
                     if packaging
                         |packaging: #{packaging}
                 .item 
@@ -103,9 +105,6 @@ template(name='label_card')
                 .item 
                     if rescued
                         |rescued: #{rescued}
-                .item 
-                    if retail_price
-                        |retail_price: #{retail_price}
                 .item 
                     if shelf_life
                         |shelf_life: #{shelf_life}

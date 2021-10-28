@@ -1,6 +1,6 @@
 @picked_products = new ReactiveArray []
 @picked_weeks = new ReactiveArray []
-@picked_months = new ReactiveArray []
+@picked_origins = new ReactiveArray []
 papa =  require 'papaparse'
 
 
@@ -14,7 +14,7 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'labels_facets',
             picked_products.array()
             picked_weeks.array()
-            picked_months.array()
+            picked_origins.array()
             Session.get('product_search')
         @autorun => @subscribe 'labels_total',
             picked_products.array()
@@ -95,12 +95,12 @@ if Meteor.isClient
     #             model:@model
         
     Template.labels.helpers 
-        month_results: ->
+        origin_results: ->
             Results.find 
-                model:'month'
-        week_results: ->
+                model:'origin'
+        vegan_results: ->
             Results.find 
-                model:'week_number'
+                model:'vegan'
         label_docs: ->
             match = {model:'label'}
             # if Session.get('order_status_filter')
@@ -172,7 +172,7 @@ if Meteor.isServer
                 $set:
                     _product:split[4]
                     _converted_date: converted 
-                    _month: moment(converted).format('MMMM')
+                    _origin: moment(converted).format('MMMM')
                     _weekdaynum: moment(converted).isoWeekday()
                     _week_number: moment(converted).week()
                     _weekday: moment(converted).format('dddd')
@@ -259,7 +259,7 @@ if Meteor.isServer
     Meteor.publish 'labels_facets', (
         picked_products=[]
         picked_weeks=[]
-        picked_months=[]
+        picked_origins=[]
         product_search=''
         )->
             self = @
@@ -277,7 +277,7 @@ if Meteor.isServer
     
             if picked_products.length > 0 then match._product = $in:picked_products
             if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
-            if picked_months.length > 0 then match._month = $in:picked_months
+            if picked_origins.length > 0 then match._origin = $in:picked_origins
             if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
 
@@ -372,40 +372,40 @@ if Meteor.isServer
                     total: product.total
                     # index: i
                     
-            week_cloud = Docs.aggregate [
+            vegan_cloud = Docs.aggregate [
                 { $match: match }
-                { $project: _week_number: 1 }
+                { $project: vegan: 1 }
                 # { $unwind: "$tags" }
-                { $group: _id: '$_week_number', count: $sum: 1 }
-                { $match: _id: $nin: picked_weeks }
+                { $group: _id: '$vegan', count: $sum: 1 }
+                # { $match: _id: $nin:  }
                 { $sort: count: -1, _id: 1 }
                 { $limit: 10 }
                 { $project: _id: 0, name: '$_id', count: 1 }
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
-            week_cloud.forEach (week, i) ->
+            vegan_cloud.forEach (vegan, i) ->
                 self.added 'results', Random.id(),
-                    name: week.name
-                    model:'week_number'
-                    count: week.count
+                    name: vegan.name
+                    model:'vegan'
+                    count: vegan.count
                     # index: i
     
-            month_cloud = Docs.aggregate [
+            origin_cloud = Docs.aggregate [
                 { $match: match }
-                { $project: _month: 1 }
+                { $project: _origin: 1 }
                 # { $unwind: "$tags" }
-                { $group: _id: '$_month', count: $sum: 1 }
-                { $match: _id: $nin: picked_months }
+                { $group: _id: '$_origin', count: $sum: 1 }
+                { $match: _id: $nin: picked_origins }
                 { $sort: count: -1, _id: 1 }
                 { $limit: 10 }
                 { $project: _id: 0, name: '$_id', count: 1 }
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
-            month_cloud.forEach (month, i) ->
+            origin_cloud.forEach (origin, i) ->
                 self.added 'results', Random.id(),
-                    name: month.name
-                    model:'month'
-                    count: month.count
+                    name: origin.name
+                    model:'origin'
+                    count: origin.count
                     # index: i
     
             # timestamp_tags_cloud = Docs.aggregate [
