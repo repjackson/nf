@@ -52,33 +52,81 @@ template(name='labels')
                                 
                             
 template(name='label_card')
-    .card
+    .card(style="background-color:##{color}")
         .content
             .ui.list 
-                .item cogs: #{cogs}
-                .item color: #{color}
-                .item description: #{description}
-                .item gf: #{gf}
-                .item goes_well_with: #{goes_well_with}
-                .item ingredients: #{ingredients}
-                .item local: #{local}
-                .item model: #{model}
-                .item name: #{name}
-                .item net_weight_: #{net_weight_}
-                .item net_weight_: #{net_weight_}
-                .item nude_made: #{nude_made}
-                .item origin: #{origin}
-                .item packaging: #{packaging}
-                .item price: #{price}
-                .item rescued: #{rescued}
-                .item retail_price: #{retail_price}
-                .item shelf_life: #{shelf_life}
-                .item size_: #{size_}
-                .item url: #{url}
-                .item vegan: #{vegan}
-                .item we_love_it_in: #{we_love_it_in}
-                .item wholefoods_retail_price: #{wholefoods_retail_price}
-                .item wholesale_price: #{wholesale_price}
+                .item 
+                    if cogs
+                        |cogs: #{cogs}
+                .item 
+                    if color
+                        |color: #{color}
+                .item 
+                    if description
+                        |description: #{description}
+                .item 
+                    if gf
+                        |gf: #{gf}
+                .item 
+                    if goes_well_with
+                        |goes_well_with: #{goes_well_with}
+                .item 
+                    if ingredients
+                        |ingredients: #{ingredients}
+                .item 
+                    if local
+                        |local: #{local}
+                .item 
+                    if model
+                        |model: #{model}
+                .item 
+                    if name
+                        |name: #{name}
+                .item 
+                    if net_weight_
+                        |net_weight_: #{net_weight_}
+                .item 
+                    if net_weight_
+                        |net_weight_: #{net_weight_}
+                .item 
+                    if nude_made
+                        |nude_made: #{nude_made}
+                .item 
+                    if origin
+                        |origin: #{origin}
+                .item 
+                    if packaging
+                        |packaging: #{packaging}
+                .item 
+                    if price
+                        |price: #{price}
+                .item 
+                    if rescued
+                        |rescued: #{rescued}
+                .item 
+                    if retail_price
+                        |retail_price: #{retail_price}
+                .item 
+                    if shelf_life
+                        |shelf_life: #{shelf_life}
+                .item 
+                    if size_
+                        |size_: #{size_}
+                .item 
+                    if url
+                        |url: #{url}
+                .item 
+                    if vegan
+                        |vegan: #{vegan}
+                .item 
+                    if we_love_it_in
+                        |we_love_it_in: #{we_love_it_in}
+                .item 
+                    if wholefoods_retail_price
+                        |wholefoods_retail_price: #{wholefoods_retail_price}
+                .item 
+                    if wholesale_price
+                        |wholesale_price: #{wholesale_price}
             +print_this
             .ui.icon.button.calc
                 i.refresh.icon
