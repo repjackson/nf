@@ -390,6 +390,24 @@ if Meteor.isServer
                     count: vegan.count
                     # index: i
     
+            color_cloud = Docs.aggregate [
+                { $match: match }
+                { $project: color: 1 }
+                # { $unwind: "$tags" }
+                { $group: _id: '$color', count: $sum: 1 }
+                # { $match: _id: $nin:  }
+                { $sort: count: -1, _id: 1 }
+                { $limit: 10 }
+                { $project: _id: 0, name: '$_id', count: 1 }
+                ]
+            # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
+            color_cloud.forEach (color, i) ->
+                self.added 'results', Random.id(),
+                    name: color.name
+                    model:'color'
+                    count: color.count
+                    # index: i
+    
             origin_cloud = Docs.aggregate [
                 { $match: match }
                 { $project: _origin: 1 }
