@@ -20,9 +20,7 @@ mobile-experience@1.1.0
 
 blaze-html-templates
 dburles:collection-helpers
-accounts-password@1.7.0
 shell-server@0.5.0
-accounts-base@1.9.0
 zimme:active-route
 lepozepo:cloudinary
 momentjs:moment
