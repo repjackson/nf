@@ -248,7 +248,7 @@ if Meteor.isServer
 
         if picked_products.length > 0 then match._product = $in:picked_products
         if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
-        if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
+        if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
         Counts.publish this, 'labels_total', Docs.find(match)
         return undefined
 
@@ -281,7 +281,7 @@ if Meteor.isServer
             if picked_products.length > 0 then match._product = $in:picked_products
             if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
             if picked_origins.length > 0 then match._origin = $in:picked_origins
-            if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
+            if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
 
             # if picked_author_ids.length > 0
@@ -508,7 +508,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:20, sort: name:-1}).observeChanges(
+            subHandle = Docs.find(match, {limit:20, sort: name:1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id

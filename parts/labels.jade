@@ -74,7 +74,7 @@ template(name='label_card')
                 +i name='no-gluten' cl='pointer zoomer' title='gluten free'
             if vegan
                 +i name='vegan-symbol' cl='pointer zoomer' title='vegan'
-            if origin
+            if origin.length
                 .ui.inline.header
                     +i name='marker' cl='pointer zoomer' title='local'
                     // i.red.marker.icon
