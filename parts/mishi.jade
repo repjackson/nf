@@ -3,14 +3,16 @@ template(name='mishi')
         .sixteen.wide.column.scrolling
             .ui.stackable.grid 
                 .sixteen.wide.column
-                    .ui.inline.header 
-                        i.money.icon
-                        |mishi
+                    // +ibig name='money' cl='ui inline image'
+                    // .ui.inline.header 
+                    //     i.money.icon
+                    //     // |mishi
                     .ui.small.inline.header 
                         |#{mishi_total} results
                     // div
                     .ui.inline.header 
-                        i.hashtag.icon
+                        // i.hashtag.icon
+                        +i name='calendar'
                         |week
                     // +cfacet model='_week_number'
                     each week_results
@@ -20,17 +22,18 @@ template(name='mishi')
                     // div
                     .ui.inline.header
                         // i.calendar.icon
-                        +i name='month'
+                        +i name='calendar'
                         |month
                     each month_results
                         .ui.button.pick_month
                             |#{name}
                             small #{count}
-                    .ui.inline.small.header
-                        i.download.icon
-                        // |import
-                    .ui.input.import
-                        input(type='file' accept='.csv')
+                    // if in_dev
+                    //     // .ui.inline.small.header
+                    //     //     i.download.icon
+                    //     //     // |import
+                    //     // .ui.input.import
+                    //     //     input(type='file' accept='.csv')
                     +cfacet model='_product'
                     .ui.icon.input(title='search product')
                         if current_search
@@ -85,7 +88,8 @@ template(name='mishi_order')
 
 
 template(name='cfacet')
-    .ui.inline.header #{model}
+    +i name='shopping-cart'
+    // .ui.inline.header #{model}
     each picked
         +unpick
     each unpicked 
@@ -98,8 +102,10 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        .ui.compact.circular.big.button.pick
+        .ui.compact.circular.massive.button.pick
             |#{name}
-            small #{count}x
+            i.grey.cart.icon
+            small #{count}
+            i.hashtag.grey.icon
             |(=#{total})
             
