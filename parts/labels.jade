@@ -91,15 +91,19 @@ template(name='label_card')
             a.ui.header.goto_product.zoomer.fly_left #{name}
             .ui.inline.small.grey.header #{query_params}
             if local
+                div
                 +i name='marker' cl='pointer zoomer' title='local'
                 |local
             if gf
+                div
                 +i name='no-gluten' cl='pointer zoomer' title='gluten free'
                 |gluten free
             if vegan
+                div
                 +i name='vegan-symbol' cl='pointer zoomer' title='vegan'
                 |vegan
             if origin.length
+                div
                 .ui.inline.header
                     +i name='marker' cl='pointer zoomer' title='local'
                     // i.red.marker.icon
