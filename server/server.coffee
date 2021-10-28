@@ -71,8 +71,8 @@ Meteor.publish 'model_docs', (model,limit)->
             # app:'nf'
             model: model
         }, sort:_timestamp:-1
-Meteor.publish 'me', ->
-    Meteor.users.find @userId
+# Meteor.publish 'me', ->
+#     Meteor.users.find @userId
 
 
 Meteor.publish 'document_by_slug', (slug)->
@@ -98,11 +98,11 @@ Meteor.publish 'inline_doc', (slug)->
 
 
 
-Meteor.publish 'user_from_username', (username)->
-    Meteor.users.find username:username
+# Meteor.publish 'user_from_username', (username)->
+#     Meteor.users.find username:username
 
-Meteor.publish 'user_from_id', (user_id)->
-    Meteor.users.find user_id
+# Meteor.publish 'user_from_id', (user_id)->
+#     Meteor.users.find user_id
 
 Meteor.publish 'doc_by_id', (doc_id)->
     Docs.find doc_id
@@ -113,10 +113,10 @@ Meteor.publish 'author_from_doc_id', (doc_id)->
     doc = Docs.findOne doc_id
     Meteor.users.find user_id
 
-Meteor.publish 'page', (slug)->
-    Docs.find
-        model:'page'
-        slug:slug
+# Meteor.publish 'page', (slug)->
+#     Docs.find
+#         model:'page'
+#         slug:slug
 
 
 Meteor.publish 'doc_tags', (picked_tags)->
