@@ -5,9 +5,9 @@
 
 
 Docs.before.insert (userId, doc)->
-    if Meteor.userId()
-        doc._author_id = Meteor.userId()
-        doc._author_username = Meteor.user().username
+    # if Meteor.userId()
+    #     doc._author_id = Meteor.userId()
+    #     doc._author_username = Meteor.user().username
     timestamp = Date.now()
     doc._timestamp = timestamp
     doc._timestamp_long = moment(timestamp).format("dddd, MMMM Do YYYY, h:mm:ss a")
@@ -60,7 +60,7 @@ if Meteor.isServer
 
 
 Docs.helpers
-    author: -> Meteor.users.findOne @_author_id
+    # author: -> Meteor.users.findOne @_author_id
     # cook: -> Meteor.users.findOne @cook_user_id
     source_products: ->
         Docs.find
@@ -199,11 +199,11 @@ if Meteor.isServer
         # console.log filter
         self = @
         match = {}
-        if Meteor.user()
-            unless Meteor.user().roles and 'dev' in Meteor.user().roles
-                match.view_roles = $in:Meteor.user().roles
-        else
-            match.view_roles = $in:['public']
+        # if Meteor.user()
+        #     unless Meteor.user().roles and 'dev' in Meteor.user().roles
+        #         match.view_roles = $in:Meteor.user().roles
+        # else
+        #     match.view_roles = $in:['public']
 
         # if filter is 'shop'
         #     match.active = true

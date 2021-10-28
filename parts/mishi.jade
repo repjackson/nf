@@ -41,14 +41,14 @@ template(name='mishi')
                         else
                             i.search.icon
                         input.search_product(type='text' placeholder='product' value=current_search)
-                    // .scrollin
-                    //     .ui.five.doubling.cards
-                    //         if mishi_orders.count
-                    //             each mishi_orders
-                    //                 +mishi_order
-                    //         else 
-                    //             .ui.center.aligned.basic.segment 
-                    //                 i.money.big.loading.icon
+                    .scrollin
+                        .ui.five.doubling.cards
+                            if mishi_orders.count
+                                each mishi_orders
+                                    +mishi_order
+                            else 
+                                .ui.center.aligned.basic.segment 
+                                    i.money.big.loading.icon
                                 
                             
 template(name='mishi_order')
@@ -102,11 +102,11 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        .ui.compact.circular.big.basic.button.pick
-            |#{name}
-            i.grey.cart.icon
-            small #{count}
-            i.hashtag.grey.icon
+        .ui.compact.basic.button.pick
+            .ui.small.header #{name}
+            i.grey.cart.icon(title='orders')
+            | #{count}
+            i.hashtag.grey.icon(title='units sold')
             // |(=#{total})
             |#{total}
             

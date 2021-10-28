@@ -98,16 +98,16 @@ if Meteor.isClient
         week_results: ->
             Results.find 
                 model:'week_number'
-        # mishi_orders: ->
-        #     match = {model:'mishi_order'}
-        #     if Session.get('order_status_filter')
-        #         match.status = Session.get('order_status_filter')
-        #     if Session.get('order_delivery_filter')
-        #         match.delivery_method = Session.get('order_sort_filter')
-        #     if Session.get('order_sort_filter')
-        #         match.delivery_method = Session.get('order_sort_filter')
-        #     Docs.find match,
-        #         sort: _timestamp:-1
+        mishi_orders: ->
+            match = {model:'mishi_order'}
+            if Session.get('order_status_filter')
+                match.status = Session.get('order_status_filter')
+            if Session.get('order_delivery_filter')
+                match.delivery_method = Session.get('order_sort_filter')
+            if Session.get('order_sort_filter')
+                match.delivery_method = Session.get('order_sort_filter')
+            Docs.find match,
+                sort: _timestamp:-1
         
         
         mishi_total: -> Counts.get('mishi_total')        
@@ -319,7 +319,7 @@ if Meteor.isServer
                 # { $match: _id: $nin: picked_products }
                 # { $sort: count: -1, _id: 1 }
                 { $sort: total: -1, _id: 1 }
-                { $limit: 300 }
+                { $limit: 20 }
                 { $project: _id:0, name:'$_id', count:1, total:1}
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud

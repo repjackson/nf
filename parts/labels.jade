@@ -12,15 +12,13 @@ template(name='labels')
                     if in_dev 
                         .ui.icon.button.clear_labels 
                             i.remove.icon
-                    .ui.inline.header 
-                        +i name='paint-brush'
-                        // |color
                     // +cfacet model='_week_number'
                     each color_results
-                        .ui.big.compact.button.pick_color(style="background-color:##{name}")
+                        .ui.big.compact.button.pick_color(style="background-color:##{name}" title=name)
                             // |#{name}
                             |#{count}
                     +i name='vegan-symbol'
+                    +i name='kitchen'
                     // .ui.inline.header 
                         // |vegan
                     // +cfacet model='_week_number'
@@ -90,8 +88,9 @@ template(name='label_card')
                 |#{description}
             if url
                 a(href=url target='_blank' title=url)
-                    // |#{url}
+                    |#{url}
                     i.large.external.link.icon.zoomer.pointer
+            .ui.inline.header #{query_params}
             if ingredients
                 +i name='ingredients'
                 |#{ingredients}
