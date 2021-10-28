@@ -1,68 +1,67 @@
 template(name='labels')
     .ui.stackable.padded.grid
-        .sixteen.wide.column.scrollin
-            .ui.stackable.grid 
-                .sixteen.wide.column
-                    .ui.inline.header 
-                        +i name='tags'
-                        |#{label_docs.count}
-                        |labels
-                    // .ui.small.inline.header 
-                    //     |#{label_total}
-                    if in_dev 
-                        .ui.icon.button.clear_labels 
-                            i.remove.icon
-                    // +cfacet model='_week_number'
-                    if picked_color
-                        .ui.button.unpick_color(style="background-color:##{picked_color}" )
-                            |##{picked_color}
-                    else 
-                        each color_results
-                            .ui.big.compact.button.pick_color(style="background-color:##{name}" title=name)
-                                // |#{name}
-                                |#{count}
-                    +i name='vegan-symbol'
-                    +i name='kitchen'
-                    // .ui.inline.header 
-                        // |vegan
-                    // +cfacet model='_week_number'
-                    each vegan_results
-                        .ui.button.pick_vegan
-                            |#{name}
-                            small #{count}
-                    +i name='no-gluten'
-                    // .ui.inline.header 
-                        // |gluten free
-                    // +cfacet model='_week_number'
-                    each gluten_results
-                        .ui.button.pick_gluten
-                            |#{name}
-                            small #{count}
-                    // .ui.small.inline.header
-                    //     i.download.icon
-                    //     |'Info for Labels'
-                    // .ui.input.import
-                    //     input(type='file' accept='.csv')
-                    // // +cfacet model='_product'
-                    .ui.icon.input(title='search product')
-                        if current_search
-                            i.remove.red.link.icon.zoomer.clear_search
-                        else
-                            i.search.icon
-                        input.search_product(type='text' placeholder='product' value=current_search)
-                    // .scrolling
-                    .ui.doubling.centered.four.cards
-                        if label_docs.count
-                            each label_docs
-                                +label_card
-                        else 
-                            .ui.center.aligned.basic.segment 
-                                .ui.hidden.divider
-                                .ui.hidden.divider
-                                .ui.hidden.divider
-                                .ui.hidden.divider
-                                i.tag.massive.loading.red.icon
-                                
+        .four.wide.column.scrollin
+            .ui.inline.header 
+                +i name='tags'
+                |#{label_docs.count}
+                |labels
+            // .ui.small.inline.header 
+            //     |#{label_total}
+            // if in_dev 
+            //     .ui.icon.button.clear_labels 
+            //         i.remove.icon
+            // +cfacet model='_week_number'
+            if picked_color
+                .ui.button.unpick_color(style="background-color:##{picked_color}" )
+                    |##{picked_color}
+            else 
+                each color_results
+                    .ui.big.compact.button.pick_color(style="background-color:##{name}" title=name)
+                        // |#{name}
+                        |#{count}
+            +i name='vegan-symbol'
+            +i name='kitchen'
+            // .ui.inline.header 
+                // |vegan
+            // +cfacet model='_week_number'
+            each vegan_results
+                .ui.button.pick_vegan
+                    |#{name}
+                    small #{count}
+            +i name='no-gluten'
+            // .ui.inline.header 
+                // |gluten free
+            // +cfacet model='_week_number'
+            each gluten_results
+                .ui.button.pick_gluten
+                    |#{name}
+                    small #{count}
+            // .ui.small.inline.header
+            //     i.download.icon
+            //     |'Info for Labels'
+            // .ui.input.import
+            //     input(type='file' accept='.csv')
+            // // +cfacet model='_product'
+            .ui.icon.input(title='search product')
+                if current_search
+                    i.remove.red.link.icon.zoomer.clear_search
+                else
+                    i.search.icon
+                input.search_product(type='text' placeholder='product' value=current_search)
+            // .scrolling
+        .ui.twelve.wide.colum
+            .ui.doubling.centered.four.cards.scrolling
+                if label_docs.count
+                    each label_docs
+                        +label_card
+                else 
+                    .ui.center.aligned.basic.segment 
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+                        .ui.hidden.divider
+                        i.tag.massive.loading.red.icon
+                            
                             
 template(name='label_card')
     .card(style="background-color:##{color}")

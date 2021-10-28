@@ -59,6 +59,13 @@ if Meteor.isClient
                 Router.go "/product/#{new_id}/edit"
                 
                 
+    Template.pick.onCreated ->
+        @autorun => Meteor.subscribe 'product_by_slug', @data, ->
+    Template.pick.helpers
+        pick_product: ->
+            Docs.findOne
+                model:'product'
+                slug:@name
     Template.pick.events
         'click .pick': ->
             console.log @
@@ -214,6 +221,12 @@ if Meteor.isServer
         Docs.find({
             model:'product'
             slug:mishi_order._product
+        }, limit:1)
+    Meteor.publish 'product_by_slug', (slug)->
+        # console.log mishi_order
+        Docs.find({
+            model:'product'
+            slug:slug
         }, limit:1)
     Meteor.publish 'mishi_facets', (
         picked_products=[]

@@ -38,6 +38,7 @@ if Meteor.isClient
                 title:@name
     Template.labels.events
         'click .pick_color': -> Session.set('picked_color',@name)
+        'click .unpick_color': -> Session.set('picked_color',null)
         'click .clear_labels': ->
             if confirm 'clear labels?'
                 Meteor.call 'clear_labels', ->
@@ -214,7 +215,7 @@ if Meteor.isServer
             
             
             for label in parsed_results.data
-                console.log label
+                # console.log label
                 found_label = 
                     Docs.findOne    
                         model:'label'

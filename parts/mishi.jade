@@ -1,54 +1,53 @@
 template(name='mishi')
     .ui.stackable.padded.grid
-        .sixteen.wide.column.scrolling
-            .ui.stackable.grid 
-                .sixteen.wide.column
-                    // +ibig name='money' cl='ui inline image'
-                    // .ui.inline.header 
-                    //     i.money.icon
-                    //     // |mishi
-                    .ui.small.inline.header 
-                        |#{mishi_total} results
-                    // div
-                    .ui.inline.header 
-                        // i.hashtag.icon
-                        +i name='calendar'
-                        |week
-                    // +cfacet model='_week_number'
-                    each week_results
-                        .ui.button.pick_week
-                            |#{name}
-                            small #{count}
-                    // div
-                    .ui.inline.header
-                        // i.calendar.icon
-                        +i name='calendar'
-                        |month
-                    each month_results
-                        .ui.button.pick_month
-                            |#{name}
-                            small #{count}
-                    // if in_dev
-                    //     // .ui.inline.small.header
-                    //     //     i.download.icon
-                    //     //     // |import
-                    //     // .ui.input.import
-                    //     //     input(type='file' accept='.csv')
-                    +cfacet model='_product'
-                    .ui.icon.input(title='search product')
-                        if current_search
-                            i.remove.red.link.icon.zoomer.clear_search
-                        else
-                            i.search.icon
-                        input.search_product(type='text' placeholder='product' value=current_search)
-                    .scrollin
-                        .ui.five.doubling.cards
-                            if mishi_orders.count
-                                each mishi_orders
-                                    +mishi_order
-                            else 
-                                .ui.center.aligned.basic.segment 
-                                    i.money.big.loading.icon
+        .four.wide.column.scrolling
+            // +ibig name='money' cl='ui inline image'
+            // .ui.inline.header 
+            //     i.money.icon
+            //     // |mishi
+            .ui.inline.header 
+                |#{mishi_total} results
+            // div
+            .ui.inline.header 
+                // i.hashtag.icon
+                +i name='calendar'
+                |week
+            // +cfacet model='_week_number'
+            each week_results
+                .ui.button.pick_week
+                    |#{name}
+                    small #{count}
+            // div
+            .ui.inline.header
+                // i.calendar.icon
+                +i name='calendar'
+                |month
+            each month_results
+                .ui.button.pick_month
+                    |#{name}
+                    small #{count}
+            // if in_dev
+            //     // .ui.inline.small.header
+            //     //     i.download.icon
+            //     //     // |import
+            //     // .ui.input.import
+            //     //     input(type='file' accept='.csv')
+        .twelve.wide.column.scrolling
+            +cfacet model='_product'
+            .ui.icon.input(title='search product')
+                if current_search
+                    i.remove.red.link.icon.zoomer.clear_search
+                else
+                    i.search.icon
+                input.search_product(type='text' placeholder='product' value=current_search)
+            .scrollin
+                .ui.five.doubling.cards
+                    if mishi_orders.count
+                        each mishi_orders
+                            +mishi_order
+                    else 
+                        .ui.center.aligned.basic.segment 
+                            i.money.big.loading.icon
                                 
                             
 template(name='mishi_order')
@@ -102,11 +101,13 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        .ui.compact.basic.button.pick
-            .ui.small.header #{name}
-            i.grey.cart.icon(title='orders')
-            | #{count}
-            i.hashtag.grey.icon(title='units sold')
-            // |(=#{total})
-            |#{total}
-            
+        .ui.compact.basic.large.button.pick(style="backgroun-color:#{pick_product.color}" title=name)
+        if pick_product
+            img.ui.avatar.image(src="{{c.url pick_product.image_id width=400 height=400 gravity='face' crop='fill'}}")
+        strong #{pick_product.title}
+        i.grey.cart.icon(title='orders')
+        | #{count}
+        i.hashtag.grey.icon(title='units sold')
+        // |(=#{total})
+        |#{total}
+        
