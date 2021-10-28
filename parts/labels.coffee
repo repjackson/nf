@@ -33,7 +33,7 @@ if Meteor.isClient
         related_product: -> 
             Docs.findOne
                 model:'product'
-                slug:@_product
+                slug:@name
     Template.labels.events
         'click .clear_labels': ->
             if confirm 'clear labels?'
@@ -257,7 +257,7 @@ if Meteor.isServer
         # console.log label
         Docs.find({
             model:'product'
-            slug:label._product
+            title:label.name
         }, limit:1)
     Meteor.publish 'labels_facets', (
         picked_products=[]
