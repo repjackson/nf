@@ -2,14 +2,13 @@ template(name='labels')
     .ui.stackable.padded.grid
         .sixteen.wide.column.scrolling
             .ui.stackable.grid 
-                .four.wide.column
+                .sixteen.wide.column
                     .ui.inline.header 
                         +i name='tags'
                         |#{label_docs.count}
-                        |label
-                    .ui.small.inline.header 
-                        |#{label_total} results
-                    div
+                        |labels
+                    // .ui.small.inline.header 
+                    //     |#{label_total}
                     if in_dev 
                         .ui.icon.button.clear_labels 
                             i.remove.icon
@@ -29,20 +28,20 @@ template(name='labels')
                         .ui.button.pick_vegan
                             |#{name}
                             small #{count}
-                    div
-                    .ui.header
-                        i.calendar.icon
-                        |month
-                    each month_results
-                        .ui.button.pick_month
+                    .ui.inline.header 
+                        +i name='no-gluten'
+                        |gluten free
+                    // +cfacet model='_week_number'
+                    each gluten_results
+                        .ui.button.pick_gluten
                             |#{name}
                             small #{count}
-                    .ui.small.header
+                    .ui.small.inline.header
                         i.download.icon
-                        |import
-                    .ui.fluid.input.import
+                        |import 'Info for Labels'
+                    .ui.input.import
                         input(type='file' accept='.csv')
-                .twelve.wide.column
+                .sixteen.wide.column
                     // +cfacet model='_product'
                     .ui.icon.input(title='search product')
                         if current_search
@@ -76,62 +75,61 @@ template(name='label_card')
             if retail_price
                 .ui.inline.header
                     |$#{retail_price}
-            .item 
-                if description
-                    i.about.icon
-                    |#{description}
+            if description
+                i.about.icon
+                |#{description}
+            if url
+                a.ui.icon.circular.button(href=url target='_blank' title=url)
+                    // |#{url}
+                    i.large.external.icon
                     
-            .ui.list 
-                .item 
-                    if cogs
-                        |cogs: #{cogs}
-                // .item 
-                //     if gf
-                //         |gf: #{gf}
-                .item 
-                    if goes_well_with
-                        |goes_well_with: #{goes_well_with}
-                .item 
-                    if ingredients
-                        +i name='ingredients'
-                        |#{ingredients}
-                .item 
-                    if net_weight_
-                        |net_weight_: #{net_weight_}
-                .item 
-                    if net_weight_
-                        |net_weight_: #{net_weight_}
-                .item 
-                    if nude_made
-                        |nude_made: #{nude_made}
-                .item 
-                    if packaging
-                        |packaging: #{packaging}
-                .item 
-                    if price
-                        .ui.inline.header$#{price}
-                .item 
-                    if rescued
-                        |rescued: #{rescued}
-                .item 
-                    if shelf_life
-                        |shelf_life: #{shelf_life}
-                .item 
-                    if size_
-                        |size_: #{size_}
-                .item 
-                    if url
-                        a.ui.fluid.button(href=url target='_blank')
-                            |#{url}
-                .item 
-                    if we_love_it_in
-                        |we_love_it_in: #{we_love_it_in}
-                .item 
-                    if wholefoods_retail_price
-                        |wholefoods_retail_price: #{wholefoods_retail_price}
-                .item 
-                    if wholesale_price
-                        |wholesale_price: #{wholesale_price}
+            // .ui.list 
+            //     .item 
+            //         if cogs
+            //             |cogs: #{cogs}
+            //     // .item 
+            //     //     if gf
+            //     //         |gf: #{gf}
+            //     .item 
+            //         if goes_well_with
+            //             |goes_well_with: #{goes_well_with}
+            //     .item 
+            //         if ingredients
+            //             +i name='ingredients'
+            //             |#{ingredients}
+            //     .item 
+            //         if net_weight_
+            //             |net_weight_: #{net_weight_}
+            //     .item 
+            //         if net_weight_
+            //             |net_weight_: #{net_weight_}
+            //     .item 
+            //         if nude_made
+            //             |nude_made: #{nude_made}
+            //     .item 
+            //         if packaging
+            //             |packaging: #{packaging}
+            //     .item 
+            //         if price
+            //             .ui.inline.header$#{price}
+            //     .item 
+            //         if rescued
+            //             |rescued: #{rescued}
+            //     .item 
+            //         if shelf_life
+            //             |shelf_life: #{shelf_life}
+            //     .item 
+            //         if size_
+            //             |size_: #{size_}
+            //     .item 
+            //         if we_love_it_in
+            //             |we_love_it_in: #{we_love_it_in}
+            //     .item 
+            //         if wholefoods_retail_price
+            //             |wholefoods_retail_price: #{wholefoods_retail_price}
+            //     .item 
+            //         if wholesale_price
+            //             |wholesale_price: #{wholesale_price}
             +print_this
             .ui.icon.button.calc
                 i.refresh.icon
