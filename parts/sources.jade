@@ -9,7 +9,7 @@ template(name='sources')
         .sixteen.wide.column
             .ui.five.stackable.centered.cards
                 each model_docs_helper 'source'
-                    .ui.card
+                    .ui.card.zoomer
                         a.fly_right(href="/source/#{_id}") 
                             img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
                         a.content(href="/source/#{_id}") 
@@ -17,54 +17,9 @@ template(name='sources')
                                 |#{title}
                             each source_products
                                 .ui.header #{title}
-                            i.marker.icon
-                            |#{location}
-                            // |added #{when} by #{_author_username}
-                
-                
-template(name='user_sources')
-    .ui.inline.header 
-        +i name='field-and-tractor'
-        |user sources
-    .ui.basic.icon.button.send_source
-        i.large.plus.icon
-    .ui.padded.stackable.two.column.grid
-        .column
-            .ui.header 
-                +i name='sent--v2'
-                |favorites 
-            .ui.stackable.cards.scrolling
-                each sent_sources 
-                    .ui.card
-                        .content
-                            a(href="/source/#{_id}") 
-                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-    
-                            .ui.header 
-                                |#{amount} #{recipient_username}
-                            // |created #{when}
-                            |sent {{from_now sent_timestamp}}
-                            small {{cal_time sent_timestamp}}
-                            a.ui.icon.button(href='/source/#{_id}')
-                                i.large.chevron.right.icon
-                            
-        .column
-            .ui.header 
-                +i name='gift--v1'
-                |received
-            .ui.stackable.cards.scrolling
-                each received_sources
-                    .ui.card
-                        .content
-                            a(href="/source/#{_id}") 
-                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-                            .ui.header 
-                                |#{amount} #{_author_username}
-                            |received {{from_now sent_timestamp}}
-                            small {{cal_time sent_timestamp}}
-                            a.ui.icon.button(href='/source/#{_id}')
-                            i.ui.large.link.chevron.right.icon.edit_address
-                
+                            if location
+                                i.marker.red.icon
+                                |#{location}
                 
                 
 template(name='source_edit')
@@ -98,41 +53,42 @@ template(name='source_view')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .ten.wide.column
-                    a.ui.basic.icon.button(href="/sources")
-                        +i name='field-and-tractor'
-                    if can_edit 
-                        a.ui.icon.button(href="/source/#{_id}/edit")
-                            i.pencil.icon
-                    div
+                .eight.wide.column
+                    // a.ui.basic.icon.button(href="/sources")
+                    //     +i name='field-and-tractor'
                     +image_view key='image_id' label='image' direct=true
                     .ui.big.header
                         | #{title}
                     div
                     +html_view key='description' label='description' direct=true
-                .six.wide.column
+                .eight.wide.column
                     +array_view key='tags' label='tags' direct=true
                     +link_view key='link' direct=true
                     .ui.header 
                         +i name='marker'
                         |#{location}
-                    .ui.header
-                        +i name='love'
-                        |fans
-                    div
+                    // .ui.header
+                    //     +i name='love'
+                    //     |fans
+                    // div
                     .ui.inline.header 
                         +i name='grocery-shelf'
                         |products
-                    .ui.large.link.selection.animated.list
+                    .ui.two.stackable.cards
                         each source_products
-                            a.ui.header.item(href="/product/#{_id}/") 
+                            a.ui.card(href="/product/#{_id}/") 
                                 img.ui.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-                                |#{title} - 
-                                |$#{price_usd}
+                                .content
+                                    |#{title} - 
+                                    |$#{price_usd}
                     .ui.icon.small.compact.basic.button.add_source_product
                         i.plus.icon
                     if can_delete
                         .ui.red.button.delete_source
                             i.remove.icon   
                             | delete
-                    +comments                
+                    // +comments                
+                    if in_dev 
+                        a.ui.icon.button(href="/source/#{_id}/edit")
+                            i.pencil.icon
+                    div
