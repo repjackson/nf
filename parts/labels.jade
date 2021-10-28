@@ -89,11 +89,10 @@ template(name='label_card')
             img.ui.image(src="{{c.url related_product.image_id width=500 height=500 gravity='face' crop='fill'}}")
         .content
             a.ui.header.goto_product.zoomer.fly_left #{name}
+            if retail_price
+                .ui.inline.header
+                    |$#{retail_price}
             .ui.inline.small.grey.header #{query_params}
-            if local
-                div
-                +i name='marker' cl='pointer zoomer' title='local'
-                |local
             if gf
                 div
                 +i name='no-gluten' cl='pointer zoomer' title='gluten free'
@@ -108,9 +107,10 @@ template(name='label_card')
                     +i name='marker' cl='pointer zoomer' title='local'
                     // i.red.marker.icon
                     |#{origin}
-            if retail_price
-                .ui.inline.header
-                    |$#{retail_price}
+            if local
+                div
+                +i name='marker' cl='pointer zoomer' title='local'
+                |local
             if description
                 i.about.icon
                 |#{description}
