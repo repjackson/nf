@@ -39,63 +39,6 @@ Meteor.methods
                     unit_number:new_unit_number
 
 
-    change_username:  (user_id, new_username) ->
-        user = Meteor.users.findOne user_id
-        Accounts.setUsername(user._id, new_username)
-        return "updated username to #{new_username}."
-
-
-    add_email: (user_id, new_email) ->
-        Accounts.addEmail(user_id, new_email);
-        Accounts.sendVerificationEmail(user_id, new_email)
-        return "updated email to #{new_email}"
-
-    remove_email: (user_id, email)->
-        # user = Meteor.users.findOne username:username
-        Accounts.removeEmail user_id, email
-
-
-    verify_email: (user_id, email)->
-        user = Meteor.users.findOne user_id
-        console.log 'sending verification', user.username
-        Accounts.sendVerificationEmail(user_id, email)
-
-    validate_email: (email) ->
-        re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        re.test String(email).toLowerCase()
-
-
-    notify_message: (message_id)->
-        message = Docs.findOne message_id
-        if message
-            to_user = Meteor.users.findOne message.to_user_id
-
-            message_link = "https://www.goldrun.online/user/#{to_user.username}/messages"
-
-        	Email.send({
-                to:["<#{to_user.emails[0].address}>"]
-                from:"relay@goldrun.online"
-                subject:"gold run message from #{message._author_username}"
-                html: "<h3> #{message._author_username} sent you the message:</h3>"+"<h2> #{message.body}.</h2>"+
-                    "<br><h4>view your messages here:<a href=#{message_link}>#{message_link}</a>.</h4>"
-            })
-
-    order_product: (product_id)->
-        product = Docs.findOne product_id
-        order_id = Docs.insert
-            model:'order'
-            product_id: product._id
-            status:'pending'
-            order_price: product.price_usd
-            buyer_id: Meteor.userId()
-        Meteor.users.update Meteor.userId(),
-            $inc:credit:-product.price_usd
-        Meteor.users.update product.cook_user_id,
-            $inc:credit:product.price_usd
-        Meteor.call 'calc_product_data', product_id, ->
-        order_id
-
-
     calc_product_data: (product_id)->
         product = Docs.findOne product_id
         # console.log product
@@ -177,10 +120,6 @@ Meteor.methods
     #     found_people
 
 
-    set_password: (user_id, new_password)->
-        Accounts.setPassword(user_id, new_password)
-
-
 
     global_remove: (keyname)->
         result = Docs.update({"#{keyname}":$exists:true}, {
@@ -219,11 +158,6 @@ Meteor.methods
 
         for doc in cursor.fetch()
             Meteor.call 'key', doc._id
-
-    send_enrollment_email: (user_id, email)->
-        user = Meteor.users.findOne(user_id)
-        console.log 'sending enrollment email to username', user.username
-        Accounts.sendEnrollmentEmail(user_id)
 # {
 # I20210606-18:09:20.217(0)?   _id: 'ep8vJCZWFvNhKPGBL',
 # I20210606-18:09:20.218(0)?   model: 'stats',
