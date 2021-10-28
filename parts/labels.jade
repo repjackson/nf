@@ -70,10 +70,13 @@ template(name='label_card')
             .ui.header.goto_product.pointer.zoomer.fly_left #{name}
             if local
                 +i name='marker' cl='pointer zoomer' title='local'
+                |local
             if gf
                 +i name='no-gluten' cl='pointer zoomer' title='gluten free'
+                |gluten free
             if vegan
                 +i name='vegan-symbol' cl='pointer zoomer' title='vegan'
+                |vegan
             if origin.length
                 .ui.inline.header
                     +i name='marker' cl='pointer zoomer' title='local'
@@ -89,54 +92,53 @@ template(name='label_card')
                 a(href=url target='_blank' title=url)
                     // |#{url}
                     i.large.external.link.icon.zoomer.pointer
+            if ingredients
+                +i name='ingredients'
+                |#{ingredients}
                     
-            // .ui.list 
-            //     .item 
-            //         if cogs
-            //             |cogs: #{cogs}
-            //     // .item 
-            //     //     if gf
-            //     //         |gf: #{gf}
-            //     .item 
-            //         if goes_well_with
-            //             |goes_well_with: #{goes_well_with}
-            //     .item 
-            //         if ingredients
-            //             +i name='ingredients'
-            //             |#{ingredients}
-            //     .item 
-            //         if net_weight_
-            //             |net_weight_: #{net_weight_}
-            //     .item 
-            //         if net_weight_
-            //             |net_weight_: #{net_weight_}
-            //     .item 
-            //         if nude_made
-            //             |nude_made: #{nude_made}
-            //     .item 
-            //         if packaging
-            //             |packaging: #{packaging}
-            //     .item 
-            //         if price
-            //             .ui.inline.header$#{price}
-            //     .item 
-            //         if rescued
-            //             |rescued: #{rescued}
-            //     .item 
-            //         if shelf_life
-            //             |shelf_life: #{shelf_life}
-            //     .item 
-            //         if size_
-            //             |size_: #{size_}
-            //     .item 
-            //         if we_love_it_in
-            //             |we_love_it_in: #{we_love_it_in}
-            //     .item 
-            //         if wholefoods_retail_price
-            //             |wholefoods_retail_price: #{wholefoods_retail_price}
-            //     .item 
-            //         if wholesale_price
-            //             |wholesale_price: #{wholesale_price}
+            .ui.list 
+                .item 
+                    if cogs
+                        |cogs: #{cogs}
+                // .item 
+                //     if gf
+                //         |gf: #{gf}
+                .item 
+                    if goes_well_with
+                        |goes_well_with: #{goes_well_with}
+                .item 
+                    if net_weight_
+                        |net_weight_: #{net_weight_}
+                .item 
+                    if net_weight_
+                        |net_weight_: #{net_weight_}
+                .item 
+                    if nude_made
+                        |nude_made: #{nude_made}
+                .item 
+                    if packaging
+                        |packaging: #{packaging}
+                .item 
+                    if price
+                        .ui.inline.header$#{price}
+                .item 
+                    if rescued
+                        |rescued: #{rescued}
+                .item 
+                    if shelf_life
+                        |shelf_life: #{shelf_life}
+                .item 
+                    if size_
+                        |size_: #{size_}
+                .item 
+                    if we_love_it_in
+                        |we_love_it_in: #{we_love_it_in}
+                .item 
+                    if wholefoods_retail_price
+                        |wholefoods_retail_price: #{wholefoods_retail_price}
+                .item 
+                    if wholesale_price
+                        |wholesale_price: #{wholesale_price}
             +print_this
             i.refresh.icon.link.calc.pointer.zoomer
 

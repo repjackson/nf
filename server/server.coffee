@@ -1,8 +1,8 @@
-Meteor.users.allow
-    update: (userId, doc, fields, modifier) ->
-        true
-        # if userId and doc._id == userId
-        #     true
+# Meteor.users.allow
+#     update: (userId, doc, fields, modifier) ->
+#         true
+#         # if userId and doc._id == userId
+#         #     true
 
 Cloudinary.config
     cloud_name: 'facet'
