@@ -33,7 +33,7 @@ if Meteor.isClient
         related_product: -> 
             Docs.findOne
                 model:'product'
-                slug:@name
+                title:@name
     Template.labels.events
         'click .clear_labels': ->
             if confirm 'clear labels?'
@@ -113,7 +113,7 @@ if Meteor.isClient
             # if Session.get('order_sort_filter')
             #     match.delivery_method = Session.get('order_sort_filter')
             Docs.find match,
-                sort: _timestamp:-1
+                sort: name:-1
         
         
         labels_total: -> Counts.get('labels_total')        
@@ -345,7 +345,7 @@ if Meteor.isServer
                 { $match: match }
                 { $project: 
                     _product: 1
-                    Qty: 1
+                    # Qty: 1
                     # sale_total: 
                     #     $sum: '$Qty' 
                 }
@@ -354,25 +354,25 @@ if Meteor.isServer
                 #     _id: '$_product', 
                 # }
                 { $group: 
-                    _id: '$_product'
-                    total: 
-                        $sum: "$Qty"
+                    _id: '$name'
+                    # total: 
+                    #     $sum: "$Qty"
                     count: 
                         $sum: 1
                 }
                 # { $match: _id: $nin: picked_products }
                 # { $sort: count: -1, _id: 1 }
                 { $sort: total: -1, _id: 1 }
-                { $limit: 100 }
-                { $project: _id:0, name:'$_id', count:1, total:1}
+                { $limit: 20 }
+                { $project: _id:0, name:'$_id', count:1 }
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
             product_cloud.forEach (product, i) ->
                 self.added 'results', Random.id(),
                     name: product.name
-                    model:'_product'
+                    model:'product'
                     count: product.count
-                    total: product.total
+                    # total: product.total
                     # index: i
                     
             vegan_cloud = Docs.aggregate [
@@ -508,7 +508,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:100, sort: timestamp:-1}).observeChanges(
+            subHandle = Docs.find(match, {limit:20, sort: name:-1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id

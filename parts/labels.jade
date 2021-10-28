@@ -1,6 +1,6 @@
 template(name='labels')
     .ui.stackable.padded.grid
-        .sixteen.wide.column.scrolling
+        .sixteen.wide.column.scrollin
             .ui.stackable.grid 
                 .sixteen.wide.column
                     .ui.inline.header 
@@ -64,6 +64,8 @@ template(name='labels')
                             
 template(name='label_card')
     .card(style="background-color:##{color}")
+        if related_product.image_id
+            img.ui.image(src="{{c.url related_product.image_id width=500 height=500 gravity='face' crop='fill'}}")
         .content
             .ui.header #{name}
             if local

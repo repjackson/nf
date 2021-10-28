@@ -325,6 +325,7 @@ template(name='left_sidebar')
             | mishi orders
         a.icon.item.toggle_leftbar(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
             +i name='tags'
+            |labels
         a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
             +i name='cookbook'
             |#{recipe_count} recipes
