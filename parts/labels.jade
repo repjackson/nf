@@ -36,12 +36,12 @@ template(name='labels')
                         .ui.button.pick_gluten
                             |#{name}
                             small #{count}
-                    .ui.small.inline.header
-                        i.download.icon
-                        |'Info for Labels'
-                    .ui.input.import
-                        input(type='file' accept='.csv')
-                    // +cfacet model='_product'
+                    // .ui.small.inline.header
+                    //     i.download.icon
+                    //     |'Info for Labels'
+                    // .ui.input.import
+                    //     input(type='file' accept='.csv')
+                    // // +cfacet model='_product'
                     .ui.icon.input(title='search product')
                         if current_search
                             i.remove.red.link.icon.zoomer.clear_search
