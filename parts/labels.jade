@@ -38,7 +38,7 @@ template(name='labels')
                             small #{count}
                     .ui.small.inline.header
                         i.download.icon
-                        |import 'Info for Labels'
+                        |'Info for Labels'
                     .ui.input.import
                         input(type='file' accept='.csv')
                     // +cfacet model='_product'
@@ -84,9 +84,9 @@ template(name='label_card')
                 i.about.icon
                 |#{description}
             if url
-                a.ui.icon.circular.button(href=url target='_blank' title=url)
+                a(href=url target='_blank' title=url)
                     // |#{url}
-                    i.large.external.icon
+                    i.large.external.link.icon.zoomer.pointer
                     
             // .ui.list 
             //     .item 
@@ -136,8 +136,7 @@ template(name='label_card')
             //         if wholesale_price
             //             |wholesale_price: #{wholesale_price}
             +print_this
-            .ui.icon.button.calc
-                i.refresh.icon
+            i.refresh.icon.link.calc.pointer.zoomer
 
 
 // template(name='cfacet')
