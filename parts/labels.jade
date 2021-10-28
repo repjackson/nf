@@ -5,6 +5,7 @@ template(name='labels')
                 .four.wide.column
                     .ui.inline.header 
                         +i name='tags'
+                        |#{label_docs.count}
                         |label
                     .ui.small.inline.header 
                         |#{label_total} results
@@ -54,34 +55,33 @@ template(name='labels')
 template(name='label_card')
     .card(style="background-color:##{color}")
         .content
+            .ui.header #{name}
+            if local
+                .ui.label 
+                    i.red.marker.icon
+                    |local
+            if gf
+                +i name='no-gluten'
+            if vegan
+                +i name='vegan-symbol'
             .ui.list 
                 .item 
                     if cogs
                         |cogs: #{cogs}
                 .item 
-                    if color
-                        |color: #{color}
-                .item 
                     if description
-                        |description: #{description}
-                .item 
-                    if gf
-                        |gf: #{gf}
+                        i.about.icon
+                        |#{description}
+                // .item 
+                //     if gf
+                //         |gf: #{gf}
                 .item 
                     if goes_well_with
                         |goes_well_with: #{goes_well_with}
                 .item 
                     if ingredients
-                        |ingredients: #{ingredients}
-                .item 
-                    if local
-                        |local: #{local}
-                .item 
-                    if model
-                        |model: #{model}
-                .item 
-                    if name
-                        |name: #{name}
+                        +i name='ingredients'
+                        |#{ingredients}
                 .item 
                     if net_weight_
                         |net_weight_: #{net_weight_}
@@ -99,7 +99,7 @@ template(name='label_card')
                         |packaging: #{packaging}
                 .item 
                     if price
-                        |price: #{price}
+                        .ui.inline.header$#{price}
                 .item 
                     if rescued
                         |rescued: #{rescued}
@@ -114,10 +114,8 @@ template(name='label_card')
                         |size_: #{size_}
                 .item 
                     if url
-                        |url: #{url}
-                .item 
-                    if vegan
-                        |vegan: #{vegan}
+                        a.ui.fluid.button(href=url target='_blank')
+                            |#{url}
                 .item 
                     if we_love_it_in
                         |we_love_it_in: #{we_love_it_in}

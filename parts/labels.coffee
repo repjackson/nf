@@ -360,7 +360,7 @@ if Meteor.isServer
                 # { $match: _id: $nin: picked_products }
                 # { $sort: count: -1, _id: 1 }
                 { $sort: total: -1, _id: 1 }
-                { $limit: 20 }
+                { $limit: 100 }
                 { $project: _id:0, name:'$_id', count:1, total:1}
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
@@ -487,7 +487,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:42, sort: timestamp:-1}).observeChanges(
+            subHandle = Docs.find(match, {limit:100, sort: timestamp:-1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id
