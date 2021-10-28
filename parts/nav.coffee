@@ -12,29 +12,29 @@ if Meteor.isClient
         Meteor.setTimeout ->
             $('.menu .item')
                 .popup()
-            $('.ui.left.sidebar')
-                .sidebar({
-                    context: $('.bottom.segment')
-                    transition:'push'
-                    mobileTransition:'scale'
-                    exclusive:true
-                    duration:200
-                    scrollLock:true
-                })
-                .sidebar('attach events', '.toggle_leftbar')
+            # $('.ui.left.sidebar')
+            #     .sidebar({
+            #         context: $('.bottom.segment')
+            #         transition:'push'
+            #         mobileTransition:'scale'
+            #         exclusive:true
+            #         duration:200
+            #         scrollLock:true
+            #     })
+            #     .sidebar('attach events', '.toggle_leftbar')
         , 2000
-        Meteor.setTimeout ->
-            $('.ui.rightbar')
-                .sidebar({
-                    context: $('.bottom.segment')
-                    transition:'push'
-                    mobileTransition:'push'
-                    exclusive:true
-                    duration:200
-                    scrollLock:true
-                })
-                .sidebar('attach events', '.toggle_rightbar')
-        , 2000
+        # Meteor.setTimeout ->
+        #     $('.ui.rightbar')
+        #         .sidebar({
+        #             context: $('.bottom.segment')
+        #             transition:'push'
+        #             mobileTransition:'push'
+        #             exclusive:true
+        #             duration:200
+        #             scrollLock:true
+        #         })
+        #         .sidebar('attach events', '.toggle_rightbar')
+        # , 2000
         # Meteor.setTimeout ->
         #     $('.ui.topbar.sidebar')
         #         .sidebar({
@@ -150,31 +150,31 @@ if Meteor.isClient
     
     Template.nav.helpers
         current_product_search: -> Session.get('product_query')
-        unread_count: ->
-            unread_count = Docs.find({
-                model:'message'
-                to_username:Meteor.user().username
-                read_by_ids:$nin:[Meteor.userId()]
-            }).count()
+        # unread_count: ->
+        #     unread_count = Docs.find({
+        #         model:'message'
+        #         to_username:Meteor.user().username
+        #         read_by_ids:$nin:[Meteor.userId()]
+        #     }).count()
 
-        cart_amount: ->
-            cart_amount = Docs.find({
-                model:'thing'
-                status:'cart'
-                _author_id:Meteor.userId()
-            }).count()
-        cart_items: ->
-            # co = 
-            #     Docs.findOne 
-            #         model:'order'
-            #         status:'cart'
-            #         _author_id:Meteor.userId()
-            # if co 
-            Docs.find 
-                model:'thing'
-                _author_id: Meteor.userId()
-                # order_id:co._id
-                status:'cart'
+        # cart_amount: ->
+        #     cart_amount = Docs.find({
+        #         model:'thing'
+        #         status:'cart'
+        #         _author_id:Meteor.userId()
+        #     }).count()
+        # cart_items: ->
+        #     # co = 
+        #     #     Docs.findOne 
+        #     #         model:'order'
+        #     #         status:'cart'
+        #     #         _author_id:Meteor.userId()
+        #     # if co 
+        #     Docs.find 
+        #         model:'thing'
+        #         _author_id: Meteor.userId()
+        #         # order_id:co._id
+        #         status:'cart'
                 
         alert_toggle_class: ->
             if Session.get('viewing_alerts') then 'active' else ''
@@ -210,25 +210,25 @@ if Meteor.isClient
     
             
             
-    Template.left_sidebar.events
-        # 'click .toggle_leftbar': ->
-        #     $('.ui.sidebar')
-        #         .sidebar('setting', 'transition', 'push')
-        #         .sidebar('toggle')
-        'click .toggle_admin': ->
-            if 'admin' in Meteor.user().roles
-                Meteor.users.update Meteor.userId(),
-                    $pull:'roles':'admin'
-            else
-                Meteor.users.update Meteor.userId(),
-                    $addToSet:'roles':'admin'
-        'click .toggle_dev': ->
-            if 'dev' in Meteor.user().roles
-                Meteor.users.update Meteor.userId(),
-                    $pull:'roles':'dev'
-            else
-                Meteor.users.update Meteor.userId(),
-                    $addToSet:'roles':'dev'
+    # Template.left_sidebar.events
+    #     # 'click .toggle_leftbar': ->
+    #     #     $('.ui.sidebar')
+    #     #         .sidebar('setting', 'transition', 'push')
+    #     #         .sidebar('toggle')
+    #     'click .toggle_admin': ->
+    #         if 'admin' in Meteor.user().roles
+    #             Meteor.users.update Meteor.userId(),
+    #                 $pull:'roles':'admin'
+    #         else
+    #             Meteor.users.update Meteor.userId(),
+    #                 $addToSet:'roles':'admin'
+    #     'click .toggle_dev': ->
+    #         if 'dev' in Meteor.user().roles
+    #             Meteor.users.update Meteor.userId(),
+    #                 $pull:'roles':'dev'
+    #         else
+    #             Meteor.users.update Meteor.userId(),
+    #                 $addToSet:'roles':'dev'
     # Template.nav.events
     #     'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
     # Template.left_sidebar.events
@@ -249,5 +249,5 @@ if Meteor.isClient
         #         Router.go '/'
 
 
-    Template.nav.helpers
+    # Template.nav.helpers
 

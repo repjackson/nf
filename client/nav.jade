@@ -4,13 +4,13 @@ template(name='nav')
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
-        else 
-            a.icon.item.toggle_leftbar.no_blink
-                // .ui.avatar.image.leftmenu
-                .ui.avatar.image
-                    .mobile.hidden
-                        +ibig name='menu--v1'
-                    img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
+        // else 
+        //     a.icon.item.toggle_leftbar.no_blink
+        //         // .ui.avatar.image.leftmenu
+        //         .ui.avatar.image
+        //             .mobile.hidden
+        //                 +ibig name='menu--v1'
+        //             img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
         a.header.item.zoomer.mobile.hidden(href='/' class="{{isActivePath '/shop'}}" )
             // +i name='food'
             // i.home.icon
@@ -292,71 +292,71 @@ template(name='nav')
 
 
 
-template(name='left_sidebar')
-    .ui.left.sidebar.vertical.big.labeled.icon.borderless.menu.smallscroll
-        // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
-        //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
-        //     |One
-        // a.item.set_member.toggle_leftbar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
-        a.item.toggle_leftbar.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
-            // +i name='food'
-            // i.home.icon
-            img.ui.small.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
-            // span.mobile.hidden nude foods market
-        // .search.item(title='search')
-        //     .ui.icon.transparent.input
-        //         i.search.icon
-        //         input.search_global(type='text')
-        // else 
-        //     a.item.toggle_leftbar(href='/' class="{{isActivePath '/'}}" title='food')
-        //         // +i name='home'
-        //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
-        a.item.toggle_leftbar(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            +i name='food-cart'
-            | #{product_count} products
-        a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
-            +i name='ingredients'
-            | #{ingredient_count} ingredients
-        a.item.toggle_leftbar(href='/sources' class="{{isActivePath '/sources'}}")
-            +i name='field-and-tractor'
-            | #{source_count} sources
-        a.item.toggle_leftbar(href='/mishi' class="{{isActivePath '/mishi'}}")
-            +i name='money'
-            | mishi orders
-        a.icon.item.toggle_leftbar(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
-            +i name='tags'
-            |labels
-        a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
-            +i name='cookbook'
-            |#{recipe_count} recipes
-        a.item.toggle_leftbar.zoomer(href='/trips' class="{{isActivePath '/trips'}}")
-            +i name='bicycle'
-            |#{recipe_count} trips
-        //         // i.newspaper.icon
-        //         strong.mobile.hidden get involved
-        a.item.toggle_leftbar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
-            +i name='phone'
-            | contact
-        a.item.toggle_leftbar.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            +i name='blog'
-            | #{post_count} posts
-        if is_in_admin
-            a.icon.item.toggle_admin.toggle_leftbar.no_blink
-                |toggle admin
-                if is_admin
-                    i.shield.icon
-                else
-                    i.shield.icon
+// template(name='left_sidebar')
+//     .ui.left.sidebar.vertical.big.labeled.icon.borderless.menu.smallscroll
+//         // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
+//         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
+//         //     |One
+//         // a.item.set_member.toggle_leftbar.no_blink(href="/m/member" class="{{isActivePath 'm/member'}}" title='players')
+//         a.item.toggle_leftbar.mobile.only(href='/' class="{{isActivePath '/'}}" title='home')
+//             // +i name='food'
+//             // i.home.icon
+//             img.ui.small.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+//             // span.mobile.hidden nude foods market
+//         // .search.item(title='search')
+//         //     .ui.icon.transparent.input
+//         //         i.search.icon
+//         //         input.search_global(type='text')
+//         // else 
+//         //     a.item.toggle_leftbar(href='/' class="{{isActivePath '/'}}" title='food')
+//         //         // +i name='home'
+//         //         img.ui.avatar.image(src="https://www.lefrenchcafeboulder.com/images/logo.svg")
+//         a.item.toggle_leftbar(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
+//             +i name='food-cart'
+//             | #{product_count} products
+//         a.item.toggle_leftbar(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='shop')
+//             +i name='ingredients'
+//             | #{ingredient_count} ingredients
+//         a.item.toggle_leftbar(href='/sources' class="{{isActivePath '/sources'}}")
+//             +i name='field-and-tractor'
+//             | #{source_count} sources
+//         a.item.toggle_leftbar(href='/mishi' class="{{isActivePath '/mishi'}}")
+//             +i name='money'
+//             | mishi orders
+//         a.icon.item.toggle_leftbar(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
+//             +i name='tags'
+//             |labels
+//         a.item.toggle_leftbar(href='/recipes' class="{{isActivePath '/recipes'}}")
+//             +i name='cookbook'
+//             |#{recipe_count} recipes
+//         a.item.toggle_leftbar.zoomer(href='/trips' class="{{isActivePath '/trips'}}")
+//             +i name='bicycle'
+//             |#{recipe_count} trips
+//         //         // i.newspaper.icon
+//         //         strong.mobile.hidden get involved
+//         a.item.toggle_leftbar.zoomer(href='/contact' class="{{isActivePath '/contact'}}" title='news')
+//             +i name='phone'
+//             | contact
+//         a.item.toggle_leftbar.zoomer(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+//             +i name='blog'
+//             | #{post_count} posts
+//         if is_in_admin
+//             a.icon.item.toggle_admin.toggle_leftbar.no_blink
+//                 |toggle admin
+//                 if is_admin
+//                     i.shield.icon
+//                 else
+//                     i.shield.icon
             
-        if is_admin
-            .divider
-            a.item.set_model.toggle_leftbar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
-                +i name='shield'
-                |admin
-            a.item.set_user.toggle_leftbar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
-                +i name='groups'
-                | users
-            a.item.toggle_leftbar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-                +i name='list'
-                | orders
+//         if is_admin
+//             .divider
+//             a.item.set_model.toggle_leftbar.no_blink(href="/m/model" class="{{isActivePath '/m/model'}}")
+//                 +i name='shield'
+//                 |admin
+//             a.item.set_user.toggle_leftbar.no_blink(href="/users" class="{{isActiveRoute '/users'}}")
+//                 +i name='groups'
+//                 | users
+//             a.item.toggle_leftbar.zoomer(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+//                 +i name='list'
+//                 | orders
                 

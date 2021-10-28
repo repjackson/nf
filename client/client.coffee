@@ -19,14 +19,14 @@ Tracker.autorun ->
 #         Docs.findOne
 #             model:'stats'
 
-Template.nav.onCreated ->
-    @autorun => @subscribe 'order_count'
-    @autorun => @subscribe 'product_count'
-    @autorun => @subscribe 'ingredient_count'
-    @autorun => @subscribe 'subscription_count'
-    @autorun => @subscribe 'source_count'
-    @autorun => @subscribe 'giftcard_count'
-    @autorun => @subscribe 'user_count'
+# Template.nav.onCreated ->
+#     @autorun => @subscribe 'order_count'
+#     @autorun => @subscribe 'product_count'
+#     @autorun => @subscribe 'ingredient_count'
+#     @autorun => @subscribe 'subscription_count'
+#     @autorun => @subscribe 'source_count'
+#     @autorun => @subscribe 'giftcard_count'
+#     @autorun => @subscribe 'user_count'
         
         
 Template.not_found.events
