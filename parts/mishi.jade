@@ -1,22 +1,18 @@
 template(name='mishi')
     .ui.stackable.padded.grid
-        .four.wide.column.scrolling
+        .four.wide.column
+            .ui.icon.input(title='search product')
+                if current_search
+                    i.remove.red.link.icon.zoomer.clear_search
+                else
+                    i.search.icon
+                input.search_product(type='text' placeholder='product' value=current_search)
             // +ibig name='money' cl='ui inline image'
             // .ui.inline.header 
             //     i.money.icon
             //     // |mishi
             .ui.inline.header 
                 |#{mishi_total} results
-            // div
-            .ui.inline.header 
-                // i.hashtag.icon
-                +i name='calendar'
-                |week
-            // +cfacet model='_week_number'
-            each week_results
-                .ui.button.pick_week
-                    |#{name}
-                    small #{count}
             // div
             .ui.inline.header
                 // i.calendar.icon
@@ -32,23 +28,26 @@ template(name='mishi')
             //     //     // |import
             //     // .ui.input.import
             //     //     input(type='file' accept='.csv')
-        .twelve.wide.column.scrolling
             +cfacet model='_product'
-            .ui.icon.input(title='search product')
-                if current_search
-                    i.remove.red.link.icon.zoomer.clear_search
-                else
-                    i.search.icon
-                input.search_product(type='text' placeholder='product' value=current_search)
-            .scrolling
-                if mishi_orders.count
-                    .ui.four.doubling.cards
-                        each mishi_orders
-                            +mishi_order
-                else 
-                    .ui.center.aligned.basic.segment 
-                        i.money.massive.grey.loading.icon
-                                
+            .ui.inline.header 
+                // i.hashtag.icon
+                +i name='calendar'
+                |week
+            // +cfacet model='_week_number'
+            each week_results
+                .ui.compaact.small.basic.button.pick_week
+                    |#{name}
+                    small #{count}
+            // div
+        .twelve.wide.column.scrolling
+            if mishi_orders.count
+                .ui.four.doubling.cards
+                    each mishi_orders
+                        +mishi_order
+            else 
+                .ui.center.aligned.basic.segment 
+                    i.money.massive.grey.loading.icon
+                            
                             
 template(name='mishi_order')
     .card
