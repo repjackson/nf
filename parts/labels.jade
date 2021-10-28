@@ -14,23 +14,23 @@ template(name='labels')
                             i.remove.icon
                     .ui.inline.header 
                         +i name='paint-brush'
-                        |color
+                        // |color
                     // +cfacet model='_week_number'
                     each color_results
                         .ui.big.compact.button.pick_color(style="background-color:##{name}")
                             // |#{name}
                             |#{count}
-                    .ui.inline.header 
-                        +i name='vegan-symbol'
-                        |vegan
+                    +i name='vegan-symbol'
+                    // .ui.inline.header 
+                        // |vegan
                     // +cfacet model='_week_number'
                     each vegan_results
                         .ui.button.pick_vegan
                             |#{name}
                             small #{count}
-                    .ui.inline.header 
-                        +i name='no-gluten'
-                        |gluten free
+                    +i name='no-gluten'
+                    // .ui.inline.header 
+                        // |gluten free
                     // +cfacet model='_week_number'
                     each gluten_results
                         .ui.button.pick_gluten
@@ -41,7 +41,6 @@ template(name='labels')
                         |import 'Info for Labels'
                     .ui.input.import
                         input(type='file' accept='.csv')
-                .sixteen.wide.column
                     // +cfacet model='_product'
                     .ui.icon.input(title='search product')
                         if current_search
@@ -56,6 +55,10 @@ template(name='labels')
                                 +label_card
                         else 
                             .ui.center.aligned.basic.segment 
+                                .ui.hidden.divider
+                                .ui.hidden.divider
+                                .ui.hidden.divider
+                                .ui.hidden.divider
                                 i.tags.massive.loading.red.icon
                                 
                             
@@ -70,8 +73,10 @@ template(name='label_card')
             if vegan
                 +i name='vegan-symbol' cl='pointer zoomer' title='vegan'
             if origin
-                i.red.marker.icon
-                |#{origin}
+                .ui.inline.header
+                    +i name='marker' cl='pointer zoomer' title='local'
+                    // i.red.marker.icon
+                    |#{origin}
             if retail_price
                 .ui.inline.header
                     |$#{retail_price}
