@@ -150,7 +150,7 @@ if Meteor.isClient
         'click .pick_weeknum': ->
             console.log @name
             if Session.equals('picked_weeknum', @name)
-                Session.set('picked_weenum', null)
+                Session.set('picked_weeknum', null)
             else
                 Session.set('picked_weeknum', @name)
                 

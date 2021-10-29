@@ -1,6 +1,10 @@
 template(name='mishi')
     .ui.stackable.padded.grid
         .four.wide.column.scrolling
+            .ui.header
+                i.tablet.icon
+                |#{mishi_total}
+                |mishi orders
             .ui.icon.input(title='search product')
                 if current_search
                     i.remove.red.link.icon.zoomer.clear_search
@@ -11,8 +15,6 @@ template(name='mishi')
             // .ui.inline.header 
             //     i.money.icon
             //     // |mishi
-            .ui.inline.header 
-                |#{mishi_total} results
             div
             .ui.inline.header
                 i.calendar.icon
@@ -47,16 +49,17 @@ template(name='mishi')
                     // |import
                 .ui.fluid.input.import
                     input(type='file' accept='.csv')
-        .twelve.wide.column.scrolling
+        .twelve.wide.column
             +cfacet model='_product'
-            if mishi_orders.count
-                .ui.four.doubling.cards
-                    each mishi_orders
-                        +mishi_order
-            else 
-                .ui.center.aligned.basic.segment 
-                    i.money.massive.grey.loading.icon
-                            
+            .scrolling
+                if mishi_orders.count
+                    .ui.four.doubling.cards
+                        each mishi_orders
+                            +mishi_order
+                else 
+                    .ui.center.aligned.basic.segment 
+                        i.money.big.grey.loading.icon
+                                
                             
 template(name='mishi_order')
     .card
@@ -110,7 +113,7 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        a.ui.image.big.label.zoomer.pick(style="backgroun-color:#{pick_product.color}" title=name)
+        a.ui.image.label.zoomer.pick(style="backgroun-color:#{pick_product.color}" title=name)
             if pick_product
                 img.ui.avatar.image(src="{{c.url pick_product.image_id width=400 height=400 gravity='face' crop='fill'}}")
                 strong #{pick_product.title}
