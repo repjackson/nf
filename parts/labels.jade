@@ -94,23 +94,23 @@ template(name='label_card')
                     |$#{retail_price}
             .ui.inline.small.grey.header #{query_params}
             if gf
-                div
+                // div
                 +i name='no-gluten' cl='pointer zoomer' title='gluten free'
-                |gluten free
+                // |gluten free
             if vegan
-                div
+                // div
                 +i name='vegan-symbol' cl='pointer zoomer' title='vegan'
-                |vegan
+                // |vegan
             if origin.length
-                div
-                .ui.inline.header
-                    +i name='marker' cl='pointer zoomer' title='local'
+                // div
+                .ui.inline.small.header
+                    // +i name='marker' cl='pointer zoomer' title='local'
                     // i.red.marker.icon
                     |#{origin}
             if local
-                div
+                // div
                 +i name='marker' cl='pointer zoomer' title='local'
-                |local
+                // |local
             if description
                 i.about.icon
                 |#{description}
@@ -128,40 +128,40 @@ template(name='label_card')
             // .item 
             //     if gf
             //         |gf: #{gf}
-            .item 
+            .ui.basic.label 
                 if goes_well_with
                     |goes_well_with: #{goes_well_with}
-            .item 
+            .ui.basic.label 
                 if net_weight_
                     |net_weight_: #{net_weight_}
-            .item 
+            .ui.basic.label 
                 if net_weight_
                     |net_weight_: #{net_weight_}
-            .item 
+            .ui.basic.label 
                 if nude_made
                     |nude_made: #{nude_made}
-            .item 
+            .ui.basic.label 
                 if packaging
                     |packaging: #{packaging}
-            .item 
+            .ui.basic.label 
                 if price
                     .ui.inline.header $#{price}
-            .item 
+            .ui.basic.label 
                 if rescued
                     |rescued: #{rescued}
-            .item 
+            .ui.basic.label 
                 if shelf_life
                     |shelf_life: #{shelf_life}
-            .item 
+            .ui.basic.label 
                 if size_
                     |size_: #{size_}
-            .item 
+            .ui.basic.label 
                 if we_love_it_in
                     |we_love_it_in: #{we_love_it_in}
-            .item 
+            .ui.basic.label 
                 if wholefoods_retail_price
                     |wholefoods_retail_price: #{wholefoods_retail_price}
-            .item 
+            .ui.basic.label 
                 if wholesale_price
                     |wholesale_price: #{wholesale_price}
             +print_this
