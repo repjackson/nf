@@ -16,7 +16,7 @@ template(name='mishi')
             //     i.money.icon
             //     // |mishi
             div
-            .ui.inline.header
+            .ui.inline.grey.header
                 i.calendar.icon
                 |month
             each month_results
@@ -24,7 +24,7 @@ template(name='mishi')
                     |#{name}
                     small #{count}
             div
-            .ui.inline.header 
+            .ui.inline.grey.header 
                 i.calendar.icon
                 |week
             // +cfacet model='_week_number'
@@ -34,8 +34,8 @@ template(name='mishi')
                     small (#{count})
             // div
             div
-            .ui.inline.header 
-                i.day.icon
+            .ui.inline.grey.header 
+                i.sun.icon
                 |weekday
             // +cfacet model='_week_number'
             each weekday_results
@@ -113,13 +113,12 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        a.ui.image.label.zoomer.pick(style="backgroun-color:#{pick_product.color}" title=name)
+        a.ui.image.large.label.zoomer.pick(style="background-color:#{pick_product.color}" title="orders and units)")
             if pick_product
                 img.ui.avatar.image(src="{{c.url pick_product.image_id width=400 height=400 gravity='face' crop='fill'}}")
                 strong #{pick_product.title}
             else 
                 strong #{name}
-            small(title='orders')
-                | #{count} orders
-            small(title='units sold')
-                |#{total} units
+            small #{count}
+            |x
+            strong #{total}

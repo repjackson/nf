@@ -20,7 +20,6 @@ if Meteor.isClient
         @autorun => @subscribe 'mishi_total',
             Session.get('product_search')
             picked_products.array()
-            Session.get('product_search')
             Session.get('picked_month')
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
@@ -64,7 +63,7 @@ if Meteor.isClient
                 
                 
     Template.pick.onCreated ->
-        @autorun => Meteor.subscribe 'product_by_slug', @data, ->
+        @autorun => Meteor.subscribe 'product_by_slug', @data.name, ->
     Template.pick.helpers
         pick_product: ->
             Docs.findOne
