@@ -73,12 +73,12 @@ if Meteor.isClient
     Template.pick.events
         'click .pick': ->
             # console.log @
-            if @model is '_product'
-                if @name in picked_products.array()
-                    picked_products.push @name
-                else
-                    picked_products.clear()
-                # console.log picked_products.array()
+            # if @model is '_product'
+            if @name in picked_products.array()
+                picked_products.clear()
+            else
+                picked_products.push @name
+            # console.log picked_products.array()
             # else if @model is '_week'
             #     picked_products.push @name
                 
