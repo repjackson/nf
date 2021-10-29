@@ -13,33 +13,45 @@ template(name='mishi')
             //     // |mishi
             .ui.inline.header 
                 |#{mishi_total} results
-            // div
+            div
             .ui.inline.header
                 // i.calendar.icon
                 +i name='calendar'
                 |month
             each month_results
-                .ui.button.pick_month
+                .ui.disabled.button.pick_month
                     |#{name}
                     small #{count}
-            // if in_dev
-            //     // .ui.inline.small.header
-            //     //     i.download.icon
-            //     //     // |import
-            //     // .ui.input.import
-            //     //     input(type='file' accept='.csv')
-            +cfacet model='_product'
+            div
             .ui.inline.header 
                 // i.hashtag.icon
                 +i name='calendar'
                 |week
             // +cfacet model='_week_number'
             each week_results
-                .ui.compaact.small.basic.button.pick_week
+                .ui.compaact.small.basic.disabled.button.pick_week
                     |#{name}
                     small #{count}
             // div
+            div
+            .ui.inline.header 
+                // i.hashtag.icon
+                +i name='calendar'
+                |weekday
+            // +cfacet model='_week_number'
+            each weekday_results
+                .ui.compaact.small.basic.disabled.button.pick_week
+                    |#{name}
+                    small #{count}
+            // div
+            .ui.segment
+                .ui.inline.small.header
+                    i.download.icon
+                    // |import
+                .ui.input.import
+                    input(type='file' accept='.csv')
         .twelve.wide.column.scrolling
+            +cfacet model='_product'
             if mishi_orders.count
                 .ui.four.doubling.cards
                     each mishi_orders
@@ -66,22 +78,23 @@ template(name='mishi_order')
             .ui.inline.header(title='original price') $#{Original_Price}
             a(href=Ean_Code target='_window')
                 i.wikipedia.link.icon
-            .item(title='quantity') ##{Qty}
-            .item Discounted_Line_Amount: #{Discounted_Line_Amount}
+            .ui.label(title='quantity') #{Qty} qty
+            .ui.label Discounted_Line_Amount: #{Discounted_Line_Amount}
             if Promo_Code
-                .item Promo_Code: #{Promo_Code}
-            .item Vat_Rate: #{Vat_Rate}
-            // .item Txn_Timestamp: #{Txn_Timestamp}
-            // .item meta info
-            .item(title='_converted_date') #{_converted_date}
-            .item(title='month') #{_month}
-            // .item day: #{day}
-            // .item _weekdaynum: #{_weekdaynum}
-            .item week #{_week_number}
-            .item(title='_weekday') #{_weekday}
-            +print_this
-            .ui.icon.button.calc
-                i.refresh.icon
+                .ui.label Promo_Code: #{Promo_Code}
+            .ui.label Vat_Rate: #{Vat_Rate}
+            // .ui.label Txn_Timestamp: #{Txn_Timestamp}
+            // .ui.label meta info
+            .ui.label(title='_converted_date') #{_converted_date}
+            .ui.label(title='month') #{_month}
+            // .ui.label day: #{day}
+            // .ui.label _weekdaynum: #{_weekdaynum}
+            .ui.label week #{_week_number}
+            .ui.label(title='_weekday') #{_weekday}
+            if in_dev 
+                +print_this
+                .ui.icon.button.calc
+                    i.refresh.icon
 
 
 template(name='cfacet')
@@ -94,8 +107,9 @@ template(name='cfacet')
         
         
 template(name='unpick')        
-    .ui.blue.big.button.unpick
-        |#{this}
+    .ui.blue.icon.button.unpick
+        // |#{this}
+        i.undo.big.icon
 
 template(name='pick')     
     if name
@@ -105,8 +119,12 @@ template(name='pick')
                 strong #{pick_product.title}
             else 
                 strong #{name}
-            // i.grey.cart.icon(title='orders')
-            | #{count}x#{total}
-            // i.hashtag.grey.icon(title='units sold')
-            // |(=#{total})
+            span(title='orders')
+                | (#{count}
+                i.grey.cart.icon
+                |)
+            span(title='units sold')
+                | (#{total}
+                i.hashtag.grey.icon
+                |)
             

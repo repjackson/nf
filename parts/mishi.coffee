@@ -105,6 +105,9 @@ if Meteor.isClient
         week_results: ->
             Results.find 
                 model:'week_number'
+        weekday_results: ->
+            Results.find 
+                model:'weekday'
         mishi_orders: ->
             match = {model:'mishi_order'}
             if Session.get('order_status_filter')
@@ -332,7 +335,7 @@ if Meteor.isServer
                 # { $match: _id: $nin: picked_products }
                 # { $sort: count: -1, _id: 1 }
                 { $sort: total: -1, _id: 1 }
-                { $limit: 20 }
+                { $limit: 100 }
                 { $project: _id:0, name:'$_id', count:1, total:1}
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
@@ -378,6 +381,24 @@ if Meteor.isServer
                     name: month.name
                     model:'month'
                     count: month.count
+                    # index: i
+    
+            weekday_cloud = Docs.aggregate [
+                { $match: match }
+                { $project: _weekday: 1 }
+                # { $unwind: "$tags" }
+                { $group: _id: '$_weekday', count: $sum: 1 }
+                # { $match: _id: $nin: picked_days }
+                { $sort: count: -1, _id: 1 }
+                { $limit: 10 }
+                { $project: _id: 0, name: '$_id', count: 1 }
+                ]
+            # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
+            weekday_cloud.forEach (weekday, i) ->
+                self.added 'results', Random.id(),
+                    name: weekday.name
+                    model:'weekday'
+                    count: weekday.count
                     # index: i
     
             # timestamp_tags_cloud = Docs.aggregate [
