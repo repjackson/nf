@@ -18,6 +18,7 @@ if Meteor.isClient
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
         @autorun => @subscribe 'mishi_total',
+            Session.get('product_search')
             picked_products.array()
             Session.get('product_search')
             Session.get('picked_month')
@@ -102,12 +103,15 @@ if Meteor.isClient
                 model:@model
         
     Template.mishi.helpers 
+        month_class: -> if Session.equals('picked_month',@name) then 'blue' else 'basic'
+        weekday_class: -> if Session.equals('picked_weekday',@name) then 'blue' else 'basic'
+        weeknum_class: -> if Session.equals('picked_weeknum',@name) then 'blue' else 'basic'
         month_results: ->
             Results.find 
                 model:'month'
-        week_results: ->
+        weeknum_results: ->
             Results.find 
-                model:'week_number'
+                model:'weeknum'
         weekday_results: ->
             Results.find 
                 model:'weekday'
@@ -133,10 +137,23 @@ if Meteor.isClient
             Meteor.call 'mishi_meta', @_id, ->
         'click .pick_month': ->
             console.log @name
-            Session.set('picked_month', @name)
+            if Session.equals('picked_month', @name)
+                Session.set('picked_month', @name)
+            else 
+                Session.set('picked_month', null)
         'click .pick_weekday': ->
             console.log @name
-            Session.set('picked_weekday', @name)
+            if Session.equals('picked_weekday', @name)
+                Session.set('picked_weekday', null)
+            else
+                Session.set('picked_weekday', @name)
+        'click .pick_weeknum': ->
+            console.log @name
+            if Session.equals('picked_weeknum', @name)
+                Session.set('picked_weenum', null)
+            else
+                Session.set('picked_weeknum', @name)
+                
         'change .import': (e,t)->
             papa.parse(e.target.files[0], {
                 header: true
@@ -225,7 +242,8 @@ if Meteor.isServer
 
         if picked_products.length > 0 then match._product = $in:picked_products
         if picked_weeknum then match._week_number = picked_weeknum
-        if picked_month then match._month = $in:picked_month
+        if picked_weekday then match._weekday = picked_weekday
+        if picked_month then match._month = picked_month
         if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
         Counts.publish this, 'mishi_total', Docs.find(match)
         return undefined
@@ -265,6 +283,7 @@ if Meteor.isServer
     
             if picked_products.length > 0 then match._product = $in:picked_products
             if picked_weeknum then match._week_number = picked_weeknum
+            if picked_weekday then match._weekday = picked_weekday
             if picked_month then match._month = $in:picked_month
             if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
@@ -360,7 +379,7 @@ if Meteor.isServer
                     total: product.total
                     # index: i
                     
-            week_cloud = Docs.aggregate [
+            weeknum_cloud = Docs.aggregate [
                 { $match: match }
                 { $project: _week_number: 1 }
                 # { $unwind: "$tags" }
@@ -371,11 +390,11 @@ if Meteor.isServer
                 { $project: _id: 0, name: '$_id', count: 1 }
                 ]
             # console.log 'theme theme_tag_cloud, ', theme_tag_cloud
-            week_cloud.forEach (week, i) ->
+            weeknum_cloud.forEach (weeknum, i) ->
                 self.added 'results', Random.id(),
-                    name: week.name
-                    model:'week_number'
-                    count: week.count
+                    name: weeknum.name
+                    model:'weeknum'
+                    count: weeknum.count
                     # index: i
     
             month_cloud = Docs.aggregate [
