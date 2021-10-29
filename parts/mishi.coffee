@@ -137,9 +137,9 @@ if Meteor.isClient
         'click .pick_month': ->
             console.log @name
             if Session.equals('picked_month', @name)
-                Session.set('picked_month', @name)
-            else 
                 Session.set('picked_month', null)
+            else 
+                Session.set('picked_month', @name)
         'click .pick_weekday': ->
             console.log @name
             if Session.equals('picked_weekday', @name)
