@@ -50,6 +50,8 @@ template(name='mishi')
                 .ui.fluid.input.import
                     input(type='file' accept='.csv')
         .twelve.wide.column
+            unless subs_ready
+                i.big.loading.refresh.icon
             +cfacet model='_product'
             .scrolling
                 if mishi_orders.count
@@ -107,9 +109,9 @@ template(name='cfacet')
         
         
 template(name='unpick')        
-    .ui.blue.icon.button.unpick
+    .ui.icon.circular.button.unpick
         // |#{this}
-        i.undo.big.icon
+        i.undo.large.blue.icon
 
 template(name='pick')     
     if name

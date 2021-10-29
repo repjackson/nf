@@ -40,8 +40,8 @@ if Meteor.isClient
     Template.mishi.events
         'keyup .search_product': ->
             search = $('.search_product').val()
-            # if search.length > 2
-            Session.set('product_search', search)
+            if search.length > 2
+                Session.set('product_search', search)
             
             
     Template.mishi_order.events
