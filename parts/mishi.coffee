@@ -65,20 +65,24 @@ if Meteor.isClient
     Template.pick.onCreated ->
         @autorun => Meteor.subscribe 'product_by_slug', @data.name, ->
     Template.pick.helpers
+        pick_product_class: -> if @name in picked_products.array() then 'blue' else 'basic'
         pick_product: ->
             Docs.findOne
                 model:'product'
                 slug:@name
     Template.pick.events
         'click .pick': ->
-            console.log @
+            # console.log @
             if @model is '_product'
-                picked_products.push @name
-                console.log picked_products.array()
-            else if @model is '_week'
-                picked_products.push @name
+                if @name in picked_products.array()
+                    picked_products.push @name
+                else
+                    picked_products.clear()
+                # console.log picked_products.array()
+            # else if @model is '_week'
+            #     picked_products.push @name
                 
-            # "picked_#{@model}".push @name
+            # # "picked_#{@model}".push @name
             
     Template.unpick.events
         'click .unpick': ->
@@ -283,7 +287,7 @@ if Meteor.isServer
             if picked_products.length > 0 then match._product = $in:picked_products
             if picked_weeknum then match._week_number = picked_weeknum
             if picked_weekday then match._weekday = picked_weekday
-            if picked_month then match._month = $in:picked_month
+            if picked_month then match._month = picked_month
             if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
 

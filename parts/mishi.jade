@@ -115,12 +115,13 @@ template(name='unpick')
 
 template(name='pick')     
     if name
-        a.ui.image.large.label.zoomer.pick(style="background-color:#{pick_product.color}" title="orders and units)")
+        // a.ui.image.large.label.zoomer.pick(style="background-color:#{pick_product.color}" title="orders and units)")
+        a.ui.image.large.label.zoomer.pick(title="orders and units)" class=pick_product_class)
             if pick_product
                 img.ui.avatar.image(src="{{c.url pick_product.image_id width=400 height=400 gravity='face' crop='fill'}}")
                 strong #{pick_product.title}
             else 
                 strong #{name}
-            small #{count}
-            |x
+            strong #{count}
+            small x
             strong #{total}

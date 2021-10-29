@@ -180,39 +180,3 @@ Meteor.methods
 
 
 
-if Meteor.isServer
-    Docs.allow
-        insert: (userId, doc) -> 
-            true    
-            # doc._author_id is userId
-        update: (userId, doc) ->
-            true
-            # if doc.model in ['calculator_doc','simulated_rental_item','healthclub_session']
-            #     true
-            # else if Meteor.user() and Meteor.user().roles and 'admin' in Meteor.user().roles
-            #     true
-            # else
-            #     doc._author_id is userId
-        # update: (userId, doc) -> doc._author_id is userId or 'admin' in Meteor.user().roles
-        remove: (userId, doc) -> 
-            false
-            # doc._author_id is userId or 'admin' in Meteor.user().roles
-
-    Meteor.publish 'docs', (picked_tags, filter)->
-        # user = Meteor.users.findOne @userId
-        # console.log picked_tags
-        # console.log filter
-        self = @
-        match = {}
-        # if Meteor.user()
-        #     unless Meteor.user().roles and 'dev' in Meteor.user().roles
-        #         match.view_roles = $in:Meteor.user().roles
-        # else
-        #     match.view_roles = $in:['public']
-
-        # if filter is 'shop'
-        #     match.active = true
-        if picked_tags.length > 0 then match.tags = $all: picked_tags
-        if filter then match.model = filter
-
-        Docs.find match, sort:_timestamp:-1
