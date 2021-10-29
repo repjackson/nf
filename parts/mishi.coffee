@@ -12,14 +12,17 @@ if Meteor.isClient
 
     Template.mishi.onCreated ->
         @autorun -> Meteor.subscribe 'mishi_facets',
-            picked_products.array()
-            picked_weeks.array()
-            picked_months.array()
             Session.get('product_search')
+            picked_products.array()
+            Session.get('picked_month')
+            Session.get('picked_weeknum')
+            Session.get('picked_weekday')
         @autorun => @subscribe 'mishi_total',
             picked_products.array()
-            picked_weeks.array()
             Session.get('product_search')
+            Session.get('picked_month')
+            Session.get('picked_weeknum')
+            Session.get('picked_weekday')
             
         # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
@@ -128,6 +131,12 @@ if Meteor.isClient
         'click .clear_search': (e,t)-> Session.set('product_search',null)
         'click .calc': (e,t)->
             Meteor.call 'mishi_meta', @_id, ->
+        'click .pick_month': ->
+            console.log @name
+            Session.set('picked_month', @name)
+        'click .pick_weekday': ->
+            console.log @name
+            Session.set('picked_weekday', @name)
         'change .import': (e,t)->
             papa.parse(e.target.files[0], {
                 header: true
@@ -194,9 +203,11 @@ if Meteor.isServer
                 # console.log item.Txn_Timestamp, converted
 
     Meteor.publish 'mishi_total', (
-        picked_products=[]
-        picked_weeks=[]
         product_search=''
+        picked_products=[]
+        picked_month=null
+        picked_weeknum=null
+        picked_weekday=null
         )->
         # @unblock()
         self = @
@@ -213,7 +224,8 @@ if Meteor.isServer
         #     match.published = $in: [0,1]
 
         if picked_products.length > 0 then match._product = $in:picked_products
-        if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
+        if picked_weeknum then match._week_number = picked_weeknum
+        if picked_month then match._month = $in:picked_month
         if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
         Counts.publish this, 'mishi_total', Docs.find(match)
         return undefined
@@ -232,10 +244,11 @@ if Meteor.isServer
             slug:slug
         }, limit:1)
     Meteor.publish 'mishi_facets', (
-        picked_products=[]
-        picked_weeks=[]
-        picked_months=[]
         product_search=''
+        picked_products=[]
+        picked_month=null
+        picked_weeknum=null
+        picked_weekday=null
         )->
             self = @
             match = {model:'mishi_order'}
@@ -251,8 +264,8 @@ if Meteor.isServer
             #     match.published = $in: [0,1]
     
             if picked_products.length > 0 then match._product = $in:picked_products
-            if picked_weeks.length > 0 then match._week_number = $in:picked_weeks
-            if picked_months.length > 0 then match._month = $in:picked_months
+            if picked_weeknum then match._week_number = picked_weeknum
+            if picked_month then match._month = $in:picked_month
             if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
             #     username: {$regex:"#{username}", $options: 'i'}
 
@@ -352,7 +365,7 @@ if Meteor.isServer
                 { $project: _week_number: 1 }
                 # { $unwind: "$tags" }
                 { $group: _id: '$_week_number', count: $sum: 1 }
-                { $match: _id: $nin: picked_weeks }
+                # { $match: _id: $ne: picked_week }
                 { $sort: count: -1, _id: 1 }
                 { $limit: 10 }
                 { $project: _id: 0, name: '$_id', count: 1 }
@@ -370,7 +383,7 @@ if Meteor.isServer
                 { $project: _month: 1 }
                 # { $unwind: "$tags" }
                 { $group: _id: '$_month', count: $sum: 1 }
-                { $match: _id: $nin: picked_months }
+                # { $match: _id: $nin: picked_months }
                 { $sort: count: -1, _id: 1 }
                 { $limit: 10 }
                 { $project: _id: 0, name: '$_id', count: 1 }

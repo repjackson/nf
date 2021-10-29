@@ -1,6 +1,6 @@
 template(name='mishi')
     .ui.stackable.padded.grid
-        .four.wide.column
+        .four.wide.column.scrolling
             .ui.icon.input(title='search product')
                 if current_search
                     i.remove.red.link.icon.zoomer.clear_search
@@ -15,17 +15,15 @@ template(name='mishi')
                 |#{mishi_total} results
             div
             .ui.inline.header
-                // i.calendar.icon
-                +i name='calendar'
+                i.calendar.icon
                 |month
             each month_results
-                .ui.disabled.button.pick_month
+                .ui.button.pick_month
                     |#{name}
                     small #{count}
             div
             .ui.inline.header 
-                // i.hashtag.icon
-                +i name='calendar'
+                i.calendar.icon
                 |week
             // +cfacet model='_week_number'
             each week_results
@@ -35,8 +33,7 @@ template(name='mishi')
             // div
             div
             .ui.inline.header 
-                // i.hashtag.icon
-                +i name='calendar'
+                i.day.icon
                 |weekday
             // +cfacet model='_week_number'
             each weekday_results
@@ -48,7 +45,7 @@ template(name='mishi')
                 .ui.inline.small.header
                     i.download.icon
                     // |import
-                .ui.input.import
+                .ui.fluid.input.import
                     input(type='file' accept='.csv')
         .twelve.wide.column.scrolling
             +cfacet model='_product'
@@ -119,12 +116,7 @@ template(name='pick')
                 strong #{pick_product.title}
             else 
                 strong #{name}
-            span(title='orders')
-                | (#{count}
-                i.grey.cart.icon
-                |)
-            span(title='units sold')
-                | (#{total}
-                i.hashtag.grey.icon
-                |)
-            
+            small(title='orders')
+                | #{count} orders
+            small(title='units sold')
+                |#{total} units
