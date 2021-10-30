@@ -50,7 +50,7 @@ if Meteor.isClient
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
     Template.question_view.events
-        'click .pick_no': ->
+        'click .pick_no': _.throttle((e,t)->
             new_id = 
                 Docs.insert 
                     model:'question_answer'
@@ -64,7 +64,8 @@ if Meteor.isClient
                 # displayTime: 'auto',
                 position: "bottom right"
             )
-        'click .pick_yes': ->
+        , 4000)
+        'click .pick_yes': _.throttle((e,t)->
             new_id = 
                 Docs.insert 
                     model:'question_answer'
@@ -78,7 +79,7 @@ if Meteor.isClient
                 # displayTime: 'auto',
                 position: "bottom right"
             )
-
+        , 4000)
     Template.questions.events
         'click .add_question': ->
             new_id = 
