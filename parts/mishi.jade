@@ -5,12 +5,13 @@ template(name='mishi')
                 i.tablet.icon
                 |#{mishi_total}
                 |mishi orders
-            .ui.icon.input(title='search product')
-                if current_search
-                    i.remove.red.link.icon.zoomer.clear_search
-                else
-                    i.search.icon
-                input.search_product(type='text' placeholder='product' value=current_search)
+            if in_dev
+                .ui.icon.input(title='search product')
+                    if current_search
+                        i.remove.red.link.icon.zoomer.clear_search
+                    else
+                        i.search.icon
+                    input.search_product(type='text' placeholder='product' value=current_search)
             // +ibig name='money' cl='ui inline image'
             // .ui.inline.header 
             //     i.money.icon

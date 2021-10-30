@@ -1,0 +1,13 @@
+template(name='wp')
+    .ui.grid
+        .four.wide.column.scrolling
+            .ui.header
+                i.tablet.icon
+                |#{wp_orders}
+                |wp orders
+            .ui.icon.input(title='search product')
+                if current_search
+                    i.remove.red.link.icon.zoomer.clear_wp
+                else
+                    i.search.icon
+                input.search_wp(type='text' placeholder='product' value=current_search)
