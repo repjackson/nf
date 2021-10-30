@@ -60,15 +60,8 @@ template(name='mishi')
                     i.sort.amount.up.icon
             |&nbsp;
             |&nbsp;
-            // .ui.compact.menu
-            //     .ui.simple.dropdown.item
-            //         strong #{product_limit}
-            //         i.dropdown.icon
-            //         .menu
-                    //   +set_product_limit amount=1
-                       +set_product_limit amount=5
-                       +set_product_limit amount=10
-                        +set_product_limit amount=20
+            +set_limit amount=10
+            +set_limit amount=100
             div
             unless subs_ready
                 i.big.loading.refresh.icon

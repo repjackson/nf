@@ -17,12 +17,14 @@ if Meteor.isClient
             Session.get('picked_month')
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
+            Session.get('facet_limit')
         @autorun => @subscribe 'mishi_total',
             Session.get('product_search')
             picked_products.array()
             Session.get('picked_month')
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
+            Session.get('limit')
             
         # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20

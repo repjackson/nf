@@ -41,10 +41,10 @@ template(name='posts')
                 //         strong #{post_limit}
                 //         i.dropdown.icon
                 //         .menu
-                        //   +set_post_limit amount=1
-                           +set_post_limit amount=5
-                           +set_post_limit amount=10
-                            +set_post_limit amount=20
+                        //   +set_limit amount=1
+                           +set_limit amount=5
+                           +set_limit amount=10
+                            +set_limit amount=20
                 .ui.hidden.divider
             if subs_ready
                 if one_post
@@ -132,8 +132,8 @@ template(name='set_view_mode_post')
         |#{title}
 
 
-template(name='set_post_limit')
-    .item.set_limit #{amount}
+template(name='set_limit')
+    .ui.compact.small.basic.button.set_limit #{amount}
 
 
 

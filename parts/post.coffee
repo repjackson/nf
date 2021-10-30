@@ -141,9 +141,9 @@ if Meteor.isClient
 if Meteor.isClient
     Template.posts.onCreated ->
         Session.setDefault 'view_mode', 'list'
-        Session.setDefault 'post_sort_key', 'datetime_available'
+        Session.setDefault 'sort_key', 'datetime_available'
         Session.setDefault 'post_sort_label', 'available'
-        Session.setDefault 'post_limit', 42
+        Session.setDefault 'limit', 42
         Session.setDefault 'view_open', true
 
         @autorun => @subscribe 'post_facets',
@@ -153,9 +153,9 @@ if Meteor.isClient
             Session.get('view_gf')
             
             Session.get('post_query')
-            Session.get('post_limit')
-            Session.get('post_sort_key')
-            Session.get('post_sort_direction')
+            Session.get('limit')
+            Session.get('sort_key')
+            Session.get('sort_direction')
 
         @autorun => @subscribe 'post_results'
         @autorun => @subscribe 'post_count',
@@ -165,9 +165,9 @@ if Meteor.isClient
             Session.get('view_vegan')
             Session.get('view_gf')
             
-            Session.get('post_limit')
-            Session.get('post_sort_key')
-            Session.get('post_sort_direction')
+            Session.get('limit')
+            Session.get('sort_key')
+            Session.get('sort_direction')
             
 
 
@@ -225,10 +225,10 @@ if Meteor.isClient
 
 
         'click .set_sort_direction': ->
-            if Session.get('post_sort_direction') is -1
-                Session.set('post_sort_direction', 1)
+            if Session.get('sort_direction') is -1
+                Session.set('sort_direction', 1)
             else
-                Session.set('post_sort_direction', -1)
+                Session.set('sort_direction', -1)
 
 
     Template.posts.helpers
@@ -236,7 +236,7 @@ if Meteor.isClient
             Docs.findOne Session.get('quickbuying_id')
 
         sorting_up: ->
-            parseInt(Session.get('post_sort_direction')) is 1
+            parseInt(Session.get('sort_direction')) is 1
 
         toggle_gf_class: -> if Session.get('view_gf') then 'blue' else ''
         toggle_vegan_class: -> if Session.get('view_vegan') then 'blue' else ''
@@ -299,8 +299,8 @@ if Meteor.isClient
             Docs.find {
                 model:'post'
             },
-                sort: "#{Session.get('post_sort_key')}":parseInt(Session.get('post_sort_direction'))
-                limit:Session.get('post_limit')
+                sort: "#{Session.get('sort_key')}":parseInt(Session.get('sort_direction'))
+                limit:Session.get('limit')
 
         subs_ready: ->
             Template.instance().subscriptionsReady()
@@ -320,20 +320,20 @@ if Meteor.isClient
                 sort: count:-1
                 # limit:1
 
-        post_limit: -> Session.get('post_limit')
+        limit: -> Session.get('limit')
 
         current_post_sort_label: -> Session.get('post_sort_label')
 
 
-    Template.set_post_limit.events
+    Template.set_limit.events
         'click .set_limit': ->
             console.log @
-            Session.set('post_limit', @amount)
+            Session.set('limit', @amount)
 
-    Template.set_post_sort_key.events
+    Template.set_sort_key.events
         'click .set_sort': ->
             console.log @
-            Session.set('post_sort_key', @key)
+            Session.set('sort_key', @key)
             Session.set('post_sort_label', @label)
             Session.set('post_sort_icon', @icon)
 
