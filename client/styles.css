@@ -19,6 +19,10 @@ body {
   width: 2px;
 }
 
+.huge {
+    font-size: 1000%;
+}
+
 #barcode { 
   /*height: inherit !important;*/
   width: 100% !important;

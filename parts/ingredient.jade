@@ -104,11 +104,11 @@ template(name='ingredient_view')
                     // +author_card
                 .eight.wide.column
                     h1.ui.header #{title} 
-                    a(href="https://www.google.com/search?q=#{instructions}" target='_window' title='search instructions')
+                    a(href="https://www.google.com/search?q=#{title}" target='_window' title='search title')
                         i.search.icon
-                    a(href="https://www.google.com/search?tbm=isch&q=#{instructions}" target='_window' title='image search instructions')
+                    a(href="https://www.google.com/search?tbm=isch&q=#{title}" target='_window' title='image search title')
                         i.image.icon
-                    a(href="https://www.amazon.com/s?k=#{title}&ref=nb_sb_noss_2" target='_window' title='amazon search instructions')
+                    a(href="https://www.amazon.com/s?k=#{title}&ref=nb_sb_noss_2" target='_window' title='amazon search title')
                         i.amazon.icon
                     +image_view key='image_id' label='image' direct=true
                     +image_view key='images.full' label='image' direct=true

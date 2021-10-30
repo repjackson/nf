@@ -450,13 +450,13 @@ template(name='add_button')
 template(name='edit_button')
     a.ui.button.icon.edit(title='Edit' href="/m/#{model}/#{_id}/edit")
         i.blue.pencil.icon
-        |Edit
+        |edit
 
 
 template(name='save_button')
     a.ui.button.large.icon.save(title='Save' href="/m/#{model}/#{_id}/view")
         i.checkmark.icon
-        |Save
+        |save
 
 template(name='toggle_button')
     .ui.icon.toggle.button(title=label)
@@ -501,8 +501,3 @@ template(name='print_this')
     .ui.icon.basic.button.print
         i.orange.code.icon
 
-
-
-template(name='friend_button')
-    .ui.button
-        |friend

@@ -3,6 +3,41 @@
 @picked_months = new ReactiveArray []
 
 
+Router.route '/question/:doc_id', (->
+    @render 'question_view'
+    ), name:'question_view'
+Router.route '/question/:doc_id/edit', (->
+    @render 'question_edit'
+    ), name:'question_edit'
+
+
+if Meteor.isClient
+    Template.question_view.onCreated ->
+        @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
+    Template.question_edit.onCreated ->
+        @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
+
+
+    Template.question_edit.events 
+        'keyup body': (e,t)->
+            if e.ctrlKey or e.metaKey
+                switch String.fromCharCode(e.which).toLowerCase()
+                    when 's'
+                        e.preventDefault()
+                        alert('ctrl-s')
+                        break
+                    when 'f'
+                        e.preventDefault()
+                        alert('ctrl-f')
+                        break
+                    when 'g'
+                        e.preventDefault()
+                        alert('ctrl-g')
+                        break
+
+
+
+
 
 if Meteor.isClient
     Router.route '/questions', (->
@@ -30,6 +65,13 @@ if Meteor.isClient
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
     Template.questions.events
+        'click .add_question': ->
+            new_id = 
+                Docs.insert 
+                    model:'question'
+            Router.go "/question/#{new_id}/edit"
+            
+            
         'keyup .search_product': ->
             search = $('.search_product').val()
             if search.length > 2
