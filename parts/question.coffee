@@ -19,22 +19,6 @@ if Meteor.isClient
 
 
     Template.question_edit.events 
-        'keyup body': (e,t)->
-            if e.ctrlKey or e.metaKey
-                switch String.fromCharCode(e.which).toLowerCase()
-                    when 's'
-                        e.preventDefault()
-                        alert('ctrl-s')
-                        break
-                    when 'f'
-                        e.preventDefault()
-                        alert('ctrl-f')
-                        break
-                    when 'g'
-                        e.preventDefault()
-                        alert('ctrl-g')
-                        break
-
 
 
 

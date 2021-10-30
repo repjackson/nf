@@ -15,15 +15,6 @@ template(name='labels')
                     i.search.icon
                 input.search_product(type='text' placeholder='product' value=current_search)
             // .scrolling
-            if picked_color
-                .ui.button.unpick_color(style="background-color:##{picked_color}" )
-                    |##{picked_color}
-            else 
-                each color_results
-                    button.ui.big.circular.button.pick_color(style="background-color:##{name}" title="#{count} #{name}")
-                        // |#{name}
-                        // |#{count}
-            div
             // .ui.circular.basic.button
             +i name='vegan-symbol'
             // .ui.inline.header 
@@ -63,14 +54,23 @@ template(name='labels')
             //     |'Info for Labels'
             // // +cfacet model='_product'
             if in_dev 
-                div
-                i.code.icon
-                .ui.icon.button.clear_labels 
-                    i.remove.icon
-                .ui.input.import
-                    input(type='file' accept='.csv')
+                .ui.segment
+                    i.code.icon
+                    .ui.icon.button.clear_labels 
+                        i.remove.icon
+                    .ui.input.import
+                        input(type='file' accept='.csv')
                     
         .twelve.wide.column
+            if picked_color
+                .ui.button.unpick_color(style="background-color:##{picked_color}" )
+                    |##{picked_color}
+            else 
+                each color_results
+                    button.ui.massive.circular.button.pick_color(style="background-color:##{name}" title="#{count} #{name}")
+                        // |#{name}
+                        // |#{count}
+            div
             i.sort.icon
             +set_sort_key key='orders' label='orders' icon='shopping cart'
             +set_sort_key key='units' label='units' icon='hashtag'
