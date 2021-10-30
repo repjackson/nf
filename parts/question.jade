@@ -2,21 +2,12 @@ template(name='questions')
     .ui.stackable.padded.grid
         .four.wide.column.scrolling
             .ui.header
-                i.tablet.icon
+                i.question.icon
                 |#{question_total}
-                |question orders
+                |questions
             .ui.circular.icon.button.add_question
                 i.large.plus.icon
         .twelve.wide.column
-            i.sort.icon
-            .ui.compact.icon.button.set_sort_direction(title='toggle sort direction')
-                if sorting_up
-                    i.sort.amount.down.icon
-                else
-                    i.sort.amount.up.icon
-            +set_limit num=10
-            +set_limit num=50
-            div
             unless subs_ready
                 i.big.loading.refresh.icon
             .scrolling
@@ -32,7 +23,7 @@ template(name='questions')
                        
                             
 template(name='question_card')
-    .card
+    a.card(href="/question/#{_id}")
         .content
             .ui.header #{title}
 
@@ -41,41 +32,18 @@ template(name='question_view')
         .ui.stackable.padded.grid
             .row
                 .four.wide.column 
-                    a.ui.compact.circular.basic.button.fly_left(href="/questions")
-                        i.left.chevron.icon
-                        +i name='food' cl='ui inline image'
-                        // |questions
-                    img.ui.fluid.rounded.image(src=images.full)
-                    .ui.small.grey.inline.header 
-                        small viewing question
-                        // strong #{title}
-                    // if can_edit
-                    a.ui.icon.circular.button(href="/question/#{_id}/edit")
-                        i.pencil.large.icon
-                    .ui.header source: #{source}
-                    +voting_full
-                    +viewing
                     if in_dev 
+                        a.ui.icon.circular.button(href="/question/#{_id}/edit")
+                            i.pencil.large.icon
                         +print_this
-                    // +view_visibility
-                    // +author_card
                 .eight.wide.column
                     h1.ui.header #{title} 
-                    a(href="https://www.google.com/search?q=#{instructions}" target='_window' title='search instructions')
-                        i.search.icon
-                    a(href="https://www.google.com/search?tbm=isch&q=#{instructions}" target='_window' title='image search instructions')
-                        i.image.icon
-                    a(href="https://www.amazon.com/s?k=#{title}&ref=nb_sb_noss_2" target='_window' title='amazon search instructions')
-                        i.amazon.icon
-                    +image_view key='image_id' label='image'
-                    +html_view key='body' icon='content' label='body'
-                    +array_view key='tags' label='tags' icon='tags'
-                    .ui.two.column.grid 
+                    .ui.two.column.fluid.grid 
                         .column
-                            .ui.fluid.green.inverted.segment
+                            .ui.fluid.green.inverted.segment.huge.pick_yes
                                 .ui.header.huge yes
                         .column
-                            .ui.fluid.red.inverted.segment
+                            .ui.fluid.red.inverted.segment.huge.pick_no
                                 .ui.header.huge no
                         
                 

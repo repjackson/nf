@@ -4,6 +4,7 @@
 
 
 Router.route '/question/:doc_id', (->
+    @layout 'full'
     @render 'question_view'
     ), name:'question_view'
 Router.route '/question/:doc_id/edit', (->
@@ -48,6 +49,36 @@ if Meteor.isClient
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
+    Template.question_view.events
+        'click .pick_no': ->
+            new_id = 
+                Docs.insert 
+                    model:'question_answer'
+                    question_id: Router.current().params.doc_id
+                    answer:false
+            $('body').toast(
+                showIcon: 'checkmark'
+                message: "no recorded"
+                showProgress: 'bottom'
+                class: 'error'
+                # displayTime: 'auto',
+                position: "bottom right"
+            )
+        'click .pick_yes': ->
+            new_id = 
+                Docs.insert 
+                    model:'question_answer'
+                    question_id: Router.current().params.doc_id
+                    answer:true
+            $('body').toast(
+                showIcon: 'checkmark'
+                message: "yes recorded"
+                showProgress: 'bottom'
+                class: 'success'
+                # displayTime: 'auto',
+                position: "bottom right"
+            )
+
     Template.questions.events
         'click .add_question': ->
             new_id = 
@@ -62,18 +93,6 @@ if Meteor.isClient
                 Session.set('product_search', search)
             
     Template.questions.helpers 
-        month_class: -> if Session.equals('picked_month',@name) then 'blue' else 'basic'
-        weekday_class: -> if Session.equals('picked_weekday',@name) then 'blue' else 'basic'
-        weeknum_class: -> if Session.equals('picked_weeknum',@name) then 'blue' else 'basic'
-        month_results: ->
-            Results.find 
-                model:'month'
-        weeknum_results: ->
-            Results.find 
-                model:'weeknum'
-        weekday_results: ->
-            Results.find 
-                model:'weekday'
         questions: ->
             match = {model:'question'}
             if Session.get('order_status_filter')
@@ -171,7 +190,7 @@ if Meteor.isServer
         )->
         # @unblock()
         self = @
-        match = {model:'question'}
+        match = {model:'question', app:'nf'}
 
         # match.tags = $all: picked_tags
         # if model then match.model = model
@@ -212,7 +231,7 @@ if Meteor.isServer
         picked_weekday=null
         )->
             self = @
-            match = {model:'question'}
+            match = {model:'question', app:'nf'}
     
             # match.tags = $all: picked_tags
             # if model then match.model = model
