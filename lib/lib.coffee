@@ -1,7 +1,7 @@
 @Docs = new Meteor.Collection 'docs'
 @Results = new Meteor.Collection 'results'
 
-
+ 
 
 Docs.before.insert (userId, doc)->
     # if Meteor.userId()
