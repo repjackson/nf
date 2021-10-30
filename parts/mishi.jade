@@ -21,8 +21,8 @@ template(name='mishi')
                 |month
             each month_results
                 .ui.compact.small.button.pick_month(class=month_class)
+                    strong #{count}o
                     |#{name}
-                    small #{count}
             div
             .ui.inline.grey.header 
                 i.calendar.icon
@@ -30,8 +30,8 @@ template(name='mishi')
             // +cfacet model='_week_number'
             each weeknum_results
                 .ui.compact.small.button.pick_weeknum(class=weeknum_class)
+                    strong #{count}o
                     |#{name}
-                    small (#{count})
             // div
             div
             .ui.inline.grey.header 
@@ -40,8 +40,8 @@ template(name='mishi')
             // +cfacet model='_week_number'
             each weekday_results
                 .ui.compact.small.button.pick_weekday(class=weekday_class)
+                    strong #{count}o
                     |#{name}
-                    small #{count}
             // div
             .ui.segment
                 .ui.inline.small.header
@@ -122,6 +122,4 @@ template(name='pick')
                 strong #{pick_product.title}
             else 
                 strong #{name}
-            strong #{count}
-            small x
-            strong #{total}
+            strong #{count}o #{total}u

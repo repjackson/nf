@@ -233,7 +233,7 @@ if Meteor.isServer
 
     Meteor.publish 'labels_total', (
         picked_products=[]
-        picked_colors=[]
+        picked_color=null
         product_search=''
         )->
         # @unblock()
@@ -251,7 +251,7 @@ if Meteor.isServer
         #     match.published = $in: [0,1]
 
         if picked_products.length > 0 then match._product = $in:picked_products
-        if picked_colors.length > 0 then match.color = $in:picked_colors
+        if picked_color then match.color = picked_color
         if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
         Counts.publish this, 'labels_total', Docs.find(match)
         return undefined

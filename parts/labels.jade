@@ -128,41 +128,41 @@ template(name='label_card')
             // .item 
             //     if gf
             //         |gf: #{gf}
-            .ui.basic.label 
-                if goes_well_with
+            if goes_well_with
+                .ui.basic.label 
                     |goes_well_with: #{goes_well_with}
-            .ui.basic.label 
-                if net_weight_
+            if net_weight_
+                .ui.basic.label 
                     |net_weight_: #{net_weight_}
-            .ui.basic.label 
-                if net_weight_
+            if net_weight_
+                .ui.basic.label 
                     |net_weight_: #{net_weight_}
-            .ui.basic.label 
-                if nude_made
+            if nude_made
+                .ui.basic.label 
                     |nude_made: #{nude_made}
-            .ui.basic.label 
-                if packaging
+            if packaging
+                .ui.basic.label 
                     |packaging: #{packaging}
-            .ui.basic.label 
-                if price
+            if price
+                .ui.basic.label 
                     .ui.inline.header $#{price}
-            .ui.basic.label 
-                if rescued
+            if rescued
+                .ui.basic.label 
                     |rescued: #{rescued}
-            .ui.basic.label 
-                if shelf_life
+            if shelf_life
+                .ui.basic.label 
                     |shelf_life: #{shelf_life}
-            .ui.basic.label 
-                if size_
+            if size_
+                .ui.basic.label 
                     |size_: #{size_}
-            .ui.basic.label 
-                if we_love_it_in
+            if we_love_it_in
+                .ui.basic.label 
                     |we_love_it_in: #{we_love_it_in}
-            .ui.basic.label 
-                if wholefoods_retail_price
+            if wholefoods_retail_price
+                .ui.basic.label 
                     |wholefoods_retail_price: #{wholefoods_retail_price}
-            .ui.basic.label 
-                if wholesale_price
+            if wholesale_price
+                .ui.basic.label 
                     |wholesale_price: #{wholesale_price}
             +print_this
             i.refresh.icon.link.calc.pointer.zoomer
