@@ -62,7 +62,7 @@ if Meteor.isClient
                 showProgress: 'bottom'
                 class: 'error'
                 # displayTime: 'auto',
-                position: "bottom right"
+                position: "center bottom"
             )
         , 4000)
         'click .pick_yes': _.throttle((e,t)->
@@ -77,7 +77,7 @@ if Meteor.isClient
                 showProgress: 'bottom'
                 class: 'success'
                 # displayTime: 'auto',
-                position: "bottom right"
+                position: "center bottom"
             )
         , 4000)
     Template.questions.events
