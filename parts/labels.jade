@@ -69,7 +69,22 @@ template(name='labels')
                     i.remove.icon
                 .ui.input.import
                     input(type='file' accept='.csv')
+                    
         .twelve.wide.column
+            i.sort.icon
+            +set_sort_key key='orders' label='orders' icon='shopping cart'
+            +set_sort_key key='units' label='units' icon='hashtag'
+            +set_sort_key key='profit' label='profit' icon='line chart'
+            +set_sort_key key='revenue' label='revenue' icon='line chart'
+            +set_sort_key key='shrink' label='shrink' icon='line chart'
+            +sort_direction_button
+            // .ui.compact.icon.button.set_sort_direction(title='toggle sort direction')
+            //     if sorting_up
+            //         i.sort.amount.down.icon
+            //     else
+            //         i.sort.amount.up.icon
+            // |&nbsp;
+            |&nbsp;
             .ui.doubling.centered.four.cards.scrolling
                 if label_docs.count
                     each label_docs

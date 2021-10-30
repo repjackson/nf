@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.eight.item.menu
+    #topnav.topnav.ui.attached.borderless.seven.item.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -11,21 +11,22 @@ template(name='nav')
         //             .mobile.hidden
         //                 +ibig name='menu--v1'
         //             img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
-        a.header.item.zoomer(href='/' class="{{isActivePath '/shop'}}" )
+        a.item.zoomer(href='/' class="{{isActivePath '/shop'}}")
+            +ibig name='shopping-cart'
             // +i name='food'
             // i.home.icon
             // |Nude Foods Market
             // .mobile.hidden
-            img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+            // img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
-        .search.item.zoomer.mobile.hidden(title='search')
-            .ui.icon.transparent.input
-                if current_product_search
-                    i.remove.large.red.link.icon.clear_search
-                else
-                    i.search.large.icon
-                input.search_products(type='text' autocomplete="off" value=current_product_search)
+        // .search.item.zoomer.mobile.hidden(title='search')
+        //     .ui.icon.transparent.input
+        //         if current_product_search
+        //             i.remove.large.red.link.icon.clear_search
+        //         else
+        //             i.search.large.icon
+        //         input.search_products(type='text' autocomplete="off" value=current_product_search)
         // a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
         //     +i name='grocery-shelf'
         a.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
