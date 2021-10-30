@@ -74,8 +74,8 @@ if Meteor.isClient
         weekday_results: ->
             Results.find 
                 model:'weekday'
-        question_orders: ->
-            match = {model:'question_order'}
+        questions: ->
+            match = {model:'question'}
             if Session.get('order_status_filter')
                 match.status = Session.get('order_status_filter')
             if Session.get('order_delivery_filter')
@@ -128,12 +128,12 @@ if Meteor.isClient
 if Meteor.isServer 
     Meteor.methods
         question_meta: (doc_id)->
-            question_order = Docs.findOne doc_id
-            split = question_order.Ean_Code.split('/')
+            question = Docs.findOne doc_id
+            split = question.Ean_Code.split('/')
             # console.log split[4]
             
             
-            converted = moment(question_order.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
+            converted = moment(question.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
             Docs.update doc_id, 
                 $set:
                     _product:split[4]
@@ -150,14 +150,14 @@ if Meteor.isServer
                 # console.log item
                 found_item = 
                     Docs.findOne    
-                        model:'question_order'
+                        model:'question'
                         Charge_ID:item.Charge_ID
                         Ean_Code:item.Ean_Code
                 if found_item 
                     console.log 'skipping existing item', item.Charge_ID
                     Meteor.call 'question_meta', found_item._id, ->
                 else 
-                    item.model = 'question_order'
+                    item.model = 'question'
                     new_id = Docs.insert item
                     Meteor.call 'question_meta', new_id, ->
                 # console.log item.Txn_Timestamp, converted
@@ -171,7 +171,7 @@ if Meteor.isServer
         )->
         # @unblock()
         self = @
-        match = {model:'question_order'}
+        match = {model:'question'}
 
         # match.tags = $all: picked_tags
         # if model then match.model = model
@@ -192,14 +192,14 @@ if Meteor.isServer
         return undefined
 
 
-    Meteor.publish 'product_by_question', (question_order)->
-        # console.log question_order
+    Meteor.publish 'product_by_question', (question)->
+        # console.log question
         Docs.find({
             model:'product'
-            slug:question_order._product
+            slug:question._product
         }, limit:1)
     Meteor.publish 'product_by_slug', (slug)->
-        # console.log question_order
+        # console.log question
         Docs.find({
             model:'product'
             slug:slug
@@ -212,7 +212,7 @@ if Meteor.isServer
         picked_weekday=null
         )->
             self = @
-            match = {model:'question_order'}
+            match = {model:'question'}
     
             # match.tags = $all: picked_tags
             # if model then match.model = model
