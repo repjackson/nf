@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.seven.item.menu
+    #topnav.topnav.ui.attached.borderless.eight.item.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -44,6 +44,8 @@ template(name='nav')
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden orders
+        a.item(href='/w' class="{{isActivePath '/w'}}" title='wordpress')
+            +ibig name='wordpress'
         a.item(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
             +ibig name='tags'
             // span.mobile.hidden &nbsp; 
