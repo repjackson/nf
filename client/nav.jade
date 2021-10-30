@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.seven.item.menu
+    #topnav.topnav.ui.attached.borderless.eight.item.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -54,6 +54,8 @@ template(name='nav')
             // span.mobile.hidden labels
         a.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             +ibig name='cookbook'
+        a.item(href='/questions' class="{{isActivePath '/questions'}}" title='questions')
+            +ibig name='ask'
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden recipes
