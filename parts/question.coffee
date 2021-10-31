@@ -26,6 +26,34 @@ if Meteor.isClient
     Template.question_edit.events 
 
 
+    Template.newsletter.onCreated ->
+        @autorun => Meteor.subscribe 'model_docs', 'newsletter_signup', ->
+    Template.newsletter.helpers 
+        responses: ->
+            Docs.find
+                model:'newsletter_signup'
+    Template.newsletter.events
+        'click .submit_form': ->
+            name = $('.name_input').val()
+            email = $('.email_input').val()
+            if email
+                new_id = 
+                    Docs.insert 
+                        model:'newsletter_signup'
+                        name:name
+                        email:email
+                $('body').toast(
+                    # showIcon: 'heart'
+                    message: "Form submitted"
+                    # showProgress: 'bottom'
+                    class: 'success'
+                    displayTime: 'auto',
+                    position: "center bottom"
+                )
+                name = $('.name_input').val('')
+                email = $('.email_input').val('')
+
+
 
 
 if Meteor.isClient

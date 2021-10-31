@@ -22,19 +22,28 @@ template(name='questions')
                         i.money.big.grey.loading.icon
                                 
 template(name='newsletter')
-    .ui.container.centered.grid
+    .ui.container.centered.padded.grid
         .twelve.wide.column
             .ui.header newsletter signup
-            .ui.small.header name
+            .ui.small.header
+                +i name='user'
+                |name
             .ui.big.fluid.input
-                i.user.icon
-                input(type='text')
-            .ui.small.header email
+                input.name_input(type='text')
+            .ui.small.header
+                +i name='email'
+                |email
             .ui.big.fluid.input
-                i.mail.icon
-                input(type='email')
+                input.email_input(type='email')
             .ui.big.fluid.green.button.submit_form
                 i.big.checkmark.icon
+            if in_dev 
+                .ui.list
+                    each responses
+                        .item
+                            .header #{name}, #{email}
+                     
+                     
                                 
 template(name='question_card')
     a.card(href="/question/#{_id}")
