@@ -569,7 +569,7 @@ input.username_search{
 
     /* -moz-border-radius: 5px !important; */
     opacity:.4 !important;
-    /* border-radius: 10px !important; */
+    border-radius: 15px !important; 
 }
 
 /* .segment {
