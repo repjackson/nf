@@ -7,6 +7,8 @@ template(name='questions')
                 |questions
             .ui.circular.icon.button.add_question
                 i.large.plus.icon
+            a.ui.button(href="/newsletter")
+                |newsletter
         .twelve.wide.column
             unless subs_ready
                 i.big.loading.refresh.icon
@@ -19,9 +21,21 @@ template(name='questions')
                     .ui.center.aligned.basic.segment 
                         i.money.big.grey.loading.icon
                                 
-                       
-                       
-                            
+template(name='newsletter')
+    .ui.container.centered.grid
+        .twelve.wide.column
+            .ui.header newsletter signup
+            .ui.small.header name
+            .ui.big.fluid.input
+                i.user.icon
+                input(type='text')
+            .ui.small.header email
+            .ui.big.fluid.input
+                i.mail.icon
+                input(type='email')
+            .ui.big.fluid.green.button.submit_form
+                i.big.checkmark.icon
+                                
 template(name='question_card')
     a.card(href="/question/#{_id}")
         .content

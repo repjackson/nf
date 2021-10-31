@@ -7,6 +7,10 @@ Router.route '/question/:doc_id', (->
     @layout 'full'
     @render 'question_view'
     ), name:'question_view'
+Router.route '/newsletter', (->
+    @layout 'full'
+    @render 'newsletter'
+    ), name:'newsletter'
 Router.route '/question/:doc_id/edit', (->
     @render 'question_edit'
     ), name:'question_edit'
