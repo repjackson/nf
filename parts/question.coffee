@@ -45,9 +45,9 @@ if Meteor.isClient
                 $('body').toast(
                     # showIcon: 'heart'
                     message: "Form submitted"
-                    # showProgress: 'bottom'
+                    showProgress: 'bottom'
                     class: 'success'
-                    displayTime: 'auto',
+                    # displayTime: 'auto',
                     position: "center bottom"
                 )
                 name = $('.name_input').val('')

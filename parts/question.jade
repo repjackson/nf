@@ -22,9 +22,9 @@ template(name='questions')
                         i.money.big.grey.loading.icon
                                 
 template(name='newsletter')
-    .ui.container.centered.padded.grid
-        .twelve.wide.column
-            .ui.header newsletter signup
+    .ui.centered.padded.grid
+        .twelve.wide.center.aligned.column
+            .ui.center.aligned.header nudeletter signup
             .ui.small.header
                 +i name='user'
                 |name
@@ -35,7 +35,8 @@ template(name='newsletter')
                 |email
             .ui.big.fluid.input
                 input.email_input(type='email')
-            .ui.big.fluid.green.button.submit_form
+            .ui.hidden.divider
+            .ui.big.fluid.green.circular.button.submit_form
                 i.big.checkmark.icon
             if in_dev 
                 .ui.list
