@@ -17,7 +17,7 @@ if Meteor.isClient
             Session.get('picked_month')
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
-            Session.get('facet_limit')
+            Session.get('limit')
         @autorun => @subscribe 'mishi_total',
             Session.get('product_search')
             picked_products.array()
