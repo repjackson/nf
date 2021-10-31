@@ -24,26 +24,29 @@ template(name='questions')
 template(name='newsletter')
     .ui.centered.padded.grid
         .twelve.wide.center.aligned.column
-            .ui.center.aligned.header nudeletter signup
-            .ui.small.header
-                +i name='user'
-                |name
-            .ui.big.fluid.input
-                input.name_input(type='text')
-            .ui.small.header
-                +i name='email'
-                |email
-            .ui.big.fluid.input
-                input.email_input(type='email')
-            .ui.hidden.divider
-            .ui.big.fluid.green.circular.button.submit_form
-                i.big.checkmark.icon
-            if in_dev 
-                .ui.list
-                    each responses
-                        .item
-                            .header #{name}, #{email}
-                     
+            .ui.segment.f17
+                .ui.center.aligned.big.header 
+                    +i name='envelope'
+                    |nudeletter signup
+                .ui.small.header
+                    +i name='user'
+                    |name
+                .ui.big.fluid.input
+                    input.name_input(type='text')
+                .ui.small.header
+                    +i name='email'
+                    |email
+                .ui.big.fluid.input
+                    input.email_input(type='email')
+                .ui.hidden.divider
+                .ui.big.fluid.green.circular.button.submit_form
+                    i.big.checkmark.icon
+                if in_dev 
+                    .ui.list
+                        each responses
+                            .item
+                                .header #{name}, #{email}
+                         
                      
                                 
 template(name='question_card')
@@ -61,15 +64,19 @@ template(name='question_view')
                             i.pencil.large.icon
                         +print_this
                 .eight.wide.column
-                    h1.ui.header #{title} 
-                    .ui.two.column.fluid.grid 
-                        .column
-                            .ui.fluid.green.inverted.segment.huge.pick_yes.zoomer.pointer
-                                .ui.header.huge yes
-                        .column
-                            .ui.fluid.red.inverted.segment.huge.pick_no.zoomer.pointer
-                                .ui.header.huge no
-                        
+                    .ui.basic.segment
+                        h1.ui.header #{title} 
+                        .ui.two.column.fluid.grid 
+                            .column
+                                .ui.fluid.green.inverted.icon.button.huge.pick_yes.zoomer.pointer
+                                    // .ui.header.huge yes
+                                    i.checkmark.big.icon
+                            .column
+                                .ui.fluid.red.inverted.icon.button.huge.pick_no.zoomer.pointer
+                                    i.cancel.big.icon
+                                    // .ui.header.huge no
+                    .ui.divider
+                    +newsletter
                 
                 
 template(name='question_edit')

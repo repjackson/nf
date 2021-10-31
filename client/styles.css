@@ -492,16 +492,16 @@ img {
 
 .input{
     /*-webkit-border-radius: 10px !important;*/
-    /*border-radius: 0px !important;*/
+    border-radius: 20px !important;
 }
 input:not(.no_format){
-    /* -webkit-border-radius: 10px !important; */ */
+    /* -webkit-border-radius: 10px !important; */
     /*border-radius: 10px !important;*/
     margin-bottom: 3px !important;
     margin-top: 3px !important;
     /* font-size: 120% !important; */
     /* -moz-border-radius: 50px !important; */
-    /*border-radius: 10px !important;*/
+    border-radius: 20px !important;
     /* -webkit-border-radius: 5px !important; */
     /* -moz-border-radius: 5px !important; */
     background: rgba(250, 250, 250, 0.9) !important;
@@ -1111,7 +1111,7 @@ h1.ui.header{
   font-size: 400% !important;
   line-height: 120% !important;
   margin-bottom: 10px !important; }
-.f13 {
+.f12 {
   font-size: 300% !important;
   line-height: 120% !important;
   margin-bottom: 10px !important; }
