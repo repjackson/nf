@@ -114,24 +114,6 @@ if Meteor.isClient
         'click .clear_search': (e,t)-> Session.set('product_search',null)
         'click .calc': (e,t)->
             Meteor.call 'question_meta', @_id, ->
-        'click .pick_month': ->
-            console.log @name
-            if Session.equals('picked_month', @name)
-                Session.set('picked_month', null)
-            else 
-                Session.set('picked_month', @name)
-        'click .pick_weekday': ->
-            console.log @name
-            if Session.equals('picked_weekday', @name)
-                Session.set('picked_weekday', null)
-            else
-                Session.set('picked_weekday', @name)
-        'click .pick_weeknum': ->
-            console.log @name
-            if Session.equals('picked_weeknum', @name)
-                Session.set('picked_weeknum', null)
-            else
-                Session.set('picked_weeknum', @name)
                 
         'change .import': (e,t)->
             papa.parse(e.target.files[0], {
@@ -217,12 +199,6 @@ if Meteor.isServer
         Docs.find({
             model:'product'
             slug:question._product
-        }, limit:1)
-    Meteor.publish 'product_by_slug', (slug)->
-        # console.log question
-        Docs.find({
-            model:'product'
-            slug:slug
         }, limit:1)
     Meteor.publish 'question_facets', (
         product_search=''

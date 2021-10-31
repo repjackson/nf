@@ -61,49 +61,6 @@ if Meteor.isClient
                         product_link:@Ean_Code
                 Router.go "/product/#{new_id}/edit"
                 
-                
-    Template.pick.onCreated ->
-        @autorun => Meteor.subscribe 'product_by_slug', @data.name, ->
-    Template.pick.helpers
-        pick_product_class: -> if @name in picked_products.array() then 'blue' else 'basic'
-        pick_product: ->
-            Docs.findOne
-                model:'product'
-                slug:@name
-    Template.pick.events
-        'click .pick': ->
-            # console.log @
-            # if @model is '_product'
-            if @name in picked_products.array()
-                picked_products.clear()
-            else
-                picked_products.push @name
-            # console.log picked_products.array()
-            # else if @model is '_week'
-            #     picked_products.push @name
-                
-            # # "picked_#{@model}".push @name
-            
-    Template.unpick.events
-        'click .unpick': ->
-            console.log Template.parentData()
-            
-            if Template.parentData().model is '_week_number'
-                picked_weeks.remove @valueOf()
-            else if Template.parentData().model is '_product'
-                picked_products.remove @valueOf()
-            
-    Template.cfacet.helpers
-        picked: ->
-            console.log @
-            if @model is '_week_number'
-                picked_weeks.array()
-            else if @model is '_product'
-                picked_products.array()
-        unpicked: ->
-            console.log @
-            Results.find 
-                model:@model
         
     Template.wp.helpers 
         month_class: -> if Session.equals('picked_month',@name) then 'blue' else 'basic'

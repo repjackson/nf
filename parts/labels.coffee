@@ -120,7 +120,7 @@ if Meteor.isClient
                 sort: name:-1
         
         picked_color: -> Session.get('picked_color')
-        labels_total: -> Counts.get('labels_total')        
+        # labels_total: -> Counts.get('labels_total')        
         current_search: ->
             Session.get('product_search')
 
@@ -231,30 +231,30 @@ if Meteor.isServer
                     # Meteor.call 'labels_meta', new_id, ->
                 # console.log item.Txn_Timestamp, converted
 
-    Meteor.publish 'labels_total', (
-        picked_products=[]
-        picked_color=null
-        product_search=''
-        )->
-        # @unblock()
-        self = @
-        match = {model:'label'}
+    # Meteor.publish 'labels_total', (
+    #     picked_products=[]
+    #     picked_color=null
+    #     product_search=''
+    #     )->
+    #     # @unblock()
+    #     self = @
+    #     match = {model:'label'}
 
-        # match.tags = $all: picked_tags
-        # if model then match.model = model
-        # if parent_id then match.parent_id = parent_id
+    #     # match.tags = $all: picked_tags
+    #     # if model then match.model = model
+    #     # if parent_id then match.parent_id = parent_id
 
-        # if view_private is true
-        #     match.author_id = Meteor.userId()
+    #     # if view_private is true
+    #     #     match.author_id = Meteor.userId()
 
-        # if view_private is false
-        #     match.published = $in: [0,1]
+    #     # if view_private is false
+    #     #     match.published = $in: [0,1]
 
-        if picked_products.length > 0 then match._product = $in:picked_products
-        if picked_color then match.color = picked_color
-        if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
-        Counts.publish this, 'labels_total', Docs.find(match)
-        return undefined
+    #     if picked_products.length > 0 then match._product = $in:picked_products
+    #     if picked_color then match.color = picked_color
+    #     if product_search.length > 1 then match.name = {$regex:"#{product_search}", $options: 'i'}
+    #     Counts.publish this, 'labels_total', Docs.find(match)
+    #     return undefined
 
 
     Meteor.publish 'product_by_labels', (label)->
