@@ -6,7 +6,11 @@ template(name='product_view')
                     .ui.large.inline.header 
                         //- small viewing
                         | #{title}
-                        //- small product
+                    div
+                    .ui.small.grey.inline.header 
+                        i.code.icon
+                        |#{slug}
+                    div
                     a.ui.basic.icon.button.fly_left(href="/shop")
                         i.chevron.left.large.icon
                         // i.large.food.icon
@@ -28,6 +32,8 @@ template(name='product_view')
                         i.external.icon
                     .ui.header calculated inventory
                     .ui.header expected inventory
+                    if query_params
+                        .ui.header query params: #{query_params}
                     .ui.small.inline.header #{product_link}
                     i.refresh.large.link.icon.calc_stats(title='refresh_stats')
                     
@@ -77,7 +83,7 @@ template(name='product_view')
                 .four.wide.column
                     +mishi_sales
                 .four.wide.column
-                    +product_subscriptions
+                    // +product_subscriptions
                     // .ui.green.large.button.add_to_cart
                     //     // i.cart.plus.large.icon
                     //     +i name='add-shopping-cart--v1' cl='ui avatar image'
@@ -113,19 +119,22 @@ template(name='product_inventory')
     .ui.inline.header 
         +i name='shield'
         |inventory
-    if is_admin
-        a.ui.icon.basic.button.add_inventory
-            i.plus.icon
+    a.ui.icon.basic.button.add_inventory
+        i.plus.icon
     .ui.list
         each inventory_items
             .item 
                 unless editing_this
-                    .ui.inline.header id: #{id}
+                    .ui.inline.header id: #{amount}
                     .ui.inline.header location: #{location}
+                    .ui.inline.header location: #{notes}
+                    .ui.inline.header staff: #{staff}
                     i.edit.link.icon.edit_inventory_item
                 if editing_this
-                    +number_edit key='id' label='id number' direct=true
+                    +number_edit key='amount' label='id number' direct=true
                     +text_edit key='location' label='location' icon='marker' direct=true
+                    +text_edit key='notes' label='staff' icon='marker' direct=true
+                    +text_edit key='staff' label='staff' icon='marker' direct=true
                     i.checkmark.green.link.icon.save_inventory_item
 
 template(name='product_reviews')

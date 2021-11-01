@@ -42,6 +42,11 @@ Meteor.methods
     calc_product_data: (product_id)->
         product = Docs.findOne product_id
         # console.log product
+        unless product.query_params
+            if product.url
+                qp = product.url.split('/')[5]
+                Docs.update product_id, 
+                    $set:query_params:qp
         mishi_order_count =
             Docs.find(
                 model:'mishi_order'
