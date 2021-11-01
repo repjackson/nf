@@ -40,12 +40,13 @@ template(name='mishi')
                     strong #{count}o
                     |#{name}
             // div
-            .ui.segment
-                .ui.inline.small.header
-                    i.download.icon
-                    // |import
-                .ui.fluid.input.import
-                    input(type='file' accept='.csv')
+            if in_dev
+                .ui.segment
+                    .ui.inline.small.header
+                        i.download.icon
+                        // |import
+                    .ui.fluid.input.import
+                        input(type='file' accept='.csv')
         .twelve.wide.column
             i.sort.icon
             +set_sort_key key='orders' label='orders' icon='shopping cart'
@@ -64,7 +65,7 @@ template(name='mishi')
             +set_limit amount=100
             div
             unless subs_ready
-                i.big.loading.refresh.icon
+                i.big.loading.grey.yin.yang.icon
             +cfacet model='_product'
             .scrolling
                 if mishi_orders.count
@@ -78,17 +79,17 @@ template(name='mishi')
                             
 template(name='mishi_order')
     .card
+        with related_product
+            img.ui.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
         .content
             // .item Store_ID: #{Store_ID}
             // .item Charge_ID: #{Charge_ID}
             // .item Order_ID: #{Order_ID}
             // .item Ean_Code: #{Ean_Code}
-            with related_product
-                img.ui.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
                 .ui.inline.header 
                     |#{title}
             a.item.goto_product
-                | #{_product}
+                | #{related_product._product}
             // .item Retailer_Product_ID: #{Retailer_Product_ID}
             .ui.inline.header(title='original price') $#{Original_Price}
             a(href=Ean_Code target='_window')

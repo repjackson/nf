@@ -11,6 +11,9 @@ if Meteor.isClient
         ), name:'mishi'
 
     Template.mishi.onCreated ->
+        Session.setDefault('sort_key', '_timestamp')
+        Session.setDefault('sort_direction', -1)
+        
         @autorun -> Meteor.subscribe 'mishi_facets',
             Session.get('product_search')
             picked_products.array()
@@ -133,7 +136,7 @@ if Meteor.isClient
             if Session.get('order_sort_filter')
                 match.delivery_method = Session.get('order_sort_filter')
             Docs.find match,
-                sort: _timestamp:-1
+                sort: "#{Session.get('sort_key')}":Session.get('sort_direction')
         
         
         mishi_total: -> Counts.get('mishi_total')        
@@ -524,7 +527,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:limit, sort: timestamp:-1}).observeChanges(
+            subHandle = Docs.find(match, {limit:limit, sort: sort_key:sort_direction}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id
