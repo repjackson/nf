@@ -166,7 +166,7 @@ template(name='session_set')
                 
                 
 template(name='set_sort_key')
-    .ui.compact.basic.button.set_sort
+    .ui.circular.button.set_sort(class=sort_button_class)
         if color
             .ui.label(class=color) #{label}
         else 

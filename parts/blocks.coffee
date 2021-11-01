@@ -73,6 +73,24 @@ if Meteor.isClient
             Docs.update @_id,
                 $pull:follower_ids:Meteor.userId()
 
+    Template.set_limit.events
+        'click .set_limit': ->
+            console.log @
+            Session.set('limit', @amount)
+
+    Template.set_sort_key.helpers
+        sort_button_class: ->
+            if Session.equals('sort_key', @key) then 'blue' else 'basic compact'
+    Template.set_sort_key.events
+        'click .set_sort': ->
+            console.log @
+            Session.set('sort_key', @key)
+            Session.set('post_sort_label', @label)
+            Session.set('post_sort_icon', @icon)
+
+
+
+
     Template.voting.events
         'click .upvote': (e,t)->
             $(e.currentTarget).closest('.button').transition('pulse',200)

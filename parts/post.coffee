@@ -325,18 +325,6 @@ if Meteor.isClient
         current_post_sort_label: -> Session.get('post_sort_label')
 
 
-    Template.set_limit.events
-        'click .set_limit': ->
-            console.log @
-            Session.set('limit', @amount)
-
-    Template.set_sort_key.events
-        'click .set_sort': ->
-            console.log @
-            Session.set('sort_key', @key)
-            Session.set('post_sort_label', @label)
-            Session.set('post_sort_icon', @icon)
-
 
 
 if Meteor.isServer

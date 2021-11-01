@@ -18,6 +18,8 @@ if Meteor.isClient
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
             Session.get('limit')
+            Session.get('sort_key')
+            Session.get('sort_direction')
         @autorun => @subscribe 'mishi_total',
             Session.get('product_search')
             picked_products.array()
@@ -25,6 +27,8 @@ if Meteor.isClient
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
             Session.get('limit')
+            Session.get('sort_key')
+            Session.get('sort_direction')
             
         # Session.get('order_status_filter')
         # @autorun -> Meteor.subscribe 'model_docs', 'product', 20
@@ -273,6 +277,8 @@ if Meteor.isServer
         picked_weeknum=null
         picked_weekday=null
         limit=20
+        sort_key='orders'
+        sort_direction=-1
         )->
             self = @
             match = {model:'mishi_order'}
@@ -518,7 +524,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:20, sort: timestamp:-1}).observeChanges(
+            subHandle = Docs.find(match, {limit:limit, sort: timestamp:-1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id
