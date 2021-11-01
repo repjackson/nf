@@ -23,7 +23,7 @@ template(name='mishi')
             div
             .ui.inline.grey.header 
                 i.calendar.icon
-                |week
+                |week #/52
             // +cfacet model='_week_number'
             each weeknum_results
                 .ui.compact.small.button.pick_weeknum(class=weeknum_class)
@@ -80,7 +80,7 @@ template(name='mishi')
 template(name='mishi_order')
     .card
         with related_product
-            img.ui.inline.image(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
+            img.ui.inline.image.goto_product.zoomer.pointer(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
         .content
             // .item Store_ID: #{Store_ID}
             // .item Charge_ID: #{Charge_ID}

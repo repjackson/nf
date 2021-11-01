@@ -527,7 +527,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:limit, sort: sort_key:sort_direction}).observeChanges(
+            subHandle = Docs.find(match, {limit:limit, sort: "#{sort_key}":sort_direction}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id
