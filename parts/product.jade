@@ -23,7 +23,14 @@ template(name='product_view')
                 .five.wide.column
                     +html_view key='description' direct=true
                     +text_view key='size_description' label='size description'  direct=true
-                    +link_view key='product_link' label='link' icon='wordpress' direct=true
+                    .ui.basic.icon.button(href=product_link)
+                        i.wordpress.large.icon
+                        i.external.icon
+                    .ui.header calculated inventory
+                    .ui.header expected inventory
+                    .ui.small.inline.header #{product_link}
+                    i.refresh.large.link.icon.calc_stats(title='refresh_stats')
+                    
                     +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
                     +boolean_view key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
                     +boolean_view key='no_sugar_added' label='no sugar added' direct=true icon='no-sugar2'

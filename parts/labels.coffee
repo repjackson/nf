@@ -65,38 +65,6 @@ if Meteor.isClient
                         # product_link:@Ean_Code
                 Router.go "/product/#{new_id}/edit"
                 
-                
-    # Template.pick.events
-    #     'click .pick': ->
-    #         console.log @
-    #         if @model is '_product'
-    #             picked_products.push @name
-    #             console.log picked_products.array()
-    #         else if @model is '_week'
-    #             picked_products.push @name
-                
-    #         # "picked_#{@model}".push @name
-            
-    # Template.unpick.events
-    #     'click .unpick': ->
-    #         console.log Template.parentData()
-            
-    #         if Template.parentData().model is 'color'
-    #             picked_colors.remove @valueOf()
-    #         else if Template.parentData().model is '_product'
-    #             picked_products.remove @valueOf()
-            
-    # Template.cfacet.helpers
-    #     picked: ->
-    #         console.log @
-    #         if @model is 'color'
-    #             picked_colors.array()
-    #         else if @model is '_product'
-    #             picked_products.array()
-    #     unpicked: ->
-    #         console.log @
-    #         Results.find 
-    #             model:@model
         
     Template.labels.helpers 
         origin_results: ->
@@ -512,7 +480,7 @@ if Meteor.isServer
             #         count: author_id.count
             # int_doc_limit = parseInt doc_limit
             # console.log 'doc match', match
-            subHandle = Docs.find(match, {limit:100, sort: name:1}).observeChanges(
+            subHandle = Docs.find(match, {limit:42, sort: name:1}).observeChanges(
                 added: (id, fields) ->
                     # console.log 'added doc', id, fields
                     # doc_results.push id

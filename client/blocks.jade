@@ -37,18 +37,18 @@ template(name='key_value_edit')
         
         
 template(name='doc_array_togggle')
-    if currentUser
-        .ui.button.toggle(class=doc_array_toggle_class title=label)
-            if in_list
-                if remove_icon
-                    i.large.icon(class=remove_icon)
-                |#{remove_label}
-            else
-                if add_icon
-                    i.large.icon(class=add_icon)
-                |#{add_label}
-            |#{label}
-        //- each list_users
+    // if currentUser
+    .ui.button.toggle(class=doc_array_toggle_class title=label)
+        if in_list
+            if remove_icon
+                i.large.icon(class=remove_icon)
+            |#{remove_label}
+        else
+            if add_icon
+                i.large.icon(class=add_icon)
+            |#{add_label}
+        |#{label}
+    //- each list_users
         //-     +user_info
         
 template(name='session_toggle') 
@@ -62,26 +62,26 @@ template(name='session_toggle')
         
         
 template(name='bookmark_button')
-    if currentUser
-        .ui.icon.compact.button.toggle(class=bookmark_button_class title=label)
-            if bookmarked
-                |bookmarked
-                //- i.large.icon(class=remove_icon)
-            else
-                |bookmark
-                //- i.large.icon(class=add_icon)
-        //- each list_users
-        //-     +user_info
+    // if currentUser
+    //     .ui.icon.compact.button.toggle(class=bookmark_button_class title=label)
+    //         if bookmarked
+    //             |bookmarked
+    //             //- i.large.icon(class=remove_icon)
+    //         else
+    //             |bookmark
+    //             //- i.large.icon(class=add_icon)
+    //     //- each list_users
+    //     //-     +user_info
 
 template(name='comments')
     .ui.header
         i.chat.outline.icon
         |comments
     div
-    if currentUser
-        .ui.fluid.icon.large.input
-            i.plus.icon
-            input.add_comment(model='text' placeholder='add')
+    // if currentUser
+    .ui.fluid.icon.large.input
+        i.plus.icon
+        input.add_comment(model='text' placeholder='add')
     .ui.comments
         each doc_comments
             .comment
@@ -89,11 +89,11 @@ template(name='comments')
                     .ui.header #{body}
                     .meta #{when}
                         |by 
-                        a(href="/user/#{author.username}") #{author.first_name} #{author.last_name}
-                        if currentUser
-                            +voting_small
-                            if can_edit
-                                +remove_button
+                        // a(href="/user/#{author.username}") #{author.first_name} #{author.last_name}
+                        // if currentUser
+                            // +voting_small
+                            // if can_edit
+                            //     +remove_button
                                 
                                 
 template(name='reviews')
@@ -101,9 +101,9 @@ template(name='reviews')
         +i name='popular-topic' cl='ui inline image'
         |reviews
     div
-    if currentUser
-        .ui.fluid.icon.large.input
-            i.plus.icon
+    // if currentUser
+    .ui.fluid.icon.large.input
+        i.plus.icon
     .ui.reviews
         each doc_reviews
             .comment
@@ -111,26 +111,27 @@ template(name='reviews')
                     .ui.header #{body}
                     .meta #{when}
                         |by 
-                        a(href="/user/#{author.username}") #{author.first_name} #{author.last_name}
-                        if currentUser
-                            +voting_small
-                            if can_edit
-                                +remove_button
+                        // a(href="/user/#{author.username}") #{author.first_name} #{author.last_name}
+                            // if currentUser
+                        +voting_small
+                        // if can_edit
+                        //     +remove_button
 
 
 template(name='viewing')
     div
-    if currentUser
-        unless viewed_by
-            .ui.icon.button.mark_read
-                i.eye.icon
-        else 
-            if is_dev
-                .ui.icon.button.mark_unread
-                    i.cancel.icon
-    .ui.inline.header viewed by
-    each read_ids
-        +user_info
+    .ui.header #{views}
+    // // if currentUser
+    //     unless viewed_by
+    //         .ui.icon.button.mark_read
+    //             i.eye.icon
+    //     else 
+    //         if is_dev
+    //             .ui.icon.button.mark_unread
+    //                 i.cancel.icon
+    // .ui.inline.header viewed by
+    // each read_ids
+    //     +user_info
 
 template(name='user_info')
     with user_from_id this
@@ -349,17 +350,17 @@ template(name='creation_info')
     .ui.small.inline.header #{when}
 
 
-template(name='user_list_toggle')
-    if currentUser
-        .ui.icon.compact.button.toggle(class=user_list_toggle_class title=label)
-            if in_list
-                i.large.icon(class=remove_icon)
-            else
-                i.large.icon(class=add_icon)
-            //- +ismall name=icon
-            //- |#{label}
-        //- each list_users
-        //-     +user_info
+// template(name='user_list_toggle')
+//     if currentUser
+//         .ui.icon.compact.button.toggle(class=user_list_toggle_class title=label)
+//             if in_list
+//                 i.large.icon(class=remove_icon)
+//             else
+//                 i.large.icon(class=add_icon)
+//             //- +ismall name=icon
+//             //- |#{label}
+//         //- each list_users
+//         //-     +user_info
 
 
 template(name='voting')

@@ -225,33 +225,6 @@ if Meteor.isClient
 
 
 
-    Template.user_list_toggle.onCreated ->
-        @autorun => Meteor.subscribe 'user_list', Template.parentData(),@key
-    Template.user_list_toggle.events
-        'click .toggle': (e,t)->
-            parent = Template.parentData()
-            $(e.currentTarget).closest('.button').transition('pulse',200)
-            if parent["#{@key}"] and Meteor.userId() in parent["#{@key}"]
-                Docs.update parent._id,
-                    $pull:"#{@key}":Meteor.userId()
-            else
-                Docs.update parent._id,
-                    $addToSet:"#{@key}":Meteor.userId()
-    Template.user_list_toggle.helpers
-        user_list_toggle_class: ->
-            if Meteor.user()
-                parent = Template.parentData()
-                if parent["#{@key}"] and Meteor.userId() in parent["#{@key}"] then '' else 'basic'
-            else
-                'disabled'
-        in_list: ->
-            parent = Template.parentData()
-            if parent["#{@key}"] and Meteor.userId() in parent["#{@key}"] then true else false
-        list_users: ->
-            parent = Template.parentData()
-            Meteor.users.find _id:$in:parent["#{@key}"]
-
-
 
 
     Template.viewing.events
@@ -279,18 +252,6 @@ if Meteor.isClient
             readers
 
 
-
-    Template.email_validation_check.events
-        'click .send_verification': ->
-            console.log @
-            if confirm 'send verification email?'
-                Meteor.call 'verify_email', @_id, ->
-                    alert 'verification email sent'
-        'click .toggle_email_verified': ->
-            console.log @emails[0].verified
-            if @emails[0]
-                Meteor.users.update @_id,
-                    $set:"emails.0.verified":true
 
 
     Template.add_button.onCreated ->
@@ -338,17 +299,6 @@ if Meteor.isClient
                 Meteor.setTimeout =>
                     Docs.remove @_id
                 , 1000
-
-
-    Template.add_model_button.events
-        'click .add': ->
-            new_id = Docs.insert model: @model
-            Router.go "/edit/#{new_id}"
-
-    Template.view_user_button.events
-        'click .view_user': ->
-            Router.go "/user/#{username}"
-
 
     Template.session_set.events
         'click .set_session_value': ->

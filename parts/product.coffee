@@ -35,6 +35,8 @@ if Meteor.isClient
         Meteor.call 'log_view', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
     Template.product_view.events
+        'click .calc_stats': (e,t)->
+            Meteor.call 'calc_product_data', Router.current().params.doc_id, ->
         'click .goto_source': (e,t)->
             $(e.currentTarget).closest('.pushable').transition('fade right', 240)
             product = Docs.findOne Router.current().params.doc_id

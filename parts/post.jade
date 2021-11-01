@@ -11,9 +11,9 @@ template(name='posts')
                 else 
                     i.search.icon
                 input#post_search(type='text' placeholder='title...' value=post_query)
-            if currentUser
-                a.ui.icon.button.add_post(title='cook')
-                    i.plus.green.large.icon
+            // if currentUser
+            a.ui.icon.button.add_post(title='cook')
+                i.plus.green.large.icon
             span.sorting_row
                 +session_set key='view_limit' value=10
                 +session_set key='view_limit' value=20
