@@ -42,22 +42,17 @@ Meteor.methods
     calc_product_data: (product_id)->
         product = Docs.findOne product_id
         # console.log product
-        unless product.query_params
-            if product.url
-                qp = product.url.split('/')[5]
-                Docs.update product_id, 
-                    $set:query_params:qp
         mishi_order_count =
             Docs.find(
                 model:'mishi_order'
                 product_id:product_id
             ).count()
-        console.log 'order count', order_count
+        # console.log 'order count', mishi_order_count
         # servings_left = product.servings_amount-order_count
         # console.log 'servings left', servings_left
-        site_order_count = 
+        woo_order_count = 
             Docs.find(
-                model:'site_order'
+                model:'woo_order'
                 product_id:product_id
             ).count()
             
@@ -78,11 +73,23 @@ Meteor.methods
         #     Docs.update product_id,
         #         $set:
         #             ingredient_titles:ingredient_titles
+        # unless product.query_params
+        if product.product_link
+            qp = product.product_link.split('/')[5]
+            split_qp = qp.split('&')
+            console.log 'split', split_qp
+            console.log 'split', split_qp
+            for param in split_qp
+                attribute = param.split('=')
+                
+            Docs.update product_id, 
+                $set:query_params:qp
 
         Docs.update product_id,
             $set:
-                order_count:order_count
-                servings_left:servings_left
+                mishi_order_count:mishi_order_count
+                woo_order_count:woo_order_count
+                # servings_left:servings_left
 
 
 

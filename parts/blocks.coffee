@@ -330,7 +330,9 @@ if Meteor.isClient
         'click .set_key_value': ->
             # console.log @key
             # console.log @value
-            Docs.update Router.current().params.doc_id, 
+            # Docs.update Router.current().params.doc_id,
+            context = Template.parentData()
+            Docs.update context._id, 
                 $set:
                     "#{@key}":@value
             # Session.set(@key, @value)
@@ -338,7 +340,9 @@ if Meteor.isClient
     Template.key_value_edit.helpers
         calculated_class: ->
             res = ''
-            doc = Docs.findOne Router.current().params.doc_id
+            # doc = Docs.findOne Router.current().params.doc_id
+            doc = Template.parentData()
+            
             # console.log @
             if @cl
                 res += @cl

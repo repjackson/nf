@@ -162,14 +162,14 @@ template(name='ingredient_view')
                         +purchase_ingredient_button
                         +ingredient_orders
                     +number_view key='servings' label='servings'
-                    // .item     prepTime: Number
-                    +number_view key='prepTime' label='prep time' icon='clock' direct=true
-                    // .item     cookTime: Number
-                    +number_view key='cookTime' label='cook time' icon='kitchen' direct=true
-                    // .item     postDate: Date
-                    +date_view key='postDate' label='post date' icon='pencil' direct=true
-                    // .item     editDate: Date
-                    +date_view key='editDate' label='edit date' icon='pencil' direct=true
+                    // // .item     prepTime: Number
+                    // +number_view key='prepTime' label='prep time' icon='clock' direct=true
+                    // // .item     cookTime: Number
+                    // +number_view key='cookTime' label='cook time' icon='kitchen' direct=true
+                    // // .item     postDate: Date
+                    // +date_view key='postDate' label='post date' icon='pencil' direct=true
+                    // // .item     editDate: Date
+                    // +date_view key='editDate' label='edit date' icon='pencil' direct=true
                 
                 
                 
@@ -218,20 +218,3 @@ template(name='ingredient_edit')
                     // +text_edit key='name' direct=true
                     +html_edit key='body' label='body' icon='content' direct=true
                 .four.wide.column.scrolling
-                    +text_edit key='uuid' label='uuid'
-                    +text_edit key='title' label='title'
-                    +number_edit key='servings' label='servings'
-                    // .item     prepTime: Number
-                    +number_edit key='prepTime' label='prep time' icon='clock' direct=true
-                    // .item     cookTime: Number
-                    +number_edit key='prepTime' label='cook time' icon='oven' direct=true
-                    // .item     postDate: Date
-                    +date_edit key='postDate' label='post date' icon='pencil' direct=true
-                    // .item     editDate: Date
-                    +date_edit key='editDate' label='post date' icon='pencil' direct=true
-                    each ingredients
-                        +text_edit key='uuid' label='uuid' direct=true
-                
-                    +boolean_edit key='can_purchase' label='charge for access' direct=true icon='coins'
-                    if can_purchase 
-                        +number_edit key='purchase_price' label='purchase price' direct=true icon='coins'

@@ -33,7 +33,11 @@ template(name='key_value_edit')
         if icon 
             +i name=icon cl='ui avatar image'
             // i.icon(class=icon)
-        |#{label}
+        if label
+            |#{label}
+        else 
+            |#{value}
+            
         
         
 template(name='doc_array_togggle')

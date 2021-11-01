@@ -27,14 +27,14 @@ template(name='product_view')
                 .five.wide.column
                     +html_view key='description' direct=true
                     +text_view key='size_description' label='size description'  direct=true
-                    .ui.basic.icon.button(href=product_link)
+                    a.ui.basic.icon.button(href=product_link)
                         i.wordpress.large.icon
                         i.external.icon
-                    .ui.header calculated inventory
-                    .ui.header expected inventory
-                    if query_params
-                        .ui.header query params: #{query_params}
-                    .ui.small.inline.header #{product_link}
+                    .ui.list
+                        .item #{product_link}
+                        .item calculated inventory
+                        .item expected inventory
+                        .item query params: #{query_params}
                     i.refresh.large.link.icon.calc_stats(title='refresh_stats')
                     
                     +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
@@ -73,35 +73,35 @@ template(name='product_view')
                     +link_view key='external_link' label='external link' icon='globe' direct=true
                     +comments
                     
-                    +product_orders
-                .four.wide.column
+                    // +product_orders
+                .five.wide.column
                     +product_inventory
-                .four.wide.column
-                    +product_reviews
-                .four.wide.column
-                    +site_sales
-                .four.wide.column
+                // .four.wide.column
+                //     +product_reviews
+                .five.wide.column
+                    +woo_sales
+                .five.wide.column
                     +mishi_sales
-                .four.wide.column
-                    // +product_subscriptions
-                    // .ui.green.large.button.add_to_cart
-                    //     // i.cart.plus.large.icon
-                    //     +i name='add-shopping-cart--v1' cl='ui avatar image'
-                    //     |add to cart
-                    // .ui.link.card.zoomer.goto_source
-                    //     img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                    //     .content
-                    //         .ui.header.zoomer
-                    //             |#{product_source.title}
-                    .ui.header 
-                        i.fork.icon
-                        |related products
-                    each related_products
-                        a.ui.header(href="/product/#{_id}") #{title}
+                // .five.wide.column
+                //     // +product_subscriptions
+                //     // .ui.green.large.button.add_to_cart
+                //     //     // i.cart.plus.large.icon
+                //     //     +i name='add-shopping-cart--v1' cl='ui avatar image'
+                //     //     |add to cart
+                //     // .ui.link.card.zoomer.goto_source
+                //     //     img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                //     //     .content
+                //     //         .ui.header.zoomer
+                //     //             |#{product_source.title}
+                //     .ui.header 
+                //         i.fork.icon
+                //         |related products
+                //     each related_products
+                //         a.ui.header(href="/product/#{_id}") #{title}
                             
         
         
-template(name='site_sales')        
+template(name='woo_sales')        
     .ui.header 
         i.wordpress.icon
         |site sales
@@ -112,7 +112,7 @@ template(name='mishi_sales')
     .ui.header 
         i.tablet.icon
         |mishi
-    .ui.selection.animated.link.list 
+    .ui.selection.animated.link.list.scrolling
         each mishi_sale_docs
             a.item(href="/sale/#{_id}") #{title} #{when}
 template(name='product_inventory')      
@@ -123,19 +123,30 @@ template(name='product_inventory')
         i.plus.icon
     .ui.list
         each inventory_items
-            .item 
-                unless editing_this
-                    .ui.inline.header id: #{amount}
-                    .ui.inline.header location: #{location}
-                    .ui.inline.header location: #{notes}
-                    .ui.inline.header staff: #{staff}
-                    i.edit.link.icon.edit_inventory_item
-                if editing_this
-                    +number_edit key='amount' label='id number' direct=true
-                    +text_edit key='location' label='location' icon='marker' direct=true
-                    +text_edit key='notes' label='staff' icon='marker' direct=true
-                    +text_edit key='staff' label='staff' icon='marker' direct=true
-                    i.checkmark.green.link.icon.save_inventory_item
+            .item
+                .content
+                    unless editing_this
+                        .ui.inline.header amount: #{amount}
+                        .ui.inline.header location: #{location}
+                        .ui.inline.header notes: #{notes}
+                        .ui.inline.header staff: #{staff}
+                        i.edit.link.icon.edit_inventory_item
+                    if editing_this
+                        +number_edit key='amount' label='amount' direct=true
+                        +key_value_edit key='location' value='boh' label='boh' direct=true
+                        +key_value_edit key='location' value='foh' label='foh' direct=true
+                        // +text_edit key='location' label='location' icon='marker' direct=true
+                        +text_edit key='notes' label='notes' icon='pencil' direct=true
+                        // +text_edit key='staff' label='staff' icon='user' direct=true
+                        +key_value_edit key='staff' value='matt' direct=true
+                        +key_value_edit key='staff' value='nena' direct=true
+                        +key_value_edit key='staff' value='rachel' direct=true
+                        +key_value_edit key='staff' value='jimmy' direct=true
+                        +key_value_edit key='staff' value='elena' direct=true
+                        +key_value_edit key='staff' value='eric' direct=true
+                        +key_value_edit key='staff' value='luke' direct=true
+                        +key_value_edit key='staff' value='mateo' direct=true
+                        i.checkmark.green.link.circular.large.icon.save_inventory_item
 
 template(name='product_reviews')
     .ui.inline.header 

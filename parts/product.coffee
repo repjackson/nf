@@ -458,5 +458,5 @@ if Meteor.isServer
     Meteor.publish 'wordpress_sales', (product_id)->
         product = Docs.findOne product_id
         Docs.find 
-            model:'site_order'
+            model:'woo_order'
             _product:product.slug

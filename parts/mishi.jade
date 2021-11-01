@@ -89,7 +89,7 @@ template(name='mishi_order_card')
                 .ui.inline.header 
                     |#{title}
             a.item.goto_product
-                | #{related_product._product}
+                | #{related_product.title}
             // .item Retailer_Product_ID: #{Retailer_Product_ID}
             .ui.inline.header(title='original price') $#{Original_Price}
             a(href=Ean_Code target='_window')
@@ -106,7 +106,7 @@ template(name='mishi_order_card')
             // .ui.label day: #{day}
             // .ui.label _weekdaynum: #{_weekdaynum}
             // .ui.label week #{_week_number}
-            .ui.label(title='_weekday') #{_weekday}
+            // .ui.label(title='_weekday') #{_weekday}
             if in_dev 
                 +print_this
                 .ui.icon.button.calc

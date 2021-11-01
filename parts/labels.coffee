@@ -30,8 +30,8 @@ if Meteor.isClient
     Template.label_card.onCreated ->
         @autorun => Meteor.subscribe 'product_by_labels', @data, ->
     Template.label_card.helpers
-        query_params: ->
-            @url.split('/')[5]
+        # query_params: ->
+        #     @url.split('/')[5]
         related_product: -> 
             Docs.findOne
                 model:'product'
