@@ -9,6 +9,9 @@ if Meteor.isClient
     Router.route '/mishi', (->
         @render 'mishi'
         ), name:'mishi'
+    Router.route '/mishi_sale/:doc_id', (->
+        @render 'mishi_view'
+        ), name:'mishi_view'
 
     Template.mishi.onCreated ->
         Session.setDefault('sort_key', '_timestamp')

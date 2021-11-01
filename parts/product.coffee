@@ -133,10 +133,10 @@ if Meteor.isClient
     Template.product_inventory.helpers
         editing_this: -> Session.equals('editing_inventory_id', @_id)
         inventory_items: ->
-            Docs.find 
+            Docs.find({
                 model:'inventory_item'
                 product_id:@_id
-            
+            }, sort:'_timestamp':-1)
 
 
     Template.product_subscriptions.helpers
