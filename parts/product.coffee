@@ -282,6 +282,12 @@ if Meteor.isClient
 
 
 
+    Template.mishi_sales.onCreated ->
+        @autorun => Meteor.subscribe 'product_mishi_sales', Router.current().params.doc_id
+    Template.mishi_sales.helpers
+        mishi_sale_docs: ->
+            Docs.find 
+                model:'mishi_order'
     Template.product_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
@@ -401,6 +407,11 @@ if Meteor.isClient
             Session.get('ingredient_search')
         
     Template.ingredient_picker.events
+        'click .clear_search': (e,t)->
+            Session.set('ingredient_search', null)
+            t.$('.ingredient_search').val('')
+
+            
         'click .remove_ingredient': (e,t)->
             if confirm "remove #{@title} ingredient?"
                 Docs.update Router.current().params.doc_id,
@@ -413,6 +424,7 @@ if Meteor.isClient
                     ingredient_ids:@_id
                     ingredient_titles:@title
             Session.set('ingredient_search',null)
+            t.$('.ingredient_search').val('')
                     
         'keyup .ingredient_search': (e,t)->
             # if e.which is '13'
@@ -433,3 +445,16 @@ if Meteor.isServer
         Docs.find 
             model:'ingredient'
             title: {$regex:"#{ingredient_title_queary}",$options:'i'}
+    Meteor.publish 'product_mishi_sales', (product_id)->
+        product = Docs.findOne product_id
+        console.log 'finding mishi for', product
+        if product.slug 
+            Docs.find 
+                model:'mishi_order'
+                _product:product.slug
+        else console.log 'no product slug', product
+    Meteor.publish 'wordpress_sales', (product_id)->
+        product = Docs.findOne product_id
+        Docs.find 
+            model:'site_order'
+            _product:product.slug

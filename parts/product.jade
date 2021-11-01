@@ -59,27 +59,49 @@ template(name='product_view')
                     +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
                     +link_view key='external_link' label='external link' icon='globe' direct=true
                     +comments
+                    
                     +product_orders
-                    // +product_inventory
-                //     +product_reviews
-                // .four.wide.column
-                //     +product_subscriptions
-                    // // .ui.green.large.button.add_to_cart
-                    // //     // i.cart.plus.large.icon
-                    // //     +i name='add-shopping-cart--v1' cl='ui avatar image'
-                    // //     |add to cart
-                    // // .ui.link.card.zoomer.goto_source
-                    // //     img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                    // //     .content
-                    // //         .ui.header.zoomer
-                    // //             |#{product_source.title}
-                    // .ui.header 
-                    //     i.fork.icon
-                    //     |related products
-                    // each related_products
-                    //     a.ui.header(href="/product/#{_id}") #{title}
+                .four.wide.column
+                    +product_inventory
+                .four.wide.column
+                    +product_reviews
+                .four.wide.column
+                    +site_sales
+                .four.wide.column
+                    +mishi_sales
+                .four.wide.column
+                    +product_subscriptions
+                    // .ui.green.large.button.add_to_cart
+                    //     // i.cart.plus.large.icon
+                    //     +i name='add-shopping-cart--v1' cl='ui avatar image'
+                    //     |add to cart
+                    // .ui.link.card.zoomer.goto_source
+                    //     img.ui.fluid.image(src="{{c.url product_source.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                    //     .content
+                    //         .ui.header.zoomer
+                    //             |#{product_source.title}
+                    .ui.header 
+                        i.fork.icon
+                        |related products
+                    each related_products
+                        a.ui.header(href="/product/#{_id}") #{title}
                             
         
+        
+template(name='site_sales')        
+    .ui.header 
+        i.wordpress.icon
+        |site sales
+    .ui.list 
+        each site_sale_docs
+            a.item(href="/sale/#{_id}") #{title}
+template(name='mishi_sales')        
+    .ui.header 
+        i.tablet.icon
+        |mishi
+    .ui.selection.animated.link.list 
+        each mishi_sale_docs
+            a.item(href="/sale/#{_id}") #{title} #{when}
 template(name='product_inventory')      
     .ui.inline.header 
         +i name='shield'
@@ -332,7 +354,7 @@ template(name='ingredient_picker')
     // if is_admin
     .ui.icon.large.input 
         if ingredient_search_value
-            i.large.red.remove.link.icon.zoomer
+            i.large.red.remove.link.icon.zoomer.clear_search
         else 
             i.search.icon
         input.ingredient_search(type='text' placeholder='search' value=ingredient_search_value)
@@ -348,7 +370,7 @@ template(name='ingredient_picker')
     
     if product_ingredients
         .ui.header 
-            |#{product_ingredients}
+            |#{product_ingredients.length}
             |picked ingredients
         .ui.list
             each product_ingredients

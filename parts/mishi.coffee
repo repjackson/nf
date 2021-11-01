@@ -39,9 +39,9 @@ if Meteor.isClient
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
-    Template.mishi_order.onCreated ->
+    Template.mishi_order_card.onCreated ->
         @autorun => Meteor.subscribe 'product_by_mishi', @data, ->
-    Template.mishi_order.helpers
+    Template.mishi_order_card.helpers
         related_product: -> 
             Docs.findOne
                 model:'product'
@@ -53,7 +53,7 @@ if Meteor.isClient
                 Session.set('product_search', search)
             
             
-    Template.mishi_order.events
+    Template.mishi_order_card.events
         'click .goto_product': ->
             related_product = 
                 Docs.findOne

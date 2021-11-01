@@ -71,13 +71,13 @@ template(name='mishi')
                 if mishi_orders.count
                     .ui.four.doubling.cards
                         each mishi_orders
-                            +mishi_order
+                            +mishi_order_card
                 else 
                     .ui.center.aligned.basic.segment 
                         i.money.big.grey.loading.icon
                                 
                             
-template(name='mishi_order')
+template(name='mishi_order_card')
     .card
         with related_product
             img.ui.inline.image.goto_product.zoomer.pointer(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
@@ -112,6 +112,42 @@ template(name='mishi_order')
                 .ui.icon.button.calc
                     i.refresh.icon
 
+
+template(name='mishi_order_view')
+    with current_doc
+        .ui.container
+            with related_product
+                img.ui.inline.image.goto_product.zoomer.pointer(src="{{c.url image_id width=400 height=400 gravity='face' crop='fill'}}")
+            .content
+                // .item Store_ID: #{Store_ID}
+                // .item Charge_ID: #{Charge_ID}
+                // .item Order_ID: #{Order_ID}
+                // .item Ean_Code: #{Ean_Code}
+                    .ui.inline.header 
+                        |#{title}
+                a.item.goto_product
+                    | #{related_product._product}
+                // .item Retailer_Product_ID: #{Retailer_Product_ID}
+                .ui.inline.header(title='original price') $#{Original_Price}
+                a(href=Ean_Code target='_window')
+                    i.wikipedia.link.icon
+                .ui.label(title='quantity') #{Qty} qty
+                .ui.label Discounted_Line_Amount: #{Discounted_Line_Amount}
+                if Promo_Code
+                    .ui.label Promo_Code: #{Promo_Code}
+                .ui.label Vat_Rate: #{Vat_Rate}
+                // .ui.label Txn_Timestamp: #{Txn_Timestamp}
+                // .ui.label meta info
+                .ui.label(title='_converted_date') #{_converted_date}
+                // .ui.label(title='month') #{_month}
+                // .ui.label day: #{day}
+                // .ui.label _weekdaynum: #{_weekdaynum}
+                // .ui.label week #{_week_number}
+                .ui.label(title='_weekday') #{_weekday}
+                if in_dev 
+                    +print_this
+                    .ui.icon.button.calc
+                        i.refresh.icon
 
 template(name='cfacet')
     +i name='shopping-cart'
