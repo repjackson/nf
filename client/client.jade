@@ -93,6 +93,21 @@ template(name='mlayout')
         +yield
 
 
+
+template(name='scanner')
+    .ui.stackable.padded.grid
+        .ui.sixteen.wide.column
+        .ui.header scanner
+        video.vid
+        .ui.big.green.button.start
+            |start
+        .ui.big.red.button.stop
+            |stop
+        .ui.big.button.check
+            |check camera
+        .ui.divider
+
+
 template(name='verification_confirmation')
     .ui.text.container
         h1.ui.header your email has been verified
