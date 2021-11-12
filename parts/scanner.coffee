@@ -10,14 +10,33 @@ if Meteor.isClient
     Template.scanner.onCreated ->
         @autorun -> Meteor.subscribe 'scanner_products', ->
         @autorun -> Meteor.subscribe 'cart_items', ->
+        @autorun -> Meteor.subscribe 'shopping_carts', ->
     Template.scanner.helpers
+        selected_cart: -> Session.get('selected_cart_id')
+        shopping_cart_button_class:->
+            if Session.equals('selected_cart_id',@_id) then 'blue large' else 'basic'
+        shopping_cart_docs: ->
+            Docs.find 
+                model:'shopping_cart'
         test_products: ->
             Docs.find 
                 model:'product'
         cart_items: ->
             Docs.find 
+                cart_id:Session.get('selected_cart_id')
                 model:'cart_item'
     Template.scanner.events
+        "click .select_cart": (e,t)->
+            if Session.equals('selected_cart_id',@_id)
+                Session.set('selected_cart_id', null)
+            else 
+                Session.set('selected_cart_id', @_id)
+        "click .new_cart": (e,t)->
+            title = prompt('customer name?')
+            if title 
+                Docs.insert 
+                    model:'shopping_cart'
+                    name:title
         "click .gen_code": (e,t)->
             console.log @
             t.qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -54,41 +73,53 @@ if Meteor.isClient
             
             onScanSuccess = (decodedText, decodedResult)->
                 console.log("Code found = #{decodedText}")
-                found = 
-                    Docs.findOne 
-                        title:decodedText
-                if found
-                    existing_cart_item = 
+                if Session.get('selected_cart_id')
+                    found = 
                         Docs.findOne 
-                            model:'cart_item'
-                            product_title:found.title
-                    if existing_cart_item
-                        Docs.update existing_cart_item._id, 
-                            $inc:amount:1
-                        $('body').toast(
-                            showIcon: 'plus'
-                            message: "#{decodedText} amount increased"
-                            # showProgress: 'bottom'
-                            class: 'info'
-                            # displayTime: 'auto',
-                            position: "top right"
-                        )
-                    else
-                        Docs.insert 
-                            model:'cart_item'
-                            product_id:found._id
-                            product_title:found.title
-                            product_image_id:found.image_id
-                            amount:1
-                        $('body').toast(
-                            showIcon: 'cart plus'
-                            message: "#{decodedText} added to cart"
-                            # showProgress: 'bottom'
-                            class: 'success'
-                            # displayTime: 'auto',
-                            position: "top right"
-                        )
+                            title:decodedText
+                    if found
+                        existing_cart_item = 
+                            Docs.findOne 
+                                model:'cart_item'
+                                product_title:found.title
+                        if existing_cart_item
+                            Docs.update existing_cart_item._id, 
+                                $inc:amount:1
+                            $('body').toast(
+                                showIcon: 'plus'
+                                message: "#{decodedText} amount increased"
+                                # showProgress: 'bottom'
+                                class: 'info'
+                                # displayTime: 'auto',
+                                position: "top right"
+                            )
+                        else
+                            Docs.insert 
+                                model:'cart_item'
+                                cart_id:Session.get('selected_cart_id')
+                                product_id:found._id
+                                product_title:found.title
+                                product_image_id:found.image_id
+                                amount:1
+                            $('body').toast(
+                                showIcon: 'cart plus'
+                                message: "#{decodedText} added to cart"
+                                # showProgress: 'bottom'
+                                class: 'success'
+                                # displayTime: 'auto',
+                                position: "top right"
+                            )
+                else 
+                    $('body').toast(
+                        showIcon: 'cart plus'
+                        message: "#{decodedText} detected but no shopping cart"
+                        # showProgress: 'bottom'
+                        class: 'error'
+                        # displayTime: 'auto',
+                        position: "top right"
+                    )
 
+                    
             onScanFailure = (error)->
             # //   console.warn(`Code scan error = ${error}`);
             
@@ -110,6 +141,13 @@ if Meteor.isServer
         Docs.find(
             model:'cart_item'
             app:'nf'
+            # product_title:$exists:true
+        , {limit:10, sort:'_timestamp':-1})
+        
+    Meteor.publish 'shopping_carts', ->
+        Docs.find(
+            model:'shopping_cart'
+            # app:'nf'
             # product_title:$exists:true
         , {limit:10, sort:'_timestamp':-1})
         

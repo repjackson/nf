@@ -95,8 +95,8 @@ template(name='scanner')
         .ui.ten.wide.column
             .ui.header scanner
             #reader(width="600px")
-            .ui.big.green.button.start
-                |scan
+            .ui.massive.green.button.start
+                |open
             .ui.big.basic.red.button.stop
                 |close
             // .ui.big.button.check
@@ -104,20 +104,33 @@ template(name='scanner')
             .ui.divider
         .ui.six.wide.column
             .ui.segment
-                .ui.header 
+                .ui.inline.header 
                     i.shopping.cart.icon
-                    |#{cart_items.count} cart items
-                .ui.list 
-                    each cart_items 
-                        .item 
-                            img.ui.avatar.image(src="{{c.url product_image_id width=200 height=200 gravity='face' crop='fill'}}")
-                            .content
-                                .header 
-                                    |#{product_title}
-                                .description
-                                    .ui.big.label(title='amount') #{amount}
-                                    i.circular.remove.link.icon.remove_cart_item
-                                    +print_this
+                    |active carts
+                .ui.icon.button.new_cart 
+                    i.plus.icon
+                div
+                each shopping_cart_docs
+                    .ui.button.select_cart(class=shopping_cart_button_class)
+                        |#{name}
+            if selected_cart
+                .ui.segment
+                    .ui.header 
+                        i.shopping.cart.icon
+                        |#{cart_items.count} cart items
+                    .ui.list 
+                        each cart_items 
+                            .item 
+                                img.ui.avatar.image(src="{{c.url product_image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    .header 
+                                        |#{product_title}
+                                    .description
+                                        .ui.big.label(title='amount') #{amount}
+                                        i.circular.remove.link.icon.remove_cart_item
+                                        +print_this
+            else 
+                .ui.header select shopping cart above
             .ui.inline.header
                 |test codes
             .ui.button.clear_code
