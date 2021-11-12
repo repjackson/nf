@@ -147,6 +147,77 @@ if Meteor.isClient
                 false);
             html5QrcodeScanner.render(onScanSuccess, onScanFailure);
         
+    Template.product_picker.onCreated ->
+        @autorun => @subscribe 'product_search_results', Session.get('product_search'), ->
+
+    Template.product_picker.helpers
+        product_results: ->
+            Docs.find {
+                model:'product'
+            }, sort:title:1
+        calculated_label: ->
+            ref_doc = Template.currentData()
+            key = Template.parentData().button_label
+            ref_doc["#{key}"]
+    
+        choice_class: ->
+            selection = @
+            current = Template.currentData()
+            ref_field = Template.parentData(1)
+            if ref_field.direct
+                parent = Template.parentData(2)
+            else
+                parent = Template.parentData(5)
+            target = Template.parentData(2)
+            if true
+                if target["#{ref_field.key}"]
+                    if @ref_field is target["#{ref_field.key}"] then 'active' else ''
+                else ''
+            else
+                if parent["#{ref_field.key}"]
+                    if @slug is parent["#{ref_field.key}"] then 'active' else ''
+                else ''
+    
+    
+    Template.product_picker.events
+        'keyup .search_product': (e,t)->
+            search = t.$('.search_product').val().trim()
+            Session.set('product_search', search)
+            if search.length > 0
+                doc = Docs.findOne parent._id
+                # t.$('.search_product').val('')
+                console.log 'search', search
+                # Meteor.call 'log_term', search, ->
+                # $('.search_product').val('')
+                # Session.set('product_search', null)
+
+        'click .select_choice': ->
+            selection = @
+            ref_field = Template.currentData()
+            if ref_field.direct
+                parent = Template.parentData()
+            else
+                parent = Template.parentData(5)
+            # parent = Template.parentData(1)
+    
+            # key = ref_field.button_key
+            key = ref_field.key
+    
+    
+            # if parent["#{key}"] and @["#{ref_field.button_key}"] in parent["#{key}"]
+            if parent["#{key}"] and @slug in parent["#{key}"]
+                doc = Docs.findOne parent._id
+                if doc
+                    Docs.update parent._id,
+                        $unset:"#{ref_field.key}":1
+            else
+                doc = Docs.findOne parent._id
+    
+                if doc
+                    Docs.update parent._id,
+                        $set: "#{ref_field.key}": @slug
+        
+        
         
 if Meteor.isServer 
     Meteor.methods 
@@ -172,4 +243,7 @@ if Meteor.isServer
             # product_title:$exists:true
         , {limit:10, sort:'_timestamp':-1})
         
-        
+    Meteor.publish 'product_search_results', (query)->
+        Docs.find 
+            model:'product'
+            title: {$regex:"#{query}",$options:'i'}

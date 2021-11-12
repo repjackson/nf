@@ -28,11 +28,7 @@ template(name='scanner')
                     .ui.icon.button.add_item(title='add item' class=add_item_class)
                         i.plus.icon
                     if is_adding 
-                        .ui.icon.input 
-                            i.search.icon
-                            input.search_product(type='text' placeholder='search product...')
-                        each product_results
-                            .ui.header #{title}
+                        +product_picker
                     .ui.list 
                         each cart_items 
                             .item 
@@ -57,3 +53,11 @@ template(name='scanner')
                         |#{title}
             #qrcode
 
+
+
+template(name='product_picker')
+    .ui.icon.input 
+        i.search.icon
+        input.search_product(type='text' placeholder='search product...')
+    each product_results
+        .ui.header #{title}
