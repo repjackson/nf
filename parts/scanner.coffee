@@ -9,10 +9,14 @@ if Meteor.isClient
 
     Template.scanner.onCreated ->
         @autorun -> Meteor.subscribe 'scanner_products', ->
+        @autorun -> Meteor.subscribe 'cart_items', ->
     Template.scanner.helpers
         test_products: ->
             Docs.find 
                 model:'product'
+        cart_items: ->
+            Docs.find 
+                model:'cart_item'
     Template.scanner.events
         "click .gen_code": (e,t)->
             console.log @
@@ -25,6 +29,9 @@ if Meteor.isClient
                 correctLevel : QRCode.CorrectLevel.H
             })
         
+        'click .remove_cart_item': (e,t)-> 
+            if confirm "remove #{@title}?"
+                Docs.remove @_id
         'click .clear_code': (e,t)-> 
             $('#qrcode').empty()
             console.log t
@@ -39,15 +46,24 @@ if Meteor.isClient
             console.log(Html5QrcodeScanner);
             
             onScanSuccess = (decodedText, decodedResult)->
-                console.log("Code matched = #{decodedText}", decodedResult)
+                console.log("Code found = #{decodedText}")
                 $('body').toast(
                     showIcon: 'cart plus'
-                    message: "#{decodedText}, #{decodedResult} detected"
+                    message: "#{decodedText} added to cart"
                     # showProgress: 'bottom'
                     class: 'success'
                     # displayTime: 'auto',
                     position: "bottom right"
                 )
+                found = 
+                    Docs.findOne 
+                        title:decodedText
+                if found
+                    Docs.insert 
+                        model:'cart_item'
+                        product_id:found._id
+                        product_title:found.title
+                        product_image_id:found.image_id
             
             onScanFailure = (error)->
             # //   console.warn(`Code scan error = ${error}`);
@@ -65,3 +81,12 @@ if Meteor.isServer
             model:'product'
             # app:'nf'
         , limit:5)
+        
+    Meteor.publish 'cart_items', ->
+        Docs.find(
+            model:'cart_item'
+            app:'nf'
+            # product_title:$exists:true
+        , {limit:10, sort:'_timestamp':-1})
+        
+        
