@@ -14,9 +14,9 @@ if Meteor.isClient
             Docs.find 
                 model:'product'
     Template.scanner.events
-        "click .gen_code": ()->
+        "click .gen_code": (e,t)->
             console.log @
-            qrcode = new QRCode(document.getElementById("qrcode"), {
+            t.qrcode = new QRCode(document.getElementById("qrcode"), {
                 text: @title,
                 width: 250,
                 height: 250,
@@ -25,9 +25,12 @@ if Meteor.isClient
                 correctLevel : QRCode.CorrectLevel.H
             })
         
-        'click .clear_code': ->qrcode.clear()
+        'click .clear_code': (e,t)-> 
+            $('#qrcode').empty()
+            console.log t
+            t.qrcode.clear()
         'click .add_code': ->
-            qrcode.makeCode("http://naver.com")
+            t.qrcode.makeCode("http://naver.com")
             
         "click .start": ()->
             # console.log 'generate', generate
