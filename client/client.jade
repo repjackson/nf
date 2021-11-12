@@ -96,11 +96,11 @@ template(name='scanner')
             .ui.header scanner
             #reader(width="600px")
             .ui.big.green.button.start
-                |start
-            .ui.big.red.button.stop
-                |stop
-            .ui.big.button.check
-                |check camera
+                |scan
+            .ui.big.basic.red.button.stop
+                |close
+            // .ui.big.button.check
+            //     |check camera
             .ui.divider
         .ui.six.wide.column
             .ui.segment
@@ -111,10 +111,13 @@ template(name='scanner')
                     each cart_items 
                         .item 
                             img.ui.avatar.image(src="{{c.url product_image_id width=200 height=200 gravity='face' crop='fill'}}")
-                            |#{product_title}
-                            .ui.big.label(title='amount') #{amount}
-                            i.circular.remove.link.icon.remove_cart_item
-                            +print_this
+                            .content
+                                .header 
+                                    |#{product_title}
+                                .description
+                                    .ui.big.label(title='amount') #{amount}
+                                    i.circular.remove.link.icon.remove_cart_item
+                                    +print_this
             .ui.inline.header
                 |test codes
             .ui.button.clear_code

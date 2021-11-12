@@ -36,8 +36,15 @@ if Meteor.isClient
             $('#qrcode').empty()
             console.log t
             t.qrcode.clear()
-        'click .add_code': ->
-            t.qrcode.makeCode("http://naver.com")
+        # 'click .add_code': ->
+        #     t.qrcode.makeCode("http://naver.com")
+            
+        "click .stop": (e,t)->
+            $('#reader').empty()
+            # t.html5QrcodeScanner.stop().then((ignore)->
+            #   console.log 'stopped'
+            # ).catch((err) =>
+            # );
             
         "click .start": ()->
             # console.log 'generate', generate
@@ -47,14 +54,6 @@ if Meteor.isClient
             
             onScanSuccess = (decodedText, decodedResult)->
                 console.log("Code found = #{decodedText}")
-                $('body').toast(
-                    showIcon: 'cart plus'
-                    message: "#{decodedText} added to cart"
-                    # showProgress: 'bottom'
-                    class: 'success'
-                    # displayTime: 'auto',
-                    position: "bottom right"
-                )
                 found = 
                     Docs.findOne 
                         title:decodedText
@@ -81,13 +80,21 @@ if Meteor.isClient
                             product_title:found.title
                             product_image_id:found.image_id
                             amount:1
-            
+                        $('body').toast(
+                            showIcon: 'cart plus'
+                            message: "#{decodedText} added to cart"
+                            # showProgress: 'bottom'
+                            class: 'success'
+                            # displayTime: 'auto',
+                            position: "top right"
+                        )
+
             onScanFailure = (error)->
             # //   console.warn(`Code scan error = ${error}`);
             
             html5QrcodeScanner = new Html5QrcodeScanner(
                 "reader",
-                { fps: 10, qrbox: {width: 300, height: 300} },
+                { fps: 5, qrbox: {width: 300, height: 300} },
                 false);
             html5QrcodeScanner.render(onScanSuccess, onScanFailure);
         
