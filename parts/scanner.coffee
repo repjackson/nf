@@ -74,20 +74,25 @@ if Meteor.isClient
             onScanSuccess = (decodedText, decodedResult)->
                 console.log("Code found = #{decodedText}")
                 if Session.get('selected_cart_id')
-                    found = 
+                    found_product = 
                         Docs.findOne 
+                            model:'product'
                             title:decodedText
-                    if found
+                            
+                    if found_product
+                        console.log 'found product', found_product
                         existing_cart_item = 
                             Docs.findOne 
                                 model:'cart_item'
-                                product_title:found.title
+                                product_title:found_product.title
+                                cart_id:Session.get('selected_cart_id')
                         if existing_cart_item
                             Docs.update existing_cart_item._id, 
                                 $inc:amount:1
                             $('body').toast(
                                 showIcon: 'plus'
-                                message: "#{decodedText} amount increased"
+                                # message: "#{decodedText} amount increased"
+                                message: "#{decodedText} already added"
                                 # showProgress: 'bottom'
                                 class: 'info'
                                 # displayTime: 'auto',
@@ -109,6 +114,8 @@ if Meteor.isClient
                                 # displayTime: 'auto',
                                 position: "top right"
                             )
+                    else 
+                        console.log 'No found product'
                 else 
                     $('body').toast(
                         showIcon: 'cart plus'
@@ -134,8 +141,8 @@ if Meteor.isServer
     Meteor.publish 'scanner_products', ->
         Docs.find(
             model:'product'
-            # app:'nf'
-        , limit:5)
+            app:'nf'
+        , limit:10)
         
     Meteor.publish 'cart_items', ->
         Docs.find(

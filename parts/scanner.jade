@@ -17,19 +17,18 @@ template(name='scanner')
                     |active carts
                 .ui.icon.button.new_cart 
                     i.plus.icon
-                div
                 each shopping_cart_docs
                     .ui.button.select_cart(class=shopping_cart_button_class)
                         |#{name}
-            if selected_cart
-                .ui.segment
-                    .ui.header 
+                div
+                if selected_cart
+                    a.ui.header(href="/cart/#{selected_cart}")
                         i.shopping.cart.icon
                         |#{cart_items.count} cart items
                     .ui.list 
                         each cart_items 
                             .item 
-                                img.ui.avatar.image(src="{{c.url product_image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                img.ui.avatar.image(src="{{c.url product_image_id width=300 height=300 gravity='face' crop='fill'}}")
                                 .content
                                     .header 
                                         |#{product_title}
@@ -37,8 +36,8 @@ template(name='scanner')
                                         .ui.big.label(title='amount') #{amount}
                                         i.circular.remove.link.icon.remove_cart_item
                                         +print_this
-            else 
-                .ui.header select shopping cart above
+                else 
+                    .ui.header select shopping cart above
             .ui.inline.header
                 |test codes
             .ui.button.clear_code
