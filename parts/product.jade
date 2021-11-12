@@ -78,6 +78,10 @@ template(name='product_view')
                     
                     // +product_orders
                 .sixteen.wide.column
+                    .ui.large.generate_qrcode
+                        i.large.qrcode.icon
+                        |generate qr code
+                    #qrcode(width='400px')
                     .ui.segment
                         +product_inventory
                 // .four.wide.column
