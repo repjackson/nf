@@ -92,7 +92,7 @@ template(name='mlayout')
 
 template(name='scanner')
     .ui.stackable.padded.grid
-        .ui.twelve.wide.column
+        .ui.eight.wide.column
             .ui.header scanner
             #reader(width="600px")
             .ui.big.green.button.start
@@ -102,10 +102,17 @@ template(name='scanner')
             .ui.big.button.check
                 |check camera
             .ui.divider
-        .ui.four.wide.column
+        .ui.eight.wide.column
             .ui.header cart
             .ui.header
                 |test codes
+            .ui.button.clear_code
+                |clear codes
+            .ui.selection.link.list 
+                each test_products
+                    .item.gen_code
+                        img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                        |#{title}
             #qrcode
 
 

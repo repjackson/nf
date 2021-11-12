@@ -5,18 +5,31 @@
 # console.log "./qrcode.min.js"
 
 if Meteor.isClient
-  Router.route '/scanner', -> @render 'scanner'
+    Router.route '/scanner', -> @render 'scanner'
 
-  Template.scanner.events
-      "click .start": ()->
+    Template.scanner.onCreated ->
+        @autorun -> Meteor.subscribe 'scanner_products', ->
+    Template.scanner.helpers
+        test_products: ->
+            Docs.find 
+                model:'product'
+    Template.scanner.events
+        "click .gen_code": ()->
+            console.log @
             qrcode = new QRCode(document.getElementById("qrcode"), {
-            	text: "http://jindo.dev.naver.com/collie",
-            	width: 128,
-            	height: 128,
-            	colorDark : "#000000",
-            	colorLight : "#ffffff",
-            	correctLevel : QRCode.CorrectLevel.H
+                text: @title,
+                width: 250,
+                height: 250,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
             })
+        
+        'click .clear_code': ->qrcode.clear()
+        'click .add_code': ->
+            qrcode.makeCode("http://naver.com")
+            
+        "click .start": ()->
             # console.log 'generate', generate
             # qrScanner = new QrScanner(this.videoElem, result => console.log('decoded qr code:', result));
             
@@ -26,7 +39,7 @@ if Meteor.isClient
                 console.log("Code matched = #{decodedText}", decodedResult)
                 $('body').toast(
                     showIcon: 'cart plus'
-                    message: "#{@title} added"
+                    message: "#{decodedText}, #{decodedResult} detected"
                     # showProgress: 'bottom'
                     class: 'success'
                     # displayTime: 'auto',
@@ -42,3 +55,10 @@ if Meteor.isClient
                 false);
             html5QrcodeScanner.render(onScanSuccess, onScanFailure);
         
+        
+if Meteor.isServer 
+    Meteor.publish 'scanner_products', ->
+        Docs.find(
+            model:'product'
+            # app:'nf'
+        , limit:5)
