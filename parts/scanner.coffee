@@ -154,6 +154,8 @@ if Meteor.isClient
         product_results: ->
             Docs.find {
                 model:'product'
+                title: {$regex:"#{Session.get('product_search')}",$options:'i'}
+                
             }, sort:title:1
         calculated_label: ->
             ref_doc = Template.currentData()
