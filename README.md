@@ -8,3 +8,4 @@
  * mongodb documentation https://docs.mongodb.com/manual/
  * deploy command 
    * DEPLOY_HOSTNAME=us-east-1.galaxy-deploy.meteor.com meteor deploy www.nudefoods.market --settings settings.json
+ * npm qr scanner package: https://www.npmjs.com/package/qr-scanner
