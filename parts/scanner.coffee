@@ -6,12 +6,15 @@
 
 if Meteor.isClient
     Router.route '/scanner', -> @render 'scanner'
+    Router.route '/dashboard', -> @render 'scanner'
 
     Template.scanner.onCreated ->
         @autorun -> Meteor.subscribe 'scanner_products', ->
         @autorun -> Meteor.subscribe 'cart_items', ->
         @autorun -> Meteor.subscribe 'shopping_carts', ->
     Template.scanner.helpers
+        add_item_class: -> if Session.get('is_adding_item') then 'blue' else 'basic'
+        is_adding: -> Session.get('is_adding_item')
         selected_cart: -> Session.get('selected_cart_id')
         shopping_cart_button_class:->
             if Session.equals('selected_cart_id',@_id) then 'blue large' else 'basic'
@@ -26,6 +29,11 @@ if Meteor.isClient
                 cart_id:Session.get('selected_cart_id')
                 model:'cart_item'
     Template.scanner.events
+        "click .add_item": (e,t)->
+            if Session.equals('is_adding_item',true)
+                Session.set('is_adding_item', false)
+            else 
+                Session.set('is_adding_item', true)
         "click .select_cart": (e,t)->
             if Session.equals('selected_cart_id',@_id)
                 Session.set('selected_cart_id', null)
@@ -74,6 +82,9 @@ if Meteor.isClient
             onScanSuccess = (decodedText, decodedResult)->
                 console.log("Code found = #{decodedText}")
                 if Session.get('selected_cart_id')
+                    Meteor.call 'find_product_from_title',decodedText,(err,res)->
+                        if res 
+                            console.log 'found product', res
                     found_product = 
                         Docs.findOne 
                             model:'product'
@@ -138,6 +149,9 @@ if Meteor.isClient
         
         
 if Meteor.isServer 
+    Meteor.methods 
+        find_product_from_title: (title)->
+            found = Docs.findOne title
     Meteor.publish 'scanner_products', ->
         Docs.find(
             model:'product'

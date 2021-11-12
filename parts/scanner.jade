@@ -25,6 +25,14 @@ template(name='scanner')
                     a.ui.header(href="/cart/#{selected_cart}")
                         i.shopping.cart.icon
                         |#{cart_items.count} cart items
+                    .ui.icon.button.add_item(title='add item' class=add_item_class)
+                        i.plus.icon
+                    if is_adding 
+                        .ui.icon.input 
+                            i.search.icon
+                            input.search_product(type='text' placeholder='search product...')
+                        each product_results
+                            .ui.header #{title}
                     .ui.list 
                         each cart_items 
                             .item 

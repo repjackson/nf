@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.seven.item.menu
+    #topnav.topnav.ui.attached.borderless.eight.item.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -11,6 +11,8 @@ template(name='nav')
         //             .mobile.hidden
         //                 +ibig name='menu--v1'
         //             img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
+        a.item.zoomer(href='/dashboard' class="{{isActivePath '/'}}" title='dashboard')
+            +ibig name='dashboard'
         a.item.zoomer(href='/' class="{{isActivePath '/shop'}}")
             +ibig name='food-cart'
             // +i name='food'
@@ -45,8 +47,8 @@ template(name='nav')
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden orders
-        a.item(href='/scanner' class="{{isActivePath '/scanner'}}" title='scanner')
-            +ibig name='scan-stock'
+        // a.item(href='/scanner' class="{{isActivePath '/scanner'}}" title='scanner')
+        //     +ibig name='scan-stock'
         // a.item(href='/wp' class="{{isActivePath '/wp'}}" title='wordpress')
         //     +ibig name='wordpress'
         a.item(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
