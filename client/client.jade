@@ -106,13 +106,14 @@ template(name='scanner')
             .ui.segment
                 .ui.header 
                     i.shopping.cart.icon
-                    |cart
+                    |#{cart_items.count} cart items
                 .ui.list 
                     each cart_items 
                         .item 
                             img.ui.avatar.image(src="{{c.url product_image_id width=200 height=200 gravity='face' crop='fill'}}")
                             |#{product_title}
-                            i.circular.remove.icon.remove_cart_item
+                            .ui.big.label(title='amount') #{amount}
+                            i.circular.remove.link.icon.remove_cart_item
                             +print_this
             .ui.inline.header
                 |test codes

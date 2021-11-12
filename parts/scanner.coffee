@@ -59,11 +59,28 @@ if Meteor.isClient
                     Docs.findOne 
                         title:decodedText
                 if found
-                    Docs.insert 
-                        model:'cart_item'
-                        product_id:found._id
-                        product_title:found.title
-                        product_image_id:found.image_id
+                    existing_cart_item = 
+                        Docs.findOne 
+                            model:'cart_item'
+                            product_title:found.title
+                    if existing_cart_item
+                        Docs.update existing_cart_item._id, 
+                            $inc:amount:1
+                        $('body').toast(
+                            showIcon: 'plus'
+                            message: "#{decodedText} amount increased"
+                            # showProgress: 'bottom'
+                            class: 'info'
+                            # displayTime: 'auto',
+                            position: "top right"
+                        )
+                    else
+                        Docs.insert 
+                            model:'cart_item'
+                            product_id:found._id
+                            product_title:found.title
+                            product_image_id:found.image_id
+                            amount:1
             
             onScanFailure = (error)->
             # //   console.warn(`Code scan error = ${error}`);
