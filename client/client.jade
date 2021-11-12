@@ -29,6 +29,7 @@ head
     //     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     //     crossorigin="")
 
+    script(src='./qrcode.min.js')
     script(src='https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js')
     script(src='https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js')
     
@@ -39,11 +40,6 @@ head
     //- // External libraries: GreenSock
     // - /* script(src='/layerslider/js/jquery.js', type='text/javascript') */
     
-    // script(src='/layerslider/js/greensock.js', type='text/javascript')
-    // //- // LayerSlider script files
-    // script(src='/layerslider/js/layerslider.transitions.js', type='text/javascript')
-    // script(src='/layerslider/js/layerslider.kreaturamedia.jquery.js', type='text/javascript')
-
     
     script(src="https://cdn.jsdelivr.net/npm/sweetalert2@9")
     script(src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js")
@@ -94,24 +90,23 @@ template(name='mlayout')
 
 
 
-// template(name='scanner')
-//     .ui.stackable.padded.grid
-//         .ui.sixteen.wide.column
-//         .ui.header scanner
-//         video.vid
-//         .ui.big.green.button.start
-//             |start
-//         .ui.big.red.button.stop
-//             |stop
-//         .ui.big.button.check
-//             |check camera
-//         .ui.divider
-
-
-template(name='verification_confirmation')
-    .ui.text.container
-        h1.ui.header your email has been verified
-
+template(name='scanner')
+    .ui.stackable.padded.grid
+        .ui.twelve.wide.column
+            .ui.header scanner
+            #reader(width="600px")
+            .ui.big.green.button.start
+                |start
+            .ui.big.red.button.stop
+                |stop
+            .ui.big.button.check
+                |check camera
+            .ui.divider
+        .ui.four.wide.column
+            .ui.header cart
+            .ui.header
+                |test codes
+            #qrcode
 
 
 template(name='not_found')
