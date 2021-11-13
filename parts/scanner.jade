@@ -59,5 +59,8 @@ template(name='product_picker')
     .ui.icon.input 
         i.search.icon
         input.search_product(type='text' placeholder='search product...')
-    each product_results
-        .ui.header.select_choice #{title}
+    .ui.large.selection.link.list
+        each product_results
+            .ui.item.select_choice
+                img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                |#{title}

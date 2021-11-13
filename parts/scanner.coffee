@@ -194,32 +194,16 @@ if Meteor.isClient
                 # Session.set('product_search', null)
 
         'click .select_choice': ->
-            selection = @
-            ref_field = Template.currentData()
-            if ref_field.direct
-                parent = Template.parentData()
-            else
-                parent = Template.parentData(5)
-            # parent = Template.parentData(1)
+            Session.set('product_search', null)
+            new_id = 
+                Docs.insert 
+                    model:'cart_item'
+                    cart_id:Session.get('selected_cart_id')
+                    product_id:@_id
+                    product_title:@title
+                    product_image_id:@image_id
+                    amount:1
     
-            # key = ref_field.button_key
-            key = ref_field.key
-    
-    
-            # if parent["#{key}"] and @["#{ref_field.button_key}"] in parent["#{key}"]
-            if parent["#{key}"] and @slug in parent["#{key}"]
-                doc = Docs.findOne parent._id
-                if doc
-                    Docs.update parent._id,
-                        $unset:"#{ref_field.key}":1
-            else
-                doc = Docs.findOne parent._id
-    
-                if doc
-                    Docs.update parent._id,
-                        $set: "#{ref_field.key}": @slug
-        
-        
         
 if Meteor.isServer 
     Meteor.methods 
