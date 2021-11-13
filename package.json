@@ -1,6 +1,7 @@
 {
 	"dependencies": {
 		"@babel/runtime": "^7.9.2",
+		"bcrypt": "^5.0.1",
 		"html5-qrcode": "^2.1.2",
 		"papaparse": "^5.3.1"
 	},

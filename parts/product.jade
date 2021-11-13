@@ -2,7 +2,7 @@ template(name='product_view')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .six.wide.column
+                .four.wide.column
                     .ui.large.inline.header 
                         //- small viewing
                         | #{title}
@@ -24,7 +24,7 @@ template(name='product_view')
                 if image_id2
                     .four.wide.column
                         img.ui.rounded.image.zoomer(src="{{c.url image_id2}}")
-                .ten.wide.column
+                .four.wide.column
                     +html_view key='description' direct=true
                     // +text_view key='size_description' label='size description'  direct=true
                     a.ui.basic.icon.button(href=product_link)
@@ -77,7 +77,10 @@ template(name='product_view')
                     +comments
                     
                     // +product_orders
-                .sixteen.wide.column
+                .four.wide.column
+                    .ui.big.fluid.green.button.add_to_cart
+                        |add to cart
+                .four.wide.column
                     .ui.large.generate_qrcode
                         i.large.qrcode.icon
                         |generate qr code

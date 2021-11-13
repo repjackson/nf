@@ -459,12 +459,12 @@ if Meteor.isServer
             title: {$regex:"#{ingredient_title_queary}",$options:'i'}
     Meteor.publish 'product_mishi_sales', (product_id)->
         product = Docs.findOne product_id
-        console.log 'finding mishi for', product
+        # console.log 'finding mishi for', product
         if product.slug 
             Docs.find 
                 model:'mishi_order'
                 _product:product.slug
-        else console.log 'no product slug', product
+        # else console.log 'no product slug', product
     Meteor.publish 'wordpress_sales', (product_id)->
         product = Docs.findOne product_id
         Docs.find 

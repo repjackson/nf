@@ -16,6 +16,8 @@ manuel:reactivearray
 meteorhacks:aggregate
 babrahams:constellation
 mobile-experience@1.1.0
+accounts-base@1.9.0
+accounts-password@1.7.0
 
 
 blaze-html-templates
