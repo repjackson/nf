@@ -332,9 +332,10 @@ if Meteor.isClient
             # console.log @value
             # Docs.update Router.current().params.doc_id,
             context = Template.parentData()
-            Docs.update context._id, 
-                $set:
-                    "#{@key}":@value
+            if context
+                Docs.update context._id, 
+                    $set:
+                        "#{@key}":@value
             # Session.set(@key, @value)
 
     Template.key_value_edit.helpers

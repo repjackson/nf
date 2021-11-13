@@ -72,10 +72,10 @@ template(name='nav')
             +ibig name='blog'
         a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
             +i name='bicycle'
-        a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-            +i name='phone'
-        a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
-            +i name='cup'
+        // a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
+        //     +i name='phone'
+        // a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
+        //     +i name='cup'
         // if currentUser
         //     a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
         //         +ibig name='groups'
@@ -89,22 +89,22 @@ template(name='nav')
         .right.menu
             if currentUser
                 // a.icon.item(href="/cart" class="{{isActivePath '/cart'}}")
-                if cart_items.count
-                    a.icon.item.toggle_cartbar
-                        // i.large.cart.icon
-                        strong #{cart_items.count}
-                        |$#{my_cart_subtotal}
-                        .ui.avatar.image.cart
-                            +ibig name='shopping-cart'
-                        each cart_items
-                            img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                // if cart_items.count
+                a.icon.item.toggle_cartbar
+                    // i.large.cart.icon
+                    strong #{cart_items.count}
+                    |$#{my_cart_subtotal}
+                    .ui.avatar.image.cart
+                        +ibig name='shopping-cart'
+                    each cart_items
+                        img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
                 a.item.toggle_topbar(title='alerts')
                     // i.wallet.icon
                     .ui.avatar.image.bell
                         +i name='notification'
-                if is_admin
-                    a.item(href="/admin" title='admin')
-                        +ibig name='shield'
+                // if is_admin
+                a.item(href="/admin" title='admin')
+                    +ibig name='shield'
                 // a.item(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
                 a.item.toggle_walletbar(title='credit')
                     // i.wallet.icon
@@ -113,7 +113,7 @@ template(name='nav')
                     strong ${{int currentUser.credit}}
                     // i.cart.icon
                 a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
-                    .ui.inline.header #{currentUser.credit}f
+                    .ui.inline.header #{currentUser.points}p
                 a.item.mobile.hidden(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
                     if currentUser.image_id
                         img.ui.avatar.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
@@ -121,13 +121,13 @@ template(name='nav')
                         i.user.icon
                     strong.mobile.hidden #{currentUser.name}
                 a.icon.item.toggle_rightbar.no_blink
-                    .ui.avatar.image
-                        if currentUser.image_id
-                            img.ui.mini.inline.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
-                        else
-                            i.user.large.icon
-                    strong.mobile.hidden #{currentUser.name}
-                    // i.bars.large.icon
+                    // .ui.avatar.image
+                    //     if currentUser.image_id
+                    //         img.ui.mini.inline.image(src="{{c.url currentUser.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                    //     else
+                    //         i.user.large.icon
+                    // strong.mobile.hidden #{currentUser.name}
+                    i.bars.large.icon
                         
         unless currentUser
             if subs_ready

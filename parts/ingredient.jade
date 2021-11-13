@@ -31,8 +31,8 @@ template(name='ingredients')
                 .ui.icon.input
                     i.search.icon
                     input.tag_search(type='text' placeholder='search...')
-                +key_value_edit key='sort_key' value='cookTime' label='cook time' icon='kitchen'
-                +key_value_edit key='sort_key' value='prepTime' label='prep time' icon='clock'
+                +session_set key='sort_key' value='cookTime' label='cook time' icon='kitchen'
+                +session_set key='sort_key' value='prepTime' label='prep time' icon='clock'
                 |&nbsp;
                 |&nbsp;
                 // +limit_menu
@@ -95,7 +95,6 @@ template(name='ingredient_view')
                     // if can_edit
                     a.ui.icon.circular.button(href="/ingredient/#{_id}/edit")
                         i.pencil.large.icon
-                    .ui.header source: #{source}
                     +voting_full
                     +viewing
                     if in_dev 
@@ -118,14 +117,14 @@ template(name='ingredient_view')
                         +html_view key='description' icon='content' label='body' direct=true
                     +array_view key='location_tags' label='location tags' icon='marker' direct=true
                     +array_view key='tags' label='tags' icon='tags' direct=true
-                    div
+                .four.wide.column
                     .ui.header 
-                        +i name='ingredients'
-                        |#{ingredients.length}
-                        |ingredients
+                        +i name='food-cart'
+                        |#{ingredient_products.length}
+                        |products included in
                     .ui.three.doubling.cards 
-                        each ingredients
-                            .card
+                        each ingredient_products
+                            a.card(href="/product/#{_id}")
                                 .content
                                     .header #{name}
                                     |#{amount} #{measurement}
@@ -134,11 +133,11 @@ template(name='ingredient_view')
                                 // .item(title='Number') amount: #{amount}
                                 // .item measurement: String #{measurement}
                     .ui.header 
-                        +i name='list'
-                        |#{directions.length}
-                        |directions
+                        +i name='cookbook'
+                        |#{ingredient_recipes.length}
+                        |recipes included in
                     .ui.ordered.big.spaced.list
-                        each directions
+                        each ingredient_recipes
                             .item.zoomer
                                 |#{instructions}
                                 a(href="https://www.google.com/search?q=#{instructions}" target='_window' title='search instructions')
@@ -152,8 +151,6 @@ template(name='ingredient_view')
                             // .item optional: Boolean #{optional}
 
                     +comments
-                    if watson 
-                        +watson_view
                 .four.wide.column
                     if can_purchase
                         .ui.header 

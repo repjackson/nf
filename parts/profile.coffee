@@ -85,6 +85,23 @@ if Meteor.isClient
             
             
             
+    Template.topup_button.events
+        'click .topup': ->
+            
+            $('body').toast(
+                showIcon: 'food'
+                message: "marked cooked"
+                showProgress: 'bottom'
+                class: 'success'
+                # displayTime: 'auto',
+                position: "bottom right"
+            )
+            
+            Meteor.users.update Meteor.userId(),
+                $inc:
+                    points:@amount
+            
+            
 if Meteor.isClient
     Template.user_addresses.onCreated ->
         @autorun => Meteor.subscribe 'username_model_docs', 'address', Router.current().params.username, ->

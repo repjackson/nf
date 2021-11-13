@@ -1,3 +1,10 @@
+Meteor.users.allow
+    update: (userId, doc, fields, modifier) ->
+        true
+        # if userId and doc._id == userId
+        #     true
+
+
 Docs.allow
     insert: (userId, doc) -> 
         true    
@@ -108,8 +115,8 @@ Meteor.publish 'model_docs', (model,limit)->
             # app:'nf'
             model: model
         }, sort:_timestamp:-1
-# Meteor.publish 'me', ->
-#     Meteor.users.find @userId
+Meteor.publish 'me', ->
+    Meteor.users.find @userId
 
 
 Meteor.publish 'document_by_slug', (slug)->
