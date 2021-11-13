@@ -39,10 +39,10 @@ template(name='checkout')
                             .item
                                 .content
                                     .header
-                                        .ui.inline.header #{product_title} 
+                                        a.ui.inline.header.zoomer(href="/product/#{product_id}/") #{product_title} 
                                     .description
                                         img.ui.small.inline.image(src="{{c.url product_image_id width=400 height=400 gravity='face' crop='fill'}}")
-                                        i.large.red.circular.icon.remove_item
+                                        i.large.red.circular.remove.icon.remove_item
                                         .ui.circular.icon.button.increment
                                             i.large.plus.icon
                                         .ui.inline.header

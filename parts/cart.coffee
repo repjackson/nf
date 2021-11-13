@@ -85,36 +85,6 @@ if Meteor.isClient
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
     Template.cart_view.events
-        'click .pick_no': _.throttle((e,t)->
-            new_id = 
-                Docs.insert 
-                    model:'cart_answer'
-                    cart_id: Router.current().params.doc_id
-                    answer:false
-            $('body').toast(
-                showIcon: 'checkmark'
-                message: "no recorded"
-                showProgress: 'bottom'
-                class: 'error'
-                # displayTime: 'auto',
-                position: "center bottom"
-            )
-        , 4000)
-        'click .pick_yes': _.throttle((e,t)->
-            new_id = 
-                Docs.insert 
-                    model:'cart_answer'
-                    cart_id: Router.current().params.doc_id
-                    answer:true
-            $('body').toast(
-                showIcon: 'checkmark'
-                message: "yes recorded"
-                showProgress: 'bottom'
-                class: 'success'
-                # displayTime: 'auto',
-                position: "center bottom"
-            )
-        , 4000)
     Template.carts.events
         'click .add_cart': ->
             new_id = 
@@ -149,18 +119,8 @@ if Meteor.isClient
         'click .clear_search': (e,t)-> Session.set('product_search',null)
         'click .calc': (e,t)->
             Meteor.call 'cart_meta', @_id, ->
-                
-        'change .import': (e,t)->
-            papa.parse(e.target.files[0], {
-                header: true
-                complete: (results)->
-                    console.log results
-                    Meteor.call 'parse_cart', results, ->
-                    # _.each(results.data, (csvData)-> 
-                    #     console.log(csvData.empId + ' , ' + csvData.empCode)
-                    # )
-                skipEmptyLines: true
-            })
+
+
 
 if Meteor.isServer 
     Meteor.methods
