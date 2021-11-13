@@ -1,0 +1,127 @@
+template(name='giftcards')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            .ui.inline.header 
+                +i name='gift-card'
+                |Giftcards
+            .ui.basic.icon.button.add_giftcard
+                i.large.plus.icon
+        .sixteen.wide.column
+            .ui.four.stackable.centered.cards
+                each model_docs_helper 'giftcard'
+                    .ui.card
+                        a(href="/giftcard/#{_id}") 
+                            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                        a.content(href="/giftcard/#{_id}") 
+                            .ui.header 
+                                |#{title}
+                            each giftcard_product
+                                .ui.header #{title}
+                            // |added #{when} by #{_author_username}
+                
+
+
+template(name='user_giftcards')
+    .ui.inline.header 
+        +i name='gift-card'
+        |user gift cards
+    .ui.basic.icon.button.send_giftcard
+        i.large.plus.icon
+    .ui.padded.stackable.two.column.grid
+        .column
+            .ui.header 
+                +i name='sent--v2'
+                |sent 
+            .ui.stackable.cards.scrolling
+                each sent_giftcards 
+                    .ui.card
+                        .content
+                            a(href="/giftcard/#{_id}") 
+                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+    
+                            .ui.header 
+                                |#{amount} #{recipient_username}
+                            // |created #{when}
+                            |sent {{from_now sent_timestamp}}
+                            small {{cal_time sent_timestamp}}
+                            a.ui.icon.button(href='/giftcard/#{_id}')
+                                i.large.chevron.right.icon
+                            
+        .column
+            .ui.header 
+                +i name='gift--v1'
+                |received
+            .ui.stackable.cards.scrolling
+                each received_giftcards
+                    .ui.card
+                        .content
+                            a(href="/giftcard/#{_id}") 
+                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                            .ui.header 
+                                |#{amount} #{_author_username}
+                            |received {{from_now sent_timestamp}}
+                            small {{cal_time sent_timestamp}}
+                            a.ui.icon.button(href='/giftcard/#{_id}')
+                            i.ui.large.link.chevron.right.icon.edit_address
+                
+                
+                
+template(name='giftcard_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    .ui.inline.header
+                        i.pencil.icon
+                        | #{title}
+                        small gift card
+                    +text_edit key='title' label='title' direct=true
+                    +image_edit key='image_id' label='image' direct=true
+                    div
+                    +number_edit key='amount' label='$ amount' direct=true
+                    +text_edit key='recipient_username' label='recipient username' direct=true
+                    +single_user_edit key='recipient_id' label='recipient' direct=true
+                .twelve.wide.column
+                    div
+                    +array_edit key='tags' label='tags' direct=true
+                    +html_edit key='notes' label='description' direct=true
+                    if can_delete
+                        .ui.red.button.delete_giftcard
+                            i.remove.icon   
+                            | delete
+                    if recipient_id
+                        .ui.large.icon.green.button.send_giftcard(title='save product')
+                            i.sent.large.icon
+                            |send giftcard
+                    else
+                        .ui.large.icon.green.disabled.button.send_giftcard(title='save product')
+                            i.sent.large.icon
+                            |send giftcard
+                
+                
+template(name='giftcard_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    .ui.inline.header
+                        | #{title}
+                        small gift card view
+                    +image_view key='image_id' label='image' direct=true
+                    div
+                    +number_view key='amount' label='$ amount' direct=true
+                    +text_view key='recipient_username' label='recipient username' direct=true
+                    +single_user_view key='recipient_id' label='recipient' direct=true
+                    if sent 
+                        .ui.header sent {{from_now sent_timestamp}} {{cal_time sent_timestamp}}
+                    else 
+                        .ui.header not sent
+                .twelve.wide.column
+                    div
+                    +array_view key='tags' label='tags' direct=true
+                    +html_view key='notes' label='description' direct=true
+                    if can_delete
+                        .ui.red.button.delete_giftcard
+                            i.remove.icon   
+                            | delete
+                    +comments                

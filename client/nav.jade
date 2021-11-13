@@ -22,13 +22,13 @@ template(name='nav')
             // img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
             // span.mobile.hidden nude foods market
-        .search.item.zoomer.mobile.hidden(title='search')
-            .ui.icon.transparent.input
-                if current_product_search
-                    i.remove.large.red.link.icon.clear_search
-                else
-                    i.search.large.icon
-                input.search_products(type='text' autocomplete="off" value=current_product_search)
+        // .search.item.zoomer.mobile.hidden(title='search')
+        //     .ui.icon.transparent.input
+        //         if current_product_search
+        //             i.remove.large.red.link.icon.clear_search
+        //         else
+        //             i.search.large.icon
+        //         input.search_products(type='text' autocomplete="off" value=current_product_search)
         a.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
             // +i name='ingredients'
             +ibig name='grocery-shelf'

@@ -1,10 +1,10 @@
-template(name='recipes')
+template(name='mealplans')
     .ui.stackable.padded.grid
         .sixteen.wide.column
             .ui.inline.header 
                 +i name='cookbook'
-                |recipes
-            .ui.basic.icon.button.add_recipe
+                |mealplans
+            .ui.basic.icon.button.add_mealplan
                 i.large.plus.icon
             // each picked_sections
             //     button.ui.blue.compact.small.button.unpick_section(tabindex='0')
@@ -54,11 +54,11 @@ template(name='recipes')
                 .spacer 
         
             span.ui.stackable.cards.scrolling
-                each model_docs_helper 'recipe'
+                each model_docs_helper 'mealplan'
                     .ui.card
-                        a(href="/recipe/#{_id}") 
+                        a(href="/mealplan/#{_id}") 
                             img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-                        a.content(href="/recipe/#{_id}") 
+                        a.content(href="/mealplan/#{_id}") 
                             .ui.header 
                                 |#{title}
                             |added #{when} by #{_author_username}
@@ -68,27 +68,24 @@ template(name='recipes')
                             i.food.icon
                             i.chat.icon
                             i.users.icon
-template(name='favorite_icon_toggle')
-    i.heart.link.icon.toggle_fav(class=icon_class)
-    |#{favorite_ids.length}
      
-template(name='product_recipes')
+template(name='product_mealplans')
     .ui.inline.header 
         +i name='cookbook'
-        |recipes
-    .ui.icon.basic.button.add_recipe
+        |mealplans
+    .ui.icon.basic.button.add_mealplan
         i.plus.green.icon
     div
-    each model_docs_helper 'recipe'
-        a.ui.header(href="/recipe/#{_id}/view") #{title}
+    each model_docs_helper 'mealplan'
+        a.ui.header(href="/mealplan/#{_id}/view") #{title}
         
                 
                 
-template(name='user_recipes')
+template(name='user_mealplans')
     .ui.inline.header 
         +i name='cookbook'
-        |user recipes
-    .ui.basic.icon.button.send_recipe
+        |user mealplans
+    .ui.basic.icon.button.send_mealplan
         i.large.plus.icon
     .ui.padded.stackable.two.column.grid
         .column
@@ -96,10 +93,10 @@ template(name='user_recipes')
                 +i name='sent--v2'
                 |authored 
             .ui.stackable.cards.scrolling
-                each sent_recipes 
+                each sent_mealplans 
                     .ui.card
                         .content
-                            a(href="/recipe/#{_id}") 
+                            a(href="/mealplan/#{_id}") 
                                 img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
     
                             .ui.header 
@@ -107,7 +104,7 @@ template(name='user_recipes')
                             // |created #{when}
                             |sent {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.icon.button(href='/recipe/#{_id}')
+                            a.ui.icon.button(href='/mealplan/#{_id}')
                                 i.large.chevron.right.icon
                             
         .column
@@ -118,18 +115,18 @@ template(name='user_recipes')
                 each favorited
                     .ui.card
                         .content
-                            a(href="/recipe/#{_id}") 
+                            a(href="/mealplan/#{_id}") 
                                 img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
                             .ui.header 
                                 |#{amount} #{_author_username}
                             |received {{from_now sent_timestamp}}
                             small {{cal_time sent_timestamp}}
-                            a.ui.icon.button(href='/recipe/#{_id}')
+                            a.ui.icon.button(href='/mealplan/#{_id}')
                             i.ui.large.link.chevron.right.icon.edit_address
                 
                 
                 
-template(name='recipe_edit')
+template(name='mealplan_edit')
     with current_doc
         .ui.stackable.padded.grid
             .row
@@ -137,8 +134,8 @@ template(name='recipe_edit')
                     .ui.inline.header
                         i.pencil.icon
                         | #{title}
-                        small recipe
-                    a.ui.large.icon.green.button(href="/recipe/#{_id}/" title='save product')
+                        small mealplan
+                    a.ui.large.icon.green.button(href="/mealplan/#{_id}/" title='save product')
                         i.checkmark.big.icon
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true
@@ -155,24 +152,24 @@ template(name='recipe_edit')
                     +html_edit key='directions' label='directions' direct=true
                     +array_edit key='tags' label='tags' icon='tags' direct=true
                     +array_edit key='ingredients' label='ingredients' icon='tags' direct=true
-                    .ui.red.button.delete_recipe
+                    .ui.red.button.delete_mealplan
                         i.remove.icon   
                         | delete
                 
                 
-template(name='recipe_view')
+template(name='mealplan_view')
     with current_doc
         .ui.stackable.padded.grid
             .row
                 .four.wide.column
-                    a.ui.basic.icon.button(href="/recipes")
+                    a.ui.basic.icon.button(href="/mealplans")
                         +i name='cookbook'
                     .ui.inline.header
                         | #{title}
-                        small recipe view
+                        small mealplan view
                     +image_view key='image_id' label='image' direct=true
                     div
-                    a.ui.icon.button(href="/recipe/#{_id}/edit")
+                    a.ui.icon.button(href="/mealplan/#{_id}/edit")
                         i.pencil.icon
                     .ui.header 
                         +i name='ingredients'
@@ -189,7 +186,7 @@ template(name='recipe_view')
                     .ui.header 
                         +i name='popular-topic' cl='ui inline image'
                         |reviews
-                    each recipe_reviews
+                    each mealplan_reviews
                         .ui.header #{when}
                     +comments
                 .four.wide.column
@@ -229,3 +226,4 @@ template(name='recipe_view')
                         // .ui.header #{this}
                         +user_info
                         // +user_from_id this
+

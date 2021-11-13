@@ -215,12 +215,6 @@ if Meteor.isServer
             model:'product'
             slug:wp_order._product
         }, limit:1)
-    Meteor.publish 'product_by_slug', (slug)->
-        # console.log wp_order
-        Docs.find({
-            model:'product'
-            slug:slug
-        }, limit:1)
     Meteor.publish 'wp_facets', (
         product_search=''
         picked_products=[]
