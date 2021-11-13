@@ -29,6 +29,12 @@ if Meteor.isClient
                 cart_id:Session.get('selected_cart_id')
                 model:'cart_item'
     Template.scanner.events
+        'click .checkout': (e,t)->
+            Docs.update @_id, 
+                $set:status:'checkout'
+            Router.go "/cart/#{Session.get('selected_cart_id')}/checkout"
+            
+            
         "click .add_item": (e,t)->
             if Session.equals('is_adding_item',true)
                 Session.set('is_adding_item', false)

@@ -10,6 +10,9 @@ Router.route '/cart/:doc_id', (->
 Router.route '/cart/:doc_id/edit', (->
     @render 'cart_edit'
     ), name:'cart_edit'
+Router.route '/cart/:doc_id/checkout', (->
+    @render 'checkout'
+    ), name:'checkout'
 
 
 if Meteor.isClient
@@ -22,34 +25,24 @@ if Meteor.isClient
     Template.cart_edit.events 
 
 
-    Template.newsletter.onCreated ->
-        @autorun => Meteor.subscribe 'model_docs', 'newsletter_signup', ->
-    Template.newsletter.helpers 
-        responses: ->
+    Template.checkout.onCreated ->
+        @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
+        @autorun => Meteor.subscribe 'cart_items', Router.current().params.doc_id, ->
+    Template.checkout.helpers 
+        cart_items: ->
             Docs.find
-                model:'newsletter_signup'
-    Template.newsletter.events
-        'click .submit_form': ->
-            name = $('.name_input').val()
-            email = $('.email_input').val()
-            if email
-                new_id = 
-                    Docs.insert 
-                        model:'newsletter_signup'
-                        name:name
-                        email:email
-                $('body').toast(
-                    # showIcon: 'heart'
-                    message: "Form submitted"
-                    showProgress: 'bottom'
-                    class: 'success'
-                    # displayTime: 'auto',
-                    position: "center bottom"
-                )
-                name = $('.name_input').val('')
-                email = $('.email_input').val('')
+                model:'cart_item'
+    Template.checkout.events
+        'click .complete_order': ->
+            Docs.update @_id,
+                $set:
+                    status:'complete'
 
-
+if Meteor.isServer 
+    Meteor.publish 'cart_items', (cart_id)->
+        Docs.find 
+            model:'cart_item'
+            cart_id:cart_id
 
 
 if Meteor.isClient
