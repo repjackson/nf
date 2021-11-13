@@ -4,9 +4,9 @@
  
 
 Docs.before.insert (userId, doc)->
-    # if Meteor.userId()
-    #     doc._author_id = Meteor.userId()
-    #     doc._author_username = Meteor.user().username
+    if Meteor.userId()
+        doc._author_id = Meteor.userId()
+        doc._author_username = Meteor.user().username
     timestamp = Date.now()
     doc._timestamp = timestamp
     doc._timestamp_long = moment(timestamp).format("dddd, MMMM Do YYYY, h:mm:ss a")

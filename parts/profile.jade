@@ -235,25 +235,25 @@ template(name='user_credit')
                 .ui.inline.header
                     // i.money.icon
                     +i name='money'
-                    |{{fixed user_from_username_param.credit}}
-                    |credit
-                .ui.inline.header 
-                    // i.shield.icon
-                    +i name='shield'
-                    |admin
-                .ui.big.icon.button.add_credit(title='add credit')
-                    |+1
-                +number_edit key='credit' label='edit credit' min='0' step='.01' max='1000' direct=true
-                .ui.big.icon.button.remove_credit(title='remove credit')
-                    |-1
+                    |{{fixed user_from_username_param.points}}
+                    |points
+                // .ui.inline.header 
+                //     // i.shield.icon
+                //     +i name='shield'
+                //     |admin
+                // .ui.big.icon.button.add_credit(title='add credit')
+                //     |+1
+                // // +number_edit key='credit' label='edit credit' min='0' step='1' max='1000' direct=true
+                // .ui.big.icon.button.remove_credit(title='remove credit')
+                //     |-1
                 +topup_button amount=10
                 +topup_button amount=20
                 +topup_button amount=100
                 // |includes 2% credit card processing fee
-                .ui.action.input
-                    input.deposit_amount(type='number' min='1' placeholder='deposit')
-                    .ui.icon.button.add_credits   
-                        i.right.chevron.icon
+                // .ui.action.input
+                //     input.deposit_amount(type='number' min='1' placeholder='deposit')
+                //     .ui.icon.button.add_credits   
+                //         i.right.chevron.icon
                         
                 .ui.large.bulleted.list.scrolling
                     each topups

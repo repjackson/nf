@@ -221,12 +221,6 @@ if Meteor.isServer
             app:'nf'
         , limit:10)
         
-    Meteor.publish 'cart_items', ->
-        Docs.find(
-            model:'cart_item'
-            app:'nf'
-            # product_title:$exists:true
-        , {limit:10, sort:'_timestamp':-1})
         
     Meteor.publish 'shopping_carts', ->
         Docs.find(
