@@ -1,0 +1,43 @@
+template(name='admin')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            .ui.header 
+                +i name='shield'
+                |admin
+        each admin_users 
+            +user_card
+        .eight.wide.column
+            +foh
+        .eight.wide.column
+            +boh    
+            
+template(name='foh')
+    a.ui.header(href="/foh")
+        +i name='stall'
+        |front of house
+    unless admin_settings.foh_calling
+        .ui.massive.button.call_help
+            +i name='alert'
+            |call help
+    else 
+        .ui.massive.button.end_call
+            +i name='cancel'
+            |end call
+    .ui.header 
+        +i name='clock'
+        |previous calls
+    .ui.list
+        each call_docs 
+            .item #{when}
+        
+            
+template(name='boh')
+    a.ui.header(href="/boh")
+        +i name='scan-stock'
+        |back of house
+    if admin_settings.foh_calling
+        .ui.fluid.red.inverted.segment
+            img.ui.inline.rounded.image(src="/bell.gif")
+            .ui.inverted.inline.header.big-text 
+                |foh help requested
+    

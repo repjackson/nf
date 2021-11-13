@@ -1,0 +1,151 @@
+template(name='trips')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            .ui.inline.header 
+                +i name='bicycle'
+                |trips
+            .ui.basic.icon.button.add_trip
+                i.large.plus.icon
+        .eight.wide.column
+            .ui.four.stackable.centered.cards
+                each model_docs_helper 'trip'
+                    .ui.card
+                        a(href="/trip/#{_id}") 
+                            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                        a.content(href="/trip/#{_id}") 
+                            .ui.header 
+                                |#{title}
+                            each trip_product
+                                .ui.header #{title}
+                            // |added #{when} by #{_author_username}
+        .eight.wide.column
+            .ui.header available jobs
+            each available_jobs
+                a.ui.header(href="/order/#{_id}") #{title}
+                
+template(name='user_trips')
+    .ui.inline.header 
+        +i name='bicycle'
+        |#{user_from_username.username} trips
+        
+    if available_for_trips
+        .ui.button
+            |request delivery
+        .ui.inline.header
+            i.checkmark.icon
+            |available for trips
+    .ui.header
+        |available jobs
+    each available_jobs
+        a.ui.header(href="/order/#{_id}/view") #{order_product.title} #{when}
+    if is_current_user
+        +boolean_edit key='available_for_trips' label='available' direct=true
+    .ui.padded.stackable.two.column.grid
+        .column
+            .ui.header 
+                +i name='clock'
+                |past trips 
+            .ui.stackable.cards.scrolling
+                each user_past_trips
+                    .ui.card
+                        .content
+                            a(href="/trip/#{_id}") 
+                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                            .ui.header 
+                                |#{amount} #{recipient_username}
+                            // |created #{when}
+                            |sent {{from_now start_timestamp}}
+                            small {{cal_time start_timestamp}}
+                            |sent {{from_now end_timestamp}}
+                            small {{cal_time end_timestamp}}
+                            a.ui.icon.button(href='/trip/#{_id}')
+                                i.large.chevron.right.icon
+                            
+        .column
+            .ui.header 
+                +i name='arow'
+                |future
+            .ui.stackable.cards.scrolling
+                each future_trips
+                    .ui.card
+                        .content
+                            a(href="/trip/#{_id}") 
+                                img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                            .ui.header 
+                                |#{amount} #{_author_username}
+                            |requested time #{from_now requested_timedate}
+                            |received {{from_now sent_timestamp}}
+                            small {{cal_time sent_timestamp}}
+                            a.ui.icon.button(href='/trip/#{_id}')
+                            i.ui.large.link.chevron.right.icon.edit_address
+                
+                
+                
+template(name='trip_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .six.wide.column
+                    .ui.inline.header
+                        i.pencil.icon
+                        | #{title}
+                        small trip edit
+                    +text_edit key='title' label='title' direct=true
+                    +image_edit key='image_id' label='image' direct=true icon='image'
+                    div
+                    +link_edit key='link' label='link' direct=true icon='link'
+                    div
+                    +text_edit key='location' label='location' direct=true icon='marker'
+                .ten.wide.column
+                    div
+                    +array_edit key='tags' label='tags' direct=true icon='tags'
+                    +html_edit key='description' label='description' direct=true icon='content'
+                    if can_delete
+                        .ui.red.button.delete_trip
+                            i.remove.icon   
+                            | delete
+                    a.ui.large.icon.green.button(href="/trip/#{_id}" title='save product')
+                        i.checkmark.big.icon
+                
+                
+template(name='trip_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    a.ui.basic.icon.button(href="/trips")
+                        +ibig name='field-and-tractor'
+                    
+                    if can_edit 
+                        a.ui.icon.button(href="/trip/#{_id}/edit")
+                            i.pencil.icon
+                    div
+                .six.wide.column
+                    +image_view key='image_id' label='image' direct=true
+                    .ui.big.header
+                        | #{title}
+                    div
+                    +html_view key='description' label='description' direct=true
+                    +array_view key='tags' label='tags' direct=true
+                    +link_view key='link' direct=true
+                .six.wide.column
+                    .ui.header 
+                        +i name='marker'
+                        |#{location}
+                    .ui.header
+                        +i name='love'
+                        |fans
+                    div
+                    .ui.inline.header 
+                        +i name='grocery-shelf'
+                        |products
+                    .ui.large.link.selection.animated.list
+                        each trip_products
+                            a.ui.header.item(href="/product/#{_id}/") #{title}
+                    .ui.icon.small.compact.basic.button.add_trip_product
+                        i.plus.icon
+                    if can_delete
+                        .ui.red.button.delete_trip
+                            i.remove.icon   
+                            | delete
+                    +comments                
