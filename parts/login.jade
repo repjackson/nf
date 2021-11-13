@@ -1,0 +1,83 @@
+template(name='login')
+    .ui.padded.stackable.grid
+        .centered.row
+            .eight.wide.column
+                // img.ui.image(src="{{c.url 'kitchen_logo' gravity='face' crop='fill'}}")
+                img.ui.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+                .ui.center.aligned.header login
+                .ui.inline.small.header 
+                    // +i name='user-male'
+                    i.user.outline.icon
+                    |username
+                .ui.fluid.large.input(class=login_class)
+                    input.username(type='text')
+                .spacer
+                .ui.inline.small.header 
+                    // +i name='password'
+                    i.lock.icon
+                    | password
+                .ui.fluid.large.input(class=login_class)
+                    input.password(type='password')
+                //- if username
+                //- if logging_in
+                .ui.hidden.divider
+                .ui.fluid.big.basic.button.enter(title="login #{username}" class=enter_class)
+                    +i name='internal' cl='ui mini inline image'
+                    |login
+                    strong #{username}
+                    //- i.right.chevron.icon
+                // .ui.center.aligned.basic.segment    
+                //     a.ui.compact.small.basic.button(href='/forgot_password')
+                //         +i name='forgot-password' cl='ui mini inline image'                    
+                //         |forgot password
+
+                .ui.center.aligned.basic.segment    
+                    a.ui.basic.button(href='/register')
+                        i.plus.icon
+                        |register
+                    a.ui.basic.button(href='/forgot_password')
+                        i.refresh.icon
+                        |forgot password
+
+template(name='register')
+    //- img.ui.fluid.image.bg_overlay(src="{{c.url 'forest-bg2' width=1000 crop='fit'}}")    
+    .ui.padded.stackable.grid
+        .centered.middle.aligned.row
+            .ten.wide.column
+                img.ui.centered.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
+                h1.ui.center.aligned.header
+                    +i name='user-add'
+                    | register
+                .ui.inline.small.header 
+                    +i name='user-male'
+                    |username
+                .ui.fluid.large.input(class=login_class)
+                    input.username(type='text')
+                .spacer
+                .ui.inline.small.header 
+                    +i name='password'
+                    | password
+                .ui.fluid.large.input(class=login_class)
+                    input.password(type='password')
+
+                //- .ui.fluid.labeled.input(class=login_class)
+                //-     .ui.small.inline.header 
+                //-         i.lock.grey.icon
+                //-         | password again
+                //-     input.password2(type='password')
+                .ui.hidden.divider
+                if can_register
+                    //- if registering
+                    .ui.fluid.big.basic.button.register(class=enter_class)
+                        i.user.plus.icon
+                        |register
+                else
+                    .ui.fluid.big.disabled.button(class=enter_class)
+                        i.user.plus.icon
+                        |register
+                    // // .ui.small.header username "#{username}" found
+                    
+                    a.ui.basic.button(href='/login') 
+                        // i.right.chevron.icon
+                        +i name='internal' cl='ui avatar image'
+                        |login

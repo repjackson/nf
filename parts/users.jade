@@ -1,0 +1,121 @@
+template(name='users')
+    .ui.padded.stackable.grid
+        .four.wide.column
+            +user_cloud
+        .twelve.wide.column
+            +session_set key='view_users' value='grid' icon='th' 
+            +session_set key='view_users' value='list' icon='list'
+            +session_set key='sort_users_direction' value='-1' icon='chevron down'
+            +session_set key='sort_users_direction' value='1' icon='chevron up'
+            +session_set key='sort_users_key' value='points' icon='coins'
+            +session_set key='sort_users_key' value='created_date' icon='clock'
+            // +session_set key='view_limit' value=1
+            +session_set key='view_limit' value=10
+            +session_set key='view_limit' value=20
+            +session_set key='view_limit' value=50
+            .scrolling
+                if skv_is 'view_users' 'grid'
+                    .ui.stackable.three.cards
+                        each users
+                            +user_card
+                    // else if session_is 'view_users' 'list'
+                else
+                    .ui.large.list
+                        each user_docs
+                            +user_item
+                            div
+
+template(name='user_cloud')
+    i.shield.blue.large.icon
+    if picked_user_levels
+        #clear_levels.ui.primary.icon.compact.button
+            i.remove.icon
+        each picked_user_levels
+            .unselect_level.ui.primary.compact.button
+                strong #{this}
+    each all_levels
+        .ui.compact.basic.button.select_level(class=cloud_tag_class) 
+            strong #{this.name}
+    div
+    i.tags.large.icon
+    if picked_user_tags
+        #clear_tags.ui.primary.icon.compact.button
+            i.remove.icon
+        each picked_user_tags
+            .unpick_tag.ui.primary.compact.button
+                strong #{this}
+    each all_tags
+        .ui.compact.basic.button.select_tag(class=cloud_tag_class) 
+            strong #{this.name}
+
+
+
+template(name='user_item')
+    .item
+        a.zoom.pointer.blink(href="/user/#{username}")
+            img.ui.avatar.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}") 
+
+            a.ui.inline.header.pointer(href="/user/#{username}" style="color:#{theme_color};")
+                |#{name}
+                //- |#{username}
+            .ui.inline.small.header(style="color:#{current_user.theme_color};") #{points}p
+            // .ui.large.basic.label(style="color:#{current_user.theme_color};" title='one ratio') {{to_percent one_ratio}}%
+            // .ui.large.basic.label(style="color:#{current_user.theme_color};") #{flow_volume} vol
+            each five_tags
+                .ui.basic.small.label(style="color:#{theme_color};") #{this}
+            // unless is_this_user
+            //     i.red.gift.pointer.debit.big.icon
+            //     i.teal.concierge.bell.pointer.request.big.icon
+            //     i.blue.chat.pointer.message.big.disabled.icon
+        
+template(name='user_card')
+    .card.rounded.calc_points
+        img.ui.image.mobile.only(class=currentUser.invert_class src="{{c.url profile_image_id width=400 height=300 crop='fill'}}")    
+        a.zoom.pointer.mobile.hidden.blink(href="/user/#{username}")
+            unless avatar_image_id
+                img.ui.image(class=currentUser.invert_class src="{{c.url profile_image_id width=400 height=300 crop='fill'}}")    
+            if avatar_image_id
+                .ui.fade.reveal.image
+                    .visible.content
+                        img(class=currentUser.invert_class src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}") 
+                    .hidden.content
+                        img(class=currentUser.invert_class src="{{c.url avatar_image_id height=500 width=500 gravity='face' crop='fill'}}") 
+
+        .content
+            a.ui.inline.header.pointer.blink(href="/user/#{username}" style="color:#{theme_color};")
+                |#{name}
+                //- |#{username}
+            .ui.inline.header(style="color:#{current_user.theme_color};") #{points}pts
+            .ui.basic.label(style="color:#{current_user.theme_color};" title='one ratio') {{to_percent one_ratio}}%
+            .ui.basic.label(style="color:#{current_user.theme_color};" title='flow volumen') #{flow_volume}
+            if debit_tags
+                div
+                i.gift.icon(title='gifted tags')
+                each debit_tags
+                    .ui.small.basic.label #{title}
+            if credit_tags
+                div
+                i.chevron.down.icon(title='received gift tags')
+                each credit_tags
+                    .ui.small.basic.label #{title}
+                    
+            if online
+                .ui.green.label online
+            if current_status
+                div
+                .ui.small.inline.header(title='status' style="color:#{theme_color};")
+                    i.small.clock.icon
+                    |!{current_status}
+            // div
+            // i.line.chart.icon(title='levels')
+            // each levels
+            //     .ui.basic.small.label(style="color:#{theme_color};") #{this}
+            // unless is_this_user
+            //     i.red.gift.pointer.debit.big.icon
+            //     i.teal.concierge.bell.pointer.request.big.icon
+            //     i.blue.chat.pointer.message.big.disabled.icon
+                    
+                    
+template(name='addtoset_user')
+    // .ui.small.compact.button.toggle_value(class=ats_class) #{key} #{value}
+    .ui.small.compact.button.toggle_value(class=ats_class) +#{value}

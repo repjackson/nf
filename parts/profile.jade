@@ -1,0 +1,164 @@
+template(name='user_layout')
+    // img.ui.fluid.image.checkin_banner(src="{{c.url 'cafe'}}")
+    +nav
+    .ui.bottom.attached.pushable.segment
+        +topbar
+        +left_sidebar
+        +right_sidebar
+        +cartbar
+        +walletbar
+        #main_area.global_container.pusher.scrollin
+            with user_from_username_param
+                .ui.stackable.padded.grid
+                    .row
+                        //- img.ui.image.checkin_banner(src="{{c.url banner_image width=1000 height=1000 crop='crop'}}")
+                        .four.wide.column
+                            a.item.mobile.hidden(href="/user/#{user_from_username_param.username}")
+                                img.ui.fluid.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                            // .spacer
+                            a(href="/user/#{username}")
+                                .ui.center.aligned.header
+                                    strong #{name}
+                                    //- 
+                                    //- strong #{user.first_name} #{user.last_name}
+                                    //- small @#{user.username}        
+                            a.ui.center.aligned.inline.header.mobile.hidden(href="/user/#{user_from_username_param.username}/credit" title='credit')
+                                |{{fixed user.credit}}c
+                            .ui.two.column.middle.aligned.grid.mobile.only
+                                // .column
+                                //     img.ui.small.inline.image.mobile.only(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
+                                .column
+                                    .ui.inline.header
+                                        strong #{user.name}
+                                        //- small @#{user.username}        
+                                    a.ui.inline.header(href="/user/#{user_from_username_param.username}/credit" title='credit')
+                                        +i name='coins'
+                                        |{{fixed user.credit}}c
+                            if is_current_user
+                                a.ui.basic.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
+                                    i.cog.icon
+                                    |edit profile
+                            else if is_admin
+                                a.ui.basic.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
+                                    +i name='settings' cl='ui avatar image'
+                                    |edit profile
+                            // unless is_current_user
+                            //     +friend_button
+                            if is_current_user
+                                .ui.basic.button.logout
+                                    i.sign.out.alternate.icon
+                                    |log out
+                            if admin
+                                .ui.header
+                                    i.shield.icon
+                                    |admin
+                            +array_view key='roles' label='roles' direct=true icon='shield'
+                            a.ui.basic.button.logout_other_clients(href="#" title='logout other clients')
+                                i.globe.icon
+                                |log out other clients
+                        .twelve.wide.column
+                            a.ui.basic.compact.button(href="/user/#{username}" class="{{isActiveRoute regex='user_dashboard'}}")
+                                +i name='dashboard' cl='ui avatar image'
+                                |dashboard
+                            // if is_current_user
+                            a.ui.basic.compact.button(href="/user/#{username}/credit" class="{{isActiveRoute regex='user_credit'}}")
+                                +i name='money' cl='ui avatar image'
+                                |credit
+                            a.ui.basic.compact.button(href="/user/#{username}/orders" class="{{isActiveRoute 'user_orders'}}")
+                                +i name='check' cl='ui avatar image'
+                                // i.list.icon
+                                |orders
+                            a.ui.basic.compact.button(href="/user/#{username}/friends" class="{{isActiveRoute 'user_friends'}}")
+                                +i name='friends' cl='ui avatar image'
+                                |friends
+                            a.ui.basic.compact.button(href="/user/#{username}/cart" class="{{isActiveRoute 'user_cart'}}")
+                                +i name='shopping-cart' cl='ui avatar image'
+                                |cart
+                            a.ui.basic.compact.button(href="/user/#{username}/posts" class="{{isActiveRoute 'user_posts'}}")
+                                +i name='blog' cl='ui avatar image'
+                                |posts
+                            a.ui.basic.compact.button(href="/user/#{username}/subs" class="{{isActiveRoute 'user_subs'}}")
+                                +i name='clock' cl='ui avatar image'
+                                |subscriptions
+                            a.ui.basic.compact.button(href="/user/#{username}/addresses" class="{{isActiveRoute 'user_addresses'}}")
+                                +i name='marker' cl='ui avatar image'
+                                |addresses
+                            a.ui.basic.compact.button(href="/user/#{username}/favorites" class="{{isActiveRoute 'user_favorites'}}")
+                                +i name='love' cl='ui avatar image'
+                                |favorites
+                            a.ui.basic.compact.button(href="/user/#{username}/ingredients" class="{{isActiveRoute 'user_ingredients'}}")
+                                +i name='ingredients' cl='ui avatar image'
+                                |ingredients
+                            a.ui.basic.compact.button(href="/user/#{username}/recipes" class="{{isActiveRoute 'user_recipes'}}")
+                                +i name='cookbook' cl='ui avatar image'
+                                |recipes
+                            a.ui.basic.compact.button(href="/user/#{username}/giftcards" class="{{isActiveRoute 'user_giftcards'}}")
+                                +i name='certificate' cl='ui avatar image'
+                                |gift cards
+                            a.ui.basic.compact.button(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
+                                +i name='bicycle' cl='ui avatar image'
+                                |trips
+                                
+                
+                            div.global_container
+                                .spacer
+                                +yield
+
+
+
+template(name='user_dashboard')
+    .ui.three.stackable.cards
+        .ui.card
+            .content
+                .ui.header
+                    +i name='check' cl='ui avatar image'
+                    |orders
+                .ui.list 
+                    each user_orders
+                        .item #{when}
+        .ui.card
+            .content
+                a.header(href="/user/#{username}/subscriptions")
+                    +i name='clock' cl='ui avatar image'
+                    |subs
+                each user_subs
+                    .ui.header #{when}
+        .ui.card
+            .content
+                a.header(href="/user/#{username}/friends")
+                    +i name='groups' cl='ui avatar image'
+                    |friends
+        .ui.card
+            .content
+                a.header(href="/user/#{username}/giftcards")
+                    +i name='gift-card' cl='ui avatar image'
+                    |gift cards
+                each gift_cards
+                    .ui.header #{when}
+        .ui.card
+            .content
+                a.header(href="/user/#{username}/favorites")
+                    +i name='love' cl='ui avatar image'
+                    |favorites
+                each favorites
+                    .ui.header #{when}
+        .ui.card
+            .content
+                a.header(href="/user/#{username}/ingredients")
+                    +i name='ingredients' cl='ui avatar image'
+                    |ingredients
+                .ui.small.header 
+                    |liked ingredients
+                each liked_ingredients
+                    .ui.header #{when}
+                each disliked_ingredients
+                    |disliked ingredients
+                    .ui.header #{when}
+                    
+                    
+                    
+template(name='user_favorites')
+    .ui.header favorites
+    each favorites
+        .ui.header #{title}
+                    

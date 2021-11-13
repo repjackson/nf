@@ -210,7 +210,8 @@ template(name='recipe_view')
                             i.grey.undo.icon
                             |mark not cooked
                     each cook_ids
-                        .ui.header #{this}
+                        +user_info
+                        // .ui.header #{this}
                     unless is_fav
                         .ui.basic.button.mark_fav 
                             +i name='heart' cl='ui inline image'
@@ -220,5 +221,6 @@ template(name='recipe_view')
                             i.grey.undo.icon
                             |mark unfavorite
                     each favorite_user_ids
-                        .ui.header #{this}
+                        // .ui.header #{this}
+                        +user_info
                         // +user_from_id this

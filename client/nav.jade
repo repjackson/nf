@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.menu
+    #topnav.topnav.ui.attached.borderless.inverted.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -13,7 +13,7 @@ template(name='nav')
                     img.ui.avatar.image.mobile.only(src="/android-chrome-96x96.png")
         a.item.zoomer(href='/dashboard' class="{{isActivePath '/'}}" title='dashboard')
             +ibig name='dashboard'
-        a.item.zoomer(href='/' class="{{isActivePath '/shop'}}")
+        a.item.zoomer(href='/shop' class="{{isActivePath '/shop'}}")
             +ibig name='food-cart'
             // +i name='food'
             // i.home.icon
@@ -29,8 +29,6 @@ template(name='nav')
                 else
                     i.search.large.icon
                 input.search_products(type='text' autocomplete="off" value=current_product_search)
-        a.icon.item(href='/shop' class="{{isActivePath '/shop'}}" title='shop')
-            +i name='grocery-shelf'
         a.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
             // +i name='ingredients'
             +ibig name='grocery-shelf'
@@ -271,7 +269,7 @@ template(name='walletbar')
         .ui.header wallet
         
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.menu.rightbar
+    .ui.right.sidebar.vertical.borderless.inverted.menu.rightbar
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
@@ -323,7 +321,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.big.labeled.icon.borderless.menu.smallscroll
+    .ui.left.sidebar.vertical.big.labeled.icon.borderless.inverted.menu.smallscroll
         // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
