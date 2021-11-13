@@ -71,14 +71,14 @@ template(name='layout')
     // img.ui.fluid.image.(src="{{c.url 'cafe'}}")
     +nav
     #man.ui.bottom.attached.pushable.segment
-        // +topbar
-        // +left_sidebar
-        // +right_sidebar
-        // +cartbar
-        // +walletbar
+        +topbar
+        +left_sidebar
+        +right_sidebar
+        +cartbar
+        +walletbar
         #ain_area.global_conainer.pusher
             +yield
-    // +footer
+    +footer
 
 
 template(name='mlayout')
