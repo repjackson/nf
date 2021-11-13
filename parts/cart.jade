@@ -36,8 +36,16 @@ template(name='checkout')
                 .eight.wide.column
                     each cart_items
                         .ui.basic.segment
-                            h1.ui.header #{product_title} 
-                
+                            img.ui.small.inline.image(src="{{c.url product_image_id width=400 height=400 gravity='face' crop='fill'}}")
+                            .ui.inline.large.header #{product_title} 
+                            i.large.red.circular.icon.remove_item
+                            .ui.circular.icon.button.increment
+                                i.large.plus.icon
+                            |#{amount}
+                            .ui.circular.icon.button.decrement
+                                i.large.minus.icon
+                .ui.fluid.big.green.button.complete
+                    |complete order
                 
 template(name='cart_view')
     with current_doc

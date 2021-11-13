@@ -37,7 +37,14 @@ if Meteor.isClient
             Docs.update @_id,
                 $set:
                     status:'complete'
-
+        'click .increment': ->
+            Docs.update @_id, 
+                $inc:amount:1
+        'click .decrement': ->
+            Docs.update @_id, 
+                $inc:amount:-1
+        
+        
 if Meteor.isServer 
     Meteor.publish 'cart_items', (cart_id)->
         Docs.find 
