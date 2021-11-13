@@ -3,75 +3,68 @@
 @picked_months = new ReactiveArray []
 
 
-Router.route '/cart/:doc_id', (->
-    @layout 'layout'
-    @render 'cart_view'
-    ), name:'cart_view'
-Router.route '/cart/:doc_id/edit', (->
-    @render 'cart_edit'
-    ), name:'cart_edit'
-Router.route '/cart/:doc_id/checkout', (->
-    @render 'checkout'
-    ), name:'checkout'
+Router.route '/member/:doc_id', (->
+    @layout 'full'
+    @render 'member_view'
+    ), name:'member_view'
+Router.route '/member/:doc_id/edit', (->
+    @render 'member_edit'
+    ), name:'member_edit'
 
 
 if Meteor.isClient
-    Template.cart_view.onCreated ->
+    Template.member_view.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
-    Template.cart_edit.onCreated ->
+    Template.member_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
 
 
-    Template.cart_edit.events 
+    Template.member_edit.events 
 
 
-    Template.checkout.onCreated ->
-        @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
-        @autorun => Meteor.subscribe 'cart_items', Router.current().params.doc_id, ->
-    Template.checkout.helpers 
-        cart_items: ->
+    Template.newsletter.onCreated ->
+        @autorun => Meteor.subscribe 'model_docs', 'newsletter_signup', ->
+    Template.newsletter.helpers 
+        responses: ->
             Docs.find
-                model:'cart_item'
-        item_count_total: ->
-            res = 0
-            for cart_item in Docs.find(model:'cart_item').fetch()
-                res += cart_item.amount
-            res
-        
-        
-    Template.checkout.events
-        'click .complete_order': ->
-            Docs.update @_id,
-                $set:
-                    status:'complete'
-        'click .increment': ->
-            Docs.update @_id, 
-                $inc:amount:1
-        'click .decrement': ->
-            Docs.update @_id, 
-                $inc:amount:-1
-        
-        
-if Meteor.isServer 
-    Meteor.publish 'cart_items', (cart_id)->
-        Docs.find 
-            model:'cart_item'
-            cart_id:cart_id
+                model:'newsletter_signup'
+    Template.newsletter.events
+        'click .submit_form': ->
+            name = $('.name_input').val()
+            email = $('.email_input').val()
+            if email
+                new_id = 
+                    Docs.insert 
+                        model:'newsletter_signup'
+                        name:name
+                        email:email
+                $('body').toast(
+                    # showIcon: 'heart'
+                    message: "Form submitted"
+                    showProgress: 'bottom'
+                    class: 'success'
+                    # displayTime: 'auto',
+                    position: "center bottom"
+                )
+                name = $('.name_input').val('')
+                email = $('.email_input').val('')
+
+
 
 
 if Meteor.isClient
-    Router.route '/carts', (->
-        @render 'carts'
-        ), name:'carts'
+    Router.route '/members', (->
+        @render 'members'
+        ), name:'members'
 
-    Template.carts.onCreated ->
-        @autorun -> Meteor.subscribe 'cart_facets',
+    Template.members.onCreated ->
+        @autorun -> Meteor.subscribe 'member_facets',
             Session.get('product_search')
             picked_products.array()
             Session.get('picked_month')
             Session.get('picked_weeknum')
             Session.get('picked_weekday')
-        @autorun => @subscribe 'cart_total',
+        @autorun => @subscribe 'member_total',
             Session.get('product_search')
             picked_products.array()
             Session.get('picked_month')
@@ -84,12 +77,12 @@ if Meteor.isClient
 
     # Template.delta.onRendered ->
     #     Meteor.call 'log_view', @_id, ->
-    Template.cart_view.events
+    Template.member_view.events
         'click .pick_no': _.throttle((e,t)->
             new_id = 
                 Docs.insert 
-                    model:'cart_answer'
-                    cart_id: Router.current().params.doc_id
+                    model:'member_answer'
+                    member_id: Router.current().params.doc_id
                     answer:false
             $('body').toast(
                 showIcon: 'checkmark'
@@ -103,8 +96,8 @@ if Meteor.isClient
         'click .pick_yes': _.throttle((e,t)->
             new_id = 
                 Docs.insert 
-                    model:'cart_answer'
-                    cart_id: Router.current().params.doc_id
+                    model:'member_answer'
+                    member_id: Router.current().params.doc_id
                     answer:true
             $('body').toast(
                 showIcon: 'checkmark'
@@ -115,12 +108,12 @@ if Meteor.isClient
                 position: "center bottom"
             )
         , 4000)
-    Template.carts.events
-        'click .add_cart': ->
+    Template.members.events
+        'click .add_member': ->
             new_id = 
                 Docs.insert 
-                    model:'cart'
-            Router.go "/cart/#{new_id}/edit"
+                    model:'member'
+            Router.go "/member/#{new_id}/edit"
             
             
         'keyup .search_product': ->
@@ -128,9 +121,9 @@ if Meteor.isClient
             if search.length > 2
                 Session.set('product_search', search)
             
-    Template.carts.helpers 
-        carts: ->
-            match = {model:'cart'}
+    Template.members.helpers 
+        members: ->
+            match = {model:'member'}
             if Session.get('order_status_filter')
                 match.status = Session.get('order_status_filter')
             if Session.get('order_delivery_filter')
@@ -141,21 +134,21 @@ if Meteor.isClient
                 sort: _timestamp:-1
         
         
-        cart_total: -> Counts.get('cart_total')        
+        member_total: -> Counts.get('member_total')        
         current_search: ->
             Session.get('product_search')
 
-    Template.carts.events
+    Template.members.events
         'click .clear_search': (e,t)-> Session.set('product_search',null)
         'click .calc': (e,t)->
-            Meteor.call 'cart_meta', @_id, ->
+            Meteor.call 'member_meta', @_id, ->
                 
         'change .import': (e,t)->
             papa.parse(e.target.files[0], {
                 header: true
                 complete: (results)->
                     console.log results
-                    Meteor.call 'parse_cart', results, ->
+                    Meteor.call 'parse_member', results, ->
                     # _.each(results.data, (csvData)-> 
                     #     console.log(csvData.empId + ' , ' + csvData.empCode)
                     # )
@@ -164,13 +157,13 @@ if Meteor.isClient
 
 if Meteor.isServer 
     Meteor.methods
-        cart_meta: (doc_id)->
-            cart = Docs.findOne doc_id
-            split = cart.Ean_Code.split('/')
+        member_meta: (doc_id)->
+            member = Docs.findOne doc_id
+            split = member.Ean_Code.split('/')
             # console.log split[4]
             
             
-            converted = moment(cart.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
+            converted = moment(member.Txn_Timestamp, ["DD/MM/YYYY HH:mm:ss"]).toDate()
             Docs.update doc_id, 
                 $set:
                     _product:split[4]
@@ -180,26 +173,26 @@ if Meteor.isServer
                     _week_number: moment(converted).week()
                     _weekday: moment(converted).format('dddd')
 
-        parse_cart: (parsed_results)->
+        parse_member: (parsed_results)->
             # console.log parsed_results
             # console.log parsed_results.data.length
             for item in parsed_results.data
                 # console.log item
                 found_item = 
                     Docs.findOne    
-                        model:'cart'
+                        model:'member'
                         Charge_ID:item.Charge_ID
                         Ean_Code:item.Ean_Code
                 if found_item 
                     console.log 'skipping existing item', item.Charge_ID
-                    Meteor.call 'cart_meta', found_item._id, ->
+                    Meteor.call 'member_meta', found_item._id, ->
                 else 
-                    item.model = 'cart'
+                    item.model = 'member'
                     new_id = Docs.insert item
-                    Meteor.call 'cart_meta', new_id, ->
+                    Meteor.call 'member_meta', new_id, ->
                 # console.log item.Txn_Timestamp, converted
 
-    Meteor.publish 'cart_total', (
+    Meteor.publish 'member_total', (
         product_search=''
         picked_products=[]
         picked_month=null
@@ -208,7 +201,7 @@ if Meteor.isServer
         )->
         # @unblock()
         self = @
-        match = {model:'cart', app:'nf'}
+        match = {model:'member', app:'nf'}
 
         # match.tags = $all: picked_tags
         # if model then match.model = model
@@ -225,17 +218,17 @@ if Meteor.isServer
         if picked_weekday then match._weekday = picked_weekday
         if picked_month then match._month = picked_month
         if product_search.length > 1 then match._product = {$regex:"#{product_search}", $options: 'i'}
-        Counts.publish this, 'cart_total', Docs.find(match)
+        Counts.publish this, 'member_total', Docs.find(match)
         return undefined
 
 
-    Meteor.publish 'product_by_cart', (cart)->
-        # console.log cart
+    Meteor.publish 'product_by_member', (member)->
+        # console.log member
         Docs.find({
             model:'product'
-            slug:cart._product
+            slug:member._product
         }, limit:1)
-    Meteor.publish 'cart_facets', (
+    Meteor.publish 'member_facets', (
         product_search=''
         picked_products=[]
         picked_month=null
@@ -243,7 +236,7 @@ if Meteor.isServer
         picked_weekday=null
         )->
             self = @
-            match = {model:'cart', app:'nf'}
+            match = {model:'member', app:'nf'}
     
             # match.tags = $all: picked_tags
             # if model then match.model = model

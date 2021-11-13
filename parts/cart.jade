@@ -30,22 +30,31 @@ template(name='checkout')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column 
+                .three.wide.column 
                     .ui.header checkout
                     +print_this
-                .eight.wide.column
-                    each cart_items
-                        .ui.basic.segment
-                            img.ui.small.inline.image(src="{{c.url product_image_id width=400 height=400 gravity='face' crop='fill'}}")
-                            .ui.inline.large.header #{product_title} 
-                            i.large.red.circular.icon.remove_item
-                            .ui.circular.icon.button.increment
-                                i.large.plus.icon
-                            |#{amount}
-                            .ui.circular.icon.button.decrement
-                                i.large.minus.icon
-                .ui.fluid.big.green.button.complete
-                    |complete order
+                .nine.wide.column
+                    .ui.large.list
+                        each cart_items
+                            .item
+                                .content
+                                    .header
+                                        .ui.inline.header #{product_title} 
+                                    .description
+                                        img.ui.small.inline.image(src="{{c.url product_image_id width=400 height=400 gravity='face' crop='fill'}}")
+                                        i.large.red.circular.icon.remove_item
+                                        .ui.circular.icon.button.increment
+                                            i.large.plus.icon
+                                        .ui.inline.header
+                                            |#{amount}
+                                        .ui.circular.icon.button.decrement
+                                            i.large.minus.icon
+                .four.wide.column
+                    .ui.header 
+                        |$#{subtotal}
+                    .ui.header #{item_count_total} total items
+                    .ui.fluid.big.green.button.complete
+                        |complete order
                 
 template(name='cart_view')
     with current_doc

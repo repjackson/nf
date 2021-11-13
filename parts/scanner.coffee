@@ -17,7 +17,7 @@ if Meteor.isClient
         is_adding: -> Session.get('is_adding_item')
         selected_cart: -> Session.get('selected_cart_id')
         shopping_cart_button_class:->
-            if Session.equals('selected_cart_id',@_id) then 'blue large' else 'basic'
+            if Session.equals('selected_cart_id',@_id) then 'active large' else 'basic'
         shopping_cart_docs: ->
             Docs.find 
                 model:'shopping_cart'

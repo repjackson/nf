@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.seven.item.menu
+    #topnav.topnav.ui.attached.borderless.eight.item.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -39,6 +39,11 @@ template(name='nav')
             // |ingredients
         a.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
             +ibig name='field-and-tractor'
+            // span.mobile.hidden &nbsp; 
+            // span.mobile.hidden &nbsp; 
+            // |sources
+        a.item(href='/members' class="{{isActivePath '/members'}}" title='sources')
+            +ibig name='groups'
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden &nbsp; 
             // |sources

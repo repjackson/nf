@@ -1,0 +1,71 @@
+template(name='members')
+    .ui.stackable.padded.grid
+        .four.wide.column.scrolling
+            .ui.header
+                i.member.icon
+                |#{member_total}
+                |members
+            .ui.circular.icon.button.add_member
+                i.large.plus.icon
+            a.ui.button(href="/newsletter")
+                |newsletter
+        .twelve.wide.column
+            unless subs_ready
+                i.big.loading.refresh.icon
+            .scrolling
+                if members.count
+                    .ui.four.doubling.cards
+                        each members
+                            +member_card
+                else 
+                    .ui.center.aligned.basic.segment 
+                        i.money.big.grey.loading.icon
+                                
+                     
+                                
+template(name='member_card')
+    a.card(href="/member/#{_id}")
+        .content
+            .ui.header #{title}
+
+template(name='member_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column 
+                    if in_dev 
+                        a.ui.icon.circular.button(href="/member/#{_id}/edit")
+                            i.pencil.large.icon
+                        +print_this
+                .eight.wide.column
+                    .ui.basic.segment
+                        h1.ui.header #{title} 
+                        .ui.two.column.fluid.grid 
+                            .column
+                                .ui.fluid.green.inverted.icon.button.huge.pick_yes.zoomer.pointer
+                                    // .ui.header.huge yes
+                                    i.checkmark.big.icon
+                            .column
+                                .ui.fluid.red.inverted.icon.button.huge.pick_no.zoomer.pointer
+                                    i.cancel.big.icon
+                                    // .ui.header.huge no
+                    .ui.divider
+                    +newsletter
+                
+                
+template(name='member_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    .ui.header 
+                        small editing member
+                        strong #{title}
+                    a.ui.big.icon.green.button(href="/#{model}/#{_id}" title='save')
+                        i.checkmark.big.icon
+                    +remove_button
+                    +image_edit key='image_id' label='image'
+                    +array_edit key='tags' label='tags' icon='tags'
+                .seven.wide.column.scrolling
+                    +text_edit key='title'
+                    +html_edit key='body' label='body' icon='content'

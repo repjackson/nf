@@ -20,9 +20,10 @@ template(name='scanner')
                     |active carts
                 .ui.icon.button.new_cart 
                     i.plus.icon
-                each shopping_cart_docs
-                    .ui.button.select_cart(class=shopping_cart_button_class)
-                        |#{name}
+                .ui.selection.list.smallscroll
+                    each shopping_cart_docs
+                        .item.select_cart(class=shopping_cart_button_class)
+                            |#{name}
                 div
                 if selected_cart
                     a.ui.header(href="/cart/#{selected_cart}")

@@ -733,8 +733,8 @@ input.username_search{
 }
 
 .ui.header{
-    /* font-family: 'Raleway', sans-serif !important; */
-     font-family: 'Ubuntu', sans-serif !important; 
+     font-family: 'Raleway', sans-serif !important; 
+     /*font-family: 'Ubuntu', sans-serif !important; */
      /*font-family: 'Varela Round' !important; */
     /*font-family: 'Goudy Bookletter 1911', sans-serif !important;*/
 }
