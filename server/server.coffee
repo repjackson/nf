@@ -116,8 +116,13 @@ Meteor.publish 'model_docs', (model,limit)->
             model: model
         }, sort:_timestamp:-1
 Meteor.publish 'me', ->
-    Meteor.users.find @userId
-
+    Meteor.users.find({_id:@userId},{
+        fields:
+            username:1
+            image_id:1
+            tags:1
+            points:1
+    })
 
 Meteor.publish 'document_by_slug', (slug)->
     Docs.find
@@ -142,11 +147,11 @@ Meteor.publish 'inline_doc', (slug)->
 
 
 
-# Meteor.publish 'user_from_username', (username)->
-#     Meteor.users.find username:username
+Meteor.publish 'user_from_username', (username)->
+    Meteor.users.find username:username
 
-# Meteor.publish 'user_from_id', (user_id)->
-#     Meteor.users.find user_id
+Meteor.publish 'user_from_id', (user_id)->
+    Meteor.users.find user_id
 
 Meteor.publish 'doc_by_id', (doc_id)->
     Docs.find doc_id

@@ -83,7 +83,14 @@ template(name='ingredient_view')
     with current_doc
         .ui.stackable.padded.grid
             .row
-                .four.wide.column 
+                .six.wide.column 
+                    h1.ui.header #{title} 
+                    a(href="https://www.google.com/search?q=#{title}" target='_window' title='search title')
+                        i.search.icon
+                    a(href="https://www.google.com/search?tbm=isch&q=#{title}" target='_window' title='image search title')
+                        i.image.icon
+                    a(href="https://www.amazon.com/s?k=#{title}&ref=nb_sb_noss_2" target='_window' title='amazon search title')
+                        i.amazon.icon
                     a.ui.compact.circular.basic.button.fly_left(href="/ingredients")
                         i.left.chevron.icon
                         +i name='food' cl='ui inline image'
@@ -101,14 +108,7 @@ template(name='ingredient_view')
                         +print_this
                     // +view_visibility
                     // +author_card
-                .eight.wide.column
-                    h1.ui.header #{title} 
-                    a(href="https://www.google.com/search?q=#{title}" target='_window' title='search title')
-                        i.search.icon
-                    a(href="https://www.google.com/search?tbm=isch&q=#{title}" target='_window' title='image search title')
-                        i.image.icon
-                    a(href="https://www.amazon.com/s?k=#{title}&ref=nb_sb_noss_2" target='_window' title='amazon search title')
-                        i.amazon.icon
+                .six.wide.column
                     +image_view key='image_id' label='image' direct=true
                     +image_view key='images.full' label='image' direct=true
                     +image_view key='images.medium' label='image' direct=true

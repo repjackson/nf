@@ -70,22 +70,10 @@ template(name='transfer_view')
                     .ui.header 
                         +i name='marker'
                         |#{location}
-                    // .ui.header
-                    //     +i name='love'
-                    //     |fans
-                    // div
-                    .ui.inline.header 
-                        +i name='grocery-shelf'
-                        |products
-                    .ui.two.stackable.cards
-                        each transfer_products
-                            a.ui.card(href="/product/#{_id}/") 
-                                img.ui.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
-                                .content
-                                    |#{title} - 
-                                    |$#{price_usd}
-                    .ui.icon.small.compact.basic.button.add_transfer_product
-                        i.plus.icon
+                    .ui.header
+                        +i name='love'
+                        |fans
+                    div
                     if can_delete
                         .ui.red.button.delete_transfer
                             i.remove.icon   

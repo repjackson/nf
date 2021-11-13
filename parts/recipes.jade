@@ -63,11 +63,20 @@ template(name='recipes')
                                 |#{title}
                             |added #{when} by #{_author_username}
                         .content
+                            // .ui.star.rating(data-rating="3")
+                            i.yellow.star.icon
+                            i.yellow.star.icon
+                            i.yellow.star.icon
+                            i.star.icon
+                            i.star.icon
                             +favorite_icon_toggle
                             i.clock.icon
                             i.food.icon
                             i.chat.icon
                             i.users.icon
+                            
+                            
+                            
 template(name='favorite_icon_toggle')
     i.heart.link.icon.toggle_fav(class=icon_class)
     |#{favorite_ids.length}

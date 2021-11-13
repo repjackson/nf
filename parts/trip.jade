@@ -2,10 +2,11 @@ template(name='trips')
     .ui.stackable.padded.grid
         .sixteen.wide.column
             .ui.inline.header 
-                +i name='bicycle'
+                +i name='car'
                 |trips
             .ui.basic.icon.button.add_trip
                 i.large.plus.icon
+                |request
         .eight.wide.column
             .ui.four.stackable.centered.cards
                 each model_docs_helper 'trip'
@@ -14,10 +15,8 @@ template(name='trips')
                             img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
                         a.content(href="/trip/#{_id}") 
                             .ui.header 
-                                |#{title}
-                            each trip_product
-                                .ui.header #{title}
-                            // |added #{when} by #{_author_username}
+                                |#{start_location} to #{end_location}
+                            |added #{when} by #{_author_username}
         .eight.wide.column
             .ui.header available jobs
             each available_jobs
@@ -63,7 +62,7 @@ template(name='user_trips')
                             
         .column
             .ui.header 
-                +i name='arow'
+                +i name='arrow'
                 |future
             .ui.stackable.cards.scrolling
                 each future_trips
@@ -90,22 +89,27 @@ template(name='trip_edit')
                         i.pencil.icon
                         | #{title}
                         small trip edit
-                    +text_edit key='title' label='title' direct=true
-                    +image_edit key='image_id' label='image' direct=true icon='image'
                     div
-                    +link_edit key='link' label='link' direct=true icon='link'
-                    div
-                    +text_edit key='location' label='location' direct=true icon='marker'
+                    +key_value_edit key='start_location' value='nudefoods' label='nude foods'
+                    +text_edit key='start_location' label='start location' direct=true icon='marker'
+                    +text_edit key='end_location' label='end location' direct=true icon='marker'
                 .ten.wide.column
                     div
                     +array_edit key='tags' label='tags' direct=true icon='tags'
-                    +html_edit key='description' label='description' direct=true icon='content'
+                    +html_edit key='notes' label='notes' direct=true icon='content'
+                    +datetime_edit key='arrival_datetime' label='arrival' direct=true
                     if can_delete
                         .ui.red.button.delete_trip
                             i.remove.icon   
                             | delete
-                    a.ui.large.icon.green.button(href="/trip/#{_id}" title='save product')
-                        i.checkmark.big.icon
+                    if published
+                        a.ui.large.icon.green.button(href="/trip/#{_id}" title='save product')
+                            i.checkmark.big.icon
+                            |save
+                    else 
+                        a.ui.large.icon.green.button.publish(href="/trip/#{_id}" title='save product')
+                            i.checkmark.big.icon
+                            |save and publish
                 
                 
 template(name='trip_view')
@@ -114,7 +118,7 @@ template(name='trip_view')
             .row
                 .four.wide.column
                     a.ui.basic.icon.button(href="/trips")
-                        +ibig name='field-and-tractor'
+                        +ibig name='car'
                     
                     if can_edit 
                         a.ui.icon.button(href="/trip/#{_id}/edit")
@@ -123,18 +127,20 @@ template(name='trip_view')
                 .six.wide.column
                     +image_view key='image_id' label='image' direct=true
                     .ui.big.header
-                        | #{title}
+                        small start location:
+                        i.marker.icon
+                        | #{start_location}
+                    .ui.big.header
+                        small end location:
+                        i.marker.icon
+                        | #{end_location}
                     div
                     +html_view key='description' label='description' direct=true
                     +array_view key='tags' label='tags' direct=true
-                    +link_view key='link' direct=true
                 .six.wide.column
                     .ui.header 
                         +i name='marker'
                         |#{location}
-                    .ui.header
-                        +i name='love'
-                        |fans
                     div
                     .ui.inline.header 
                         +i name='grocery-shelf'
