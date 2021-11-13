@@ -1,0 +1,347 @@
+template(name='orders')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column.scrolling
+            .ui.stackable.grid 
+                .four.wide.column
+                    .ui.header 
+                        +i name='money'
+                        |orders
+                    // .ui.button.import
+                    //     |import
+                    a.ui.button(href="/mishi")
+                        |mishi
+                    |view
+                    // +skvs key='order_sort_filter' value='open'               
+                    +skvs key='order_sort_filter' value='now'               
+                    +skvs key='order_sort_filter' value='later'   
+                    +skvs key='order_sort_filter' value=null label='all'
+                    |delivery
+                    +skvs key='order_delivery_filter' value='pickup'   
+                    +skvs key='order_delivery_filter' value='delivery'   
+                    +skvs key='order_delivery_filter' value=null label='all'   
+                    +skvs key='order_status_filter' value='cart' label='cart' icon='cart'   
+                    +skvs key='order_status_filter' value=null label='all status' icon='cart'   
+                    div
+                    |sort by
+                    +skvs key='order_sort_key' value='price'               
+                .twelve.wide.column
+                    a.ui.center.aligned.header(href="/orders")
+                        +i name='clock' cl='ui tiny inline image'
+                        | orders
+                    .ui.button today
+                    .ui.button now
+                    .ui.button later
+                    .ui.button sort order
+                    .ui.button sort by
+                    .scrolling
+                        each orders
+                            +order_item
+                            .ui.divider
+            
+            
+template(name='order_item')
+    a.ui.grid(href="/order/#{_id}")
+        .row
+            // .four.wide.column.zoomer
+            //     with order_product
+            //         //- img.ui.mini.image(src=image)
+            //         +image_view key='image_id' direct=true cl='zoomer ui fluid image'
+            .sixteen.wide.column
+                .ui.list
+                    each order_things
+                        .item
+                            strong #{product_title}
+                            small $#{product_price}
+                            |status:#{status}
+                            // if kve status 'pending'
+                            //     i.large.yellow.clock.icon
+                            // else if kve status 'ready'
+                            //     i.large.green.clock.icon
+                            // else if kve status 'complete'
+                            //     i.large.green.checkmark.icon
+                            // .ui.inline.header product_id: #{product_id}
+                            | {{from_now _timestamp}} 
+                            small ({{long_date _timestamp}})
+                a.ui.icon.big.button(href="/order/#{_id}")
+                    i.right.chevron.large.icon
+                .ui.inline.header #{status}
+                .ui.inline.header $#{subtotal}
+                .ui.inline.header paid: #{paid}
+                each order_things
+                    img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                if in_dev 
+                    +print_this
+                i.cubes.icon(title='things')
+                // each order_things
+                |#{when}, #{_author_username} 
+
+template(name='order')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column
+                    a.ui.icon.button(href="/orders")
+                        i.chevron.left.icon
+                        // +i name='invoice' cl='ui avatar image'
+                    .ui.inline.header 
+                        // strong '#{order_product.title}'
+                        +i name='invoice' cl='ui avatar image'
+                        |order
+                    // .ui.segment 
+                    //     with order_product
+                    //         a(href="/product/#{_id}")
+                    //             img.ui.rounded.image(src="{{c.url image_id width=400 height=400}}")
+                    //         a.ui.header(href="/product/#{_id}") #{title}
+                    //         // - .ui.header #{cook_tip} cook tip
+                    //         // .ui.header $#{order_total_transaction_amount} 
+                    //         //     small total transaction amount
+                    div
+                    .ui.inline.header 
+                        i.clock.icon
+                        small started
+                        strong #{when}
+                        small by
+                        strong #{_author_username}
+                    with buyer
+                        +user_card
+                    if is_admin
+                        +print_this
+                    +comments
+                    .ui.grey.header 
+                        i.eye.icon
+                        |viewers
+                    .ui.small.button.mark_viewed
+                        |mark viewed
+                    each view_events
+                        .item 
+                            |#{username} {{from_now view_timestamp}}
+                .six.wide.column
+                    .ui.large.feed
+                        .event
+                            .label
+                                img.ui.mini.inline.image(src="{{c.url author.image_id width=200 height=200 gravity='face' crop='fill'}}")
+                            .content
+                                .summary
+                                    a.user #{_author_username}
+                                    |started order 
+                                    .date #{when}
+                        each order_things
+                            .event
+                                .label
+                                    img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    .summary
+                                        a.user #{product_title}
+                                        |added for ${{fixed product_price}}
+                                        .date #{when}
+                        if completed
+                            .event
+                                .label
+                                    img.ui.mini.inline.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    .summary
+                                        a.user payment completed
+                                        .date {{from_now payment_timestamp}}
+                        // .event
+                        //     .label
+                        //         img.avatar
+                        //     .content
+                        //         .summary
+                        //             a.user dev 
+                        //             |message
+                        //             .date #{when}
+                        //         .meta
+                        //             a.like
+                        //                 i.like.icon
+                        //                 |4 likes
+                    // a.ui.compact.button(href="/product/#{product_id}")
+                    //     i.left.chevron.icon
+                    //     img.ui.avatar.image(src="{{c.url order_product.image_id width=200 height=200}}")    
+                    //     |#{order_product.title}
+                    .ui.header 
+                        i.cart.icon
+                        |cart items
+                    each cart_items 
+                        .ui.header #{title}
+                    
+                    if kve 'when' 'later'
+                        +datetime_view key='pickup_datetime'
+                    .ui.header status: #{status}
+                    // if complete
+                    //     .ui.header
+                    //         i.checkmark.icon
+                    //         |complete
+                    //     .ui.inline.header {{from_now complete_timestamp}}
+                    // .ui.header complete #{complete}
+                    // .ui.header 
+                    //     i.shield.icon
+                    //     |admin
+                    // if is_admin
+                    //     +kvs key='status' value='started' label='mark started' direct=true
+                    //     if kve status 'started'
+                    //         +kvs key='status' value='ready' label='mark ready' direct=true
+                    //         +kvs key='status' value='picked_up' label='picked up' direct=true
+                    // div
+                    .ui.inline.header 
+                        i.user.outline.icon
+                        |customer
+                    if delivered
+                        if is_author
+                            +kvs key='status' value='picked_up' label='picked up' direct=true
+                            .ui.basic.large.button.mark_arrived
+                                +i name='pick-up' cl='ui inline image'
+                                |mark picked up
+                            
+                    +kvs key='status' value='picked_up' label='mark picked up' direct=true
+                        
+                .six.wide.column
+                    +product_delivery
+                    // |{{from_now datetime_available}}:
+                    // +textarea_view key='description'
+                    div
+                    if pickup
+                        .ui.header
+                            |pickup
+                    else if delivery
+                        .ui.header 
+                            |delivery
+                    if is_admin
+                        .ui.small.compact.button.delete_order
+                            i.remove.icon
+                            |cancel
+                    .ui.hidden.divider
+                    +comments
+                    
+                    
+                    
+                    
+template(name='product_delivery')
+    .ui.segment
+        // .ui.inline.header 
+        //     +i name='bicycle'
+        //     |delivery
+        if is delivery_method 'delivery'
+            .ui.header 
+                +i name='bicycle'
+                |type: delivery
+        if is delivery_method 'pickup'
+            .ui.header 
+                +i name='doormat'
+                |type: pickup
+        if is delivery_time_type 'now'
+            .ui.header 
+                +i name='present'
+                small for when: 
+                strong now
+        if is delivery_time_type 'later'
+            .ui.header 
+                +i name='clock'
+                |for when: 
+                strong later
+        
+    
+        .ui.header 
+            i.shield.icon
+            |staff
+        unless runner_viewed
+            .ui.basic.large.button.mark_viewed
+                +i name='eye-checked' cl='ui avatar image'
+                |mark viewed
+        if runner_viewed 
+            div
+            +i name='eye-checked' cl='ui avatar image'
+            .ui.inline.header viewed {{from_now runner_viewed_timestamp}} 
+            .ui.small.grey.inline.header {{cal_time runner_viewed_timestamp}}
+            div
+            unless preparing
+                .ui.basic.large.button.mark_preparing
+                    +i name='new-product--v1' cl='ui avatar image'
+                    |preparing
+        if preparing 
+            div
+            +i name='new-product--v1' cl='ui inline image'
+            .ui.inline.header prep started {{from_now preparing_timestamp}} 
+            .ui.small.grey.inline.header {{cal_time preparing_timestamp}}
+            div
+            unless prepared
+                .ui.basic.large.button.mark_prepared
+                    +i name='handle-with-care' cl='ui avatar image'
+                    |prepared
+        if prepared 
+            div
+            +i name='handle-with-care' cl='ui inline image'
+            .ui.inline.header prepared {{from_now prepared_timestamp}} 
+            .ui.small.grey.inline.header {{cal_time prepared_timestamp}}
+            div
+            unless delivering
+                .ui.basic.large.button.mark_delivering
+                    +i name='truck' cl='ui inline image'
+                    |delivering
+        if delivering 
+            div
+            +i name='truck' cl='ui inline image'
+            .ui.inline.header started delivery {{from_now delivering_timestamp}} 
+            .ui.small.grey.inline.header {{cal_time delivering_timestamp}}
+            
+            div
+            unless arrived
+                .ui.basic.large.button.mark_arrived
+                    +i name='checked-truck' cl='ui inline image'
+                    |arrived
+        if arrived 
+            div
+            +i name='checked-truck' cl='ui inline image'
+            .ui.inline.header arrived {{from_now arrived_timestamp}} 
+            .ui.small.grey.inline.header {{cal_time arrived_timestamp}}
+            +image_edit key='delivery_photo' direct=true
+            if delivery_photo                        
+                div
+                .ui.basic.large.button.mark_delivery_complete
+                    i.large.checkmark.icon
+                    |delivered
+
+
+
+template(name='user_orders')
+    .ui.inline.header #{orders.count} 
+        +i name='invoice'
+        |orders
+    .ui.button
+        |view complete
+    |sort by
+    .ui.button
+        |price
+    .ui.button
+        |time
+    .ui.button 
+        |delivery
+    .scrolling
+        each model_docs_helper 'order' 
+            +user_order_item
+
+template(name='user_order_item')
+    .ui.segment
+        each order_items
+            img.ui.avatar.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+            .ui.header #{product_title}
+            a.ui.small.header.inline.lowercase(href="/order/#{_id}")
+                |#{subtitle}c
+            .ui.inline.header
+                |status: 
+                if is status 'pending'
+                    i.large.yellow.clock.icon
+                else if is status 'ready'
+                    i.large.green.clock.icon
+                else if is status 'complete'
+                    i.large.green.checkmark.icon
+                |#{status}
+                // .ui.inline.header product_id: #{product_id}
+                
+        a.ui.icon.big.button(href="/order/#{_id}")
+            i.right.chevron.large.icon
+        |#{status}
+        i.clock.icon
+        |#{when}
+        if is_admin 
+            +print_this
+            +remove_button

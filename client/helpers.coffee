@@ -365,13 +365,13 @@ Template.registerHelper 'current_doc', ->
     if doc then doc
 
 
-# Template.registerHelper 'user_from_username_param', () ->
-#     found = Meteor.users.findOne username:Router.current().params.username
-#     # console.log found
-#     if found
-#         found
-#     else 
-#         Meteor.user()
+Template.registerHelper 'user_from_username_param', () ->
+    found = Meteor.users.findOne username:Router.current().params.username
+    # console.log found
+    if found
+        found
+    else 
+        Meteor.user()
 Template.registerHelper 'field_value', () ->
     # console.log @
     parent = Template.parentData()

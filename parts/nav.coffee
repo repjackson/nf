@@ -230,11 +230,11 @@ if Meteor.isClient
                 Meteor.users.update Meteor.userId(),
                     $addToSet:'roles':'dev'
     Template.nav.events
-        'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
+        # 'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
     Template.left_sidebar.events
-        'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
+        # 'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
     Template.right_sidebar.events
-        'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
+        # 'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
     # Template.secnav.events
     #     'mouseenter .item': (e,t)-> $(e.currentTarget).closest('.item').transition('pulse', '1000')
     #     'click .menu_dropdown': ->

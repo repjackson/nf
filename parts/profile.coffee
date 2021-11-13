@@ -55,8 +55,8 @@ if Meteor.isClient
 
 
     Template.user_layout.onCreated ->
-        @autorun -> Meteor.subscribe 'user_from_username', Router.current().params.username
-        @autorun -> Meteor.subscribe 'user_referenced_docs', Router.current().params.username
+        @autorun -> Meteor.subscribe 'user_from_username', Router.current().params.username, ->
+        @autorun -> Meteor.subscribe 'user_referenced_docs', Router.current().params.username, ->
 
     Template.user_layout.onRendered ->
         Meteor.setTimeout ->
@@ -246,6 +246,12 @@ if Meteor.isClient
                 Meteor.users.update Meteor.userId(),
                     $inc: credit: @amount
 
+        'click .send_points': ->
+            new_id = 
+                Docs.insert 
+                    model:'transfer'
+                    amount:10
+            Router.go "/transfer/#{new_id}/edit"
 
 
     Template.user_credit.helpers

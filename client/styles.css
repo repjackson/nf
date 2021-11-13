@@ -642,13 +642,13 @@ input.username_search{
     /* transform: translate(0, 4px); */
 }
 
-.button:hover {
+/*.button:hover {*/
     /* background-color: rgba(200, 200, 200, 0.5) !important; */
     /* box-shadow: 0 0px 2px 1px rgba(50, 50, 100, 0.2) !important; */
     /* background-color: rgba(43, 33, 0, .9) !important; */
     /* color: white !important; */
     /* transform: translate(0, 4px); */
-}
+/*}*/
 
 
 /* .button:active {

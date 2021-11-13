@@ -54,11 +54,6 @@ template(name='nav')
         //     +ibig name='scan-stock'
         // a.item(href='/wp' class="{{isActivePath '/wp'}}" title='wordpress')
         //     +ibig name='wordpress'
-        a.item(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
-            +ibig name='tags'
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden labels
         a.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             +ibig name='cookbook'
         // a.item(href='/questions' class="{{isActivePath '/questions'}}" title='questions')
@@ -317,7 +312,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.big.labeled.icon.borderless.inverted.menu.smallscroll
+    .ui.left.sidebar.vertical.labeled.icon.borderless.inverted.menu.smallscroll
         // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One
@@ -347,6 +342,9 @@ template(name='left_sidebar')
         a.item.toggle_leftbar(href='/mishi' class="{{isActivePath '/mishi'}}")
             +i name='money'
             | mishi orders
+        a.item.toggle_leftbar(href='/transfers' class="{{isActivePath '/transfers'}}")
+            +i name='donate'
+            | point transfers
         a.icon.item.toggle_leftbar(href='/labels' class="{{isActivePath '/labels'}}" title='labels')
             +i name='tags'
             |labels

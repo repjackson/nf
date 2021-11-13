@@ -235,8 +235,13 @@ template(name='user_credit')
                 .ui.inline.header
                     // i.money.icon
                     +i name='money'
-                    |{{fixed user_from_username_param.points}}
+                    |{{user_from_username_param.points}}
                     |points
+                .ui.big.button.send_points
+                    |send points
+                a.ui.big.button(href="/transfers")
+                    i.exchange.icon
+                    |transfers
                 // .ui.inline.header 
                 //     // i.shield.icon
                 //     +i name='shield'

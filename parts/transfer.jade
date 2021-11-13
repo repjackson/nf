@@ -1,0 +1,97 @@
+template(name='transfers')
+    .ui.stackable.padded.grid
+        .sixteen.wide.column
+            .ui.inline.header 
+                +i name='donate'
+                |transfers
+            .ui.basic.icon.button.add_transfer
+                i.large.plus.icon
+        .sixteen.wide.column
+            .ui.five.stackable.centered.cards
+                each model_docs_helper 'transfer'
+                    .ui.card.zoomer
+                        a.fly_right(href="/transfer/#{_id}") 
+                            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                        a.content(href="/transfer/#{_id}") 
+                            .ui.header 
+                                |#{title}
+                            i.tag.icon
+                            each tags 
+                                .ui.label #{this}
+                            if location_tags
+                                i.marker.red.icon
+                                |#{location}
+                            each location_tags 
+                                .ui.label #{this}
+                            |#{when}
+                
+template(name='transfer_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .six.wide.column
+                    .ui.inline.header
+                        i.pencil.icon
+                        | #{title}
+                        small transfer edit
+                    a.ui.large.icon.green.button(href="/transfer/#{_id}" title='save product')
+                        i.checkmark.big.icon
+                    +text_edit key='title' label='title' direct=true
+                    +image_edit key='image_id' label='image' direct=true icon='image'
+                    div
+                    +link_edit key='link' label='link' direct=true icon='link'
+                    div
+                    +text_edit key='location' label='location' direct=true icon='marker'
+                .ten.wide.column
+                    div
+                    +array_edit key='tags' label='tags' direct=true icon='tags'
+                    +html_edit key='description' label='description' direct=true icon='content'
+                    if can_edit
+                        .ui.red.button.delete_transfer
+                            i.remove.icon   
+                            | delete
+                
+                
+template(name='transfer_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .eight.wide.column
+                    // a.ui.basic.icon.button(href="/transfers")
+                    //     +i name='field-and-tractor'
+                    +image_view key='image_id' label='image' direct=true
+                    .ui.big.header
+                        | #{title}
+                    div
+                    +html_view key='description' label='description' direct=true
+                .eight.wide.column
+                    +array_view key='tags' label='tags' direct=true
+                    +link_view key='link' direct=true
+                    .ui.header 
+                        +i name='marker'
+                        |#{location}
+                    // .ui.header
+                    //     +i name='love'
+                    //     |fans
+                    // div
+                    .ui.inline.header 
+                        +i name='grocery-shelf'
+                        |products
+                    .ui.two.stackable.cards
+                        each transfer_products
+                            a.ui.card(href="/product/#{_id}/") 
+                                img.ui.image(src="{{c.url image_id width=200 height=200 gravity='face' crop='fill'}}")
+                                .content
+                                    |#{title} - 
+                                    |$#{price_usd}
+                    .ui.icon.small.compact.basic.button.add_transfer_product
+                        i.plus.icon
+                    if can_delete
+                        .ui.red.button.delete_transfer
+                            i.remove.icon   
+                            | delete
+                    // +comments                
+                    if in_dev 
+                        a.ui.icon.button(href="/transfer/#{_id}/edit")
+                            i.pencil.icon
+                    div
