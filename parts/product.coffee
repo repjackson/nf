@@ -27,10 +27,10 @@ if Meteor.isClient
 
     Template.product_view.onCreated ->
         @autorun => Meteor.subscribe 'product_source', Router.current().params.doc_id, ->
-        @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        # @autorun => Meteor.subscribe 'product_from_product_id', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'orders_from_product_id', Router.current().params.doc_id
-        @autorun => Meteor.subscribe 'subs_from_product_id', Router.current().params.doc_id
+        @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
+        @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id, ->
+        @autorun => Meteor.subscribe 'orders_from_product_id', Router.current().params.doc_id, ->
+        @autorun => Meteor.subscribe 'subs_from_product_id', Router.current().params.doc_id, ->
     Template.product_view.onRendered ->
         Meteor.call 'log_view', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'ingredients_from_product_id', Router.current().params.doc_id
@@ -259,6 +259,11 @@ if Meteor.isClient
         # )
 
 if Meteor.isServer
+    Meteor.publish 'ingredients_from_product_id', (product_id)->
+        product = Docs.findOne product_id
+        Docs.find 
+            model:'ingredient'  
+            _id:$in:product.ingredient_ids
     Meteor.publish 'product_source', (product_id)->
         product = Docs.findOne product_id
         # console.log 'need source from this product', product

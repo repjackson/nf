@@ -45,17 +45,7 @@ template(name='product_view')
                     // .ui.header #{menu_section}
                             +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
                     // +boolean_view key='has_2cup' label='2 cup' direct=true icon='cup'
-                    if has_2cup
-                        +float_view key='2cup_price' label='2 cup price' icon='cup' direct=true
                     div
-                    // +boolean_view key='has_4cup' label='4 cup' direct=true icon='mason-jar'
-                    if has_4cup
-                        +float_view key='4cup_price' label='4 cup price' icon='mason-jar' direct=true
-                    div
-                    // +boolean_view key='has_8cup' label='8 cup' direct=true icon='glass-jar'
-                    if has_8cup
-                        +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
-                    // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                     .ui.inline.header 
                         +i name='ingredients'
                         |ingredients
@@ -68,6 +58,17 @@ template(name='product_view')
                     
                     // +product_orders
                 .four.wide.column
+                    if has_2cup
+                        +float_view key='2cup_price' label='2 cup price' icon='cup' direct=true
+                    div
+                    // +boolean_view key='has_4cup' label='4 cup' direct=true icon='mason-jar'
+                    if has_4cup
+                        +float_view key='4cup_price' label='4 cup price' icon='mason-jar' direct=true
+                    div
+                    // +boolean_view key='has_8cup' label='8 cup' direct=true icon='glass-jar'
+                    if has_8cup
+                        +float_view key='8cup_price' label='8 cup price' icon='glass-jar' direct=true
+                    // img.ui.rounded.fluid.image.zoomer(src="{{c.url image_id}}")
                     .ui.big.fluid.green.button.add_to_cart
                         i.cart.plus.large.icon
                         |add to cart

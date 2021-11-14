@@ -102,9 +102,6 @@ template(name='ingredient_view')
                     // +author_card
                 .six.wide.column
                     +image_view key='image_id' label='image' direct=true
-                    // +image_view key='images.full' label='image' direct=true
-                    // +image_view key='images.medium' label='image' direct=true
-                    // +image_view key='small' label='image' direct=true
                     .f6
                         +html_view key='description' icon='content' label='body' direct=true
                     +array_view key='location_tags' label='location tags' icon='marker' direct=true
@@ -114,16 +111,12 @@ template(name='ingredient_view')
                         +i name='food-cart'
                         |#{ingredient_products.length}
                         |products included in
-                    .ui.three.doubling.cards 
+                    .ui.doubling.cards 
                         each ingredient_products
                             a.card(href="/product/#{_id}")
+                                img.ui.zoomer.pointer.image(src="{{c.url image_id width=400 height=400}}")
                                 .content
-                                    .header #{name}
-                                    |#{amount} #{measurement}
-                                // .item(title='String') 
-                                // .item(title='String') uuid: #{uuid}
-                                // .item(title='Number') amount: #{amount}
-                                // .item measurement: String #{measurement}
+                                    .header #{title}
                     .ui.header 
                         +i name='cookbook'
                         |#{ingredient_recipes.length}

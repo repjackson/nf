@@ -322,6 +322,7 @@ Router.route '/ingredient/:doc_id/edit', (->
 if Meteor.isClient
     Template.ingredient_view.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
+        @autorun => Meteor.subscribe 'products_from_ingredient_id', Router.current().params.doc_id, ->
     Template.ingredient_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id, ->
 
@@ -376,7 +377,7 @@ if Meteor.isServer
             ingredient_id: ingredient_id
         }, limit:10)
 
-    Meteor.publish 'ingredient_products', (ingredient_id)->
+    Meteor.publish 'products_from_ingredient_id', (ingredient_id)->
         Docs.find({
             model:'product'
             ingredient_ids:$in:[ingredient_id]
