@@ -131,19 +131,20 @@ template(name='checkout')
                     each cart_items
                         .item
                             // .image
-                            img.ui.tiny.inline.rounded.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
-                            .ui.inline.small.header $#{product_price} #{product_title}
-                            div
-                            small added #{when}
-                            .ui.basic.icon.button.decrease_amount
-                                i.minus.icon
-                            // .ui.inline.header #{amount}
-                            .ui.basic.icon.button.increase_amount
-                                i.plus.icon
-                            .ui.basic.icon.button.remove_item
-                                i.remove.red.icon
-                            // if is_admin
-                            //     +print_this
+                            img.ui.tiny.inline.rounded.image(src="{{c.url product_image_id width=400 height=400 crop='pad'}}")
+                            .content
+                                .header $#{product_price} #{product_title}
+                                .description
+                                    small added #{when}
+                                    .ui.basic.icon.button.decrease_amount
+                                        i.minus.icon
+                                    .ui.inline.header #{amount}
+                                    .ui.basic.icon.button.increase_amount
+                                        i.plus.icon
+                                    .ui.basic.icon.button.remove_item
+                                        i.remove.red.icon
+                                    // if is_admin
+                                    //     +print_this
                 .ui.header 
                     +i name='receipt'
                     |subtotal: $#{my_cart_subtotal}

@@ -29,44 +29,6 @@ template(name='nav')
         //         else
         //             i.search.large.icon
         //         input.search_products(type='text' autocomplete="off" value=current_product_search)
-        a.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
-            // +i name='ingredients'
-            +ibig name='grocery-shelf'
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden &nbsp; 
-            // |ingredients
-        a.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
-            +ibig name='field-and-tractor'
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden &nbsp; 
-            // |sources
-        a.item(href='/members' class="{{isActivePath '/members'}}" title='sources')
-            +ibig name='groups'
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden &nbsp; 
-            // |sources
-        a.item(href='/mishi' class="{{isActivePath '/mishi'}}" title='mishi orders')
-            +ibig name='money'
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden orders
-        // a.item(href='/scanner' class="{{isActivePath '/scanner'}}" title='scanner')
-        //     +ibig name='scan-stock'
-        // a.item(href='/wp' class="{{isActivePath '/wp'}}" title='wordpress')
-        //     +ibig name='wordpress'
-        a.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
-            +ibig name='cookbook'
-        // a.item(href='/questions' class="{{isActivePath '/questions'}}" title='questions')
-        //     +ibig name='ask'
-        //     // span.mobile.hidden &nbsp; 
-        //     // span.mobile.hidden &nbsp; 
-        //     // span.mobile.hidden recipes
-        a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            +i name='invoice'
-        a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
-            +ibig name='blog'
-        a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
-            +i name='car'
         // a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
         //     +i name='phone'
         // a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
@@ -123,7 +85,46 @@ template(name='nav')
                     //         i.user.large.icon
                     // strong.mobile.hidden #{currentUser.name}
                     i.bars.large.icon
-                        
+    .ui.small.attached.inverted.menu
+        a.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
+            // +i name='ingredients'
+            +ibig name='grocery-shelf'
+            // span.mobile.hidden &nbsp; 
+            // span.mobile.hidden &nbsp; 
+            // |ingredients
+        a.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
+            +ibig name='field-and-tractor'
+            // span.mobile.hidden &nbsp; 
+            // span.mobile.hidden &nbsp; 
+            // |sources
+        a.item(href='/members' class="{{isActivePath '/members'}}" title='sources')
+            +ibig name='groups'
+            // span.mobile.hidden &nbsp; 
+            // span.mobile.hidden &nbsp; 
+            // |sources
+        a.item(href='/mishi' class="{{isActivePath '/mishi'}}" title='mishi orders')
+            +ibig name='money'
+            // span.mobile.hidden &nbsp; 
+            // span.mobile.hidden &nbsp; 
+            // span.mobile.hidden orders
+        // a.item(href='/scanner' class="{{isActivePath '/scanner'}}" title='scanner')
+        //     +ibig name='scan-stock'
+        // a.item(href='/wp' class="{{isActivePath '/wp'}}" title='wordpress')
+        //     +ibig name='wordpress'
+        a.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
+            +ibig name='cookbook'
+        // a.item(href='/questions' class="{{isActivePath '/questions'}}" title='questions')
+        //     +ibig name='ask'
+        //     // span.mobile.hidden &nbsp; 
+        //     // span.mobile.hidden &nbsp; 
+        //     // span.mobile.hidden recipes
+        a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
+            +i name='invoice'
+        a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
+            +ibig name='blog'
+        a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
+            +i name='car'
+                
         unless currentUser
             if subs_ready
                 a.item(href='/login' title='login') 

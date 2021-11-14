@@ -44,10 +44,10 @@ if Meteor.isClient
             Docs.update @_id,
                 $set:
                     status:'complete'
-        'click .increment': ->
+        'click .increase_amount': ->
             Docs.update @_id, 
                 $inc:amount:1
-        'click .decrement': ->
+        'click .decrease_amount': ->
             Docs.update @_id, 
                 $inc:amount:-1
         
