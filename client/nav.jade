@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.borderless.inverted.menu
+    #topnav.topnav.ui.attached.inverted.menu
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -63,12 +63,12 @@ template(name='nav')
                 a.item(href="/admin" title='admin')
                     +ibig name='shield'
                 // a.item(href='/user/#{currentUser.username}/credit' class="{{isActiveRoute 'user_credit'}}" title='current wallet balance')
-                a.item.toggle_walletbar(title='credit')
-                    // i.wallet.icon
-                    .ui.avatar.image
-                        +ibig name='wallet'
-                    strong ${{int currentUser.credit}}
-                    // i.cart.icon
+                // a.item.toggle_walletbar(title='credit')
+                //     // i.wallet.icon
+                //     .ui.avatar.image
+                //         +ibig name='wallet'
+                //     strong ${{int currentUser.credit}}
+                //     // i.cart.icon
                 a.item(href="/user/#{currentUser.username}/credit" class="{{isActiveRoute regex='user_credit'}}" title='your credits')
                     strong #{currentUser.points}p
                 a.item.mobile.hidden(href="/user/#{currentUser.username}" class=user_nav_button_class title=user_nav_button_title)
@@ -119,12 +119,14 @@ template(name='nav')
         //     // span.mobile.hidden &nbsp; 
         //     // span.mobile.hidden recipes
         a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
-            +i name='invoice'
+            +ibig name='invoice'
         a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
             +ibig name='blog'
         a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
-            +i name='car'
-                
+            +ibig name='car'
+        a.icon.item(href='/transfers' class="{{isActivePath '/transfers'}}" title='transfers')
+            +ibig name='donate'
+
         unless currentUser
             if subs_ready
                 a.item(href='/login' title='login') 
@@ -261,7 +263,7 @@ template(name='walletbar')
         .ui.header wallet
         
 template(name='right_sidebar')
-    .ui.right.sidebar.vertical.borderless.inverted.menu.rightbar
+    .ui.right.sidebar.vertical.inverted.menu.rightbar
         a.item.toggle_rightbar.no_blink(href="/user/#{currentUser.username}" class="{{isActiveRoute 'user_layout'}}")
             img.ui.avatar.compact.image(src="{{c.url currentUser.image_id height=200 width=200 gravity='face' crop='fill'}}")
             |#{currentUser.name}
@@ -313,7 +315,7 @@ template(name='right_sidebar')
 
 
 template(name='left_sidebar')
-    .ui.left.sidebar.vertical.labeled.icon.borderless.inverted.menu.smallscroll
+    .ui.left.sidebar.vertical.inverted.menu.smallscroll
         // a.item.toggle_leftbar.no_blink(href="/" class="{{isActiveRoute '/'}}")
         //     img.ui.avatar.compact.image(src="{{c.url 'one_logo' height=200 width=200 gravity='face' crop='fill'}}")
         //     |One

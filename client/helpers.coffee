@@ -355,6 +355,12 @@ Template.registerHelper 'editing_doc', () ->
 #         Meteor.userId() is @_author_id or 'admin' in Meteor.user().roles
 
 Template.registerHelper 'publish_when', () -> moment(@publish_date).fromNow()
+Template.registerHelper 'ingredient_products', () -> 
+    Docs.find 
+        model:'product'
+        ingredient_ids:$in:[@_id]
+        
+
 
 Template.registerHelper 'current_doc', ->
     doc = Docs.findOne Router.current().params.doc_id

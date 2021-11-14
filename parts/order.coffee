@@ -137,7 +137,7 @@ if Meteor.isServer
         if status 
             match.status = status
 
-        Docs.find match
+        Docs.find match, limit:20
         
     Meteor.publish 'product_by_order_id', (order_id)->
         order = Docs.findOne order_id

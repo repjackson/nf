@@ -85,6 +85,8 @@ if Meteor.isClient
             query = $('#product_search').val()
             if query.length > 2
                 Session.set('product_query', query)
+                picked_sections.clear()
+                Session.set('view_shop_section',null)
             # console.log Session.get('product_query')
             if e.key == "Escape"
                 Session.set('product_query', null)

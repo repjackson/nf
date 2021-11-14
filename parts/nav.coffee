@@ -71,18 +71,18 @@ if Meteor.isClient
                 })
                 .sidebar('attach events', '.toggle_cartbar')
         , 3000
-        Meteor.setTimeout ->
-            $('.ui.sidebar.walletbar')
-                .sidebar({
-                    context: $('.bottom.segment')
-                    transition:''
-                    mobileTransition:'scale'
-                    exclusive:true
-                    duration:200
-                    scrollLock:true
-                })
-                .sidebar('attach events', '.toggle_walletbar')
-        , 2000
+        # Meteor.setTimeout ->
+        #     $('.ui.sidebar.walletbar')
+        #         .sidebar({
+        #             context: $('.bottom.segment')
+        #             transition:''
+        #             mobileTransition:'scale'
+        #             exclusive:true
+        #             duration:200
+        #             scrollLock:true
+        #         })
+        #         .sidebar('attach events', '.toggle_walletbar')
+        # , 2000
     
     Template.right_sidebar.events
         'click .logout': ->

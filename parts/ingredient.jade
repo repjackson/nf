@@ -57,24 +57,16 @@ template(name='ingredient_card')
                 +ismall name='tags'
                 each tags
                     .ui.small.basic.label #{this}
-        .content
             if tags
                 span(title='tags')
                     |#{tags.count}
                     // +i name='ingredients'
             each ingredient_products
                 .ui.basic.label #{title}
-            // .right.floated.meta
-            //     | {{from_now _timestamp}}
-            // a(href="/user/#{author.username}")
-            //     img.ui.avatar.image(src="{{c.url author.image_id width=400 height=600 crop='fit'}}")
-            //     |#{author.username}
-        .content    
-            .ui.inline.header
+            .ui.small.inline.header
                 |#{product_count} products
-            // +number_view key='servings' label='servings'
-            a.ui.icon.circular.basic.button.zoomer(href="/ingredient/#{_id}/edit")
-                i.pencil.icon
+            // a.ui.icon.circular.basic.button.zoomer(href="/ingredient/#{_id}/edit")
+            //     i.pencil.icon
             a.ui.icon.circular.basic.button.zoomer(href="/ingredient/#{_id}")
                 i.right.chevron.icon
 
@@ -110,9 +102,9 @@ template(name='ingredient_view')
                     // +author_card
                 .six.wide.column
                     +image_view key='image_id' label='image' direct=true
-                    +image_view key='images.full' label='image' direct=true
-                    +image_view key='images.medium' label='image' direct=true
-                    +image_view key='small' label='image' direct=true
+                    // +image_view key='images.full' label='image' direct=true
+                    // +image_view key='images.medium' label='image' direct=true
+                    // +image_view key='small' label='image' direct=true
                     .f6
                         +html_view key='description' icon='content' label='body' direct=true
                     +array_view key='location_tags' label='location tags' icon='marker' direct=true

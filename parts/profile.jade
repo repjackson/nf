@@ -12,18 +12,17 @@ template(name='user_layout')
                 .ui.stackable.padded.grid
                     .row
                         //- img.ui.image.checkin_banner(src="{{c.url banner_image width=1000 height=1000 crop='crop'}}")
-                        .four.wide.column
+                        .four.wide.column.scrolling
                             a.item.mobile.hidden(href="/user/#{user_from_username_param.username}")
                                 img.ui.fluid.image(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
                             // .spacer
                             a(href="/user/#{username}")
                                 .ui.center.aligned.header
-                                    strong #{name}
-                                    //- 
-                                    //- strong #{user.first_name} #{user.last_name}
-                                    //- small @#{user.username}        
+                                    // strong #{name}
+                                    strong #{user.first_name} #{user.last_name}
+                                    small @#{user.username}        
                             a.ui.center.aligned.inline.header.mobile.hidden(href="/user/#{user_from_username_param.username}/credit" title='credit')
-                                |{{fixed user.credit}}c
+                                |#{user.points}p
                             .ui.two.column.middle.aligned.grid.mobile.only
                                 // .column
                                 //     img.ui.small.inline.image.mobile.only(src="{{c.url image_id height=300 width=300 gravity='face' crop='fill'}}")
@@ -33,7 +32,7 @@ template(name='user_layout')
                                         //- small @#{user.username}        
                                     a.ui.inline.header(href="/user/#{user_from_username_param.username}/credit" title='credit')
                                         +i name='coins'
-                                        |{{fixed user.credit}}c
+                                        |#{user.points}p
                             if is_current_user
                                 a.ui.button(href="/user/#{user_from_username_param.username}/edit" title='profile settings')
                                     i.cog.icon
@@ -97,9 +96,7 @@ template(name='user_layout')
                             a.ui.compact.small.button(href="/user/#{username}/trips" class="{{isActiveRoute 'user_trips'}}")
                                 +i name='bicycle' cl='ui avatar image'
                                 |trips
-                                
-                
-                        .twelve.wide.column
+                        .twelve.wide.column.scrolling
                             div.global_container
                                 .spacer
                                 +yield

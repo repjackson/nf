@@ -190,9 +190,9 @@ if Meteor.isClient
     Template.product_picker.events
         'keyup .search_product': (e,t)->
             search = t.$('.search_product').val().trim()
-            Session.set('product_search', search)
-            if search.length > 0
-                doc = Docs.findOne parent._id
+            if search.length > 1
+                Session.set('product_search', search)
+                # doc = Docs.findOne parent._id
                 # t.$('.search_product').val('')
                 console.log 'search', search
                 # Meteor.call 'log_term', search, ->
@@ -230,6 +230,7 @@ if Meteor.isServer
         , {limit:10, sort:'_timestamp':-1})
         
     Meteor.publish 'product_search_results', (query)->
-        Docs.find 
+        Docs.find {
             model:'product'
             title: {$regex:"#{query}",$options:'i'}
+        }, limit:10

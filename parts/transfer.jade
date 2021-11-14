@@ -11,18 +11,20 @@ template(name='transfers')
                 each model_docs_helper 'transfer'
                     .ui.card.zoomer
                         a.fly_right(href="/transfer/#{_id}") 
-                            img.ui.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+                            img.ui.image(src="{{c.url image_id width=400 height=400 crop='pad'}}")
                         a.content(href="/transfer/#{_id}") 
                             .ui.header 
-                                |#{title}
+                                |#{amount}p
                             i.tag.icon
                             each tags 
                                 .ui.label #{this}
                             if location_tags
-                                i.marker.red.icon
+                                i.marker.icon
                             each location_tags 
                                 .ui.label #{this}
-                            |#{when}
+                            |#{when} by #{_author_username} to
+                            with target_user_id
+                                +user_info
                 
 template(name='transfer_edit')
     with current_doc

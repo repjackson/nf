@@ -14,7 +14,7 @@ if Meteor.isClient
         Session.setDefault 'view_open', true
 
     Template.ingredients.onCreated ->
-        @autorun => @subscribe 'model_docs', 'special', ->
+        # @autorun => @subscribe 'model_docs', 'special', ->
         @autorun => @subscribe 'ingredient_facets',
             picked_tags.array()
             Session.get('limit')
@@ -374,6 +374,12 @@ if Meteor.isServer
         Docs.find({
             model:'order'
             ingredient_id: ingredient_id
+        }, limit:10)
+
+    Meteor.publish 'ingredient_products', (ingredient_id)->
+        Docs.find({
+            model:'product'
+            ingredient_ids:$in:[ingredient_id]
         }, limit:10)
 
 

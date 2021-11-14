@@ -120,6 +120,9 @@ template(name='cart_item')
             i.remove.red.icon
         // if is_admin
         //     +print_this
+        
+        
+        
 template(name='checkout')
     with current_doc
         .ui.stackable.padded.three.column.grid
@@ -133,7 +136,7 @@ template(name='checkout')
                             // .image
                             img.ui.tiny.inline.rounded.image(src="{{c.url product_image_id width=400 height=400 crop='pad'}}")
                             .content
-                                .header $#{product_price} #{product_title}
+                                a.header(href="/product/#{product_id}") $#{product_price} #{product_title}
                                 .description
                                     small added #{when}
                                     .ui.basic.icon.button.decrease_amount

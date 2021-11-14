@@ -24,22 +24,12 @@ template(name='product_view')
                 if image_id2
                     .four.wide.column
                         img.ui.rounded.image.zoomer(src="{{c.url image_id2}}")
-                .four.wide.column
+                .eight.wide.column
                     +html_view key='description' direct=true
                     // +text_view key='size_description' label='size description'  direct=true
                     a.ui.basic.icon.button(href=product_link)
                         i.wordpress.large.icon
                         i.external.icon
-                    .ui.list
-                        .item #{product_link}
-                        .item calculated inventory
-                        .item #{total_units_sold} total units sold
-                        .item $#{total_revenue} total revenue
-                        .item expected inventory
-                        .item query params: #{query_params}
-                        .item #{last_inventory_boh_record} most recent BOH record
-                        .item #{last_inventory_foh_record} most recent FOH record
-                    i.refresh.large.link.icon.calc_stats(title='refresh_stats')
                     
                     +boolean_view key='gluten_free' label='gluten free' direct=true icon='no-gluten'
                     +boolean_view key='vegetarian' label='vegetarian' direct=true icon='vegetarian-mark'
@@ -79,6 +69,7 @@ template(name='product_view')
                     // +product_orders
                 .four.wide.column
                     .ui.big.fluid.green.button.add_to_cart
+                        i.cart.plus.large.icon
                         |add to cart
                 .four.wide.column
                     .ui.large.button.generate_qrcode
@@ -87,6 +78,16 @@ template(name='product_view')
                     #qrcode(width='400px')
                     .ui.segment
                         +product_inventory
+                    .ui.list
+                        .item #{product_link}
+                        .item calculated inventory
+                        .item #{total_units_sold} total units sold
+                        .item $#{total_revenue} total revenue
+                        .item expected inventory
+                        .item query params: #{query_params}
+                        .item #{last_inventory_boh_record} most recent BOH record
+                        .item #{last_inventory_foh_record} most recent FOH record
+                    i.refresh.large.link.icon.calc_stats(title='refresh_stats')
                 // .four.wide.column
                 //     +product_reviews
                 .five.wide.column

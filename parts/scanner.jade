@@ -7,6 +7,7 @@ template(name='scanner')
             .ui.massive.green.button.start
                 |open
             .ui.big.basic.red.button.stop
+                i.remove.icon
                 |close
             // .ui.big.button.check
             //     |check camera
@@ -30,8 +31,8 @@ template(name='scanner')
                     a.ui.header(href="/cart/#{selected_cart}")
                         i.shopping.cart.icon
                         |#{cart_items.count} cart items
-                    .ui.icon.button.add_item(title='add item' class=add_item_class)
-                        i.plus.icon
+                    // .ui.icon.button.add_item(title='add item' class=add_item_class)
+                    //     i.plus.icon
                     .ui.list 
                         each cart_items 
                             .item 
