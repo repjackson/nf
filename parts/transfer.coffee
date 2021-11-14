@@ -73,9 +73,27 @@ if Meteor.isClient
     Template.transfer_edit.onCreated ->
         @autorun => Meteor.subscribe 'doc_by_id', Router.current().params.doc_id
         # @autorun => Meteor.subscribe 'doc', Router.current().params.doc_id
-        # @autorun => Meteor.subscribe 'model_docs', 'menu_section'
+        @autorun => Meteor.subscribe 'username_search', Session.get('username_query'), ->
 
 
+    Template.user_picker.helpers
+        unpicked_users: ->
+            current_transfer = Docs.findOne Router.current().params.doc_id
+            Meteor.users.find 
+                _id:$ne:current_transfer.target_user_id
+        picked_user: ->
+            current_transfer = Docs.findOne Router.current().params.doc_id
+            Meteor.users.findOne 
+                _id:current_transfer.target_user_id
+                
+    Template.user_picker.events
+        'click .pick_user': ->
+            Docs.update Router.current().params.doc_id,
+                $set:target_user_id:@_id
+        'keyup .search_user': ->
+            val = $('.search_user').val()
+            Session.set('username_query',val)
+        
     Template.transfer_edit.events
         'click .delete_transfer':->
             if confirm 'delete?'
@@ -87,3 +105,9 @@ if Meteor.isClient
         all_shop: ->
             Docs.find
                 model:'transfer'
+                
+if Meteor.isServer
+    Meteor.publish 'username_search', (query)->
+        console.log 'search', query
+        Meteor.users.find 
+            username:{$regex:query,$options:'i'}

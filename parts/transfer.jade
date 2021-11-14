@@ -20,7 +20,6 @@ template(name='transfers')
                                 .ui.label #{this}
                             if location_tags
                                 i.marker.red.icon
-                                |#{location}
                             each location_tags 
                                 .ui.label #{this}
                             |#{when}
@@ -32,24 +31,41 @@ template(name='transfer_edit')
                 .six.wide.column
                     .ui.inline.header
                         i.pencil.icon
-                        | #{title}
+                        strong !{notes}
                         small transfer edit
-                    a.ui.large.icon.green.button(href="/transfer/#{_id}" title='save product')
+                    a.ui.large.icon.green.button(href="/transfer/#{_id}" title='save draft')
                         i.checkmark.big.icon
+                        |save draft
                     +text_edit key='title' label='title' direct=true
                     +image_edit key='image_id' label='image' direct=true icon='image'
                     div
-                    +link_edit key='link' label='link' direct=true icon='link'
-                    div
-                    +text_edit key='location' label='location' direct=true icon='marker'
+                    +array_edit key='location_tags' label='location tags' direct=true icon='marker'
                 .ten.wide.column
                     div
                     +array_edit key='tags' label='tags' direct=true icon='tags'
-                    +html_edit key='description' label='description' direct=true icon='content'
+                    +html_edit key='notes' label='notes' direct=true icon='content'
+                    +user_picker
+                    
                     if can_edit
                         .ui.red.button.delete_transfer
                             i.remove.icon   
                             | delete
+                    unless complete
+                        a.ui.big.green.button.complete_transfer(href="/transfer/#{_id}")
+                            |complete transfer
+                
+                
+template(name='user_picker')
+    .ui.header 
+        |user picker
+    with picked_user
+        .ui.header #{username}
+        i.remove.link.icon.clear_target
+    .ui.fluid.input
+        input.search_user(type='text' placeholder='search...')
+    each unpicked_users
+        .ui.button.pick_user
+            |#{username}
                 
                 
 template(name='transfer_view')
@@ -63,23 +79,14 @@ template(name='transfer_view')
                     .ui.big.header
                         | #{title}
                     div
-                    +html_view key='description' label='description' direct=true
+                    +html_view key='notes' label='notes' direct=true
                 .eight.wide.column
                     +array_view key='tags' label='tags' direct=true
-                    +link_view key='link' direct=true
-                    .ui.header 
-                        +i name='marker'
-                        |#{location}
-                    .ui.header
-                        +i name='love'
-                        |fans
+                    +array_view key='location_tags' label='location tags' icon='marker' direct=true
                     div
-                    if can_delete
-                        .ui.red.button.delete_transfer
-                            i.remove.icon   
-                            | delete
-                    // +comments                
-                    if in_dev 
+                    .ui.header #{target_user_id}
+                    +comments                
+                    if can_edit
                         a.ui.icon.button(href="/transfer/#{_id}/edit")
                             i.pencil.icon
                     div

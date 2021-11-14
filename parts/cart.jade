@@ -121,7 +121,7 @@ template(name='cart_item')
         // if is_admin
         //     +print_this
 template(name='checkout')
-    with cart_order
+    with current_doc
         .ui.stackable.padded.three.column.grid
             .column
                 .ui.header

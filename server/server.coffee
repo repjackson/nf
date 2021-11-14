@@ -103,6 +103,11 @@ Meteor.publish 'model_fields_from_child_id', (child_id)->
         model:'field'
         parent_id:model._id
 
+Meteor.publish 'all_users', ()->
+    Meteor.users.find {},
+        limit:20
+    
+    
 Meteor.publish 'model_docs', (model,limit)->
     if limit
         Docs.find {
