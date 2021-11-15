@@ -656,21 +656,21 @@ template(name='ibig')
     
 //         //     +single_doc_edit key='ref_model' ref_model='model' ref_key='slug' label='Referenced model (if ref)'
 //         //     .ui.divider
-// template(name='kvs')
-//     //- div
-//     .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
-//         //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
-//         if icon
-//             +i name=icon
-//         .inline
-//             //- if field_value
-//             //-     i.checkmark.icon
-//             if label
-//                 |#{label}
-//             else if value
-//                 |#{value}
-//             else if key
-//                 |#{key}
+template(name='kvs')
+    //- div
+    .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
+        //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
+        if icon
+            +i name=icon
+        .inline
+            //- if field_value
+            //-     i.checkmark.icon
+            if label
+                |#{label}
+            else if value
+                |#{value}
+            else if key
+                |#{key}
 
 // template(name='skvs')
 //     //- div

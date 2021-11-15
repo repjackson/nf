@@ -355,21 +355,21 @@
 #             Docs.update page_doc._id,
 #                 $set:slug:res
 
-# Template.kvs.helpers
-#     kve_class: ->
-#         parent = Template.parentData()
-#         if parent["#{@key}"] is @value then 'active' else 'basic'
+Template.kvs.helpers
+    kve_class: ->
+        parent = Template.parentData()
+        if parent["#{@key}"] is @value then 'active' else 'basic'
 
 
-# Template.kvs.events
-#     'click .set_value': (e,t)->
-#         parent = Template.parentData()
-#         # $(e.currentTarget).closest('.button').transition('pulse', 100)
+Template.kvs.events
+    'click .set_value': (e,t)->
+        parent = Template.parentData()
+        # $(e.currentTarget).closest('.button').transition('pulse', 100)
 
-#         doc = Docs.findOne parent._id
-#         if doc
-#             Docs.update parent._id,
-#                 $set:"#{@key}":@value
+        doc = Docs.findOne parent._id
+        if doc
+            Docs.update parent._id,
+                $set:"#{@key}":@value
 
 
 
