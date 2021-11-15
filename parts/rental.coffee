@@ -135,9 +135,9 @@ if Meteor.isClient
             rental_count = Docs.find().count()
             # console.log 'rental count', rental_count
             if rental_count < 3
-                Tags.find({count: $lt: rental_count})
+                Results.find({model:'tag', count: $lt: rental_count})
             else
-                Tags.find()
+                Results.find({model:'tag'})
 
         result_class: ->
             if Template.instance().subscriptionsReady()

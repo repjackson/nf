@@ -274,8 +274,12 @@ img {
     /* border-radius:10px !important; */
 }
 
-.image:not(.flat), img {
+/*.image:not(.flat), img {*/
+img {
     border-radius:10px !important; 
+    filter: invert(.9) !important;
+}
+.invert {
     filter: invert(.9) !important;
 }
 
@@ -410,11 +414,6 @@ img {
     margin: 0px !important;
 }
 
- .invert {
-    /*filter: invert(90%) !important; */
-     background-color:white; 
-     height: 100%; 
- } 
 
 .red_flagged {
   border: 5px solid red !important;
