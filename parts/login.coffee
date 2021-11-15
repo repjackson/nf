@@ -1,4 +1,6 @@
 if Meteor.isClient
+    Router.route '/login', -> @render 'login'
+    
     Template.login.onCreated ->
         Session.set 'username', null
 

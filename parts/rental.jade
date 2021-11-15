@@ -1,0 +1,974 @@
+template(name='rentals')
+    .ui.stackable.padded.grid
+        .four.wide.column
+            .ui.inline.header 
+                +i name='shop'
+                |rentals
+            if currentUser
+                a.ui.icon.basic.circular.button.add_rental(title='cook')
+                    i.plus.green.large.icon
+            .div
+            .ui.left.icon.search.small.input
+                i.search.icon.refresh_tags
+                input#search_tag.prompt(type='text' autocomplete="off" placeholder='tags')
+            if selected_tag_plural
+                .ui.icon.circular.black.compact.button.clear_picked_tags
+                    i.remove.icon
+            each picked_tags
+                button.ui.blue.compact.circular.small.button.unselect_tag(tabindex='0')
+                    //- i.remove.icon
+                    | #{this}
+            each tags
+                button.ui.circular.compact.small.basic.button.tag_result(tabindex="0" class=result_class title=count) #{title}
+                    //- small #{count}
+            .spacer
+        .twelve.wide.column
+            //- .sorting_row
+            //-     .ui.icon.input
+            //-         i.search.icon
+            //-         input.tag_search(type='text' placeholder='search...')
+            //-     |sort by
+            //-     .ui.compact.small.menu
+            //-         .ui.simple.dropdown.item
+            //-             strong #{current_rental_sort_label}
+            //-             i.dropdown.icon
+            //-             .menu
+            //-                 +set_rental_sort_key key='price_per_serving' label='$/serving' icon='money'
+            //-                 +set_rental_sort_key key='datetime_available' label='available' icon='clock'
+            //-                 //- +set_rental_sort_key key='_timestamp' label='added' icon='clock'
+            //-                 +set_rental_sort_key key='comment_count' label='comment count' icon='chat'
+            //-     .ui.compact.icon.circular.button.set_sort_direction(title='toggle sort direction')
+            //-         if sorting_up
+            //-             i.sort.amount.down.icon
+            //-         else
+            //-             i.sort.amount.up.icon
+            //-     |&nbsp;
+            //-     |&nbsp;
+            //-     //- .ui.inline.small.grey.header
+            //-     //-     |show
+            //-     //- .ui.compact.menu
+            //-     //-     .ui.simple.dropdown.item
+            //-     //-         strong #{rental_limit}
+            //-     //-         i.dropdown.icon
+            //-     //-         .menu
+            //-     //-             +set_rental_limit amount=1
+            //-     //-             +set_rental_limit amount=5
+            //-     //-             +set_rental_limit amount=10
+            //-     //-             +set_rental_limit amount=20
+            //- .spacer 
+            .ui.stackable.four.cards
+                each rental
+                    +rental_card
+
+template(name='set_rental_sort_key')
+    .item.set_sort
+        if color
+            .ui.label(class=color) #{label}
+        else 
+            if emoji
+                em(data-emoji=emoji)
+            else if icon
+                i.icon(class=icon)
+            |#{label}
+        
+
+template(name='set_view_mode_rental')
+    .item.set_view
+        i.icon(class=icon)
+        |#{title}
+
+
+template(name='set_rental_limit')
+    .item.set_limit #{amount}
+    
+    
+template(name='user_rentals')
+    .scrolling
+        if is_current_user
+            .ui.circular.button.add_rental
+                i.plus.icon
+                |rental
+        each rentals
+            +profile_rental_item
+
+template(name='profile_rental_item')
+    .ui.segment.grid
+        .row
+            .four.wide.column
+                +image_view key='image_id' direct=true cl='zoom ui tiny image'
+            .twelve.wide.column
+                .ui.header #{title}
+                a.ui.small.header(href="/rental/#{_id}/")
+                    |#{hourly_rate}c / hr
+                a.ui.small.header(href="/rental/#{_id}/")
+                    |#{daily_rate}c / day
+                .ui.small.inline.header #{when}
+                a.ui.button(href="/rental/#{_id}/")
+                    |view
+                    i.right.chevron.icon
+                if is_admin
+                    +remove_button
+    
+
+template(name='sort_item')
+    .item.set_sort #{label}
+    
+    
+    
+template(name='rental_card')
+    .ui.card(class=rental_card_class)
+        a.image(href="/rental/#{_id}/") 
+            img.ui.zoom.pointer.goto_rental.image(src="{{c.url image_id width=400 height=300 crop='pad'}}")
+        .content
+            a.ui.header(href="/rental/#{_id}/") 
+                //- |#{_author.name}'s
+                | #{title}
+            //- if session_is 'view_tags' true
+            //- +ismall name='tags'
+            each tags
+                .ui.small.circular.basic.label #{this}
+        //- .ui.inline.small.header tags
+        .content
+            .right.floated.meta
+                | {{from_now datetime_available}}
+            //- if session_is 'view_users' true
+            a(href="/user/#{_author.username}")
+                img.ui.avatar.image(src="{{c.url _author.image_id width=400 height=600 crop='fit'}}")
+                |#{_author.username}
+        .content    
+            if hourly_rate
+                .ui.inline.header
+                    |#{hourly_rate}c/hr
+            if daily_rate
+                .ui.inline.header
+                    |#{daily_rate}c/day
+            if weekly_rate
+                .ui.inline.header
+                    |#{daily_rate}c/day
+            if can_edit
+                a.ui.large.icon.button(href="/rental/#{_id}/edit")
+                    i.pencil.icon
+        //- .ui.bottom.attached.buttons        
+        //-     .ui.green.button.quickbuy
+        //-         i.lightning.icon
+        //-         |buy
+        //-     a.ui.button(href="/rental/#{_id}/")
+        //-         |view
+        //-         i.right.chevron.icon
+    
+
+
+template(name='rental_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            img.ui.large.rounded.image(src="{{c.url image width=500 height=500 gravity='face' crop='fill'}}")
+            .row
+                .four.wide.column.scrolling
+                    a.ui.icon.button(href='/' title='rentals')
+                        i.left.chevron.icon
+                        +i name='clock' cl='ui avatar image'
+                    +rental_status
+                    .ui.header 
+                        |$#{hourly_dollars}
+                        small /hr standard rate
+                    if can_edit
+                        a.ui.icon.button(href="/rental/#{_id}/edit" title='edit')
+                            i.pencil.large.icon
+                    img.ui.centered.rounded.image(src="{{c.url image_id width=500 height=500 crop='fit'}}")
+                    +rental_stats
+                    +last_viewed
+                    +creation_info
+                    with _author_id
+                        +user_card
+                    +array_view key='tags' icon='tags' direct=true title='tags'
+                    div
+                    +array_view key='location_tags' icon='marker' direct=true title='location tags'
+                    div
+                    +text_view key='location' icon='marker' label='location' direct=true
+                    .ui.grey.header 
+                        i.user.shield.icon
+                        | owner
+                    +single_user_view key='owner_username' direct=true
+                    .ui.grey.header 
+                        i.user.clock.icon
+                        | handler
+                    +single_user_view key='handler_username' direct=true
+                .eight.wide.column.scrolling
+                    .ui.large.center.aligned.inline.header #{title}
+                    +rental_calendar
+                    if description
+                        .ui.segment.f4
+                            +textarea_view key='description' label='description' icon='content' direct=true
+                    div
+                    if security_deposit_required
+                        .ui.header 
+                        |$#{security_deposit_amount}
+                        small security deposit
+                    +text_view key='contact_info' label='contact info' icon='info' direct=true
+                    div
+                    +link_view key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                    +rental_calendar
+                    +rental_view_reservations
+                    +comments
+                .four.wide.column.scrolling
+                    +reserve_button
+                    +boolean_view key='daily_rate' label='daily rate' icon='sun' direct=true
+                    if daily_rate
+                        +float_view key='daily_dollars' label='daily rate' icon='exchange' direct=true
+                    div
+                    +boolean_view key='auction' label='auction' icon='podium-with-audience--v2' direct=true
+                    if auction
+                        +number_view key='auction_cutoff_hours' label='auction cutoff (hours)' direct=true
+                        +float_view key='minimum_bid' label='hour minimum bid' icon='refund' direct=true
+                    div
+                    +boolean_view key='security_deposit_required' label='security deposit required' icon='lock' direct=true
+                    if security_deposit_required
+                        +number_view key='security_deposit_amount' label='security deposit amount' icon='lock' direct=true tooltip='amount will be held from renters account then returned upon successful transaction'
+                        div
+                        +boolean_view key='friends_exempt' label='friends exempt' icon='users' direct=true
+                        
+                    +boolean_view key='approval_required' label='approval required' icon='checkmark' direct=true
+                    if approval_required
+                        div
+                        |you will receive a notification when reservations are requested
+                    .ui.small.header
+                        +i name='refund'
+                        | refunds
+                    +boolean_view key='allow_refunds' label='allow refunds' icon='refund' direct=true
+                    if allow_refunds
+                        +number_view key='full_refund_cutoff_hours' label='full refund cutoff hours' icon='clock' direct=true
+                        +number_view key='half_refund_cutoff_hours' label='half refund cutoff hours' icon='clock' direct=true
+
+                    .ui.small.header
+                        i.pie.chart.icon 
+                        |ownership
+                    .content
+                        +single_user_view key='owner_username' label='owner' direct=true
+                        +single_user_view key='handler_username' label='handler' direct=true
+                    .ui.small.header
+                        i.clock.icon
+                        |availability
+                    .content
+                        +array_view key='availability_tags' label='availability tags' icon='clock' direct=true
+                        +boolean_view key='available' label='currently available' direct=true
+                        +multi_doc_view key='available_days' label='available days' ref_model='day_of_week' direct=true
+                    .ui.small.header
+                        i.users.icon
+                        |audience
+                    .content
+                        +boolean_view key='transaction_number_restriction' label='transaction number restriction' icon='hashtag' direct=true
+                        if transaction_number_restriction
+                            +number_view key='transaction_number_restriction_threshold' label='transaction number restriction threshold' direct=true
+                        +boolean_view key='transaction_amount_restriction' label='transaction amount restriction' icon='money' direct=true
+                        if transaction_amount_restriction
+                            +number_view key='transaction_amount_restriction_threshold' label='transaction amount restriction threshold' direct=true
+                        +boolean_view key='visible_to_public' label='visible to public' direct=true
+                        unless visible_to_public
+                            +boolean_view key='visible_to_friends' label='visible to friends' direct=true
+                        unless visible_to_public
+                            +boolean_view key='visible_to_specific_people' label='visible to specific people' direct=true
+                            if visible_to_specific_people
+                                +multi_user_view key='visible_to_member_ids' label='visible to members:' direct=true
+                    .ui.small.header
+                        i.people.carry.icon
+                        |delivery
+                    .content
+                        .ui.small.header
+                            +i name='clock' cl='ui inline tiny image'
+                            |reservation start
+                        +boolean_view key='res_start_pickup' label='pickup' icon='truck' direct=true
+                        +boolean_view key='res_start_dropoff' label='dropoff' icon='dolly' direct=true
+                        if res_start_dropoff
+                            +number_view key='res_start_dropoff_fee' label='reservation start dropoff fee' icon='low-price' direct=true
+                        .ui.small.header
+                            i.clock.icon
+                            |reservation end
+                        +boolean_view key='res_end_dropoff' label='dropoff' icon='dolly' direct=true
+                        +boolean_view key='res_end_pickup' label='pickup' icon='truck' direct=true
+                        if res_end_pickup
+                            +number_view key='res_end_pickup_fee' label='reservation end pickup fee' icon='low-price' direct=true
+                    .ui.small.header
+                        i.bell.icon
+                        |notifications
+                    .content
+                        +boolean_view key='notify_on_reservation' label='on new reservation' icon='plus' direct=true
+                        +boolean_view key='notify_on_cancelation' label='on reservation cancelation' icon='cancel-2--v1' direct=true
+
+                    
+                    
+template(name='last_viewed')
+    i.large.grey.eye.icon
+    .ui.inline.small.header last viewed {{long_date last_viewed_timestamp}}
+    .ui.inline.small.header {{from_now last_viewed_timestamp}}
+                    
+                    
+
+template(name='rental_stats')
+    //- .ui.accordion
+    //-     .title
+    .ui.grey.header.refresh_rental_stats
+        i.line.chart.icon
+        |stats
+    //- .content
+    .ui.big.list
+        .item #{views} views
+        .item #{reservation_count} reservations
+        .item #{total_earnings}c/#{total_rental_hours}hrs total
+        .item #{average_rental_cost}c / #{average_rental_duration}hrs avg rental
+        //- .item rental ranking # reservations
+        //- .item rental ranking $ earned
+        //- .item # different renters
+        //- .item avg daily earnings
+        //- .item avg weekly earnings
+        //- .item avg monthly earnings
+        //- .item biggest renter
+        //- .item predicted payback duration 
+        //- .item predicted payback date 
+    //-     //- .ui.header res slot exists
+    //-     +reservation_slot_template
+    //- else
+    //-     if is_product_author
+    //-         .ui.button.new_slot
+    //-             |new slot
+        
+    
+template(name='rental_status')
+    if available 
+        .ui.green.label available now
+    else 
+        .ui.label off the clock
+        
+        
+        
+template(name='reserve_button')
+    unless approval_required
+        .ui.big.green.fluid.button.new_reservation 
+            |reserve
+    else 
+        .ui.big.blue.fluid.button.new_reservation 
+            |request
+
+
+
+template(name='rental_view_reservations')
+    .ui.header 
+        i.clock.icon
+        |reservations
+    //- .ui.icon.button.set_card_view
+    //-     i.clone.icon
+    //- .ui.icon.button.set_segment_view
+    //-     i.list.icon
+    //- .ui.hidden.divider
+    //- if view_res_cards
+    //-     .ui.stackable.three.cards
+    //-         each reservations
+    //-             +res_card
+    //- else if view_res_segments
+    each reservations
+        +reservation_segment
+        
+template(name='set_date_filter')        
+    .ui.button.set_date_filter(class=date_filter_class)
+        |#{label}
+        
+        
+
+template(name='reservation_segment')
+    .ui.segment
+        a.ui.small.header.inline.lowercase(href="/reservation/#{_id}/")
+            small from 
+            |{{cal_time start_datetime}}
+            //- |{{cal_time start_datetime}} [#{start_date}, hour: #{start_hour}]
+            //- |{{long_date start_datetime}}
+            small to 
+            |{{cal_time end_datetime}}
+        //- .ui.inline.header #{_author_username}
+        .ui.inline.header #{author.name}
+        .ui.grey.inline.header #{hour_duration}hrs
+        .ui.grey.inline.header(title='credits')
+            | $#{cost}
+        .ui.small.inline.header #{when} by #{_author_username}
+        a.ui.large.button(href="/reservation/#{_id}/")
+            |view
+            i.right.chevron.icon
+                
+                
+                
+                
+template(name='res_card')
+    .ui.card
+        .content
+            a.ui.small.header.inline.lowercase(href="/reservation/#{_id}/")
+                small from 
+                |{{cal_time start_datetime}}
+                //- |{{cal_time start_datetime}} [#{start_date}, hour: #{start_hour}]
+                //- |{{long_date start_datetime}}
+                small to 
+                |{{cal_time end_datetime}}
+            div
+            .ui.grey.inline.header #{hour_duration} hrs
+            .ui.grey.inline.header(title='credits')
+                //- i.coins.icon
+                | #{cost}c
+            .ui.small.header #{when} by #{_author_username}
+            a.ui.large.fluid.button(href="/reservation/#{_id}/")
+                |view
+                i.right.chevron.icon
+
+
+
+
+template(name='rental_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column 
+                    .ui.header 
+                        i.pencil.icon
+                        | edit '#{title}' rental
+                    a.ui.big.fluid.green.button(href="/rental/#{_id}/" title='save')
+                        i.checkmark.icon
+                        |save
+                    +remove_button
+                    if is_dev
+                        +single_user_edit key='_author_username' label='author username' direct=true
+                        +link_edit key='amazon_referral_link' label='amazon referral link' icon='amazon' direct=true
+                    +text_edit key='title' direct=true
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
+                    +array_edit key='private_location_tags' label='private location tags' icon='marker' direct=true tooltip='for handlers and buyers who are picking up'
+                    +array_edit key='public_location_tags' label='public location tags' icon='marker' direct=true tooltip='fo people to find the rental'
+                    //- +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+                    +text_edit key='contact_info' label='contact info' icon='info' direct=true
+                .eight.wide.column
+                    .ui.segment
+                        .ui.header
+                            i.info.icon
+                            |info
+                        .content
+                            +image_edit key='image_id' label='image' direct=true
+                            +html_edit key='description' label='description' icon='content' direct=true
+                    .ui.segment
+                        .ui.header
+                            i.money.icon
+                            |finance
+                        .content
+                .four.wide.column
+                    .ui.segment
+                        .ui.header
+                            i.shield.icon
+                            | policies
+                        .content
+                            +boolean_edit key='approval_required' label='approval required' icon='checkmark' direct=true
+                            if approval_required
+                                div
+                                |you will receive a notification when reservations are requested
+                            .ui.small.header
+                                +i name='refund'
+                                | refunds
+                            +boolean_edit key='allow_refunds' label='allow refunds' icon='refund' direct=true
+                            if allow_refunds
+                                +number_edit key='full_refund_cutoff_hours' label='full refund cutoff hours' icon='clock' direct=true
+                                +number_edit key='half_refund_cutoff_hours' label='half refund cutoff hours' icon='clock' direct=true
+                    .ui.segment
+                        .ui.header
+                            i.pie.chart.icon 
+                            |ownership
+                        .content
+                            +single_user_edit key='owner_username' label='owner' direct=true
+                            +single_user_edit key='handler_username' label='handler' direct=true
+                    .ui.segment
+                        .ui.header
+                            i.clock.icon
+                            |availability
+                        .content
+                            +array_edit key='availability_tags' label='availability tags' icon='clock' direct=true
+                            +boolean_edit key='available' label='currently available' direct=true
+                            +multi_doc_edit key='available_days' label='available days' ref_model='day_of_week' direct=true
+                    .ui.segment    
+                        .ui.header
+                            i.users.icon
+                            |audience
+                        .content
+                            +boolean_edit key='transaction_number_restriction' label='transaction number restriction' icon='hashtag' direct=true
+                            if transaction_number_restriction
+                                +number_edit key='transaction_number_restriction_threshold' label='transaction number restriction threshold' direct=true
+                            +boolean_edit key='transaction_amount_restriction' label='transaction amount restriction' icon='money' direct=true
+                            if transaction_amount_restriction
+                                +number_edit key='transaction_amount_restriction_threshold' label='transaction amount restriction threshold' direct=true
+                            +boolean_edit key='visible_to_public' label='visible to public' direct=true
+                            unless visible_to_public
+                                +boolean_edit key='visible_to_friends' label='visible to friends' direct=true
+                            unless visible_to_public
+                                +boolean_edit key='visible_to_specific_people' label='visible to specific people' direct=true
+                                if visible_to_specific_people
+                                    +multi_user_edit key='visible_to_member_ids' label='visible to members:' direct=true
+                    .ui.segment
+                        .ui.header
+                            i.people.carry.icon
+                            |delivery
+                        .content
+                            .ui.small.header
+                                +i name='clock' cl='ui inline tiny image'
+                                |reservation start
+                            +boolean_edit key='res_start_pickup' label='pickup' icon='truck' direct=true
+                            +boolean_edit key='res_start_dropoff' label='dropoff' icon='dolly' direct=true
+                            if res_start_dropoff
+                                +number_edit key='res_start_dropoff_fee' label='reservation start dropoff fee' icon='low-price' direct=true
+                            .ui.small.header
+                                i.clock.icon
+                                |reservation end
+                            +boolean_edit key='res_end_dropoff' label='dropoff' icon='dolly' direct=true
+                            +boolean_edit key='res_end_pickup' label='pickup' icon='truck' direct=true
+                            if res_end_pickup
+                                +number_edit key='res_end_pickup_fee' label='reservation end pickup fee' icon='low-price' direct=true
+                    .ui.segment
+                        .title.header
+                            i.bell.icon
+                            |notifications
+                        .content
+                            +boolean_edit key='notify_on_reservation' label='on new reservation' icon='plus' direct=true
+                            +boolean_edit key='notify_on_cancelation' label='on reservation cancelation' icon='cancel-2--v1' direct=true
+                    //- unless published 
+                    //-     if can_publish
+                    //-         .ui.button.publish 
+                    //-             |publish 
+                    //-     else
+                    //-         .ui.disabled.button
+                    //-             |#{publish_message}
+                    
+                    
+                    
+template(name='reservation_view')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row
+                .four.wide.column 
+                    with rental
+                        a.ui.fluid.large.button(href="/rental/#{_id}/")
+                            i.left.chevron.icon
+                            |#{title}
+                        +image_view key='image' label='image' direct=true
+                        +comments
+                .eight.wide.column 
+                    .ui.header 
+                        |viewing reservation
+                    a.ui.header.inline.lowercase(href="/reservation/#{_id}/")
+                        small from 
+                        |{{cal_time start_datetime}}
+                        small to 
+                        |{{cal_time end_datetime}}
+                    if complete 
+                        .ui.large.green.label complete 
+                    else 
+                        .ui.large.label ongoing (incomplete)
+                    .ui.small.header #{when} by #{_author_username}
+                    .ui.header 
+                        | #{hour_duration}
+                        small hrs * $
+                        |#{rental.hourly_dollars}
+                        small /hr = $
+                        |#{cost}
+                    .ui.header by #{_author_username}
+                    +reservation_events
+                .four.wide.column
+                    if can_edit
+                        a.ui.big.fluid.button(href="/reservation/#{_id}/edit" title='edit reservation')
+                            i.pencil.icon
+                            |edit
+                    .ui.header 
+                        |payouts
+                    .ui.big.list
+                        .item 
+                            |#{hour_duration}hr * #{rental.hourly_dollars}c/hr = #{cost}c
+                        .item 
+                            small 50% owner
+                            |=#{owner_payout}c to #{rental.owner_username}
+                        .item.handler
+                            small 45% handler
+                            |=#{handler_payout}c to #{rental.handler_username}
+                        .item 
+                            small 5% taxes
+                            |=#{taxes_payout}c
+
+
+template(name='reservation_events')
+    .ui.header
+        i.rss.icon
+        |reservation events
+    .ui.bulleted.list
+        each log_events
+            .item #{text} #{when}
+
+    
+    
+    
+    
+template(name='reservation_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            if is_paying
+                .row
+                    h1.ui.header is paying
+            .three.column.row
+                .column 
+                    a.ui.big.fluid.button(href="/reservation/#{_id}/" title='save')
+                        i.save.icon
+                        //- +i name='submit-progress--v1'        
+                        .ui.inline.header save draft     
+                    .ui.hidden.divider     
+                    .ui.large.fluid.icon.button.cancel_reservation
+                        i.ban.icon
+                        |cancel/delete
+                    .ui.header 
+                        strong #{rental.title}
+                        small reservation
+                    with rental
+                        .ui.inline.header #{hourly_dollars}c
+                            small /hr
+                        |&nbsp;
+                        |&nbsp;
+                        .ui.inline.header #{daily_dollars}c
+                            small /day
+                        +image_view key='image' label='image' direct=true cl='ui rounded image'
+                    .result_column   
+                        .ui.big.list
+                            .item
+                                i.user.shield.icon
+                                small 50% owner
+                                | #{owner_payout}c to #{rental.owner_username}
+                            .item.handler
+                                i.user.cog.icon
+                                small 45% handler
+                                | #{handler_payout}c to #{rental.handler_username}
+                            .item 
+                                small 5% taxes
+                                | #{taxes_payout}c
+                
+                .column 
+                    a.ui.header(href="/rental/#{rental._id}/") reserve #{rental.title}
+                    .ui.fluid.button.reserve_now(class=now_button_class)
+                        |reserve now
+                    unless now
+                        .ui.header 
+                            i.calendar.icon
+                            |start date/time
+                        .ui.input
+                            input.res_start(type='datetime-local' value="#{start_datetime}")
+                    if start_datetime
+                        .ui.header 
+                            |duration
+                        div
+                        .ui.input            
+                            input.other_hour(type='number' min='0' value=hour_duration autocomplete="off")
+                        .ui.header 
+                            i.calendar.icon
+                            |end date/time            
+                        .ui.input
+                            input.res_end(type='datetime-local' value="#{end_datetime}")
+                .column.result_column.rounded
+                    if start_datetime
+                        .ui.header.lowercase 
+                            small from 
+                            |{{cal_time start_datetime}}
+                        if end_datetime
+                            .ui.header.lowercase 
+                                small to
+                                |{{cal_time end_datetime}}
+                            .ui.header 
+                                | #{hour_duration}hrs * #{rental.hourly_dollars}c/hr = #{cost}
+                            .ui.header(title='security deposit amount will be held until successful return') 
+                                if rental.security_deposit_required
+                                    small + security deposit 
+                                    |#{rental.security_deposit_amount}c
+                            if rental.res_start_dropoff
+                                .ui.header 
+                                    small add reservation start dropoff for 
+                                    |#{rental.res_start_dropoff_fee}c
+                                +boolean_edit key='res_start_dropoff_selected' cl='trigger_recalc' label='start dropoff' direct=true data=this._id  
+                            div
+                            if rental.res_end_pickup
+                                .ui.header
+                                    small add reservation end pickup for 
+                                    |#{rental.res_end_pickup_fee}c
+                                +boolean_edit key='res_end_pickup_selected' cl='trigger_recalc' label='end pickup' direct=true data=this._id
+                            .ui.divider
+                            if can_buy
+                                .ui.header 
+                                    small your balance
+                                    |{{fixed currentUser.credit}} 
+                                .ui.header
+                                    small
+                                    //- | -  #{cost} 
+                                    | -  #{total_cost} 
+                                    if res_start_dropoff_selected
+                                        | + #{rental.res_start_dropoff_fee}
+                                    if res_end_pickup_selected
+                                        | + #{rental.res_end_pickup_fee}
+                                .ui.header
+                                    small balance after purchase
+                                    small = 
+                                    //- small balance after purchase 
+                                    |#{member_balance_after_reservation}
+                            else if need_credit
+                                .ui.header need credit
+                                .ui.header 
+                                    |{{fixed currentUser.credit}} 
+                                .ui.header
+                                    small cost
+                                    | #{total_cost} 
+                                    //- | #{cost} 
+                                    //- if res_start_dropoff_selected
+                                    //-     | + #{rental.res_start_dropoff_fee}
+                                    //- if res_end_pickup_selected
+                                    //-     | + #{rental.res_end_pickup_fee}
+                                .ui.header
+                                    small balance after purchase
+                                    small = 
+                                    |#{member_balance_after_reservation}
+                    unless submitted
+                        if can_buy
+                            .ui.big.green.fluid.button.submit_reservation(class=submit_button_class)
+                                |pay
+                        else if need_credit
+                            .ui.header #{member_balance_after_reservation} credit needed to purchase
+                            .ui.inline.header add 
+                            .ui.inline.input
+                                input.adding_credit(type='number' value=member_balance_after_reservation) 
+                            .ui.big.teal.fluid.button.add_credit(class=submit_button_class)
+                                i.plus.icon
+                                |add credit to reserve
+                        else if need_approval
+                            .ui.big.teal.fluid.button.request_reservation(class=submit_button_class)
+                                |request reservation
+                        else
+                            .ui.big.disabled.fluid.button.send_message(title='cannot reserve for other reason')
+                                |send message
+                    else
+                        .ui.header submitted {{ from_now submitted_timestamp }}
+                        .ui.orange.fluid.button.unsubmit
+                            i.undo.icon
+                            |cancel
+        .ui.modal
+            i.close.icon
+            .header confirm payment of #{cost} credit
+            .image.content
+                .image
+                    with rental
+                        img.ui.rounded.small.image(src="{{c.url image width=300 height=300 gravity='face' crop='fill'}}")
+                .description
+                    if is_paying
+                        i.big.loading.refresh.icon
+                    else 
+                        .ui.header 
+                            small your balance
+                            |{{fixed currentUser.credit}} 
+                        .ui.header
+                            small deductions
+                            | -
+                            if res_start_dropoff_selected
+                                small dropoff selected
+                                | + #{rental.res_start_dropoff_fee}
+                            if res_end_pickup_selected
+                                small pickup selected
+                                | + #{rental.res_end_pickup_fee}
+                        .ui.header
+                            |#{cost} 
+                        .ui.header
+                            small balance after purchase
+                            small = 
+                            //- small balance after purchase 
+                            |#{member_balance_after_reservation}
+            .actions
+                .ui.red.negative.button
+                    i.ban.icon
+                    | cancel
+                .ui.green.positive.large.button
+                    i.checkmark.icon
+                    |confirm                    
+                    
+                    
+template(name='rental_calendar')
+    //- +ReactiveFullcalendar options=calendarOptions
+
+    .ui.header calendar
+    //- #menu
+    //-     .ui.button.move_today today
+    //-     .ui.button.move_now now
+    //-     .ui.large.icon.button.create_schedules +
+    //-     .ui.icon.button.prev_view
+    //-         i.chevron.left.icon
+    //-     .ui.icon.button.next_view
+    //-         i.chevron.right.icon
+    //-     .ui.icon.button.view_week
+    //-         |week
+    //-     .ui.icon.button.view_day
+    //-         |day
+    //-     .ui.icon.button.view_month
+    //-         |month
+    //- 
+    //-     span#renderRange.render-range
+    //- 
+    //- #calendar(style="height: 800px;")
+        
+    //- +full_cal    
+        
+    .ui.stackable.grid
+        .row
+            .eight.wide.column
+    
+                if daily_dollars
+                    .ui.inline.large.header 
+                        |$#{daily_dollars}
+                        small /day
+                .ui.stackable.grid
+                    .two.column.row
+                        each upcoming_days
+                            .column
+                                +upcoming_day data=this
+            .eight.wide.column
+                if current_date
+                    if current_hour
+                        .ui.header {{short_date current_date_string}} @ #{current_hour}:00
+                        with hourly_reservation
+                            +reservation_small
+                        else 
+                            .ui.green.fluid.button.reserve_this
+                                |reserve hour for #{rental.hourly_dollars}c
+
+
+template(name='upcoming_day')
+    .ui.small.grey.header
+        | #{data.long_form}
+    .ui.vertical.fluid.buttons
+        each hours
+            .ui.fluid.button.select_hour(class=hour_class)
+                .ui.small.grey.inline.header #{hour_display}
+                if pending_res 
+                    i.clock.icon(title="reservation started by #{pending_res.author.name} but not paid for")
+                //- .ui.small.header reservations
+                .ui.list
+                    each existing_reservations
+                        .item 
+                            | by #{_author_username}
+            //- .ui.divider
+                
+                
+template(name='full_cal')
+    .ui.raised.segment.container
+        #event-calendar
+    #create-event-modal.ui.modal
+        +add_event_modal
+                
+
+            
+template(name='reservation_small')
+    .ui.secondary.green.segment
+        .ui.header from #{start_time} to #{end_time}
+        if submitted
+            .ui.header submitted on #{submitted_timestamp}
+        else 
+            if is_author
+                .ui.input
+                    input.res_start_time(type='time' value=start_time)
+                //- .ui.input
+                //-     input.res_start(type='datetime-local' value=start_datetime)
+                .ui.right.labeled.input            
+                    input.hour_duration(type='number' min='0' value=hour_duration autocomplete="off")
+                    .ui.label hrs
+                div
+                .ui.input
+                    input.res_end_time(type='time' min="#{start_time}" value=end_time)
+                div
+                //- .ui.input
+                //-     input.res_end(type='datetime-local' value="#{end_datetime}")
+                //- +number_edit key='start_minute' min='0' max='60' label='start minute' direct=true
+                +number_view key='end_hour' min=start_hour max='24' label='end hour' direct=true
+                //- +number_edit key='end_minute' min='0' max='60' label='end minute' direct=true
+                //- +boolean_edit key='submitted' direct=true
+                .ui.header
+                    | #{hour_duration}
+                    small hrs * $
+                    |#{rental.hourly_dollars}
+                    small /hr = $
+                    |#{cost}
+                .ui.header(title='security deposit amount will be held until successful return') 
+                    if rental.security_deposit_required
+                        small + security deposit 
+                        |#{rental.security_deposit_amount}c
+                if rental.res_start_dropoff
+                    +boolean_edit key='res_start_dropoff_selected' cl='trigger_recalc' label="start dropoff (+1)" direct=true data=this._id  
+                    //- +boolean_edit key='res_start_dropoff_selected' cl='trigger_recalc' label="start dropoff (+#{rental.res_start_dropoff_fee})" direct=true data=this._id  
+                div
+                if rental.res_end_pickup
+                    +boolean_edit key='res_end_pickup_selected' cl='trigger_recalc' label="end pickup (+1)" direct=true data=this._id
+                    //- +boolean_edit key='res_end_pickup_selected' cl='trigger_recalc' label="end pickup (+#{rental.res_end_pickup_fee})" direct=true data=this._id
+                .ui.divider
+                if can_buy
+                    .ui.header 
+                        img.ui.avatar.image(src="{{c.url currentUser.profile_photo width=300 height=300 gravity='face' crop='fill'}}")
+                        |{{fixed currentUser.credit}}c 
+                    .ui.inline.header
+                        small
+                        //- | -  #{cost} 
+                        | -  #{total_cost} 
+                        if res_start_dropoff_selected
+                            | + #{rental.res_start_dropoff_fee}
+                        if res_end_pickup_selected
+                            | + #{rental.res_end_pickup_fee}
+                    .ui.header
+                        small balance after purchase
+                        small = 
+                        //- small balance after purchase 
+                        |#{member_balance_after_purchase}
+                    .ui.header
+                        small balance after reservation
+                        small = 
+                        //- small balance after purchase 
+                        |#{member_balance_after_reservation}
+                else if need_credit
+                    .ui.header need credit
+                    .ui.header 
+                        small your balance
+                        |{{fixed currentUser.credit}} 
+                    .ui.header
+                        small cost
+                        | #{total_cost} 
+                        //- | #{cost} 
+                        //- if res_start_dropoff_selected
+                        //-     | + #{rental.res_start_dropoff_fee}
+                        //- if res_end_pickup_selected
+                        //-     | + #{rental.res_end_pickup_fee}
+            unless submitted
+                if can_buy
+                    .ui.big.green.fluid.button.submit_reservation(class=submit_button_class)
+                        if is_paying
+                            i.loading.refresh.icon
+                            |paying
+                        else 
+                            i.shopping.cart      
+                            |submit and pay
+                else if need_credit
+                    .ui.header #{member_balance_after_reservation} credit needed to purchase
+                    .ui.inline.header add 
+                    .ui.inline.input
+                        input.adding_credit(type='number' value=member_balance_after_reservation) 
+                    .ui.big.teal.fluid.button.add_credit(class=submit_button_class)
+                        +i name='online-money-transfer'        
+                        |add credit to reserve
+                else if need_approval
+                    .ui.big.teal.fluid.button.request_reservation(class=submit_button_class)
+                        +i name='paid'        
+                        |request reservation
+                else
+                    .ui.big.disabled.fluid.button.send_message(title='cannot reserve for other reason')
+                        +i name='ban'
+                        |send message
+            else
+                .ui.header submitted {{ from_now submitted_timestamp }}
+                .ui.orange.fluid.button.unsubmit
+                    i.undo.icon
+                    |cancel
+
+        |by #{_author_username}
+        if is_author
+            +remove_button                    

@@ -134,7 +134,12 @@ template(name='ingredient_view')
                                     | (optional)
                             // // .item instructions: String #{instructions}
                             // .item optional: Boolean #{optional}
-
+                    .ui.button
+                        +i name='heart'
+                        |mark favorite
+                    .ui.button
+                        +i name='no-milk'
+                        |mark allergen
                     +comments
                 .four.wide.column
                     if can_purchase
@@ -190,13 +195,12 @@ template(name='ingredient_edit')
                     +remove_button
                     +image_edit key='image_id' label='image' direct=true
                     // +visibility_settings
-                    +array_edit key='tags' label='tags' icon='tags' direct=true
-                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
                     // +boolean_edit key='private' label='private' direct=true
-                    if in_dev 
-                        +text_edit key='model' label='model' direct=true
+                    // if in_dev 
+                    //     +text_edit key='model' label='model' direct=true
                 .seven.wide.column.scrolling
                     +text_edit key='title' direct=true
                     // +text_edit key='name' direct=true
                     +html_edit key='body' label='body' icon='content' direct=true
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
                 .four.wide.column.scrolling

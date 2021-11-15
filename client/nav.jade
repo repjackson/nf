@@ -1,6 +1,6 @@
 template(name='nav')
     // https://fomantic-ui.com/elements/icon.html#/icon
-    #topnav.topnav.ui.attached.inverted.menu
+    #topnav.topnav.ui.attached.inverted.menu.hscroll
         if is_loading
             .icon.item
                 i.big.loading.grey.refresh.icon.cancel
@@ -17,7 +17,7 @@ template(name='nav')
             +ibig name='food-cart'
             // +i name='food'
             // i.home.icon
-            // |Nude Foods Market
+            span.mobile.hidden shop
             // .mobile.hidden
             // img.ui.small.image(src="https://nudefoodsmarket.com/wp-content/uploads/2021/03/logo-smaller-300x87.jpg")
             // img.ui.avatar.image.mobile.only(src="/android-icon-48x48.png")
@@ -29,18 +29,9 @@ template(name='nav')
         //         else
         //             i.search.large.icon
         //         input.search_products(type='text' autocomplete="off" value=current_product_search)
-        // a.icon.item(href='/contact' class="{{isActivePath '/contact'}}" title='contact')
-        //     +i name='phone'
-        // a.icon.item(href='/things' class="{{isActivePath '/things'}}" title='thing')
-        //     +i name='cup'
         // if currentUser
-        //     a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
-        //         +ibig name='groups'
-        // unless currentUser
-        //     a.icon.item(href='/p/about' class="{{isActivePath '/about'}}" title='about')
-        //         // i.info.large.icon
-        //         +i name='information--v1'
-
+        a.icon.item(href='/users' class="{{isActivePath '/users'}}" title='users')
+            +ibig name='groups'
         // .icon.item 
         //     i.large.search.icon
         .right.menu
@@ -85,56 +76,60 @@ template(name='nav')
                     //         i.user.large.icon
                     // strong.mobile.hidden #{currentUser.name}
                     i.bars.large.icon
-    .ui.small.attached.inverted.menu
+                unless currentUser
+                    if subs_ready
+                        a.item(href='/login' title='login') 
+                            i.sign.in.large.icon
+                            // +i name='internal'
+                            |login
+                    else 
+                        i.food.loading.icon
+    .ui.small.attached.inverted.menu.hscroll
         a.item(href='/ingredients' class="{{isActivePath '/ingredients'}}" title='ingredients')
             // +i name='ingredients'
             +ibig name='grocery-shelf'
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden &nbsp; 
-            // |ingredients
+            span.mobile.hidden ingredients
         a.item(href='/sources' class="{{isActivePath '/sources'}}" title='sources')
             +ibig name='field-and-tractor'
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden &nbsp; 
-            // |sources
+            span.mobile.hidden sources
         a.item(href='/members' class="{{isActivePath '/members'}}" title='sources')
             +ibig name='groups'
             // span.mobile.hidden &nbsp; 
             // span.mobile.hidden &nbsp; 
-            // |sources
+            span.mobile.hidden members
         a.item(href='/mishi' class="{{isActivePath '/mishi'}}" title='mishi orders')
             +ibig name='money'
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden &nbsp; 
-            // span.mobile.hidden orders
+            span.mobile.hidden mishi
         // a.item(href='/scanner' class="{{isActivePath '/scanner'}}" title='scanner')
         //     +ibig name='scan-stock'
         // a.item(href='/wp' class="{{isActivePath '/wp'}}" title='wordpress')
         //     +ibig name='wordpress'
         a.item(href='/recipes' class="{{isActivePath '/recipes'}}" title='recipes')
             +ibig name='cookbook'
-        // a.item(href='/questions' class="{{isActivePath '/questions'}}" title='questions')
-        //     +ibig name='ask'
-        //     // span.mobile.hidden &nbsp; 
-        //     // span.mobile.hidden &nbsp; 
-        //     // span.mobile.hidden recipes
+            span.mobile.hidden recipes
+        a.item(href='/questions' class="{{isActivePath '/questions'}}" title='questions')
+            +ibig name='ask'
+            span.mobile.hidden questions
         a.icon.item(href='/orders' class="{{isActivePath '/orders'}}" title='orders')
             +ibig name='invoice'
+            span.mobile.hidden orders
         a.icon.item(href='/posts' class="{{isActivePath '/posts'}}" title='posts')
             +ibig name='blog'
+            span.mobile.hidden blog
         a.icon.item(href='/trips' class="{{isActivePath '/trips'}}" title='trips')
             +ibig name='car'
+            span.mobile.hidden trips
         a.icon.item(href='/transfers' class="{{isActivePath '/transfers'}}" title='transfers')
             +ibig name='donate'
+            span.mobile.hidden transfers
+        a.icon.item(href='/rentals' class="{{isActivePath '/rentals'}}" title='rentals')
+            +ibig name='clock'
+            span.mobile.hidden rentals
 
-        unless currentUser
-            if subs_ready
-                a.item(href='/login' title='login') 
-                    i.sign.in.large.icon
-                    // +i name='internal'
-                    |login
-            else 
-                i.food.loading.icon
         
                 
 
