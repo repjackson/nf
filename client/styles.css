@@ -551,12 +551,12 @@ input.username_search{
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2) !important;
     filter: drop-shadow(0px 0px 5px rgba(100,100,100,.9)) !important; 
 }
-.segment, .label:not(.no_format){
+.label:not(.no_format){
     /* -webkit-border-radius: 5px !important; */
-    /* -moz-border-radius: 5px !important; */
+     -moz-border-radius: 5px !important; 
     opacity:.9 !important;
     font-family: 'Ubuntu', sans-serif !important;
-    /*filter: invert(.9) !important;*/
+    filter: invert(.9) !important;
     border-radius: 10px !important; 
 }
 
@@ -579,6 +579,7 @@ input.username_search{
 
 .button {
     border-radius: 15px !important; 
+    filter: invert(.9) !important;
     margin:2px !important;
 }
 

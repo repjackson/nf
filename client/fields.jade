@@ -1,1145 +1,1145 @@
-template(name='youtube_edit')
-    .ui.labeled.fluid.icon.input
-        .ui.label 
-            // if icon
-            //     i.icon(class=icon)
-            |youtube id
-        input.youtube_id(type='text' value=field_value placeholder=placeholder autocomplete="off")
-    if field_value
-        iframe.invert(width='100%' height='500px' src="https://www.youtube.com/embed/#{field_value}" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+// template(name='youtube_edit')
+//     .ui.labeled.fluid.icon.input
+//         .ui.label 
+//             // if icon
+//             //     i.icon(class=icon)
+//             |youtube id
+//         input.youtube_id(type='text' value=field_value placeholder=placeholder autocomplete="off")
+//     if field_value
+//         iframe.invert(width='100%' height='500px' src="https://www.youtube.com/embed/#{field_value}" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
 
-template(name='youtube_view')
-    if field_value
-        if icon
-            +i name=icon
-            //- i.icon(class=icon)
-        .ui.embed.invert(data-source="youtube" data-id=field_value)
+// template(name='youtube_view')
+//     if field_value
+//         if icon
+//             +i name=icon
+//             //- i.icon(class=icon)
+//         .ui.embed.invert(data-source="youtube" data-id=field_value)
 
-        //- // iframe(width='560' height='315' src="https://www.youtube.com/embed/#{field_value}" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
-        //- iframe(src="https://www.youtube.com/embed/#{field_value}" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
-template(name='color_edit')
-    .ui.large.form
-        .field
-            label 
-                if icon
-                    +i name=icon
-                    //- i.grey.icon(class=icon)
-                if title
-                    |#{title}
-                else if key
-                    |#{key}
-                else
-                    |#{this}
-            input.edit_color(type='color' value=field_value placeholder='color' autocomplete="off")
-
-
-
-template(name='color_view')
-    .ui.form
-        .field
-            label 
-                if icon
-                    //- +i name=icon
-                    i.grey.icon(class=icon)
-                if title
-                    |#{title}
-                else if key
-                    |#{key}
-                else
-                    |#{this}
-            .ui.large.label(style="background:#{field_value}")
-            |#{field_value}
-
-template(name='html_view')
-    if field_value
-        .spacer
-        // .ui.small.inline.header
-        //     if icon
-        //         i.icon(class=icon)
-        //     if title
-        //         |#{title}
-        //     else if label
-        //         |#{label}
-        //     else if key
-        //         |#{key}
-        //     else
-        //         |#{this}
-        // .f10
-        |!{field_value}
+//         //- // iframe(width='560' height='315' src="https://www.youtube.com/embed/#{field_value}" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+//         //- iframe(src="https://www.youtube.com/embed/#{field_value}" frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen='')
+// template(name='color_edit')
+//     .ui.large.form
+//         .field
+//             label 
+//                 if icon
+//                     +i name=icon
+//                     //- i.grey.icon(class=icon)
+//                 if title
+//                     |#{title}
+//                 else if key
+//                     |#{key}
+//                 else
+//                     |#{this}
+//             input.edit_color(type='color' value=field_value placeholder='color' autocomplete="off")
 
 
 
-template(name='html_edit')
-    .ui.form
-        .field
-            label 
-                if icon
-                    i.icon(class=icon)
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                else if key
-                    |#{key}
-                else
-                    |#{this}
-    .ui.fluid.form
-        .field.testsun
-            textarea#sample.sun-editor-editable
-                |#{field_value}
-    // +call_watson mode='html' key='content'
-    //- div
-    //- //- +tone mode='html'
-    if watson
-        +watson_view
+// template(name='color_view')
+//     .ui.form
+//         .field
+//             label 
+//                 if icon
+//                     //- +i name=icon
+//                     i.grey.icon(class=icon)
+//                 if title
+//                     |#{title}
+//                 else if key
+//                     |#{key}
+//                 else
+//                     |#{this}
+//             .ui.large.label(style="background:#{field_value}")
+//             |#{field_value}
+
+// template(name='html_view')
+//     if field_value
+//         .spacer
+//         // .ui.small.inline.header
+//         //     if icon
+//         //         i.icon(class=icon)
+//         //     if title
+//         //         |#{title}
+//         //     else if label
+//         //         |#{label}
+//         //     else if key
+//         //         |#{key}
+//         //     else
+//         //         |#{this}
+//         // .f10
+//         |!{field_value}
+
+
+
+// template(name='html_edit')
+//     .ui.form
+//         .field
+//             label 
+//                 if icon
+//                     i.icon(class=icon)
+//                 if title
+//                     |#{title}
+//                 else if label
+//                     |#{label}
+//                 else if key
+//                     |#{key}
+//                 else
+//                     |#{this}
+//     .ui.fluid.form
+//         .field.testsun
+//             textarea#sample.sun-editor-editable
+//                 |#{field_value}
+//     // +call_watson mode='html' key='content'
+//     //- div
+//     //- //- +tone mode='html'
+//     if watson
+//         +watson_view
 
 
 
 
-template(name='color_icon_edit')
-    div
-    .ui.inline.header
-        if title
-            |#{title}
-        else if key
-            |#{key}
-        else
-            |#{this}
-    .ui.input
-        input.color_icon(type='url' value=field_value placeholder='icons8 class' autocomplete="off")
-    if field_value
-        //- i.large.icon(class=field_value)
-        //- img.ui.inline.image(src="https://img.icons8.com/fluent/48/000000/#{field_value}.png")
-        //- img.ui.inline.image(src="https://img.icons8.com/dusk/48/000000/#{field_value}.png")
-        img.ui.inline.image(src="https://img.icons8.com/color/48/000000/#{field_value}.png")
-        //- img.ui.inline.image(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
-template(name='icon_edit')
-    div
-    if icon
-        //- i.grey.icon(class=icon)
-        +icon name=icon
-    .ui.inline.header
-        if title
-            |#{title}
-        else if key
-            |#{key}
-        else
-            |#{this}    
-    if field_value
-        i.large.icon(class=field_value)
-    .ui.right.icon.input
-        input.icon_val(type='text' value=field_value placeholder='fa class' autocomplete="off")
-    a(href="https://fomantic-ui.com/elements/icon.html" target='_window')
-        i.external.icon
-        |icons
+// template(name='color_icon_edit')
+//     div
+//     .ui.inline.header
+//         if title
+//             |#{title}
+//         else if key
+//             |#{key}
+//         else
+//             |#{this}
+//     .ui.input
+//         input.color_icon(type='url' value=field_value placeholder='icons8 class' autocomplete="off")
+//     if field_value
+//         //- i.large.icon(class=field_value)
+//         //- img.ui.inline.image(src="https://img.icons8.com/fluent/48/000000/#{field_value}.png")
+//         //- img.ui.inline.image(src="https://img.icons8.com/dusk/48/000000/#{field_value}.png")
+//         img.ui.inline.image(src="https://img.icons8.com/color/48/000000/#{field_value}.png")
+//         //- img.ui.inline.image(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
+// template(name='icon_edit')
+//     div
+//     if icon
+//         //- i.grey.icon(class=icon)
+//         +i name=icon
+//     .ui.inline.header
+//         if title
+//             |#{title}
+//         else if key
+//             |#{key}
+//         else
+//             |#{this}    
+//     if field_value
+//         i.large.icon(class=field_value)
+//     .ui.right.icon.input
+//         input.icon_val(type='text' value=field_value placeholder='fa class' autocomplete="off")
+//     a(href="https://fomantic-ui.com/elements/icon.html" target='_window')
+//         i.external.icon
+//         |icons
 
 
-template(name='color_icon_view')
-    if field_value
-        //- img(src="https://img.icons8.com/color/48/000000/#{field_value}.png")
-        img(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
-        //- img(src="https://img.icons8.com/dusk/48/000000/#{field_value}.png")
-        //- img(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
-        //- img(src="https://img.icons8.com/ios/48/000000/#{field_value}.png")
-template(name='icon_view')
-    if field_value
-        span.inline.spaced
-            +i name=field_value
-        //- i.icon(class=field_value)
-        //- img(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
-        //- img(src="https://img.icons8.com/fluent/48/000000/#{field_value}.png")
-        //- img(src="https://img.icons8.com/ios/48/000000/#{field_value}.png")
-template(name='i')
-    //- i.icon(class=name)
-    // if is_hovering
-    //     img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
-    // else
-    if cl.length
-        img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
-    else 
-        img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class='ui avatar image' title=title)
-    // img.content.fade(src="https://img.icons8.com/ios/24/000000/#{name}.png" class=cl title=title)
-    // img(src="https://img.icons8.com/dusk/64/000000/#{name}.png" class=cl title=title)
-    // img(src="https://img.icons8.com/fluent/48/000000/#{name}.png" class=cl title=title)
-    // img(src="https://img.icons8.com/doodle/48/000000/#{name}.png" class=cl title=title)
-    //- img.icon8(src="https://img.icons8.com/ios/50/000000/#{name}.png" class=cl title=title)
-    //- img(src="https://img.icons8.com/ultraviolet/48/000000/#{name}.png" class=cl title=title)
-    //- img(src="https://img.icons8.com/office/48/000000/#{name}.png" class=cl title=title)
-    //-     img(src="https://img.icons8.com/#{gs.icon_theme}/48/000000/#{name}.png" class=cl title=title)
-    //- else 
-    //-     img.ui.mini.inline.image(src="https://img.icons8.com/#{gs.icon_theme}/48/000000/#{name}.png" class=cl title=title)
-    //- img(src="https://img.icons8.com/plasticine/48/000000/#{name}.png" class=cl title=title)
-template(name='ioffice')
-    img(src="https://img.icons8.com/office/48/000000/#{name}.png" class=cl title=title)
-template(name='ismall')
-    img(src="https://img.icons8.com/fluent/24/000000/#{name}.png" class=cl title=title)
-template(name='icolor')
-    // i.icon(name=name)
-    img(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
-    // img(src="https://img.icons8.com/dusk/48/000000/#{name}.png" class=cl title=title)
+// template(name='color_icon_view')
+//     if field_value
+//         //- img(src="https://img.icons8.com/color/48/000000/#{field_value}.png")
+//         img(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
+//         //- img(src="https://img.icons8.com/dusk/48/000000/#{field_value}.png")
+//         //- img(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
+//         //- img(src="https://img.icons8.com/ios/48/000000/#{field_value}.png")
+// template(name='icon_view')
+//     if field_value
+//         span.inline.spaced
+//             +i name=field_value
+//         //- i.icon(class=field_value)
+//         //- img(src="https://img.icons8.com/office/48/000000/#{field_value}.png")
+//         //- img(src="https://img.icons8.com/fluent/48/000000/#{field_value}.png")
+//         //- img(src="https://img.icons8.com/ios/48/000000/#{field_value}.png")
+// template(name='i')
+//     //- i.icon(class=name)
+//     // if is_hovering
+//     //     img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
+//     // else
+//     if cl.length
+//         img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
+//     else 
+//         img.content.fade(src="https://img.icons8.com/color/48/000000/#{name}.png" class='ui avatar image' title=title)
+//     // img.content.fade(src="https://img.icons8.com/ios/24/000000/#{name}.png" class=cl title=title)
+//     // img(src="https://img.icons8.com/dusk/64/000000/#{name}.png" class=cl title=title)
+//     // img(src="https://img.icons8.com/fluent/48/000000/#{name}.png" class=cl title=title)
+//     // img(src="https://img.icons8.com/doodle/48/000000/#{name}.png" class=cl title=title)
+//     //- img.icon8(src="https://img.icons8.com/ios/50/000000/#{name}.png" class=cl title=title)
+//     //- img(src="https://img.icons8.com/ultraviolet/48/000000/#{name}.png" class=cl title=title)
+//     //- img(src="https://img.icons8.com/office/48/000000/#{name}.png" class=cl title=title)
+//     //-     img(src="https://img.icons8.com/#{gs.icon_theme}/48/000000/#{name}.png" class=cl title=title)
+//     //- else 
+//     //-     img.ui.mini.inline.image(src="https://img.icons8.com/#{gs.icon_theme}/48/000000/#{name}.png" class=cl title=title)
+//     //- img(src="https://img.icons8.com/plasticine/48/000000/#{name}.png" class=cl title=title)
+// template(name='ioffice')
+//     img(src="https://img.icons8.com/office/48/000000/#{name}.png" class=cl title=title)
+// template(name='ismall')
+//     img(src="https://img.icons8.com/fluent/24/000000/#{name}.png" class=cl title=title)
+// template(name='icolor')
+//     // i.icon(name=name)
+//     img(src="https://img.icons8.com/color/48/000000/#{name}.png" class=cl title=title)
+//     // img(src="https://img.icons8.com/dusk/48/000000/#{name}.png" class=cl title=title)
 template(name='ibig')
     // i.icon(name=name)
     // if is_hovering
     //     img.content.fade(src="https://img.icons8.com/color/96/000000/#{name}.png" class=cl title=title)
     // else
     img.content.fade(src="https://img.icons8.com/color/96/000000/#{name}.png" class=cl title=title)
-template(name='iios')
-    img(src="https://img.icons8.com/ios/48/000000/#{name}.png" class=cl title=title)
-    //- img(src="https://img.icons8.com/ultraviolet/48/000000/#{name}.png" class=cl title=title)
-template(name='icon')
-    i.icon(class=name)
-// -     //- img.ui.middle.aligned.image(src="https://img.icons8.com/cotton/24/000000/#{name}.png" class=cl title=title)
-//-     //- img(src="https://img.icons8.com/office/24/000000/#{name}.png" class=cl title=title)
-//-     //- img.ui.middle.aligned.image(src="https://img.icons8.com/plasticine/24/000000/#{name}.png" class=cl title=title)
-//-     //- img(src="https://img.icons8.com/plasticine/24/000000/#{name}.png" class=cl title=title)
-//-     //- img.ui.inline.image(src="https://img.icons8.com/#{gs.icon_theme}/24/000000/#{name}.png" class=cl title=title)
-//-     //- img(src="https://img.icons8.com/ultraviolet/24/000000/#{name}.png" class=cl title=title)
-//-     //- img(src="https://img.icons8.com/ios/24/000000/#{name}.png" class=cl title=title) 
-//-     //- |&nbsp;
-template(name='iblue')
-    img(src="https://img.icons8.com/ultraviolet/40/000000/#{name}.png" class=cl)
+// template(name='iios')
+//     img(src="https://img.icons8.com/ios/48/000000/#{name}.png" class=cl title=title)
+//     //- img(src="https://img.icons8.com/ultraviolet/48/000000/#{name}.png" class=cl title=title)
+// template(name='icon')
+//     i.icon(class=name)
+// // -     //- img.ui.middle.aligned.image(src="https://img.icons8.com/cotton/24/000000/#{name}.png" class=cl title=title)
+// //-     //- img(src="https://img.icons8.com/office/24/000000/#{name}.png" class=cl title=title)
+// //-     //- img.ui.middle.aligned.image(src="https://img.icons8.com/plasticine/24/000000/#{name}.png" class=cl title=title)
+// //-     //- img(src="https://img.icons8.com/plasticine/24/000000/#{name}.png" class=cl title=title)
+// //-     //- img.ui.inline.image(src="https://img.icons8.com/#{gs.icon_theme}/24/000000/#{name}.png" class=cl title=title)
+// //-     //- img(src="https://img.icons8.com/ultraviolet/24/000000/#{name}.png" class=cl title=title)
+// //-     //- img(src="https://img.icons8.com/ios/24/000000/#{name}.png" class=cl title=title) 
+// //-     //- |&nbsp;
+// template(name='iblue')
+//     img(src="https://img.icons8.com/ultraviolet/40/000000/#{name}.png" class=cl)
 
-template(name='iflat')
-    img.ui.mini.image(src="https://img.icons8.com/flat_round/64/000000/#{name}.png")
+// template(name='iflat')
+//     img.ui.mini.image(src="https://img.icons8.com/flat_round/64/000000/#{name}.png")
 
-//- template(name='ioffice')
-//-     img.ui.image(src="https://img.icons8.com/office/30/000000/#{name}.png" class=cl)
-template(name='link_edit')
-    div
-    if icon
-        +i name=icon
-        // i.icon(class=icon)
-    .ui.inline.header
-        |#{title} #{label}
-    .ui.fluid.input
-        input.edit_url(type='url' value=field_value placeholder='url' autocomplete="off")
-    .spacer
-
-template(name='link_view')
-    if field_value
-        div
-        if icon
-            +i name=icon
-        //- .ui.inline.header 
-        //-     |#{title} #{label}
-        a.ui.small.header(href=field_value target='_window' title=field_value)
-            |#{label}
-        // div
-        // a(href="#{field_value}" target='_window')
-        //     |#{field_value}
-        //- img.ui.fluid.image(src=field_value)
-        
-        
-template(name='image_view')
-    if field_value
-        //- .ui.inline.header
-        //-     if icon
-        //-         +icon name=icon
-                //- i.grey.icon(class=icon)
-        //-     if title
-        //-         |#{title}
-        //- else if key
-        //-     |#{key}
-        //- else
-        //-     |#{this}
-        //- if cl
-        //-     img(src="{{c.url field_value gravity='face' crop='fit'}}" class=cl)
-        //- else 
-        // a(href="{{c.url field_value }}" target='_window')
-        img.ui.centered.rounded.image(src="{{c.url field_value gravity='face' crop='fit'}}" class=cl)
-        //- a(href="{{c.url field_value gravity='face' crop='fit'}}")
-        //-     |download
-    //- +call_visual
-    
-template(name='image_edit')
-    .ui.form
-        if icon
-            i.icon(class=icon)
-        .ui.inline.header
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            else if key
-                |#{key}
-            else
-                |#{this}            
-        .field
-            if field_value
-                //- label Image
-                a(href="{{c.url field_value }}" target='_window')
-                    img.ui.centered.fluid.rounded.image(src="{{c.url field_value height=500 gravity='face' crop='fill'}}" class=cl)
-                a#remove_photo.ui.right.corner.link.label
-                    i.remove.link.icon
-                // .ui.button.call_cloud_visual
-                //     i.dna.icon
-                //     |autotag
-            else
-                input(type='file' name='upload_image' accept='image/*' )
-            
-
-template(name='image_link_edit')
-    .ui.fluid.input
-        .ui.label image link
-        i.image.icon
-        input.image_link_val(type='link' value=field_value placeholder='image link'  autocomplete="off")
-    if field_value
-        img.ui.fluid.image(src=field_value)
-    // +call_visual
-template(name='image_link_view')
-    img.ui.rounded.zoomer.image(src=field_value)
-
-
-
-template(name='textarea_view')
-    if field_value
-        div
-        //- if icon
-        //-     i.icon(class=field_value)
-            //- +i name=icon cl='ui inline image'
-        .ui.inline.small.grey.header
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            //- else if key
-            //-     |#{key}
-            //- else
-            //-     |#{this}     
-        //- .spacer       
-        |{{nl2br field_value}}
-
-template(name='raw_edit')
-    .ui.large.form
-        // .ui.small.inline.header raw
-        .field
-            label 
-                if icon
-                    // i.icon(class=field_value)
-                    +i name=icon
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                //- else if key
-                //-     |#{key}
-                //- else
-                //-     |#{this}
-            textarea.edit_textarea(rows='7') #{field_value}
-            
-            
-template(name='raw_view')
-    .ui.large.form
-        .ui.small.inline.header raw
-        .field
-            label 
-                if icon
-                    // i.icon(class=field_value)
-                    +i name=icon
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                //- else if key
-                //-     |#{key}
-                //- else
-                //-     |#{this}
-            textarea.edit_textarea(rows='7') !{field_value}
-
-        
-template(name='textarea_edit')
-    .ui.large.form
-        .field
-            label 
-                if icon
-                    // i.icon(class=field_value)
-                    +i name=icon
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                //- else if key
-                //-     |#{key}
-                //- else
-                //-     |#{this}
-            textarea.edit_textarea(rows='7') #{field_value}
-
-        
-template(name='text_edit')
-    div
-    if icon
-        //- i.grey.icon(class=icon)
-        +icon name=icon
-    .ui.inline.small.header
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        else if key
-            |#{key}
-            //- +clear_value
-    .ui.icon.large.fluid.input
-        input.edit_text(type='text' value=field_value placeholder=placeholder autocomplete="off")
-        
-
-
-
-
-
-
-
-template(name='clear_value')
-    if field_value
-        i.remove.link.large.icon.clear_value
-
-template(name='text_view')
-    if field_value
-        //- unless header
-        //-     div
-        //-     if icon
-        //-         +icon name=icon                
-        .ui.grey.small.inline.header
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            else if key
-                |#{key}
-            else
-                |#{this}
-        .ui.inline.header #{field_value}
-
-
-
-
-
-
-template(name='date_edit')
-    div
-    if icon
-        +icon name=icon cl='ui inline mini image'   
-    //-     |&nbsp;
-    .ui.inline.header
-        if title
-            |#{title}
-        else if label
-            |#{label}
-            //- else if key
-            //-     |#{key}
-            //- else
-            //-     |#{this}
-            //- +clear_value                
-    .ui.fluid.input
-        input.edit_date(type='date' value=field_value placeholder=placeholder autocomplete="off")
-
-
-template(name='date_view')
-    if field_value
-        div
-        if icon
-            +i name=icon
-        .ui.grey.inline.small.header
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            else if key
-                |#{key}
-            else
-                |#{this}
-        .ui.inline.header 
-            |&nbsp; {{medium_date field_value}}
-
-
-
-template(name='time_edit')
-    .ui.inline.grey.header
-        if icon
-            +i name=icon cl='ui inline mini image'
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        //- else
-        //-     |#{key}
-    //- +clear_value                
-    .ui.fluid.input
-        input.edit_time(type='time' value=field_value placeholder=placeholder autocomplete="off")
-                
-                
-template(name='time_view')
-    div
-    if field_value
-        if icon
-            +i name=icon cl='ui inline mini image'
-        .ui.inline.grey.header
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            else if key
-                |#{key}
-            else
-                |#{this}
-        .ui.inline.header &nbsp; #{field_value}
-
-template(name='datetime_edit')
-    .ui.form
-        .field
-            label 
-                if icon
-                    i.grey.icon(class=icon)
-                    //- +i name=icon                
-                if label
-                    |#{label}
-                else
-                    |#{key}
-            //- +clear_value                
-            input.edit_datetime(type='datetime-local' value=field_value placeholder=placeholder autocomplete="off")
-
-template(name='datetime_view')
-    div
-    //- if icon
-    //-     +i name=icon cl='ui mini inline image'
-    if title
-        |#{title}
-    else if label
-        |#{label}        
-    else if key
-        |#{key}
-    else
-        |#{this}
-    strong &nbsp; #{field_value}
-
-template(name='array_edit')
-    .spacer
-    .spacer
-    // if icon
-    //     i.grey.icon(class=i)
-    //     // +icon name=icon
-    .ui.inline.header
-        |#{field_value.length}
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        else if key
-            |#{key}
-    .ui.icon.large.input
-        i.icon
-            +i name=icon
-    
-        input.new_element(type='text' placeholder="#{field_value.length} #{label}" autocomplete="off")
-        //- +clear_value                
-    if field_value
-        each field_value
-            if in_dev
-                .ui.basic.large.label.touch_element
-                    i.delete.icon.remove_element
-                    |#{this}
-                // .ui.compact.button.pick_tag
-                //     |#{this}
-            else
-                a.ui.basic.label.pick_tag
-                    |#{this}
-
-// template(name='array_edit')
-//     .spacer
-//     if i
-//         i.grey.icon(class=i)
-//         // +icon name=icon
+// //- template(name='ioffice')
+// //-     img.ui.image(src="https://img.icons8.com/office/30/000000/#{name}.png" class=cl)
+// template(name='link_edit')
+//     div
+//     if icon
+//         +i name=icon
+//         // i.icon(class=icon)
 //     .ui.inline.header
+//         |#{title} #{label}
+//     .ui.fluid.input
+//         input.edit_url(type='url' value=field_value placeholder='url' autocomplete="off")
+//     .spacer
+
+// template(name='link_view')
+//     if field_value
+//         div
+//         if icon
+//             +i name=icon
+//         //- .ui.inline.header 
+//         //-     |#{title} #{label}
+//         a.ui.small.header(href=field_value target='_window' title=field_value)
+//             |#{label}
+//         // div
+//         // a(href="#{field_value}" target='_window')
+//         //     |#{field_value}
+//         //- img.ui.fluid.image(src=field_value)
+        
+        
+// template(name='image_view')
+//     if field_value
+//         //- .ui.inline.header
+//         //-     if icon
+//         //-         +i name=icon
+//                 //- i.grey.icon(class=icon)
+//         //-     if title
+//         //-         |#{title}
+//         //- else if key
+//         //-     |#{key}
+//         //- else
+//         //-     |#{this}
+//         //- if cl
+//         //-     img(src="{{c.url field_value gravity='face' crop='fit'}}" class=cl)
+//         //- else 
+//         // a(href="{{c.url field_value }}" target='_window')
+//         img.ui.centered.rounded.image(src="{{c.url field_value gravity='face' crop='fit'}}" class=cl)
+//         //- a(href="{{c.url field_value gravity='face' crop='fit'}}")
+//         //-     |download
+//     //- +call_visual
+    
+// template(name='image_edit')
+//     .ui.form
+//         if icon
+//             i.icon(class=icon)
+//         .ui.inline.header
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             else if key
+//                 |#{key}
+//             else
+//                 |#{this}            
+//         .field
+//             if field_value
+//                 //- label Image
+//                 a(href="{{c.url field_value }}" target='_window')
+//                     img.ui.centered.fluid.rounded.image(src="{{c.url field_value height=500 gravity='face' crop='fill'}}" class=cl)
+//                 a#remove_photo.ui.right.corner.link.label
+//                     i.remove.link.icon
+//                 // .ui.button.call_cloud_visual
+//                 //     i.dna.icon
+//                 //     |autotag
+//             else
+//                 input(type='file' name='upload_image' accept='image/*' )
+            
+
+// template(name='image_link_edit')
+//     .ui.fluid.input
+//         .ui.label image link
+//         i.image.icon
+//         input.image_link_val(type='link' value=field_value placeholder='image link'  autocomplete="off")
+//     if field_value
+//         img.ui.fluid.image(src=field_value)
+//     // +call_visual
+// template(name='image_link_view')
+//     img.ui.rounded.zoomer.image(src=field_value)
+
+
+
+// template(name='textarea_view')
+//     if field_value
+//         div
+//         //- if icon
+//         //-     i.icon(class=field_value)
+//             //- +i name=icon cl='ui inline image'
+//         .ui.inline.small.grey.header
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             //- else if key
+//             //-     |#{key}
+//             //- else
+//             //-     |#{this}     
+//         //- .spacer       
+//         |{{nl2br field_value}}
+
+// template(name='raw_edit')
+//     .ui.large.form
+//         // .ui.small.inline.header raw
+//         .field
+//             label 
+//                 if icon
+//                     // i.icon(class=field_value)
+//                     +i name=icon
+//                 if title
+//                     |#{title}
+//                 else if label
+//                     |#{label}
+//                 //- else if key
+//                 //-     |#{key}
+//                 //- else
+//                 //-     |#{this}
+//             textarea.edit_textarea(rows='7') #{field_value}
+            
+            
+// template(name='raw_view')
+//     .ui.large.form
+//         .ui.small.inline.header raw
+//         .field
+//             label 
+//                 if icon
+//                     // i.icon(class=field_value)
+//                     +i name=icon
+//                 if title
+//                     |#{title}
+//                 else if label
+//                     |#{label}
+//                 //- else if key
+//                 //-     |#{key}
+//                 //- else
+//                 //-     |#{this}
+//             textarea.edit_textarea(rows='7') !{field_value}
+
+        
+// template(name='textarea_edit')
+//     .ui.large.form
+//         .field
+//             label 
+//                 if icon
+//                     // i.icon(class=field_value)
+//                     +i name=icon
+//                 if title
+//                     |#{title}
+//                 else if label
+//                     |#{label}
+//                 //- else if key
+//                 //-     |#{key}
+//                 //- else
+//                 //-     |#{this}
+//             textarea.edit_textarea(rows='7') #{field_value}
+
+        
+// template(name='text_edit')
+//     div
+//     if icon
+//         //- i.grey.icon(class=icon)
+//         +i name=icon
+//     .ui.inline.small.header
 //         if title
 //             |#{title}
 //         else if label
 //             |#{label}
 //         else if key
 //             |#{key}
-//     .ui.input
-//         input.new_element(type='text' placeholder='+' autocomplete="off")
+//             //- +clear_value
+//     .ui.icon.large.fluid.input
+//         input.edit_text(type='text' value=field_value placeholder=placeholder autocomplete="off")
+        
+
+
+
+
+
+
+
+// template(name='clear_value')
+//     if field_value
+//         i.remove.link.large.icon.clear_value
+
+// template(name='text_view')
+//     if field_value
+//         //- unless header
+//         //-     div
+//         //-     if icon
+//         //-         +i name=icon                
+//         .ui.grey.small.inline.header
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             else if key
+//                 |#{key}
+//             else
+//                 |#{this}
+//         .ui.inline.header #{field_value}
+
+
+
+
+
+
+// template(name='date_edit')
+//     div
+//     if icon
+//         +i name=icon cl='ui inline mini image'   
+//     //-     |&nbsp;
+//     .ui.inline.header
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//             //- else if key
+//             //-     |#{key}
+//             //- else
+//             //-     |#{this}
+//             //- +clear_value                
+//     .ui.fluid.input
+//         input.edit_date(type='date' value=field_value placeholder=placeholder autocomplete="off")
+
+
+// template(name='date_view')
+//     if field_value
+//         div
+//         if icon
+//             +i name=icon
+//         .ui.grey.inline.small.header
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             else if key
+//                 |#{key}
+//             else
+//                 |#{this}
+//         .ui.inline.header 
+//             |&nbsp; {{medium_date field_value}}
+
+
+
+// template(name='time_edit')
+//     .ui.inline.grey.header
+//         if icon
+//             +i name=icon cl='ui inline mini image'
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//         //- else
+//         //-     |#{key}
+//     //- +clear_value                
+//     .ui.fluid.input
+//         input.edit_time(type='time' value=field_value placeholder=placeholder autocomplete="off")
+                
+                
+// template(name='time_view')
+//     div
+//     if field_value
+//         if icon
+//             +i name=icon cl='ui inline mini image'
+//         .ui.inline.grey.header
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             else if key
+//                 |#{key}
+//             else
+//                 |#{this}
+//         .ui.inline.header &nbsp; #{field_value}
+
+// template(name='datetime_edit')
+//     .ui.form
+//         .field
+//             label 
+//                 if icon
+//                     i.grey.icon(class=icon)
+//                     //- +i name=icon                
+//                 if label
+//                     |#{label}
+//                 else
+//                     |#{key}
+//             //- +clear_value                
+//             input.edit_datetime(type='datetime-local' value=field_value placeholder=placeholder autocomplete="off")
+
+// template(name='datetime_view')
+//     div
+//     //- if icon
+//     //-     +i name=icon cl='ui mini inline image'
+//     if title
+//         |#{title}
+//     else if label
+//         |#{label}        
+//     else if key
+//         |#{key}
+//     else
+//         |#{this}
+//     strong &nbsp; #{field_value}
+
+// template(name='array_edit')
+//     .spacer
+//     .spacer
+//     // if icon
+//     //     i.grey.icon(class=i)
+//     //     // +i name=icon
+//     .ui.inline.header
+//         |#{field_value.length}
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//         else if key
+//             |#{key}
+//     .ui.icon.large.input
+//         i.icon
+//             +i name=icon
+    
+//         input.new_element(type='text' placeholder="#{field_value.length} #{label}" autocomplete="off")
 //         //- +clear_value                
 //     if field_value
 //         each field_value
 //             if in_dev
-//                 .ui.large.label
+//                 .ui.basic.large.label.touch_element
 //                     i.delete.icon.remove_element
 //                     |#{this}
-//                 .ui.compact.button.pick_tag
-//                     |#{this}
+//                 // .ui.compact.button.pick_tag
+//                 //     |#{this}
 //             else
-//                 .ui.compact.button.pick_tag
+//                 a.ui.basic.label.pick_tag
 //                     |#{this}
+
+// // template(name='array_edit')
+// //     .spacer
+// //     if i
+// //         i.grey.icon(class=i)
+// //         // +i name=icon
+// //     .ui.inline.header
+// //         if title
+// //             |#{title}
+// //         else if label
+// //             |#{label}
+// //         else if key
+// //             |#{key}
+// //     .ui.input
+// //         input.new_element(type='text' placeholder='+' autocomplete="off")
+// //         //- +clear_value                
+// //     if field_value
+// //         each field_value
+// //             if in_dev
+// //                 .ui.large.label
+// //                     i.delete.icon.remove_element
+// //                     |#{this}
+// //                 .ui.compact.button.pick_tag
+// //                     |#{this}
+// //             else
+// //                 .ui.compact.button.pick_tag
+// //                     |#{this}
             
                 
-template(name='array_view')
-    if field_value
-        // div
-        if icon
-            i.icon(class=icon)
-        if label
-            .ui.inline.small.grey.header.say_body(title=title)
-                |#{label}
-        each field_value
-            .ui.label.say_body #{this}
+// template(name='array_view')
+//     if field_value
+//         // div
+//         if icon
+//             i.icon(class=icon)
+//         if label
+//             .ui.inline.small.grey.header.say_body(title=title)
+//                 |#{label}
+//         each field_value
+//             .ui.label.say_body #{this}
 
 
-template(name='children_edit')
-    div
-    .ui.inline.header 
-        |#{title}
-    .ui.icon.large.button.add_child(title="add child #{ref_model}")
-        i.plus.icon
-    .ui.styled.fluid.accordion
-        each children
-            +child_edit
+// template(name='children_edit')
+//     div
+//     .ui.inline.header 
+//         |#{title}
+//     .ui.icon.large.button.add_child(title="add child #{ref_model}")
+//         i.plus.icon
+//     .ui.styled.fluid.accordion
+//         each children
+//             +child_edit
 
 
-template(name='child_edit')
-    .title
-        .ui.header child doc: #{title} #{key} #{parent.slug}
-    .content
-        each child_fields
-            +Template.dynamic template=edit_template 
-        +remove_button
-        //-     +text_edit key='key'
-        //-     +text_edit key='field'
-        //-     +single_doc_edit key='field' ref_model='field_type' ref_key='slug' label='Field Type'
-        //-     +text_edit key='label'
-        //-     +text_edit key='icon'
-        //-     if icon
-        //-         i.big.icon(class=icon)
-        //- div
-              //- if is_reference
+// template(name='child_edit')
+//     .title
+//         .ui.header child doc: #{title} #{key} #{parent.slug}
+//     .content
+//         each child_fields
+//             +Template.dynamic template=edit_template 
+//         +remove_button
+//         //-     +text_edit key='key'
+//         //-     +text_edit key='field'
+//         //-     +single_doc_edit key='field' ref_model='field_type' ref_key='slug' label='Field Type'
+//         //-     +text_edit key='label'
+//         //-     +text_edit key='icon'
+//         //-     if icon
+//         //-         i.big.icon(class=icon)
+//         //- div
+//               //- if is_reference
         
-        //     +single_doc_edit key='ref_model' ref_model='model' ref_key='slug' label='Referenced model (if ref)'
-        //     .ui.divider
-template(name='children_view')
-    .ui.accordion
-        .title
-            //- if icon
-            //-     +i name=icon                
-            .ui.inline.header
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                else if key
-                    |#{key}
-                else
-                    |#{this}
-                i.dropdown.icon
-        .content
-            each children
-                .ui.smoothed.segment
-                    +child_view
+//         //     +single_doc_edit key='ref_model' ref_model='model' ref_key='slug' label='Referenced model (if ref)'
+//         //     .ui.divider
+// template(name='children_view')
+//     .ui.accordion
+//         .title
+//             //- if icon
+//             //-     +i name=icon                
+//             .ui.inline.header
+//                 if title
+//                     |#{title}
+//                 else if label
+//                     |#{label}
+//                 else if key
+//                     |#{key}
+//                 else
+//                     |#{this}
+//                 i.dropdown.icon
+//         .content
+//             each children
+//                 .ui.smoothed.segment
+//                     +child_view
 
 
-template(name='child_view')
-    each child_fields
-        //- |#{rank} #{title} #{title}
-        //- |#{key}
-        +Template.dynamic template=view_template 
-    +remove_button
-    +view_button
-        // if field_template
-        //     .ui.header field template #{field_template}
-        // else 
-        // .ui.segment
-        //     +text_edit key='key'
-        //     // +text_edit key='field'
-        //     +single_doc_edit key='field' ref_model='field' ref_key='slug' label='Field Type'
-        //     +text_edit key='label'
-        //     +text_edit key='icon'
-        //     if icon
-        //         i.big.icon(class=icon)
-        //     // if is_reference
+// template(name='child_view')
+//     each child_fields
+//         //- |#{rank} #{title} #{title}
+//         //- |#{key}
+//         +Template.dynamic template=view_template 
+//     +remove_button
+//     +view_button
+//         // if field_template
+//         //     .ui.header field template #{field_template}
+//         // else 
+//         // .ui.segment
+//         //     +text_edit key='key'
+//         //     // +text_edit key='field'
+//         //     +single_doc_edit key='field' ref_model='field' ref_key='slug' label='Field Type'
+//         //     +text_edit key='label'
+//         //     +text_edit key='icon'
+//         //     if icon
+//         //         i.big.icon(class=icon)
+//         //     // if is_reference
     
-        //     +single_doc_edit key='ref_model' ref_model='model' ref_key='slug' label='Referenced model (if ref)'
-        //     .ui.divider
-template(name='kvs')
-    //- div
-    .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
-        //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
-        if icon
-            +i name=icon
-        .inline
-            //- if field_value
-            //-     i.checkmark.icon
-            if label
-                |#{label}
-            else if value
-                |#{value}
-            else if key
-                |#{key}
+//         //     +single_doc_edit key='ref_model' ref_model='model' ref_key='slug' label='Referenced model (if ref)'
+//         //     .ui.divider
+// template(name='kvs')
+//     //- div
+//     .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
+//         //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
+//         if icon
+//             +i name=icon
+//         .inline
+//             //- if field_value
+//             //-     i.checkmark.icon
+//             if label
+//                 |#{label}
+//             else if value
+//                 |#{value}
+//             else if key
+//                 |#{key}
 
-template(name='skvs')
-    //- div
-    .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
-        //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
-        if icon
-            +i name=icon
-        .inline
-            //- if field_value
-            //-     i.checkmark.icon
-            if label
-                |#{label}
-            else if value
-                |#{value}
-            else if key
-                |#{key}
+// template(name='skvs')
+//     //- div
+//     .ui.button.set_value(class="#{kve_class} #{cl}" title=tooltip)
+//         //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
+//         if icon
+//             +i name=icon
+//         .inline
+//             //- if field_value
+//             //-     i.checkmark.icon
+//             if label
+//                 |#{label}
+//             else if value
+//                 |#{value}
+//             else if key
+//                 |#{key}
 
 
-template(name='boolean_edit')
-    //- div
-    .ui.compact.button.toggle_boolean(class="#{boolean_toggle_class} #{cl}" title=tooltip)
-        if field_value
-            i.green.checkmark.icon
-        else
-            i.circle.outline.icon
-        //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
-        if icon
-            +i name=icon
-        .inline
-            //- if field_value
-            //-     i.checkmark.icon
-            if label
-                |#{label}
-            else if key
-                |#{key}
-            else
-                |#{this}
-        div
-        //- 
-        //- if field_value
-        //-     if true_icon
-        //-         i.large.green.icon(class=true_icon)
-        //-     else
-        //-         |yes
-        //- else
-        //-     if false_icon
-        //-         i.large.icon(class=false_icon)
-        //-     else
-        //-         |no
+// template(name='boolean_edit')
+//     //- div
+//     .ui.compact.button.toggle_boolean(class="#{boolean_toggle_class} #{cl}" title=tooltip)
+//         if field_value
+//             i.green.checkmark.icon
+//         else
+//             i.circle.outline.icon
+//         //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
+//         if icon
+//             +i name=icon
+//         .inline
+//             //- if field_value
+//             //-     i.checkmark.icon
+//             if label
+//                 |#{label}
+//             else if key
+//                 |#{key}
+//             else
+//                 |#{this}
+//         div
+//         //- 
+//         //- if field_value
+//         //-     if true_icon
+//         //-         i.large.green.icon(class=true_icon)
+//         //-     else
+//         //-         |yes
+//         //- else
+//         //-     if false_icon
+//         //-         i.large.icon(class=false_icon)
+//         //-     else
+//         //-         |no
         
         
         
-template(name='boolean_view')
-    if field_value
-        .ui.basic.label(title=title)
-            // .ui.inline.grey.small.header
-            if icon
-                if field_value
-                    +ibig name=icon cl='ui inline image'
-                else
-                    //- i.grey.icon(class=icon)
-                    +iios name=icon cl='ui inline mini image'
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            else if key
-                |#{key}
-            else
-                |#{this}
-            // if field_value
-            //     i.large.green.checkmark.icon
-            // else
-            //     i.cancel.grey.icon
+// template(name='boolean_view')
+//     if field_value
+//         .ui.basic.label(title=title)
+//             // .ui.inline.grey.small.header
+//             if icon
+//                 if field_value
+//                     +ibig name=icon cl='ui inline image'
+//                 else
+//                     //- i.grey.icon(class=icon)
+//                     +iios name=icon cl='ui inline mini image'
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             else if key
+//                 |#{key}
+//             else
+//                 |#{this}
+//             // if field_value
+//             //     i.large.green.checkmark.icon
+//             // else
+//             //     i.cancel.grey.icon
 
 
-template(name='number_edit')
-    // div
-        //- i.grey.icon(class=icon)
-    .ui.inline.small.header(title=tip)
-        if icon
-            // i.icon(class=icon)
-            +i name=icon
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        else
-            |#{key}
-    if tooltip
-        .ui.tiny.grey.inline.header #{tooltip}
-        div
-    //- +clear_value  
-    .ui.input            
-        input.edit_number(type='number' min=min step=step max=max class=cl value=field_value placeholder=placeholder autocomplete="off")
+// template(name='number_edit')
+//     // div
+//         //- i.grey.icon(class=icon)
+//     .ui.inline.small.header(title=tip)
+//         if icon
+//             // i.icon(class=icon)
+//             +i name=icon
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//         else
+//             |#{key}
+//     if tooltip
+//         .ui.tiny.grey.inline.header #{tooltip}
+//         div
+//     //- +clear_value  
+//     .ui.input            
+//         input.edit_number(type='number' min=min step=step max=max class=cl value=field_value placeholder=placeholder autocomplete="off")
             
             
-template(name='number_view')
-    if field_value
-        div
-        if icon
-            //- i.grey.icon(class=icon)
-            +i name=icon cl='ui inline mini image'
-        .ui.inline.small.header
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            //- else if key
-            //-     |#{key}
-            //- else
-            //-     |#{this}
-        .ui.inline.header &nbsp;
-            if unit
-                span #{prefix}
-            |#{field_value}
+// template(name='number_view')
+//     if field_value
+//         div
+//         if icon
+//             //- i.grey.icon(class=icon)
+//             +i name=icon cl='ui inline mini image'
+//         .ui.inline.small.header
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             //- else if key
+//             //-     |#{key}
+//             //- else
+//             //-     |#{this}
+//         .ui.inline.header &nbsp;
+//             if unit
+//                 span #{prefix}
+//             |#{field_value}
 
 
-template(name='float_edit')
-    .ui.small.grey.inline.header(title=tip)
-        if icon
-            // i.grey.icon(class=icon)
-            +i name=icon
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        else
-            |#{key}
-    //- +clear_value  
-    .ui.input            
-        input.edit_float(type='number' class=cl min='0' step='.01' value=field_value placeholder=placeholder autocomplete="off")
+// template(name='float_edit')
+//     .ui.small.grey.inline.header(title=tip)
+//         if icon
+//             // i.grey.icon(class=icon)
+//             +i name=icon
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//         else
+//             |#{key}
+//     //- +clear_value  
+//     .ui.input            
+//         input.edit_float(type='number' class=cl min='0' step='.01' value=field_value placeholder=placeholder autocomplete="off")
             
             
-template(name='phone_edit')
-    .ui.inline.header 
-        i.phone.icon
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        else if key
-            |#{key}
-        else
-            |#{this}
-    .ui.fluid.input
-        //- +clear_value                
-        input.edit_phone(type='tel' value=field_value placeholder=placeholder autocomplete="off")
+// template(name='phone_edit')
+//     .ui.inline.header 
+//         i.phone.icon
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//         else if key
+//             |#{key}
+//         else
+//             |#{this}
+//     .ui.fluid.input
+//         //- +clear_value                
+//         input.edit_phone(type='tel' value=field_value placeholder=placeholder autocomplete="off")
 
-template(name='phone_view')
-    if field_value
-        unless header
-            div
-            //- if icon
-            //-     +i name=icon          
-            .ui.inline.grey.header
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                else if key
-                    |#{key}
-                else
-                    |#{this}
-        strong &nbsp; #{field_value}
+// template(name='phone_view')
+//     if field_value
+//         unless header
+//             div
+//             //- if icon
+//             //-     +i name=icon          
+//             .ui.inline.grey.header
+//                 if title
+//                     |#{title}
+//                 else if label
+//                     |#{label}
+//                 else if key
+//                     |#{key}
+//                 else
+//                     |#{this}
+//         strong &nbsp; #{field_value}
 
             
             
             
-template(name='float_view')
-    if field_value
-        div
-        if icon
-            //- i.grey.icon(class=icon)
-            +i name=icon cl='ui inline mini image'
-        .ui.inline.header
-            if title
-                |#{title}
-            else if label
-                |#{label}
-            else if key
-                |#{key}
-            else
-                |#{this}
-        .ui.inline.large.header &nbsp; #{field_value}
+// template(name='float_view')
+//     if field_value
+//         div
+//         if icon
+//             //- i.grey.icon(class=icon)
+//             +i name=icon cl='ui inline mini image'
+//         .ui.inline.header
+//             if title
+//                 |#{title}
+//             else if label
+//                 |#{label}
+//             else if key
+//                 |#{key}
+//             else
+//                 |#{this}
+//         .ui.inline.large.header &nbsp; #{field_value}
 
-template(name='slug_edit')
-    if icon
-        i.grey.icon(class=icon)
-    .ui.inline.header.pointer.slugify_title
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        else if key
-            |#{key}
-        // small (auto slugify)
-    //- +clear_value
-    .ui.icon.fluid.input
-        input.edit_text(type='text' value=field_value placeholder=placeholder autocomplete="off")
+// template(name='slug_edit')
+//     if icon
+//         i.grey.icon(class=icon)
+//     .ui.inline.header.pointer.slugify_title
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//         else if key
+//             |#{key}
+//         // small (auto slugify)
+//     //- +clear_value
+//     .ui.icon.fluid.input
+//         input.edit_text(type='text' value=field_value placeholder=placeholder autocomplete="off")
 
-template(name='slug_view')
-    if field_value
-        unless header
-            div
-            //- if icon
-            //-     +i name=icon                
-            .ui.inline.header
-                if title
-                    |#{title}
-                else if label
-                    |#{label}
-                else if key
-                    |#{key}
-                else
-                    |#{this}
-        .ui.inline.header #{field_value}
-
-
-
-template(name='single_doc_view')
-    div
-    if field_value
-        if icon
-            //- i.grey.icon(class=icon)
-            +i name=icon
-        .ui.inline.header(title=key)
-            |#{title}
-        .ui.label
-            if icon
-                //- i.grey.icon(class=icon)
-                +i name=icon
-            |#{field_value}
+// template(name='slug_view')
+//     if field_value
+//         unless header
+//             div
+//             //- if icon
+//             //-     +i name=icon                
+//             .ui.inline.header
+//                 if title
+//                     |#{title}
+//                 else if label
+//                     |#{label}
+//                 else if key
+//                     |#{key}
+//                 else
+//                     |#{this}
+//         .ui.inline.header #{field_value}
 
 
-template(name='single_doc_edit')
-    div
-    .ui.inline.header(title=key) 
-        if icon
-            //- i.grey.icon(class=icon)
-            +i name=icon
-        |#{label} #{title}
-    each choices
-        .ui.compact.button.select_choice(class=choice_class)
-            if icon
-                //- i.grey.icon(class=icon)
-                +i name=icon cl='ui middle aligned mini image'
-                //- +i name=icon cl='ui mini inline image'
-            |#{calculated_label}
-            |#{slug} #{title}
+
+// template(name='single_doc_view')
+//     div
+//     if field_value
+//         if icon
+//             //- i.grey.icon(class=icon)
+//             +i name=icon
+//         .ui.inline.header(title=key)
+//             |#{title}
+//         .ui.label
+//             if icon
+//                 //- i.grey.icon(class=icon)
+//                 +i name=icon
+//             |#{field_value}
 
 
-template(name='multi_doc_edit')
-    div
-    if icon
-        +icon name=icon cl='ui mini inline image'
-    .ui.inline.header(title=key)
-        |#{title} #{label}    
-    each choices
-        .ui.compact.button.select_choice(class=choice_class)
-            if icon
-                //- i.grey.icon(class=icon)
-                +i name=icon cl='ui inline image'
-            //- |#{title} #{slug}
-            |#{slug}
-    //- .ui.sub.header 
-    //-     if icon
-    //-         i.grey.icon(class=icon)
-    //-     |#{title}
-    //- select.ui.fluid.multiple.selection.dropdown(multiple='')
-    //-     each choices
-    //-         option(value=slug) #{title} #{unit_number}
-    //- .ui.fluid.multiple.selection.dropdown
-    //-  // input(type='hidden' name='multi_doc_edit')
-    //-  // i.dropdown.icon
-    //-  // .default.text 
-    //-  //     |#{title}
-    //-  // .menu
-    //-  //     each choices
-    //-  //         .item(data-value=slug) 
-    //-  //             if icon
-    //-  i.grey.icon(class=icon)
-    //-  //             |#{title}
+// template(name='single_doc_edit')
+//     div
+//     .ui.inline.header(title=key) 
+//         if icon
+//             //- i.grey.icon(class=icon)
+//             +i name=icon
+//         |#{label} #{title}
+//     each choices
+//         .ui.compact.button.select_choice(class=choice_class)
+//             if icon
+//                 //- i.grey.icon(class=icon)
+//                 +i name=icon cl='ui middle aligned mini image'
+//                 //- +i name=icon cl='ui mini inline image'
+//             |#{calculated_label}
+//             |#{slug} #{title}
+
+
+// template(name='multi_doc_edit')
+//     div
+//     if icon
+//         +i name=icon cl='ui mini inline image'
+//     .ui.inline.header(title=key)
+//         |#{title} #{label}    
+//     each choices
+//         .ui.compact.button.select_choice(class=choice_class)
+//             if icon
+//                 //- i.grey.icon(class=icon)
+//                 +i name=icon cl='ui inline image'
+//             //- |#{title} #{slug}
+//             |#{slug}
+//     //- .ui.sub.header 
+//     //-     if icon
+//     //-         i.grey.icon(class=icon)
+//     //-     |#{title}
+//     //- select.ui.fluid.multiple.selection.dropdown(multiple='')
+//     //-     each choices
+//     //-         option(value=slug) #{title} #{unit_number}
+//     //- .ui.fluid.multiple.selection.dropdown
+//     //-  // input(type='hidden' name='multi_doc_edit')
+//     //-  // i.dropdown.icon
+//     //-  // .default.text 
+//     //-  //     |#{title}
+//     //-  // .menu
+//     //-  //     each choices
+//     //-  //         .item(data-value=slug) 
+//     //-  //             if icon
+//     //-  i.grey.icon(class=icon)
+//     //-  //             |#{title}
     
     
     
-template(name='multi_doc_view')
-    div
-    //- if icon
-    //-     +i name=icon cl='ui mini inline image'
-    if field_value
-        .ui.inline.header(title=key)
-            |#{title} #{label}
-        each sorted_field_values
-            .ui.large.label
-                |#{this}
+// template(name='multi_doc_view')
+//     div
+//     //- if icon
+//     //-     +i name=icon cl='ui mini inline image'
+//     if field_value
+//         .ui.inline.header(title=key)
+//             |#{title} #{label}
+//         each sorted_field_values
+//             .ui.large.label
+//                 |#{this}
 
 
 
-template(name='single_user_edit')
-    div
-    if icon
-        i.icon(class=icon)
-    .ui.inline.header 
-        |#{label} #{title}
-    // if field_value
-    //     .pull_user.ui.icon.compact.button(title='remove user')
-    //         i.remove.icon
-            //- |clear #{field_value}
-    unless field_value
-        .ui.input
-            input.single_user_select_input(type='text' placeholder='lookup user..' autocomplete='off')
-            each selections
-                .ui.large.label
-                    |#{name} 
-                .ui.mini.grey.inline.header 
-                    |#{username}
-        if user_results
-            .ui.attached.smoothed.segment
-                .ui.middle.aligned.selection.animated.list
-                    each user_results
-                        a.select_user.item(href='#')
-                            .ui.small.inline.header
-                                img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
-                                |#{first_name} #{last_name}
-                            .ui.mini.grey.inline.header 
-                                |#{username}
-    if field_value
-        // +user_card field_value
-        if is_dev
-            |#{field_value}
-        //- |#{this}
-        with user_from_id field_value
-            .ui.inline.header
-                img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
-                |#{name}
-            i.pull_user.remove.link.icon
+// template(name='single_user_edit')
+//     div
+//     if icon
+//         i.icon(class=icon)
+//     .ui.inline.header 
+//         |#{label} #{title}
+//     // if field_value
+//     //     .pull_user.ui.icon.compact.button(title='remove user')
+//     //         i.remove.icon
+//             //- |clear #{field_value}
+//     unless field_value
+//         .ui.input
+//             input.single_user_select_input(type='text' placeholder='lookup user..' autocomplete='off')
+//             each selections
+//                 .ui.large.label
+//                     |#{name} 
+//                 .ui.mini.grey.inline.header 
+//                     |#{username}
+//         if user_results
+//             .ui.attached.smoothed.segment
+//                 .ui.middle.aligned.selection.animated.list
+//                     each user_results
+//                         a.select_user.item(href='#')
+//                             .ui.small.inline.header
+//                                 img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
+//                                 |#{first_name} #{last_name}
+//                             .ui.mini.grey.inline.header 
+//                                 |#{username}
+//     if field_value
+//         // +user_card field_value
+//         if is_dev
+//             |#{field_value}
+//         //- |#{this}
+//         with user_from_id field_value
+//             .ui.inline.header
+//                 img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
+//                 |#{name}
+//             i.pull_user.remove.link.icon
 
 
-template(name='single_user_view')
-    if field_value
-        div
-        if icon
-            +i name=icon    
-        .ui.inline.header 
-            |#{title}
-            |#{label}
-        with field_value
-            with user_from_id this
-                +user_item
+// template(name='single_user_view')
+//     if field_value
+//         div
+//         if icon
+//             +i name=icon    
+//         .ui.inline.header 
+//             |#{title}
+//             |#{label}
+//         with field_value
+//             with user_from_id this
+//                 +user_item
             
 
 
 
-template(name='multi_user_edit')
-    div
-    .ui.inline.header
-        if icon
-            i.icon(class=icon)
-            //- +i name=icon
-        if title
-            |#{title}
-        else if label
-            |#{label}
-        else if key
-            |#{key}
-        else
-            |#{this}
-    .ui.input
-        input#multi_user_select_input(type='text' placeholder="lookup #{role_filter}.." autocomplete='off')
-    each selections
-        a.ui.large.label(href="/user/#{username}")
-            |#{name}
-    if user_results
-        .ui.top.attached.segment
-            .ui.middle.aligned.selection.animated.list
-                each user_results
-                    a.select_user.item(href="#")
-                        .ui.header
-                            img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
-                            strong #{first_name} #{last_name}
-                            small @#{username}
-    +clear_value                
-    each field_value
-        // |#{this}
-        with user_from_id this
-            div
-            .ui.inline.header
-                img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
-                |#{name}
-            i.pull_user.remove.link.icon
+// template(name='multi_user_edit')
+//     div
+//     .ui.inline.header
+//         if icon
+//             i.icon(class=icon)
+//             //- +i name=icon
+//         if title
+//             |#{title}
+//         else if label
+//             |#{label}
+//         else if key
+//             |#{key}
+//         else
+//             |#{this}
+//     .ui.input
+//         input#multi_user_select_input(type='text' placeholder="lookup #{role_filter}.." autocomplete='off')
+//     each selections
+//         a.ui.large.label(href="/user/#{username}")
+//             |#{name}
+//     if user_results
+//         .ui.top.attached.segment
+//             .ui.middle.aligned.selection.animated.list
+//                 each user_results
+//                     a.select_user.item(href="#")
+//                         .ui.header
+//                             img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
+//                             strong #{first_name} #{last_name}
+//                             small @#{username}
+//     +clear_value                
+//     each field_value
+//         // |#{this}
+//         with user_from_id this
+//             div
+//             .ui.inline.header
+//                 img.ui.avatar.image(src="{{c.url profile_image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
+//                 |#{name}
+//             i.pull_user.remove.link.icon
 
-template(name='multi_doc_input')
-    //- .ui.form
-        //- .ui.inline.header
-        //-     if icon
-        //-         i.grey.icon(class=icon)
-        //-     if title
-        //-         |#{title}
-        //-     else if label
-        //-         |#{label}
-        //-     else if key
-        //-         |#{key}
-        //-     else
-        //-         |#{this}
-    .ui.big.input
-        input#multi_doc_select_input(type='text' placeholder=title autocomplete="off")
-        //- input#multi_doc_select_input(type='text' placeholder="Lookup #{ref_model}.." autocomplete="off")
-    each selections
-        .ui.large.label
-            |#{guest_name} #{first_name} #{last_name}
-    if doc_results
-        .ui.attached.secondary.segment
-            .ui.middle.aligned.selection.animated.list
-                each doc_results
-                    .select_doc.item
-                        h2.ui.header
-                            //- img.ui.avatar.image(src="{{c.url image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
-                            strong + #{guest_name} #{first_name} #{last_name}
-        //- +clear_value                
-        //- .ui.list
-        //-     each field_value
-        //-         // |#{this}
-        //-         +user_card
-        //-         .ui.large.button
-        //-             |#{first_name} #{last_name}
-                //- with user_from_id
-                //-     .item
-                //-         .right.floated.content
-                //-             i.pull_user.remove.link.icon
-                //-         .image
-                //-             img.ui.avatar.image(src="{{c.url image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
-                //-         .content
-                //-             h4.ui.header
-                //-                 |#{first_name} #{last_name}
-                //-                 @#{username}
-template(name='multi_user_view')
-    .ui.header 
-        if icon 
-            i.icon(class=icon)
-        |#{field_value.length}
-        |#{title} #{label}
-        //- #{key} #{label}
-    each field_value
-        with user_from_id this
-            +user_item
-            div
+// template(name='multi_doc_input')
+//     //- .ui.form
+//         //- .ui.inline.header
+//         //-     if icon
+//         //-         i.grey.icon(class=icon)
+//         //-     if title
+//         //-         |#{title}
+//         //-     else if label
+//         //-         |#{label}
+//         //-     else if key
+//         //-         |#{key}
+//         //-     else
+//         //-         |#{this}
+//     .ui.big.input
+//         input#multi_doc_select_input(type='text' placeholder=title autocomplete="off")
+//         //- input#multi_doc_select_input(type='text' placeholder="Lookup #{ref_model}.." autocomplete="off")
+//     each selections
+//         .ui.large.label
+//             |#{guest_name} #{first_name} #{last_name}
+//     if doc_results
+//         .ui.attached.secondary.segment
+//             .ui.middle.aligned.selection.animated.list
+//                 each doc_results
+//                     .select_doc.item
+//                         h2.ui.header
+//                             //- img.ui.avatar.image(src="{{c.url image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
+//                             strong + #{guest_name} #{first_name} #{last_name}
+//         //- +clear_value                
+//         //- .ui.list
+//         //-     each field_value
+//         //-         // |#{this}
+//         //-         +user_card
+//         //-         .ui.large.button
+//         //-             |#{first_name} #{last_name}
+//                 //- with user_from_id
+//                 //-     .item
+//                 //-         .right.floated.content
+//                 //-             i.pull_user.remove.link.icon
+//                 //-         .image
+//                 //-             img.ui.avatar.image(src="{{c.url image_id width=100 height=100 gravity='face' crop='fill'}}" class=cl)
+//                 //-         .content
+//                 //-             h4.ui.header
+//                 //-                 |#{first_name} #{last_name}
+//                 //-                 @#{username}
+// template(name='multi_user_view')
+//     .ui.header 
+//         if icon 
+//             i.icon(class=icon)
+//         |#{field_value.length}
+//         |#{title} #{label}
+//         //- #{key} #{label}
+//     each field_value
+//         with user_from_id this
+//             +user_item
+//             div
             
 
 
     
     
-template(name='range_edit')
-    .ui.form
-        .field
-            label 
-                +i name='date-to'
-                start date
-            #rangestart.ui.calendar
-                .ui.input.left.icon
-                    i.calendar.icon
-                    input(type='text', placeholder='start' value=start_time)
-            .ui.button.fluid.get_start save start
-        .field
-            label 
-                +i name='date-from'
-                |end date
-            #rangeend.ui.calendar
-                .ui.input.left.icon
-                    i.calendar.icon
-                    input(type='text', placeholder='end' value=end_time)
-            .ui.button.fluid.get_end save end
+// template(name='range_edit')
+//     .ui.form
+//         .field
+//             label 
+//                 +i name='date-to'
+//                 start date
+//             #rangestart.ui.calendar
+//                 .ui.input.left.icon
+//                     i.calendar.icon
+//                     input(type='text', placeholder='start' value=start_time)
+//             .ui.button.fluid.get_start save start
+//         .field
+//             label 
+//                 +i name='date-from'
+//                 |end date
+//             #rangeend.ui.calendar
+//                 .ui.input.left.icon
+//                     i.calendar.icon
+//                     input(type='text', placeholder='end' value=end_time)
+//             .ui.button.fluid.get_end save end

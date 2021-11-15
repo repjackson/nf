@@ -26,35 +26,34 @@ template(name='transfers')
                             with target_user_id
                                 +user_info
                 
-template(name='transfer_edit')
-    with current_doc
-        .ui.stackable.padded.grid
-            .row
-                .six.wide.column
-                    .ui.inline.header
-                        i.pencil.icon
-                        strong !{notes}
-                        small transfer edit
-                    a.ui.large.icon.green.button(href="/transfer/#{_id}" title='save draft')
-                        i.checkmark.big.icon
-                        |save draft
-                    +text_edit key='title' label='title' direct=true
-                    +image_edit key='image_id' label='image' direct=true icon='image'
-                    div
-                    +array_edit key='location_tags' label='location tags' direct=true icon='marker'
-                .ten.wide.column
-                    div
-                    +array_edit key='tags' label='tags' direct=true icon='tags'
-                    +html_edit key='notes' label='notes' direct=true icon='content'
-                    +user_picker
+// template(name='transfer_edit')
+//     with current_doc
+//         .ui.stackable.padded.grid
+//             .row
+//                 .six.wide.column
+//                     .ui.inline.header
+//                         i.pencil.icon
+//                         strong !{notes}
+//                         small transfer edit
+//                     a.ui.large.icon.green.button(href="/transfer/#{_id}" title='save draft')
+//                         i.checkmark.big.icon
+//                         |save draft
+//                     +image_edit key='image_id' label='image' direct=true icon='image'
+//                     div
+//                     +array_edit key='location_tags' label='location tags' direct=true icon='marker'
+//                 .ten.wide.column
+//                     div
+//                     +array_edit key='tags' label='tags' direct=true icon='tags'
+//                     +textarea_edit key='notes' label='notes' direct=true icon='content'
+//                     +user_picker
                     
-                    if can_edit
-                        .ui.red.button.delete_transfer
-                            i.remove.icon   
-                            | delete
-                    unless complete
-                        a.ui.big.green.button.complete_transfer(href="/transfer/#{_id}")
-                            |complete transfer
+//                     if can_edit
+//                         .ui.red.button.delete_transfer
+//                             i.remove.icon   
+//                             | delete
+//                     unless complete
+//                         a.ui.big.green.button.complete_transfer(href="/transfer/#{_id}")
+//                             |complete transfer
                 
                 
 template(name='user_picker')
@@ -79,16 +78,104 @@ template(name='transfer_view')
                     //     +i name='field-and-tractor'
                     +image_view key='image_id' label='image' direct=true
                     .ui.big.header
-                        | #{title}
+                        | #{amount}
                     div
                     +html_view key='notes' label='notes' direct=true
                 .eight.wide.column
                     +array_view key='tags' label='tags' direct=true
                     +array_view key='location_tags' label='location tags' icon='marker' direct=true
                     div
-                    .ui.header #{target_user_id}
+                    with target_user_id
+                        +user_info
+                    .ui.header #{when}
+                    // .ui.header #{target_user_id}
                     +comments                
                     if can_edit
                         a.ui.icon.button(href="/transfer/#{_id}/edit")
                             i.pencil.icon
+                            
+                            
+template(name='transfer_edit')
+    with current_doc
+        .ui.stackable.padded.grid
+            .row 
+                .five.wide.column
+                    .ui.large.fluid.basic.circular.button.cancel_debit
+                        i.large.remove.red.icon
+                        |cancel
+                    .ui.segment
+                        .ui.inline.grey.header sender
+                        .ui.inline.header
+                            img.ui.small.image(src="{{c.url _author.profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+                            |#{_author.name}
+                    .ui.segment
+                        .ui.header recipient
+                        with recipient
+                            i.large.remove.link.icon.remove_recipient
+                            a.pointer(href="/user/#{name}")
+                                img.ui.tiny.inline.image(src="{{c.url profile_image_id height=400 width=400 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+                                .ui.inline.header #{name}
+                                .ui.small.grey.inline.header #{points}
+                        unless recipient
+                            .ui.divider
+                            // i.large.user.plus.icon
+                            +single_user_edit key='recipient_id' label='search member' icon='user plus' direct=true
+                            // .ui.icon.input
+                            //     i.search.icon
+                            //     input.search_username(type='text' placeholder='username')
+                            // each members
+                            //     .ui.compact.basic.circular.button.add_recipient
+                            //         // i.plus.icon
+                            //         img.ui.avatar.image(src="{{c.url profile_image_id height=200 width=200 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+                            //         |#{name}
+                            //         small #{points}p
+                    +date_edit key='date' label='date' direct=true   
+                    +time_edit key='time' label='time' direct=true   
+                    +array_edit key='location_tags' label='location tags' icon='marker' direct=true
+                .six.wide.column
+                    +textarea_edit key='description' label='description' direct=true
+                    +image_edit key='image_id' label='image' direct=true
+                    div 
                     div
+                    .ui.inline.header
+                        i.tag.red.icon
+                        |tags
+                    .ui.input
+                        input.new_tag(type='text' placeholder='+' autocomplete="off")
+                        //- +clear_value                
+                    each terms 
+                        a.ui.large.circular.basic.button.select_term(href='#')
+                            if image
+                                img.ui.mini.rounded.inline.image(src="{{c.url image height=200 width=200 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+                            |#{title}
+                    each tags
+                        .ui.big.basic.circular.label
+                            i.delete.icon.remove_element
+                            |#{this}
+                    if suggestions
+                        .ui.small.inline.header suggestions
+                    each suggestions
+                        a.ui.large.circular.basic.button.select_term(href='#')
+                            // if image
+                            //     img.ui.mini.rounded.inline.image(src="{{c.url image height=200 width=200 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+                            |#{title}
+                .five.wide.center.aligned.column
+                    .ui.big.header #{amount}pts
+                    .ui.big.input
+                        input.point_amount(type='number' value=amount min='1' max=point_max)
+                    div
+                    +key_value_edit key='amount' value=1
+                    +key_value_edit key='amount' value=5
+                    +key_value_edit key='amount' value=10
+                    +key_value_edit key='amount' value=20
+                    +key_value_edit key='amount' value=50
+                    .spacer
+                    .ui.center.aligned.basic.segment
+                        if can_submit
+                            .ui.green.huge.circular.button.submit
+                                i.big.send.icon
+                                |send
+                        else 
+                            .ui.green.huge.circular.disabled.button
+                                i.send.big.icon
+                                |send                            
