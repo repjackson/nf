@@ -3,7 +3,7 @@ template(name='shop')
         .four.wide.column
             .ui.header
                 +i name='food-cart'
-                |#{product_docs.count}
+                // |#{product_docs.count}
                 |products
             .ui.icon.large.input
                 if product_query
@@ -21,10 +21,10 @@ template(name='shop')
             // if picked_ingredient_plural
             //     .ui.icon.black.compact.button.clear_picked_ingredients
             //         i.remove.icon
-            .ui.basic.icon.circular.button.toggle_gf(class=toggle_gf_class)
+            .ui.icon.circular.button.toggle_gf(class=toggle_gf_class)
                 +icolor name='no-gluten' cl='ui mini inline image'
                 |gluten free
-            .ui.basic.icon.circular.button.toggle_vegan(class=toggle_vegan_class)
+            .ui.icon.circular.button.toggle_vegan(class=toggle_vegan_class)
                 +i name='vegan-food' cl='ui mini inline image'
                 |vegan
             each picked_ingredients
@@ -41,7 +41,7 @@ template(name='shop')
             //     .content
             //         .ui.inline.header
             //             |beta app, go to our 
-            //         a.ui.basic.compact.large.button(href="https://nudefoodsmarket.com/")
+            //         a.ui.compact.large.button(href="https://nudefoodsmarket.com/")
             //             i.external.icon
             //             |current site  
             //         .ui.inline.header
@@ -68,7 +68,7 @@ template(name='shop')
                 // +session_set key='view_shop_section' value='pasta' label='pasta' icon='spaghetti'
                 // +session_set key='view_shop_section' value='dairy' label='dairy' icon='milk-bottle'
                 // // each sections
-                //     button.ui.compact.basic.button.pick_section(tabindex="0" class=result_class title=count) #{title}
+                //     button.ui.compact.button.pick_section(tabindex="0" class=result_class title=count) #{title}
                 //         //- small #{count}
                 // // unless one_post
                 // if currentUser
@@ -110,7 +110,7 @@ template(name='shop')
                 .spacer 
             if subs_ready
                 if no_products
-                    .ui.basic.center.aligned.segment
+                    .ui.center.aligned.segment
                         .ui.header no products found
                         .ui.button.request_product
                             |request product
@@ -131,7 +131,7 @@ template(name='shop')
                         each product_docs
                             +product_card
             else 
-                .ui.basic.center.aligned.segment
+                .ui.center.aligned.segment
                     i.massive.loading.food.icon
 
 
@@ -169,7 +169,7 @@ template(name='product_card')
             //- if session_is 'view_ingredients' true
             // +ismall name='ingredients'
             // each ingredients
-            //     .ui.small.basic.label #{this}
+            //     .ui.small.label #{this}
             if gluten_free
                 +i name='no-gluten' cl='ui mini inline image' title='gluten free'
             if vegan

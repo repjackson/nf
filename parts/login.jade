@@ -21,21 +21,21 @@ template(name='login')
                 //- if username
                 //- if logging_in
                 .ui.hidden.divider
-                .ui.fluid.big.basic.button.enter(title="login #{username}" class=enter_class)
+                .ui.fluid.big.button.enter(title="login #{username}" class=enter_class)
                     +i name='internal' cl='ui mini inline image'
                     |login
                     strong #{username}
                     //- i.right.chevron.icon
-                // .ui.center.aligned.basic.segment    
-                //     a.ui.compact.small.basic.button(href='/forgot_password')
-                //         +i name='forgot-password' cl='ui mini inline image'                    
-                //         |forgot password
+                .ui.center.aligned.basic.segment    
+                    a.ui.compact.small.button(href='/forgot_password')
+                        +i name='forgot-password' cl='ui mini inline image'                    
+                        |forgot password
 
                 .ui.center.aligned.basic.segment    
-                    a.ui.basic.button(href='/register')
+                    a.ui.button(href='/register')
                         i.plus.icon
                         |register
-                    a.ui.basic.button(href='/forgot_password')
+                    a.ui.button(href='/forgot_password')
                         i.refresh.icon
                         |forgot password
 
@@ -68,7 +68,7 @@ template(name='register')
                 .ui.hidden.divider
                 if can_register
                     //- if registering
-                    .ui.fluid.big.basic.button.register(class=enter_class)
+                    .ui.fluid.big.button.register(class=enter_class)
                         i.user.plus.icon
                         |register
                 else
@@ -77,7 +77,7 @@ template(name='register')
                         |register
                     // // .ui.small.header username "#{username}" found
                     
-                    a.ui.basic.button(href='/login') 
+                    a.ui.button(href='/login') 
                         // i.right.chevron.icon
                         +i name='internal' cl='ui avatar image'
                         |login

@@ -51,6 +51,7 @@ template(name='product_view')
                         |ingredients
                     each ingredients
                         .ui.large.basic.label.goto_ingredient #{this}
+                    div
                     +voting_full
                     +link_view key='amazon_referral_link' label='amazon link' icon='amazon' direct=true
                     +link_view key='external_link' label='external link' icon='globe' direct=true

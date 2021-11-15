@@ -228,7 +228,6 @@ template(name='user_credit')
     .ui.stackable.one.column.padded.grid
         if is_current_user
             .column
-            .column
                 .ui.inline.header
                     // i.money.icon
                     +i name='money'
@@ -257,12 +256,13 @@ template(name='user_credit')
                 //     .ui.icon.button.add_credits   
                 //         i.right.chevron.icon
                         
-                .ui.large.bulleted.list.scrolling
+                .ui.large.bulleted.list.smallscroll
                     each topups
                         .item 
                             .content
                                 .header 
                                     |$#{amount}
-                                .description #{when} {{long_date _timestamp}}
-                                //- if is_dev
-                                +remove_button        
+                                .description 
+                                    |#{when} {{long_date _timestamp}}
+                                    //- if is_dev
+                                    +remove_button        
