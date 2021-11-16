@@ -119,6 +119,25 @@ if Meteor.isClient
                 Meteor.setTimeout( ->
                     Session.set('just_read', false)
                 ,1500)
+                $('body').toast(
+                    # showIcon: 'checkmark'
+                    # message: "#{decodedText} amount increased"
+                    message: "#{decodedText} scanned"
+                    # showProgress: 'bottom'
+                    # classActions: 'left vertical attached',
+                    class: 'black'
+                    # classActions: 'basic left',
+                    actions: [{
+                        text: 'Undo',
+                        icon:'undo'
+                        class: 'red',
+                        click: ()->
+                            $('body').toast({message:'You clicked "undo", cart item removed'});
+                    }]
+                    # displayTime: 'auto',
+                    # position: "top right"
+                  )
+                
             , 1500)
             config = { fps: 10, qrbox: { width: 300, height: 300 } };
             
