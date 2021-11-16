@@ -276,7 +276,7 @@ img {
 
 /*.image:not(.flat), img {*/
 img {
-    border-radius:10px !important; 
+    /*border-radius:10px !important; */
     /*filter: invert(.9) !important;*/
 }
 .invert {
@@ -555,7 +555,7 @@ input.username_search{
      -moz-border-radius: 5px !important; 
     opacity:.9 !important;
     font-family: 'Ubuntu', sans-serif !important;
-    filter: invert(.9) !important;
+    /*filter: invert(.9) !important;*/
     border-radius: 10px !important; 
 }
 
@@ -578,7 +578,7 @@ input.username_search{
 
 .button {
     border-radius: 15px !important; 
-    filter: invert(.9) !important;
+    /*filter: invert(.9) !important;*/
     margin:2px !important;
 }
 
