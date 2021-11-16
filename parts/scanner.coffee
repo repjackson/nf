@@ -9,80 +9,107 @@ if Meteor.isClient
     Router.route '/dashboard', -> @render 'scanner'
 
     Template.scanner.onRendered ->
-        Meteor.setTimeout =>
+        onScanFailure = (error)->
+            # console.warn(`Code scan error = ${error}`);
+        onScanSuccess = (decodedText, decodedResult)->
+            console.log("Code found = #{decodedText}")
+        
+        html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            { fps: 5, qrbox: {width: 300, height: 300} },
+            false);
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        
+        # Meteor.setTimeout =>
             # console.log 'generate', generate
             # qrScanner = new QrScanner(this.videoElem, result => console.log('decoded qr code:', result));
             
-            console.log(Html5QrcodeScanner);
+        #     console.log(Html5QrcodeScanner);
             
-            onScanSuccess = (decodedText, decodedResult)->
-                console.log("Code found = #{decodedText}")
-                if Session.get('selected_cart_id')
-                    Meteor.call 'find_product_from_title',decodedText,(err,res)->
-                        if res 
-                            console.log 'found product', res
-                    found_product = 
-                        Docs.findOne 
-                            model:'product'
-                            title:decodedText
+        #     onScanSuccess = (decodedText, decodedResult)->
+        #         console.log("Code found = #{decodedText}")
+        #         # if Session.get('selected_cart_id')
+        #             # Meteor.call 'find_product_from_title',decodedText,(err,res)->
+        #             #     if res 
+        #             #         console.log 'found product', res
+        #             # found_product = 
+        #             #     Docs.findOne 
+        #             #         model:'product'
+        #             #         title:decodedText
                             
-                    if found_product
-                        console.log 'found product', found_product
-                        existing_cart_item = 
-                            Docs.findOne 
-                                model:'cart_item'
-                                product_title:found_product.title
-                                cart_id:Session.get('selected_cart_id')
-                        if existing_cart_item
-                            Docs.update existing_cart_item._id, 
-                                $inc:amount:1
-                            $('body').toast(
-                                showIcon: 'plus'
-                                # message: "#{decodedText} amount increased"
-                                message: "#{decodedText} already added"
-                                # showProgress: 'bottom'
-                                class: 'info'
-                                # displayTime: 'auto',
-                                position: "top right"
-                            )
-                        else
-                            Docs.insert 
-                                model:'cart_item'
-                                cart_id:Session.get('selected_cart_id')
-                                product_id:found._id
-                                product_title:found.title
-                                product_image_id:found.image_id
-                                amount:1
-                            $('body').toast(
-                                showIcon: 'cart plus'
-                                message: "#{decodedText} added to cart"
-                                # showProgress: 'bottom'
-                                class: 'success'
-                                # displayTime: 'auto',
-                                position: "top right"
-                            )
-                    else 
-                        console.log 'No found product'
-                else 
-                    $('body').toast(
-                        showIcon: 'cart plus'
-                        message: "#{decodedText} detected but no shopping cart"
-                        # showProgress: 'bottom'
-                        class: 'error'
-                        # displayTime: 'auto',
-                        position: "top right"
-                    )
+        #             # if found_product
+        #                 # console.log 'found product', found_product
+        #                 # existing_cart_item = 
+        #                 #     Docs.findOne 
+        #                 #         model:'cart_item'
+        #                 #         product_title:found_product.title
+        #                 #         cart_id:Session.get('selected_cart_id')
+        #                 # if existing_cart_item
+        #                 #     Docs.update existing_cart_item._id, 
+        #                 #         $inc:amount:1
+        #         # $('body').toast(
+        #         #     showIcon: 'plus'
+        #         #     # message: "#{decodedText} amount increased"
+        #         #     message: "#{decodedText} already added"
+        #         #     # showProgress: 'bottom'
+        #         #     class: 'info'
+        #         #     actions:	[{
+        #         #       text: 'Yes',
+        #         #       icon: 'check',
+        #         #       class: 'green',
+        #         #       click: ()->
+        #         #           $('body').toast({message:'You clicked "yes", toast closes by default'});
+        #         #     },{
+        #         #       icon: 'ban',
+        #         #       class: 'icon red'
+        #         #     },{
+        #         #       text: '?',
+        #         #       class: 'blue',
+        #         #       click: ()->
+        #         #           $('body').toast({message:'Returning false from the click handler avoids closing the toast '});
+        #         #           return false;
+        #         #     }]
+        #         #     # displayTime: 'auto',
+        #         #     position: "top right"
+        #         #   )
+        #         #         else
+        #         #             Docs.insert 
+        #         #                 model:'cart_item'
+        #         #                 cart_id:Session.get('selected_cart_id')
+        #         #                 product_id:found._id
+        #         #                 product_title:found.title
+        #         #                 product_image_id:found.image_id
+        #         #                 amount:1
+        #         #             $('body').toast(
+        #         #                 showIcon: 'cart plus'
+        #         #                 message: "#{decodedText} added to cart"
+        #         #                 # showProgress: 'bottom'
+        #         #                 class: 'success'
+        #         #                 # displayTime: 'auto',
+        #         #                 position: "top right"
+        #         #             )
+        #         #     else 
+        #         #         console.log 'No found product'
+        #         # else 
+        #         #     $('body').toast(
+        #         #         showIcon: 'cart plus'
+        #         #         message: "#{decodedText} detected but no shopping cart"
+        #         #         # showProgress: 'bottom'
+        #         #         class: 'error'
+        #         #         # displayTime: 'auto',
+        #         #         position: "top right"
+        #         #     )
 
                     
-            onScanFailure = (error)->
-            # //   console.warn(`Code scan error = ${error}`);
+        #     onScanFailure = (error)->
+        #     # //   console.warn(`Code scan error = ${error}`);
             
-            html5QrcodeScanner = new Html5QrcodeScanner(
-                "reader",
-                { fps: 5, qrbox: {width: 300, height: 300} },
-                false);
-            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-        , 500
+        #     html5QrcodeScanner = new Html5QrcodeScanner(
+        #         "reader",
+        #         { fps: 5, qrbox: {width: 300, height: 300} },
+        #         false);
+        #     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        # , 500
         
     Template.scanner.onCreated ->
         @autorun -> Meteor.subscribe 'scanner_products', ->
