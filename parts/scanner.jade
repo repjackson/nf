@@ -1,8 +1,11 @@
 template(name='scanner')
     +dashboard
     .ui.stackable.padded.grid
-        .ui.sixteen.wide.column
+        .ui.sixteen.wide.column(class=column_class)
             .ui.header scanner
+            // if just_read
+            //     .ui.massive.fluid.message 
+                    
             #reader.invert(width="100%")
             // .ui.massive.green.button.start
             //     |open

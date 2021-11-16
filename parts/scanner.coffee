@@ -11,6 +11,8 @@ if Meteor.isClient
     Router.route '/scanner', -> @render 'scanner'
     Router.route '/dashboard', -> @render 'scanner'
 
+    Template.scanner.onCreated ->
+        Session.setDefault('just_read',false)
     Template.scanner.onRendered ->
         # #         #                 # displayTime: 'auto',
         # onScanFailure = (error)->
@@ -113,7 +115,11 @@ if Meteor.isClient
               "reader", {})
             qrCodeSuccessCallback = (decodedText, decodedResult)=>
                 console.log 'sucess read', decodedText
-            config = { fps: 10, qrbox: { width: 250, height: 250 } };
+                Session.set('just_read', true)
+                Meteor.setTimeout( ->
+                    Session.set('just_read', false)
+                ,1000)
+            config = { fps: 10, qrbox: { width: 300, height: 300 } };
             
             html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
             
@@ -125,6 +131,9 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'cart_items', ->
         @autorun -> Meteor.subscribe 'shopping_carts', ->
     Template.scanner.helpers
+        column_class: ->
+            if Session.get('just_read')
+                "green inverted segment"
         add_item_class: -> if Session.get('is_adding_item') then 'blue' else 'basic'
         is_adding: -> Session.get('is_adding_item')
         selected_cart: -> Session.get('selected_cart_id')
