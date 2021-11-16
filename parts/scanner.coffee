@@ -8,78 +8,8 @@ if Meteor.isClient
     Router.route '/scanner', -> @render 'scanner'
     Router.route '/dashboard', -> @render 'scanner'
 
-    Template.scanner.onCreated ->
-        @autorun -> Meteor.subscribe 'scanner_products', ->
-        @autorun -> Meteor.subscribe 'cart_items', ->
-        @autorun -> Meteor.subscribe 'shopping_carts', ->
-    Template.scanner.helpers
-        add_item_class: -> if Session.get('is_adding_item') then 'blue' else 'basic'
-        is_adding: -> Session.get('is_adding_item')
-        selected_cart: -> Session.get('selected_cart_id')
-        shopping_cart_button_class:->
-            if Session.equals('selected_cart_id',@_id) then 'active large' else 'basic'
-        shopping_cart_docs: ->
-            Docs.find 
-                model:'shopping_cart'
-        test_products: ->
-            Docs.find 
-                model:'product'
-        cart_items: ->
-            Docs.find 
-                cart_id:Session.get('selected_cart_id')
-                model:'cart_item'
-    Template.scanner.events
-        'click .checkout': (e,t)->
-            Docs.update @_id, 
-                $set:status:'checkout'
-            Router.go "/cart/#{Session.get('selected_cart_id')}/checkout"
-            
-            
-        "click .add_item": (e,t)->
-            if Session.equals('is_adding_item',true)
-                Session.set('is_adding_item', false)
-            else 
-                Session.set('is_adding_item', true)
-        "click .select_cart": (e,t)->
-            if Session.equals('selected_cart_id',@_id)
-                Session.set('selected_cart_id', null)
-            else 
-                Session.set('selected_cart_id', @_id)
-        "click .new_cart": (e,t)->
-            title = prompt('customer name?')
-            if title 
-                Docs.insert 
-                    model:'shopping_cart'
-                    name:title
-        "click .gen_code": (e,t)->
-            console.log @
-            t.qrcode = new QRCode(document.getElementById("qrcode"), {
-                text: @title,
-                width: 250,
-                height: 250,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            })
-        
-        'click .remove_cart_item': (e,t)-> 
-            if confirm "remove #{@title}?"
-                Docs.remove @_id
-        'click .clear_code': (e,t)-> 
-            $('#qrcode').empty()
-            console.log t
-            t.qrcode.clear()
-        # 'click .add_code': ->
-        #     t.qrcode.makeCode("http://naver.com")
-            
-        "click .stop": (e,t)->
-            $('#reader').empty()
-            # t.html5QrcodeScanner.stop().then((ignore)->
-            #   console.log 'stopped'
-            # ).catch((err) =>
-            # );
-            
-        "click .start": ()->
+    Template.scanner.onRendered ->
+        Meteor.setTimeout =>
             # console.log 'generate', generate
             # qrScanner = new QrScanner(this.videoElem, result => console.log('decoded qr code:', result));
             
@@ -152,7 +82,80 @@ if Meteor.isClient
                 { fps: 5, qrbox: {width: 300, height: 300} },
                 false);
             html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        , 500
         
+    Template.scanner.onCreated ->
+        @autorun -> Meteor.subscribe 'scanner_products', ->
+        @autorun -> Meteor.subscribe 'cart_items', ->
+        @autorun -> Meteor.subscribe 'shopping_carts', ->
+    Template.scanner.helpers
+        add_item_class: -> if Session.get('is_adding_item') then 'blue' else 'basic'
+        is_adding: -> Session.get('is_adding_item')
+        selected_cart: -> Session.get('selected_cart_id')
+        shopping_cart_button_class:->
+            if Session.equals('selected_cart_id',@_id) then 'active large' else 'basic'
+        shopping_cart_docs: ->
+            Docs.find 
+                model:'shopping_cart'
+        test_products: ->
+            Docs.find 
+                model:'product'
+        cart_items: ->
+            Docs.find 
+                cart_id:Session.get('selected_cart_id')
+                model:'cart_item'
+    Template.scanner.events
+        'click .checkout': (e,t)->
+            Docs.update @_id, 
+                $set:status:'checkout'
+            Router.go "/cart/#{Session.get('selected_cart_id')}/checkout"
+            
+            
+        "click .add_item": (e,t)->
+            if Session.equals('is_adding_item',true)
+                Session.set('is_adding_item', false)
+            else 
+                Session.set('is_adding_item', true)
+        "click .select_cart": (e,t)->
+            if Session.equals('selected_cart_id',@_id)
+                Session.set('selected_cart_id', null)
+            else 
+                Session.set('selected_cart_id', @_id)
+        "click .new_cart": (e,t)->
+            title = prompt('customer name?')
+            if title 
+                Docs.insert 
+                    model:'shopping_cart'
+                    name:title
+        "click .gen_code": (e,t)->
+            console.log @
+            t.qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: @title,
+                width: 250,
+                height: 250,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            })
+        
+        'click .remove_cart_item': (e,t)-> 
+            if confirm "remove #{@title}?"
+                Docs.remove @_id
+        'click .clear_code': (e,t)-> 
+            $('#qrcode').empty()
+            console.log t
+            t.qrcode.clear()
+        # 'click .add_code': ->
+        #     t.qrcode.makeCode("http://naver.com")
+            
+        "click .stop": (e,t)->
+            $('#reader').empty()
+            # t.html5QrcodeScanner.stop().then((ignore)->
+            #   console.log 'stopped'
+            # ).catch((err) =>
+            # );
+            
+        "click .start": ()->
     Template.product_picker.onCreated ->
         @autorun => @subscribe 'product_search_results', Session.get('product_search'), ->
 
