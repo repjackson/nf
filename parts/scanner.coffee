@@ -113,12 +113,13 @@ if Meteor.isClient
             
             html5QrCode = new Html5Qrcode(
               "reader", {})
-            qrCodeSuccessCallback = (decodedText, decodedResult)=>
+            qrCodeSuccessCallback =  _.throttle((decodedText, decodedResult)=>
                 console.log 'sucess read', decodedText
                 Session.set('just_read', true)
                 Meteor.setTimeout( ->
                     Session.set('just_read', false)
-                ,1000)
+                ,1500)
+            , 1500)
             config = { fps: 10, qrbox: { width: 300, height: 300 } };
             
             html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
